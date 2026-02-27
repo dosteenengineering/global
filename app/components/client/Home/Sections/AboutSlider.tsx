@@ -55,7 +55,9 @@ export default function AboutSlider() {
       bottomSwiperRef.current.slideToLoop(idx, 600);
     }
 
-    setTimeout(() => { syncSource.current = null; }, 700);
+    setTimeout(() => {
+      syncSource.current = null;
+    }, 700);
   };
 
   const handleBottomRealIndexChange = (swiper: SwiperType) => {
@@ -70,7 +72,9 @@ export default function AboutSlider() {
       topSwiperRef.current.slideToLoop(idx, 600);
     }
 
-    setTimeout(() => { syncSource.current = null; }, 700);
+    setTimeout(() => {
+      syncSource.current = null;
+    }, 700);
   };
 
   const handleTouchEnd = (swiper: SwiperType) => {
@@ -137,7 +141,7 @@ export default function AboutSlider() {
           </div>
           <div />
 
-          <div className="flex items-center pb-5">
+          <div className="flex items-center">
             <div className="w-full h-[2px] bg-gray-200 overflow-hidden">
               <div
                 className="h-full bg-[#1853D6]"
@@ -151,6 +155,7 @@ export default function AboutSlider() {
               borderColor="black"
               textColor="black"
               iconColor="primary"
+              px="px-[35px]"
             />
           </div>
 
@@ -168,15 +173,14 @@ export default function AboutSlider() {
                 <SwiperSlide key={slide.id}>
                   <div className="pt-[45px]">
                     {activeIndex === bottomSwiperRef.current?.realIndex && (
-  <Counter
-    key={`counter-${activeIndex}`}
-    value={slide.stat}
-    totalTime={2.5}
-    start={0}
-    className="font-helvetica text-250 leading-[1] text-secondary"
-  />
-)}
-
+                      <Counter
+                        key={`counter-${activeIndex}`}
+                        value={slide.stat}
+                        totalTime={2.5}
+                        start={0}
+                        className="font-helvetica text-250 leading-[1] text-secondary"
+                      />
+                    )}
                   </div>
                   <div className="">
                     <p className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]">

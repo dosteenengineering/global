@@ -7,6 +7,7 @@ type BorderButtonProps = {
   borderColor?: "white" | "black";
   textColor?: "white" | "black";
   iconColor?: "primary" | "white";
+  px?: string;
   className?: string;
 };
 
@@ -15,6 +16,7 @@ export default function BorderButton({
   borderColor = "white",
   textColor = "white",
   iconColor = "primary",
+  px = "px-6",
   className = "",
 }: BorderButtonProps) {
 
@@ -31,9 +33,11 @@ export default function BorderButton({
 
   return (
     <button
-      className={`group max-h-[61px] flex items-center gap-3 border rounded-[50px] px-6 py-[17.5px] uppercase text-15 leading-[1.73] font-[400] transition-all duration-300 hover:bg-white/20 cursor-pointer ${borderClass} ${textClass} ${className}`}
+      className={`group h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} py-[17.5px] uppercase text-15 leading-[1.73] font-[400] transition-all duration-300 hover:bg-white/20 cursor-pointer ${borderClass} ${textClass} ${className}`}
     >
-      <span className="text-15 leading-[1.73] max-w-[200px] font-dm-sans">{text}</span>
+      <span className="text-15 leading-[1] max-w-[200px] font-dm-sans">
+        {text}
+      </span>
 
       <Image
         src="/assets/icons/button-arrow-top-right.svg"

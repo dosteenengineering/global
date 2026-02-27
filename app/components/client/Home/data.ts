@@ -105,3 +105,47 @@ export const solutionsData: {
     },
   ],
 };
+
+
+//fourth Section
+export interface ServiceTab {
+  key: string;
+  label: string;
+  image: string;
+  description: string;
+}
+
+export interface ServicesData {
+  title: string;
+  topRightSvg: string;
+  tabs: ServiceTab[];
+}
+
+export const servicesData: ServicesData = {
+  title: "SERVICES",
+  topRightSvg: "/assets/icons/bg-svg/top-right.svg",
+  tabs: [
+{
+  key: "amc",
+  label: "AMC",
+  image: "/assets/images/home/service/export.svg",
+  description:
+    "Annual maintenance contracts ensuring reliable performance and system continuity.",
+},
+{
+  key: "export",
+  label: "Export",
+  image: "/assets/images/home/service/export.svg",
+  description:
+    "Seamless export services delivering engineered solutions worldwide.",
+},
+{
+  key: "instant-call",
+  label: "Instant Call Service",
+  image: "/assets/images/home/service/export.svg",
+  description:
+    "24/7 instant call services for immediate technical support and assistance.",
+},
+
+  ],
+};
