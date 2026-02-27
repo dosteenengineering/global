@@ -149,3 +149,51 @@ export const servicesData: ServicesData = {
 
   ],
 };
+
+//fifth Section
+export interface Industry {
+  key: string;
+  label: string;
+  image: string;
+}
+
+export interface IndustriesData {
+  title: string;
+  industries: Industry[];
+}
+
+export const industriesData: IndustriesData = {
+  title: "EXPERTISE ACROSS\nMULTIPLE INDUSTRIES\nWE SERVE",
+  industries: [
+    {
+      key: "residential",
+      label: "Residential",
+      image: "/assets/images/home/industries/residential.jpg",
+    },
+    {
+      key: "industrial",
+      label: "Industrial",
+      image: "/assets/images/home/industries/industrial.jpg",
+    },
+    {
+      key: "hospitality",
+      label: "Hospitality",
+      image: "/assets/images/home/industries/hospitality.jpg",
+    },
+    {
+      key: "healthcare",
+      label: "Healthcare",
+      image: "/assets/images/home/industries/healthcare.jpg",
+    },
+        {
+      key: "hospitality1",
+      label: "Hospitality",
+      image: "/assets/images/home/industries/hospitality.jpg",
+    },
+    {
+      key: "healthcare2",
+      label: "Healthcare",
+      image: "/assets/images/home/industries/healthcare.jpg",
+    },
+  ],
+};
