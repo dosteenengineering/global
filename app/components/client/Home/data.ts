@@ -1,3 +1,4 @@
+//second Section
 export interface SlideData {
   id: number;
   description: string;
@@ -42,3 +43,65 @@ export const slidesData: SlideData[] = [
     statLabel: "Client Retention Rate",
   },
 ];
+
+
+//third Section
+export type SolutionTab = {
+  key: string;
+  label: string;
+  leftTitle: string;
+  rightItems: string[];
+};
+
+export const solutionsData: {
+  mainTitle: string;
+  backgroundImage: string;
+  tabs: SolutionTab[];
+} = {
+  mainTitle: "SOLUTIONS",
+  backgroundImage: "/assets/images/home/solution/solution-bg.jpg",
+
+  tabs: [
+    {
+      key: "residential",
+      label: "Residential Systems",
+      leftTitle: "Integrated Systems Designed for Modern Homes",
+      rightItems: [
+        "Garage Doors",
+        "Architectural Shades",
+        "Shutters",
+        "Flood Barriers",
+        "Garage & Linen Chutes",
+        "Multi-Parking Solutions",
+        "Bespoke Steel Gates",
+        "Fly Mesh & Insect Screens",
+        "Retractable Pool Covers",
+      ],
+    },
+    {
+      key: "commercial",
+      label: "Commercial & Industrial Systems",
+      leftTitle: "High Systems for Commercial Spaces",
+      rightItems: [
+        "Industrial Doors",
+        "Loading Bay Systems",
+        "Security Shutters",
+        "Dock Levelers",
+        "Fire Rated Doors",
+        "Warehouse Automation",
+      ],
+    },
+    {
+      key: "defense",
+      label: "Defense & Government",
+      leftTitle: "Advanced Security Systems for Critical Infrastructure",
+      rightItems: [
+        "Blast Resistant Doors",
+        "Perimeter Security Gates",
+        "Ballistic Barriers",
+        "High Security Bollards",
+        "Military Hangar Doors",
+      ],
+    },
+  ],
+};

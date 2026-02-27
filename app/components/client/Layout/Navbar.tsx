@@ -28,7 +28,7 @@ export default function Navbar() {
             }}
             className="flex items-center justify-between gap-6 rounded-[3px] py-[15px] px-5 max-h-[56px] min-w-[220px] 3xl:min-w-[540px]"
           >
-            <span className="text-sm tracking-wide text-white">MENU</span>
+            <span className="text-15 uppercase font-[400] text-white">MENU</span>
             <Image
               src="/assets/icons/nav_menu.svg"
               alt="Menu"
