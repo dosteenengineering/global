@@ -55,7 +55,7 @@ function smoothEase(t: number): number {
 export default function Counter({
   value,
   start = 0,
-  totalTime = 2200,
+  totalTime = 2.2,
   className = "",
 }: CounterProps) {
   const { num: endNum, prefix, suffix, formatted } = parseValue(value);
@@ -81,7 +81,7 @@ export default function Counter({
         if (!startTimeRef.current) startTimeRef.current = timestamp;
 
         const elapsed = timestamp - startTimeRef.current;
-        const rawProgress = Math.min(elapsed / totalTime, 1);
+        const rawProgress = Math.min(elapsed / (totalTime * 1000), 1);
         const eased = smoothEase(rawProgress);
         const currentVal = Math.round(effectiveStart + (endNum - effectiveStart) * eased);
 

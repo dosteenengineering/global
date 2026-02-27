@@ -167,7 +167,16 @@ export default function AboutSlider() {
               {slidesData.map((slide) => (
                 <SwiperSlide key={slide.id}>
                   <div className="pt-[45px]">
-                    <Counter value={slide.stat} totalTime={2000} start={0} className="font-helvetica text-250 leading-[1] text-secondary" />
+                    {activeIndex === bottomSwiperRef.current?.realIndex && (
+  <Counter
+    key={`counter-${activeIndex}`}
+    value={slide.stat}
+    totalTime={2.5}
+    start={0}
+    className="font-helvetica text-250 leading-[1] text-secondary"
+  />
+)}
+
                   </div>
                   <div className="">
                     <p className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]">
