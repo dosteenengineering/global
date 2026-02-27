@@ -1,0 +1,40 @@
+import Image from "next/image";
+import BorderButton from "@/app/components/common/BorderButton";
+
+export default function Hero() {
+  return (
+    <section className="relative h-[92dvh] w-full overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src="/assets/images/home/hero/herobg.jpg"
+        alt="Hero background"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
+
+      {/* Content */}
+      <div className="container relative z-10 flex h-full items-end pb-[130px]">
+        <div className="max-w-[964px]">
+          {/* Title */}
+          <h1 className="text-[#FFFBFB] text-95 font-[700] uppercase font-helvetica leading-[1]">
+            Where Engineering Meets Assurance
+          </h1>
+
+          {/* Button */}
+          <div className="mt-[50px]">
+            <BorderButton
+              text="Request a Quote"
+              borderColor="white"
+              textColor="white"
+              iconColor="primary"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
