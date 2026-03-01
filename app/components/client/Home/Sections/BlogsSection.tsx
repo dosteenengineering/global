@@ -1,0 +1,146 @@
+"use client";
+
+import { useRef, useCallback, useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+
+import { blogsData, BlogPost } from "../data";
+import NavButton from "@/app/components/common/NavigationButton";
+import SecondaryNoise from "@/app/components/common/SecondaryNoise";
+
+const SLIDE_GAP = 80;
+
+export default function BlogsSection() {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const slideRef = useRef<HTMLDivElement | null>(null);
+  const [swiperHeight, setSwiperHeight] = useState<number>(0);
+
+  const handleSwiper = useCallback((s: SwiperType) => {
+    swiperRef.current = s;
+  }, []);
+  const slidePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
+  const slideNext = useCallback(() => swiperRef.current?.slideNext(), []);
+
+  useEffect(() => {
+    if (!slideRef.current) return;
+    const measure = () => {
+      if (slideRef.current)
+        setSwiperHeight(slideRef.current.offsetHeight * 2 + SLIDE_GAP);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  return (
+    <section className="w-full relative">
+      <SecondaryNoise />
+
+      <div className="relative container py-140 3xl:py-150">
+        <div className="grid grid-cols-[auto_1fr]">
+          {/* Row 1 — Col 1: empty spacer */}
+          <div />
+
+          {/* Row 1 — Col 2: Heading */}
+          <h2 className="text-secondary font-helvetica font-bold uppercase text-90 leading-[1.111] mb-[70px]">
+            {blogsData.title}
+          </h2>
+
+          {/* Row 2 — Col 1: Nav buttons — pt-0, aligns with image top */}
+          <div className="flex flex-col gap-[15px] items-start px-90 3xl:px-[112px]">
+            <NavButton
+              onClick={slidePrev}
+              direction="up"
+              disabled={false}
+              ariaLabel="Previous blog"
+            />
+            <NavButton
+              onClick={slideNext}
+              direction="down"
+              disabled={false}
+              ariaLabel="Next blog"
+            />
+          </div>
+
+          {/* Row 2 — Col 2: Vertical Swiper */}
+          <div
+            className="overflow-hidden"
+            style={{ height: swiperHeight || "auto" }}
+          >
+            <Swiper
+              direction="vertical"
+              loop={true}
+              modules={[Autoplay]}
+              onSwiper={handleSwiper}
+              slidesPerView="auto"
+              spaceBetween={SLIDE_GAP}
+              speed={700}
+              allowTouchMove={true}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+              }}
+              style={{ height: "100%" }}
+            >
+              {blogsData.posts.map((post: BlogPost, i: number) => (
+                <SwiperSlide key={post.key} style={{ height: "auto" }}>
+                  {/* Divider line sits in the gap above this slide (hidden on first) */}
+                  <div
+                    className="absolute left-0 right-0 border-t border-[#CCCCCC]"
+                    style={{ top: -(SLIDE_GAP / 2) }}
+                  />
+                  <Link
+                    ref={
+                      i === 0
+                        ? (slideRef as React.Ref<HTMLAnchorElement>)
+                        : undefined
+                    }
+                    href={post.href}
+                    className="flex flex-row items-stretch gap-[62px] group"
+                  >
+                    {/* Image — no padding, aligns flush to top */}
+                    <div className="flex-shrink-0 relative w-[350px] h-[220px] overflow-hidden">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    {/* Text content */}
+                    <div className="flex-1 flex flex-col justify-between py-5">
+                      <p className="text-30 text-paragraph font-[300] font-poppins -tracking-[2%] leading-[1.33] max-w-[537px]">
+                        {post.title}
+                      </p>
+                      <div className="flex items-center justify-between gap-5 text-paragraph font-poppins font-[300] text-19 leading-[1.52] max-w-[537px]">
+                        <span>{post.category}</span>
+                        <span>{post.date}</span>
+                      </div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex-shrink-0 self-start">
+                      <Image
+                        src="/assets/icons/button-arrow-top-right.svg"
+                        alt="arrow"
+                        width={32}
+                        height={32}
+                        className="w-[28px] h-[28px] 3xl:w-[32px] 3xl:h-[32px]"
+                      />
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -25,7 +25,7 @@ export default function Hero() {
           </h1>
 
           {/* Button */}
-          <div className="mt-[50px]">
+          <div className="mt-[50px] w-fit">
             <BorderButton
               text="Request a Quote"
               borderColor="white"

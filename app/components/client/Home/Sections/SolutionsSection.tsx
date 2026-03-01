@@ -48,14 +48,14 @@ useLayoutEffect(() => {
       <div className="absolute inset-0 bg-black/70" />
 
       {/* Content */}
-      <div className="relative z-10 w-full container pt-150 overflow-hidden">
+      <div className="relative z-10 w-full container py-140 3xl:py-150 overflow-hidden">
         {/* Main Title */}
         <h2 className="text-center text-90 leading-[1.111] font-helvetica uppercase">
           {solutionsData.mainTitle}
         </h2>
 
         {/* Tabs */}
-        <div className="mt-[109px]">
+        <div className="mt-18 3xl:mt-[109px]">
           <div ref={tabsContainerRef} className="relative">
             {/* Tabs */}
             <div className="flex gap-20 text-30 leading-[1.33] font-[300] font-poppins -tracking-[2%]">
@@ -103,7 +103,7 @@ useLayoutEffect(() => {
         <div className="mt-[76px]" />
 
         {/* Split Section */}
-        <div className="flex w-full pb-150">
+        <div className="flex w-full">
           {/* Left 30% */}
           <div className="pr-15 mt-[203px] mb-[167px]">
             <h3 className="text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[500px] font-light">
@@ -115,12 +115,12 @@ useLayoutEffect(() => {
           <div className="w-px bg-white/35" />
 
           {/* Right 70% */}
-          <div className="ml-auto mr-20 mt-[203px]">
-            <div className="grid grid-cols-2 gap-x-[136px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
+          <div className="ml-auto 3xl:mr-20 mt-[203px]">
+            <div className="grid grid-cols-2 gap-x-20 3xl:gap-x-[136px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
               {activeData.rightItems.map((item, index) => (
                 <div
                   key={index}
-                  className="group cursor-pointer flex items-center w-fit transition-all duration-300"
+                  className="group cursor-pointer flex items-center w-[290px] transition-all duration-300"
                 >
                   <span className="transition-all duration-300 group-hover:font-[600]">
                     {item}

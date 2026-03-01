@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Poppins, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
-import Navbar from "../components/client/Layout/Navbar";
 import LenisProvider from "../components/LenisProvider";
+import Navbar from "../components/client/Layout/Navbar";
+import Footer from "../components/client/Layout/Footer";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
         <LenisProvider>
           <Navbar />
           {children}
+          <Footer />
         </LenisProvider>
       </body>
     </html>
