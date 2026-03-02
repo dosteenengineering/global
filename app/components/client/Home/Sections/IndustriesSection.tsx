@@ -44,19 +44,29 @@ export default function IndustriesSection() {
 
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(1);
-  const [isMounted, setIsMounted] = useState(false);
   const swiperContainerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  // Track if swiper is ready to avoid operating on unmounted/destroyed instance
+  const swiperReadyRef = useRef(false);
 
+  // Intersection observer: only nudge once, safely, after swiper is ready
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
+    let triggered = false;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        swiperRef.current?.slideNext();
+        if (!entry.isIntersecting || triggered) return;
+        triggered = true;
         observer.disconnect();
+        // Defer to next frame so swiper is guaranteed initialised
+        requestAnimationFrame(() => {
+          if (swiperReadyRef.current && swiperRef.current && !swiperRef.current.destroyed) {
+            swiperRef.current.slideNext();
+          }
+        });
       },
       { threshold: 0.3 },
     );
@@ -65,19 +75,16 @@ export default function IndustriesSection() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const goTo = useCallback((index: number) => {
     const swiper = swiperRef.current;
-    if (!swiper) return;
+    if (!swiper || swiper.destroyed) return;
     swiper.slideToLoop(index);
     if (!swiper.autoplay?.running) swiper.autoplay?.start();
   }, []);
 
   const handleSwiper = useCallback((swiper: SwiperType) => {
     swiperRef.current = swiper;
+    swiperReadyRef.current = true;
     applyHeights(swiper);
   }, []);
 
@@ -86,10 +93,22 @@ export default function IndustriesSection() {
     applyHeights(swiper);
   }, []);
 
+  // Stable callback wrapper for onSlideChangeTransitionStart
+  const handleTransitionStart = useCallback((swiper: SwiperType) => {
+    applyHeights(swiper);
+  }, []);
+
+  // Cleanup swiperReadyRef on unmount to prevent stale ref usage
+  useEffect(() => {
+    return () => {
+      swiperReadyRef.current = false;
+    };
+  }, []);
+
   return (
     <section ref={sectionRef}>
       <ContainerAnchor ref={containerRef} />
-      <div style={{ paddingLeft: leftInset }} className="py-200">
+      <div style={{ paddingLeft: leftInset }} className="py-140 3xl:py-200">
         <div className="grid grid-cols-[215px_1fr] gap-x-[70px] mb-[70px] text-secondary">
           <div />
           <h2 className="text-90 leading-[1.111] uppercase font-helvetica max-w-[1129px]">
@@ -101,13 +120,19 @@ export default function IndustriesSection() {
           <div className="flex flex-col justify-start flex-shrink-0">
             <div className="flex items-center gap-[15px] mb-[50px]">
               <NavButton
-                onClick={() => swiperRef.current?.slidePrev()}
+                onClick={() => {
+                  const s = swiperRef.current;
+                  if (s && !s.destroyed) s.slidePrev();
+                }}
                 direction="left"
                 disabled={false}
                 ariaLabel="Previous"
               />
               <NavButton
-                onClick={() => swiperRef.current?.slideNext()}
+                onClick={() => {
+                  const s = swiperRef.current;
+                  if (s && !s.destroyed) s.slideNext();
+                }}
                 direction="right"
                 disabled={false}
                 ariaLabel="Next"
@@ -115,7 +140,7 @@ export default function IndustriesSection() {
             </div>
             <div className="w-full h-px bg-[#C2C2C2] mb-[30px]" />
 
-            <div className="flex items-center gap-1 border border-primary text-paragraph font-poppins font-[300] leading-[1.666] border-gray-300 rounded-full px-[17px] text-15 w-fit py-[3px]">
+            <div className="flex items-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5] border-gray-300 rounded-full px-[16px] text-15 w-[78px] h-[31px] py-[3px]">
               <span className="font-[600]">
                 {String(activeIndex + 1).padStart(2, "0")}
               </span>
@@ -128,14 +153,16 @@ export default function IndustriesSection() {
             ref={swiperContainerRef}
             style={{ overflow: "visible", minWidth: 0 }}
           >
-            {isMounted && (
+            {/* Render Swiper directly — no isMounted gate to avoid layout flash.
+                suppressHydrationWarning on the wrapper prevents SSR/CSR mismatch noise. */}
+            <div suppressHydrationWarning>
               <Swiper
                 loop={true}
                 initialSlide={1}
                 modules={[Autoplay]}
                 onSwiper={handleSwiper}
                 onSlideChange={handleSlideChange}
-                onSlideChangeTransitionStart={applyHeights}
+                onSlideChangeTransitionStart={handleTransitionStart}
                 slidesPerView="auto"
                 spaceBetween={SPACE_BETWEEN}
                 speed={500}
@@ -149,7 +176,7 @@ export default function IndustriesSection() {
                 }}
                 observer={true}
                 observeParents={true}
-                className="3xl:h-[569px]"
+                className="h-[569px]"
               >
                 {industries.map((industry: Industry, index: number) => (
                   <SwiperSlide
@@ -181,7 +208,7 @@ export default function IndustriesSection() {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            )}
+            </div>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function PrimaryNoise({ className = "" }: PrimaryNoiseProps) {
           backgroundSize: "101px",
         }}
       />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent to-[#022E9E]/90" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent to-[#022E9E]" />
     </>
   );
 }

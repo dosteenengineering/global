@@ -28,7 +28,7 @@ export default function ServicesSection() {
         />
       </div>
 
-      <div className="relative z-10 container py-150">
+      <div className="relative z-10 container py-140 3xl:py-150">
         <h2 className="text-90 leading-[1.11] text-white uppercase font-helvetica text-center">
           {servicesData.title}
         </h2>
@@ -59,7 +59,7 @@ export default function ServicesSection() {
                   </span>
 
                   <span
-                    className={`text-30 font-poppins leading-[1.33] font-[300] -tracking-[2%] transition-all duration-300 mb-[72px] 3xl:min-w-[285px] ${
+                    className={`text-30 font-poppins leading-[1.33] font-[300] -tracking-[2%] transition-all duration-300 mb-[72px] min-w-[260px] 3xl:min-w-[285px] ${
                       isActive
                         ? "font-[600] text-white"
                         : "text-white/60"
