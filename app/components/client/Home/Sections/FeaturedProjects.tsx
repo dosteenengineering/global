@@ -1,10 +1,15 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect, useLayoutEffect } from "react";
+import {
+  useRef,
+  useCallback,
+  useState,
+  useLayoutEffect,
+} from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, EffectCreative } from "swiper/modules";
+import "swiper/css/effect-creative";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
@@ -160,27 +165,37 @@ export default function FeaturedProjectsSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-140 3xl:gap-x-200">
-
         {/* ───────── Row 1 Col 1 — ACTIVE SWIPER ───────── */}
         <div>
           <Swiper
             loop={true}
-            modules={[Autoplay]}
+            modules={[Autoplay, EffectCreative]}
+            effect="creative"
+            creativeEffect={{
+              // ← add this block
+              prev: {
+                translate: ["-105%", "-105%", 0], // exits to top-left
+              },
+              next: {
+                translate: ["105%", "105%", 0], // enters from bottom-right
+              },
+            }}
             onSwiper={handleActiveInit}
             onSlideChange={handleSlideChange}
             slidesPerView={1}
             spaceBetween={0}
-            speed={600}
+            speed={700}
             allowTouchMove={true}
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
               // pauseOnMouseEnter: true,
             }}
+            className="w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer"
           >
             {projects.map((project: Project) => (
               <SwiperSlide key={project.key}>
-                <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer">
+                <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                   <Image
                     src={project.image}
                     alt={project.name}
@@ -201,6 +216,7 @@ export default function FeaturedProjectsSection() {
                       alt="arrow"
                       width={71}
                       height={48}
+                      className="-translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
                     />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 px-12 pb-12 z-10">
@@ -225,7 +241,6 @@ export default function FeaturedProjectsSection() {
 
         {/* ───────── Row 1 Col 2 — NAV + INACTIVE STRIP ───────── */}
         <div className="flex flex-col justify-between mt-8 md:mt-0">
-
           {/* Nav */}
           <div className="flex items-center justify-end gap-[15px]">
             <NavButton
@@ -243,7 +258,7 @@ export default function FeaturedProjectsSection() {
           </div>
 
           {/* Inactive cards */}
-          <div className="flex flex-col sm:flex-row gap-[16px] items-end">
+          <div className="flex flex-col sm:flex-row gap-[16px] 3xl:gap-[30px] items-end">
             {inactiveProjects.map((project: Project, i: number) => (
               <InactiveSlot
                 key={`slot-${i}`}
@@ -268,7 +283,6 @@ export default function FeaturedProjectsSection() {
             px="px-[35px]"
           />
         </div>
-
       </div>
     </section>
   );

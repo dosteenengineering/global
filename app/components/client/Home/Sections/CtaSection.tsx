@@ -8,6 +8,14 @@ export default function CtaSection() {
   return (
     <section className="relative w-full overflow-hidden">
       <PrimaryNoise />
+<div className="absolute left-0 -top-[60%] w-[50%] h-[165%] pointer-events-none">
+  <Image
+    src="/assets/icons/bg-svg/cta.svg"
+    alt=""
+    fill
+    className="object-contain object-top-left"
+  />
+</div>
 
       {/* Content */}
       <div className="relative z-10 container py-140 3xl:pb-150 flex flex-col gap-[50px] items-center justify-center">

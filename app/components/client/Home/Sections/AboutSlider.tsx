@@ -123,7 +123,7 @@ export default function AboutSlider() {
           </div>
 
           <div>
-            <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[1.66] max-w-[78px] h-[31px] flex items-center justify-center rounded-[15px]">
+            <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[0.5] py-[3px] max-w-[78px] h-[31px] flex items-center justify-center rounded-[15px]">
               <span className="font-bold">{String(activeIndex + 1).padStart(2, "0")}</span>
               <span className="text-[#C2C2C2]">/</span>
               {String(slidesData.length).padStart(2, "0")}

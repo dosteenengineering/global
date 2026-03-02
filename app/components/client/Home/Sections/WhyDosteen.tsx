@@ -5,9 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { whyDosteenData } from "../data";
 import PrimaryNoise from "@/app/components/common/PrimaryNoise";
 
-// ─── constants ────────────────────────────────────────────────────────────────
 const AUTOPLAY_MS = 4000;
-const BEZIER = "800ms cubic-bezier(0.4, 0, 0.2, 1)";
+const BEZIER = "900ms cubic-bezier(0.4, 0, 0.2, 1)";
 const CIRCLE_MS = 800;
 const CIRCLE_SM = 215;
 
@@ -19,7 +18,7 @@ const getLeft = (offset: number, n: number) => {
 };
 
 const useWatermark = (title: string) => {
-  const [cur,     setCur]     = useState({ text: title, key: 0 });
+  const [cur, setCur] = useState({ text: title, key: 0 });
   const [exiting, setExiting] = useState<{ text: string; key: number } | null>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -34,7 +33,6 @@ const useWatermark = (title: string) => {
   return { cur, exiting };
 };
 
-// ─── component ────────────────────────────────────────────────────────────────
 export default function WhyDosteen() {
   const { heading, slides } = whyDosteenData;
   const n = slides.length;
@@ -61,10 +59,16 @@ export default function WhyDosteen() {
   const wm = useWatermark(slides[active].title);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden flex flex-col select-none py-140 3xl:pb-150">
+    <section className="relative w-full min-h-screen overflow-hidden flex flex-col select-none py-140">
       <PrimaryNoise />
 
-      {/* ── Heading + watermark ─────────────────────────────────────── */}
+      <Image src="/assets/icons/bg-svg/why-dosteen.svg" alt="" width={948} height={439} className="absolute right-[12%] bottom-0 w-[700px] h-[300px] 3xl:w-[948px] 3xl:h-[439px]" />
+
+      <style>{`
+        @keyframes spinCW  { to { transform: rotate(360deg);  } }
+        @keyframes spinCCW { to { transform: rotate(-360deg); } }
+      `}</style>
+
       <div className="relative container mx-auto">
         <h2 className="text-center text-white font-helvetica uppercase text-90 leading-[1.111]">
           {heading}
@@ -74,7 +78,6 @@ export default function WhyDosteen() {
           className="absolute top-full mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
-          {/* Exiting watermark — slides out to the left */}
           {wm.exiting && (
             <span
               key={`wm-exit-${wm.exiting.key}`}
@@ -84,7 +87,6 @@ export default function WhyDosteen() {
               {wm.exiting.text}
             </span>
           )}
-          {/* Entering watermark — slides in from the right, then drifts */}
           <span
             key={`wm-enter-${wm.cur.key}`}
             className="font-helvetica uppercase whitespace-nowrap text-white opacity-6 leading-[100%] text-300 3xl:text-400"
@@ -100,21 +102,19 @@ export default function WhyDosteen() {
         </div>
       </div>
 
-      {/* ── Stage ───────────────────────────────────────────────────── */}
       <div className="relative flex-1 flex items-center pt-[85px]">
         <div className="container mx-auto relative z-20 w-full">
 
-          {/* Pagination pill */}
           <div className="absolute left-0" style={{ top: "calc(50% + 18px)" }}>
-            <div className="flex items-center py-[3px] leading-tight h-[31px] w-[78px] justify-center text-15 font-[300] font-poppins text-white rounded-full border border-white/[0.28]">
+            <div className="flex items-center py-[3px] leading-[0.5] h-[31px] w-[78px] justify-center text-15 font-[300] font-poppins text-white rounded-full border border-white">
               <span className="font-[600]">{String(active + 1).padStart(2, "0")}</span>
               <span>/{String(n).padStart(2, "0")}</span>
             </div>
           </div>
 
-          {/* Track — line lives here so top-1/2 is the exact circle center */}
-          <div className="relative mx-28 h-[530px] 3xl:h-[720px]">
+          <div className="relative mx-28 3xl:mx-34 h-[530px] 3xl:h-[720px]">
 
+            {/* Track line — no z-index, sits in natural flow below all positioned children */}
             <div
               className="absolute top-1/2 h-px pointer-events-none"
               style={{
@@ -125,6 +125,58 @@ export default function WhyDosteen() {
               }}
             />
 
+            {/*
+              SVG border layer — rendered as siblings BEFORE the circles.
+              They mirror each circle's position/size/opacity/transition exactly,
+              but are separate elements so the circle wrapper stays overflow:hidden
+              (preserving original stacking context behaviour — no z-index conflicts).
+            */}
+            {slides.map((_, i) => {
+              const offset = (i - active + n) % n;
+              const isActive = offset === 0;
+              const isNext = offset === 1;
+              const isVisible = isActive || isNext;
+
+              return (
+                <div
+                  key={`border-${i}`}
+                  className={`absolute top-1/2 -translate-y-1/2 rounded-full pointer-events-none ${
+                    isActive
+                      ? "w-[530px] h-[530px] 2xl:w-[560px] 2xl:h-[560px] 3xl:w-[720px] 3xl:h-[720px]"
+                      : "w-[215px] h-[215px] 2xl:w-[250px] 2xl:h-[250px] 3xl:w-[284px] 3xl:h-[284px]"
+                  }`}
+                  style={{
+                    left: getLeft(offset, n),
+                    opacity: isVisible ? 1 : 0,
+                    zIndex: isActive ? 3 : isNext ? 2 : 1,
+                    transition: BEZIER,
+                  }}
+                >
+                  <div
+                    className="absolute -inset-[1px]"
+                    style={{
+                      animation: isActive
+                        ? "spinCW 3s linear infinite"
+                        : "spinCCW 4s linear infinite",
+                    }}
+                  >
+                    <Image
+                      src={
+                        isActive
+                          ? "/assets/images/home/why-dosteen/big-circle.svg"
+                          : "/assets/images/home/why-dosteen/small-circle.svg"
+                      }
+                      alt=""
+                      fill
+                      aria-hidden="true"
+                      className="pointer-events-none"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Original circles — unchanged, overflow:hidden preserved */}
             {slides.map((slide, i) => {
               const offset = (i - active + n) % n;
               const isActive = offset === 0;
@@ -154,7 +206,6 @@ export default function WhyDosteen() {
                 >
                   <div className="w-full h-full rounded-full flex flex-col items-center justify-center">
 
-                    {/* Icon */}
                     <div
                       className={`relative flex items-center justify-center shrink-0 ${
                         isActive
@@ -177,7 +228,6 @@ export default function WhyDosteen() {
                       />
                     </div>
 
-                    {/* Title */}
                     <p
                       className={`text-center font-[300] -tracking-[2%] font-poppins ${
                         isActive
@@ -193,7 +243,6 @@ export default function WhyDosteen() {
                       {slide.title}
                     </p>
 
-                    {/* Description — reserved space so icon+title never shift */}
                     <div
                       className={`${isActive ? "h-[120px]" : "h-0"}`}
                       style={{
@@ -205,7 +254,7 @@ export default function WhyDosteen() {
                       }}
                     >
                       <p
-                        className="text-center font-[300] -tracking-[2%] font-poppins text-25 3xl:text-30 leading-[1.33] max-w-[508px] px-18 text-white"
+                        className="text-center font-[300] -tracking-[2%] font-poppins text-25 3xl:text-30 leading-[1.33] max-w-[508px] px-18 3xl:px-0 text-white"
                         style={{
                           opacity: showDesc ? 1 : 0,
                           transform: showDesc ? "translateY(0)" : "translateY(10px)",

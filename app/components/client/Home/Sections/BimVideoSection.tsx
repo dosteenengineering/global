@@ -93,7 +93,7 @@ export default function BimSection() {
           {bimData.description}
         </p>
 
-        <div className="3xl:w-[150px] 3xl:h-[150px] w-[100px] h-[100px]">
+        <div className="3xl:w-[150px] 3xl:h-[150px] w-[100px] h-[100px] hover:cursor-pointer hover:translate-y-[-15px] hover:translate-x-[15px] transition-all duration-300">
           <Image
             src={bimData.arrowImage}
             alt="Arrow"

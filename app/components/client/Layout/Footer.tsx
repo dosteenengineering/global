@@ -9,6 +9,7 @@ import SecondaryNoise from "../../common/SecondaryNoise";
 import ContainerAnchor from "../../layout/ContainerAnchor";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { useRef } from "react";
+import FooterNoise from "../../common/FooterNoise";
 
 const SocialIcon = ({
   name,
@@ -70,13 +71,8 @@ const SocialIcon = ({
 };
 
 const Footer = () => {
-  const {
-    contact,
-    socials,
-    navColumns,
-    certifications,
-    bottomLinks,
-  } = footerData;
+  const { contact, socials, navColumns, certifications, bottomLinks } =
+    footerData;
   const containerRef = useRef<HTMLDivElement>(null);
   const leftPadding = useGetContainerSpacing(containerRef);
 
@@ -175,9 +171,10 @@ const Footer = () => {
           {/* ── BOTTOM BAR — lives inside left col only ── */}
           <div
             style={{ paddingLeft: leftPadding }}
-            className="border-t border-r border-[#C2C2C2] bg-[#E5E5E5] pr-[57px]"
+            className="border-t border-r border-[#C2C2C2] relative pr-[57px]"
           >
-            <div className="flex items-center justify-between py-[14px]">
+            <FooterNoise />
+            <div className="relative flex items-center justify-between py-[14px]">
               <div className="flex items-center gap-[30px]">
                 {bottomLinks.map((link) => (
                   <Link
@@ -199,15 +196,28 @@ const Footer = () => {
         {/* ── RIGHT COLUMN ── */}
         <div className="shrink-0 flex flex-col justify-between">
           {/* Form */}
-          <div style={{ paddingRight: leftPadding }} className="pl-12 3xl:pl-[91px]">
+          <div
+            style={{ paddingRight: leftPadding }}
+            className="pl-12 3xl:pl-[91px]"
+          >
             <FooterCallBackForm />
           </div>
 
           {/* Certification badges */}
-          <div style={{ paddingRight: leftPadding }} className="py-10 3xl:py-[55px] border-t border-[#D0CFC9] pl-12 3xl:pl-[91px]">
+          <div
+            style={{ paddingRight: leftPadding }}
+            className="py-10 3xl:py-[55px] border-t border-[#D0CFC9] pl-12 3xl:pl-[91px]"
+          >
             <div className="flex items-center gap-3 3xl:gap-[22px]">
-              {certifications.map((cert) => (
-                <div key={cert.alt} className="w-full h-[50px] 3xl:h-[72px] relative">
+              {certifications.map((cert, index) => (
+                <div
+                  key={cert.alt}
+                  className={`relative h-[50px] 3xl:h-[72px] ${
+                    index === certifications.length - 1
+                      ? "w-[112px]"
+                      : "w-[73px]"
+                  }`}
+                >
                   <Image
                     src={cert.src}
                     alt={cert.alt}

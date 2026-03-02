@@ -91,7 +91,7 @@ export default function BlogsSection() {
                 <SwiperSlide key={post.key} style={{ height: "auto" }}>
                   {/* Divider line sits in the gap above this slide (hidden on first) */}
                   <div
-                    className="absolute left-0 right-0 border-t border-[#CCCCCC]"
+                    className="absolute left-0 right-0 border-t border-[#CCCCCC] group"
                     style={{ top: -(SLIDE_GAP / 2) }}
                   />
                   <Link
@@ -125,13 +125,13 @@ export default function BlogsSection() {
                     </div>
 
                     {/* Arrow */}
-                    <div className="flex-shrink-0 self-start">
+                    <div className="flex-shrink-0 self-start w-[60px] h-[50px] pt-2">
                       <Image
                         src="/assets/icons/button-arrow-top-right.svg"
                         alt="arrow"
                         width={32}
                         height={32}
-                        className="w-[28px] h-[28px] 3xl:w-[32px] 3xl:h-[32px]"
+                        className="w-[28px] h-[28px] 3xl:w-[32px] 3xl:h-[32px] group-hover:rotate-45 transition-all duration-300 shrink-0"
                       />
                     </div>
                   </Link>

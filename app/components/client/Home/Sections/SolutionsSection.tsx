@@ -116,11 +116,11 @@ useLayoutEffect(() => {
 
           {/* Right 70% */}
           <div className="ml-auto 3xl:mr-20 mt-[203px]">
-            <div className="grid grid-cols-2 gap-x-20 3xl:gap-x-[136px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
+            <div className="grid grid-cols-2 gap-x-20 3xl:gap-x-[100px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
               {activeData.rightItems.map((item, index) => (
                 <div
                   key={index}
-                  className="group cursor-pointer flex items-center w-[290px] transition-all duration-300"
+                  className="group cursor-pointer flex items-center w-fit transition-all duration-300"
                 >
                   <span className="transition-all duration-300 group-hover:font-[600]">
                     {item}

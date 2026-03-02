@@ -140,7 +140,7 @@ export default function IndustriesSection() {
             </div>
             <div className="w-full h-px bg-[#C2C2C2] mb-[30px]" />
 
-            <div className="flex items-center border border-primary text-paragraph font-poppins font-[300] leading-[1.666] border-gray-300 rounded-full px-[16px] text-15 w-[78px] h-[31px] py-[3px]">
+            <div className="flex items-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5] border-gray-300 rounded-full px-[16px] text-15 w-[78px] h-[31px] py-[3px]">
               <span className="font-[600]">
                 {String(activeIndex + 1).padStart(2, "0")}
               </span>
