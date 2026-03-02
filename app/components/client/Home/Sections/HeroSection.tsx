@@ -3,7 +3,7 @@ import BorderButton from "@/app/components/common/BorderButton";
 
 export default function Hero() {
   return (
-    <section className="relative h-[92dvh] w-full overflow-hidden">
+    <section className="relative h-[70vh] lg:h-[92vh] w-full overflow-hidden">
       {/* Background Image */}
       <Image
         src="/assets/images/home/hero/herobg.jpg"
@@ -17,10 +17,10 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
-      <div className="container relative z-10 flex h-full items-end pb-[130px]">
+      <div className="container relative z-10 flex h-full items-end pb-150 3xl:pb-[130px]">
         <div className="max-w-[964px]">
           {/* Title */}
-          <h1 className="text-[#FFFBFB] text-95 font-[700] uppercase font-helvetica leading-[1]">
+          <h1 className="text-[#FFFBFB] text-[36px] lg:text-95 font-[700] uppercase font-helvetica leading-[1]">
             Where Engineering Meets Assurance
           </h1>
 
@@ -31,6 +31,7 @@ export default function Hero() {
               borderColor="white"
               textColor="white"
               iconColor="primary"
+              px="px-4 2xl:px-6"
             />
           </div>
         </div>

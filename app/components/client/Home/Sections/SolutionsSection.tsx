@@ -37,7 +37,7 @@ useLayoutEffect(() => {
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab)!;
 
   return (
-    <section className="relative w-full min-h-screen text-white">
+    <section className="relative w-full min-h-screen text-white overflow-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"

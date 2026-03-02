@@ -106,7 +106,7 @@ export default function IndustriesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef}>
+    <section className="overflow-hidden" ref={sectionRef}>
       <ContainerAnchor ref={containerRef} />
       <div style={{ paddingLeft: leftInset }} className="py-140 3xl:py-200">
         <div className="grid grid-cols-[215px_1fr] gap-x-[70px] mb-[70px] text-secondary">

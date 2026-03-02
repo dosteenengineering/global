@@ -77,7 +77,7 @@ const Footer = () => {
   const leftPadding = useGetContainerSpacing(containerRef);
 
   return (
-    <footer className="relative">
+    <footer className="relative overflow-hidden">
       <ContainerAnchor ref={containerRef} />
       <SecondaryNoise />
       <div className="relative flex pt-140">

@@ -171,6 +171,7 @@ body::-webkit-scrollbar {
     --spacing-90: var(--space-90);
     --spacing-110: var(--space-110);
     --spacing-120: var(--space-120);
+    --spacing-130: var(--space-120);
     --spacing-140: var(--space-140);
     --spacing-150: var(--space-150);
     --spacing-180: var(--space-180);

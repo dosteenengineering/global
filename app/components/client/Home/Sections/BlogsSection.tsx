@@ -37,7 +37,7 @@ export default function BlogsSection() {
   }, []);
 
   return (
-    <section className="w-full relative">
+    <section className="w-full relative overflow-hidden">
       <SecondaryNoise />
 
       <div className="relative container py-140 3xl:py-150">

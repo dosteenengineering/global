@@ -30,7 +30,7 @@ export default function BorderButton({
     const textClass = textColor === "white" ? "text-white" : "text-secondary";
     const iconClass = iconColor === "white" ? "invert brightness-0" : "";
 
-    const sharedClass = `group h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} py-[17.5px] uppercase text-15 leading-[1.73] font-[400] transition-all duration-300 hover:bg-white/20 cursor-pointer ${borderClass} ${textClass} ${className}`;
+    const sharedClass = `group 2xl:h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} py-[17.5px] uppercase text-15 leading-[1.73] font-[400] transition-all duration-300 hover:bg-white/20 cursor-pointer ${borderClass} ${textClass} ${className}`;
 
     const content = (
         <>
