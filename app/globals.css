@@ -6,14 +6,14 @@ body {
     height: auto;
     overflow-y: auto;
     font-family: var(--font-poppins);
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    /* scrollbar-width: none;
+    -ms-overflow-style: none; */
 }
 
-html::-webkit-scrollbar,
+/* html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* Lenis compatibility */
 .lenis.lenis-smooth {
@@ -129,7 +129,7 @@ body::-webkit-scrollbar {
   --text-70: clamp(34px, 2.5vw + 34px, 70px);
   --text-90: clamp(40px, 2.98vw + 40px, 90px);
   --text-95: clamp(42px, 3.28vw + 42px, 95px);
-  --text-250: clamp(100px, 7.74vw + 90px, 250px);
+--text-250: clamp(90px, 13.1vw, 250px);
   --text-300: clamp(120px, 17vw, 300px);
 --text-400: clamp(140px, 22vw, 400px);
 
