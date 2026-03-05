@@ -8,9 +8,9 @@ export default function SecondaryNoise({ className = "" }: SecondaryNoiseProps) 
       <div
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{
-          backgroundImage: `url("/assets/noise/snoise.svg")`,
+          backgroundImage: `url("/assets/noise/secondary-noise.png")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "100px",
+          backgroundSize: "200px",
         }}
       />
     </>

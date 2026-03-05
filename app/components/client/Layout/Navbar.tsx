@@ -15,6 +15,7 @@ export default function Navbar() {
             alt="Logo"
             width={177}
             height={47}
+            className="pointer-events-none"
           />
         </Link>
 
@@ -35,6 +36,7 @@ export default function Navbar() {
               alt="Menu"
               width={31}
               height={10}
+              className="pointer-events-none"
             />
           </button>
         </div>

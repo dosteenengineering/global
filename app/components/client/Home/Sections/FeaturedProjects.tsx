@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useRef,
-  useCallback,
-  useState,
-  useLayoutEffect,
-} from "react";
+import { useRef, useCallback, useState, useLayoutEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative } from "swiper/modules";
@@ -17,6 +12,7 @@ import "swiper/css/autoplay";
 import { featuredProjectsData, Project } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import BorderButton from "@/app/components/common/BorderButton";
+import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 
 function getInactiveProjects(
   projects: Project[],
@@ -73,7 +69,6 @@ function InactiveSlot({
 
   return (
     <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-      {/* Text — slides inside fixed-height overflow-hidden container */}
       <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
         {displayed.animating && (
           <p
@@ -93,7 +88,6 @@ function InactiveSlot({
         </p>
       </div>
 
-      {/* Image — slides inside fixed-size overflow-hidden container */}
       <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
         {displayed.animating && (
           <div
@@ -128,16 +122,23 @@ function InactiveSlot({
 }
 
 export default function FeaturedProjectsSection() {
+  // ── Desktop swiper state ──
   const activeSwiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [changeCount, setChangeCount] = useState(0);
   const prevIndexRef = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftInset = useGetContainerSpacing(containerRef);
+
+  // ── Mobile swiper state ──
+  const mobileSwiperRef = useRef<SwiperType | null>(null);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
 
   const projects = featuredProjectsData.projects;
-  // Only 2 inactive cards visible
   const inactiveProjects = getInactiveProjects(projects, activeIndex, 2);
 
+  // Desktop handlers
   const handleActiveInit = useCallback((s: SwiperType) => {
     activeSwiperRef.current = s;
   }, []);
@@ -158,13 +159,162 @@ export default function FeaturedProjectsSection() {
   const slidePrev = useCallback(() => activeSwiperRef.current?.slidePrev(), []);
   const slideNext = useCallback(() => activeSwiperRef.current?.slideNext(), []);
 
+  // Mobile handlers
+  const handleMobileSlideChange = useCallback((s: SwiperType) => {
+    setMobileActiveIndex(s.realIndex);
+  }, []);
+
+  const mobileSlidePrev = useCallback(
+    () => mobileSwiperRef.current?.slidePrev(),
+    [],
+  );
+  const mobileSlideNext = useCallback(
+    () => mobileSwiperRef.current?.slideNext(),
+    [],
+  );
+
   return (
-    <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden container">
-      <h2 className="text-center text-90 leading-[1.1] uppercase font-helvetica text-secondary mb-[70px]">
+    <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
+      <h2
+        ref={containerRef}
+        className="lg:text-center section-font-size leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px] container"
+      >
         {featuredProjectsData.title}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-140 3xl:gap-x-200">
+      {/* ═══════════════════════════════════════════════════════
+          MOBILE LAYOUT — visible only below lg
+      ════════════════════════════════════════════════════════ */}
+      <div className="lg:hidden">
+        {/* Nav buttons right-aligned, under title */}
+        <div className="flex items-center justify-between mb-8 container">
+          <div className="flex items-center gap-[12px]">
+            <NavButton
+              onClick={mobileSlidePrev}
+              direction="left"
+              disabled={false}
+              ariaLabel="Previous project"
+            />
+            <NavButton
+              onClick={mobileSlideNext}
+              direction="right"
+              disabled={false}
+              ariaLabel="Next project"
+            />
+          </div>
+
+          {/* View all button */}
+            <BorderButton
+              href={featuredProjectsData.viewAllHref}
+              text={featuredProjectsData.viewAllLabel}
+              borderColor="black"
+              textColor="black"
+              px="md:px-[35px] px-[18px]"
+            />
+        </div>
+
+        <div style={{ paddingLeft: leftInset }}>
+          <Swiper
+            loop={true}
+            modules={[Autoplay]}
+            onSwiper={(s) => {
+              mobileSwiperRef.current = s;
+            }}
+            onSlideChange={handleMobileSlideChange}
+            slidesPerView={1.15}
+            breakpoints={{
+              640: {
+                slidesPerView: 1.5,
+              },
+              768: {
+                slidesPerView: 2.2,
+              },
+              950: {
+                slidesPerView: 2.5,
+              },
+            }}
+            spaceBetween={16}
+            speed={600}
+            allowTouchMove={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            className="w-full"
+          >
+            {projects.map((project: Project, idx: number) => {
+              const isActive = idx === mobileActiveIndex;
+              return (
+                <SwiperSlide key={project.key}>
+                  <div className="relative w-full h-[320px] md:h-[380px] cursor-pointer group overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.name}
+                      fill
+                      className="object-cover"
+                      priority={idx === 0}
+                    />
+                    {/* Overlay + details only on the currently active slide */}
+                    <>
+                      {/* Gradient */}
+                      <div
+                        className={`absolute inset-0 transition-opacity duration-500 ${
+                          isActive ? "opacity-100" : "opacity-0"
+                        }`}
+                        style={{
+                          background:
+                            "linear-gradient(180deg, rgba(0,0,0,0) 35.9%, rgba(0,0,0,0.85) 86.75%)",
+                        }}
+                      />
+                      {/* Arrow */}
+                      <div
+                        className={`absolute top-4 right-4 z-10 transition-all duration-500 ${
+                          isActive
+                            ? "opacity-100 translate-x-0 translate-y-0"
+                            : "opacity-0 translate-x-4 translate-y-4"
+                        }`}
+                      >
+                        <Image
+                          src="/assets/icons/arrow-right-top-big.svg"
+                          alt="arrow"
+                          width={71}
+                          height={48}
+                          className="w-[50px] h-[50px]"
+                        />
+                      </div>
+                      {/* Content */}
+                      <div
+                        className={`absolute bottom-0 left-0 right-0 px-6 pb-6 z-10 transition-opacity duration-500 ${
+                          isActive ? "opacity-100" : "opacity-0"
+                        }`}
+                      >
+                        <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-4">
+                          {project.name}
+                        </p>
+                        <div className="h-[1px] bg-white/30 mb-4" />
+                        <div className="flex items-center gap-3 justify-between">
+                          <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
+                            Location: {project.location}
+                          </span>
+                          <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
+                            Client: {project.client}
+                          </span>
+                        </div>
+                      </div>
+                    </>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════════
+          DESKTOP LAYOUT — visible only from lg and above
+          Completely unchanged from original
+      ════════════════════════════════════════════════════════ */}
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-x-140 3xl:gap-x-200 container">
         {/* ───────── Row 1 Col 1 — ACTIVE SWIPER ───────── */}
         <div>
           <Swiper
@@ -172,12 +322,11 @@ export default function FeaturedProjectsSection() {
             modules={[Autoplay, EffectCreative]}
             effect="creative"
             creativeEffect={{
-              // ← add this block
               prev: {
-                translate: ["-105%", "-105%", 0], // exits to top-left
+                translate: ["-105%", "-105%", 0],
               },
               next: {
-                translate: ["105%", "105%", 0], // enters from bottom-right
+                translate: ["105%", "105%", 0],
               },
             }}
             onSwiper={handleActiveInit}
@@ -189,7 +338,6 @@ export default function FeaturedProjectsSection() {
             autoplay={{
               delay: 3000,
               disableOnInteraction: false,
-              // pauseOnMouseEnter: true,
             }}
             className="w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer"
           >

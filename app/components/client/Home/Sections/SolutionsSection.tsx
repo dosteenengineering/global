@@ -35,7 +35,7 @@ export default function SolutionsSection() {
       <div className="absolute inset-0 bg-black/70" />
 
       <div className="relative z-10 w-full container py-140 3xl:py-150 overflow-hidden">
-        <h2 className="text-center text-[34px] lg:text-90 leading-[1.111] font-helvetica uppercase">
+        <h2 className="text-left lg:text-center section-font-size leading-[1.111] font-helvetica uppercase">
           {solutionsData.mainTitle}
         </h2>
 
@@ -92,7 +92,7 @@ export default function SolutionsSection() {
         </div>
 
         {/* ================= MOBILE ACCORDION (BELOW LG) ================= */}
-        <div className="lg:hidden mt-10 space-y-6">
+        <div className="lg:hidden mt-10 md:mt-12 space-y-6">
           {solutionsData.tabs.map((tab: any) => {
             const isOpen = activeTab === tab.key;
 
@@ -100,7 +100,7 @@ export default function SolutionsSection() {
               <div key={tab.key} className="border-b border-white/50 pb-4">
                 <button
                   onClick={() => setActiveTab(isOpen ? null : tab.key)}
-                  className="w-full flex justify-between items-center text-30 leading-[1.33] font-poppins -tracking-[2%]"
+                  className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left"
                 >
                   <span className={isOpen ? "font-[600] text-white" : "font-[300] text-white/60 transition-all duration-300"}>
                     {tab.label}
