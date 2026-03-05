@@ -8,9 +8,9 @@ export default function FooterNoise({ className = "" }: FooterNoiseProps) {
       <div
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{
-          backgroundImage: `url("/assets/noise/footernoise.svg")`,
+          backgroundImage: `url("/assets/noise/privacy-noise.png")`,
           backgroundRepeat: "repeat",
-          backgroundSize: "20px",
+          backgroundSize: "200px",
         }}
       />
     </>

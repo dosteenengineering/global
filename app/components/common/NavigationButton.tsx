@@ -46,7 +46,7 @@ export default function NavButton({
       className={`
         flex items-center justify-center
         ${flexDirection[iconPosition]}
-        w-[46px] h-[46px] rounded-full border
+        md:w-[46px] md:h-[46px] w-[40px] h-[40px] rounded-full border
         transition-all duration-300
         ${disabled ? "opacity-30 cursor-not-allowed" : "hover:bg-black/5 cursor-pointer"}
         ${className}
@@ -57,7 +57,7 @@ export default function NavButton({
         alt={direction}
         width={17}
         height={17}
-        className={`transition-transform duration-300 ${directionRotation[direction]}`}
+        className={`transition-transform duration-300 md:w-[17px] md:h-[17px] w-[14px] h-[14px] pointer-events-none ${directionRotation[direction]}`}
       />
     </button>
   );

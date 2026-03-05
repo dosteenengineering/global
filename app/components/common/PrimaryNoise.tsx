@@ -1,19 +1,22 @@
-interface PrimaryNoiseProps {
-  className?: string;
-}
-
-export default function PrimaryNoise({ className = "" }: PrimaryNoiseProps) {
+export default function PrimaryNoise({ className = "" }) {
   return (
-    <>
+    <div
+      className={`absolute inset-0 pointer-events-none ${className}`}
+      style={{
+        background: "linear-gradient(180deg, #1853D6 0%, #022E9E 100%)",
+      }}
+    >
       <div
-        className={`absolute inset-0 pointer-events-none ${className}`}
         style={{
-          backgroundImage: `url("/assets/noise/pnoise1.svg")`,
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url(/assets/noise/primary-noise.png)",
           backgroundRepeat: "repeat",
-          backgroundSize: "101px",
+          backgroundSize: "250px",
+          mixBlendMode: "screen",
+          opacity: 0.6,
         }}
       />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent to-[#022E9E]" />
-    </>
+    </div>
   );
 }

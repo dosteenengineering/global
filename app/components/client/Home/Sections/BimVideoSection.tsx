@@ -48,7 +48,7 @@ export default function BimSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-[80vh] sm:h-full lg:min-h-screen w-full overflow-hidden bg-black">
       {/* Video — hidden until ready to prevent flash */}
       <video
         ref={videoRef}
@@ -71,13 +71,13 @@ export default function BimSection() {
         }}
       />
 
-      <div className="container relative z-10 h-full flex flex-col justify-center py-140 3xl:pt-[177px]">
-        <h1 className="text-white text-90 leading-[1.111] font-helvetica max-w-[721px] mb-8 3xl:mb-[45px]">
+      <div className="container relative z-10 h-full flex flex-col justify-between py-140 3xl:pt-[177px]">
+        <h1 className="text-white section-font-size leading-[1.111] font-helvetica max-w-[721px] mb-10 md:mb-[45px]">
           {bimData.heading}
         </h1>
 
-        <div className="flex items-center gap-[35px] mb-120 3xl:mb-[145px]">
-          <div className="flex-1 h-[2px] bg-white/35 relative">
+        <div className="flex items-start md:items-center gap-[10px] md:gap-[35px] mb-120 3xl:mb-[145px] flex-col md:flex-row">
+          <div className="w-full md:flex-1 h-[2px] bg-white/35 relative">
             <div
               ref={progressBarRef}
               className="absolute inset-0 top-1/2 -translate-y-1/2 bg-primary h-[4px] origin-left will-change-transform"
@@ -89,11 +89,11 @@ export default function BimSection() {
           </span>
         </div>
 
-        <p className="text-white text-30 leading-[1.33] font-poppins font-[300] -tracking-[2%] ml-[calc(50%_-_130px)] max-w-[540px] mb-15 3xl:mb-[82px]">
+        <p className="text-white text-30 leading-[1.33] font-poppins font-[300] -tracking-[2%] ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-20 3xl:mb-[82px]">
           {bimData.description}
         </p>
 
-        <div className="3xl:w-[150px] 3xl:h-[150px] w-[100px] h-[100px] hover:cursor-pointer hover:translate-y-[-15px] hover:translate-x-[15px] transition-all duration-300">
+        <div className="3xl:w-[150px] 3xl:h-[150px] xl:w-[110px] xl:h-[110px] lg:w-[100px] lg:h-[100px] w-[70px] h-[70px] hover:cursor-pointer hover:translate-y-[-15px] hover:translate-x-[15px] transition-all duration-300">
           <Image
             src={bimData.arrowImage}
             alt="Arrow"

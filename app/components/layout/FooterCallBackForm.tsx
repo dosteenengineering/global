@@ -22,7 +22,7 @@ const solutionOptions: OptionType[] = footerData.solutionTypes.map((type) => ({
 }));
 
 const inputClass =
-    "w-full bg-transparent border-0 border-b border-[#C2C2C2] pb-5 pt-1 text-15 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph focus:outline-none focus:border-[#1B2B6B] transition-colors";
+    "w-full bg-transparent border-0 border-b border-[#C2C2C2] pb-3 md:pb-5 text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph focus:outline-none focus:border-[#1B2B6B] transition-colors";
 
 // Traps wheel events so the list scrolls instead of the page
 const MenuList = (props: MenuListProps<OptionType>) => {
@@ -60,7 +60,7 @@ const MenuList = (props: MenuListProps<OptionType>) => {
     );
 };
 
-const FooterCallBackForm = () => {
+const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => { setMounted(true); }, []);
 
@@ -78,13 +78,17 @@ const FooterCallBackForm = () => {
         });
     };
 
-    return (
-        <div className="min-w-[300px] 3xl:min-w-[477px]">
-            <h2 className="text-30 font-[500] text-secondary font-poppins leading-[0.96] mb-10">
-                Get a Call Back
-            </h2>
+    const isMobile = mounted && typeof window !== "undefined" && window.innerWidth < 768;
 
-            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-1">
+    return (
+        <div className="min-w-[250px] 2xl:min-w-[300px] 3xl:min-w-[477px]">
+            {!hideTitle && (
+                <h2 className="text-[22px] lg:text-30 font-[500] text-secondary font-poppins leading-[0.96] mb-8 md:mb-10">
+                    Get a Call Back
+                </h2>
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)}>
 
                 {/* Name */}
                 <div className="pb-2 3xl:pb-5">
@@ -94,7 +98,7 @@ const FooterCallBackForm = () => {
                         {...register("name", { required: "Name is required" })}
                         className={inputClass}
                     />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[16px]">
+                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.name?.message ?? ""}
                     </p>
                 </div>
@@ -107,7 +111,7 @@ const FooterCallBackForm = () => {
                         {...register("companyName")}
                         className={inputClass}
                     />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[16px]" />
+                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
                 </div>
 
                 {/* Email */}
@@ -124,7 +128,7 @@ const FooterCallBackForm = () => {
                         })}
                         className={inputClass}
                     />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[16px]">
+                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.email?.message ?? ""}
                     </p>
                 </div>
@@ -143,13 +147,12 @@ const FooterCallBackForm = () => {
                         })}
                         className={inputClass}
                     />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[16px]">
+                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.contactNumber?.message ?? ""}
                     </p>
                 </div>
 
-                {/* Solution Type — react-select */}
-                <div>
+                <div className="relative">
                     <Controller
                         name="solutionType"
                         control={control}
@@ -159,12 +162,14 @@ const FooterCallBackForm = () => {
                                 {...field}
                                 options={solutionOptions}
                                 placeholder="Solution Type"
-                                instanceId="solution-type"
+                                instanceId={hideTitle ? "solution-type-popup" : "solution-type"}
                                 classNamePrefix="rs"
                                 unstyled
-                                menuPosition="fixed"
-                                menuPortalTarget={mounted ? document.body : null}
-                                menuShouldBlockScroll
+                                isSearchable={false}
+                                menuPosition={hideTitle ? "absolute" : "fixed"}
+                                menuPortalTarget={hideTitle ? undefined : (mounted ? document.body : null)}
+                                menuShouldBlockScroll={!hideTitle}
+                                menuPlacement={hideTitle ? "top" : "auto"}
                                 components={{ MenuList }}
                                 classNames={{
                                     control: ({ isFocused }) =>
@@ -172,16 +177,16 @@ const FooterCallBackForm = () => {
                                             isFocused ? "border-[#1B2B6B]" : "border-[#C2C2C2]"
                                         }`,
                                     placeholder: () =>
-                                        "text-15 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph",
+                                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
                                     singleValue: () =>
-                                        "text-15 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph",
+                                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
                                     indicatorSeparator: () => "hidden",
                                     dropdownIndicator: () => "text-secondary ml-2",
-                                    menuPortal: () => "z-[9999]",
+                                    menuPortal: () => "z-[10000]",
                                     menu: () =>
                                         "bg-[#F4F4F4] border border-[#C2C2C2] rounded-lg shadow-lg",
                                     menuList: () =>
-                                        "py-1 max-h-[180px] overflow-y-scroll",
+                                        `py-1 overflow-y-scroll ${isMobile ? "h-[285px] pt-3" : "max-h-[180px]"}`,
                                     option: ({ isFocused, isSelected }) =>
                                         `px-4 py-2 text-[13px] font-poppins font-[300] cursor-pointer transition-colors ${
                                             isSelected
@@ -194,11 +199,11 @@ const FooterCallBackForm = () => {
                             />
                         )}
                     />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[16px]" />
+                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
                 </div>
 
                 {/* Submit */}
-                <div className="pt-10 w-fit">
+                <div className="pt-5 md:pt-6 lg:pt-[22px] w-fit">
                     <BorderButton
                         type="submit"
                         text="Submit"

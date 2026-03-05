@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { trustedClientsData } from "../data";
+import { div } from "framer-motion/client";
 
 const TrustedClients = () => {
   const { logos } = trustedClientsData;
@@ -19,7 +20,7 @@ const TrustedClients = () => {
     if (!track || !viewport) return;
 
     isDesktopRef.current = window.innerWidth >= 1024;
-    const duration = isDesktopRef.current ? 50 : 25;
+    const duration = isDesktopRef.current ? 50 : 15;
 
     track.querySelectorAll("[data-clone='true']").forEach((n) => n.remove());
 
@@ -79,19 +80,19 @@ const TrustedClients = () => {
         >
           <div
             ref={trackRef}
-            className="flex items-center gap-110 3xl:gap-[127px]"
+            className="flex items-center gap-110 3xl:gap-[127px] pointer-events-none"
           >
-            {logos.map((logo, i) => (
+            {[...logos, ...logos, ...logos].map((logo, i) => (
               <div
                 key={i}
-                className="shrink-0 flex items-center justify-center w-fit h-[80px]"
+                className="shrink-0 flex items-center justify-center w-fit h-[50px] lg:h-[80px]"
               >
                 <Image
                   src={logo}
                   alt=""
                   height={80}
                   width={0}
-                  className="object-contain max-w-[160px] h-[80px] w-auto"
+                  className="object-contain max-w-[160px] h-[50px] lg:h-[80px] w-auto"
                 />
               </div>
             ))}
