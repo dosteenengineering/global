@@ -13,7 +13,7 @@ import WhyDosteen from "./Sections/WhyDosteen";
 
 const Index = () => {
   return (
-    <div className="max-w-[1920px] mx-auto">
+    <div className="max-w-[1920px] mx-auto overflow-hidden">
       <HeroSection />
       <AboutSlider />
       <SolutionsSection />

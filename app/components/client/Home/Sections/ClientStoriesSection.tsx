@@ -9,7 +9,8 @@ import "swiper/css";
 
 import { clientStoriesData, ClientStory } from "../data";
 import PrimaryNoise from "@/app/components/common/PrimaryNoise";
-import { moveUp } from "@/app/components/motionVariants";
+import { moveLeft, moveRight, moveUp } from "@/app/components/motionVariants";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
 const SLIDE_DELAY = 5000;
 
@@ -20,8 +21,6 @@ export default function ClientStoriesSection() {
   const total = clientStoriesData.stories.length;
   const activeStory: ClientStory = clientStoriesData.stories[activeIndex];
 
-  // Single source of truth: one timer drives both the progress bar and the slide.
-  // Any time activeIndex or progressKey changes, this effect restarts the 5s clock.
   useEffect(() => {
     const id = setTimeout(() => {
       const next = (activeIndex + 1) % total;
@@ -30,14 +29,12 @@ export default function ClientStoriesSection() {
       setProgressKey((k) => k + 1);
     }, SLIDE_DELAY);
     return () => clearTimeout(id);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex, progressKey]);
 
   const handleSwiper = useCallback((s: SwiperType) => {
     swiperRef.current = s;
   }, []);
 
-  // Only used for swipe/drag — keeps activeIndex in sync.
   const handleSlideChange = useCallback((s: SwiperType) => {
     setActiveIndex(s.realIndex);
     setProgressKey((k) => k + 1);
@@ -54,33 +51,51 @@ export default function ClientStoriesSection() {
       <PrimaryNoise />
 
       {/* ═══════════════════════════════════════════════════════
-          DESKTOP LAYOUT — lg and above, completely unchanged
+          DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140">
-        <h2 className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-[82px]">
-          {clientStoriesData.title}
-        </h2>
+        <SectionTitle
+          title={clientStoriesData.title}
+          className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-[82px]"
+        />
 
         <div className="flex flex-row flex-1 gap-0 lg:pl-10 xl:pl-12 2xl:pl-14 3xl:pl-[65px]">
           {/* Opening quote icon */}
-          <div className="flex-shrink-0 flex items-start mr-15 xl:mr-90 2xl:mr-110 3xl:mr-[113px] pointer-events-none">
-            <Image
-              src="/assets/images/home/client-stories/quote-open.svg"
-              alt="quote open"
-              width={120}
-              height={120}
-              className="object-contain opacity-10 w-[80px] h-[140px] md:w-[120px] md:h-[200px] 2xl:w-[160px] 2xl:h-[300px] 3xl:w-[233px] 3xl:h-[446px]"
-            />
+          <div className="flex-shrink-0 flex items-start mr-15 xl:mr-90 2xl:mr-110 3xl:mr-[113px] pointer-events-none overflow-hidden">
+            <motion.div
+            variants={moveRight(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            >
+              <Image
+                src="/assets/images/home/client-stories/quote-open.svg"
+                alt="quote open"
+                width={120}
+                height={120}
+                className="object-contain opacity-10 w-[80px] h-[140px] md:w-[120px] md:h-[200px] 2xl:w-[160px] 2xl:h-[300px] 3xl:w-[233px] 3xl:h-[446px]"
+              />
+            </motion.div>
           </div>
 
           {/* Vertical divider */}
-          <div className="flex-shrink-0 self-stretch w-px bg-[#76A7FF]" />
+          <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="flex-shrink-0 self-stretch w-px bg-[#76A7FF]" />
 
           {/* Main content col */}
           <div className="flex-1 flex flex-col min-w-0 pl-[30px]">
             <div className="flex flex-row flex-1 gap-0">
               {/* Counter pill */}
-              <div className="flex-shrink-0 pr-12 2xl:pr-[66px] -mt-3">
+              <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex-shrink-0 pr-12 2xl:pr-[66px] -mt-3">
                 <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
                   <span className="font-poppins text-15 leading-[1.66] text-white">
                     <span className="font-[600]">
@@ -89,14 +104,18 @@ export default function ClientStoriesSection() {
                     <span>/{String(total).padStart(2, "0")}</span>
                   </span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Lines + content */}
               <div className="flex-1 flex flex-col min-w-0">
                 {/* Progress lines */}
                 <div className="flex items-center flex-shrink-0 gap-[28px] 3xl:gap-[38px] mb-120 3xl:mb-[126px] relative z-20">
                   {clientStoriesData.stories.map((_, i) => (
-                    <button
+                    <motion.button
+                    variants={moveUp(i*0.18)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
                       key={i}
                       onClick={() => goToSlide(i)}
                       aria-label={`Go to slide ${i + 1}`}
@@ -118,7 +137,7 @@ export default function ClientStoriesSection() {
                           </span>
                         )}
                       </span>
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
 
@@ -194,7 +213,13 @@ export default function ClientStoriesSection() {
                     </div>
 
                     {/* Closing quote — pinned bottom-right, static */}
-                    <div className="absolute bottom-0 right-20 2xl:right-50 3xl:right-[285px] pb-90">
+                    <div className="absolute bottom-0 right-20 2xl:right-50 3xl:right-[285px] pb-90 overflow-hidden">
+                      <motion.div
+                      variants={moveLeft(0.4)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      >
                       <Image
                         src="/assets/images/home/client-stories/quote-close.svg"
                         alt="quote close"
@@ -202,6 +227,7 @@ export default function ClientStoriesSection() {
                         height={225}
                         className="opacity-10 w-[56px] h-[112px] md:w-[84px] md:h-[168px] 3xl:w-[112px] 3xl:h-[225px] object-contain"
                       />
+                      </motion.div>
                     </div>
                   </div>
                 </div>
@@ -212,18 +238,22 @@ export default function ClientStoriesSection() {
       </div>
 
       {/* ═══════════════════════════════════════════════════════
-          MOBILE LAYOUT — below lg
+          MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden relative z-10 container pt-140 pb-[60px]">
-        {/* Heading */}
-        <h2 className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-8 md:mb-10">
-          {clientStoriesData.title}
-        </h2>
+        <SectionTitle
+        title={clientStoriesData.title}
+        className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-8 md:mb-10"
+        />
 
         {/* Progress bars — full width */}
         <div className="flex items-center gap-[16px] mb-5 md:mb-8 relative z-20">
           {clientStoriesData.stories.map((_, i) => (
-            <button
+            <motion.button
+            variants={moveUp(i * 0.11)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
               key={i}
               onClick={() => goToSlide(i)}
               aria-label={`Go to slide ${i + 1}`}
@@ -245,12 +275,17 @@ export default function ClientStoriesSection() {
                   </span>
                 )}
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* Pagination pill — left aligned */}
-        <div className="mb-10 md:mb-12">
+        <motion.div
+        variants={moveUp(0.3)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="mb-10 md:mb-12">
           <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
             <span className="font-poppins text-15 leading-[1.66] text-white">
               <span className="font-[600]">
@@ -259,7 +294,7 @@ export default function ClientStoriesSection() {
               <span>/{String(total).padStart(2, "0")}</span>
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Invisible Swiper — handles drag only, no autoplay */}
         <div
@@ -330,14 +365,21 @@ export default function ClientStoriesSection() {
         </div>
 
         {/* Close quote */}
-        <div className="flex-shrink-0 pr-10 absolute bottom-[10%] right-0">
-          <Image
-            src="/assets/images/home/client-stories/quote-close.svg"
-            alt="quote close"
-            width={56}
-            height={112}
-            className="opacity-10 w-[45px] h-[90px] object-contain"
-          />
+        <div className="flex-shrink-0 pr-10 absolute bottom-[10%] right-0 overflow-hidden">
+          <motion.div
+          variants={moveLeft(0.4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          >
+            <Image
+              src="/assets/images/home/client-stories/quote-close.svg"
+              alt="quote close"
+              width={56}
+              height={112}
+              className="opacity-10 w-[45px] h-[90px] object-contain"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

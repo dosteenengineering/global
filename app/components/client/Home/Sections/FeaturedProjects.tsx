@@ -13,6 +13,9 @@ import { featuredProjectsData, Project } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import BorderButton from "@/app/components/common/BorderButton";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 function getInactiveProjects(
   projects: Project[],
@@ -62,7 +65,7 @@ function InactiveSlot({
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [changeCount]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [changeCount]);
 
   const enterFrom = direction === "right" ? "100%" : "-100%";
   const exitTo = direction === "right" ? "-100%" : "100%";
@@ -175,20 +178,22 @@ export default function FeaturedProjectsSection() {
 
   return (
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
-      <h2
-        ref={containerRef}
-        className="lg:text-center section-font-size leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px] container"
-      >
-        {featuredProjectsData.title}
-      </h2>
+      <div ref={containerRef} className="container">
+        <SectionTitle text={featuredProjectsData.title} className="lg:text-center section-font-size leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px]" />
+      </div>
 
       {/* ═══════════════════════════════════════════════════════
-          MOBILE LAYOUT — visible only below lg
+          MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden">
         {/* Nav buttons right-aligned, under title */}
         <div className="flex items-center justify-between mb-8 container">
-          <div className="flex items-center gap-[12px]">
+          <motion.div 
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+          className="flex items-center gap-[12px]">
             <NavButton
               onClick={mobileSlidePrev}
               direction="left"
@@ -201,19 +206,30 @@ export default function FeaturedProjectsSection() {
               disabled={false}
               ariaLabel="Next project"
             />
-          </div>
+          </motion.div>
 
           {/* View all button */}
-            <BorderButton
-              href={featuredProjectsData.viewAllHref}
-              text={featuredProjectsData.viewAllLabel}
-              borderColor="black"
-              textColor="black"
-              px="md:px-[35px] px-[18px]"
-            />
+            <motion.div
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}>
+              <BorderButton
+                href={featuredProjectsData.viewAllHref}
+                text={featuredProjectsData.viewAllLabel}
+                borderColor="black"
+                textColor="black"
+                px="md:px-[35px] px-[18px]"
+              />
+            </motion.div>
         </div>
 
-        <div style={{ paddingLeft: leftInset }}>
+        <motion.div 
+        variants={moveUp(0.6)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.5 }}
+        style={{ paddingLeft: leftInset }}>
           <Swiper
             loop={true}
             modules={[Autoplay]}
@@ -307,16 +323,20 @@ export default function FeaturedProjectsSection() {
               );
             })}
           </Swiper>
-        </div>
+        </motion.div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════
-          DESKTOP LAYOUT — visible only from lg and above
-          Completely unchanged from original
+          DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-x-140 3xl:gap-x-200 container">
         {/* ───────── Row 1 Col 1 — ACTIVE SWIPER ───────── */}
-        <div>
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           <Swiper
             loop={true}
             modules={[Autoplay, EffectCreative]}
@@ -385,12 +405,17 @@ export default function FeaturedProjectsSection() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </motion.div>
 
         {/* ───────── Row 1 Col 2 — NAV + INACTIVE STRIP ───────── */}
         <div className="flex flex-col justify-between mt-8 md:mt-0">
           {/* Nav */}
-          <div className="flex items-center justify-end gap-[15px]">
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex items-center justify-end gap-[15px]">
             <NavButton
               onClick={slidePrev}
               direction="left"
@@ -403,10 +428,15 @@ export default function FeaturedProjectsSection() {
               disabled={false}
               ariaLabel="Next project"
             />
-          </div>
+          </motion.div>
 
           {/* Inactive cards */}
-          <div className="flex flex-col sm:flex-row gap-[16px] 3xl:gap-[30px] items-end">
+          <motion.div
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row gap-[16px] 3xl:gap-[30px] items-end">
             {inactiveProjects.map((project: Project, i: number) => (
               <InactiveSlot
                 key={`slot-${i}`}
@@ -415,21 +445,27 @@ export default function FeaturedProjectsSection() {
                 changeCount={changeCount}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* ───────── Row 2 Col 1 — EMPTY ───────── */}
         <div />
 
         {/* ───────── Row 2 Col 2 — VIEW BUTTON ───────── */}
-        <div className="mt-[50px] w-fit">
-          <BorderButton
-            href={featuredProjectsData.viewAllHref}
-            text={featuredProjectsData.viewAllLabel}
-            borderColor="black"
-            textColor="black"
-            px="px-[35px]"
-          />
+        <div className="mt-[50px] w-fit overflow-hidden">
+          <motion.div
+            variants={moveUp(0.6)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}>
+            <BorderButton
+              href={featuredProjectsData.viewAllHref}
+              text={featuredProjectsData.viewAllLabel}
+              borderColor="black"
+              textColor="black"
+              px="px-[35px]"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

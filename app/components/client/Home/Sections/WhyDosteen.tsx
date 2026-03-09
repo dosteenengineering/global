@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { whyDosteenData } from "../data";
 import PrimaryNoise from "@/app/components/common/PrimaryNoise";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { motion } from "framer-motion";
+import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 
 const AUTOPLAY_MS = 4000;
 const BEZIER = "900ms cubic-bezier(0.4, 0, 0.2, 1)";
@@ -154,11 +157,14 @@ export default function WhyDosteen() {
       />
 
       <div className="relative container">
-        <h2 className="text-center text-white font-helvetica uppercase section-font-size leading-[1.111]">
-          {heading}
-        </h2>
+        <SectionTitle text={heading} className="text-center text-white font-helvetica uppercase section-font-size leading-[1.111]" />
+        
 
-        <div
+        <motion.div
+        variants={moveUp(0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
           className="absolute top-full mt-14 lg:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
@@ -178,7 +184,7 @@ export default function WhyDosteen() {
           >
             {wm.enteringTitle}
           </span>
-        </div>
+        </motion.div>
       </div>
 
       <div className="relative flex-1 flex items-center pt-8 md:pt-20 lg:pt-[85px]">

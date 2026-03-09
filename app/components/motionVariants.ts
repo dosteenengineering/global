@@ -172,19 +172,19 @@ export const itemVariants = {
 };
 
 
-export const moveUpVariant: Variants = {
+export const moveUpVariant = (duration: number = 0.5): Variants => ({
   hidden: { opacity: 0, y: 64 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration, ease: [0.22, 1, 0.36, 1] as const },
   },
   exit: {
     opacity: 1,
-    y: -64,
+    y: -264,
     transition: { duration: 0.4, ease: "easeIn" },
   },
-};
+});
 
 export const flipVariant: Variants = {
   hidden: { opacity: 0, rotateX: 90, transformOrigin: "top center" },
@@ -196,7 +196,7 @@ export const flipVariant: Variants = {
   },
   exit: {
     opacity: 0,
-    rotateX: -80,
+    rotateX: -90,
     transformOrigin: "top center",
     transition: { duration: 0.6, ease: "easeInOut" },
   },
@@ -211,7 +211,7 @@ export const labelVariant: Variants = {
   },
   exit: {
     opacity: 0,
-    y: -22,
+    y: -60,
     transition: { duration: 0.4, ease: "easeIn" },
   },
 };

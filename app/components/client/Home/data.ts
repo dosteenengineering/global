@@ -160,7 +160,7 @@ export interface IndustriesData {
 }
 
 export const industriesData: IndustriesData = {
-  title: "EXPERTISE ACROSS\nMULTIPLE INDUSTRIES\nWE SERVE",
+  title: "EXPERTISE ACROSS MULTIPLE INDUSTRIES WE SERVE",
   industries: [
     {
       key: "residential",

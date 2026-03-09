@@ -10,6 +10,8 @@ import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
 import FooterNoise from "../../common/FooterNoise";
 import BorderButton from "../../common/BorderButton";
+import { moveUp } from "../../motionVariants";
+import { motion } from "framer-motion";
 
 const SocialIcon = ({
   name,
@@ -172,16 +174,25 @@ const CallbackPopup = ({
           <SecondaryNoise />
           <div className="relative z-10 px-6 pt-6 pb-10">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-[22px] lg:text-30 font-[500] font-poppins text-secondary leading-[1.2]">
+              <motion.h3
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="text-[22px] lg:text-30 font-[500] font-poppins text-secondary leading-[1.2]">
                 Get a Call Back
-              </h3>
-              <button
+              </motion.h3>
+              <motion.button
+                variants={moveUp(0.3)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
                 onClick={onClose}
                 aria-label="Close"
                 className="w-[36px] h-[36px] rounded-full border border-[#C2C2C2] flex items-center justify-center text-secondary text-[20px] leading-none hover:bg-primary hover:text-white hover:border-primary transition-colors duration-300"
               >
                 ×
-              </button>
+              </motion.button>
             </div>
             <div className="overflow-y-auto max-h-[70vh]">
               <FooterCallBackForm hideTitle />
@@ -214,12 +225,16 @@ const Footer = () => {
       <SecondaryNoise />
 
       {/* ═══════════════════════════════════════════════════════
-          DESKTOP LAYOUT — lg and above
+          DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="hidden lg:flex relative pt-140">
         {/* ── LEFT COLUMN ── */}
         <div className="flex flex-col flex-1">
-          <div
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
             style={{ paddingLeft: leftPadding }}
             className="border-r border-[#C2C2C2] flex flex-col"
           >
@@ -227,7 +242,13 @@ const Footer = () => {
             {/* lg → 2xl */}
             <div className="2xl:hidden pb-10 pr-8">
               {/* Row 1 — logo left, socials right */}
-              <div className="flex items-center justify-between mb-8">
+              <motion.div
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="flex items-center justify-between mb-8"
+              >
                 <div className="shrink-0 w-[222px] h-[55px]">
                   <Image
                     src={footerData.logo.src}
@@ -247,9 +268,15 @@ const Footer = () => {
                     />
                   ))}
                 </div>
-              </div>
+              </motion.div>
               {/* Row 2 — email + phone at left */}
-              <div className="flex items-center gap-5 text-19 leading-[2.1] font-[500] font-poppins -tracking-[2%]">
+              <motion.div
+                variants={moveUp(0.3)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="flex items-center gap-5 text-19 leading-[2.1] font-[500] font-poppins -tracking-[2%]"
+              >
                 <Link
                   href={`mailto:${contact.email}`}
                   className="flex items-center gap-3"
@@ -277,12 +304,18 @@ const Footer = () => {
                   />
                   <span>{contact.phone}</span>
                 </Link>
-              </div>
+              </motion.div>
             </div>
 
             {/* 2xl+ — original single row */}
             <div className="hidden 2xl:flex items-start justify-between pb-10 3xl:pb-[60px] 2xl:pr-10 3xl:pr-[57px]">
-              <div className="shrink-0 w-[222px] h-[55px]">
+              <motion.div
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="shrink-0 w-[222px] h-[55px]"
+              >
                 <Image
                   src={footerData.logo.src}
                   alt={footerData.logo.alt}
@@ -290,9 +323,15 @@ const Footer = () => {
                   height={55}
                   className="object-contain pointer-events-none"
                 />
-              </div>
+              </motion.div>
               <div className="flex gap-15 3xl:gap-20">
-                <div className="flex flex-col 2xl:w-[280px] 3xl:w-[312px] text-19 leading-[2.1] font-[500] font-poppins -tracking-[2%]">
+                <motion.div
+                  variants={moveUp(0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
+                  className="flex flex-col 2xl:w-[280px] 3xl:w-[312px] text-19 leading-[2.1] font-[500] font-poppins -tracking-[2%]"
+                >
                   <Link
                     href={`mailto:${contact.email}`}
                     className="flex items-center gap-3 3xl:gap-4 border-b pb-3 3xl:pb-[14px] border-black/35"
@@ -319,8 +358,14 @@ const Footer = () => {
                     />
                     <span>{contact.phone}</span>
                   </Link>
-                </div>
-                <div className="flex items-start gap-[6px] shrink-0">
+                </motion.div>
+                <motion.div
+                  variants={moveUp(0.4)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
+                  className="flex items-start gap-[6px] shrink-0"
+                >
                   {socials.map((s) => (
                     <SocialIcon
                       key={s.name}
@@ -329,62 +374,96 @@ const Footer = () => {
                       icon={s.icon}
                     />
                   ))}
-                </div>
+                </motion.div>
               </div>
             </div>
 
             {/* Divider */}
-            <div className="border-t border-[#C2C2C2]" />
+            <motion.div
+              variants={moveUp(0.4)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ amount: 0.1, once: true }}
+              className="border-t border-[#C2C2C2]"
+            />
 
             {/* Nav columns */}
             <div className="flex gap-12 xl:gap-15 2xl:gap-18 3xl:gap-20 pt-10 3xl:pt-15 pb-[50px] 3xl:pb-[70px] font-poppins -tracking-[2%] 2xl:pr-10 3xl:pr-[57px]">
               {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
               <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
-                {mergedCols.map((col) => (
-                  <div key={col.title}>
+                {mergedCols.map((col, i) => (
+                  <motion.div
+                  variants={moveUp(i * 0.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
+                   key={col.title}>
                     <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] 2xl:max-w-none">
                       {col.title}
                     </h3>
                     <ul>
-                      {col.links.map((link) => (
-                        <li key={link.label}>
+                      {col.links.map((link, j) => (
+                        <motion.li
+                        variants={moveUp(j * 0.11)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ amount: 0.1, once: true }}
+                        key={link.label}
+                      >
                           <Link
                             href={link.href}
                             className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
                           >
                             {link.label}
                           </Link>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
               {/* ── lg → 2xl: remaining columns separately ── */}
-              {otherCols.map((col) => (
-                <div key={col.title} className="flex-shrink-0 3xl:hidden">
+              {otherCols.map((col, i) => (
+                <motion.div
+                  variants={moveUp(i * 0.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
+                  key={col.title}
+                  className="flex-shrink-0 3xl:hidden"
+                >
                   <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] xl:max-w-none">
                     {col.title}
                   </h3>
                   <ul>
-                    {col.links.map((link) => (
-                      <li key={link.label}>
+                    {col.links.map((link, j) => (
+                      <motion.li
+                        variants={moveUp(j * 0.11)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ amount: 0.1, once: true }}
+                        key={link.label}
+                      >
                         <Link
                           href={link.href}
                           className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
                         >
                           {link.label}
                         </Link>
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               ))}
 
               {/* ── 3xl+: all columns separate (original) ── */}
-              {navColumns.map((col) => (
-                <div
+              {navColumns.map((col, i) => (
+                <motion.div
+                  variants={moveUp(i * 0.2)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
                   key={`xl-${col.title}`}
                   className="flex-shrink-0 hidden 3xl:block"
                 >
@@ -392,26 +471,32 @@ const Footer = () => {
                     {col.title}
                   </h3>
                   <ul>
-                    {col.links.map((link) => (
-                      <li key={link.label}>
+                    {col.links.map((link, j) => (
+                      <motion.li
+                        variants={moveUp(j * 0.11)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ amount: 0.1, once: true }}
+                        key={link.label}
+                      >
                         <Link
                           href={link.href}
                           className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
                         >
                           {link.label}
                         </Link>
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* ── BOTTOM BAR ── */}
           <div
             style={{ paddingLeft: leftPadding }}
-            className="relative pr-[57px]"
+            className="relative pr-[57px] border-r border-[#C2C2C2]"
           >
             <FooterNoise />
             <div className="relative flex items-center justify-between py-[14px] -tracking-[2%]">
@@ -434,7 +519,12 @@ const Footer = () => {
         </div>
 
         {/* ── RIGHT COLUMN ── */}
-        <div className="flex flex-col justify-between">
+        <motion.div
+        variants={moveUp(0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ amount: 0.1, once: true }}
+        className="flex flex-col justify-between">
           <div
             style={{ paddingRight: leftPadding }}
             className="pl-12 3xl:pl-[91px]"
@@ -447,7 +537,11 @@ const Footer = () => {
           >
             <div className="flex items-center justify-center xl:justify-start gap-3 3xl:gap-[22px]">
               {certifications.map((cert, index) => (
-                <div
+                <motion.div
+                variants={moveUp(index * 0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
                   key={cert.alt}
                   className={`relative h-[50px] 3xl:h-[72px] ${
                     index === certifications.length - 1
@@ -461,19 +555,24 @@ const Footer = () => {
                     fill
                     className="object-contain object-left pointer-events-none"
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════
-          MOBILE LAYOUT — below lg, completely unchanged
+          MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden relative pt-120">
         <div className="container flex flex-col">
-          <div className="mb-8 md:mb-10">
+          <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="mb-8 md:mb-10">
             <Image
               src={footerData.logo.src}
               alt={footerData.logo.alt}
@@ -481,9 +580,14 @@ const Footer = () => {
               height={55}
               className="object-contain w-[222px] h-auto"
             />
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 md:mb-10">
+          <motion.div
+          variants={moveUp(0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 md:mb-10">
             <div>
               <Link
                 href={`mailto:${contact.email}`}
@@ -515,9 +619,14 @@ const Footer = () => {
                 <span>{contact.phone}</span>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-[6px] shrink-0 mb-8 md:mb-10">
+          <motion.div
+          variants={moveUp(0.4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="flex items-center gap-[6px] shrink-0 mb-8 md:mb-10">
             {socials.map((s) => (
               <SocialIcon
                 key={s.name}
@@ -526,21 +635,33 @@ const Footer = () => {
                 icon={s.icon}
               />
             ))}
-          </div>
+          </motion.div>
 
           <div className="border-t border-[#C2C2C2] mb-8 md:mb-10">
             {navColumns.map((col, i) => (
-              <AccordionItem
-                key={col.title}
-                title={col.title}
-                links={col.links}
-                isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-              />
+              <motion.div 
+              variants={moveUp(i * 0.15)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ amount: 0.1, once: true }}
+              key={col.title}
+              >
+                <AccordionItem
+                  title={col.title}
+                  links={col.links}
+                  isOpen={openIndex === i}
+                  onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                />
+              </motion.div>
             ))}
           </div>
 
-          <div className="mb-8 md:mb-10 w-fit">
+          <motion.div
+          variants={moveUp(0.5)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="mb-8 md:mb-10 w-fit">
             <BorderButton
               text="Get a Call Back"
               borderColor="black"
@@ -548,12 +669,21 @@ const Footer = () => {
               px="px-6"
               onClick={() => setCallbackOpen(true)}
             />
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3 border-t border-[#D0CFC9] py-8">
+          <motion.div
+          variants={moveUp(0.6)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="flex items-center gap-3 border-t border-[#D0CFC9] py-8">
             {certifications.map((cert, index) => (
-              <div
+              <motion.div
                 key={cert.alt}
+                variants={moveUp(index * 0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
                 className={`relative h-[50px] pointer-events-none ${index === certifications.length - 1 ? "w-[112px]" : "w-[73px]"}`}
               >
                 <Image
@@ -562,12 +692,17 @@ const Footer = () => {
                   fill
                   className="object-contain"
                 />
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="relative container">
+        <motion.div
+        variants={moveUp(0.7)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ amount: 0.1, once: true }}
+        className="relative container">
           <FooterNoise />
           <div className="relative py-[14px] flex flex-col gap-4 -tracking-[2%]">
             <div className="flex items-center justify-between">
@@ -585,7 +720,7 @@ const Footer = () => {
               ©{new Date().getFullYear()} Dosteen. All Rights Reserved
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="lg:hidden">
