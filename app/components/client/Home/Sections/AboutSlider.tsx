@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -10,19 +10,22 @@ import { slidesData } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
 import Image from "next/image";
 import Counter from "@/app/components/common/CounterAnimate";
-import { moveUpVariant, flipVariant, labelVariant } from "@/app/components/motionVariants";
+import { moveUpVariant, labelVariant } from "@/app/components/motionVariants";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
 const SLIDE_INTERVAL = 5000;
-
+const DRAG_THRESHOLD = 40;
 
 export default function AboutSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const swiperRef = useRef<SwiperType | null>(null);
+  const swiperRef      = useRef<SwiperType | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
-  const animFrameRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number>(Date.now());
+  const animFrameRef   = useRef<number | null>(null);
+  const startTimeRef   = useRef<number>(Date.now());
+  const dragStartX     = useRef<number | null>(null);
+  const isDragging     = useRef(false);
 
-  const startProgress = () => {
+  const startProgress = useCallback(() => {
     if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     startTimeRef.current = Date.now();
     const tick = () => {
@@ -34,19 +37,61 @@ export default function AboutSlider() {
       if (pct < 100) animFrameRef.current = requestAnimationFrame(tick);
     };
     animFrameRef.current = requestAnimationFrame(tick);
-  };
+  }, []);
+
+  const handleRealIndexChange = useCallback(
+    (s: SwiperType) => {
+      setActiveIndex(s.realIndex);
+      startProgress();
+    },
+    [startProgress]
+  );
 
   useEffect(() => {
     startProgress();
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
-  }, [activeIndex]);
+  }, [startProgress]);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLElement>) => {
+    // ignore clicks on interactive elements
+    const tag = (e.target as HTMLElement).closest("a, button");
+    if (tag) return;
+    dragStartX.current = e.clientX;
+    isDragging.current = false;
+  }, []);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
+    if (dragStartX.current === null) return;
+    if (Math.abs(e.clientX - dragStartX.current) > 8) {
+      isDragging.current = true;
+    }
+  }, []);
+
+  const handlePointerUp = useCallback((e: React.PointerEvent<HTMLElement>) => {
+    if (dragStartX.current === null) return;
+    const diff = e.clientX - dragStartX.current;
+    if (isDragging.current && Math.abs(diff) > DRAG_THRESHOLD) {
+      diff < 0
+        ? swiperRef.current?.slideNext()
+        : swiperRef.current?.slidePrev();
+    }
+    dragStartX.current = null;
+    isDragging.current = false;
+  }, []);
 
   const activeSlide = slidesData[activeIndex];
 
   return (
-    <section className="bg-white w-full relative">
+    <section
+      className="bg-white w-full relative select-none"
+      style={{ cursor: "grab" }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
+    >
       <div className="absolute -top-88 lg:-top-73 left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left.svg"
@@ -57,7 +102,7 @@ export default function AboutSlider() {
         />
       </div>
 
-      {/* Single invisible Swiper — sole clock for autoplay + drag */}
+      {/* Invisible Swiper — sole autoplay clock */}
       <div
         aria-hidden="true"
         className="absolute opacity-0 pointer-events-none"
@@ -70,7 +115,7 @@ export default function AboutSlider() {
           speed={600}
           allowTouchMove={false}
           onSwiper={(s) => (swiperRef.current = s)}
-          onRealIndexChange={(s) => setActiveIndex(s.realIndex)}
+          onRealIndexChange={handleRealIndexChange}
           style={{ width: "100px", height: "100px" }}
         >
           {slidesData.map((slide) => (
@@ -82,9 +127,10 @@ export default function AboutSlider() {
       </div>
 
       <div className="lg:ml-[29%] pt-120 px-[15px] lg:px-0 container">
-        <h2 className="font-helvetica section-font-size leading-[1.111] max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase">
-          DELIVERING EXCELLENCE BEYOND BORDERS
-        </h2>
+        <SectionTitle 
+        text="DELIVERING EXCELLENCE BEYOND BORDERS"
+        className="font-helvetica section-font-size leading-[1.111] max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px]  3xl:max-w-[1049px] text-secondary uppercase"
+        />
       </div>
 
       <div className="container mt-6 lg:mt-[30px]">
@@ -92,11 +138,11 @@ export default function AboutSlider() {
           <div className="hidden lg:block" />
 
           {/* Description */}
-          <div className="lg:pb-[70px] overflow-hidden">
+          <div className="lg:pb-6 3xl:pb-[70px] overflow-hidden">
             <AnimatePresence mode="wait" initial={false}>
               <motion.p
                 key={`desc-${activeIndex}`}
-                variants={moveUpVariant}
+                variants={moveUpVariant(0.5)}
                 initial="hidden"
                 animate="show"
                 exit="exit"
@@ -142,11 +188,10 @@ export default function AboutSlider() {
 
           {/* Counter */}
           <div className="pb-140 3xl:pb-200 overflow-hidden" style={{ perspective: "800px" }}>
-            {/* Counter number — flip animation */}
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={`counter-${activeIndex}`}
-                variants={flipVariant}
+                variants={moveUpVariant(0.5)}
                 initial="hidden"
                 animate="show"
                 exit="exit"
@@ -161,21 +206,21 @@ export default function AboutSlider() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Stat label — fast independent animation */}
+              <div className="overflow-hidden">
             <AnimatePresence mode="wait" initial={false}>
-              <motion.p
-                key={`label-${activeIndex}`}
-                variants={labelVariant}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]"
-              >
-                {activeSlide.statLabel}
-              </motion.p>
+                <motion.p
+                  key={`label-${activeIndex}`}
+                  variants={labelVariant}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]"
+                >
+                  {activeSlide.statLabel}
+                </motion.p>
             </AnimatePresence>
+              </div>
           </div>
-
         </div>
       </div>
     </section>

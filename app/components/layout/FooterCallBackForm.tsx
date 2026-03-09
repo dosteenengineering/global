@@ -5,6 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 import Select, { components, MenuListProps } from "react-select";
 import { footerData } from "../client/Layout/data";
 import BorderButton from "../common/BorderButton";
+import { motion } from "framer-motion";
+import { moveUp } from "../motionVariants";
 
 type OptionType = { label: string; value: string };
 
@@ -83,15 +85,25 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
     return (
         <div className="min-w-[250px] 2xl:min-w-[300px] 3xl:min-w-[477px]">
             {!hideTitle && (
-                <h2 className="text-[22px] lg:text-30 font-[500] text-secondary font-poppins leading-[0.96] mb-8 md:mb-10">
+                <motion.h2
+                variants={moveUp(0.2)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="text-[22px] lg:text-30 font-[500] text-secondary font-poppins leading-[0.96] mb-8 md:mb-10">
                     Get a Call Back
-                </h2>
+                </motion.h2>
             )}
 
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 {/* Name */}
-                <div className="pb-2 3xl:pb-5">
+                <motion.div 
+                variants={moveUp(0.25)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="pb-2 3xl:pb-5">
                     <input
                         type="text"
                         placeholder="Name*"
@@ -101,10 +113,15 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                     <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.name?.message ?? ""}
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Company Name */}
-                <div className="pb-2 3xl:pb-5">
+                <motion.div
+                variants={moveUp(0.33)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="pb-2 3xl:pb-5">
                     <input
                         type="text"
                         placeholder="Company Name"
@@ -112,10 +129,15 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                         className={inputClass}
                     />
                     <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
-                </div>
+                </motion.div>
 
                 {/* Email */}
-                <div className="pb-2 3xl:pb-5">
+                <motion.div
+                variants={moveUp(0.41)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="pb-2 3xl:pb-5">
                     <input
                         type="email"
                         placeholder="Email ID*"
@@ -131,10 +153,15 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                     <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.email?.message ?? ""}
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Contact Number */}
-                <div className="pb-5">
+                <motion.div
+                variants={moveUp(0.48)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="pb-5">
                     <input
                         type="tel"
                         placeholder="Contact Number*"
@@ -150,9 +177,14 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                     <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
                         {errors.contactNumber?.message ?? ""}
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="relative">
+                <motion.div
+                variants={moveUp(0.55)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="relative">
                     <Controller
                         name="solutionType"
                         control={control}
@@ -200,10 +232,15 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                         )}
                     />
                     <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
-                </div>
+                </motion.div>
 
                 {/* Submit */}
-                <div className="pt-5 md:pt-6 lg:pt-[22px] w-fit">
+                <motion.div
+                variants={moveUp(0.63)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                className="pt-5 md:pt-6 lg:pt-[22px] w-fit">
                     <BorderButton
                         type="submit"
                         text="Submit"
@@ -212,7 +249,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                         px="px-[35px]"
                         textColor="black"
                     />
-                </div>
+                </motion.div>
             </form>
         </div>
     );
