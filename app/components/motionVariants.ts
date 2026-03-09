@@ -215,3 +215,21 @@ export const labelVariant: Variants = {
     transition: { duration: 0.4, ease: "easeIn" },
   },
 };
+
+// Direction-aware variant: +1 = forward (up), -1 = backward (down)
+export const slideVariant = (duration: number = 0.5): Variants => ({
+  enter: (dir: number) => ({
+    opacity: 0,
+    y: dir >= 0 ? 64 : -64,
+  }),
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration, ease: [0.22, 1, 0.36, 1] as const },
+  },
+  exit: (dir: number) => ({
+    opacity: 1,
+    y: dir >= 0 ? -264 : 264,
+    transition: { duration: 0.4, ease: "easeIn" },
+  }),
+});
