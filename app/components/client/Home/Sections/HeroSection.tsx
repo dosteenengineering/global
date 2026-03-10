@@ -22,12 +22,12 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}
-      <div className="container relative z-10 flex h-full items-end pb-150 3xl:pb-[130px]">
+      <div className="container relative z-10 flex h-full items-end py-140 3xl:pb-[130px]">
         <div className="max-w-[964px]">
           {/* Title */}
           <TitleReveal
             text="Where Engineering Meets Assurance"
-            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] text-[36px] md:text-[50px] lg:text-[70px] xl:text-95 lg:max-w-[740px] xl:max-w-[864px] 2xl:max-w-none font-[700] uppercase font-helvetica leading-[1.22] lg:leading-[1.1]"
+            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-[700] uppercase font-helvetica leading-[1.22] lg:leading-[1.1]"
           />
 
           {/* Button */}
@@ -43,6 +43,7 @@ export default function Hero() {
               textColor="white"
               iconColor="primary"
               px="px-4 2xl:px-6"
+              hoverBg="white"
             />
           </motion.div>
         </div>

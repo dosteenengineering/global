@@ -133,7 +133,7 @@ export default function Navbar() {
           <div className="min-w-[430px] 3xl:min-w-[540px] xl:min-h-[56px] flex items-center justify-center">
             <div
               ref={pillTrackRef}
-              className="overflow-hidden rounded-[3px] w-full"
+              className="overflow-hidden rounded-[3px] w-full backdrop-blur-[5px]"
               style={{
                 width: "1px",
                 background:
@@ -183,7 +183,7 @@ export default function Navbar() {
           <div className="lg:hidden" style={{ minWidth: "120px" }}>
             <div
               ref={mobilePillRef}
-              className="overflow-hidden rounded-[3px]"
+              className="overflow-hidden rounded-[3px] backdrop-blur-[5px]"
               style={{
                 width: "1px",
                 background:

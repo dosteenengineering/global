@@ -133,7 +133,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               className="w-fit mt-[50px] xl:mb-10 2xl:mb-[50px]  3xl:mb-[71px]"
             >
-              <BorderButton text="Read More" iconColor="white" px="px-[35px]" />
+              <BorderButton text="Read More" iconColor="white" px="px-[35px]" hoverBg="white" />
             </motion.div>
           </div>
         </motion.div>

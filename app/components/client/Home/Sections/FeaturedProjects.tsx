@@ -220,6 +220,7 @@ export default function FeaturedProjectsSection() {
                 borderColor="black"
                 textColor="black"
                 px="md:px-[35px] px-[18px]"
+                hoverBg="black"
               />
             </motion.div>
         </div>
@@ -464,6 +465,7 @@ export default function FeaturedProjectsSection() {
               borderColor="black"
               textColor="black"
               px="px-[35px]"
+              hoverBg="black"
             />
           </motion.div>
         </div>
