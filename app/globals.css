@@ -64,6 +64,10 @@ body::-webkit-scrollbar {
         max-width: 740px;
     }
 
+    @media (width >=820px) {
+        max-width: 780px;
+    }
+
     @media (width >=868px) {
         max-width: 820px;
     }
