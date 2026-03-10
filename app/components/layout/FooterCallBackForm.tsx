@@ -248,6 +248,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                         iconColor="primary"
                         px="px-[35px]"
                         textColor="black"
+                        hoverBg="black"
                     />
                 </motion.div>
             </form>

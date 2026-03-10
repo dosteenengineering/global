@@ -338,7 +338,7 @@ export default function AboutSlider() {
     >
       <div className="absolute -top-88 lg:-top-73 left-0 pointer-events-none">
         <Image
-          src="/assets/icons/bg-svg/top-left.svg"
+          src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
           width={600}
           height={500}
@@ -427,6 +427,7 @@ export default function AboutSlider() {
                 textColor="black"
                 iconColor="primary"
                 px="px-6 lg:px-[35px]"
+                hoverBg="black"
               />
             </div>
           </div>

@@ -208,7 +208,7 @@ body::-webkit-scrollbar {
 
 @layer components {
   .section-font-size {
-    @apply text-[32px] md:text-[48px] lg:text-[68px] xl:text-90;
+    @apply text-[32px] md:text-[48px] lg:text-[68px] xl:text-[74px] 3xl:text-90;
   }
 }
 

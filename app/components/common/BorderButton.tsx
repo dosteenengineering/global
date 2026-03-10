@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 type BorderButtonProps = {
   text: string;
@@ -9,6 +10,7 @@ type BorderButtonProps = {
   borderColor?: "white" | "black";
   textColor?: "white" | "black";
   iconColor?: "primary" | "white";
+  hoverBg?: "white" | "black";
   px?: string;
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -19,45 +21,80 @@ export default function BorderButton({
   text,
   href,
   borderColor = "white",
-  textColor = "white",
-  iconColor = "primary",
-  px = "px-6",
-  className = "",
+  textColor   = "white",
+  iconColor   = "primary",
+  hoverBg,
+  px          = "px-6",
+  className   = "",
   type,
   onClick,
 }: BorderButtonProps) {
-  const borderClass =
-    borderColor === "white" ? "border-white" : "border-[#454545]";
-  const textClass = textColor === "white" ? "text-white" : "text-secondary";
-  const iconClass = iconColor === "white" ? "invert brightness-0" : "";
+  const [hovered, setHovered] = useState(false);
 
-  const sharedClass = `group 2xl:h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-15 leading-[1.73] font-[400] transition-all duration-300 hover:bg-white/20 cursor-pointer ${borderClass} ${textClass} ${className}`;
+  const borderClass = borderColor === "white" ? "border-white" : "border-[#454545]";
+  const textClass   = textColor === "white" ? "text-white" : "text-secondary";
+  const iconClass   = iconColor === "white" ? "invert brightness-0" : "";
+
+  const fillBg =
+    hoverBg === "white" ? "bg-white" :
+    hoverBg === "black" ? "bg-[#161616]" : "";
+
+  const sharedClass = `group relative overflow-hidden 2xl:h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-15 leading-[1.73] font-[400] cursor-pointer ${borderClass} ${textClass} ${className}`;
+
+  const arrowSrc =
+    hoverBg === "white" && hovered
+      ? "/assets/icons/button-arrow-top-right-black.svg"
+      : "/assets/icons/button-arrow-top-right.svg";
+
+  const imgClass =
+    hoverBg === "white" && hovered ? "" :
+    hoverBg === "black" && hovered ? "invert brightness-0" :
+    iconClass;
+
+  // Text color flips when hovered (for white/black hoverBg)
+  const textHoverClass =
+    hoverBg === "white" && hovered ? "text-[#161616]" :
+    hoverBg === "black" && hovered ? "text-white" :
+    "";
 
   const content = (
     <>
-      <span className="text-15 leading-[1] max-w-[200px] font-dm-sans">
+      {/* Animated fill — slides in from left on hover */}
+      {hoverBg && (
+        <span
+          aria-hidden="true"
+          className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`}
+        />
+      )}
+
+      <span className={`relative z-10 text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300 ${textHoverClass}`}>
         {text}
       </span>
       <Image
-        src="/assets/icons/button-arrow-top-right.svg"
+        src={arrowSrc}
         alt="arrow"
         width={18}
         height={18}
-        className={`${iconClass} transition-all duration-300 group-hover:rotate-45 w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] pointer-events-none`}
+        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] pointer-events-none`}
       />
     </>
   );
 
+  const events = {
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false),
+  };
+
   if (type || onClick) {
     return (
-      <button type={type ?? "button"} onClick={onClick} className={sharedClass}>
+      <button type={type ?? "button"} onClick={onClick} className={sharedClass} {...events}>
         {content}
       </button>
     );
   }
 
   return (
-    <Link href={href ?? "#"} className={sharedClass}>
+    <Link href={href ?? "#"} className={sharedClass} {...events}>
       {content}
     </Link>
   );
