@@ -27,7 +27,7 @@ export default function ServicesSection() {
 
       <div className="absolute -top-85 lg:top-0 -right-88 -lg:right-80 w-[1062px] h-[513px] pointer-events-none">
         <Image
-          src={servicesData.topRightSvg}
+          src="/assets/icons/bg-svg/top-right-animated.svg"
           alt=""
           fill
           className="object-contain"
@@ -110,18 +110,53 @@ export default function ServicesSection() {
 
           <div className="flex-1 pl-20 2xl:pl-140 3xl:pl-150 flex flex-col min-h-[400px]">
             <div className="relative w-full h-[150px] xl:h-[200px] mb-[70px] 2xl:px-3">
-              <Image
+              <svg
                 key={activeData.key}
-                src={activeData.image}
-                alt={activeData.label}
-                height={200}
-                width={630}
-                className="object-contain object-left transition-opacity duration-300 pointer-events-none"
-              />
+                width="630"
+                height="200"
+                viewBox="0 0 630 200"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="pointer-events-none"
+              >
+                <style>{`
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    .svg-path {
+      fill: none;
+      stroke: white;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: var(--len);
+      stroke-dashoffset: var(--len);
+      animation: draw 1s ease forwards;
+    }
+  `}</style>
+
+                {activeData.svgPaths?.map(
+                  (
+                    path: { d: string; len: number; delay: number },
+                    i: number,
+                  ) => (
+                    <path
+                      key={i}
+                      className="svg-path"
+                      d={path.d}
+                      style={
+                        {
+                          "--len": path.len,
+                          animationDelay: `${path.delay}s`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ),
+                )}
+              </svg>
             </div>
 
             <SectionTitle
-            key={activeTab}
+              key={activeTab}
               text={activeData.description}
               className="text-55 text-white leading-[1.18] font-[300] font-poppins -tracking-[2%] max-w-[855px]"
             />
@@ -133,7 +168,12 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               className="w-fit mt-[50px] xl:mb-10 2xl:mb-[50px]  3xl:mb-[71px]"
             >
-              <BorderButton text="Read More" iconColor="white" px="px-[35px]" hoverBg="white" />
+              <BorderButton
+                text="Read More"
+                iconColor="white"
+                px="px-[35px]"
+                hoverBg="white"
+              />
             </motion.div>
           </div>
         </motion.div>
@@ -173,17 +213,58 @@ export default function ServicesSection() {
 
           <div>
             <div className="relative w-full h-[180px] mb-2 md:mb-12">
-              <Image
-                key={activeData.key}
-                src={activeData.image}
-                alt={activeData.label}
-                fill
-                className="object-contain object-left"
-              />
+              {activeData.svgPaths ? (
+                <svg
+                  key={activeData.key}
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 630 200"
+                  preserveAspectRatio="xMinYMid meet"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute inset-0"
+                >
+                  <style>{`
+        @keyframes draw {
+          to { stroke-dashoffset: 0; }
+        }
+        .svg-path {
+          fill: none;
+          stroke: white;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          stroke-dasharray: var(--len);
+          stroke-dashoffset: var(--len);
+          animation: draw 1s ease forwards;
+        }
+      `}</style>
+                  {activeData.svgPaths.map((path, i) => (
+                    <path
+                      key={i}
+                      className="svg-path"
+                      d={path.d}
+                      style={
+                        {
+                          "--len": path.len,
+                          animationDelay: `${path.delay}s`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </svg>
+              ) : (
+                <Image
+                  key={activeData.key}
+                  src={activeData.image}
+                  alt={activeData.label}
+                  fill
+                  className="object-contain object-left"
+                />
+              )}
             </div>
 
             <SectionTitle
-            key={activeTab}
+              key={activeTab}
               text={activeData.description}
               className="text-[26px] lg:text-55 text-white leading-[1.18] font-[300] font-poppins -tracking-[2%] max-w-[680px] lg:max-w-[855px]"
             />

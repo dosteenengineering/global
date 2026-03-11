@@ -149,7 +149,7 @@ export default function WhyDosteen() {
       <PrimaryNoise />
 
       <Image
-        src="/assets/icons/bg-svg/why-dosteen.svg"
+        src="/assets/icons/bg-svg/why-dosteen-animated.svg"
         alt=""
         width={948}
         height={439}

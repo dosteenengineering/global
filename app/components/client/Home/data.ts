@@ -44,7 +44,6 @@ export const slidesData: SlideData[] = [
   },
 ];
 
-
 //third Section
 export type SolutionTab = {
   key: string;
@@ -106,12 +105,12 @@ export const solutionsData: {
   ],
 };
 
-
 //fourth Section
 export interface ServiceTab {
   key: string;
   label: string;
   image: string;
+  svgPaths?: { d: string; len: number; delay: number }[];
   description: string;
 }
 
@@ -125,26 +124,145 @@ export const servicesData: ServicesData = {
   title: "SERVICES",
   topRightSvg: "/assets/icons/bg-svg/top-right.svg",
   tabs: [
-  {
-    key: "amc",
-    label: "AMC",
-    image: "/assets/images/home/service/export.svg",
-    description: "Annual maintenance contracts ensuring reliable performance and continuity.",
-  },
-  {
-    key: "export",
-    label: "Export",
-    image: "/assets/images/home/service/export.svg",
-    description: "Seamless export services delivering engineered solutions worldwide.",
-  },
-  {
-    key: "instant-call",
-    label: "Instant Call Service",
-    image: "/assets/images/home/service/export.svg",
-    description: "Round-the-clock call services for immediate technical support and help.",
-  },
-  
-],
+    {
+      key: "amc",
+      label: "AMC",
+      image: "/assets/images/home/service/export.svg",
+      svgPaths: [
+        // Left box
+        // Left box - fix these two paths
+        {
+          d: "M196.79 3.35571H3.35742V38.1879H196.79V3.35571Z",
+          len: 600,
+          delay: 0,
+        },
+        {
+          d: "M14.1035 38.188V196.644H186.044V38.188H14.1035",
+          len: 700,
+          delay: 0.15,
+        }, // ← added H14.1035 to close
+        { d: "M17.1269 69.8657H186.045", len: 170, delay: 0.25 },
+        { d: "M17.1269 101.544H186.045", len: 170, delay: 0.35 },
+        { d: "M17.1269 133.289H186.045", len: 170, delay: 0.4 },
+        { d: "M17.1269 164.967H186.045", len: 170, delay: 0.45 },
+        // Right ship
+        {
+          d: "M476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476L476.194 196.644Z",
+          len: 500,
+          delay: 0,
+        },
+        {
+          d: "M465.447 101.543V46.3086H594.402V101.543",
+          len: 300,
+          delay: 0.15,
+        },
+        { d: "M486.939 46.3088V24.8323H572.91V46.3088", len: 200, delay: 0.25 },
+        { d: "M519.18 24.8322V4.02686H540.672V24.8322", len: 100, delay: 0.35 },
+        { d: "M529.926 69.8657V196.644", len: 130, delay: 0.45 },
+        // Arrow
+        {
+          d: "M218.283 196.644L239.776 196.644L357.985 35.1677H433.209",
+          len: 350,
+          delay: 1.2,
+        },
+        { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
+      ],
+      description:
+        "Annual maintenance contracts ensuring reliable performance and continuity.",
+    },
+    {
+      key: "export",
+      label: "Export",
+      image: "/assets/images/home/service/export.svg",
+      svgPaths: [
+        // Left box
+        // Left box - fix these two paths
+        {
+          d: "M196.79 3.35571H3.35742V38.1879H196.79V3.35571Z",
+          len: 600,
+          delay: 0,
+        },
+        {
+          d: "M14.1035 38.188V196.644H186.044V38.188H14.1035",
+          len: 700,
+          delay: 0.15,
+        }, // ← added H14.1035 to close
+        { d: "M17.1269 69.8657H186.045", len: 170, delay: 0.25 },
+        { d: "M17.1269 101.544H186.045", len: 170, delay: 0.35 },
+        { d: "M17.1269 133.289H186.045", len: 170, delay: 0.4 },
+        { d: "M17.1269 164.967H186.045", len: 170, delay: 0.45 },
+        // Right ship
+        {
+          d: "M476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476L476.194 196.644Z",
+          len: 500,
+          delay: 0,
+        },
+        {
+          d: "M465.447 101.543V46.3086H594.402V101.543",
+          len: 300,
+          delay: 0.15,
+        },
+        { d: "M486.939 46.3088V24.8323H572.91V46.3088", len: 200, delay: 0.25 },
+        { d: "M519.18 24.8322V4.02686H540.672V24.8322", len: 100, delay: 0.35 },
+        { d: "M529.926 69.8657V196.644", len: 130, delay: 0.45 },
+        // Arrow
+        {
+          d: "M218.283 196.644L239.776 196.644L357.985 35.1677H433.209",
+          len: 350,
+          delay: 1.2,
+        },
+        { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
+      ],
+      description:
+        "Seamless export services delivering engineered solutions worldwide.",
+    },
+    {
+      key: "instant-call",
+      label: "Instant Call Service",
+      image: "/assets/images/home/service/export.svg",
+      svgPaths: [
+        // Left box
+        // Left box - fix these two paths
+        {
+          d: "M196.79 3.35571H3.35742V38.1879H196.79V3.35571Z",
+          len: 600,
+          delay: 0,
+        },
+        {
+          d: "M14.1035 38.188V196.644H186.044V38.188H14.1035",
+          len: 700,
+          delay: 0.15,
+        }, // ← added H14.1035 to close
+        { d: "M17.1269 69.8657H186.045", len: 170, delay: 0.25 },
+        { d: "M17.1269 101.544H186.045", len: 170, delay: 0.35 },
+        { d: "M17.1269 133.289H186.045", len: 170, delay: 0.4 },
+        { d: "M17.1269 164.967H186.045", len: 170, delay: 0.45 },
+        // Right ship
+        {
+          d: "M476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476L476.194 196.644Z",
+          len: 500,
+          delay: 0,
+        },
+        {
+          d: "M465.447 101.543V46.3086H594.402V101.543",
+          len: 300,
+          delay: 0.15,
+        },
+        { d: "M486.939 46.3088V24.8323H572.91V46.3088", len: 200, delay: 0.25 },
+        { d: "M519.18 24.8322V4.02686H540.672V24.8322", len: 100, delay: 0.35 },
+        { d: "M529.926 69.8657V196.644", len: 130, delay: 0.45 },
+        // Arrow
+        {
+          d: "M218.283 196.644L239.776 196.644L357.985 35.1677H433.209",
+          len: 350,
+          delay: 1.2,
+        },
+        { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
+      ],
+      description:
+        "Round-the-clock call services for immediate technical support and help.",
+    },
+  ],
 };
 
 //fifth Section
@@ -182,7 +300,7 @@ export const industriesData: IndustriesData = {
       label: "Healthcare",
       image: "/assets/images/home/industries/healthcare.jpg",
     },
-        {
+    {
       key: "hospitality1",
       label: "Hospitality",
       image: "/assets/images/home/industries/hospitality.jpg",
@@ -197,29 +315,32 @@ export const industriesData: IndustriesData = {
 
 //sixth section
 export const whyDosteenData = {
-    heading: "WHY DOSTEEN",
-slides: [
+  heading: "WHY DOSTEEN",
+  slides: [
     // {
     //     icon: "/assets/images/home/why-dosteen/expertise.svg",
     //     title: "Transparency",
     //     description: "Engineered with integrity and strengthened by transparent partnerships.",
     // },
     {
-        icon: "/assets/images/home/why-dosteen/experience.svg",
-        title: "Experience",
-        description: "Proven project experience across diverse industries and environments",
+      icon: "/assets/images/home/why-dosteen/experience.svg",
+      title: "Experience",
+      description:
+        "Proven project experience across diverse industries and environments",
     },
     {
-        icon: "/assets/images/home/why-dosteen/expertise.svg",
-        title: "Expertise",
-        description: "Deep technical knowledge and specialized skills for every challenge",
+      icon: "/assets/images/home/why-dosteen/expertise.svg",
+      title: "Expertise",
+      description:
+        "Deep technical knowledge and specialized skills for every challenge",
     },
     {
-        icon: "/assets/images/home/why-dosteen/experience.svg",
-        title: "Innovation",
-        description: "Pioneering new approaches to meet tomorrow's engineering challenges",
+      icon: "/assets/images/home/why-dosteen/experience.svg",
+      title: "Innovation",
+      description:
+        "Pioneering new approaches to meet tomorrow's engineering challenges",
     },
-],
+  ],
 };
 
 export type WhyDosteenSlide = (typeof whyDosteenData.slides)[number];
@@ -234,8 +355,7 @@ export const bimData = {
   arrowImage: "/assets/icons/arrow-right-top-big.svg",
 };
 
-
-//eighth Section    
+//eighth Section
 export interface Project {
   key: string;
   name: string;
@@ -335,10 +455,8 @@ export const clientStoriesData: ClientStoriesData = {
       company: "Company Name",
       designation: "Designation",
     },
-    
   ],
 };
-
 
 //tenth Section
 export interface BlogPost {
@@ -393,7 +511,6 @@ export const blogsData: BlogsData = {
   ],
 };
 
-
 //eleventh Section
 export interface TrustedClientsData {
   logos: string[];
@@ -405,7 +522,7 @@ export const trustedClientsData: TrustedClientsData = {
     "/assets/images/home/clients/2.svg",
     "/assets/images/home/clients/3.svg",
     "/assets/images/home/clients/4.svg",
-  ]
+  ],
 };
 
 //twelfth Section

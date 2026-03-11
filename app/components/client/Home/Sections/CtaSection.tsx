@@ -15,7 +15,7 @@ export default function CtaSection() {
       <PrimaryNoise />
       <div className="absolute left-0 -top-[50%] lg:-top-[60%] w-[70%] lg:w-[50%] h-[165%] pointer-events-none">
         <Image
-          src="/assets/icons/bg-svg/cta.svg"
+          src="/assets/icons/bg-svg/cta-animated.svg"
           alt=""
           fill
           className="object-contain object-top-left"
