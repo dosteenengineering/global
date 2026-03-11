@@ -136,13 +136,13 @@ export default function BlogsSection() {
                         src={post.image}
                         alt={post.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-[1.06] transition-transform duration-450"
                       />
                     </div>
 
                     {/* Text content */}
                     <div className="flex-1 flex flex-col justify-between py-5">
-                      <p className="text-30 text-paragraph font-[300] font-poppins -tracking-[2%] leading-[1.33] max-w-[537px]">
+                      <p className="text-30 text-paragraph font-[300] font-poppins -tracking-[2%] leading-[1.33] max-w-[537px] group-hover:text-secondary transition-colors duration-300">
                         {post.title}
                       </p>
                       <div className="flex items-center justify-between gap-5 text-paragraph font-poppins font-[300] text-19 leading-[1.52] max-w-[537px]">
