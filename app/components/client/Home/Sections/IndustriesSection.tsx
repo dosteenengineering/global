@@ -210,7 +210,7 @@ export default function IndustriesSection() {
             <div />
             <SectionTitle
             text={industriesData.title}
-            className="section-font-size leading-[1.111] uppercase font-helvetica max-w-[1129px]"
+            className="section-heading max-w-[1129px]"
              />
           </div>
 
@@ -274,7 +274,7 @@ export default function IndustriesSection() {
         <div className="py-140 container">
           <SectionTitle
             text={industriesData.title}
-            className="section-font-size leading-[1.111] uppercase font-helvetica w-full mb-8 md:mb-10 text-secondary"
+            className="section-heading w-full mb-8 md:mb-10 text-secondary"
           />
 
           <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{once: true}} className="flex items-center justify-between mb-4 md:mb-8">

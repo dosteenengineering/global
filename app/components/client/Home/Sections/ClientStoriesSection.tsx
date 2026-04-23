@@ -56,7 +56,7 @@ export default function ClientStoriesSection() {
       <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140">
         <SectionTitle
           title={clientStoriesData.title}
-          className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-[82px]"
+          className="text-white section-heading uppercase mb-[82px]"
         />
 
         <div className="flex flex-row flex-1 gap-0 lg:pl-10 xl:pl-12 2xl:pl-14 3xl:pl-[65px]">
@@ -243,7 +243,7 @@ export default function ClientStoriesSection() {
       <div className="lg:hidden relative z-10 container pt-140 pb-[60px]">
         <SectionTitle
         title={clientStoriesData.title}
-        className="text-white section-font-size leading-[1.11] font-helvetica uppercase mb-8 md:mb-10"
+        className="text-white section-heading uppercase mb-8 md:mb-10"
         />
 
         {/* Progress bars — full width */}

@@ -63,7 +63,7 @@ export default function BorderButton({
       {hoverBg && (
         <span
           aria-hidden="true"
-          className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`}
+          className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`}
         />
       )}
 

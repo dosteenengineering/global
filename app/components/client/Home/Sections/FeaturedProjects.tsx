@@ -179,7 +179,7 @@ export default function FeaturedProjectsSection() {
   return (
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
       <div ref={containerRef} className="container">
-        <SectionTitle text={featuredProjectsData.title} className="lg:text-center section-font-size leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px]" />
+        <SectionTitle text={featuredProjectsData.title} className="lg:text-center section-heading leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px]" />
       </div>
 
       {/* ═══════════════════════════════════════════════════════

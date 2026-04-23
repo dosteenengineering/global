@@ -70,7 +70,7 @@ export default function BlogsSection() {
           {/* Row 1 */}
           <SectionTitle
           title={blogsData.title}
-          className="text-secondary font-helvetica font-bold uppercase section-font-size leading-[1.111] mb-12 2xl:mb-14 3x:mb-[70px]"
+          className="text-secondary section-heading mb-12 2xl:mb-14 3x:mb-[70px]"
           />
 
           {/* Row 2 */}
@@ -178,7 +178,7 @@ export default function BlogsSection() {
           className="container flex items-center justify-between mb-10 md:mb-12"
         >
           <h2
-            className="text-secondary font-helvetica font-bold uppercase section-font-size leading-[1.111] w-full"
+            className="text-secondary section-heading w-full"
           >
             {blogsData.title}
           </h2>
