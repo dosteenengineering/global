@@ -172,14 +172,15 @@ const CallbackPopup = ({
       >
         <div className="relative overflow-hidden">
           <SecondaryNoise />
-          <div className="relative z-10 px-6 pt-6 pb-10">
+          <div className="relative z-10 px-6 pt-6 pb-40">
             <div className="flex items-center justify-between mb-6">
               <motion.h3
                 variants={moveUp(0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
-                className="text-[22px] lg:text-30 font-[500] font-poppins text-secondary leading-[1.2]">
+                className="text-[22px] lg:text-30 font-[500] font-poppins text-secondary leading-[1.2]"
+              >
                 Get a Call Back
               </motion.h3>
               <motion.button
@@ -240,14 +241,14 @@ const Footer = () => {
           >
             {/* ── Top strip ── */}
             {/* lg → 2xl */}
-            <div className="2xl:hidden pb-10 pr-8">
+            <div className="2xl:hidden pb-40 pr-30">
               {/* Row 1 — logo left, socials right */}
               <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
-                className="flex items-center justify-between mb-8"
+                className="flex items-center justify-between mb-30"
               >
                 <div className="shrink-0 w-[222px] h-[55px]">
                   <Image
@@ -308,7 +309,7 @@ const Footer = () => {
             </div>
 
             {/* 2xl+ — original single row */}
-            <div className="hidden 2xl:flex items-start justify-between pb-10 3xl:pb-[60px] 2xl:pr-10 3xl:pr-[57px]">
+            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-60 2xl:pr-40 3xl:pr-[57px]">
               <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
@@ -388,28 +389,29 @@ const Footer = () => {
             />
 
             {/* Nav columns */}
-            <div className="flex gap-12 xl:gap-15 2xl:gap-18 3xl:gap-20 pt-10 3xl:pt-15 pb-[50px] 3xl:pb-[70px] font-poppins -tracking-[2%] 2xl:pr-10 3xl:pr-[57px]">
+            <div className="flex gap-70 3xl:gap-80 pt-40 3xl:pt-60 pb-50 3xl:pb-70 font-poppins -tracking-[2%] 2xl:pr-40 3xl:pr-[57px]">
               {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
               <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
                 {mergedCols.map((col, i) => (
                   <motion.div
-                  variants={moveUp(i * 0.2)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ amount: 0.1, once: true }}
-                   key={col.title}>
+                    variants={moveUp(i * 0.2)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ amount: 0.1, once: true }}
+                    key={col.title}
+                  >
                     <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] 2xl:max-w-none">
                       {col.title}
                     </h3>
                     <ul>
                       {col.links.map((link, j) => (
                         <motion.li
-                        variants={moveUp(j * 0.11)}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ amount: 0.1, once: true }}
-                        key={link.label}
-                      >
+                          variants={moveUp(j * 0.11)}
+                          initial="hidden"
+                          whileInView="show"
+                          viewport={{ amount: 0.1, once: true }}
+                          key={link.label}
+                        >
                           <Link
                             href={link.href}
                             className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
@@ -492,11 +494,12 @@ const Footer = () => {
               ))}
             </div>
           </motion.div>
+          
 
           {/* ── BOTTOM BAR ── */}
           <div
             style={{ paddingLeft: leftPadding }}
-            className="relative pr-[57px] border-r border-[#C2C2C2]"
+            className="relative pr-50 3xl:pr-[57px] border-r border-[#C2C2C2]"
           >
             <FooterNoise />
             <div className="relative flex items-center justify-between py-[14px] -tracking-[2%]">
@@ -520,22 +523,23 @@ const Footer = () => {
 
         {/* ── RIGHT COLUMN ── */}
         <motion.div
-        variants={moveUp(0.2)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ amount: 0.1, once: true }}
-        className="flex flex-col justify-between">
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="flex flex-col justify-between"
+        >
           <div
             style={{ paddingRight: leftPadding }}
-            className="pl-12 3xl:pl-[91px]"
+            className="pl-40 3xl:pl-90"
           >
             <FooterCallBackForm />
           </div>
           <div
             style={{ paddingRight: leftPadding }}
-            className="py-8 3xl:py-[55px] border-t border-[#D0CFC9] 2xl:pl-12 3xl:pl-[91px]"
+            className="py-40 3xl:pt-40 3xl:pb-[42px] border-t border-[#D0CFC9] pl-40 3xl:pl-90"
           >
-            <div className="flex items-center justify-center xl:justify-start gap-3 3xl:gap-[22px]">
+            {/* <div className="flex items-center justify-center xl:justify-start gap-3 3xl:gap-[22px]">
               {certifications.map((cert, index) => (
                 <motion.div
                 variants={moveUp(index * 0.1)}
@@ -557,6 +561,29 @@ const Footer = () => {
                   />
                 </motion.div>
               ))}
+            </div> */}
+            <div>
+              <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">Subscribe to our newsletter</p>
+<div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
+  <input
+    type="email"
+    placeholder="Enter Your Email"
+    className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
+  />
+  <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
+    <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
+    <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
+      Subscribe
+    </span>
+    <Image
+      src="/assets/icons/button-arrow-top-right.svg"
+      alt=""
+      width={25}
+      height={25}
+      className="relative z-10 w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
+    />
+  </button>
+</div>
             </div>
           </div>
         </motion.div>
@@ -568,11 +595,12 @@ const Footer = () => {
       <div className="lg:hidden relative pt-120">
         <div className="container flex flex-col">
           <motion.div
-          variants={moveUp(0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ amount: 0.1, once: true }}
-          className="mb-8 md:mb-10">
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="mb-40"
+          >
             <Image
               src={footerData.logo.src}
               alt={footerData.logo.alt}
@@ -583,11 +611,12 @@ const Footer = () => {
           </motion.div>
 
           <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ amount: 0.1, once: true }}
-          className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 md:mb-10">
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-40"
+          >
             <div>
               <Link
                 href={`mailto:${contact.email}`}
@@ -622,11 +651,12 @@ const Footer = () => {
           </motion.div>
 
           <motion.div
-          variants={moveUp(0.4)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ amount: 0.1, once: true }}
-          className="flex items-center gap-[6px] shrink-0 mb-8 md:mb-10">
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="flex items-center gap-[6px] shrink-0 mb-40"
+          >
             {socials.map((s) => (
               <SocialIcon
                 key={s.name}
@@ -637,14 +667,14 @@ const Footer = () => {
             ))}
           </motion.div>
 
-          <div className="border-t border-[#C2C2C2] mb-8 md:mb-10">
+          <div className="border-t border-[#C2C2C2] mb-40">
             {navColumns.map((col, i) => (
-              <motion.div 
-              variants={moveUp(i * 0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ amount: 0.1, once: true }}
-              key={col.title}
+              <motion.div
+                variants={moveUp(i * 0.15)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ amount: 0.1, once: true }}
+                key={col.title}
               >
                 <AccordionItem
                   title={col.title}
@@ -657,11 +687,12 @@ const Footer = () => {
           </div>
 
           <motion.div
-          variants={moveUp(0.5)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ amount: 0.1, once: true }}
-          className="mb-8 md:mb-10 w-fit">
+            variants={moveUp(0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="mb-40 w-fit"
+          >
             <BorderButton
               text="Get a Call Back"
               borderColor="black"
@@ -672,11 +703,12 @@ const Footer = () => {
           </motion.div>
 
           <motion.div
-          variants={moveUp(0.6)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ amount: 0.1, once: true }}
-          className="flex items-center gap-3 border-t border-[#D0CFC9] py-8">
+            variants={moveUp(0.6)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ amount: 0.1, once: true }}
+            className="flex items-center gap-3 border-t border-[#D0CFC9] py-8"
+          >
             {certifications.map((cert, index) => (
               <motion.div
                 key={cert.alt}
@@ -698,11 +730,12 @@ const Footer = () => {
         </div>
 
         <motion.div
-        variants={moveUp(0.7)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ amount: 0.1, once: true }}
-        className="relative container">
+          variants={moveUp(0.7)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="relative container"
+        >
           <FooterNoise />
           <div className="relative py-[14px] flex flex-col gap-4 -tracking-[2%]">
             <div className="flex items-center justify-between">

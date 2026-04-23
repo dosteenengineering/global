@@ -20,15 +20,15 @@ body::-webkit-scrollbar {
     scroll-behavior: auto !important;
 }
 
-.font-poppins {
+@utility font-poppins {
   font-family: var(--font-poppins);
 }
 
-.font-helvetica {
+@utility font-helvetica {
     font-family: var(--font-helvetica-neue);
 }
 
-.font-dm-sans {
+@utility font-dm-sans {
   font-family: var(--font-dm-sans);
 }
 
@@ -97,7 +97,7 @@ body::-webkit-scrollbar {
     }
 
     @media (width >=1460px) {
-        max-width: 1330px;
+        max-width: 1360px;
     }
 
     @media (width >=1540px) {
@@ -130,7 +130,7 @@ body::-webkit-scrollbar {
 
   /* large */
 --text-70: clamp(34px, 5.239vw + 16.35px, 70px);
---text-90: clamp(40px, 3.4vw + 28px, 90px);
+--text-90: clamp(32px, 5.5vw + 6px, 90px);
   --text-95: clamp(42px, 3.28vw + 42px, 95px);
 --text-250: clamp(70px, 13.1vw, 250px);
   --text-300: clamp(120px, 17vw, 300px);
@@ -138,15 +138,21 @@ body::-webkit-scrollbar {
 
 
 
-
+--space-20: clamp(12px, 1.2vw + 8px, 20px);
+--space-30: clamp(16px, 1.8vw + 11px, 30px);
+--space-40: clamp(20px, 2.2vw + 14px, 40px);
+--space-50: clamp(24px, 2.6vw + 17px, 50px);
+--space-60: clamp(28px, 2.9vw + 20px, 60px);
+--space-70: clamp(32px, 3.2vw + 23px, 70px);
+--space-80: clamp(35px, 3.5vw + 25px, 80px);
 --space-90: clamp(38px, 3.7vw + 28px, 90px);
---space-110: clamp(50px, 3.9vw + 35px, 110px);
---space-120: clamp(60px, 4vw + 40px, 120px);
---space-140: clamp(60px, 5.1vw + 42px, 140px);
---space-150: clamp(70px, 6.62vw + 70px, 150px);
---space-180: clamp(75px, 7vw + 75px, 180px);
---space-200: clamp(80px, 9vw + 80px, 200px);
-
+--space-100: clamp(44px, 3.8vw + 32px, 100px);
+--space-110: clamp(37px, 5.2vw + 17px, 110px);
+--space-120: clamp(38px, 5.8vw + 17px, 120px);
+--space-140: clamp(45px, 6.8vw + 19px, 140px);
+--space-150: clamp(44px, 7.5vw + 17px, 150px);
+--space-180: clamp(54px, 9.0vw + 20px, 180px);
+--space-200: clamp(52px, 10.5vw + 13px, 200px);
 }
 
 
@@ -162,7 +168,7 @@ body::-webkit-scrollbar {
     --text-15: var(--text-15);
     --text-19: var(--text-19);
     --text-25: var(--text-25);
-    --text-30: var(--text-30);
+    --text-30: var(--text-30);  
     --text-55: var(--text-55);
     --text-70: var(--text-70);
     --text-90: var(--text-90);
@@ -171,7 +177,15 @@ body::-webkit-scrollbar {
     --text-300: var(--text-300);
     --text-400: var(--text-400);
 
+    --spacing-20: var(--space-20);
+    --spacing-30: var(--space-30);
+    --spacing-40: var(--space-40);
+    --spacing-50: var(--space-50);
+    --spacing-60: var(--space-60);
+    --spacing-70: var(--space-70);
+    --spacing-80: var(--space-80);
     --spacing-90: var(--space-90);
+    --spacing-100: var(--space-100);
     --spacing-110: var(--space-110);
     --spacing-120: var(--space-120);
     --spacing-130: var(--space-120);
@@ -210,10 +224,17 @@ body::-webkit-scrollbar {
     font-size: var(--text-250);
 }
 
-@layer components {
-  .section-font-size {
-    @apply text-[32px] md:text-[48px] lg:text-[68px] xl:text-[74px] 3xl:text-90;
-  }
+.section-heading {
+  @apply font-helvetica uppercase leading-[1.111] text-90;
+}
+
+
+.glass-effect {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.14),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
 
 

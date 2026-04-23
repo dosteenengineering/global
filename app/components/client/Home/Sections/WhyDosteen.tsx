@@ -157,7 +157,7 @@ export default function WhyDosteen() {
       />
 
       <div className="relative container">
-        <SectionTitle text={heading} className="text-center text-white font-helvetica uppercase section-font-size leading-[1.111]" />
+        <SectionTitle text={heading} className="text-center text-white font-helvetica uppercase section-heading leading-[1.111]" />
         
 
         <motion.div

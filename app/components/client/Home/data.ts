@@ -54,10 +54,16 @@ export type SolutionTab = {
 
 export const solutionsData: {
   mainTitle: string;
+  secondTitle: string;
+  btnText: string;
+  btnLink: string;
   backgroundImage: string;
   tabs: SolutionTab[];
 } = {
   mainTitle: "SOLUTIONS",
+  secondTitle: "Need something built to spec? We also offer custom solutions tailored to your exact requirements.",
+  btnText: "Discuss your project",
+  btnLink: "#",
   backgroundImage: "/assets/images/home/solution/solution-bg.jpg",
 
   tabs: [

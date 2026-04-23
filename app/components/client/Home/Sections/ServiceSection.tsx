@@ -38,7 +38,7 @@ export default function ServicesSection() {
       <div className="relative z-10 container py-140 3xl:py-150">
         <SectionTitle
           text={servicesData.title}
-          className="section-font-size leading-[1.11] text-white uppercase font-helvetica text-left lg:text-center 3xl:-ml-[67px]"
+          className="section-heading leading-[1.11] text-white uppercase font-helvetica text-left lg:text-center 3xl:-ml-[67px]"
         />
 
         {/* ===== Desktop (lg and up) ==== */}
