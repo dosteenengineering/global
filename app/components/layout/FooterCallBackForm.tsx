@@ -246,7 +246,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                         text="Submit"
                         borderColor="black"
                         iconColor="primary"
-                        px="px-[35px]"
+                        px="px-30 3xl:px-[35px]"
                         textColor="black"
                         hoverBg="black"
                     />

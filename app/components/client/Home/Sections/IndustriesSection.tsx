@@ -194,7 +194,7 @@ export default function IndustriesSection() {
           priority={index <= 2}
         />
       </div>
-      <div className="mt-4 lg:mt-[22px] ml-[15px] lg:ml-[28px] text-30 leading-[1.33] text-paragraph font-poppins font-[300]">
+      <div className="mt-20 lg:mt-[22px] ml-[15px] lg:ml-[28px] text-30 leading-[1.33] text-paragraph font-poppins font-[300]">
         {industry.label}
       </div>
     </SwiperSlide>
@@ -206,7 +206,7 @@ export default function IndustriesSection() {
 
       {showLg ? (
         <div style={{ paddingLeft: leftInset }} className="py-140 3xl:py-200">
-          <div className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-15 3xl:gap-x-[70px] mb-10 xl:mb-14 3xl:mb-[70px] text-secondary">
+          <div className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 mb-40 xl:mb-70 text-secondary">
             <div />
             <SectionTitle
             text={industriesData.title}
@@ -214,9 +214,9 @@ export default function IndustriesSection() {
              />
           </div>
 
-          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once: true}} className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-15 3xl:gap-x-[70px] items-start">
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once: true}} className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 items-start">
             <div className="flex flex-col justify-start flex-shrink-0">
-              <div className="flex items-center gap-[15px] mb-10 3xl:mb-[50px]">
+              <div className="flex items-center gap-[15px] mb-50">
                 <NavButton
                   onClick={() => {
                     const s = swiperRef.current;
@@ -236,7 +236,7 @@ export default function IndustriesSection() {
                   ariaLabel="Next"
                 />
               </div>
-              <div className="w-full h-px bg-[#C2C2C2] mb-6 3xl:mb-[30px]" />
+              <div className="w-full h-px bg-[#C2C2C2] mb-6 3xl:mb-30" />
               {counterPill}
             </div>
 
@@ -274,7 +274,7 @@ export default function IndustriesSection() {
         <div className="py-140 container">
           <SectionTitle
             text={industriesData.title}
-            className="section-heading w-full mb-8 md:mb-10 text-secondary"
+            className="section-heading w-full mb-40 text-secondary"
           />
 
           <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{once: true}} className="flex items-center justify-between mb-4 md:mb-8">

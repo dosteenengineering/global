@@ -56,12 +56,12 @@ export default function ClientStoriesSection() {
       <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140">
         <SectionTitle
           title={clientStoriesData.title}
-          className="text-white section-heading uppercase mb-[82px]"
+          className="text-white section-heading uppercase mb-80 3xl:mb-[82px]"
         />
 
-        <div className="flex flex-row flex-1 gap-0 lg:pl-10 xl:pl-12 2xl:pl-14 3xl:pl-[65px]">
+        <div className="flex flex-row flex-1 gap-0 lg:pl-60 3xl:pl-[65px]">
           {/* Opening quote icon */}
-          <div className="flex-shrink-0 flex items-start mr-15 xl:mr-90 2xl:mr-110 3xl:mr-[113px] pointer-events-none overflow-hidden">
+          <div className="flex-shrink-0 flex items-start mr-110 3xl:mr-[113px] pointer-events-none overflow-hidden">
             <motion.div
             variants={moveRight(0.2)}
             initial="hidden"
@@ -87,7 +87,7 @@ export default function ClientStoriesSection() {
           className="flex-shrink-0 self-stretch w-px bg-[#76A7FF]" />
 
           {/* Main content col */}
-          <div className="flex-1 flex flex-col min-w-0 pl-[30px]">
+          <div className="flex-1 flex flex-col min-w-0 pl-30">
             <div className="flex flex-row flex-1 gap-0">
               {/* Counter pill */}
               <motion.div
@@ -95,7 +95,7 @@ export default function ClientStoriesSection() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="flex-shrink-0 pr-12 2xl:pr-[66px] -mt-3">
+              className="flex-shrink-0 pr-60 3xl:pr-[66px] -mt-3">
                 <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
                   <span className="font-poppins text-15 leading-[1.66] text-white">
                     <span className="font-[600]">
@@ -109,7 +109,7 @@ export default function ClientStoriesSection() {
               {/* Lines + content */}
               <div className="flex-1 flex flex-col min-w-0">
                 {/* Progress lines */}
-                <div className="flex items-center flex-shrink-0 gap-[28px] 3xl:gap-[38px] mb-120 3xl:mb-[126px] relative z-20">
+                <div className="flex items-center flex-shrink-0 gap-30 3xl:gap-[38px] mb-120 3xl:mb-[126px] relative z-20">
                   {clientStoriesData.stories.map((_, i) => (
                     <motion.button
                     variants={moveUp(i*0.18)}
@@ -180,7 +180,7 @@ export default function ClientStoriesSection() {
                             y: -24,
                             transition: { duration: 0.2, ease: "easeIn" },
                           }}
-                          className="text-white text-55 leading-[1.18] -tracking-[2%] max-w-[998px] font-poppins font-[300] min-h-[238px] 3xl:min-h-[208px]"
+                          className="text-white text-55 leading-[1.18] -tracking-[2%] max-w-[998px] font-poppins font-light min-h-[238px] 3xl:min-h-[208px]"
                         >
                           {activeStory.quote}
                         </motion.p>
@@ -200,7 +200,7 @@ export default function ClientStoriesSection() {
                             y: -16,
                             transition: { duration: 0.18, ease: "easeIn" },
                           }}
-                          className="flex flex-col gap-[8px] 3xl:gap-[15px] font-[300] text-white font-poppins -tracking-[2%]"
+                          className="flex flex-col gap-[8px] 3xl:gap-[15px] font-light text-white font-poppins -tracking-[2%]"
                         >
                           <p className="text-30 leading-[1.33]">
                             {activeStory.name}
@@ -240,10 +240,10 @@ export default function ClientStoriesSection() {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden relative z-10 container pt-140 pb-[60px]">
+      <div className="lg:hidden relative z-10 container pt-140 pb-60">
         <SectionTitle
         title={clientStoriesData.title}
-        className="text-white section-heading uppercase mb-8 md:mb-10"
+        className="text-white section-heading uppercase mb-40"
         />
 
         {/* Progress bars — full width */}
@@ -365,7 +365,7 @@ export default function ClientStoriesSection() {
         </div>
 
         {/* Close quote */}
-        <div className="flex-shrink-0 pr-10 absolute bottom-[10%] right-0 overflow-hidden">
+        <div className="flex-shrink-0 pr-40 absolute bottom-[10%] right-0 overflow-hidden">
           <motion.div
           variants={moveLeft(0.4)}
           initial="hidden"

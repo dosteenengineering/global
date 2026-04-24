@@ -145,7 +145,7 @@ export default function WhyDosteen() {
     : `wmEnterLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`;
 
   return (
-    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-[50px] sm:py-[80px] lg:py-140">
+    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-[50px] sm:py-140">
       <PrimaryNoise />
 
       <Image
@@ -165,7 +165,7 @@ export default function WhyDosteen() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-          className="absolute top-full mt-14 lg:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
+          className="absolute top-full mt-80 3xl:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
           {wm.exitingTitle && (
@@ -187,7 +187,7 @@ export default function WhyDosteen() {
         </motion.div>
       </div>
 
-      <div className="relative flex-1 flex items-center pt-8 md:pt-20 lg:pt-[85px]">
+      <div className="relative flex-1 flex items-center pt-80 3xl:pt-[85px]">
         <div className="container relative z-20 w-full">
 
           <div className="absolute left-[15px] bottom-[calc(0%-28px)] lg:top-[calc(50%+18px)]">

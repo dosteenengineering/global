@@ -51,7 +51,7 @@ export default function BimSection() {
   }, []);
 
   return (
-    <section className="relative h-[80vh] sm:h-full lg:min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-screen lg:h-auto lg:min-h-screen w-full overflow-hidden bg-black">
       <video
         ref={videoRef}
         src={bimData.videoSrc}
@@ -75,7 +75,7 @@ export default function BimSection() {
       <div className="container relative z-10 h-full flex flex-col justify-between py-140 3xl:pt-[177px]">
         <SectionTitle
           text={bimData.heading}
-          className="text-white section-heading max-w-[721px] mb-10 md:mb-[45px]"
+          className="text-white section-heading max-w-[721px] mb-40 lg:mb-[45px]"
         />
 
         <motion.div
@@ -92,22 +92,21 @@ export default function BimSection() {
               style={{ transform: "scaleX(0)" }}
             />
           </div>
-          <span className="text-white/60 text-19 leading-[1.52] font-[300] font-poppins -tracking-[2%]">
+          <span className="text-white/60 text-19 leading-[1.52] font-light font-poppins -tracking-[2%]">
             {bimData.progressLabel}
           </span>
         </motion.div>
 
-        <div className="overflow-hidden">
+        
           <motion.p
             variants={moveUp(0.4)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.5 }}
-            className="text-white text-30 leading-[1.33] font-poppins font-[300] -tracking-[2%] ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-20 3xl:mb-[82px]"
+            className="text-white text-30 leading-[1.33] font-poppins font-light-tracking-[2%] ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-80 2xl:mb-[82px]"
           >
             {bimData.description}
           </motion.p>
-        </div>
 
         <motion.div
           variants={moveUp(0.6)}
