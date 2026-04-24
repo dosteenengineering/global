@@ -131,9 +131,9 @@ body::-webkit-scrollbar {
   /* large */
 --text-70: clamp(34px, 5.239vw + 16.35px, 70px);
 --text-90: clamp(32px, 5.5vw + 6px, 90px);
-  --text-95: clamp(42px, 3.28vw + 42px, 95px);
+--text-95: clamp(42px, 3.28vw + 42px, 95px);
 --text-250: clamp(70px, 13.1vw, 250px);
-  --text-300: clamp(120px, 17vw, 300px);
+--text-300: clamp(120px, 17vw, 300px);
 --text-400: clamp(140px, 22vw, 400px);
 
 
@@ -226,6 +226,10 @@ body::-webkit-scrollbar {
 
 .section-heading {
   @apply font-helvetica uppercase leading-[1.111] text-90;
+}
+
+.hero-heading {
+  @apply text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 font-helvetica uppercase;
 }
 
 

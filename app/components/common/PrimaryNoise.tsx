@@ -10,16 +10,18 @@ function Bg() {
     <>
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(180deg, #1853D6 0%, #022E9E 100%)" }}
+        style={{
+          background: "linear-gradient(180deg, #1853D6 0%, #022E9E 100%)",
+        }}
       />
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:  "url(/assets/noise/primary-noise.png)",
+          backgroundImage: "url(/assets/noise/primary-noise.png)",
           backgroundRepeat: "repeat",
-          backgroundSize:   "250px",
-          mixBlendMode:     "screen",
-          opacity:          0.6,
+          backgroundSize: "250px",
+          mixBlendMode: "screen",
+          opacity: 0.6,
         }}
       />
     </>
@@ -42,13 +44,13 @@ export default function PrimaryNoise({ className = "" }) {
         {
           clipPath: "inset(0 0% 0 0)",
           duration: 1.2,
-          ease:     "power2.inOut",
+          ease: "power2.inOut",
           scrollTrigger: {
             trigger: el.closest("section") ?? el.parentElement,
             start,
-            once:    true,
+            once: true,
           },
-        }
+        },
       );
     });
 

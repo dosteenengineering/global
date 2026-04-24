@@ -228,7 +228,7 @@ const Footer = () => {
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:flex relative pt-140">
+      <div className="hidden min-[1120px]:flex relative pt-140">
         {/* ── LEFT COLUMN ── */}
         <div className="flex flex-col flex-1">
           <motion.div
@@ -389,18 +389,53 @@ const Footer = () => {
             />
 
             {/* Nav columns */}
-            <div className="flex gap-70 3xl:gap-80 pt-40 3xl:pt-60 pb-50 3xl:pb-70 font-poppins -tracking-[2%] 2xl:pr-40 3xl:pr-[57px]">
-              {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
-              <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
-                {mergedCols.map((col, i) => (
+            <div className=" pt-40 3xl:pt-60 pb-50 3xl:pb-70 font-poppins -tracking-[2%] 2xl:pr-40 3xl:pr-[57px] relative overflow-hidden">
+              <div className="flex gap-70 3xl:gap-80">
+                {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
+                <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
+                  {mergedCols.map((col, i) => (
+                    <motion.div
+                      variants={moveUp(i * 0.2)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ amount: 0.1, once: true }}
+                      key={col.title}
+                    >
+                      <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] 2xl:max-w-none">
+                        {col.title}
+                      </h3>
+                      <ul>
+                        {col.links.map((link, j) => (
+                          <motion.li
+                            variants={moveUp(j * 0.11)}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ amount: 0.1, once: true }}
+                            key={link.label}
+                          >
+                            <Link
+                              href={link.href}
+                              className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
+                            >
+                              {link.label}
+                            </Link>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </div>
+                {/* ── lg → 2xl: remaining columns separately ── */}
+                {otherCols.map((col, i) => (
                   <motion.div
                     variants={moveUp(i * 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ amount: 0.1, once: true }}
                     key={col.title}
+                    className="flex-shrink-0 3xl:hidden"
                   >
-                    <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] 2xl:max-w-none">
+                    <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] xl:max-w-[220px] 2xl:max-w-none">
                       {col.title}
                     </h3>
                     <ul>
@@ -423,78 +458,92 @@ const Footer = () => {
                     </ul>
                   </motion.div>
                 ))}
+                {/* ── 3xl+: all columns separate (original) ── */}
+                {navColumns.map((col, i) => (
+                  <motion.div
+                    variants={moveUp(i * 0.2)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ amount: 0.1, once: true }}
+                    key={`xl-${col.title}`}
+                    className="flex-shrink-0 hidden 3xl:block"
+                  >
+                    <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52]">
+                      {col.title}
+                    </h3>
+                    <ul>
+                      {col.links.map((link, j) => (
+                        <motion.li
+                          variants={moveUp(j * 0.11)}
+                          initial="hidden"
+                          whileInView="show"
+                          viewport={{ amount: 0.1, once: true }}
+                          key={link.label}
+                        >
+                          <Link
+                            href={link.href}
+                            className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
+                          >
+                            {link.label}
+                          </Link>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+                <div className="hidden 3xl:block absolute bottom-50 3xl:bottom-70 pb-[10px] left-0">
+                  <div className="flex items-center justify-center xl:justify-start gap-20">
+                    {certifications.map((cert, index) => (
+                      <motion.div
+                        variants={moveUp(index * 0.1)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ amount: 0.1, once: true }}
+                        key={cert.alt}
+                        className={`relative h-[50px] 3xl:h-[73px] shrink-0 ${
+                          index === certifications.length - 1
+                            ? "w-[70px] 2xl:w-[112px]"
+                            : "w-[50px] 2xl:w-[73px]"
+                        }`}
+                      >
+                        <Image
+                          src={cert.src}
+                          alt={cert.alt}
+                          fill
+                          className="object-contain object-center pointer-events-none"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
-
-              {/* ── lg → 2xl: remaining columns separately ── */}
-              {otherCols.map((col, i) => (
-                <motion.div
-                  variants={moveUp(i * 0.2)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ amount: 0.1, once: true }}
-                  key={col.title}
-                  className="flex-shrink-0 3xl:hidden"
-                >
-                  <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52] max-w-[210px] xl:max-w-none">
-                    {col.title}
-                  </h3>
-                  <ul>
-                    {col.links.map((link, j) => (
-                      <motion.li
-                        variants={moveUp(j * 0.11)}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ amount: 0.1, once: true }}
-                        key={link.label}
-                      >
-                        <Link
-                          href={link.href}
-                          className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-
-              {/* ── 3xl+: all columns separate (original) ── */}
-              {navColumns.map((col, i) => (
-                <motion.div
-                  variants={moveUp(i * 0.2)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ amount: 0.1, once: true }}
-                  key={`xl-${col.title}`}
-                  className="flex-shrink-0 hidden 3xl:block"
-                >
-                  <h3 className="text-19 font-[500] text-secondary mb-5 leading-[1.52]">
-                    {col.title}
-                  </h3>
-                  <ul>
-                    {col.links.map((link, j) => (
-                      <motion.li
-                        variants={moveUp(j * 0.11)}
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{ amount: 0.1, once: true }}
-                        key={link.label}
-                      >
-                        <Link
-                          href={link.href}
-                          className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+              <div className="mt-40 3xl:hidden">
+                <div className="flex items-center justify-start gap-20">
+                  {certifications.map((cert, index) => (
+                    <motion.div
+                      variants={moveUp(index * 0.1)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ amount: 0.1, once: true }}
+                      key={cert.alt}
+                      className={`relative h-[50px] 2xl:h-[68px] shrink-0 ${
+                        index === certifications.length - 1
+                          ? "w-[70px] 2xl:w-[104px]"
+                          : "w-[50px] 2xl:w-[68px]"
+                      }`}
+                    >
+                      <Image
+                        src={cert.src}
+                        alt={cert.alt}
+                        fill
+                        className="object-contain object-center pointer-events-none"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
-          
 
           {/* ── BOTTOM BAR ── */}
           <div
@@ -539,51 +588,30 @@ const Footer = () => {
             style={{ paddingRight: leftPadding }}
             className="py-40 3xl:pt-40 3xl:pb-[42px] border-t border-[#D0CFC9] pl-40 3xl:pl-90"
           >
-            {/* <div className="flex items-center justify-center xl:justify-start gap-3 3xl:gap-[22px]">
-              {certifications.map((cert, index) => (
-                <motion.div
-                variants={moveUp(index * 0.1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ amount: 0.1, once: true }}
-                  key={cert.alt}
-                  className={`relative h-[50px] 3xl:h-[72px] ${
-                    index === certifications.length - 1
-                      ? "w-[70px] 2xl:w-[112px]"
-                      : "w-[50px] 2xl:w-[73px]"
-                  }`}
-                >
-                  <Image
-                    src={cert.src}
-                    alt={cert.alt}
-                    fill
-                    className="object-contain object-left pointer-events-none"
-                  />
-                </motion.div>
-              ))}
-            </div> */}
             <div>
-              <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">Subscribe to our newsletter</p>
-<div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
-  <input
-    type="email"
-    placeholder="Enter Your Email"
-    className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
-  />
-  <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
-    <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
-    <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
-      Subscribe
-    </span>
-    <Image
-      src="/assets/icons/button-arrow-top-right.svg"
-      alt=""
-      width={25}
-      height={25}
-      className="relative z-10 w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
-    />
-  </button>
-</div>
+              <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
+                Subscribe to our newsletter
+              </p>
+              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
+                />
+                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
+                  <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
+                    Subscribe
+                  </span>
+                  <Image
+                    src="/assets/icons/button-arrow-top-right.svg"
+                    alt=""
+                    width={25}
+                    height={25}
+                    className="relative z-10 w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -592,7 +620,7 @@ const Footer = () => {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden relative pt-120">
+      <div className="min-[1120px]:hidden relative pt-120">
         <div className="container flex flex-col">
           <motion.div
             variants={moveUp(0.2)}

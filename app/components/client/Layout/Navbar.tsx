@@ -199,7 +199,6 @@
 //   );
 // }
 
-
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -227,22 +226,24 @@ export default function Navbar() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // 1. Pill expands left → right (width 0 → 100%)
-tl.fromTo(
-  navPillRef.current,
-  { width: 0, opacity: 1 },
-  { width: "100%", duration: 1.5, ease: "power3.out" },
-  0.1,
-);
+      tl.fromTo(
+        navPillRef.current,
+        { clipPath: "inset(0 100% 0 0 round 50px)" },
+        {
+          clipPath: "inset(0 0% 0 0 round 50px)",
+          duration: 0.9,
+          ease: "power3.out",
+        },
+        0.1,
+      );
 
-// search icon
+      // search icon
       tl.fromTo(
         searchRef.current,
         { opacity: 0, x: 28 },
         { opacity: 1, x: 0, duration: 0.5 },
         0.7,
       );
-
 
       // 2. Hamburger drops in
       tl.fromTo(
@@ -283,29 +284,24 @@ tl.fromTo(
   return (
     <header className="absolute top-[23px] left-0 w-full z-50">
       <div className="container flex items-center justify-between gap-4">
-
-        {/* Single combined pill: Logo + Nav items + Search */}
-        {/* overflow-hidden on this wrapper is what clips the width animation */}
         <div
           ref={navPillRef}
-          className="flex h-[60px] md:h-[70px] overflow-hidden"
-          style={{ width: 0 }}
+          className="flex h-[60px] md:h-[70px] rounded-[50px]"
         >
-          <div className="flex items-center rounded-full border border-white/20 bg-white/8 glass-effect overflow-hidden">
-
+          <div className="flex items-center rounded-[50px] border border-white/30 bg-white/8 glass-effect overflow-hidden">
             {/* Logo */}
             <div
               ref={logoRef}
               className="shrink-0 pl-[30px] 3xl:pl-[31px] pr-100"
               style={{ opacity: 0 }}
             >
-              <Link href="/" className="flex items-center">
+              <Link href="/" className="flex items-center shrink-0">
                 <Image
-                  src="/assets/logos/logo-white-full.png"
+                  src="/assets/logos/logo-white-full.svg"
                   alt="Dosteen Logo"
                   width={300}
                   height={100}
-                  className="w-auto 3xl:w-[164px] h-[35px] md:h-[43px] object-contain pointer-events-none"
+                  className="w-auto 3xl:w-[164px] h-[35px] md:h-[43px] object-contain pointer-events-none shrink-0"
                 />
               </Link>
             </div>
@@ -315,7 +311,9 @@ tl.fromTo(
               {navItems.map((item, i) => (
                 <div
                   key={item.label}
-                  ref={(el) => { navItemRefs.current[i] = el; }}
+                  ref={(el) => {
+                    navItemRefs.current[i] = el;
+                  }}
                   className="relative group"
                   style={{ opacity: 0 }}
                 >
@@ -338,7 +336,10 @@ tl.fromTo(
             </div>
 
             {/* Search icon */}
-            <button ref={searchRef} className="shrink-0 cursor-pointer flex items-center justify-center w-[38px] h-[38px] md:w-[45.61px] md:h-[45.61px] rounded-full bg-white/8 border border-white/20 backdrop-blur-[10px] mr-[20.39px]">
+            <button
+              ref={searchRef}
+              className="shrink-0 cursor-pointer flex items-center justify-center w-[38px] h-[38px] md:w-[45.61px] md:h-[45.61px] rounded-full bg-white/8 border border-white/20 backdrop-blur-[10px] mr-[20.39px]"
+            >
               <Image
                 src="/assets/icons/search.svg"
                 alt="Search"
@@ -347,53 +348,54 @@ tl.fromTo(
                 className="w-auto h-[15px] md:w-[20.64px] md:h-[20.64px] pointer-events-none"
               />
             </button>
-
           </div>
         </div>
 
         {/* Right group — Contact + Hamburger */}
         <div className="flex items-center gap-3 flex-shrink-0">
-
           {/* Contact pill */}
-          <Link
-            ref={contactRef}
-            href="/contact"
-            className="hidden lg:flex group items-center gap-3 justify-center h-[70px] pr-[14.2px] pl-6 rounded-[50px] bg-white/8 border border-white/20 glass-effect"
-            style={{ opacity: 0 }}
-          >
-            <span className="text-white text-15 leading-[1.733] uppercase">
-              CONTACT
-            </span>
-            <Image
-              src="/assets/icons/button-arrow-top-right.svg"
-              alt=""
-              width={14}
-              height={14}
-              className="pointer-events-none w-auto h-[18px] group-hover:rotate-45 transition-all duration-300 ease-in-out"
-            />
-          </Link>
+          <div className="rounded-[50px] overflow-hidden">
+            <Link
+              ref={contactRef}
+              href="/contact"
+              className="hidden lg:flex group items-center gap-3 justify-center h-[70px] pr-[14.2px] pl-6 rounded-[50px] bg-white/8 border border-white/30 glass-effect"
+              style={{ opacity: 0 }}
+            >
+              <span className="text-white text-15 leading-[1.733] uppercase">
+                CONTACT
+              </span>
+              <Image
+                src="/assets/icons/button-arrow-top-right.svg"
+                alt=""
+                width={14}
+                height={14}
+                className="pointer-events-none w-auto h-[18px] group-hover:rotate-45 transition-all duration-300 ease-in-out"
+              />
+            </Link>
+          </div>
 
           {/* Hamburger pill */}
-          <button
-            ref={hamburgerRef}
-            className="cursor-pointer flex items-center justify-center group w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-white/8 border border-white/20 glass-effect"
-            aria-label="Open menu"
-            style={{ opacity: 0 }}
-          >
-            <svg
-              className="group-hover:scale-[1.08] transition-all duration-300 ease-in-out w-auto h-[17px] md:w-[31px] md:h-[21px]"
-              xmlns="http://www.w3.org/2000/svg"
-              width="31"
-              height="21"
-              viewBox="0 0 31 21"
-              fill="none"
+          <div className="rounded-full overflow-hidden">
+            <button
+              ref={hamburgerRef}
+              className="cursor-pointer flex items-center justify-center group w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-white/8 border border-white/30 glass-effect"
+              aria-label="Open menu"
+              style={{ opacity: 0 }}
             >
-              <line y1="0.5" x2="31" y2="0.5" stroke="white" />
-              <line y1="10.5" x2="31" y2="10.5" stroke="white" />
-              <line y1="20.5" x2="31" y2="20.5" stroke="white" />
-            </svg>
-          </button>
-
+              <svg
+                className="group-hover:scale-[1.08] transition-all duration-300 ease-in-out w-auto h-[17px] md:w-[31px] md:h-[21px]"
+                xmlns="http://www.w3.org/2000/svg"
+                width="31"
+                height="21"
+                viewBox="0 0 31 21"
+                fill="none"
+              >
+                <line y1="0.5" x2="31" y2="0.5" stroke="white" />
+                <line y1="10.5" x2="31" y2="10.5" stroke="white" />
+                <line y1="20.5" x2="31" y2="20.5" stroke="white" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </header>

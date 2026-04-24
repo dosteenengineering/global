@@ -27,7 +27,7 @@ export default function Hero() {
           {/* Title */}
           <TitleReveal
             text="Where Engineering Meets Assurance"
-            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-[700] uppercase font-helvetica leading-[1.22] lg:leading-[1.1]"
+            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] hero-heading lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-[700] uppercase font-helvetica leading-[1.22] lg:leading-[1.1]"
           />
 
           {/* Button */}
