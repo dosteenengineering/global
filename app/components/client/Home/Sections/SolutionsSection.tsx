@@ -61,13 +61,9 @@ export default function SolutionsSection() {
           >
             <div className="mt-18 3xl:mt-[109px]">
               <div ref={tabsContainerRef} className="relative">
-                <div className="flex gap-15 2xl:gap-20 text-25 xl:text-30 leading-[1.33] font-[300] font-poppins -tracking-[2%] overflow-hidden">
+                <div className="flex gap-80 text-25 xl:text-30 leading-[1.33] font-[300] font-poppins -tracking-[2%] overflow-hidden">
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
-                    <motion.button
-                      initial="hidden"
-                      whileInView="show"
-                      variants={moveUp(index * 0.3)}
-                      viewport={{ once: true }}
+                    <button
                       key={tab.key}
                       ref={(el) => {
                         buttonRefs.current[index] = el;
@@ -83,7 +79,7 @@ export default function SolutionsSection() {
                       >
                         {tab.label}
                       </span>
-                    </motion.button>
+                    </button>
                   ))}
                 </div>
                 <div className="absolute left-0 right-0 bottom-0 h-px bg-white/35" />
