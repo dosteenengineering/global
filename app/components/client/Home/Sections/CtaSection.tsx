@@ -62,9 +62,9 @@ export default function CtaSection() {
                 >
                   <Link
                     href={action.href}
-                    className={`group flex items-center gap-3 sm:gap-6 3xl:gap-[30px] px-6 lg:px-[45px] ${i === 0 ? "pl-0" : ""} ${i === ctaData.actions.length - 1 ? "pr-0" : ""}`}
+                    className={`group flex items-center gap-3 sm:gap-30 px-6 lg:px-[45px] ${i === 0 ? "pl-0" : ""} ${i === ctaData.actions.length - 1 ? "pr-0" : ""}`}
                   >
-                    <span className="text-white font-poppins font-[300] text-15 sm:text-19 md:text-30 leading-[1.52] -tracking-[2%] uppercase">
+                    <span className="text-white font-poppins font-light text-15 sm:text-19 md:text-30 leading-[1.52] -tracking-[2%] uppercase">
                       {action.label}
                     </span>
                     <Image

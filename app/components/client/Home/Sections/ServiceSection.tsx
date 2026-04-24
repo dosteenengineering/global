@@ -47,7 +47,7 @@ export default function ServicesSection() {
           whileInView="show"
           variants={moveUp(0.2)}
           viewport={{ once: true }}
-          className="hidden lg:flex items-stretch gap-0 pt-16 2xl:pt-20"
+          className="hidden lg:flex items-stretch gap-0 pt-80"
         >
           <div className="w-px bg-[#76A7FF] shrink-0" />
 
@@ -158,7 +158,7 @@ export default function ServicesSection() {
             <SectionTitle
               key={activeTab}
               text={activeData.description}
-              className="text-55 text-white leading-[1.18] font-[300] font-poppins -tracking-[2%] max-w-[855px]"
+              className="text-55 text-white leading-[1.18] font-light font-poppins -tracking-[2%] max-w-[855px]"
             />
 
             <motion.div
@@ -166,12 +166,12 @@ export default function ServicesSection() {
               whileInView="show"
               variants={moveUp(0.7)}
               viewport={{ once: true }}
-              className="w-fit mt-[50px] xl:mb-10 2xl:mb-[50px]  3xl:mb-[71px]"
+              className="w-fit mt-50 xl:mb-70 3xl:mb-[71px]"
             >
               <BorderButton
                 text="Read More"
                 iconColor="white"
-                px="px-[35px]"
+                px="px-30 3xl:px-[35px]"
                 hoverBg="white"
               />
             </motion.div>
@@ -179,7 +179,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* ===== Mobile / Tablet ======= */}
-        <div className="lg:hidden pt-10 md:pt-12">
+        <div className="lg:hidden pt-50">
           <Swiper
             spaceBetween={30}
             slidesPerView="auto"

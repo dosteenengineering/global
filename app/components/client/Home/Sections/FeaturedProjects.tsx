@@ -179,7 +179,7 @@ export default function FeaturedProjectsSection() {
   return (
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
       <div ref={containerRef} className="container">
-        <SectionTitle text={featuredProjectsData.title} className="lg:text-center section-heading leading-[1.1] uppercase font-helvetica text-secondary mb-10 md:mb-12 lg:mb-[70px]" />
+        <SectionTitle text={featuredProjectsData.title} className="lg:text-center section-heading leading-[1.1] uppercase font-helvetica text-secondary mb-70" />
       </div>
 
       {/* ═══════════════════════════════════════════════════════
@@ -388,11 +388,11 @@ export default function FeaturedProjectsSection() {
                       className="-translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 px-12 pb-12 z-10">
-                    <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-[22px]">
+                  <div className="absolute bottom-0 left-0 right-0 px-50 pb-40 3xl:pb-[43px] z-10">
+                    <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px]">
                       {project.name}
                     </p>
-                    <div className="h-[1px] bg-white/30 mb-[22px]" />
+                    <div className="h-[1px] bg-white/30 mb-20 2xl:mb-[22px]" />
                     <div className="flex items-center gap-150 3xl:gap-[163px]">
                       <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
                         Location: {project.location}
@@ -437,7 +437,7 @@ export default function FeaturedProjectsSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-[16px] 3xl:gap-[30px] items-end">
+            className="flex flex-col sm:flex-row gap-30 items-end">
             {inactiveProjects.map((project: Project, i: number) => (
               <InactiveSlot
                 key={`slot-${i}`}
@@ -453,7 +453,7 @@ export default function FeaturedProjectsSection() {
         <div />
 
         {/* ───────── Row 2 Col 2 — VIEW BUTTON ───────── */}
-        <div className="mt-[50px] w-fit overflow-hidden">
+        <div className="mt-50 w-fit overflow-hidden">
           <motion.div
             variants={moveUp(0.6)}
             initial="hidden"
@@ -464,7 +464,7 @@ export default function FeaturedProjectsSection() {
               text={featuredProjectsData.viewAllLabel}
               borderColor="black"
               textColor="black"
-              px="px-[35px]"
+              px="px-30 3xl:px-[35px]"
               hoverBg="black"
             />
           </motion.div>

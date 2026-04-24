@@ -228,7 +228,7 @@ export default function SolutionsSection() {
             <BorderButton
               text={solutionsData.btnText}
               iconColor="white"
-              px="px-[35px]"
+              px="px-30 3xl:px-[35px]"
               href={solutionsData.btnLink}
               hoverBg="white"
               className="w-fit"

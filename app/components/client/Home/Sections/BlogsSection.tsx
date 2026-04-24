@@ -70,7 +70,7 @@ export default function BlogsSection() {
           {/* Row 1 */}
           <SectionTitle
           title={blogsData.title}
-          className="text-secondary section-heading mb-12 2xl:mb-14 3x:mb-[70px]"
+          className="text-secondary section-heading mb-70"
           />
 
           {/* Row 2 */}
