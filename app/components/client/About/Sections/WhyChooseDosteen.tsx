@@ -80,7 +80,7 @@ export default function WhyChooseDosteen() {
   const showPagination = dotCount > 1;
 
   return (
-    <section className="relative w-full select-none">
+    <section className="relative w-full select-none overflow-x-clip">
       <PrimaryNoise2 />
 
       <div className="absolute right-[-40%] top-[-18%] w-[900px] h-[900px] 3xl:w-[1280px] 3xl:h-[1280px] pointer-events-none">

@@ -26,7 +26,7 @@ export default function InnerPageBanner({
   return (
     <div className="w-full">
       {/* 1. Gradient block — standalone, no content */}
-      <div className="w-full h-[286px] relative">
+      <div className="w-full h-[250px] 3xl:h-[286px] relative">
         <BannerNoise />
       </div>
 
