@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { whyDosteenData } from "../data";
-import PrimaryNoise from "@/app/components/common/PrimaryNoise";
+import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
@@ -24,29 +24,70 @@ const getLeft = (offset: number, n: number, circleSm: number = CIRCLE_SM) => {
 // Pure function — safe to call inside .map()
 const getSlideStyles = (isActive: boolean, w: number) => {
   const iconSize = isActive
-    ? w < 640 ? 50 : w < 1024 ? 72 : w < 1280 ? 100 : w < 1536 ? 120 : w < 1920 ? 130 : 150
-    : w < 640 ? 22 : w < 1024 ? 30 : w < 1920 ? 40 : 52;
+    ? w < 640
+      ? 50
+      : w < 1024
+        ? 72
+        : w < 1280
+          ? 100
+          : w < 1536
+            ? 120
+            : w < 1920
+              ? 130
+              : 150
+    : w < 640
+      ? 22
+      : w < 1024
+        ? 30
+        : w < 1920
+          ? 40
+          : 52;
 
   const iconMb = isActive
-    ? w < 1024 ? 16 : w < 1280 ? 20 : w < 1536 ? 32 : w < 1920 ? 48 : 70
-    : w < 640  ? 5  : w < 1024 ? 8  : w < 1920 ? 10 : 18;
+    ? w < 1024
+      ? 16
+      : w < 1280
+        ? 20
+        : w < 1536
+          ? 32
+          : w < 1920
+            ? 48
+            : 70
+    : w < 640
+      ? 5
+      : w < 1024
+        ? 8
+        : w < 1920
+          ? 10
+          : 18;
 
   const titleMb = isActive
-    ? w < 1024 ? 12 : w < 1280 ? 12 : w < 1536 ? 24 : 30
+    ? w < 1024
+      ? 12
+      : w < 1280
+        ? 12
+        : w < 1536
+          ? 24
+          : 30
     : 16;
 
-  const titleOpacity = isActive ? 1    : 0.5;
+  const titleOpacity = isActive ? 1 : 0.5;
 
   return { iconSize, iconMb, titleMb, titleOpacity };
 };
 
-const useWatermark = (title: string, directionRef: React.MutableRefObject<"forward" | "backward">) => {
+const useWatermark = (
+  title: string,
+  directionRef: React.MutableRefObject<"forward" | "backward">,
+) => {
   const [exitingTitle, setExitingTitle] = useState<string | null>(null);
   const [enteringTitle, setEnteringTitle] = useState(title);
   const [animKey, setAnimKey] = useState(0);
   const [exitDir, setExitDir] = useState<"forward" | "backward">("forward");
   const prevTitleRef = useRef(title);
-  const exitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     if (title === prevTitleRef.current) return;
@@ -74,7 +115,9 @@ export default function WhyDosteen() {
   const slideDirRef = useRef<"forward" | "backward">("forward");
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const contentRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const contentRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
   const isAnimating = useRef(false);
@@ -84,7 +127,9 @@ export default function WhyDosteen() {
     isAnimating.current = true;
     slideDirRef.current = dir;
     setActive(index);
-    setTimeout(() => { isAnimating.current = false; }, CIRCLE_MS + 100);
+    setTimeout(() => {
+      isAnimating.current = false;
+    }, CIRCLE_MS + 100);
   };
 
   const advance = () => goTo((active + 1) % n, "forward");
@@ -128,8 +173,13 @@ export default function WhyDosteen() {
     const delta = e.clientX - dragStartX.current;
     dragStartX.current = null;
     if (Math.abs(delta) < DRAG_THRESHOLD) return;
-    if (delta < 0) { clearTimeout(timerRef.current); advance(); }
-    else            { clearTimeout(timerRef.current); retreat(); }
+    if (delta < 0) {
+      clearTimeout(timerRef.current);
+      advance();
+    } else {
+      clearTimeout(timerRef.current);
+      retreat();
+    }
   };
 
   const handlePointerCancel = () => {
@@ -137,12 +187,14 @@ export default function WhyDosteen() {
     dragStartX.current = null;
   };
 
-  const exitAnim = wm.exitDir === "forward"
-    ? "wmExitLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards"
-    : "wmExitRight 750ms cubic-bezier(0.4, 0, 0.2, 1) forwards";
-  const enterAnim = wm.exitDir === "forward"
-    ? `wmEnterRight 750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`
-    : `wmEnterLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`;
+  const exitAnim =
+    wm.exitDir === "forward"
+      ? "wmExitLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards"
+      : "wmExitRight 750ms cubic-bezier(0.4, 0, 0.2, 1) forwards";
+  const enterAnim =
+    wm.exitDir === "forward"
+      ? `wmEnterRight 750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`
+      : `wmEnterLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`;
 
   return (
     <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-[50px] sm:py-140">
@@ -157,14 +209,16 @@ export default function WhyDosteen() {
       />
 
       <div className="relative container">
-        <SectionTitle text={heading} className="text-center text-white font-helvetica uppercase section-heading leading-[1.111]" />
-        
+        <SectionTitle
+          text={heading}
+          className="text-center text-white font-helvetica uppercase section-heading leading-[1.111]"
+        />
 
         <motion.div
-        variants={moveUp(0.2)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
           className="absolute top-full mt-80 3xl:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
@@ -189,10 +243,11 @@ export default function WhyDosteen() {
 
       <div className="relative flex-1 flex items-center pt-80 3xl:pt-[85px]">
         <div className="container relative z-20 w-full">
-
           <div className="absolute left-[15px] bottom-[calc(0%-28px)] lg:top-[calc(50%+18px)]">
             <div className="flex items-center py-[3px] leading-[0.5] h-[24px] w-[58px] sm:h-[28px] sm:w-[70px] lg:h-[31px] lg:w-[78px] justify-center text-[10px] sm:text-[13px] lg:text-15 font-[300] font-poppins text-white rounded-full border border-white">
-              <span className="font-[600]">{String(active + 1).padStart(2, "0")}</span>
+              <span className="font-[600]">
+                {String(active + 1).padStart(2, "0")}
+              </span>
               <span>/{String(n).padStart(2, "0")}</span>
             </div>
           </div>
@@ -210,7 +265,8 @@ export default function WhyDosteen() {
                 left: "50%",
                 transform: "translateX(-50%)",
                 width: "100vw",
-                background: "linear-gradient(90deg, rgba(118,167,255,0.05) 0%, #76A7FF 50%, rgba(118,167,255,0.05) 100%)",
+                background:
+                  "linear-gradient(90deg, rgba(118,167,255,0.05) 0%, #76A7FF 50%, rgba(118,167,255,0.05) 100%)",
               }}
             />
 
@@ -239,14 +295,21 @@ export default function WhyDosteen() {
                   <div
                     className="absolute -inset-[1px] pointer-events-none"
                     style={{
-                      animation: isActive ? "spinCW 3s linear infinite" : "spinCCW 4s linear infinite",
+                      animation: isActive
+                        ? "spinCW 3s linear infinite"
+                        : "spinCCW 4s linear infinite",
                     }}
                   >
                     <Image
-                      src={isActive
-                        ? "/assets/images/home/why-dosteen/big-circle.svg"
-                        : "/assets/images/home/why-dosteen/small-circle.svg"}
-                      alt="" fill aria-hidden="true" className="pointer-events-none"
+                      src={
+                        isActive
+                          ? "/assets/images/home/why-dosteen/big-circle.svg"
+                          : "/assets/images/home/why-dosteen/small-circle.svg"
+                      }
+                      alt=""
+                      fill
+                      aria-hidden="true"
+                      className="pointer-events-none"
                     />
                   </div>
                 </div>
@@ -282,7 +345,8 @@ export default function WhyDosteen() {
                   <div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      background: "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.2) 100%)",
+                      background:
+                        "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.2) 100%)",
                       opacity: isActive ? 1 : 0,
                       transition: BEZIER,
                     }}
@@ -290,13 +354,13 @@ export default function WhyDosteen() {
                   <div
                     className="absolute inset-0 rounded-full"
                     style={{
-                      background: "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.1) 100%)",
+                      background:
+                        "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.1) 100%)",
                       opacity: isActive ? 0 : 1,
                       transition: BEZIER,
                     }}
                   />
                   <div className="relative w-full h-full rounded-full flex flex-col items-center justify-center">
-
                     {/* Icon — width/height/marginBottom all interpolated */}
                     <div
                       className="relative flex items-center justify-center shrink-0 pointer-events-none"
@@ -319,7 +383,9 @@ export default function WhyDosteen() {
                     {/* Title — className for font size (preserves clamp vars), color/mb via style */}
                     <p
                       className={`text-center font-[300] -tracking-[2%] font-poppins ${
-                        isActive ? "text-[24px] lg:text-55" : "text-[12px] sm:text-[17px] lg:text-30"
+                        isActive
+                          ? "text-[24px] lg:text-55"
+                          : "text-[12px] sm:text-[17px] lg:text-30"
                       }`}
                       style={{
                         color: `rgba(255,255,255,${s.titleOpacity})`,
@@ -346,14 +412,16 @@ export default function WhyDosteen() {
                         className="text-center font-[300] -tracking-[2%] font-poppins text-15 lg:text-25 3xl:text-30 leading-[1.33] max-w-[508px] px-6 lg:px-18 2xl:px-15 3xl:px-0 text-white"
                         style={{
                           opacity: showDesc ? 1 : 0,
-                          transform: showDesc ? "translateY(0)" : "translateY(20px)",
-                          transition: "opacity 500ms ease, transform 300ms ease",
+                          transform: showDesc
+                            ? "translateY(0)"
+                            : "translateY(20px)",
+                          transition:
+                            "opacity 500ms ease, transform 300ms ease",
                         }}
                       >
                         {slide.description}
                       </p>
                     </div>
-
                   </div>
                 </div>
               );

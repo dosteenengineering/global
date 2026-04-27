@@ -307,7 +307,7 @@ export default function Navbar() {
             </div>
 
             {/* Nav items */}
-            <div className="hidden lg:flex items-center flex-1 gap-40 pr-80 2xl:pr-100 3xl:pr-150">
+            <div className="hidden min-[1200px]:flex items-center flex-1 gap-40 pr-80 2xl:pr-100 3xl:pr-150">
               {navItems.map((item, i) => (
                 <div
                   key={item.label}
@@ -358,7 +358,7 @@ export default function Navbar() {
             <Link
               ref={contactRef}
               href="/contact"
-              className="hidden lg:flex group items-center gap-3 justify-center h-[70px] pr-[14.2px] pl-6 rounded-[50px] bg-white/8 border border-white/30 glass-effect"
+              className="hidden min-[1400px]:flex group items-center gap-3 justify-center h-[70px] pr-[14.2px] pl-6 rounded-[50px] bg-white/8 border border-white/30 glass-effect"
               style={{ opacity: 0 }}
             >
               <span className="text-white text-15 leading-[1.733] uppercase">

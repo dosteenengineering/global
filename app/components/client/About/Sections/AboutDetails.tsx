@@ -1,15 +1,70 @@
 "use client";
 import "swiper/css";
-import { motion } from "framer-motion";
-import { slidesData } from "../data";
 import Image from "next/image";
-import { moveUp } from "@/app/components/motionVariants";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { AboutData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
-import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import StatNoise1 from "@/app/components/common/noise/StatNoise1";
+import StatNoise2 from "@/app/components/common/noise/StatNoise2";
+
+function StatCard({
+  icon,
+  value,
+  label,
+  subLabel,
+  noiseVariant,
+}: {
+  icon: string;
+  value: string;
+  label: string;
+  subLabel: string;
+  noiseVariant: 1 | 2;
+}) {
+  return (
+    <div className="flex items-center py-25 gap-200 3xl:gap-[296px] px-50 relative flex-1 min-w-0 max-h-[148px]">
+      {noiseVariant === 1 ? <StatNoise1 /> : <StatNoise2 />}
+
+      {/* Icon */}
+      <div className="relative shrink-0 h-[60px] w-[60px] 2xl:w-[70px] 2xl:h-[70px]">
+        <Image src={icon} alt={label} fill className="object-contain" />
+      </div>
+
+      {/* Text */}
+      <div>
+        <div className="flex items-baseline gap-x-[14px]">
+          <div className="flex flex-row items-start">
+            <span className="text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
+              {value.replace("+", "")}
+            </span>
+            {value.includes("+") && (
+              <span className="text-[33px] leading-none relative 2xl:top-[3px] 3xl:top-[5px] text-primary font-light font-poppins">
+                +
+              </span>
+            )}
+          </div>
+          <span className="text-30 leading-[1.333] font-light -tracking-[0.02em] text-black">
+            {label}
+          </span>
+        </div>
+        <p className="text-description text-paragraph mt-[5px]">{subLabel}</p>
+      </div>
+    </div>
+  );
+}
+
+// Group stats into pairs: [[stat1, stat2], [stat3, stat4]]
+const slideGroups = AboutData.stats.reduce<(typeof AboutData.stats)[]>(
+  (acc, stat, i) => {
+    if (i % 2 === 0) acc.push([stat]);
+    else acc[acc.length - 1].push(stat);
+    return acc;
+  },
+  [],
+);
 
 export default function AboutDetails() {
   return (
-    <section className="bg-white w-full relative select-none overflow-hidden">
+    <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <div className="absolute -top-88 lg:-top-61 left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
@@ -22,16 +77,46 @@ export default function AboutDetails() {
 
       <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-120 px-[15px] lg:px-0 container w-full">
         <SectionTitle
-          text="Dosteen: A UAE & Oman Building Systems Engineering Company"
+          text={AboutData.title}
           className="section-heading text-secondary uppercase mb-50"
         />
 
-        <SectionDescription
-          text="Dosteen is a multi-discipline building systems engineering company headquartered in Dubai, UAE, with operations across Oman and the broader MENA region. 
-
-Founded in 1999, Dosteen designs, supplies, and installs engineered solutions for access control, entrance systems, fire protection, flood management, parking systems, architectural shading, and industrial doors. Serving developers, contractors, facility managers, and government entities across residential, commercial, healthcare, and industrial sectors, Dosteen delivers projects with ISO-certified quality and BIM-integrated engineering."
-          className="text-19 text-paragraph font-poppins font-light leading-[1.52] whitespace-pre-line break-words"
+        <div
+          className="text-paragraph text-description"
+          dangerouslySetInnerHTML={{ __html: AboutData.description }}
         />
+      </div>
+
+      {/* Stats Swiper */}
+      <div className="mt-100 w-full container">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={10}
+          breakpoints={{
+            1024: {
+              slidesPerView: 2,
+            },
+          }}
+          className="w-full"
+        >
+          {slideGroups.map((group, slideIndex) => (
+            <SwiperSlide key={slideIndex}>
+              {/* 1 column, 2 stacked cards, 10px gap */}
+              <div className="flex flex-col gap-[10px]">
+                {group.map((stat, cardIndex) => (
+                  <StatCard
+                    key={stat.id}
+                    icon={stat.icon}
+                    value={stat.value}
+                    label={stat.label}
+                    subLabel={stat.subLabel}
+                    noiseVariant={cardIndex === 0 ? 1 : 2}
+                  />
+                ))}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

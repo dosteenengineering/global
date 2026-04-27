@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import BannerNoise from "./BannerNoise";
+import BannerNoise from "./noise/BannerNoise";
 import { motion } from "framer-motion";
 import { useParallax } from "./animations/useParallax";
 
@@ -22,11 +22,11 @@ export default function InnerPageBanner({
   image,
   imageAlt = "Banner image",
 }: InnerPageBannerProps) {
-    const { ref, parallaxY } = useParallax(10);
+  const { ref, parallaxY } = useParallax(10);
   return (
     <div className="w-full">
       {/* 1. Gradient block — standalone, no content */}
-      <div className="w-full h-[286px] relative">
+      <div className="w-full h-[250px] 3xl:h-[286px] relative">
         <BannerNoise />
       </div>
 
@@ -65,7 +65,7 @@ export default function InnerPageBanner({
           fill
           className="object-cover object-top"
           style={{
-            transform: `scale(${1.10}) translateY(${parallaxY}vh)`,
+            transform: `scale(${1.1}) translateY(${parallaxY}vh)`,
           }}
           priority
         />

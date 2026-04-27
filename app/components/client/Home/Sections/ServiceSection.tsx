@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { servicesData, ServiceTab } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
-import PrimaryNoise from "@/app/components/common/PrimaryNoise";
+import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";

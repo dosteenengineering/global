@@ -110,7 +110,7 @@ export default function AboutSlider() {
 
   return (
     <section
-      className="bg-white w-full relative select-none overflow-hidden"
+      className="bg-white w-full relative select-none"
       style={{ cursor: "grab" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -127,153 +127,147 @@ export default function AboutSlider() {
         />
       </div>
 
-      {/* Invisible Swiper — autoplay clock */}
-      <div
-        aria-hidden="true"
-        className="absolute opacity-0 pointer-events-none"
-        style={{ width: "1px", height: "1px", overflow: "hidden" }}
-      >
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: SLIDE_INTERVAL, disableOnInteraction: false }}
-          loop={true}
-          speed={600}
-          allowTouchMove={false}
-          onSwiper={(s) => (swiperRef.current = s)}
-          onRealIndexChange={handleRealIndexChange}
-          style={{ width: "100px", height: "100px" }}
+      <div className="overflow-hidden">
+        {/* Invisible Swiper — autoplay clock */}
+        <div
+          aria-hidden="true"
+          className="absolute opacity-0 pointer-events-none"
+          style={{ width: "1px", height: "1px", overflow: "hidden" }}
         >
-          {slidesData.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <div style={{ width: "100px", height: "100px" }} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-
-      <div className="lg:ml-[29%] pt-120 px-[15px] lg:px-0 container">
-        <SectionTitle
-          text="DELIVERING EXCELLENCE BEYOND BORDERS"
-          className="section-heading max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase"
-        />
-      </div>
-
-      <div className="container mt-6 lg:mt-[30px]">
-        <div className="flex flex-col lg:grid lg:grid-cols-[60%_40%]">
-          <div className="hidden lg:block" />
-
-          {/* Description */}
-          {/* <div className="lg:pb-6 3xl:pb-[70px] overflow-hidden">
-            <AnimatePresence mode="wait" initial={false} custom={direction}>
-              <motion.p
-                key={`desc-${activeIndex}`}
-                custom={direction}
-                variants={slideVariant(0.5)}
-                initial="enter"
-                animate="show"
-                exit="exit"
-                className="text-19 text-paragraph font-poppins font-[300] leading-[1.52] lg:max-w-[520px] min-h-[174px]"
-              >
-                <span className="font-[700]">
-                  {activeSlide.description.split(",")[0]},
-                </span>
-                {activeSlide.description.substring(
-                  activeSlide.description.indexOf(",") + 1,
-                )}
-              </motion.p>
-            </AnimatePresence>
-          </div> */}
-          {/* Description */}
-          <div className="lg:pb-6 3xl:pb-[70px] overflow-hidden">
-            <motion.p
-              variants={moveUp(0.1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="text-19 text-paragraph font-poppins font-[300] leading-[1.52] lg:max-w-[520px] min-h-[174px]"
-            >
-              <span className="font-[700]">
-                {slidesData[0].description.split(",")[0]},
-              </span>
-              {slidesData[0].description.substring(
-                slidesData[0].description.indexOf(",") + 1,
-              )}
-            </motion.p>
-          </div>
-
-          {/* Pagination pill */}
-          <div className="pt-6">
-            <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[0.5] py-[3px] max-w-[78px] h-[31px] flex items-center justify-center rounded-[15px]">
-              <span className="font-bold">
-                {String(activeIndex + 1).padStart(2, "0")}
-              </span>
-              <span className="text-[#C2C2C2]">/</span>
-              {String(slidesData.length).padStart(2, "0")}
-            </span>
-          </div>
-
-          <div className="hidden lg:block" />
-
-          <div className="flex items-center lg:contents">
-            <div className="flex-1 lg:flex lg:items-center">
-              <div className="w-full h-[2px] bg-gray-200 overflow-hidden">
-                <div
-                  ref={progressBarRef}
-                  className="h-full bg-[#1853D6] will-change-[width]"
-                  style={{ width: "0%" }}
-                />
-              </div>
-            </div>
-            <div className="lg:flex lg:items-center">
-              <BorderButton
-                text="Know More Us"
-                borderColor="black"
-                textColor="black"
-                iconColor="primary"
-                px="px-6 lg:px-[35px]"
-                hoverBg="black"
-              />
-            </div>
-          </div>
-
-          {/* Counter */}
-          <div
-            className="pb-140 3xl:pb-200 overflow-hidden"
-            style={{ perspective: "800px" }}
+          <Swiper
+            modules={[Autoplay]}
+            autoplay={{ delay: SLIDE_INTERVAL, disableOnInteraction: false }}
+            loop={true}
+            speed={600}
+            allowTouchMove={false}
+            onSwiper={(s) => (swiperRef.current = s)}
+            onRealIndexChange={handleRealIndexChange}
+            style={{ width: "100px", height: "100px" }}
           >
-            <AnimatePresence mode="wait" initial={false} custom={direction}>
-              <motion.div
-                key={`counter-${activeIndex}`}
-                custom={direction}
-                variants={slideVariant(0.5)}
-                initial="enter"
-                animate="show"
-                exit="exit"
-                className="pt-8 lg:pt-[45px]"
-              >
-                <Counter
-                  value={activeSlide.stat}
-                  totalTime={2.5}
-                  start={0}
-                  className="font-helvetica text-250 leading-[1] text-secondary"
-                />
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="overflow-hidden">
+            {slidesData.map((slide) => (
+              <SwiperSlide key={slide.id}>
+                <div style={{ width: "100px", height: "100px" }} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="lg:ml-[29%] pt-120 px-[15px] lg:px-0 container">
+          <SectionTitle
+            text="DELIVERING EXCELLENCE BEYOND BORDERS"
+            className="section-heading max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase"
+          />
+        </div>
+        <div className="container mt-6 lg:mt-[30px]">
+          <div className="flex flex-col lg:grid lg:grid-cols-[60%_40%]">
+            <div className="hidden lg:block" />
+            {/* Description */}
+            {/* <div className="lg:pb-6 3xl:pb-[70px] overflow-hidden">
               <AnimatePresence mode="wait" initial={false} custom={direction}>
                 <motion.p
-                  key={`label-${activeIndex}`}
+                  key={`desc-${activeIndex}`}
                   custom={direction}
                   variants={slideVariant(0.5)}
                   initial="enter"
                   animate="show"
                   exit="exit"
-                  className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]"
+                  className="text-19 text-paragraph font-poppins font-[300] leading-[1.52] lg:max-w-[520px] min-h-[174px]"
                 >
-                  {activeSlide.statLabel}
+                  <span className="font-[700]">
+                    {activeSlide.description.split(",")[0]},
+                  </span>
+                  {activeSlide.description.substring(
+                    activeSlide.description.indexOf(",") + 1,
+                  )}
                 </motion.p>
               </AnimatePresence>
+            </div> */}
+            {/* Description */}
+            <div className="lg:pb-6 3xl:pb-[70px] overflow-hidden">
+              <motion.p
+                variants={moveUp(0.1)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="text-19 text-paragraph font-poppins font-[300] leading-[1.52] lg:max-w-[520px] min-h-[174px]"
+              >
+                <span className="font-[700]">
+                  {slidesData[0].description.split(",")[0]},
+                </span>
+                {slidesData[0].description.substring(
+                  slidesData[0].description.indexOf(",") + 1,
+                )}
+              </motion.p>
+            </div>
+            {/* Pagination pill */}
+            <div className="pt-6">
+              <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[0.5] py-[3px] max-w-[78px] h-[31px] flex items-center justify-center rounded-[15px]">
+                <span className="font-bold">
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[#C2C2C2]">/</span>
+                {String(slidesData.length).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="hidden lg:block" />
+            <div className="flex items-center lg:contents">
+              <div className="flex-1 lg:flex lg:items-center">
+                <div className="w-full h-[2px] bg-gray-200 overflow-hidden">
+                  <div
+                    ref={progressBarRef}
+                    className="h-full bg-[#1853D6] will-change-[width]"
+                    style={{ width: "0%" }}
+                  />
+                </div>
+              </div>
+              <div className="lg:flex lg:items-center">
+                <BorderButton
+                  text="Know More Us"
+                  borderColor="black"
+                  textColor="black"
+                  iconColor="primary"
+                  px="px-6 lg:px-[35px]"
+                  hoverBg="black"
+                />
+              </div>
+            </div>
+            {/* Counter */}
+            <div
+              className="pb-140 3xl:pb-200 overflow-hidden"
+              style={{ perspective: "800px" }}
+            >
+              <AnimatePresence mode="wait" initial={false} custom={direction}>
+                <motion.div
+                  key={`counter-${activeIndex}`}
+                  custom={direction}
+                  variants={slideVariant(0.5)}
+                  initial="enter"
+                  animate="show"
+                  exit="exit"
+                  className="pt-8 lg:pt-[45px]"
+                >
+                  <Counter
+                    value={activeSlide.stat}
+                    totalTime={2.5}
+                    start={0}
+                    className="font-helvetica text-250 leading-[1] text-secondary"
+                  />
+                </motion.div>
+              </AnimatePresence>
+              <div className="overflow-hidden">
+                <AnimatePresence mode="wait" initial={false} custom={direction}>
+                  <motion.p
+                    key={`label-${activeIndex}`}
+                    custom={direction}
+                    variants={slideVariant(0.5)}
+                    initial="enter"
+                    animate="show"
+                    exit="exit"
+                    className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]"
+                  >
+                    {activeSlide.statLabel}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
