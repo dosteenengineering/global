@@ -10,7 +10,7 @@ import "swiper/css";
 
 import { blogsData, BlogPost } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
-import SecondaryNoise from "@/app/components/common/SecondaryNoise";
+import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
@@ -69,13 +69,18 @@ export default function BlogsSection() {
 
           {/* Row 1 */}
           <SectionTitle
-          title={blogsData.title}
-          className="text-secondary section-heading mb-70"
+            title={blogsData.title}
+            className="text-secondary section-heading mb-70"
           />
 
           {/* Row 2 */}
           <div className="flex flex-col gap-[15px] items-start px-90 3xl:px-[112px]">
-            <motion.div variants={moveRight(0.2)} initial="hidden" whileInView="show" viewport={{once: true}}>
+            <motion.div
+              variants={moveRight(0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
               <NavButton
                 onClick={slidePrev}
                 direction="up"
@@ -83,18 +88,27 @@ export default function BlogsSection() {
                 ariaLabel="Previous blog"
               />
             </motion.div>
-            <motion.div variants={moveRight(0.35)} initial="hidden" whileInView="show" viewport={{once: true}}>
-            <NavButton
-              onClick={slideNext}
-              direction="down"
-              disabled={false}
-              ariaLabel="Next blog"
-            />
+            <motion.div
+              variants={moveRight(0.35)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <NavButton
+                onClick={slideNext}
+                direction="down"
+                disabled={false}
+                ariaLabel="Next blog"
+              />
             </motion.div>
           </div>
 
           {/* Row 2 */}
-          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{once: true}}
+          <motion.div
+            variants={moveUp(0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
             className="overflow-hidden"
             style={{ height: swiperHeight || "auto" }}
           >
@@ -177,9 +191,7 @@ export default function BlogsSection() {
           ref={containerRef}
           className="container flex items-center justify-between mb-10 md:mb-12"
         >
-          <h2
-            className="text-secondary section-heading w-full"
-          >
+          <h2 className="text-secondary section-heading w-full">
             {blogsData.title}
           </h2>
           {/* Nav buttons — left aligned */}

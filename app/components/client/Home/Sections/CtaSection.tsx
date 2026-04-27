@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Fragment } from "react";
 import { ctaData } from "../data";
-import PrimaryNoise from "@/app/components/common/PrimaryNoise";
+import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
@@ -24,7 +24,6 @@ export default function CtaSection() {
 
       {/* Content */}
       <div className="relative z-10 container py-140 3xl:pb-150 flex flex-col gap-8 md:gap-10 lg:gap-[50px] items-center justify-center">
-
         {/* Heading */}
         <SectionTitle
           title={ctaData.heading}
@@ -35,7 +34,6 @@ export default function CtaSection() {
         <div className="flex items-center h-[80px] md:h-[130px]">
           {ctaData.actions.map((action, i) => (
             <Fragment key={action.key}>
-
               {/* Divider between items — animates at delay 0.18 */}
               {i === 1 && (
                 <div className="overflow-hidden self-stretch flex-shrink-0 w-px">
@@ -52,7 +50,7 @@ export default function CtaSection() {
                   />
                 </div>
               )}
-              
+
               <div className="self-stretch flex items-center">
                 <motion.div
                   variants={moveUp(i * 0.18)}
@@ -77,11 +75,9 @@ export default function CtaSection() {
                   </Link>
                 </motion.div>
               </div>
-
             </Fragment>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 
 import { clientStoriesData, ClientStory } from "../data";
-import PrimaryNoise from "@/app/components/common/PrimaryNoise";
+import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import { moveLeft, moveRight, moveUp } from "@/app/components/motionVariants";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
@@ -63,10 +63,10 @@ export default function ClientStoriesSection() {
           {/* Opening quote icon */}
           <div className="flex-shrink-0 flex items-start mr-110 3xl:mr-[113px] pointer-events-none overflow-hidden">
             <motion.div
-            variants={moveRight(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+              variants={moveRight(0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
             >
               <Image
                 src="/assets/images/home/client-stories/quote-open.svg"
@@ -80,22 +80,24 @@ export default function ClientStoriesSection() {
 
           {/* Vertical divider */}
           <motion.div
-          variants={moveUp(0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="flex-shrink-0 self-stretch w-px bg-[#76A7FF]" />
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex-shrink-0 self-stretch w-px bg-[#76A7FF]"
+          />
 
           {/* Main content col */}
           <div className="flex-1 flex flex-col min-w-0 pl-30">
             <div className="flex flex-row flex-1 gap-0">
               {/* Counter pill */}
               <motion.div
-              variants={moveUp(0.3)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex-shrink-0 pr-60 3xl:pr-[66px] -mt-3">
+                variants={moveUp(0.3)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex-shrink-0 pr-60 3xl:pr-[66px] -mt-3"
+              >
                 <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
                   <span className="font-poppins text-15 leading-[1.66] text-white">
                     <span className="font-[600]">
@@ -112,10 +114,10 @@ export default function ClientStoriesSection() {
                 <div className="flex items-center flex-shrink-0 gap-30 3xl:gap-[38px] mb-120 3xl:mb-[126px] relative z-20">
                   {clientStoriesData.stories.map((_, i) => (
                     <motion.button
-                    variants={moveUp(i*0.18)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
+                      variants={moveUp(i * 0.18)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
                       key={i}
                       onClick={() => goToSlide(i)}
                       aria-label={`Go to slide ${i + 1}`}
@@ -215,18 +217,18 @@ export default function ClientStoriesSection() {
                     {/* Closing quote — pinned bottom-right, static */}
                     <div className="absolute bottom-0 right-20 2xl:right-50 3xl:right-[285px] pb-90 overflow-hidden">
                       <motion.div
-                      variants={moveLeft(0.4)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true }}
+                        variants={moveLeft(0.4)}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
                       >
-                      <Image
-                        src="/assets/images/home/client-stories/quote-close.svg"
-                        alt="quote close"
-                        width={112}
-                        height={225}
-                        className="opacity-10 w-[56px] h-[112px] md:w-[84px] md:h-[168px] 3xl:w-[112px] 3xl:h-[225px] object-contain"
-                      />
+                        <Image
+                          src="/assets/images/home/client-stories/quote-close.svg"
+                          alt="quote close"
+                          width={112}
+                          height={225}
+                          className="opacity-10 w-[56px] h-[112px] md:w-[84px] md:h-[168px] 3xl:w-[112px] 3xl:h-[225px] object-contain"
+                        />
                       </motion.div>
                     </div>
                   </div>
@@ -242,18 +244,18 @@ export default function ClientStoriesSection() {
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden relative z-10 container pt-140 pb-60">
         <SectionTitle
-        title={clientStoriesData.title}
-        className="text-white section-heading uppercase mb-40"
+          title={clientStoriesData.title}
+          className="text-white section-heading uppercase mb-40"
         />
 
         {/* Progress bars — full width */}
         <div className="flex items-center gap-[16px] mb-5 md:mb-8 relative z-20">
           {clientStoriesData.stories.map((_, i) => (
             <motion.button
-            variants={moveUp(i * 0.11)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
+              variants={moveUp(i * 0.11)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
               key={i}
               onClick={() => goToSlide(i)}
               aria-label={`Go to slide ${i + 1}`}
@@ -281,11 +283,12 @@ export default function ClientStoriesSection() {
 
         {/* Pagination pill — left aligned */}
         <motion.div
-        variants={moveUp(0.3)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="mb-10 md:mb-12">
+          variants={moveUp(0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mb-10 md:mb-12"
+        >
           <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
             <span className="font-poppins text-15 leading-[1.66] text-white">
               <span className="font-[600]">
@@ -367,10 +370,10 @@ export default function ClientStoriesSection() {
         {/* Close quote */}
         <div className="flex-shrink-0 pr-40 absolute bottom-[10%] right-0 overflow-hidden">
           <motion.div
-          variants={moveLeft(0.4)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
+            variants={moveLeft(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
           >
             <Image
               src="/assets/images/home/client-stories/quote-close.svg"

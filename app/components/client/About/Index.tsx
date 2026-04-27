@@ -1,5 +1,11 @@
 import InnerPageBanner from "../../common/InnerPageBanner";
 import AboutDetails from "./Sections/AboutDetails";
+import MissionVision from "./Sections/MissionVision";
+import WhoYouServe from "./Sections/WhoYouServe";
+import WhyChooseDosteen from "./Sections/WhyChooseDosteen";
+import OurValues from "./Sections/OurValues";
+import CtaSection from "./Sections/CtaSection";
+import { CtaData } from "./data";
 
 const Index = () => {
   return (
@@ -13,6 +19,11 @@ const Index = () => {
         imageAlt="About Us"
       />
       <AboutDetails />
+      <WhoYouServe />
+      <WhyChooseDosteen />
+      <MissionVision />
+      <OurValues />
+      <CtaSection {...CtaData} descriptionWidth="max-w-[968px]" />
     </>
   );
 };
