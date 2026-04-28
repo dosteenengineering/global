@@ -129,3 +129,67 @@ export const whyTrustData = {
     },
   ],
 };
+
+
+export interface Project {
+  id: number;
+  key: string;
+  name: string;
+  location: string;
+  category: string;
+  image: string;
+  slug: string;
+}
+
+export const featuredProjectsData = {
+  title: "FEATURED PROJECTS",
+  viewAllLabel: "ALL PROJECTS",
+  viewAllHref: "/projects",
+  projects: [
+    {
+      id: 1,
+      key: "al-mouj",
+      name: "Al Mouj",
+      location: "Dubai",
+      category: "Commercial",
+      image: "/assets/images/services/residential/featured-projects/1.jpg",
+      slug: "al-mouj",
+    },
+    {
+      id: 2,
+      key: "zaabeel-towers",
+      name: "Za'abeel Towers",
+      location: "Dubai",
+      category: "Residential",
+      image: "/assets/images/services/residential/featured-projects/2.jpg",
+      slug: "zaabeel-towers",
+    },
+    {
+      id: 3,
+      key: "expo-2020",
+      name: "Expo 2020, Dubai",
+      location: "Dubai",
+      category: "Infrastructure",
+      image: "/assets/images/services/residential/featured-projects/3.jpg",
+      slug: "expo-2020",
+    },
+    // {
+    //   id: 4,
+    //   key: "downtown-residences",
+    //   name: "Downtown Residences",
+    //   location: "Abu Dhabi",
+    //   category: "Residential",
+    //   image: "/assets/images/services/residential/featured-projects/1.jpg",
+    //   slug: "downtown-residences",
+    // },
+    // {
+    //   id: 5,
+    //   key: "marina-gate",
+    //   name: "Marina Gate",
+    //   location: "Dubai",
+    //   category: "Mixed Use",
+    //   image: "/assets/images/services/residential/featured-projects/2.jpg",
+    //   slug: "marina-gate",
+    // },
+  ],
+};

@@ -154,7 +154,7 @@ export default function ResidentialHero() {
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="relative w-full h-screen overflow-hidden">
+      <div className="relative w-full h-screen overflow-hidden bg-white">
         {/* Banner image — shrinks and flies to center slot */}
         <div
           ref={bannerImageRef}
