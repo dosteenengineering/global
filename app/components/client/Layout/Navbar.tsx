@@ -288,7 +288,7 @@ export default function Navbar() {
           ref={navPillRef}
           className="flex h-[60px] md:h-[70px] rounded-[50px]"
         >
-          <div className="flex items-center rounded-[50px] border border-white/30 bg-white/8 glass-effect overflow-hidden">
+          <div className="flex items-center rounded-[50px] border border-white/30 bg-white/6 glass-effect overflow-hidden">
             {/* Logo */}
             <div
               ref={logoRef}

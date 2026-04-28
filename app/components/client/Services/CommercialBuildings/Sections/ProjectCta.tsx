@@ -8,7 +8,7 @@ const ProjectCta = () => {
       <div className="container w-full">
         <div className="flex lg:items-center items-start flex-col lg:flex-row gap-y-[40px] lg:justify-between p-60 relative">
           <StatNoise1 />
-          <p
+          <div
             className="text-30 leading-[1.33] tracking-[-0.02em] text-secondary max-w-[908px] font-light"
             dangerouslySetInnerHTML={{ __html: ProjectCtaData.description }}
           />

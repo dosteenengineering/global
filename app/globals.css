@@ -130,8 +130,8 @@ body::-webkit-scrollbar {
 
   /* large */
 --text-70: clamp(34px, 5.239vw + 16.35px, 70px);
---text-90: clamp(32px, 5.17vw - 3px, 90px);
---text-95: clamp(42px, 3.5vw + 32px, 95px);
+--text-90: clamp(32px, 8.57vw - 60px, 90px);
+--text-95: clamp(42px, 2.8vw + 32px, 95px);
 --text-250: clamp(70px, 13.1vw, 250px);
 --text-300: clamp(120px, 17vw, 300px);
 --text-400: clamp(140px, 22vw, 400px);

@@ -24,7 +24,7 @@ export default function BorderButton({
   textColor   = "white",
   iconColor   = "primary",
   hoverBg,
-  px          = "px-6",
+  px          = "px-6 lg:px-[35px]",
   className   = "",
   type,
   onClick,
