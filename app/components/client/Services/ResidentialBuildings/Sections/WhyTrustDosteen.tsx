@@ -19,7 +19,7 @@ interface StatCard {
 
 function StatCard({ card }: { card: StatCard }) {
   return (
-    <div className="relative h-[514px] overflow-hidden cursor-pointer group">
+    <div className="relative h-[430px] 3xl:h-[514px] overflow-hidden cursor-pointer group">
       {/* Image */}
       <Image
         src={card.image}
@@ -90,7 +90,8 @@ export default function WhyTrustDosteen() {
             breakpoints={{
               1024: { slidesPerView: 3 },
               1280: { slidesPerView: 4 },
-              1792: { slidesPerView: 5 },
+              1400: { slidesPerView: 5, spaceBetween: 17 },
+              1792: { slidesPerView: 5, spaceBetween: 20 },
             }}
             className="w-full"
           >
