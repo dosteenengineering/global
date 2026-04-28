@@ -24,16 +24,6 @@ export default function ResidentialHero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const getCenterSlotPosition = () => {
-        const slot = centerSlotRef.current;
-        if (!slot) return { x: 0, y: 0 };
-        const { left, top, width, height } = slot.getBoundingClientRect();
-        return {
-          x: left + width / 2 - window.innerWidth / 2,
-          y: top + height / 2 - window.innerHeight / 2,
-        };
-      };
-
       // Auto typewriter — fires independently of scroll, reverses on scroll back
       const typewriterTween = gsap.to(descWordsRef.current, {
         opacity: 1,
@@ -113,16 +103,26 @@ export default function ResidentialHero() {
       );
 
       // Banner scales down and moves to center slot
-      const pos = getCenterSlotPosition();
       tl.to(
         bannerImageRef.current,
         {
           width: "200px",
           height: "200px",
-          x: pos.x,
-          y: pos.y,
+          x: () => {
+            const slot = centerSlotRef.current;
+            if (!slot) return 0;
+            const { left, width } = slot.getBoundingClientRect();
+            return left + width / 2 - window.innerWidth / 2;
+          },
+          y: () => {
+            const slot = centerSlotRef.current;
+            if (!slot) return 0;
+            const { top, height } = slot.getBoundingClientRect();
+            return top + height / 2 - window.innerHeight / 2;
+          },
           ease: "power2.inOut",
           duration: 1.6,
+          invalidateOnRefresh: true, // recalculates on every ScrollTrigger.refresh()
         },
         3.8,
       );
@@ -142,8 +142,7 @@ export default function ResidentialHero() {
 
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
-    }, 100);
-
+    }, 300);
     return () => {
       ctx.revert();
       clearTimeout(timer);
@@ -154,11 +153,11 @@ export default function ResidentialHero() {
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="relative w-full h-screen overflow-hidden bg-white">
+      <div className="relative w-full h-screen overflow-hidden">
         {/* Banner image — shrinks and flies to center slot */}
         <div
           ref={bannerImageRef}
-          className="absolute inset-0 w-full h-full overflow-hidden"
+          className="absolute inset-0 w-full h-full overflow-hidden bg-white"
           style={{ margin: "auto", zIndex: 5 }}
         >
           <Image
@@ -244,7 +243,10 @@ export default function ResidentialHero() {
 
             {/* Center — invisible landing slot (244px from top via pt-[243px] on parent) + heading + description */}
             <div className="flex flex-col items-center justify-center flex-1">
-              <div ref={centerSlotRef} className="w-[200px] h-[200px] shrink-0 mb-80" />
+              <div
+                ref={centerSlotRef}
+                className="w-[200px] h-[200px] shrink-0 mb-80"
+              />
               <h2 className="section-heading text-secondary max-w-[40ch] text-center mb-20">
                 {second.heading}
               </h2>
