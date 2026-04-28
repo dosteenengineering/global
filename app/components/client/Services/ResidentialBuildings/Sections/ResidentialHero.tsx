@@ -171,7 +171,7 @@ export default function ResidentialHero() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.6) 100%);",
+                "linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.6) 100%)",
             }}
           />
         </div>
@@ -234,7 +234,7 @@ export default function ResidentialHero() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);",
+                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)",
                     }}
                   />
                 </div>
@@ -275,7 +275,7 @@ export default function ResidentialHero() {
                     className="absolute inset-0"
                     style={{
                       background:
-                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);",
+                        "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)",
                     }}
                   />
                 </div>
