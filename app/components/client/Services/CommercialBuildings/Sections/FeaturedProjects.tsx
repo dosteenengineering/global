@@ -22,7 +22,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <div className="flex flex-col">
       {/* Image */}
-      <div className="relative w-full aspect-[12/12] overflow-hidden mb-30 3xl:mb-[32px]">
+      <div className="relative w-full aspect-12/12 overflow-hidden mb-30 3xl:mb-[32px]">
         <Image
           src={project.image}
           alt={project.title}
