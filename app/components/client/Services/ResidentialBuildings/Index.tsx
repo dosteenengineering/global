@@ -6,6 +6,7 @@ import DosteenSystems from "./Sections/DosteenSystems";
 import CtaSection from "../../../common/CtaSection";
 import { CtaData } from "./data";
 import WhyTrustDosteen from "./Sections/WhyTrustDosteen";
+import FeaturedProjectsResidencial from "./Sections/FeaturedProjectsResidencial";
 
 const ResidentialPage = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const ResidentialPage = () => {
       <DosteenSystems />
       <CtaSection {...CtaData} descriptionWidth="max-w-[662px]" titleWidth="max-w-[23ch]" />
       <WhyTrustDosteen />
+      <FeaturedProjectsResidencial />
     </>
   );
 };
