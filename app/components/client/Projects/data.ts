@@ -134,3 +134,13 @@ export const projectsData: Project[] = [
     slug: "#",
   },
 ];
+
+export const cta = {
+  title: "Let's Talk About Your Project.",
+  description:
+    "Dummy Content: Our engineering team is ready to review your project requirements, identify the most relevant case study references from our portfolio, and deliver a detailed engineering proposal — within 48 hours.",
+  buttons: [
+    { text: "REQUEST A QUOTE", href: "#" },
+    { text: "SPEAK TO OUR TEAM", href: "#" },
+  ],
+};
