@@ -1,6 +1,6 @@
 import Image from "next/image";
 interface Props {
-  title: string;
+  title: string;  
   image: string;
 }
 
@@ -24,7 +24,7 @@ export default function InnerPageBanner2({ title, image }: Props) {
 
       {/* Container with title pinned to bottom-74px */}
       <div className="container relative h-full">
-        <h1 className="absolute text-white section-heading uppercase bottom-70 3xl:bottom-[74px]">
+        <h1 className="absolute text-white hero-heading uppercase bottom-70 3xl:bottom-[74px]">
           {title}
         </h1>
       </div>

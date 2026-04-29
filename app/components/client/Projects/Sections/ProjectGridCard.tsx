@@ -41,7 +41,7 @@ export default function GridCard({ project }: { project: Project }) {
             alt="location"
             width={20}
             height={20}
-            className="object-contain w-[11px] h-[14px]"
+            className="object-contain w-[11px] h-[14px] -mt-1"
           />
           {project.location}
         </div>

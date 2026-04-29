@@ -8,6 +8,7 @@ import "swiper/css";
 import { featuredProjectsData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
+import ProjectCard from "@/app/components/common/ProjectCard";
 
 interface Project {
   id: number;
@@ -16,49 +17,6 @@ interface Project {
   category: string;
   image: string;
   slug: string;
-}
-
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <div className="flex flex-col">
-      {/* Image */}
-      <div className="relative w-full aspect-12/12 overflow-hidden mb-30 3xl:mb-[32px]">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      {/* Title */}
-      <h3
-        className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-[15px]"
-      >
-        {project.title}
-      </h3>
-
-      {/* Location + Category */}
-      <div className="flex items-center text-white font-light justify-between mb-[15px] pr-60 3xl:pr-[96px]">
-        <div className="flex items-center gap-[10px]">
-          <Image
-            src="/assets/icons/location-pin.svg"
-            alt="location"
-            width={20}
-            height={20}
-            className="object-contain w-[11px] h-[14px]"
-          />
-          {project.location}
-        </div>
-        <span className="text-description">
-          {project.category}
-        </span>
-      </div>
-
-      {/* Divider line */}
-      <div className="w-full h-[2px] bg-[#c2c2c2]" />
-    </div>
-  );
 }
 
 export default function FeaturedProjects() {

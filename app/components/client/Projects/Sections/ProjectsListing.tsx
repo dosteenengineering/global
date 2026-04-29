@@ -6,6 +6,7 @@ import GridCard from "./ProjectGridCard";
 import ProjectEvenRowCard from "./ProjectEvenRowCard";
 import Pagination from "@/app/components/common/Pagination";
 import Image from "next/image";
+import ProjectCard from "@/app/components/common/ProjectCard";
 
 const ITEMS_PER_PAGE = 11;
 
@@ -72,7 +73,7 @@ export default function ProjectsListing() {
               className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-30"
             >
               {row.projects.map((p, i) => (
-                <GridCard key={i} project={p} />
+                <ProjectCard key={i} project={p} variant="dark" />
               ))}
             </div>
           ) : (
@@ -80,7 +81,7 @@ export default function ProjectsListing() {
             <div key={`featured-${ri}`} className="w-full">
               {/* Below lg → render as a normal grid card in a 1-col grid */}
               <div className="lg:hidden grid grid-cols-1 gap-x-30">
-                <GridCard project={row.projects[0]} />
+                <ProjectCard project={row.projects[0]} variant="dark"/>
               </div>
               {/* lg+ → full featured layout */}
               <div className="hidden lg:block">

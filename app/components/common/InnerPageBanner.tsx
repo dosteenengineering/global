@@ -10,7 +10,7 @@ interface InnerPageBannerProps {
   titleMaxWidth?: string;
   description?: string;
   descriptionMaxWidth?: string;
-  image: string;
+  image?: string;
   imageAlt?: string;
 }
 
@@ -43,7 +43,7 @@ export default function InnerPageBanner({
         </div>
 
         <h1
-          className={`text-secondary mb-30 hero-heading leading-[100%] ${titleMaxWidth}`}
+          className={`text-secondary ${description ? "mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}
         >
           {title}
         </h1>
@@ -58,6 +58,7 @@ export default function InnerPageBanner({
       </div>
 
       {/* 3. Image */}
+      {image && (
       <div ref={ref} className="relative w-full h-[650px] overflow-hidden">
         <Image
           src={image}
@@ -70,6 +71,7 @@ export default function InnerPageBanner({
           priority
         />
       </div>
+      )}
     </div>
   );
 }

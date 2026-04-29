@@ -126,7 +126,7 @@ function InactiveSlot({
             alt="location"
             width={20}
             height={20}
-            className="object-contain pointer-events-none w-[11px] h-[14px]"
+            className="object-contain pointer-events-none w-[11px] h-[14px] -mt-1"
           />
           {displayed.next.location}
         </span>
@@ -242,7 +242,7 @@ export default function FeaturedProjectsResidencial() {
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-[10px] text-white font-light">
                             <Image
-                              src="/assets/icons/location-pin.svg"
+                              src="/assets/icons/location-pin.svg -mt-1"
                               alt="location"
                               width={20}
                               height={20}
