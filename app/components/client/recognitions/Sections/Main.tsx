@@ -60,7 +60,7 @@ function AwardCard({ image, title }: { image: string; title: string }) {
         />
 
         {/* Trophy / cert image */}
-        <div className="relative h-[300px] w-full">
+        <div className="relative h-[220px] 3xl:h-[300px] w-full">
           <Image
             src={image}
             alt={title}
