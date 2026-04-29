@@ -59,18 +59,18 @@ export default function InnerPageBanner({
 
       {/* 3. Image */}
       {image && (
-      <div ref={ref} className="relative w-full h-[650px] overflow-hidden">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          className="object-cover object-top"
-          style={{
-            transform: `scale(${1.1}) translateY(${parallaxY}vh)`,
-          }}
-          priority
-        />
-      </div>
+        <div ref={ref} className="relative w-full h-[650px] overflow-hidden">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            className="object-cover object-top-left"
+            style={{
+              transform: `scale(${1.1}) translateY(${parallaxY}vh)`,
+            }}
+            priority
+          />
+        </div>
       )}
     </div>
   );
