@@ -13,7 +13,7 @@ export default function CtaSection() {
   return (
     <section className="relative w-full overflow-hidden">
       <PrimaryNoise />
-      <div className="absolute left-0 -top-[50%] lg:-top-[60%] w-[70%] lg:w-[50%] h-[165%] pointer-events-none">
+      <div className="hidden sm:block absolute left-0 -top-[50%] lg:-top-[60%] w-[70%] lg:w-[50%] h-[165%] pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/cta-animated.svg"
           alt=""
@@ -23,7 +23,7 @@ export default function CtaSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container py-140 3xl:pb-150 flex flex-col gap-8 md:gap-10 lg:gap-[50px] items-center justify-center">
+      <div className="relative z-10 container py-[50px] md:py-140 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
         {/* Heading */}
         <SectionTitle
           title={ctaData.heading}
@@ -31,12 +31,12 @@ export default function CtaSection() {
         />
 
         {/* Actions row */}
-        <div className="flex items-center h-[80px] md:h-[130px]">
+        <div className="flex flex-col sm:flex-row items-center h-[80px] md:h-[130px]">
           {ctaData.actions.map((action, i) => (
             <Fragment key={action.key}>
               {/* Divider between items — animates at delay 0.18 */}
               {i === 1 && (
-                <div className="overflow-hidden self-stretch flex-shrink-0 w-px">
+                <div className="overflow-hidden self-stretch flex-shrink-0 h-px w-full sm:h-full sm:w-px my-2 sm:my-0">
                   <motion.div
                     className="w-full h-full"
                     variants={moveUp(0.18)}
@@ -51,7 +51,7 @@ export default function CtaSection() {
                 </div>
               )}
 
-              <div className="self-stretch flex items-center">
+              <div className="self-stretch flex items-center justify-center sm:justify-start">
                 <motion.div
                   variants={moveUp(i * 0.18)}
                   initial="hidden"
@@ -60,17 +60,17 @@ export default function CtaSection() {
                 >
                   <Link
                     href={action.href}
-                    className={`group flex items-center gap-3 sm:gap-30 px-6 lg:px-[45px] ${i === 0 ? "pl-0" : ""} ${i === ctaData.actions.length - 1 ? "pr-0" : ""}`}
+                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:px-[45px] ${i === 0 ? "sm:pl-0" : ""} ${i === ctaData.actions.length - 1 ? "sm:pr-0" : ""}`}
                   >
-                    <span className="text-white font-poppins font-light text-15 sm:text-19 md:text-30 leading-[1.52] -tracking-[2%] uppercase">
+                    <span className="text-white font-poppins font-light text-30 leading-[1.52] -tracking-[2%] uppercase">
                       {action.label}
                     </span>
                     <Image
-                      src="/assets/icons/arrow-right-top-big.svg"
+                      src="/assets/icons/button-arrow-top-right.svg"
                       alt=""
                       width={43}
                       height={43}
-                      className="3xl:w-[43px] 3xl:h-[43px] md:w-[35px] md:h-[35px] w-[17px] h-[17px] group-hover:rotate-45 transition-all duration-300 pointer-events-none"
+                      className="3xl:w-[43px] 3xl:h-[43px] w-[18px] h-[18px] invert brightness-0 group-hover:rotate-45 transition-all duration-300 pointer-events-none"
                     />
                   </Link>
                 </motion.div>

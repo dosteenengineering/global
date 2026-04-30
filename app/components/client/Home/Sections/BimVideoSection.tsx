@@ -72,10 +72,10 @@ export default function BimSection() {
         }}
       />
 
-      <div className="container relative z-10 h-full flex flex-col justify-between py-140 3xl:pt-[177px]">
+      <div className="container relative z-10 h-full flex flex-col justify-between py-[105px] lg:py-140 3xl:pt-[177px]">
         <SectionTitle
           text={bimData.heading}
-          className="text-white section-heading max-w-[721px] mb-40 lg:mb-[45px]"
+          className="text-white section-heading max-w-[721px] mb-[30px] md:mb-40 lg:mb-[45px]"
         />
 
         <motion.div
@@ -103,7 +103,7 @@ export default function BimSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.5 }}
-            className="text-white text-30 leading-[1.33] font-poppins font-light-tracking-[2%] ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-80 2xl:mb-[82px]"
+            className="text-white text-30 leading-[1.33] font-poppins font-light-tracking-[2%] sm:ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-80 2xl:mb-[82px]"
           >
             {bimData.description}
           </motion.p>

@@ -25,7 +25,7 @@ export default function ServicesSection() {
     <section ref={ref} className="relative w-full overflow-hidden">
       <PrimaryNoise />
 
-      <div className="absolute -top-85 lg:top-0 -right-88 -lg:right-80 w-[1062px] h-[513px] pointer-events-none">
+      <div className="absolute top-[-32%] md:-top-85 lg:top-0 right-[-20%] md:-right-88 -lg:right-80 w-[250px] h-[350px] md:w-[1062px] md:h-[513px] pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-right-animated.svg"
           alt=""
@@ -35,7 +35,7 @@ export default function ServicesSection() {
         />
       </div>
 
-      <div className="relative z-10 container py-140 3xl:py-150">
+      <div className="relative z-10 container py-[50px] md:py-140 3xl:py-150">
         <SectionTitle
           text={servicesData.title}
           className="section-heading leading-[1.11] text-white uppercase font-helvetica text-left lg:text-center 3xl:-ml-[67px]"
@@ -179,9 +179,9 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* ===== Mobile / Tablet ======= */}
-        <div className="lg:hidden pt-50">
+        <div className="lg:hidden pt-30 md:pt-50">
           <Swiper
-            spaceBetween={30}
+            spaceBetween={44}
             slidesPerView="auto"
             onSlideChange={(swiper) =>
               setActiveTab(servicesData.tabs[swiper.activeIndex].key)
@@ -199,7 +199,7 @@ export default function ServicesSection() {
                     className="w-full text-left"
                   >
                     <span
-                      className={`text-25 md:text-30 font-poppins leading-[1.33] -tracking-[2%] transition-all duration-300 ${isActive ? "font-[600] text-white" : "text-white/60"}`}
+                      className={`text-30 transition-all duration-300 ${isActive ? "font-semibold text-white" : "text-white/60"}`}
                     >
                       {tab.label}
                     </span>
@@ -209,15 +209,13 @@ export default function ServicesSection() {
             })}
           </Swiper>
 
-          <div className="h-[1px] bg-[#76A7FF] my-4 md:my-6 md:mb-14" />
+          <div className="h-[1px] bg-[#76A7FF] mt-[10px] mb-[30px] md:my-6 md:mb-14" />
 
           <div>
-            <div className="relative w-full h-[180px] mb-2 md:mb-12">
+            <div className="relative w-[70%] h-[80px] sm:h-[180px] mb-[30px] md:mb-12">
               {activeData.svgPaths ? (
                 <svg
                   key={activeData.key}
-                  width="100%"
-                  height="100%"
                   viewBox="0 0 630 200"
                   preserveAspectRatio="xMinYMid meet"
                   fill="none"
@@ -266,7 +264,7 @@ export default function ServicesSection() {
             <SectionTitle
               key={activeTab}
               text={activeData.description}
-              className="text-[26px] lg:text-55 text-white leading-[1.18] font-[300] font-poppins -tracking-[2%] max-w-[680px] lg:max-w-[855px]"
+              className="text-[24px] lg:text-55 text-white leading-[1.18] font-[300] font-poppins -tracking-[2%] max-w-[680px] lg:max-w-[855px]"
             />
 
             <motion.div
@@ -274,7 +272,7 @@ export default function ServicesSection() {
               whileInView="show"
               variants={moveUp(0.6)}
               viewport={{ once: true }}
-              className="w-fit mt-7 md:mt-12"
+              className="w-fit mt-20 md:mt-12"
             >
               <BorderButton text="Read More" iconColor="white" px="px-[24px]" />
             </motion.div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState, useLayoutEffect } from "react";
+import { useRef, useCallback, useState, useLayoutEffect, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative } from "swiper/modules";
@@ -133,6 +133,16 @@ export default function FeaturedProjectsSection() {
   const prevIndexRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const leftInset = useGetContainerSpacing(containerRef);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 520);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // ── Mobile swiper state ──
   const mobileSwiperRef = useRef<SwiperType | null>(null);
@@ -179,21 +189,44 @@ export default function FeaturedProjectsSection() {
   return (
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
       <div ref={containerRef} className="container">
-          
+        <SectionTitle
+          text={featuredProjectsData.title}
+          className="section-heading mb-20 md:mb-70 md:text-center"
+        />
       </div>
 
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden">
+        <div className="container">
+          <div className="w-full h-px bg-[#C2C2C2] mb-20" />
+        </div>
         {/* Nav buttons right-aligned, under title */}
-        <div className="flex items-center justify-between mb-8 container">
-          <motion.div 
-          variants={moveUp(0.2)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.5 }}
-          className="flex items-center gap-[12px]">
+        <div className="flex items-center justify-between mb-[30px] sm:mb-8 container">
+                    {/* View all button */}
+          <motion.div
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+          >
+            <BorderButton
+              href={featuredProjectsData.viewAllHref}
+              text={featuredProjectsData.viewAllLabel}
+              borderColor="black"
+              textColor="black"
+              px="md:px-[35px] px-[18px]"
+              hoverBg="black"
+            />
+          </motion.div>
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.5 }}
+            className="flex items-center gap-[10px]"
+          >
             <NavButton
               onClick={mobileSlidePrev}
               direction="left"
@@ -207,30 +240,16 @@ export default function FeaturedProjectsSection() {
               ariaLabel="Next project"
             />
           </motion.div>
-
-          {/* View all button */}
-            <motion.div
-            variants={moveUp(0.4)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.5 }}>
-              <BorderButton
-                href={featuredProjectsData.viewAllHref}
-                text={featuredProjectsData.viewAllLabel}
-                borderColor="black"
-                textColor="black"
-                px="md:px-[35px] px-[18px]"
-                hoverBg="black"
-              />
-            </motion.div>
         </div>
 
-        <motion.div 
-        variants={moveUp(0.6)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.5 }}
-        style={{ paddingLeft: leftInset }}>
+        <motion.div
+          variants={moveUp(0.6)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.5 }}
+          style={{ paddingLeft: leftInset }}
+          className={isMobile ? "container" : ""}
+        >
           <Swiper
             loop={true}
             modules={[Autoplay]}
@@ -238,8 +257,11 @@ export default function FeaturedProjectsSection() {
               mobileSwiperRef.current = s;
             }}
             onSlideChange={handleMobileSlideChange}
-            slidesPerView={1.15}
+            slidesPerView={1}
             breakpoints={{
+              520: {
+                slidesPerView: 1.2,
+              },
               640: {
                 slidesPerView: 1.5,
               },
@@ -263,7 +285,7 @@ export default function FeaturedProjectsSection() {
               const isActive = idx === mobileActiveIndex;
               return (
                 <SwiperSlide key={project.key}>
-                  <div className="relative w-full h-[320px] md:h-[380px] cursor-pointer group overflow-hidden">
+                  <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.name}
@@ -416,7 +438,8 @@ export default function FeaturedProjectsSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex items-center justify-end gap-[15px]">
+            className="flex items-center justify-end gap-[15px]"
+          >
             <NavButton
               onClick={slidePrev}
               direction="left"
@@ -437,7 +460,8 @@ export default function FeaturedProjectsSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row gap-30 items-end">
+            className="flex flex-col sm:flex-row gap-30 items-end"
+          >
             {inactiveProjects.map((project: Project, i: number) => (
               <InactiveSlot
                 key={`slot-${i}`}
@@ -458,7 +482,8 @@ export default function FeaturedProjectsSection() {
             variants={moveUp(0.6)}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}>
+            viewport={{ once: true }}
+          >
             <BorderButton
               href={featuredProjectsData.viewAllHref}
               text={featuredProjectsData.viewAllLabel}
