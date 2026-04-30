@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { items, type Category } from "../data";
+import AwardsNoise from "@/app/components/common/noise/AwardsNoise";
 
 const categories: { label: string; value: Category }[] = [
   { label: "Certifications", value: "certifications" },
@@ -15,7 +16,16 @@ export default function Main() {
   const filtered = items.filter((item) => item.category === active);
 
   return (
-    <section className="w-full">
+    <section className="w-full relative">
+      <div className="absolute right-0 top-[-34%] 3xl:top-[-33.2%]">
+        <Image
+          src="/assets/images/recognitions/bg-lines.svg"
+          alt="bg-svg"
+          width={900}
+          height={900}
+          className="object-contain pointer-events-none w-full h-[930px] 3xl:h-full"
+        />
+      </div>
       <div className="container mt-80 mb-140 3xl:mb-200">
         {/* Category Tabs */}
         <div className="flex gap-[10px] mb-50">
@@ -48,32 +58,23 @@ export default function Main() {
 function AwardCard({ image, title }: { image: string; title: string }) {
   return (
     <div className="flex flex-col items-center group">
-      {/* Image container with 100px padding on all sides */}
       <div className="relative w-full overflow-hidden pt-100 pb-70 border-b border-[#c2c2c2]">
-        {/* Hover gradient overlay — grows from bottom */}
-        <div
-          className="absolute bottom-0 left-0 w-full h-0 group-hover:h-full transition-all duration-500 ease-in-out pointer-events-none z-10"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(24, 83, 214, 0) 0%, rgba(2, 46, 158, 0.1) 100%)",
-          }}
-        />
+        <div className="absolute bottom-0 left-0 w-full h-0 group-hover:h-full transition-all duration-500 ease-in-out pointer-events-none z-10">
+          <AwardsNoise />
+        </div>
 
-        {/* Trophy / cert image */}
         <div className="relative h-[220px] 3xl:h-[300px] w-full">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-contain"
+            className="object-contain pointer-events-none"
           />
         </div>
       </div>
 
       {/* Title */}
-      <p
-        className="text-center text-30 leading-[1.333] text-secondary font-light mt-30 3xl:mt-[32px]"
-      >
+      <p className="text-center text-30 leading-[1.333] text-secondary font-light mt-30 3xl:mt-[32px]">
         {title}
       </p>
     </div>
