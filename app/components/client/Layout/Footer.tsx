@@ -64,7 +64,7 @@ const SocialIcon = ({
   return (
     <Link
       href={href}
-      className="w-[42px] h-[42px] rounded-full border border-[#C2C2C2] flex items-center justify-center group hover:bg-primary transition-colors duration-300"
+      className="w-[40px] h-[40px] rounded-full border border-[#C2C2C2] flex items-center justify-center group hover:bg-primary transition-colors duration-300"
       aria-label={name}
     >
       {icons[name]}
@@ -97,11 +97,11 @@ const AccordionItem = ({
     <div className="border-b border-[#C2C2C2]">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-4 text-[18px] md:text-[20px] font-[500] font-poppins -tracking-[2%] text-secondary leading-[1.52]"
+        className="w-full flex items-center justify-between py-[15px] text-30 font-[500] font-poppins -tracking-[2%] text-secondary leading-[1.52]"
       >
         <span>{title}</span>
         <span
-          className="text-25 leading-none"
+          className="text-[19px] leading-none"
           style={{
             display: "inline-block",
             transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
@@ -620,21 +620,21 @@ const Footer = () => {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="min-[1120px]:hidden relative pt-120">
-        <div className="container flex flex-col">
+      <div className="min-[1120px]:hidden relative pt-[50px] md:pt-120">
+        <div className="flex flex-col">
           <motion.div
             variants={moveUp(0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="mb-40"
+            className="mb-[30px] md:mb-40 container"
           >
             <Image
               src={footerData.logo.src}
               alt={footerData.logo.alt}
               width={222}
               height={55}
-              className="object-contain w-[222px] h-auto"
+              className="object-contain w-[169px] md:w-[222px] h-[42px] md:h-[55px]"
             />
           </motion.div>
 
@@ -643,7 +643,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-40"
+            className="flex flex-col sm:flex-row items-start sm:items-center gap-[10px] sm:gap-20 mb-20  sm:mb-40 container"
           >
             <div>
               <Link
@@ -655,12 +655,12 @@ const Footer = () => {
                   alt="Mail"
                   width={24}
                   height={20}
-                  className="shrink-0 w-[20px] h-[16px]"
+                  className="shrink-0 w-[20px] h-[20px]"
                 />
                 <span>{contact.email}</span>
               </Link>
             </div>
-            <div className="w-[1px] h-[40px] bg-[#C2C2C2] sm:block hidden" />
+            <div className="w-full sm:w-[1px] h-[1px] sm:h-[40px] bg-[#C2C2C2] max-w-[187px] sm:max-w-auto" />
             <div>
               <Link
                 href={`tel:${contact.phone.replace(/\s/g, "")}`}
@@ -671,7 +671,7 @@ const Footer = () => {
                   alt="Phone"
                   width={24}
                   height={24}
-                  className="shrink-0 w-[20px] h-[20px]"
+                  className="shrink-0 w-[21px] h-[20px]"
                 />
                 <span>{contact.phone}</span>
               </Link>
@@ -683,7 +683,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="flex items-center gap-[6px] shrink-0 mb-40"
+            className="flex items-center gap-[9px] shrink-0 mb-[30px] sm:mb-40 container"
           >
             {socials.map((s) => (
               <SocialIcon
@@ -695,23 +695,25 @@ const Footer = () => {
             ))}
           </motion.div>
 
-          <div className="border-t border-[#C2C2C2] mb-40">
-            {navColumns.map((col, i) => (
-              <motion.div
-                variants={moveUp(i * 0.15)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ amount: 0.1, once: true }}
-                key={col.title}
-              >
-                <AccordionItem
-                  title={col.title}
-                  links={col.links}
-                  isOpen={openIndex === i}
-                  onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-                />
-              </motion.div>
-            ))}
+          <div className="container">
+            <div className="border-t border-[#C2C2C2] mb-[30px] sm:mb-40">
+              {navColumns.map((col, i) => (
+                <motion.div
+                  variants={moveUp(i * 0.15)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ amount: 0.1, once: true }}
+                  key={col.title}
+                >
+                  <AccordionItem
+                    title={col.title}
+                    links={col.links}
+                    isOpen={openIndex === i}
+                    onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           <motion.div
@@ -719,7 +721,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="mb-40 w-fit"
+            className="mb-[30px] sm:mb-40 container w-full"
           >
             <BorderButton
               text="Get a Call Back"
@@ -735,7 +737,7 @@ const Footer = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="flex items-center gap-3 border-t border-[#D0CFC9] py-8"
+            className="flex items-center gap-[25px] border-t border-[#D0CFC9] pt-[30px] pb-20 container"
           >
             {certifications.map((cert, index) => (
               <motion.div
@@ -744,7 +746,7 @@ const Footer = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
-                className={`relative h-[50px] pointer-events-none ${index === certifications.length - 1 ? "w-[112px]" : "w-[73px]"}`}
+                className={`relative h-[62px] pointer-events-none ${index === certifications.length - 1 ? "w-[96px]" : "w-[62px]"}`}
               >
                 <Image
                   src={cert.src}

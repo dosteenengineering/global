@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
@@ -40,11 +39,20 @@ const getHeightByOffset = (offset: number, scale = 1): number =>
 const getSmHeightByOffset = (offset: number): number =>
   Math.round(getHeightByOffset(offset) * SM_SCALE);
 
-const applyHeights = (swiper: SwiperType, isLg: boolean, lgScale: number) => {
+const applyHeights = (
+  swiper: SwiperType,
+  isLg: boolean,
+  lgScale: number,
+  isXs = false,
+) => {
   const activeIdx = swiper.activeIndex;
   swiper.slides.forEach((slide, domIndex) => {
     const inner = slide.querySelector<HTMLElement>("[data-inner]");
     if (!inner) return;
+    if (isXs) {
+      inner.style.height = `273px`;
+      return;
+    }
     const offset = domIndex - activeIdx;
     const h = isLg
       ? getHeightByOffset(offset, lgScale)
@@ -72,17 +80,37 @@ export default function IndustriesSection() {
   const [lgScale, setLgScale] = useState(0);
   const [mounted, setMounted] = useState(false);
   const [smSlideWidth, setSmSlideWidth] = useState(310);
+  const [isXs, setIsXs] = useState(false);
+  const isXsRef = useRef(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
       const lg = window.innerWidth >= 1024;
-      const scale = window.innerWidth >= BREAKPOINT_3XL ? 1 : LG_RESPONSIVE_SCALE;
+      const scale =
+        window.innerWidth >= BREAKPOINT_3XL ? 1 : LG_RESPONSIVE_SCALE;
+      const xs = window.innerWidth < 480;
+
       isLgRef.current = lg;
       lgScaleRef.current = scale;
+      isXsRef.current = xs;
+
       setIsLg(lg);
       setLgScale(scale);
+      setIsXs(xs);
+
+      // full container width for xs
+      if (!lg) {
+        const container = smContainerRef.current;
+        if (xs) {
+          setSmSlideWidth(
+            container ? container.offsetWidth : window.innerWidth,
+          );
+        }
+      }
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -94,7 +122,7 @@ export default function IndustriesSection() {
     const swiper = swiperRef.current;
     if (!swiper || swiper.destroyed || !isLgRef.current) return;
     swiper.update();
-    applyHeights(swiper, true, lgScaleRef.current);
+    applyHeights(swiper, true, lgScaleRef.current, false);
   }, [lgScale]);
 
   useEffect(() => {
@@ -107,7 +135,11 @@ export default function IndustriesSection() {
         triggered = true;
         observer.disconnect();
         requestAnimationFrame(() => {
-          if (swiperReadyRef.current && swiperRef.current && !swiperRef.current.destroyed) {
+          if (
+            swiperReadyRef.current &&
+            swiperRef.current &&
+            !swiperRef.current.destroyed
+          ) {
             swiperRef.current.slideNext();
           }
         });
@@ -128,28 +160,37 @@ export default function IndustriesSection() {
   const handleSwiper = useCallback((swiper: SwiperType) => {
     swiperRef.current = swiper;
     swiperReadyRef.current = true;
-    applyHeights(swiper, isLgRef.current, lgScaleRef.current);
+    applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
   }, []);
 
   const handleSlideChange = useCallback((swiper: SwiperType) => {
     setActiveIndex(swiper.realIndex);
-    applyHeights(swiper, isLgRef.current, lgScaleRef.current);
+    applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
   }, []);
 
   const handleTransitionStart = useCallback((swiper: SwiperType) => {
-    applyHeights(swiper, isLgRef.current, lgScaleRef.current);
+    applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
   }, []);
 
   useEffect(() => {
-    return () => { swiperReadyRef.current = false; };
+    return () => {
+      swiperReadyRef.current = false;
+    };
   }, []);
 
   useEffect(() => {
     const swiper = swiperRef.current;
     if (!swiper || swiper.destroyed || isLg) return;
     swiper.update();
-    applyHeights(swiper, false, 1);
+    applyHeights(swiper, false, 1, isXsRef.current);
   }, [smSlideWidth, isLg]);
+
+  useEffect(() => {
+  if (isLg || !smContainerRef.current) return;
+  if (isXs) {
+    setSmSlideWidth(smContainerRef.current.offsetWidth);
+  }
+}, [isXs, isLg]);
 
   const showLg = !mounted || isLg;
 
@@ -157,17 +198,21 @@ export default function IndustriesSection() {
   const lgSlideWidth = Math.round(SLIDE_WIDTH * lgScale);
   const currentSlideWidth = showLg ? lgSlideWidth : smSlideWidth;
 
-  const getInitialHeight = (index: number): number =>
-    showLg
+  const getInitialHeight = (index: number): number => {
+    if (!showLg && isXs) return 273;
+    return showLg
       ? getHeightByOffset(index - 1, lgScale)
       : getSmHeightByOffset(index - 1);
+  };
 
   const lgSwiperHeight = Math.round(getHeightByOffset(0, lgScale) + 62);
   const lgOffsetBefore = lgSlideWidth + SPACE_BETWEEN;
 
   const counterPill = (
-    <div className="flex items-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5] border-gray-300 rounded-full px-[16px] text-15 w-[78px] h-[31px] py-[3px]">
-      <span className="font-[600]">{String(activeIndex + 1).padStart(2, "0")}</span>
+    <div className="flex items-center justify-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5] border-gray-300 rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
+      <span className="font-[600]">
+        {String(activeIndex + 1).padStart(2, "0")}
+      </span>
       <span>/</span>
       <span>{String(total).padStart(2, "0")}</span>
     </div>
@@ -194,7 +239,7 @@ export default function IndustriesSection() {
           priority={index <= 2}
         />
       </div>
-      <div className="mt-20 lg:mt-[22px] ml-[15px] lg:ml-[28px] text-30 leading-[1.33] text-paragraph font-poppins font-[300]">
+      <div className="mt-[10px] md:mt-20 lg:mt-[22px] md:ml-[15px] lg:ml-[28px] text-30 font-light text-secondary">
         {industry.label}
       </div>
     </SwiperSlide>
@@ -209,14 +254,20 @@ export default function IndustriesSection() {
           <div className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 mb-40 xl:mb-70 text-secondary">
             <div />
             <SectionTitle
-            text={industriesData.title}
-            className="section-heading max-w-[1129px]"
-             />
+              text={industriesData.title}
+              className="section-heading max-w-[1129px]"
+            />
           </div>
 
-          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once: true}} className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 items-start">
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 items-start"
+          >
             <div className="flex flex-col justify-start flex-shrink-0">
-              <div className="flex items-center gap-[15px] mb-50">
+              <div className="flex items-center gap-[10px] md:gap-[15px] mb-50">
                 <NavButton
                   onClick={() => {
                     const s = swiperRef.current;
@@ -240,7 +291,10 @@ export default function IndustriesSection() {
               {counterPill}
             </div>
 
-            <div ref={swiperContainerRef} style={{ overflow: "visible", minWidth: 0 }}>
+            <div
+              ref={swiperContainerRef}
+              style={{ overflow: "visible", minWidth: 0 }}
+            >
               <div suppressHydrationWarning>
                 <Swiper
                   loop={true}
@@ -274,12 +328,33 @@ export default function IndustriesSection() {
         <div className="py-140 container">
           <SectionTitle
             text={industriesData.title}
-            className="section-heading w-full mb-40 text-secondary"
+            className="section-heading w-full mb-20 sm:mb-40 text-secondary"
           />
 
-          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{once: true}} className="flex items-center justify-between mb-4 md:mb-8">
-            <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{once: true}}>{counterPill}</motion.div>
-            <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{once: true}} className="flex items-center gap-[15px]">
+          <div className="w-full h-px bg-[#C2C2C2] mb-20 md:mb-8" />
+
+          <motion.div
+            variants={moveUp(0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex items-center justify-between mb-[30px]"
+          >
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              {counterPill}
+            </motion.div>
+            <motion.div
+              variants={moveUp(0.5)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="flex items-center gap-[10px] md:gap-[15px]"
+            >
               <NavButton
                 onClick={() => {
                   const s = swiperRef.current;
@@ -300,8 +375,6 @@ export default function IndustriesSection() {
               />
             </motion.div>
           </motion.div>
-
-          <div className="w-full h-px bg-[#C2C2C2] mb-6 md:mb-8" />
 
           <div ref={smContainerRef} className="w-full">
             <div suppressHydrationWarning>
@@ -325,7 +398,7 @@ export default function IndustriesSection() {
                 }}
                 observer={true}
                 observeParents={true}
-                className="h-[380px] !overflow-visible"
+                className={isXs ? "h-[311px]" : "h-[380px]"}
               >
                 {slideElements}
               </Swiper>

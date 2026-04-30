@@ -67,7 +67,7 @@ const TrustedClients = () => {
   }, []);
 
   return (
-    <section className="bg-white py-120 overflow-hidden">
+    <section className="bg-white py-[50px] md:py-120 overflow-hidden">
       <div className="container">
         <div
           ref={viewportRef}
@@ -80,7 +80,7 @@ const TrustedClients = () => {
         >
           <div
             ref={trackRef}
-            className="flex items-center gap-110 3xl:gap-[127px] pointer-events-none"
+            className="flex items-center gap-[68px] md:gap-110 3xl:gap-[127px] pointer-events-none"
           >
             {[...logos, ...logos, ...logos].map((logo, i) => (
               <div
@@ -92,7 +92,7 @@ const TrustedClients = () => {
                   alt=""
                   height={80}
                   width={0}
-                  className="object-contain max-w-[160px] h-[50px] lg:h-[80px] w-auto"
+                  className="object-contain max-w-[100 px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] w-auto"
                 />
               </div>
             ))}

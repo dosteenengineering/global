@@ -242,62 +242,63 @@ export default function ClientStoriesSection() {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden relative z-10 container pt-140 pb-60">
+      <div className="lg:hidden relative z-10 container pt-140 pb-[70px]">
         <SectionTitle
           title={clientStoriesData.title}
-          className="text-white section-heading uppercase mb-40"
+          className="text-white section-heading uppercase mb-[30px] md:mb-40"
         />
 
         {/* Progress bars — full width */}
-        <div className="flex items-center gap-[16px] mb-5 md:mb-8 relative z-20">
-          {clientStoriesData.stories.map((_, i) => (
-            <motion.button
-              variants={moveUp(i * 0.11)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              key={i}
-              onClick={() => goToSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className="flex flex-1 items-center h-[12px] bg-transparent border-none outline-none p-0 m-0 cursor-pointer"
-            >
-              <span className="relative block w-full h-[2px] bg-white/30">
-                {i === activeIndex && (
-                  <span className="absolute inset-0 flex items-center">
-                    <motion.span
-                      key={progressKey}
-                      initial={{ width: "0%" }}
-                      animate={{ width: "100%" }}
-                      transition={{
-                        duration: SLIDE_DELAY / 1000,
-                        ease: "linear",
-                      }}
-                      className="block h-[4px] bg-white flex-shrink-0"
-                    />
-                  </span>
-                )}
-              </span>
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Pagination pill — left aligned */}
-        <motion.div
-          variants={moveUp(0.3)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="mb-10 md:mb-12"
-        >
-          <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
-            <span className="font-poppins text-15 leading-[1.66] text-white">
-              <span className="font-[600]">
-                {String(activeIndex + 1).padStart(2, "0")}
-              </span>
-              <span>/{String(total).padStart(2, "0")}</span>
-            </span>
+        <div className="flex flex-row mb-[50px] relative z-20 gap-[10px]">
+          <div className="flex items-center gap-[15px] w-full">
+            {clientStoriesData.stories.map((_, i) => (
+              <motion.button
+                variants={moveUp(i * 0.11)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                key={i}
+                onClick={() => goToSlide(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className="flex flex-1 items-center h-[12px] bg-transparent border-none outline-none p-0 m-0 cursor-pointer"
+              >
+                <span className="relative block w-full h-[2px] bg-white/30">
+                  {i === activeIndex && (
+                    <span className="absolute inset-0 flex items-center">
+                      <motion.span
+                        key={progressKey}
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{
+                          duration: SLIDE_DELAY / 1000,
+                          ease: "linear",
+                        }}
+                        className="block h-[4px] bg-white flex-shrink-0"
+                      />
+                    </span>
+                  )}
+                </span>
+              </motion.button>
+            ))}
           </div>
-        </motion.div>
+
+          {/* Pagination pill — left aligned */}
+          <motion.div
+            variants={moveUp(0.3)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <div className="rounded-full border flex justify-center items-center font-light border-white w-[55px] h-[26px]">
+              <span className="font-poppins text-15 leading-[1.66] text-white">
+                <span className="font-semibold">
+                  {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <span>/{String(total).padStart(2, "0")}</span>
+              </span>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Invisible Swiper — handles drag only, no autoplay */}
         <div
@@ -323,7 +324,7 @@ export default function ClientStoriesSection() {
         </div>
 
         {/* Quote / description */}
-        <div className="overflow-hidden mb-14 md:mb-15 h-[120px] md:h-[165px] max-w-[400px] md:max-w-[700px]">
+        <div className="overflow-hidden mb-[50px] md:mb-15 h-[120px] md:h-[165px] max-w-[400px] md:max-w-[700px]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.p
               key={`mobile-quote-${activeIndex}`}
@@ -335,7 +336,7 @@ export default function ClientStoriesSection() {
                 y: -24,
                 transition: { duration: 0.2, ease: "easeIn" },
               }}
-              className="text-white text-30 md:text-55 leading-[1.33] -tracking-[2%] font-poppins font-[300]"
+              className="text-white text-55 leading-[1.33] -tracking-[2%] font-poppins font-[300]"
             >
               {activeStory.quote}
             </motion.p>
@@ -357,7 +358,7 @@ export default function ClientStoriesSection() {
               }}
               className="flex items-end justify-between gap-4"
             >
-              <div className="flex flex-col gap-[6px] font-[300] text-white font-poppins -tracking-[2%]">
+              <div className="flex flex-col gap-[5px] sm:gap-[6px] font-light text-white font-poppins -tracking-[2%]">
                 <p className="text-25 leading-[1.33]">{activeStory.name}</p>
                 <p className="text-19 leading-[1.52]">
                   {activeStory.company} – {activeStory.designation}
@@ -368,7 +369,7 @@ export default function ClientStoriesSection() {
         </div>
 
         {/* Close quote */}
-        <div className="flex-shrink-0 pr-40 absolute bottom-[10%] right-0 overflow-hidden">
+        <div className="flex-shrink-0 pr-40 absolute bottom-[50px] sm:bottom-[10%] right-0 overflow-hidden">
           <motion.div
             variants={moveLeft(0.4)}
             initial="hidden"
@@ -378,9 +379,9 @@ export default function ClientStoriesSection() {
             <Image
               src="/assets/images/home/client-stories/quote-close.svg"
               alt="quote close"
-              width={56}
-              height={112}
-              className="opacity-10 w-[45px] h-[90px] object-contain"
+              width={70}
+              height={140}
+              className="opacity-10 w-[67.2px] h-[135px] object-contain"
             />
           </motion.div>
         </div>

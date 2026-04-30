@@ -39,7 +39,7 @@ export default function BorderButton({
     hoverBg === "white" ? "bg-white" :
     hoverBg === "black" ? "bg-[#161616]" : "";
 
-  const sharedClass = `group relative overflow-hidden 2xl:h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
+  const sharedClass = `group relative overflow-hidden h-[40px] md:h-auto 2xl:h-[61px] flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-[14px] md:text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
 
   const arrowSrc =
     hoverBg === "white" && hovered
@@ -67,7 +67,7 @@ export default function BorderButton({
         />
       )}
 
-      <span className={`relative z-10 text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300 ${textHoverClass}`}>
+      <span className={`relative z-10 text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300 ${textHoverClass}`}>
         {text}
       </span>
       <Image
@@ -75,7 +75,7 @@ export default function BorderButton({
         alt="arrow"
         width={18}
         height={18}
-        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] pointer-events-none`}
+        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
       />
     </>
   );

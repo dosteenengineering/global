@@ -219,12 +219,11 @@ export default function SolutionsSection() {
           </motion.div>
         </div>
         <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-40 lg:mt-0">
-          <div className="container flex flex-col lg:flex-row gap-40 not-last:lg:gap-0 lg:items-center py-50 3xl:py-[56px] text-30 leading-[1.33] font-poppins -tracking-[2%]">
+          <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px] text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
             <span className="max-w-[997px]" dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }} />
             <BorderButton
               text={solutionsData.btnText}
               iconColor="white"
-              px="px-30 3xl:px-[35px]"
               href={solutionsData.btnLink}
               hoverBg="white"
               className="w-fit"

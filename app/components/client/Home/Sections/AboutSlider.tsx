@@ -117,13 +117,13 @@ export default function AboutSlider() {
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <div className="absolute -top-88 lg:-top-73 left-0 pointer-events-none">
+      <div className="absolute top-[-30%] md:-top-88 lg:-top-73 left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
           width={600}
           height={500}
-          className="object-contain"
+          className="object-contain w-[60%] md:w-full h-full"
         />
       </div>
 
@@ -151,13 +151,13 @@ export default function AboutSlider() {
             ))}
           </Swiper>
         </div>
-        <div className="lg:ml-[29%] pt-120 px-[15px] lg:px-0 container">
+        <div className="lg:ml-[29%] pt-[70px] lg:pt-120 px-[15px] lg:px-0 container">
           <SectionTitle
             text="DELIVERING EXCELLENCE BEYOND BORDERS"
             className="section-heading max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase"
           />
         </div>
-        <div className="container mt-6 lg:mt-[30px]">
+        <div className="container mt-[10px] md:mt-6 lg:mt-[30px]">
           <div className="flex flex-col lg:grid lg:grid-cols-[60%_40%]">
             <div className="hidden lg:block" />
             {/* Description */}
@@ -188,7 +188,7 @@ export default function AboutSlider() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-19 text-paragraph font-poppins font-[300] leading-[1.52] lg:max-w-[520px] min-h-[174px]"
+                className="text-description !tracking-[0.02em] text-paragraph font-poppins font-light lg:max-w-[520px]"
               >
                 <span className="font-[700]">
                   {slidesData[0].description.split(",")[0]},
@@ -199,8 +199,8 @@ export default function AboutSlider() {
               </motion.p>
             </div>
             {/* Pagination pill */}
-            <div className="pt-6">
-              <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[0.5] py-[3px] max-w-[78px] h-[31px] flex items-center justify-center rounded-[15px]">
+            <div className="pt-20 md:pt-6 -mb-[10px] md:mb-0">
+              <span className="border border-[#C2C2C2] text-paragraph text-15 leading-[0.5] py-[3px] max-w-[55px] md:max-w-[78px] h-[26px] md:h-[31px] flex items-center justify-center rounded-[15px]">
                 <span className="font-bold">
                   {String(activeIndex + 1).padStart(2, "0")}
                 </span>
@@ -225,8 +225,8 @@ export default function AboutSlider() {
                   borderColor="black"
                   textColor="black"
                   iconColor="primary"
-                  px="px-6 lg:px-[35px]"
                   hoverBg="black"
+                  className="max-w-[184px]"
                 />
               </div>
             </div>
@@ -243,7 +243,7 @@ export default function AboutSlider() {
                   initial="enter"
                   animate="show"
                   exit="exit"
-                  className="pt-8 lg:pt-[45px]"
+                  className="pt-[30px] md:pt-8 lg:pt-[45px]"
                 >
                   <Counter
                     value={activeSlide.stat}

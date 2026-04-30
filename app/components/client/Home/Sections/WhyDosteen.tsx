@@ -6,7 +6,7 @@ import { whyDosteenData } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
-import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
+import { moveUp } from "@/app/components/motionVariants";
 
 const AUTOPLAY_MS = 4000;
 const BEZIER = "900ms cubic-bezier(0.4, 0, 0.2, 1)";
@@ -16,7 +16,9 @@ const DRAG_THRESHOLD = 40;
 
 const getLeft = (offset: number, n: number, circleSm: number = CIRCLE_SM) => {
   if (offset === 0) return "0px";
-  if (offset === 1) return `calc(100% - ${circleSm}px)`;
+if (offset === 1) return circleSm === 110
+  ? `calc(100% - 78px)`
+  : `calc(100% - ${circleSm}px)`;
   if (offset === n - 1) return `calc(0px - ${circleSm}px - 80px)`;
   return "calc(100% + 80px)";
 };
@@ -205,21 +207,31 @@ export default function WhyDosteen() {
         alt=""
         width={948}
         height={439}
-        className="pointer-events-none absolute right-0 md:right-[5%] lg:right-[12%] bottom-0 w-[250px] h-[115px] sm:w-[460px] sm:h-[200px] md:h-[160px] lg:w-[700px] lg:h-[300px] 3xl:w-[948px] 3xl:h-[430px]"
+        className="pointer-events-none absolute right-[-30%] md:right-[5%] lg:right-[12%] bottom-0 w-[400px] h-[110px] sm:w-[460px] sm:h-[200px] md:h-[160px] lg:w-[700px] lg:h-[300px] 3xl:w-[948px] 3xl:h-[430px]"
       />
 
       <div className="relative container">
-        <SectionTitle
-          text={heading}
-          className="text-center text-white font-helvetica uppercase section-heading leading-[1.111]"
-        />
+        <div className="flex justify-between w-full">
+          <SectionTitle
+            text={heading}
+            className="text-left md:text-center text-white font-helvetica uppercase section-heading leading-[1.111] w-full"
+          />
+          <div className="md:hidden">
+            <div className="flex items-center py-[3px] leading-[0.5] h-[26px] w-[55px] justify-center text-15 font-light font-poppins text-white rounded-full border border-white">
+              <span className="font-[600]">
+                {String(active + 1).padStart(2, "0")}
+              </span>
+              <span>/{String(n).padStart(2, "0")}</span>
+            </div>
+          </div>
+        </div>
 
         <motion.div
           variants={moveUp(0.2)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute top-full mt-80 3xl:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
+          className="absolute top-full mt-[15px] sm:mt-80 3xl:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
           {wm.exitingTitle && (
@@ -241,9 +253,9 @@ export default function WhyDosteen() {
         </motion.div>
       </div>
 
-      <div className="relative flex-1 flex items-center pt-80 3xl:pt-[85px]">
+      <div className="relative flex-1 flex items-center pt-[15px] sm:pt-80 3xl:pt-[85px]">
         <div className="container relative z-20 w-full">
-          <div className="absolute left-[15px] bottom-[calc(0%-28px)] lg:top-[calc(50%+18px)]">
+          <div className="hidden md:block absolute left-[15px] bottom-[calc(0%-28px)] lg:top-[calc(50%+18px)]">
             <div className="flex items-center py-[3px] leading-[0.5] h-[24px] w-[58px] sm:h-[28px] sm:w-[70px] lg:h-[31px] lg:w-[78px] justify-center text-[10px] sm:text-[13px] lg:text-15 font-[300] font-poppins text-white rounded-full border border-white">
               <span className="font-[600]">
                 {String(active + 1).padStart(2, "0")}
@@ -254,7 +266,7 @@ export default function WhyDosteen() {
 
           {/* Drag surface */}
           <div
-            className="relative sm:mx-2 md:mx-10 lg:mx-30 xl:ml-38 xl:mr-30 3xl:ml-38 3xl:mr-56 h-[260px] sm:h-[380px] lg:h-[530px] 3xl:h-[720px] touch-pan-y cursor-grab active:cursor-grabbing"
+            className="relative sm:mx-2 md:mx-10 lg:mx-30 xl:ml-38 xl:mr-30 3xl:ml-38 3xl:mr-56 h-[264px] sm:h-[380px] lg:h-[530px] 3xl:h-[720px] touch-pan-y cursor-grab active:cursor-grabbing"
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
@@ -282,8 +294,8 @@ export default function WhyDosteen() {
                   key={`border-${i}`}
                   className={`absolute top-1/2 -translate-y-1/2 rounded-full pointer-events-none ${
                     isActive
-                      ? "w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[470px] lg:h-[470px] 2xl:w-[560px] 2xl:h-[560px] 3xl:w-[720px] 3xl:h-[720px]"
-                      : "w-[100px] h-[100px] sm:w-[155px] sm:h-[155px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] 2xl:w-[250px] 2xl:h-[250px] 3xl:w-[284px] 3xl:h-[284px]"
+                      ? "w-[263px] h-[263px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[470px] lg:h-[470px] 2xl:w-[560px] 2xl:h-[560px] 3xl:w-[720px] 3xl:h-[720px]"
+                      : "w-[75.93px] h-[75.93px] sm:w-[155px] sm:h-[155px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] 2xl:w-[250px] 2xl:h-[250px] 3xl:w-[284px] 3xl:h-[284px]"
                   }`}
                   style={{
                     left: getLeft(offset, n, circleSm),
@@ -330,8 +342,8 @@ export default function WhyDosteen() {
                   key={i}
                   className={`absolute top-1/2 -translate-y-1/2 rounded-full overflow-hidden ${
                     isActive
-                      ? "w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[470px] lg:h-[470px] 2xl:w-[560px] 2xl:h-[560px] 3xl:w-[720px] 3xl:h-[720px]"
-                      : "w-[100px] h-[100px] sm:w-[155px] sm:h-[155px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] 2xl:w-[250px] 2xl:h-[250px] 3xl:w-[284px] 3xl:h-[284px]"
+                      ? "w-[264px] h-[264px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px] lg:w-[470px] lg:h-[470px] 2xl:w-[560px] 2xl:h-[560px] 3xl:w-[720px] 3xl:h-[720px]"
+                      : "w-[76.93px] h-[76.93px] sm:w-[155px] sm:h-[155px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] 2xl:w-[250px] 2xl:h-[250px] 3xl:w-[284px] 3xl:h-[284px]"
                   }`}
                   style={{
                     left: getLeft(offset, n, circleSm),

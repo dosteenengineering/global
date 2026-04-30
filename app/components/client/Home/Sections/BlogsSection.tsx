@@ -25,6 +25,16 @@ export default function BlogsSection() {
   const [swiperHeight, setSwiperHeight] = useState<number>(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftInset = useGetContainerSpacing(containerRef);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 520);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // ── Mobile swiper ──
   const mobileSwiperRef = useRef<SwiperType | null>(null);
@@ -189,13 +199,13 @@ export default function BlogsSection() {
       <div className="lg:hidden relative py-140">
         <div
           ref={containerRef}
-          className="container flex items-center justify-between mb-10 md:mb-12"
+          className="container flex items-center justify-between mb-[30px] md:mb-12"
         >
           <h2 className="text-secondary section-heading w-full">
             {blogsData.title}
           </h2>
           {/* Nav buttons — left aligned */}
-          <div className="flex items-center gap-[15px]">
+          <div className="flex items-center gap-[10px]">
             <NavButton
               onClick={mobileSlidePrev}
               direction="left"
@@ -212,14 +222,14 @@ export default function BlogsSection() {
         </div>
 
         {/* Horizontal swiper */}
-        <div style={{ paddingLeft: leftInset }}>
+        <div className="container">
           <Swiper
             loop={true}
             modules={[Autoplay]}
             onSwiper={(s) => {
               mobileSwiperRef.current = s;
             }}
-            slidesPerView={1.2}
+            slidesPerView={1}
             breakpoints={{
               500: { slidesPerView: 1.4 },
               680: { slidesPerView: 1.75 },
@@ -257,7 +267,7 @@ export default function BlogsSection() {
                     </div>
                   </div>
                   {/* Title */}
-                  <p className="text-25 text-paragraph font-[300] font-poppins -tracking-[2%] leading-[1.33] mb-5">
+                  <p className="text-30 text-secondary font-[300] font-poppins -tracking-[2%] leading-[1.33] mb-[10px] sm:mb-20">
                     {post.title}
                   </p>
                   {/* Category left, date right */}
@@ -265,6 +275,7 @@ export default function BlogsSection() {
                     <span>{post.category}</span>
                     <span>{post.date}</span>
                   </div>
+                  <div className="w-full h-px mt-[10px] bg-[#c2c2c2]" />
                 </Link>
               </SwiperSlide>
             ))}

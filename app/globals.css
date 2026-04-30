@@ -47,7 +47,7 @@ body::-webkit-scrollbar {
 
 
 @utility container {
-    @apply mx-auto px-[15px];
+    @apply mx-auto px-[16px];
 
     /* Set custom max-widths at each breakpoint */
     max-width: 100%;
@@ -121,12 +121,12 @@ body::-webkit-scrollbar {
 
   /* small */
 --text-15: clamp(12px, 0.5vw + 10px, 15px);
-  --text-19: clamp(15px, 0.34vw + 13px, 19px);
+--text-19: clamp(12px, 0.667vw + 9.4px, 19px);
 
   /* medium */
   --text-25: clamp(20px, 0.7vw + 12px, 25px);
-  --text-30: clamp(23px, 0.8vw + 16px, 30px);
---text-55: clamp(28px, 3.19vw - 6.3px, 55px);
+--text-30: clamp(18px, 1.143vw + 13.54px, 30px);
+--text-55: clamp(24px, 2.562vw + 14.01px, 55px);
 
   /* large */
 --text-70: clamp(34px, 5.239vw + 16.35px, 70px);
@@ -150,7 +150,7 @@ body::-webkit-scrollbar {
 --space-100: clamp(44px, 3.8vw + 32px, 100px);
 --space-110: clamp(37px, 5.2vw + 17px, 110px);
 --space-120: clamp(38px, 5.8vw + 17px, 120px);
---space-140: clamp(45px, 6.8vw + 19px, 140px);
+--space-140: clamp(70px, 6.8vw + 19px, 140px);
 --space-150: clamp(44px, 7.5vw + 17px, 150px);
 --space-180: clamp(54px, 9.0vw + 20px, 180px);
 --space-200: clamp(52px, 10.5vw + 13px, 200px);
@@ -227,17 +227,20 @@ body::-webkit-scrollbar {
 }
 
 .section-heading {
-  @apply font-helvetica uppercase leading-[1.111] text-90;
+  @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111] text-90;
 }
 
 .hero-heading {
-  @apply text-[36px] md:text-95 font-helvetica uppercase leading-[100%];
+  @apply text-[36px] md:text-95 font-helvetica uppercase leading-[1.08] md:leading-[1.096];
 }
 
 .text-description {
-  @apply text-19 font-poppins font-light leading-[1.526] tracking-[-0.02em];
+  @apply text-19 font-poppins font-light leading-[1.666] md:leading-[1.526] tracking-[-0.02em];
 }
 
+.text-30 {
+  @apply text-30 font-poppins leading-[1.666] md:leading-[1.526] tracking-[-0.02em];
+}
 
 .glass-effect {
   backdrop-filter: blur(20px) saturate(180%);
