@@ -145,7 +145,7 @@ export default function SolutionsSection() {
             whileInView="show"
             variants={moveUp(0.2)}
             viewport={{ once: true }}
-            className="lg:hidden mt-10 md:mt-12 space-y-6"
+            className="lg:hidden mt-10 md:mt-12"
           >
             {solutionsData.tabs.map((tab: SolutionTab, index: number) => {
               const isOpen = activeTab === tab.key;
@@ -156,12 +156,12 @@ export default function SolutionsSection() {
                   variants={moveUp(index * 0.14)}
                   viewport={{ once: true }}
                   key={tab.key}
-                  className="border-b border-white/50 pb-4"
+                  className="border-b first:border-t border-white/50"
                 >
                   {/* Accordion trigger */}
                   <button
                     onClick={() => setActiveTab(isOpen ? null : tab.key)}
-                    className="w-full flex justify-between items-start text-25 leading-[1.33] font-poppins -tracking-[2%] text-left"
+                    className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-2"
                   >
                     <motion.div
                       initial="hidden"
@@ -174,7 +174,7 @@ export default function SolutionsSection() {
                         className={
                           isOpen
                             ? "font-[600] text-white"
-                            : "font-[300] text-white/60 transition-all duration-300"
+                            : "font-[300] text-white transition-all duration-300"
                         }
                       >
                         {tab.label}
@@ -187,16 +187,16 @@ export default function SolutionsSection() {
                   </button>
                   {/* Accordion body */}
                   <div
-                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"} overflow-hidden`}
+                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 pt-20" : "grid-rows-[0fr] opacity-0"} overflow-hidden border-t border-white/50`}
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3 className="text-30 leading-[1.33] font-poppins -tracking-[2%] font-light mb-4">
+                      <h3 className="text-55 leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
                         {tab.leftTitle}
                       </h3>
 
                       {/* Right items */}
-                      <div className="space-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%]">
+                      <div className="grid grid-cols-2 space-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%]">
                         {tab.rightItems.map((item: string, index: number) => (
                           <motion.div
                             key={`${activeTab}-${index}`}
@@ -204,9 +204,9 @@ export default function SolutionsSection() {
                             whileInView="show"
                             variants={moveUp(index * 0.06)}
                             viewport={{ once: true }}
-                            className="flex items-center gap-2"
+                            className="flex items-center"
                           >
-                            <FiArrowRight size={20} />
+                            {/* <FiArrowRight size={20} /> */}
                             <span>{item}</span>
                           </motion.div>
                         ))}
