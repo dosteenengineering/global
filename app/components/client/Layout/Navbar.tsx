@@ -137,7 +137,7 @@ export default function Navbar() {
             {/* Search icon */}
             <button
               ref={searchRef}
-              className="hidden md:block shrink-0 cursor-pointer flex items-center justify-center w-[38px] h-[38px] md:w-[45.61px] md:h-[45.61px] rounded-full bg-white/8 border border-white/20 backdrop-blur-[10px] mr-[20.39px]"
+              className="hidden md:flex shrink-0 cursor-pointer items-center justify-center w-[38px] h-[38px] md:w-[45.61px] md:h-[45.61px] rounded-full bg-white/8 border border-white/20 backdrop-blur-[10px] mr-[20.39px]"
             >
               <Image
                 src="/assets/icons/search.svg"
