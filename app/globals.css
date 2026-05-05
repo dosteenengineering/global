@@ -125,7 +125,7 @@ body::-webkit-scrollbar {
 
   /* medium */
   --text-25: clamp(20px, 0.7vw + 12px, 25px);
---text-30: clamp(18px, 1.143vw + 13.54px, 30px);
+--text-30: clamp(18px, 1.034vw + 13.45px, 30px);
 --text-55: clamp(24px, 2.562vw + 14.01px, 55px);
 
   /* large */

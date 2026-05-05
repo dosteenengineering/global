@@ -2,12 +2,13 @@ import InnerPageBanner from "../../common/InnerPageBanner";
 import AboutBim from "./Sections/AboutBim";
 import BimCapabilitiesStats from "./Sections/BimCapabilitiesStats";
 import SoftwareTools from "./Sections/SoftwareTools";
-import { banner, ctaData  } from "./data";
+import { banner, ctaData, BimFaqData  } from "./data";
 import Benefits from "./Sections/Benefits";
 import BimProcess from "./Sections/BimProcess";
 import BuildingSystems from "./Sections/BuildingSystems";
 import BimEngineeringData from "./Sections/BimEngineeringData";
 import CtaSection from "../../common/CtaSection";
+import Faq from "../../common/Faq";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <BimProcess />
       <BuildingSystems />
       <BimEngineeringData />
+      <Faq bimFaqData={BimFaqData} />
       <CtaSection {...ctaData} descriptionWidth="max-w-[968px]" titleWidth="max-w-[34ch]"/>
     </>
   );
