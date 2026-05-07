@@ -7,7 +7,7 @@ import FeaturedProjects from "./Sections/FeaturedProjects";
 const DefaultServicePageIndex = () => {
   return (
     <>
-      <InnerPageBanner {...BannerData} descriptionMaxWidth="max-w-[1395px]" />
+      <InnerPageBanner {...BannerData} descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]" />
       <DosteenSystems data={DosteenSystemsData} />
       <ProjectCta />
       <FeaturedProjects />

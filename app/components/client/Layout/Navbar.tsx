@@ -14,11 +14,11 @@ export default function Navbar() {
   const searchRef = useRef<HTMLButtonElement>(null);
 
   const navItems = [
-    { label: "ABOUT US", hasDropdown: true },
-    { label: "SERVICES", hasDropdown: true },
-    { label: "SOLUTIONS", hasDropdown: true },
-    { label: "RESOURCE HUB", hasDropdown: false },
-    { label: "PROJECTS", hasDropdown: false },
+    { label: "ABOUT US", hasDropdown: true, href: "/about" },
+    { label: "SERVICES", hasDropdown: true, href: "/services" },
+    { label: "SOLUTIONS", hasDropdown: true, href: "#" },
+    { label: "RESOURCE HUB", hasDropdown: false, href: "#" },
+    { label: "PROJECTS", hasDropdown: false, href: "/projects" },
   ];
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between gap-4 w-full">
         <div
           ref={navPillRef}
-          className="flex h-[62px] md:h-[70px] rounded-[50px] w-full"
+          className="flex h-[62px] md:h-[70px] rounded-[50px] w-full max-w-[1127px]"
         >
           <div className="flex items-center justify-between rounded-[50px] border border-white/30 bg-white/8 glass-effect overflow-hidden w-full">
             {/* Logo */}
@@ -116,7 +116,10 @@ export default function Navbar() {
                   className="relative group"
                   style={{ opacity: 0 }}
                 >
-                  <button className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer">
+                  <Link
+                    href={item.href}
+                    className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
+                  >
                     <span className="text-15 leading-[1.733] uppercase">
                       {item.label}
                     </span>
@@ -129,7 +132,7 @@ export default function Navbar() {
                         className="w-auto h-[7px] pointer-events-none"
                       />
                     )}
-                  </button>
+                  </Link>
                 </div>
               ))}
             </div>

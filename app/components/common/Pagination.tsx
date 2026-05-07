@@ -9,7 +9,7 @@ export default function Pagination({
   totalPages: number;
 }) {
   return (
-    <div className="flex items-center justify-center gap-200 3xl:gap-[218px] pt-120">
+    <div className="flex items-center gap-200 3xl:gap-[218px]">
       <div className="flex items-center gap-[18px]">
         {currentPage > 1 ? (
           <Link
@@ -17,7 +17,7 @@ export default function Pagination({
             className="flex items-center gap-[9px]"
           >
             <span className="text-description text-paragraph">Previous</span>
-            <span className="w-12 h-12 2xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
+            <span className="w-12 h-12 3xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
               <Image
                 src="/assets/icons/arrow-right-primary.svg"
                 alt="Previous"
@@ -30,7 +30,7 @@ export default function Pagination({
         ) : (
           <span className="flex items-center gap-3 text-secondary text-sm font-medium opacity-30 cursor-not-allowed">
             <span className="text-description text-paragraph">Previous</span>
-            <span className="w-12 h-12 2xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
+            <span className="w-12 h-12 3xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
               <Image
                 src="/assets/icons/arrow-right-primary.svg"
                 alt="Previous"
@@ -47,7 +47,7 @@ export default function Pagination({
             href={`?page=${currentPage + 1}`}
             className="flex items-center gap-[9px]"
           >
-            <span className="w-12 h-12 2xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
+            <span className="w-12 h-12 3xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
               <Image
                 src="/assets/icons/arrow-right-primary.svg"
                 alt="Previous"
@@ -60,7 +60,7 @@ export default function Pagination({
           </Link>
         ) : (
           <span className="flex items-center gap-3 text-secondary text-sm font-medium opacity-30 cursor-not-allowed">
-            <span className="w-12 h-12 2xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
+            <span className="w-12 h-12 3xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">
               <Image
                 src="/assets/icons/arrow-right-primary.svg"
                 alt="Previous"
