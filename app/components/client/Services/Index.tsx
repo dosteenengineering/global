@@ -9,7 +9,7 @@ const Index = () => {
       <InnerPageBanner
         title={BannerData.title}
         titleMaxWidth="max-w-[1270px] 3xl:max-w-[1563px]"
-        descriptionMaxWidth="max-w-[1395px]"
+        descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]"
         description={BannerData.description}
         image={BannerData.image}
         imageAlt={BannerData.imageAlt}

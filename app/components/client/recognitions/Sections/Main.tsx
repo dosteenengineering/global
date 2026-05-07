@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { items, type Category } from "../data";
 import AwardsNoise from "@/app/components/common/noise/AwardsNoise";
+import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
+import { moveUpV2 } from "@/app/components/motionVariants";
 
 const categories: { label: string; value: Category }[] = [
   { label: "Certifications", value: "certifications" },
@@ -46,8 +48,14 @@ export default function Main() {
         </div>
         {/* Grid */}
         <div className="grid grid-cols-3 gap-x-20 3xl:gap-x-[25px] gap-y-50 ">
-          {filtered.map((item) => (
-            <AwardCard key={item.id} image={item.image} title={item.title} />
+          {filtered.map((item, itemIdx) => (
+            <Reveal
+              key={item.id}
+              variants={moveUpV2}
+              delayRange={itemIdx * 0.12}
+            >
+              <AwardCard image={item.image} title={item.title} />
+            </Reveal>
           ))}
         </div>
       </div>

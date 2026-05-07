@@ -18,7 +18,7 @@ export default function InnerPageBanner({
   title,
   titleMaxWidth = "",
   description,
-  descriptionMaxWidth = "max-w-xl",
+  descriptionMaxWidth = "max-w-[94%] 3xl:max-w-[1395px]",
   image,
   imageAlt = "Banner image",
 }: InnerPageBannerProps) {

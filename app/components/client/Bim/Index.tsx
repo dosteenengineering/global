@@ -15,7 +15,7 @@ const Index = () => {
     <>
       <InnerPageBanner
         titleMaxWidth="max-w-[30ch] 3xl:max-w-[1629px]"
-        descriptionMaxWidth="max-w-[1395px]"
+        descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]"
         {...banner}
       />
       <AboutBim />

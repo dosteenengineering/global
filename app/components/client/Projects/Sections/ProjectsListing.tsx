@@ -2,11 +2,12 @@
 
 import { useSearchParams } from "next/navigation";
 import { projectsData, Project } from "../data";
-import GridCard from "./ProjectGridCard";
 import ProjectEvenRowCard from "./ProjectEvenRowCard";
 import Pagination from "@/app/components/common/Pagination";
 import Image from "next/image";
 import ProjectCard from "@/app/components/common/ProjectCard";
+import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
+import { moveUpV2 } from "@/app/components/motionVariants";
 
 const ITEMS_PER_PAGE = 11;
 
@@ -73,7 +74,9 @@ export default function ProjectsListing() {
               className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-30"
             >
               {row.projects.map((p, i) => (
-                <ProjectCard key={i} project={p} variant="dark" />
+                <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
+                  <ProjectCard project={p} variant="dark" />
+                </Reveal>
               ))}
             </div>
           ) : (
@@ -81,18 +84,24 @@ export default function ProjectsListing() {
             <div key={`featured-${ri}`} className="w-full">
               {/* Below lg → render as a normal grid card in a 1-col grid */}
               <div className="lg:hidden grid grid-cols-1 gap-x-30">
-                <ProjectCard project={row.projects[0]} variant="dark"/>
+                <Reveal key={ri} variants={moveUpV2} delayRange={ri * 0.12}>
+                  <ProjectCard project={row.projects[0]} variant="dark" />
+                </Reveal>
               </div>
               {/* lg+ → full featured layout */}
               <div className="hidden lg:block">
-                <ProjectEvenRowCard project={row.projects[0]} />
+                <Reveal key={ri} variants={moveUpV2} delayRange={ri * 0.12}>
+                  <ProjectEvenRowCard project={row.projects[0]} />
+                </Reveal>
               </div>
             </div>
           ),
         )}
       </div>
 
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <div className="mt-120 w-full flex items-center justify-center">
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      </div>
     </section>
   );
 }
