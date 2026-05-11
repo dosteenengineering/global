@@ -51,7 +51,7 @@ export default function Hero() {
               textColor="white"
               iconColor="primary"
               hoverBg="white"
-              className="max-w-[201px]"
+              className="!px-[24px]"
             />
           </motion.div>
         </div>
