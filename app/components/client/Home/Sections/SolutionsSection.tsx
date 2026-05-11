@@ -226,7 +226,7 @@ export default function SolutionsSection() {
               iconColor="white"
               href={solutionsData.btnLink}
               hoverBg="white"
-              className="w-fit"
+              className="w-fit lg:px-[35px]"
             />
           </div>
         </div>

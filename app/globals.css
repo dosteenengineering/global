@@ -231,7 +231,7 @@ body::-webkit-scrollbar {
 }
 
 .hero-heading {
-  @apply text-[36px] md:text-95 font-helvetica uppercase leading-[1.08] md:leading-[1.096];
+  @apply text-[36px] md:text-95 font-helvetica uppercase leading-[1];
 }
 
 .text-description {

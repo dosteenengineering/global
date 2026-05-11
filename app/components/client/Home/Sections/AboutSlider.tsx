@@ -226,7 +226,7 @@ export default function AboutSlider() {
                   textColor="black"
                   iconColor="primary"
                   hoverBg="black"
-                  className="max-w-[184px]"
+                  className="max-w-[215px]"
                 />
               </div>
             </div>
