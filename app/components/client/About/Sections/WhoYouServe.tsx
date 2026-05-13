@@ -33,22 +33,29 @@ function ServeCard({ icon, label }: { icon: string; label: string }) {
 
 export default function WhoYouServe() {
   return (
-    <section className="relative w-full select-none py-140 3xl:py-150">
+    <section className="relative w-full select-none py-[50px] md:py-140 3xl:py-150">
       <SecondaryNoise />
       <div className="container w-full">
         <SectionTitle
           text={WhoWeServeData.title}
-          className="section-heading text-secondary uppercase mb-80"
+          className="section-heading text-secondary uppercase mb-[30px] md:mb-80"
         />
-
-        <Swiper
+ <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-20">
+          {WhoWeServeData.items.map((item) => (
+            <div key={item.id}>
+              <ServeCard icon={item.icon} label={item.label} />
+            </div>
+          ))}
+        </div>
+         
+        {/* <Swiper
           slidesPerView={2}
-          spaceBetween={20}
+          spaceBetween={16}
           breakpoints={{
             640: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
             1550: {
-              slidesPerView: 5,
+              slidesPerView: 5,spaceBetween: 20
             },
           }}
           className="w-full [&_.swiper-slide]:3xl:!w-[320px]"
@@ -58,7 +65,7 @@ export default function WhoYouServe() {
               <ServeCard icon={item.icon} label={item.label} />
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
       </div>
     </section>
   );
