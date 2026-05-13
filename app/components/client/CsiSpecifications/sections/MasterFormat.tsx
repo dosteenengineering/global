@@ -1,7 +1,5 @@
 import Image from "next/image";
-// import { MasterFormatData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
-import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 
 interface Props {
   data: {
