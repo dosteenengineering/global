@@ -645,7 +645,7 @@ const Footer = () => {
             viewport={{ amount: 0.1, once: true }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-[10px] sm:gap-20 mb-20  sm:mb-40 container"
           >
-            <div>
+            <div className="border-b border-black/35 pb-[10px]">
               <Link
                 href={`mailto:${contact.email}`}
                 className="flex items-center gap-2 md:gap-3 text-19 font-[500] font-poppins -tracking-[2%] leading-[1.52] text-secondary"
@@ -660,7 +660,6 @@ const Footer = () => {
                 <span>{contact.email}</span>
               </Link>
             </div>
-            <div className="w-full sm:w-[1px] h-[1px] sm:h-[40px] bg-[#C2C2C2] max-w-[187px] sm:max-w-auto" />
             <div>
               <Link
                 href={`tel:${contact.phone.replace(/\s/g, "")}`}
@@ -731,15 +730,52 @@ const Footer = () => {
               onClick={() => setCallbackOpen(true)}
             />
           </motion.div>
-
+  <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ amount: 0.1, once: true }}
+          className="flex flex-col justify-between"
+        > 
+          <div 
+            className="py-[30px] md:py-40 3xl:pt-40 3xl:pb-[42px] border-t border-[#D0CFC9]  "
+          >
+            <div className="container">
+              <p className="text-[18px] lg:text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
+                Subscribe to our newsletter
+              </p>
+              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
+                <input
+                  type="email"
+                  placeholder="Enter Your Email"
+                  className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
+                />
+                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
+                  <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
+                    Subscribe
+                  </span>
+                  <Image
+                    src="/assets/icons/button-arrow-top-right.svg"
+                    alt=""
+                    width={25}
+                    height={25}
+                    className="relative z-10 w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
           <motion.div
             variants={moveUp(0.6)}
             initial="hidden"
             whileInView="show"
             viewport={{ amount: 0.1, once: true }}
-            className="flex items-center gap-[25px] border-t border-[#D0CFC9] pt-[30px] pb-20 container"
+            className="  border-t border-[#D0CFC9] pt-[30px] pb-20"
           >
-            {certifications.map((cert, index) => (
+            <div className="flex items-center gap-[25px]  container">
+              {certifications.map((cert, index) => (
               <motion.div
                 key={cert.alt}
                 variants={moveUp(index * 0.1)}
@@ -756,6 +792,7 @@ const Footer = () => {
                 />
               </motion.div>
             ))}
+            </div>
           </motion.div>
         </div>
 
@@ -764,11 +801,12 @@ const Footer = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ amount: 0.1, once: true }}
-          className="relative container"
+          className="relative "
         >
           <FooterNoise />
-          <div className="relative py-[14px] flex flex-col gap-4 -tracking-[2%]">
-            <div className="flex items-center justify-between">
+          <div className="container">
+            <div className="relative py-5 flex flex-col gap-[10px] -tracking-[2%]">
+            <div className="flex items-center justify-left gap-[30px]">
               {bottomLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -779,9 +817,10 @@ const Footer = () => {
                 </Link>
               ))}
             </div>
-            <p className="text-15 font-[300] text-center font-poppins text-paragraph leading-[1.66]">
+            <p className="text-15 font-[300]  font-poppins text-paragraph leading-[1.66]">
               ©{new Date().getFullYear()} Dosteen. All Rights Reserved
             </p>
+          </div>
           </div>
         </motion.div>
       </div>

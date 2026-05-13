@@ -13,13 +13,13 @@ function Card({
   description: string;
 }) {
   return (
-    <div className="relative flex flex-col gap-8 p-60 3xl:pb-[63px] w-full">
+    <div className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full">
       <SecondaryNoise />
       <div className="relative z-10 flex flex-col gap-8">
-        <div className="w-[100px] h-[100px] relative mb-100">
+        <div className="w-[50px] h-[50px] lg:w-[120px] lg:h-[120px] relative lg:mb-100">
           <Image src={icon} alt={title} fill className="object-contain" />
         </div>
-        <div className="flex flex-col gap-20">
+        <div className="flex flex-col gap-10px md:gap-20">
           <h2 className="section-heading">
             {title}
           </h2>
@@ -38,7 +38,7 @@ export default function MissionVision() {
   return (
     <section className="bg-white w-full select-none">
       <div className="container w-fullborder-[#c2c2c2]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-30 border-b border-[#c2c2c2] py-140 3xl:py-200 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[10px] md:gap-30 border-b border-[#c2c2c2] py-140 3xl:py-200 ">
           <div>
               <Card
                 icon={mission.icon}
@@ -46,7 +46,7 @@ export default function MissionVision() {
                 description={mission.description}
               />
           </div>
-          <div className="pt-100">
+          <div className="lg:pt-100">
               <Card
                 icon={vision.icon}
                 title={vision.title}

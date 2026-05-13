@@ -43,14 +43,14 @@ export default function InnerPageBanner({
         </div>
 
         <h1
-          className={`text-secondary ${description ? "mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}
+          className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}
         >
           {title}
         </h1>
 
         {description && (
           <p
-            className={`text-secondary mb-120 text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}
+            className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}
           >
             {description}
           </p>
@@ -59,14 +59,14 @@ export default function InnerPageBanner({
 
       {/* 3. Image */}
       {image && (
-        <div ref={ref} className="relative w-full h-[650px] overflow-hidden">
+        <div ref={ref} className="relative w-full h-[244px] md:h-[450px] xl:h-[650px] overflow-hidden">
           <Image
             src={image}
             alt={imageAlt}
             fill
             className="object-cover object-top-left"
             style={{
-              transform: `scale(${1.1}) translateY(${parallaxY}vh)`,
+              transform: `scale(${1.05}) translateY(${parallaxY}vh)`,
             }}
             priority
           />
