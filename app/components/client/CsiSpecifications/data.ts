@@ -1,4 +1,6 @@
+import { desc } from "framer-motion/client";
 import { items } from "../recognitions/data";
+import { BenefitItem } from "../Bim/data";
 
 export const banner = {
   title: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
@@ -134,4 +136,92 @@ export const systemsData = {
       system: "Fire Curtain & Smoke Curtain Activation Systems",
     },
   ],
+};
+
+export const downloadData = {
+  sectionTitle: "DOWNLOAD DOSTEEN CSI SPECIFICATION SECTIONS",
+
+  sections: [
+    {
+      id: 1,
+      title: "Fire Curtains & Smoke Curtains",
+      division: "Division 08",
+      section: "08 34 00 Special Function Doors",
+      icon: "/assets/icons/cs-spec/icon-1.svg",
+      link: "#",
+    },
+    {
+      id: 2,
+      title: "Roller Shutters & Industrial Doors",
+      division: "Division 08",
+      section: "08 33 23 Overhead Coiling Doors",
+      icon: "/assets/icons/cs-spec/icon-2.svg",
+      link: "#",
+    },
+    {
+      id: 3,
+      title: "Flood Barriers",
+      division: "Division 08",
+      section: "08 11 13 Hollow Metal Doors & Frames",
+      icon: "/assets/icons/cs-spec/icon-3.svg",
+      link: "#",
+    },
+    {
+      id: 4,
+      title: "Dock Levellers & Dock Equipment",
+      division: "Division 11",
+      section: "11 16 00 Loading Dock Equipment",
+      icon: "/assets/icons/cs-spec/icon-4.svg",
+      link: "#",
+    },
+    {
+      id: 5,
+      title: "Waste Chutes & Compactors",
+      division: "Division 11",
+      section: "11 82 00 Solid Waste Handling Equipment",
+      icon: "/assets/icons/cs-spec/icon-5.svg",
+      link: "#",
+    },
+    {
+      id: 6,
+      title: "Architectural Shading",
+      division: "Division 10",
+      section: "10 71 13 Exterior Sun Control Devices",
+      icon: "/assets/icons/cs-spec/icon-6.svg",
+      link: "#",
+    },
+  ],
+};
+
+
+export interface UsesItem {
+  id: string;
+  label: string;
+  description: string;
+  image: string;
+}
+
+export const whoUsesSection = {
+  title: "Who Uses Dosteen's CSI Specifications",
+  description: "Dosteen's CSI specification documents are used at different stages of the project by different disciplines — each with a specific purpose.",
+  items: [
+    {
+      id: "mep-consultants",
+      label: "MEP Consultants",
+      description: "Fully coordinated BIM models reduce design clashes before construction begins. Dosteen's Revit families integrate directly into the consultant's federated model, minimising RFIs and design queries on site.",
+      image: "/assets/images/bim/banner.jpg",
+    },
+    {
+      id: "main-contractors",
+      label: "Main Contractors",
+      description: "Clash-free building systems models reduce on-site rework and programme delays. Fixing schedules and installation sequences derived directly from the BIM model. Single contact for all systems BIM coordination.",
+      image: "/assets/images/bim/benefits/2.jpg",
+    },
+    {
+      id: "developers-fm",
+      label: "Developers & FM Teams",
+      description: "As-built BIM models delivered at handover support FM operations, COBie data obligations, and Civil Defence record submissions — reducing the cost and effort of post-handover documentation.",
+      image: "/assets/images/project-details/solutions/1.jpg",
+    },
+  ] satisfies UsesItem[],
 };
