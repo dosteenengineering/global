@@ -39,14 +39,16 @@ export default function CtaSection() {
                 <div className="overflow-hidden self-stretch flex-shrink-0 h-px w-full sm:h-full sm:w-px my-2 sm:my-0">
                   <motion.div
                     className="w-full h-full"
-                    variants={moveUp(0.18)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ amount: 0.1, once: true }}
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)",
-                    }}
+                    // variants={moveUp(0.18)}
+                    // initial="hidden"
+                    // whileInView="show"
+                    // viewport={{ amount: 0.1, once: true }}
+                  style={{
+                    background: window.innerWidth < 768
+                      ? "linear-gradient(90deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)"
+                      : "linear-gradient(180deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)",
+                  }}
+                    
                   />
                 </div>
               )}

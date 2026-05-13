@@ -117,13 +117,13 @@ export default function AboutSlider() {
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <div className="absolute top-[-30%] md:-top-88 lg:-top-73 left-0 pointer-events-none">
+      <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
           width={600}
           height={500}
-          className="object-contain w-[60%] md:w-full h-full"
+          className="object-contain min-w-[280px] w-[53.14%] sm:w-[60%] lg:w-full h-full"
         />
       </div>
 

@@ -26,13 +26,13 @@ export default function InnerPageBanner({
   return (
     <div className="w-full">
       {/* 1. Gradient block — standalone, no content */}
-      <div className="w-full h-[250px] 3xl:h-[286px] relative">
+      <div className="w-full h-[154px] lg:h-[250px] 3xl:h-[286px] relative">
         <BannerNoise />
       </div>
 
       {/* 2. Content — line, title, description */}
       <div className="container">
-        <div className="w-full mb-80">
+        <div className="w-full mb-[70px] lg:mb-80">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}

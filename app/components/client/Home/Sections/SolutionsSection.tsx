@@ -36,7 +36,7 @@ export default function SolutionsSection() {
   }, [activeTab]);
 
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
-
+const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <section className="relative w-full lg:min-h-screen text-white overflow-hidden">
       <div
@@ -45,7 +45,7 @@ export default function SolutionsSection() {
       />
       <div className="absolute inset-0 bg-black/70" />
 
-      <div className="relative z-10 w-full pt-140 3xl:pt-150 overflow-hidden">
+      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
           <SectionTitle
             text={solutionsData.mainTitle}
@@ -145,7 +145,7 @@ export default function SolutionsSection() {
             whileInView="show"
             variants={moveUp(0.2)}
             viewport={{ once: true }}
-            className="lg:hidden mt-10 md:mt-12"
+            className="lg:hidden mb-12 mt-[30px] md:mt-12"
           >
             {solutionsData.tabs.map((tab: SolutionTab, index: number) => {
               const isOpen = activeTab === tab.key;
@@ -161,7 +161,7 @@ export default function SolutionsSection() {
                   {/* Accordion trigger */}
                   <button
                     onClick={() => setActiveTab(isOpen ? null : tab.key)}
-                    className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-2"
+                    className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-[10px]"
                   >
                     <motion.div
                       initial="hidden"
@@ -179,10 +179,12 @@ export default function SolutionsSection() {
                       >
                         {tab.label}
                       </span>
-                      <FiArrowRight
-                        size={24}
-                        className={`transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
-                      />
+                      
+                      <div    className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}> 
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>  
+                      </div>
                     </motion.div>
                   </button>
                   {/* Accordion body */}
@@ -191,12 +193,12 @@ export default function SolutionsSection() {
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3 className="text-55 leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
+                      <h3 className="text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
                         {tab.leftTitle}
                       </h3>
 
                       {/* Right items */}
-                      <div className="grid grid-cols-2 space-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%]">
+                     <div className="grid grid-cols-2 gap-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] pb-8">
                         {tab.rightItems.map((item: string, index: number) => (
                           <motion.div
                             key={`${activeTab}-${index}`}
@@ -205,9 +207,20 @@ export default function SolutionsSection() {
                             variants={moveUp(index * 0.06)}
                             viewport={{ once: true }}
                             className="flex items-center"
+                            onMouseEnter={() => setHoveredIndex(index)}
+                            onMouseLeave={() => setHoveredIndex(null)}
+                            onTouchStart={() => setHoveredIndex(index)}
+                            onTouchEnd={() => setHoveredIndex(null)}
                           >
-                            {/* <FiArrowRight size={20} /> */}
-                            <span>{item}</span>
+                            <span className={`transition-all duration-300   ${
+                                hoveredIndex === index ? "font-[700]" : ""
+                              }`}  >{item}</span>
+                            <FiArrowRight
+                              size={20}
+                              className={` transition-all duration-300 ${
+                                hoveredIndex === index ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-1"
+                              }`}
+                            />
                           </motion.div>
                         ))}
                       </div>
@@ -226,7 +239,7 @@ export default function SolutionsSection() {
               iconColor="white"
               href={solutionsData.btnLink}
               hoverBg="white"
-              className="w-fit lg:px-[35px]"
+              className="w-fit px-[27px] lg:px-[35px]"
             />
           </div>
         </div>

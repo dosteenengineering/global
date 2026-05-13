@@ -196,7 +196,7 @@ export default function BlogsSection() {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden relative py-140">
+      <div className="lg:hidden relative py-[50px] md:py-140">
         <div
           ref={containerRef}
           className="container flex items-center justify-between mb-[30px] md:mb-12"

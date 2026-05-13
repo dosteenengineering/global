@@ -99,7 +99,7 @@ const AccordionItem = ({
         onClick={onToggle}
         className="w-full flex items-center justify-between py-[15px] text-30 font-[500] font-poppins -tracking-[2%] text-secondary leading-[1.52]"
       >
-        <span>{title}</span>
+        <span className="text-left">{title}</span>
         <span
           className="text-[19px] leading-none"
           style={{

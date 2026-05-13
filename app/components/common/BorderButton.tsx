@@ -75,7 +75,7 @@ export default function BorderButton({
         alt="arrow"
         width={18}
         height={18}
-        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
+        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
       />
     </>
   );

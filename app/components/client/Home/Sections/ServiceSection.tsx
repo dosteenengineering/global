@@ -179,8 +179,8 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* ===== Mobile / Tablet ======= */}
-        <div className="lg:hidden pt-30 md:pt-50">
-          <Swiper
+        <div className="lg:hidden pt-[28px] md:pt-50">
+          <Swiper 
             spaceBetween={44}
             slidesPerView="auto"
             onSlideChange={(swiper) =>
@@ -196,10 +196,10 @@ export default function ServicesSection() {
                     animate={isInView ? "show" : "hidden"}
                     variants={moveUp(index * 0.15)}
                     onClick={() => setActiveTab(tab.key)}
-                    className="w-full text-left"
+                    className="w-full text-left pb-[10px]"
                   >
                     <span
-                      className={`text-30 transition-all duration-300 ${isActive ? "font-semibold text-white" : "text-white/60"}`}
+                      className={`text-30 transition-all duration-300 pb-[10px]  ${isActive ? "font-semibold text-white border-b-1 border-white" : "text-white/60"}`}
                     >
                       {tab.label}
                     </span>
@@ -209,7 +209,7 @@ export default function ServicesSection() {
             })}
           </Swiper>
 
-          <div className="h-[1px] bg-[#76A7FF] mt-[10px] mb-[30px] md:my-6 md:mb-14" />
+          <div className="h-[1px] bg-[#76A7FF] mb-[30px] md:mb-6 md:mb-14 relative bottom-[1px]" />
 
           <div>
             <div className="relative w-[70%] h-[80px] sm:h-[180px] mb-[30px] md:mb-12">
@@ -274,7 +274,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               className="w-fit mt-20 md:mt-12"
             >
-              <BorderButton text="Read More" iconColor="white" px="lg:px-[35px]" />
+              <BorderButton text="Read More" iconColor="white" px="px-[23px] lg:px-[35px]" />
             </motion.div>
           </div>
         </div>
