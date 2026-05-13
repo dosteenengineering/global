@@ -1,10 +1,17 @@
 import InnerPageBanner from "../../common/InnerPageBanner";
-import { banner, featuresList, MasterFormatData, systemsData } from "./data";
+import {
+  banner,
+  featuresList,
+  MasterFormatData,
+  systemsData,
+  whoUsesSection,
+} from "./data";
 import FeaturesList from "./sections/FeaturesList";
 import MasterFormat from "./sections/MasterFormat";
 import ThreePartSpec from "./sections/ThreePartSpec";
 import Systems from "./sections/Systems";
 import DownloadSection from "./sections/DownloadSection";
+import Benefits from "../Bim/Sections/Benefits";
 const Index = () => {
   return (
     <>
@@ -14,6 +21,7 @@ const Index = () => {
       <ThreePartSpec />
       <Systems data={systemsData} />
       <DownloadSection />
+      <Benefits data={whoUsesSection} showSecondaryNoise={false} />
     </>
   );
 };
