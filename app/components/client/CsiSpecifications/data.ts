@@ -64,3 +64,74 @@ export const threePartSpecData = {
     },
   ],
 };
+
+export const systemsData = {
+  title: "Dosteen Systems — CSI MasterFormat Division Reference",
+
+  tableData: [
+    {
+      id: 1,
+      division: "08 — Openings",
+      category: "Doors & specialty doors",
+      sectionNumber: "08 33 23",
+      sectionTitle: "Overhead Coiling Doors",
+      system: "Roller Shutters · Industrial Sectional Doors",
+    },
+    {
+      id: 2,
+      division: "08 — Openings",
+      category: "Doors & specialty doors",
+      sectionNumber: "08 34 00",
+      sectionTitle: "Special Function Doors",
+      system: "Fire Curtains · Fire-Rated Roller Shutters · Smoke Curtains",
+    },
+    {
+      id: 3,
+      division: "08 — Openings",
+      category: "Doors & specialty doors",
+      sectionNumber: "08 11 13",
+      sectionTitle: "Hollow Metal Doors & Frames",
+      system: "Flood Barrier Doors · Force Entry Resistant Doors",
+    },
+    {
+      id: 4,
+      division: "10 — Specialties",
+      category: "Sun control & partitions",
+      sectionNumber: "10 71 13",
+      sectionTitle: "Exterior Sun Control Devices",
+      system: "Architectural Shading · Louvres · Facade Screens",
+    },
+    {
+      id: 5,
+      division: "10 — Specialties",
+      category: "Sun control & partitions",
+      sectionNumber: "10 22 13",
+      sectionTitle: "Operable Partitions",
+      system: "Moveable Partitions · Demountable Walls",
+    },
+    {
+      id: 6,
+      division: "11 — Equipment",
+      category: "Loading dock & waste",
+      sectionNumber: "11 16 00",
+      sectionTitle: "Loading Dock Equipment",
+      system: "Dock Levellers · Dock Lifts · Dock Shelters",
+    },
+    {
+      id: 7,
+      division: "11 — Equipment",
+      category: "Loading dock & waste",
+      sectionNumber: "11 82 00",
+      sectionTitle: "Solid Waste Handling Equipment",
+      system: "Waste Chutes · Garbage Chutes · Waste Compactors",
+    },
+    {
+      id: 8,
+      division: "28 — Electronic Safety",
+      category: "Fire & access",
+      sectionNumber: "28 31 00",
+      sectionTitle: "Fire Detection & Alarm",
+      system: "Fire Curtain & Smoke Curtain Activation Systems",
+    },
+  ],
+};
