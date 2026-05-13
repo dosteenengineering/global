@@ -12,6 +12,7 @@ import ThreePartSpec from "./sections/ThreePartSpec";
 import Systems from "./sections/Systems";
 import DownloadSection from "./sections/DownloadSection";
 import Benefits from "../Bim/Sections/Benefits";
+import ComplianceSection from "./sections/ComplianceSection";
 const Index = () => {
   return (
     <>
@@ -22,6 +23,7 @@ const Index = () => {
       <Systems data={systemsData} />
       <DownloadSection />
       <Benefits data={whoUsesSection} showSecondaryNoise={false} />
+      <ComplianceSection/>
     </>
   );
 };

@@ -225,3 +225,4 @@ export const whoUsesSection = {
     },
   ] satisfies UsesItem[],
 };
+
