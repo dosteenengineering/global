@@ -72,7 +72,7 @@ export default function AboutDetails() {
           alt="decorative lines"
           width={600}
           height={500}
-          className="object-contain 2xl:w-[500px] 3xl:w-[600px]"
+          className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]"
         />
       </div>
 

@@ -18,22 +18,22 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         />
       </div>
 
-      <div className="relative z-10 container py-140 3xl:py-150 w-full">
+      <div className="relative z-10 container py-[50px] md:py-140 3xl:py-150 w-full">
         {/* Title */}
         <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
         </h2>
 
         {/* Divider */}
-        <div className="w-full border-t border-[#76A7FF] mb-80 3xl:mb-100" />
+        <div className="w-full border-t border-[#76A7FF] mb-[30px] md:mb-80 3xl:mb-100" />
 
         {/* Description */}
-        <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-50 ${descriptionWidth}`}>
+        <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
           {description}
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-wrap gap-[10px]">
+        <div className="flex flex-wrap gap-5 md:gap-[10px]">
           {buttons.map((btn) => (
             <BorderButton
               key={btn.text}

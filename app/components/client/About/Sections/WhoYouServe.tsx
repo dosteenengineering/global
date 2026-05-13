@@ -10,7 +10,7 @@ function ServeCard({ icon, label }: { icon: string; label: string }) {
   return (
     <div className="flex flex-col group">
       {/* Icon row */}
-      <div className="pb-40 relative">
+      <div className="pb-[10px] md:pb-40 relative">
         {/* Base line */}
         <div className="absolute bottom-0 left-0 w-full h-px bg-[#c2c2c2]" />
 
@@ -18,13 +18,13 @@ function ServeCard({ icon, label }: { icon: string; label: string }) {
         <div className="absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-500 group-hover:w-full" />
 
         {/* Icon */}
-        <div className="w-15 h-15 relative">
+        <div className="w-[43px] h-[40px] md:w-15 md:h-15 relative">
           <Image src={icon} alt={label} fill className="object-contain" />
         </div>
       </div>
 
       {/* Label */}
-      <p className="text-25 md:text-30 font-light text-secondary leading-[1.333] tracking-[-0.02em] mt-30">
+      <p className="relative text-[18px] md:text-30 font-light text-secondary leading-[1.556] md:leading-[1.333] tracking-[-0.02em] mt-[10px] md:mt-30">
         {label}
       </p>
     </div>
@@ -40,7 +40,7 @@ export default function WhoYouServe() {
           text={WhoWeServeData.title}
           className="section-heading text-secondary uppercase mb-[30px] md:mb-80"
         />
- <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-[35px] md:gap-x-5">
           {WhoWeServeData.items.map((item) => (
             <div key={item.id}>
               <ServeCard icon={item.icon} label={item.label} />
