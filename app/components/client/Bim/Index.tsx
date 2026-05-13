@@ -6,6 +6,7 @@ import { banner, ctaData, BimFaqData  } from "./data";
 import Benefits from "./Sections/Benefits";
 import BimProcess from "./Sections/BimProcess";
 import BuildingSystems from "./Sections/BuildingSystems";
+import { bimEngineeringData } from "./data";
 import BimEngineeringData from "./Sections/BimEngineeringData";
 import CtaSection from "../../common/CtaSection";
 import Faq from "../../common/Faq";
@@ -24,8 +25,8 @@ const Index = () => {
       <Benefits />
       <BimProcess />
       <BuildingSystems />
-      <BimEngineeringData />
-      <Faq bimFaqData={BimFaqData} />
+      <BimEngineeringData data={bimEngineeringData}  />
+      <Faq faqData={BimFaqData} />
       <CtaSection {...ctaData} descriptionWidth="max-w-[968px]" titleWidth="max-w-[34ch]"/>
     </>
   );

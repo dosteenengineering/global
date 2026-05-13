@@ -193,7 +193,6 @@ export const downloadData = {
   ],
 };
 
-
 export interface UsesItem {
   id: string;
   label: string;
@@ -224,4 +223,75 @@ export const whoUsesSection = {
       image: "/assets/images/project-details/solutions/1.jpg",
     },
   ] satisfies UsesItem[],
+};
+
+export const specData = {
+  title: "Dosteen Specifications — By the Numbers",
+  stats: [
+    {
+      id: 1,
+      value: "8+",
+      label: "Systems with CSI Spec Documentation",
+    },
+    {
+      id: 2,
+      value: "3-Part",
+      label: "Format — General, Products, Execution",
+    },
+    {
+      id: 3,
+      value: "2018",
+      label: "MasterFormat Edition",
+    },
+    {
+      id: 4,
+      value: "UAE & Oman",
+      label: "Compliance References Included",
+    },
+  ],
+};
+
+export const CsiFaqData = {
+  title: "Frequently Asked Question",
+  items: [
+    {
+      id: "faq-1",
+      question: "What BIM software does Dosteen's engineering team use?",
+      answer:
+        "BIM coordination is the process of integrating the BIM models of all building systems — including MEP, structural, architectural, and specialist systems — into a single federated model. For Dosteen, this means our building systems models are coordinated with the main contractor’s BIM environment before installation begins, eliminating clashes between ductwork, piping, structural elements, and our system installations.",
+    },
+    {
+      id: "faq-2",
+      question: "What LOD can Dosteen deliver for building systems models?",
+      answer:
+        "Dosteen delivers models from LOD 200 (spatial coordination) through to LOD 400 (installation-ready fabrication detail), depending on the project stage and BIM Execution Plan requirements. As-built models are delivered at LOD 400 or as agreed with the project team. Confirm your LOD requirements with our engineering team at appointment.",
+    },
+    {
+      id: "faq-3",
+      question: "Can Dosteen integrate with our project's existing BIM model?",
+      answer:
+        "For fire protection systems, Dosteen provides BIM-coordinated shop drawings for sprinkler layouts, pipe supports, and equipment placement. We deliver clash-free models that integrate with the building’s structural and MEP models, ensuring correct clearances and installation sequences. As-built BIM models are also provided for Civil Defence submissions and FM handover.",
+    },
+    {
+      id: "faq-4",
+      question: "How does Dosteen handle clash detection?",
+      answer:
+        "BIM coordination reduces construction delays by identifying and resolving clashes in the model before installation begins. When MEP, structural, and specialist systems are coordinated in BIM, issues like pipe-duct interferences, incorrect clearances, and installation conflicts are resolved digitally. This minimises on-site rework, reduces RFIs, and keeps the construction programme on schedule.",
+    },
+  ],
+};
+
+export const ctaData = {
+  title: "Need a CSI Specification for Your Project? We'll Have It Ready in 5 Days",
+  description: "Share the system, project, and Civil Defence authority — Dosteen will deliver a project-ready CSI MasterFormat spec within 5 working days, free of charge.",
+  buttons: [
+    {
+      text: "REQUEST A SPECIFICATION",
+      href: "#",
+    },
+    {
+      text: "DOWNLOAD ALL SPECS",
+      href: "#",
+    },
+  ],
 };

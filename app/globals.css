@@ -290,3 +290,37 @@ body::-webkit-scrollbar {
 @keyframes wmDrift     { from { transform: translateX(0); }               to { transform: translateX(-3%); } }
 @keyframes spinCW  { to { transform: rotate(360deg);  } }
 @keyframes spinCCW { to { transform: rotate(-360deg); } }
+
+@keyframes spinSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spinSlow 20s linear infinite;
+    transform-origin: center center;
+}
+
+@keyframes rotateSwing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.animate-rotate-swing {
+    animation: rotateSwing 12s ease-in-out infinite;
+    transform-origin: center center;
+}
