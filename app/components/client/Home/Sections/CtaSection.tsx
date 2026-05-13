@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { ctaData } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
@@ -10,6 +10,19 @@ import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
 
 export default function CtaSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  checkScreen();
+
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
   return (
     <section className="relative w-full overflow-hidden">
       <PrimaryNoise />
@@ -43,11 +56,11 @@ export default function CtaSection() {
                     // initial="hidden"
                     // whileInView="show"
                     // viewport={{ amount: 0.1, once: true }}
-                  style={{
-                    background: window.innerWidth < 768
-                      ? "linear-gradient(90deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)"
-                      : "linear-gradient(180deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)",
-                  }}
+                 style={{
+                      background: isMobile
+                        ? "linear-gradient(90deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)"
+                        : "linear-gradient(180deg, rgba(118, 167, 255, 0) 0%, #76A7FF 49.52%, rgba(118, 167, 255, 0) 100%)",
+                    }}
                     
                   />
                 </div>
