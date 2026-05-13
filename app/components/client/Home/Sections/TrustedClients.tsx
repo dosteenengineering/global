@@ -67,7 +67,7 @@ const TrustedClients = () => {
   }, []);
 
   return (
-    <section className="bg-white py-[50px] md:py-120 overflow-hidden">
+    <section className="bg-white py-12.5 md:py-120 overflow-hidden">
       <div className="container">
         <div
           ref={viewportRef}

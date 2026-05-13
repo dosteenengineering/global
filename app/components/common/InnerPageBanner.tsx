@@ -64,7 +64,7 @@ export default function InnerPageBanner({
             src={image}
             alt={imageAlt}
             fill
-            className="object-cover object-top-left"
+            className="object-cover object-center-top lg:object-top-left"
             style={{
               transform: `scale(${1.05}) translateY(${parallaxY}vh)`,
             }}

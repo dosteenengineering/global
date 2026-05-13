@@ -66,7 +66,7 @@ const slideGroups = AboutData.stats.reduce<(typeof AboutData.stats)[]>(
 export default function AboutDetails() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
-      <div className="absolute -top-43 md:-top-88 lg:-top-61 left-[-131px] md:left-0 pointer-events-none">
+      <div className="absolute -top-43   lg:-top-68 left-[-131px] lg:left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"

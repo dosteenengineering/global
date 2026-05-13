@@ -36,7 +36,7 @@ useEffect(() => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container py-[50px] md:py-140 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
+      <div className="relative z-10 container py-12.5 md:py-140 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
         {/* Heading */}
         <SectionTitle
           title={ctaData.heading}

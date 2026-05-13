@@ -199,7 +199,7 @@ export default function WhyDosteen() {
       : `wmEnterLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`;
 
   return (
-    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-[50px] sm:py-140">
+    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-12.5 sm:py-140">
       <PrimaryNoise />
 
       <Image
