@@ -38,7 +38,7 @@ const getSlideStyles = (isActive: boolean, w: number) => {
               ? 130
               : 150
     : w < 640
-      ? 22
+      ? 25
       : w < 1024
         ? 30
         : w < 1920
@@ -47,7 +47,7 @@ const getSlideStyles = (isActive: boolean, w: number) => {
 
   const iconMb = isActive
     ? w < 1024
-      ? 16
+      ? 10
       : w < 1280
         ? 20
         : w < 1536
@@ -65,7 +65,7 @@ const getSlideStyles = (isActive: boolean, w: number) => {
 
   const titleMb = isActive
     ? w < 1024
-      ? 12
+      ? 10
       : w < 1280
         ? 12
         : w < 1536
@@ -421,7 +421,7 @@ export default function WhyDosteen() {
                       }}
                     >
                       <p
-                        className="text-center font-[300] -tracking-[2%] font-poppins text-15 lg:text-25 3xl:text-30 leading-[1.33] max-w-[508px] px-6 lg:px-18 2xl:px-15 3xl:px-0 text-white"
+                        className=" text-center font-[300] -tracking-[2%] font-poppins text-15 lg:text-25 3xl:text-30 leading-[1.667] md:leading-[1.33] max-w-[28ch] md:max-w-[508px] px-6 lg:px-18 2xl:px-15 3xl:px-0 text-white"
                         style={{
                           opacity: showDesc ? 1 : 0,
                           transform: showDesc

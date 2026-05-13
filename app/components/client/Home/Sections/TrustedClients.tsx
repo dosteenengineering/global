@@ -85,7 +85,7 @@ const TrustedClients = () => {
             {[...logos, ...logos, ...logos].map((logo, i) => (
               <div
                 key={i}
-                className="shrink-0 flex items-center justify-center w-fit h-[50px] lg:h-[80px]"
+                className="shrink-0 flex items-center justify-center w-fit h-[30px] md:h-[50px] lg:h-[80px]"
               >
                 <Image
                   src={logo}
