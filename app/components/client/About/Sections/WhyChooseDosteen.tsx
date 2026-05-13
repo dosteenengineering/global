@@ -106,17 +106,24 @@ const counterPill = (
     <section className="relative w-full select-none overflow-x-clip">
       <PrimaryNoise2 />
 
-      <div className="absolute right-[-40%] top-[-18%] w-[900px] h-[900px] 3xl:w-[1280px] 3xl:h-[1280px] pointer-events-none">
+      <div className="absolute right-[-17%] top-[-8%] md:right-[-40%] md:top-[-18%] w-[52%] h-[327px] md:w-[900px] md:h-[900px] 3xl:w-[1280px] 3xl:h-[1280px] pointer-events-none">
         <Image
           src="/assets/images/about/why-choose/why-bg2.svg"
           alt=""
           fill
-          className="object-contain"
+          className="object-contain hidden lg:block"
+          priority
+        />
+         <Image
+          src="/assets/images/about/cta/bg-right.svg"
+          alt="" 
+         fill
+          className="object-contain lg:hidden w-[203px] h-[327px]"
           priority
         />
       </div>
 
-      <div className="relative z-10 container py-[50px] md:py-[140px] 3xl:py-[150px] w-full">
+      <div className="relative z-10 container py-12.5 md:py-[140px] 3xl:py-[150px] w-full">
         <SectionTitle
           text={WhyChooseData.title}
           className="section-heading text-white uppercase mb-50 max-w-[30ch]"

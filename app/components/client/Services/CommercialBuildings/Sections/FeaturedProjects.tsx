@@ -35,7 +35,7 @@ export default function FeaturedProjects() {
   };
 
   return (
-    <section className="w-full relative py-140 3xl:py-150">
+    <section className="w-full relative py-12.5 md:py-140 3xl:py-150">
         <PrimaryNoise2 />
       <div className="container">
 

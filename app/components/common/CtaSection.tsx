@@ -9,7 +9,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
       <PrimaryNoise2 />
 
       {/* Decorative lines — right side */}
-      <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 w-[42%] h-[90%] pointer-events-none">
+      <div className="absolute z-10 right-[-17%] top-[-8%] md:right-0 md:top-1/2 -translate-y-1/2 w-[52%] h-[327px] md:w-[42%] md:h-[90%] pointer-events-none">
         <Image
           src="/assets/images/about/cta/bg-right.svg"
           alt=""
@@ -18,7 +18,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         />
       </div>
 
-      <div className="relative z-10 container py-[50px] md:py-140 3xl:py-150 w-full">
+      <div className="relative z-10 container py-12.5 md:py-140 3xl:py-150 w-full">
         {/* Title */}
         <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
@@ -39,7 +39,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
               key={btn.text}
               text={btn.text}
               iconColor="white"
-              px="px-30 3xl:px-[35px]"
+              px="px-[24px] md:px-30 3xl:px-[35px]"
               href={btn.href}
               hoverBg="white"
               className="w-fit"
