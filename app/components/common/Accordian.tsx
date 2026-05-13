@@ -40,7 +40,7 @@ const AccordionItemComponent = ({
         aria-expanded={isOpen}
         aria-controls={`accordion-body-${item.id}`}
         id={`accordion-trigger-${item.id}`}
-        className={`flex w-full items-center justify-between gap-4 text-left transition-all duration-300 ${isOpen ? "pt-50 3xl:pt-60 pb-30 pl-50" : "py-40 3xl:py-50"}`}
+        className={`flex w-full items-center cursor-pointer justify-between gap-4 text-left transition-all duration-300 ${isOpen ? "pt-50 3xl:pt-60 pb-30 pl-50" : "py-40 3xl:py-50"}`}
       >
         <span
           className={`text-30 leading-[1.33] font-light tracking-[-0.02em] max-w-[90%] 3xl:max-w-none ${isOpen ? "text-secondary" : "text-paragraph"}`}
