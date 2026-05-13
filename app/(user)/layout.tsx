@@ -8,7 +8,7 @@ import Footer from "../components/client/Layout/Footer";
 
 export const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-poppins",
 });
