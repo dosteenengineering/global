@@ -1,6 +1,3 @@
-import { desc } from "framer-motion/client";
-import { items } from "../recognitions/data";
-import { BenefitItem } from "../Bim/data";
 
 export const banner = {
   title: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
