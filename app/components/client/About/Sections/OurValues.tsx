@@ -25,7 +25,7 @@ function ValueCard({
 export default function OurValues() {
   return (
     <section className="bg-white w-full select-none overflow-hidden relative">
-      <div className="absolute -top-13 left-0 pointer-events-none">
+      <div className="absolute -top-13 left-0 pointer-events-none hidden lg:block">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
