@@ -21,7 +21,7 @@ export default function ProjectCard({
     <Link href={`/projects/${project.title.toLowerCase().replace(" ", "-")}`}>
       <div className="flex flex-col group cursor-pointer">
         {/* Image */}
-        <div className="relative w-full aspect-square overflow-hidden mb-30 3xl:mb-[32px]">
+        <div className="relative w-full aspect-[11.2/12] lg:aspect-square  overflow-hidden mb-30 3xl:mb-[32px]">
           <Image
             src={project.image}
             alt={project.title}
@@ -43,7 +43,7 @@ export default function ProjectCard({
         </div>
         {/* Title */}
         <h3
-          className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[15px] ${
+          className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] ${
             isDark ? "text-secondary" : "text-white"
           }`}
         >
@@ -51,7 +51,7 @@ export default function ProjectCard({
         </h3>
         {/* Location + Category */}
         <div
-          className={`flex items-center justify-between mb-[15px] pr-70 3xl:pr-80 ${
+          className={`flex items-center justify-between mb-[10px] md:mb-[15px] pr-70 3xl:pr-80 ${
             isDark ? "text-paragraph" : "text-white font-light"
           }`}
         >
@@ -74,14 +74,24 @@ export default function ProjectCard({
         {/* Divider */}
         {isDark ? (
           // Animated fill on hover
-          <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden">
+          <>
+          <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
             <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
           </div>
+          <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
+            <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+          </div>
+          </>
         ) : (
           // Animated fill on hover
-          <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden">
+          <>
+          <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
             <span className="absolute left-0 top-0 h-full w-full bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
           </div>
+          <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
+            <span className="absolute left-0 top-0 h-full w-full bg-[#C2C2C2] lg:bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+          </div>
+          </>
         )}
       </div>
     </Link>

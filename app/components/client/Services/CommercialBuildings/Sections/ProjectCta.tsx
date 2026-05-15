@@ -13,11 +13,11 @@ const ProjectCta = () => {
             dangerouslySetInnerHTML={{ __html: ProjectCtaData.description }}
           />
           <BorderButton
-            text="Know More Us"
+            text="Discuss your project"
             borderColor="black"
             textColor="black"
             iconColor="primary"
-            px="px-6 lg:px-[35px]"
+            px="px-8 lg:px-[35px]"
             hoverBg="black"
           />
         </div>
