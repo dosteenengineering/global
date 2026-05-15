@@ -57,7 +57,7 @@ function SystemCard({
       </div>
 
       {/* Title */}
-      <p className="mt-[10px] text-[18px] leading-[1.333] font-medium text-secondary group-hover:font-medium transition-all duration-300 tracking-[-0.02em]">
+      <p className="mt-[10px] text-[18px] leading-[1.56] md:leading-[1.333] font-medium text-secondary group-hover:font-medium transition-all duration-300 tracking-[-0.02em]">
         {system.title}
       </p>
 
@@ -142,7 +142,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
 
       {/* Cards Grid */}
       <div className="container ">
-      <div className="  w-full hidden md:gridgrid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
+      <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
         {data.systems.map((system) => (
           <SystemCard key={system.id} system={system} />
         ))}
