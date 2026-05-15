@@ -301,6 +301,37 @@ body::-webkit-scrollbar {
     filter: brightness(0) invert(1);
 }
 
+.spec-card{
+    isolation: isolate;
+    /* z-index: 1; */
+}
+.spec-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left:0;
+    width: 0;
+    height: 100%;
+    /* border-radius: 50%; */
+    background: linear-gradient(180deg, #1853D6 0%, #022E9E 100%);
+    /* transform-origin: center; */
+    transition: all 0.7s cubic-bezier(0.4, 0, 1, 1);
+    z-index: 0;
+    filter: blur(20px);
+}
+
+.spec-card:hover::before {
+    /* transform: scale(100); */
+    filter: blur(0);
+    width: 100%;
+}
+
+/* Content sits above the ripple */
+.spec-card>* {
+    position: relative;
+    z-index: 1;
+}
+
 /* ─── Why Dosteen ─── */
 @keyframes wmExitLeft {
     from {

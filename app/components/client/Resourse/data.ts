@@ -139,7 +139,6 @@ export const resourcesKnowledgeHubData = {
       label: "BIM & CAD Files",
       icon: "/assets/images/resources/tab-icons/tab-2.svg",
       title: "BIM Objects & CAD Downloads",
-
       description: "Download Dosteen product BIM objects for direct use in your project models. Available for Autodesk Revit, AutoCAD, and ArchiCAD. All objects are LOD 300 and carry product-accurate geometry and data properties.",
 
       button: {
@@ -149,26 +148,32 @@ export const resourcesKnowledgeHubData = {
 
       filters: ["ALL", "REVIT (RVT)", "AUTOCAD (DWG)", "IFC"],
 
-      items: [
-        {
-          id: 1,
-          type: "RVT",
-          title: "Flood Barrier System – Product Specification",
-          download: "#",
-        },
-        {
-          id: 2,
-          type: "RVT",
-          title: "Flood Barrier – Revit Family",
-          download: "#",
-        },
-        {
-          id: 3,
-          type: "DWG",
-          title: "Entrance System – AutoCAD 2D/3D",
-          download: "#",
-        },
-      ],
+      items: {
+        "AUTOCAD (DWG)": [
+          {
+            id: 1,
+            type: "RVT",
+            title: "Flood Barrier System — Product Specification",
+            download: "#",
+          },
+        ],
+        "REVIT (RVT)": [
+          {
+            id: 2,
+            type: "RVT",
+            title: "Sectional Overhead Door – Revit Family",
+            download: "#",
+          },
+        ],
+        IFC: [
+          {
+            id: 3,
+            type: "DWG",
+            title: "Entrance System – AutoCAD 2D/3D",
+            download: "#",
+          },
+        ],
+      },
     },
 
     {
@@ -181,7 +186,7 @@ export const resourcesKnowledgeHubData = {
         {
           id: 1,
           title: "How Sectional Overhead Doors Work",
-          image: "/assets/images/resources/video-1.webp",
+          image: "/assets/images/resources/videos-demos/vdo-img-1.jpg",
           tag: "PRODUCT DEMO",
           duration: "3:42",
           videoLink: "#",
@@ -189,7 +194,7 @@ export const resourcesKnowledgeHubData = {
         {
           id: 2,
           title: "Flood Barrier Installation Walkthrough",
-          image: "/assets/images/resources/video-2.webp",
+          image: "/assets/images/resources/videos-demos/vdo-img-2.jpg",
           tag: "HOW-TO",
           duration: "6:15",
           videoLink: "#",
@@ -197,7 +202,7 @@ export const resourcesKnowledgeHubData = {
         {
           id: 3,
           title: "Project Tour - Abu Dhabi Municipality",
-          image: "/assets/images/resources/video-3.webp",
+          image: "/assets/images/resources/videos-demos/vdo-img-3.jpg",
           tag: "PROJECT TOUR",
           duration: "4:58",
           videoLink: "#",
@@ -316,11 +321,92 @@ export const resourcesKnowledgeHubData = {
 
 export type ResourceHubData = typeof resourcesKnowledgeHubData;
 export type ResourceHubTab = ResourceHubData["tabs"][number];
-type ResourceItems<T> = T extends { items: infer Items }
-  ? Items extends readonly (infer Item)[]
-    ? Item
-    : Items extends Record<string, readonly (infer Item)[]>
-      ? Item
-      : never
-  : never;
+type ResourceItems<T> = T extends { items: infer Items } ? (Items extends readonly (infer Item)[] ? Item : Items extends Record<string, readonly (infer Item)[]> ? Item : never) : never;
 export type ResourceHubItem = ResourceItems<ResourceHubTab>;
+
+export const industryGuidesData = {
+  title: "Industry Guides, Standards & Technical Articles",
+
+  items: [
+    {
+      id: 1,
+      featured: true,
+      audience: "For Consultants",
+      type: "GUIDE",
+      title: "Understanding Dubai Municipality Requirements for Flood Barriers",
+      image: "/assets/images/resources/industry-guides/img-1.png",
+      link: "#",
+    },
+
+    {
+      id: 2,
+      featured: true,
+      audience: "For Architects",
+      type: "STANDARDS",
+      title: "UAE Civil Defence Code: Fire-Rated Door Requirements Explained",
+      image: "/assets/images/resources/industry-guides/img-2.png",
+      link: "#",
+    },
+
+    {
+      id: 3,
+      featured: true,
+      audience: "For Specifiers",
+      type: "CHECKLIST",
+      title: "Specifying Garage Doors: A Checklist for UAE Consultants",
+      image: "/assets/images/resources/industry-guides/img-3.jpg",
+      link: "#",
+    },
+  ],
+};
+
+export const specificationToolsData = {
+  title: "Specification Tools For Building Professionals",
+
+  items: [
+    {
+      id: 1,
+      title: "Flood Barrier Selector",
+      desc: "Answer 4 questions, get the right flood barrier type for your project",
+      buttonText: "LAUNCH TOOL",
+      link: "#",
+    },
+
+    {
+      id: 2,
+      title: "Door Opening Size Guide",
+      desc: "Enter your clear opening dimensions to find compatible door systems",
+      buttonText: "LAUNCH TOOL",
+      link: "#",
+    },
+
+    {
+      id: 3,
+      title: "Download Submission Pack",
+      desc: "Select your project type and get a bundled submittal-ready document pack",
+      buttonText: "LAUNCH TOOL",
+      link: "#",
+    },
+  ],
+};
+
+export const newsLetterData = {
+  title: "Stay updated when new resources are published",
+  desc: "New datasheets, BIM updates, compliance guides and industry standards delivered to your inbox.",
+  email: "dosteen@info.com",
+};
+
+export const ctaData = {
+  title: "Can't find what you need?",
+  description: "Our technical team can provide custom documentation, project-specific submittals, or help you select the right system for your building.",
+  buttons: [
+    {
+      text: "Contact technical team",
+      href: "#",
+    },
+    {
+      text: "Request a custom pack",
+      href: "#",
+    },
+  ],
+};
