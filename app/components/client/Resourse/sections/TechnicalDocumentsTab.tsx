@@ -67,7 +67,7 @@ const ResourceDownloadCard = ({ item }: { item: TechnicalDocumentItem }) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
-    <article className="bg-[#F4F4F4] px-25 md:px-40 py-6 md:py-35 grid grid-cols-[78px_1fr] gap-5 xl:gap-10 min-h-[190px]">
+    <article className="bg-[#F4F4F4] px-25 md:px-40 py-6 md:py-35 grid sm:grid-cols-[78px_1fr] gap-5 xl:gap-10 min-h-[190px]">
       <div className={`w-[78px] h-[78px] flex items-center justify-center text-24 font-poppins font-[600] 
       ${ isDwg ? "bg-[#E3EFE8] text-[#147C39]" : "bg-[#E6EBFF] text-primary" }`}
       >

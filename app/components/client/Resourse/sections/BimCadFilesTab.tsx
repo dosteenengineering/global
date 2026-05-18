@@ -35,7 +35,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
       : itemsByFilter[activeFilter] ?? [];
   return (
     <div className="pt-70 md:pt-100">
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-wrap">
         <div>
           <h2 className="text-[38px] md:text-55 leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
             {tab.title}
@@ -83,14 +83,14 @@ const ResourceDownloadCard = ({ item }: { item: BimCadFilesItem }) => {
   const tags = item.tags ?? [];
 
   return (
-    <article className="bg-[#F4F4F4] px-25 md:px-40 py-6 md:py-35 grid grid-cols-[78px_1fr] gap-5 xl:gap-10 ">
+    <article className="bg-[#F4F4F4] px-25 md:px-40 py-6 md:py-35 grid sm:grid-cols-[78px_1fr] gap-5 xl:gap-10 ">
       <div className={`w-[78px] h-[78px] flex items-center justify-center text-24 font-poppins font-[600] 
       ${isDwg ? "bg-[#E3EFE8] text-[#147C39]" : "bg-[#E6EBFF] text-primary"}`}
       >
         {item.type}
       </div>
 
-      <div className="flex min-w-0 gap-x-2 gap-y-3">
+      <div className="flex flex-wrap min-w-0 gap-x-2 gap-y-3">
         <h3 className="text-24 md:text-30 leading-[1.333333333333333] font-poppins font-light text-secondary max-w-[25ch]">{item.title}</h3>
         <div className="ml-auto w-fitt flex flex-wrap items-center justify-between gap-20">
           <a href={item.download} className="group inline-flex items-center gap-3 text-13 leading-none font-poppins font-light uppercase text-primary" >
