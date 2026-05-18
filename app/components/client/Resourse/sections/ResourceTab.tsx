@@ -10,6 +10,7 @@ import TechnicalDocumentsTab from "./TechnicalDocumentsTab";
 import VideosDemosTab from "./VideosDemosTab";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ResourseTabProps {
   data: ResourceHubData;
@@ -21,21 +22,18 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
 
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const tabsScrollerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const updateIndicator = () => {
       const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
       const activeButton = buttonRefs.current[activeIndex];
-      const container = tabsContainerRef.current;
 
-      if (!activeButton || !container) return;
-
-      const buttonRect = activeButton.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
+      if (!activeButton) return;
 
       setIndicatorStyle({
         width: activeButton.offsetWidth,
-        left: buttonRect.left - containerRect.left,
+        left: activeButton.offsetLeft,
       });
     };
 
@@ -49,6 +47,27 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
 
   const handleTabChange = (tab: ResourceHubTab) => {
     setActiveTab(tab.id);
+  };
+
+  useLayoutEffect(() => {
+    const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
+    const activeButton = buttonRefs.current[activeIndex];
+
+    activeButton?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeTab, data.tabs]);
+
+  const slideTabs = (direction: "prev" | "next") => {
+    const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
+    const nextIndex =
+      direction === "next"
+        ? Math.min(activeIndex + 1, data.tabs.length - 1)
+        : Math.max(activeIndex - 1, 0);
+
+    setActiveTab(data.tabs[nextIndex].id);
   };
 
   const renderTabContent = (tab: ResourceHubTab) => {
@@ -78,31 +97,58 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">{data.sectionDesc}</p>
         </div>
 
-        <div ref={tabsContainerRef} className="relative">
-          <div className="flex items-center 3xl:justify-between gap-5 xl:gap-10 2xl:gap-[40px] overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {data.tabs.map((tab, index) => {
-              const isActive = activeTab === tab.id;
-              return (
-                <button key={tab.id} ref={(el) => { buttonRefs.current[index] = el; }} type="button" onClick={() => handleTabChange(tab)}
-                  className="shrink-0 flex items-center gap-2 pb-20 text-left transition-colors duration-300"
-                >
-                  <Image
-                    src={tab.icon}
-                    alt=""
-                    width={28}
-                    height={28}
-                    className="h-7 w-7 shrink-0 object-contain"
-                  />
-                  <span className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all duration-300 
-                    ${isActive ? "font-medium " : "font-light" }`}>
-                    {tab.label}
-                  </span>
-                </button>
-              );
-            })}
+        <div className="relative">
+          <button
+            type="button"
+            aria-label="Previous resource tabs"
+            onClick={() => slideTabs("prev")}
+            className="absolute -left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-colors hover:border-primary hover:text-primary 3xl:hidden"
+          >
+            <ChevronLeft size={20} strokeWidth={1.8} />
+          </button>
+
+          <div
+            ref={tabsScrollerRef}
+            className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div
+              ref={tabsContainerRef}
+              className="relative flex min-w-max snap-x snap-mandatory items-center gap-5 px-10 sm:px-11 xl:gap-10 2xl:gap-[40px] 3xl:w-full 3xl:min-w-0 3xl:justify-between 3xl:px-0"
+            >
+              {data.tabs.map((tab, index) => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button key={tab.id} ref={(el) => { buttonRefs.current[index] = el; }} type="button" onClick={() => handleTabChange(tab)}
+                    className="flex shrink-0 snap-center items-center gap-2 pb-20 text-left transition-colors duration-300"
+                  >
+                    <Image
+                      src={tab.icon}
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="h-7 w-7 shrink-0 object-contain"
+                    />
+                    <span className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all duration-300 
+                      ${isActive ? "font-medium " : "font-light"}`}>
+                      {tab.label}
+                    </span>
+                  </button>
+                );
+              })}
+
+              <div className="absolute left-0 right-0 bottom-0 h-px bg-bdr-gray" />
+              <div className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300" style={{ width: indicatorStyle.width, left: indicatorStyle.left }} />
+            </div>
           </div>
-          <div className="absolute left-0 right-0 bottom-0 h-px bg-bdr-gray" />
-          <div className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300" style={{ width: indicatorStyle.width, left: indicatorStyle.left }} />
+
+          <button
+            type="button"
+            aria-label="Next resource tabs"
+            onClick={() => slideTabs("next")}
+            className="absolute -right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-colors hover:border-primary hover:text-primary 3xl:hidden"
+          >
+            <ChevronRight size={20} strokeWidth={1.8} />
+          </button>
         </div>
 
         {renderTabContent(currentTab)}

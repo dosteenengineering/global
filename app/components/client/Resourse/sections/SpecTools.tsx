@@ -13,7 +13,7 @@ interface Props {
 }
 const SpecTools = ({ data }: Props) => {
   return ( 
-    <section className="py-140 2xl:py-200">
+    <section className="py-120 md:py-140 2xl:py-200">
       <div className="container">
         <SectionTitle text={data.title} className="text-left section-heading uppercase mb-50" />
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-30">
