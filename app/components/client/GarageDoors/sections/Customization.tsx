@@ -122,7 +122,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                   variants={moveUp(index * 0.14)}
                   viewport={{ once: true }}
                   key={tab.key}
-                  className="border-b first:border-t border-white/50"
+                  className="border-b first:border-t border-bdr-gray"
                 >
                   {/* Accordion trigger */}
                   <button
@@ -139,8 +139,8 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       <span
                         className={
                           isOpen
-                            ? "font-[600] text-white"
-                            : "font-[300] text-white transition-all duration-300"
+                            ? "font-[600] text-secondary"
+                            : "font-[300] text-paragraph transition-all duration-300"
                         }
                       >
                         {tab.label}
@@ -148,14 +148,14 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       
                       <div    className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}> 
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>  
                       </div>
                     </motion.div>
                   </button>
                   {/* Accordion body */}
                   <div
-                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 pt-20" : "grid-rows-[0fr] opacity-0"} overflow-hidden border-t border-white/50`}
+                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 pt-20" : "grid-rows-[0fr] opacity-0"} overflow-hidden border-t border-bdr-gray`}
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
@@ -164,7 +164,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       </h3>
 
                       {/* Right items */}
-                     <div className="grid grid-cols-2 gap-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] pb-8">
+                     <div className="grid md:grid-cols-2 xl:gap-y-2 text-19 font-[300] leading-[1.5] md:leading-[2.63] font-poppins -tracking-[2%] pb-8">
                         {tab.rightItems.map((item: string, index: number) => (
                           <motion.div
                             key={`${activeTab}-${index}`}
@@ -181,12 +181,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                             <span className={`transition-all duration-300   ${
                                 hoveredIndex === index ? "font-[700]" : ""
                               }`}  >{item}</span>
-                            <FiArrowRight
-                              size={20}
-                              className={` transition-all duration-300 ${
-                                hoveredIndex === index ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-1"
-                              }`}
-                            />
+                          
                           </motion.div>
                         ))}
                       </div>

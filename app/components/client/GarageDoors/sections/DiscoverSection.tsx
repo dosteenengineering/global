@@ -80,24 +80,24 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
 
         <div className="border-t border-[#76A7FF] pt-40 lg:pt-50">
           <div className="grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
-            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-[#76A7FF] pt-40 h-full">
-              <div className="pb-8 xl:pb-0 xl:pr-70">
-                <nav className="flex gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
+            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-[#76A7FF] xl:pt-40 h-full">
+              <div className="pb-0 xl:pr-70">
+                <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
                   {data.doors.map((door) => { const isActive = activeId === door.id;
 
                     return (
                       <button key={door.id} type="button" onClick={() => handleMenuClick(door.id)}
                         className={`group flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0  rounded-full px-4 first:mb-2 text-left transition-colors duration-300 xl:w-full xl:rounded-none xl:px-0 
-                          ${isActive ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]" : "py-20 " }`} >
+                          ${isActive ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]" : "xl:py-20 " }`} >
                         <span className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
                         ${isActive ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]" : "font-light leading-[1.2]" }`} >
                           {door.menuTitle}
                         </span>
-                          {
-                            isActive &&(
+                          { isActive &&(
                         <span
-                          className={`hidden h-10 w-10 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 xl:flex ${ isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100" }`} >
-                          <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-[15px] w-[15px] md:h-auto md:w-auto" />
+                          className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex
+                           ${ isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100" }`} >
+                          <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-2 w-2 md:h-auto md:w-auto" />
                         </span>
 
                             )
