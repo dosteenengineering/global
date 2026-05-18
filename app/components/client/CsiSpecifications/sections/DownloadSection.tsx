@@ -29,11 +29,10 @@ interface CellProps {
 
 function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
   return (
-    <a
-      ref={onRef}
-      href={item.link}
-      style={fixedHeight != null ? { height: fixedHeight } : undefined}
-      className={[ "group flex flex-col  p-6 transition-colors duration-300 hover:bg-[#F3F5FB] p-50", "border-r border-b border-[#c2c2c2]",
+    <a ref={onRef} href={item.link} 
+    style={fixedHeight != null ? { height: fixedHeight } : undefined}
+
+      className={[ "group flex flex-col p-6 transition-colors duration-300 hover:bg-[#F3F5FB] p-50 2xl:pr-30", "border-r border-b border-[#c2c2c2]",
         isTopRow ? "border-t border-[#c2c2c2]" : "",
         isFirstSlide ? "border-l border-[#c2c2c2]" : "",
       ]
@@ -50,18 +49,18 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
       </div>
 
       <div>
-        <h3 className="mb-[20px] text-30 font-light leading-[1.333] text-secondary">
+        <h3 className="mb-[20px] text-30 font-light leading-[1.333] -tracking-[0.02em] text-secondary">
           {item.title}
         </h3>
         <p className="mb-3 text-19 text-paragraph leading-[1.526315789473684] ">
           <span className="font-semibold">Division: </span><span className="">{item.division}</span>
         </p>
-        <p className="text-paragraph text-description mb-30">
+        <p className="text-paragraph text-description   ">
           <span className="font-semibold">Section: </span><span className="">{item.section}</span>
         </p>
       </div>
 
-      <div className="mt-auto flex items-center justify-between gap-4">
+      <div className="mt-30 flex items-center justify-between gap-4">
         {/* CTA Button */}
         <BorderButton text="Download Specification" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
       </div>

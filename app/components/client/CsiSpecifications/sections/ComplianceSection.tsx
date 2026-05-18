@@ -12,8 +12,7 @@ const ComplianceSection = () => {
           </div>
         </div>
       <div className="container py-140 3xl:py-150 relative z-10">
-        <SectionTitle title="UAE & Oman Compliance — Built Into Every Specification"
-         className="section-heading text-white mb-50 max-w-[26ch]"  />
+        <SectionTitle title="UAE & Oman Compliance — Built Into Every Specification" className="section-heading text-white mb-50 leading-[1.111111111111111] max-w-[26ch]"  />
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-20 3xl:mb-[26px] max-w-[26ch]`}>
           UAE & Oman Compliance — Built Into Every Specification
         </h2> */}

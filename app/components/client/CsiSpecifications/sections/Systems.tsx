@@ -60,15 +60,15 @@ const Systems = ({ data }: Props) => {
             <table className="w-full border-collapse border border-[#D9D9D9]">
               <thead>
                 <tr className="bg-[#F3F5FB]">
-                  <th className="w-[33.33%] border-r border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-30 font-light text-primary leading-[1.333333333333333]">
+                  <th className="w-[33.33%] border-r border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-19 md:text-30 font-light text-primary leading-[1.333333333333333]">
                     Division
                   </th>
 
-                  <th className="w-[33.33%] border-r border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-30 font-light text-primary leading-[1.333333333333333]">
+                  <th className="w-[33.33%] border-r border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-19 md:text-30 font-light text-primary leading-[1.333333333333333]">
                     Section Number & Title
                   </th>
 
-                  <th className="w-[33.33%] border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-30 font-light text-primary leading-[1.333333333333333]">
+                  <th className="w-[33.33%] border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-19 md:text-30 font-light text-primary leading-[1.333333333333333]">
                     Dosteen System
                   </th>
                 </tr>
@@ -76,12 +76,9 @@ const Systems = ({ data }: Props) => {
 
               <tbody>
                 {data.tableData.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="bg-white border-b border-[#D9D9D9] last:border-b-0"
-                  >
+                  <tr key={item.id} className="bg-white border-b border-[#D9D9D9] last:border-b-0" >
                     {/* Division */}
-                    <td className="border-r border-[#D9D9D9] px-2 md:p-30 align-top">
+                    <td className="border-r border-[#D9D9D9] px-2 py-2 md:p-30 align-top">
                       <h3 className="text-[14px] md:text-30 leading-[1.333333333333333] font-light text-[#202020]">
                         {item.division}
                       </h3>
@@ -92,7 +89,7 @@ const Systems = ({ data }: Props) => {
                     </td>
 
                     {/* Section */}
-                    <td className="border-r border-[#D9D9D9] px-2 md:p-30 align-top">
+                    <td className="border-r border-[#D9D9D9] px-2 py-2 md:p-30 align-top">
                       <h3 className="text-[18px] md:text-30 leading-[1.333333333333333] font-light text-[#202020]">
                         {item.sectionNumber}
                       </h3>
@@ -103,7 +100,7 @@ const Systems = ({ data }: Props) => {
                     </td>
 
                     {/* System */}
-                    <td className="px-2 md:p-30 align-top">
+                    <td className="px-2 py-2 md:p-30 align-top">
                       <p className="text-19 leading-[1.526315789473684] font-light text-[#7B7B7B]">
                         {item.system}
                       </p>

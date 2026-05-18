@@ -1,11 +1,9 @@
 export default function StatNoise1() {
   return (
     <>
-      <div
-        className="absolute inset-0 z-1"
+      <div className="absolute inset-0 z-1"
         style={{
-          background:
-            "linear-gradient(270deg, rgba(24, 83, 214, 0.05) 7.21%, rgba(24, 83, 214, 0.16) 29.81%, rgba(2, 46, 158, 0.05) 76.92%)",
+          background: "linear-gradient(270deg, rgba(24, 83, 214, 0.05) 7.21%, rgba(24, 83, 214, 0.16) 29.81%, rgba(2, 46, 158, 0.05) 76.92%)",
         }}
       />
       <div

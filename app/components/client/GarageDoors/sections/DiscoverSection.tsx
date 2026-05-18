@@ -46,7 +46,7 @@ function DoorContent({ door }: { door: DoorItem }) {
       </div>
       <p className="w-fit rounded-full border border-white/70 px-6 py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white mb-30"> {door.idealFor} </p>
       <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30"> {door.heading} </h4>
-      <ul className="space-y-2 xl:space-y-6">
+      <ul className="space-y-2 xl:space-y-6 3xl:pb-[97px]">
         {door.points.map((point) => (
           <li key={point} className="relative pl-5 text-19 text-white/90 leading-[1.526315789473684] font-light" >
             <span className="absolute left-0 top-1/2 -translate-y-1/2 h-[5px] w-[5px] bg-white" />
@@ -70,37 +70,39 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
     <section className="relative py-100 lg:py-150">
       <PrimaryNoise />
       <div className="container relative z-10">
-        <SectionTitle title={data.sectionTitle} className="section-heading text-white max-w-[1290px] mb-50 uppercase" />
+        <SectionTitle title={data.sectionTitle} className="section-heading text-white mb-50 uppercase" />
 
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
-          <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
+          <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50 max-w-[52.5ch]">
             {data.sectionDesc}
           </p>
         </div>
 
         <div className="border-t border-[#76A7FF] pt-40 lg:pt-50">
-          <div className="grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[489px_minmax(0,1fr)]">
-            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-[#76A7FF]">
+          <div className="grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
+            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-[#76A7FF] pt-40 h-full">
               <div className="pb-8 xl:pb-0 xl:pr-70">
                 <nav className="flex gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
                   {data.doors.map((door) => { const isActive = activeId === door.id;
 
                     return (
                       <button key={door.id} type="button" onClick={() => handleMenuClick(door.id)}
-                        className={`group flex min-w-fit items-center justify-between gap-5 rounded-full px-4 py-3 text-left transition-colors duration-300 xl:mb-[15px] xl:w-full xl:rounded-none xl:px-0 ${
-                          isActive ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent" : ""
-                        }`}
-                      >
-                        <span className={`text-19 text-white leading-[2.526315789473684] tracking-[-0.02em] transition-colors duration-300 ${
-                            isActive ? "font-[500]" : "font-light" }`} >
+                        className={`group flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0  rounded-full px-4 first:mb-2 text-left transition-colors duration-300 xl:w-full xl:rounded-none xl:px-0 
+                          ${isActive ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]" : "py-20 " }`} >
+                        <span className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
+                        ${isActive ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]" : "font-light leading-[1.2]" }`} >
                           {door.menuTitle}
                         </span>
-
+                          {
+                            isActive &&(
                         <span
-                          className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 xl:flex ${ isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100" }`} >
-                          <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-[15px] 
-                          w-[15px]" />
+                          className={`hidden h-10 w-10 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 xl:flex ${ isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100" }`} >
+                          <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-[15px] w-[15px] md:h-auto md:w-auto" />
                         </span>
+
+                            )
+                          }
+
                       </button>
                     );
                   })}
@@ -108,7 +110,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
               </div>
             </aside>
 
-            <div className="pt-40 xl:pt-0 xl:pl-70 3xl:pl-[86px]">
+            <div className="pt-40 xl:pl-70 3xl:pl-[86px]">
               <AnimatePresence mode="wait">
                 {activeDoor && (
                   <motion.div key={activeDoor.id} variants={moveUpV2} initial="hidden" animate="show" exit={{ opacity: 0, y: -24, transition: { duration: 0.25 } }} >

@@ -1,9 +1,8 @@
-import { ctaData } from "../Bim/data";
 
 export const banner = {
   title: "Premium Residential Garage Doors Across UAE, Oman & MENA",
   description: "Designed to Impress, Safety You Can Count On",
-  image: "/assets/images/csi-specifications/banner.jpg",
+  image: "/assets/images/garage-doors/banner.jpg",
   imageAlt: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
 };
 
@@ -27,7 +26,7 @@ export const garageDoorData = {
       id: 2,
       menuTitle: "Oversized Doors (>6 Meters)",
       title: "Oversized Doors (>6 Meters)",
-      image: "/assets/images/garage-doors/oversized-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Large industrial and commercial applications",
       points: ["Designed for extra-wide openings", "Heavy-duty structure for long-term durability", "Suitable for warehouses and logistics facilities"],
@@ -37,7 +36,7 @@ export const garageDoorData = {
       id: 3,
       menuTitle: "Cladded Doors",
       title: "Cladded Doors",
-      image: "/assets/images/garage-doors/cladded-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Premium architectural aesthetics",
       points: ["Custom cladding finishes available", "Blends seamlessly with building façade", "Modern and elegant appearance"],
@@ -47,7 +46,7 @@ export const garageDoorData = {
       id: 4,
       menuTitle: "Vertical Bi-Fold / Tilt Doors",
       title: "Vertical Bi-Fold / Tilt Doors",
-      image: "/assets/images/garage-doors/vertical-bi-fold-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Space-saving vertical operation",
       points: ["Fast opening and closing operation", "Ideal for facilities with limited side room", "Robust and reliable performance"],
@@ -57,7 +56,7 @@ export const garageDoorData = {
       id: 5,
       menuTitle: "Compact Doors",
       title: "Compact Doors",
-      image: "/assets/images/garage-doors/compact-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Applications with low headroom",
       points: ["Minimal ceiling track requirements", "Efficient use of available space", "Suitable for retrofit projects"],
@@ -67,7 +66,7 @@ export const garageDoorData = {
       id: 6,
       menuTitle: "Side Sliding Doors (Curved & Straight)",
       title: "Side Sliding Doors (Curved & Straight)",
-      image: "/assets/images/garage-doors/side-sliding-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Wide openings with lateral movement",
       points: ["Available in curved and straight track systems", "Smooth and quiet sliding operation", "Perfect for customized garage layouts"],
@@ -77,7 +76,7 @@ export const garageDoorData = {
       id: 7,
       menuTitle: "Custom Engineered Doors",
       title: "Custom Engineered Doors",
-      image: "/assets/images/garage-doors/custom-engineered-doors.webp",
+      image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Unique project requirements",
       points: ["Tailor-made dimensions and configurations", "Engineered for specialized applications", "High-performance and durable systems"],
@@ -152,7 +151,7 @@ export const solutionsData: {
   backgroundImage: string;
   tabs: SolutionTab[];
 } = {
-  mainTitle: "SOLUTIONS",
+  mainTitle: "Customization & Smart Automation",
   secondTitle: "Customization & Smart Automation",
   mainDescription: "We offer fully customizable garage door solutions with smart technology. All materials and components are manufactured in UAE and Oman, ensuring premium quality and compliance with local standards.",
   btnText: "Discuss your project",
