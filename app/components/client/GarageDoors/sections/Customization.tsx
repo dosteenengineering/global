@@ -43,8 +43,8 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
       <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
-          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase" />
-          <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[60ch] mt-6">
+          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase max-w-[24ch]" />
+          <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-6">
             {solutionsData.mainDescription}
           </p>
           {/* ================= DESKTOP ================= */}
@@ -54,7 +54,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                 <div className="flex gap-80 text-19 leading-[2.631578947368421] font-[300] font-poppins -tracking-[2%] overflow-hidden">
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
                     <button key={tab.key} ref={(el) => { buttonRefs.current[index] = el; }} onClick={() => setActiveTab(tab.key)}
-                      className={`px-0 pb-[13px] transition-colors duration-300 relative ${activeTab === tab.key ? "text-paragraph" : "text-paragraph"}`}
+                      className={`px-0 pb-[13px] transition-colors duration-300 relative ${activeTab === tab.key ? "text-secondary" : "text-paragraph"}`}
                     >
                       <span className="block font-[600] invisible h-0 overflow-hidden"> {tab.label}</span>
                       <span className={`${activeTab === tab.key ? "font-[600]" : "font-[300]"} transition-all duration-300`} >

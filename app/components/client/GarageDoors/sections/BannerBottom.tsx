@@ -15,7 +15,7 @@ const BannerBottom = () => {
         className="ml-auto max-w-[1252px] px-[16px] 2xl:px-0"
         style={{ marginRight: rightInset }}
       >
-        <p className="text-30 leading-[1.33] font-light tracking-[-0.02em]  mb-40">
+        <p className="text-30 leading-[1.33] font-light tracking-[-0.02em]  mb-40 3xl:pr-5">
           In the demanding climates and architecturally refined neighborhoods of
           Oman, UAE, and the wider MENA region, a garage door should do more
           than just serve as a point of entry. It should enhance your home&apos;s

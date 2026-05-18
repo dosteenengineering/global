@@ -70,16 +70,14 @@ export default function Benefits({
   );
 
   return (
-    <section className="relative w-full py-140 3xl:py-150">
+    <section className="relative w-full py-140 3xl:py-200">
       {showSecondaryNoise && <SecondaryNoise />}
       <div className="container relative">
-        <SectionTitle
-          className="section-heading max-w-[30ch] mb-30"
-          title={title}
+        <SectionTitle className="section-heading max-w-[70ch] mb-30" title={title}
         />
 
         {description && (
-          <p className="text-19 leading-[1.3333333333] text-paragraph max-w-6xl font-light mb-80">
+          <p className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80">
             {description}
           </p>
         )}

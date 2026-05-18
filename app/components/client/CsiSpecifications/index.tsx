@@ -34,6 +34,7 @@ const Index = () => {
       <BimEngineeringData data={specData} descMaxWidth="max-w-[26ch]" />
       <Faq faqData={CsiFaqData} />
       <CtaSection {...ctaData} descriptionWidth="max-w-[968px]" titleWidth="max-w-[34ch]"/>
+      
     </>
   );
 };
