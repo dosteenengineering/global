@@ -42,7 +42,7 @@ export default function ProjectsListing() {
   return (
     <section className="container pt-17.5 md:pt-120 pb-140 3xl:pb-200">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-80">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-7.5 md:mb-80">
         <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px] mb-5 md:mb-0">
           <span className="text-secondary md:text-paragraph text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
             All Projects
@@ -71,7 +71,7 @@ export default function ProjectsListing() {
           row.type === "grid" ? (
             <div
               key={`grid-${ri}`}
-              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-30"
+              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-y-0 gap-x-30 divide-y divide-bdr-gray"
             >
               {row.projects.map((p, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>

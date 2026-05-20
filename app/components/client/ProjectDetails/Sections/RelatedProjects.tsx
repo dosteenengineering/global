@@ -8,6 +8,9 @@ import "swiper/css";
 import { featuredProjectsData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import ProjectCard from "@/app/components/common/ProjectCard";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
+import NavButton from "@/app/components/common/NavigationButton";
 
 interface Project {
   id: number;
@@ -25,23 +28,51 @@ export default function RelatedProjects() {
   const [dotCount, setDotCount] = useState(0);
   const [showDots, setShowDots] = useState(false);
 
-  const updateDots = (swiper: SwiperType) => {
-    const total = swiper.slides.length;
-    const perView = Math.round(swiper.params.slidesPerView as number);
-    const dots = Math.max(0, total - perView + 1);
-    setDotCount(dots);
-    setShowDots(dots > 1);
-  };
+ const [showNav, setShowNav] = useState(false);
+
+const updateDots = (swiper: SwiperType) => {
+  const total = swiper.slides.length;
+  const perView = Math.round(swiper.params.slidesPerView as number);
+  const dots = Math.max(0, total - perView + 1);
+  setDotCount(dots);
+  setShowDots(dots > 1);
+  setShowNav(dots > 1); // ← add this
+}; 
+
+ 
 
   return (
     <section className="w-full pb-140 3xl:pb-200">
       <div className="container">
         {/* Title */}
-        <SectionTitle
-          title={title}
-          className="section-heading text-secondary mb-60"
-        />
-
+            <div className="flex gap-2 justify-between items-center pb-5 md:pb-0 mb-5 md:mb-60   border-b border-bdr-gray md:border-0">
+                <SectionTitle
+                  title={title}
+                  className="section-heading text-secondary w-full "
+                />
+                {showNav && (
+                  <motion.div
+                    variants={moveUp(0.5)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="flex items-center gap-[10px] md:gap-[15px] "
+                  >
+                    <NavButton
+                      onClick={() => { const s = swiperRef.current; if (s && !s.destroyed) s.slidePrev(); }}
+                      direction="left"
+                      disabled={false}
+                      ariaLabel="Previous"
+                    />
+                    <NavButton
+                      onClick={() => { const s = swiperRef.current; if (s && !s.destroyed) s.slideNext(); }}
+                      direction="right"
+                      disabled={false}
+                      ariaLabel="Next"
+                    />
+                  </motion.div>
+                )}
+            </div>
         {/* Swiper */}
         <Swiper
           onSwiper={(swiper) => {
@@ -66,7 +97,7 @@ export default function RelatedProjects() {
         </Swiper>
 
         {/* Pagination dots */}
-        {showDots && (
+        {/* {showDots && (
           <div className="flex items-center justify-center gap-[10px] mt-40">
             {Array.from({ length: dotCount }).map((_, i) => (
               <button
@@ -80,7 +111,7 @@ export default function RelatedProjects() {
               />
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </section>
   );

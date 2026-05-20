@@ -148,7 +148,7 @@ body::-webkit-scrollbar {
     --space-50: clamp(24px, 2.6vw + 17px, 50px);
     --space-60: clamp(28px, 2.9vw + 20px, 60px);
     --space-70: clamp(32px, 3.2vw + 23px, 70px);
-    --space-80: clamp(35px, 3.5vw + 25px, 80px);
+    --space-80: clamp(30px, 6.5vw, 80px);
     --space-90: clamp(38px, 3.7vw + 28px, 90px);
     --space-100: clamp(44px, 3.8vw + 32px, 100px);
     --space-110: clamp(37px, 5.2vw + 17px, 110px);
