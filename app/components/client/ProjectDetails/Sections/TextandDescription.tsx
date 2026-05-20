@@ -10,7 +10,7 @@ const TextandDescription = ({
   return (
     <div>
       <SectionTitle
-        className="text-55 leading-[1.1818] text-secondary font-light tracking-[-0.02em] mb-40"
+        className="text-55 leading-[1.1818] text-secondary font-light tracking-[-0.02em] mb-2.5 md:mb-40"
         title={title}
       />
       <div

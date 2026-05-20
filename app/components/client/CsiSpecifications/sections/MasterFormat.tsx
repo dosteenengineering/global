@@ -33,7 +33,7 @@ const Masterformat = ({ data }: Props) => {
 
       <div className="max-w-[1252px] ml-auto px-[15px] 2xl:px-0 w-full" style={{ marginRight: rightInset }} >
         <SectionTitle text={data.title} className="section-heading text-secondary uppercase mb-50" />
-        <div className="text-paragraph text-description mb-100" dangerouslySetInnerHTML={{ __html: data.description }} />
+        <div className="text-paragraph text-description mb-7.5 md:mb-100" dangerouslySetInnerHTML={{ __html: data.description }} />
 
         <div>
           <h3 className="text-55 leading-[1.181818181818182] mb-50 font-light -tracking-[0.02em]">{data.subTitle}</h3>
