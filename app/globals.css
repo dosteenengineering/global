@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import 'flag-icons/css/flag-icons.min.css';
 
 html,
 body {
@@ -435,4 +436,34 @@ body::-webkit-scrollbar {
 .animate-rotate-swing {
     animation: rotateSwing 12s ease-in-out infinite;
     transform-origin: center center;
+}
+
+
+.animate-rotate-swing-oposit {
+    animation: rotateSwing 12s ease-in-out infinite reverse;
+    transform-origin: center center;
+}
+
+
+.partner-phone-input.react-international-phone-input-container {
+    display: flex;
+    align-items: flex-end;
+}
+
+.partner-phone-input .react-international-phone-country-selector {
+    height: 100%;
+}
+
+.partner-phone-input .react-international-phone-country-selector-button {
+    width: 96px;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.partner-phone-input .react-international-phone-country-selector-button__button-content {
+    align-items: center;
+}
+
+.partner-phone-input .react-international-phone-input {
+    padding-bottom: 1px;
 }
