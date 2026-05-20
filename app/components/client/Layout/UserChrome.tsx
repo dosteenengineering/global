@@ -8,7 +8,7 @@ type UserChromeProps = {
   children: React.ReactNode;
 };
 
-const ROUTES_WITHOUT_CHROME = ["/become-a-partner"];
+const ROUTES_WITHOUT_CHROME = ["/become-a-partner","/partner-registration"];
 
 const UserChrome = ({ children }: UserChromeProps) => {
   const pathname = usePathname();
