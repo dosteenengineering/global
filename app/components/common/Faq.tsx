@@ -16,7 +16,7 @@ interface FaqData {
 const Faq = ({ faqData }: { faqData: FaqData }) => {
   return (
     <section className="py-140 3xl:py-200 relative">
-      <div className="absolute top-80 3xl:top-[87px] bottom-70 3xl:bottom-[77px] left-[-7%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0">
+      <div className=" absolute top-80 3xl:top-[87px] bottom-70 3xl:bottom-[77px] left-[-7%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 hidden lg:block">
         <Image
           src="/assets/icons/faq-question.svg"
           alt="faq-question"
