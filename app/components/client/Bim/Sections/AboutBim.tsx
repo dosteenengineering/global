@@ -8,35 +8,35 @@ import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 export default function AboutBim() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
-      <div className="absolute -top-88 lg:-top-61 left-0 pointer-events-none">
+      <div className="absolute w-[436px] lg:w-full top-[-24%] lg:-top-61 left-[-21%] lg:left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
           width={600}
           height={500}
-          className="object-contain 2xl:w-[500px] 3xl:w-[600px]"
+          className="object-contain w-[250px] 2xl:w-[500px] 3xl:w-[600px]"
         />
       </div>
 
-      <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-120 px-[15px] lg:px-0 container w-full">
+      <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-12.5 md:pt-120 px-[15px] lg:px-0 container w-full">
         <SectionTitle
           text={AboutBimData.title}
           className="section-heading text-secondary uppercase mb-50"
         />
 
         <div
-          className="text-paragraph text-description mb-100"
+          className="text-paragraph text-description mb-7.5 md:mb-100"
           dangerouslySetInnerHTML={{ __html: AboutBimData.description }}
         />
 
-        <div className="px-70 pb-70 pt-60 relative">
+        <div className="px-5 md:px-70 py-7.5 md:pb-70 md:pt-60 relative">
           <StatNoise1 />
-          <div className="flex flex-col gap-y-40">
+          <div className="flex flex-col gap-y-2.5 md:gap-y-40">
             <h2 className="text-55 leading-[1.18181] tracking-[-0.02em] text-secondary font-light">
               {AboutBimData.subTitle}
             </h2>
             <div
-              className="text-30 leading-[1.33] tracking-[-0.02em] text-secondary max-w-[1112px] font-light"
+              className="text-30 leading-[1.33] tracking-[-0.02em] text-paragraph max-w-[1112px] font-light"
               dangerouslySetInnerHTML={{
                 __html: AboutBimData.subDescription,
               }}

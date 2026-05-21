@@ -44,9 +44,9 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="pt-120 pb-140 3xl:pb-200 relative min-h-[2000px]">
+    <section className="pt-17.5 lg:pt-120 pb-[265px] lg:pb-140 3xl:pb-200 relative ">
       <div
-        className={`absolute ${filtered.length > 0 ? "top-[33.5%]" : "top-[17.8%]"} bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
+        className={`absolute hidden lg:block ${filtered.length > 0 ? "top-[33.5%]" : "top-[17.8%]"} bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
       >
         <Image
           src="/assets/icons/faq-question.svg"
@@ -56,7 +56,7 @@ export default function FaqSection() {
         />
       </div>
 
-      <div className="container pl-[15.6%] z-20 relative">
+      <div className="container lg:pl-[15.6%] z-20 relative">
         <div>
           <SectionTitle
             title={title}
@@ -70,8 +70,8 @@ export default function FaqSection() {
         </div>
 
         {/* Toolbar */}
-        <div className="flex items-center justify-between gap-20 mb-60">
-          <div className="flex items-center gap-30 3xl:gap-[36px]">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-20 mb-60">
+          <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px]">
             <span className="text-secondary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
               All Questions
             </span>
@@ -80,7 +80,7 @@ export default function FaqSection() {
             </span>
           </div>
           <div className="flex items-center gap-80">
-            <div className="flex items-center justify-between border border-[#c2c2c2] rounded-full h-[50px] min-w-[280px] 3xl:w-[330px] px-[17px]">
+            <div className="flex items-center justify-between border border-[#c2c2c2] rounded-full h-[38px] lg:h-[50px] min-w-[237px] lg:min-w-[280px] 3xl:w-[330px] px-[17px]">
               <input
                 type="text"
                 value={search}
@@ -95,8 +95,8 @@ export default function FaqSection() {
                 className="w-[24px] h-[24px]"
               />
             </div>
-            <button className="flex items-center gap-4">
-              <span className="text-paragraph text-55 leading-[1.1818] font-light tracking-[-0.02em]">
+            <button className="flex items-center gap-5 lg:gap-4">
+              <span className="text-paragraph text-[18px] lg:text-55 leading-[1.1818] font-light tracking-[-0.02em]">
                 Filter
               </span>
               <Image
@@ -104,7 +104,7 @@ export default function FaqSection() {
                 alt="filter"
                 width={50}
                 height={50}
-                className="w-[38px] h-[38px]"
+                className="w-5 h-5 lg:w-[38px] lg:h-[38px]"
               />
             </button>
           </div>
@@ -114,20 +114,31 @@ export default function FaqSection() {
         {paginated.length > 0 ? (
           <Accordion key={`${search}-${page}`} items={paginated} />
         ) : (
-          <div className="flex flex-col">
-            <div className="mb-70 mt-[10px]">
+          <div className="flex flex-col relative">
+             <div
+              className={`absolute  lg:hidden  top-7.5  w-full  left-[-21%]  h-[353px] z-0 pointer-events-none`}
+            >
+              <Image
+                src="/assets/icons/faq-question.svg"
+                alt="faq-question"
+                fill
+                className="object-contain object-top-left"
+              />
+            </div>
+            <div className="mb-7.5 lg:mb-70 border-t border-bdr-gray pt-7.5">
+             
               <Image
                 src="/assets/icons/search-faq.png"
                 alt="No Results"
                 width={500}
                 height={500}
-                className="w-auto h-[120px]"
+                className="w-auto h-[49px] lg:h-[120px]"
               />
             </div>
-            <h3 className="mb-20 3xl:mb-[24px] text-55 leading-[1.18181] tracking-[-0.02em] font-light text-secondary">
+            <h3 className="mb-2.5 md:mb-20 3xl:mb-[24px] text-55 leading-[1.18181] tracking-[-0.02em] font-light text-secondary">
               No results found
             </h3>
-            <p className="mb-60 text-30 leading-[1.333] tracking-[-0.02em] font-light text-secondary">
+            <p className="mb-5 md:mb-60 text-30 leading-[1.333] tracking-[-0.02em] font-light text-secondary">
               If you don't see your question here, feel free to ask it here
             </p>
             <BorderButton
@@ -142,7 +153,7 @@ export default function FaqSection() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-80">
+          <div className="mt-10 md:mt-80">
             <Pagination currentPage={page} totalPages={totalPages} />
           </div>
         )}

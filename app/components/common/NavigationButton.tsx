@@ -88,7 +88,7 @@ const NavButton = forwardRef<HTMLButtonElement, NavButtonProps>(
           alt={direction}
           width={17}
           height={17}
-          className={`relative z-10 transition-all duration-300 xl:w-auto xl:h-[24px] md:w-[17px] md:h-[17px] w-[14px] h-[14px] pointer-events-none ${hovered ? "invert brightness-0" : ""} ${directionRotation[direction]}`}
+          className={`relative z-10 transition-all duration-300 xl:w-auto xl:h-[24px] md:w-[17px] md:h-[17px] w-[11px] h-[11px] pointer-events-none ${hovered ? "invert brightness-0" : ""} ${directionRotation[direction]}`}
         />
       </button>
     );

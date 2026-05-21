@@ -9,7 +9,7 @@ import SpecGrid from "./SpecGrid";
 import TextandDescription from "./TextandDescription";
 import SolutionSlider from "./SolutionSlider";
 import Divider from "./Divider";
-import SystemsTable from "./SystemAndProducts";
+import SystemsTable from "./SystemAndProducts"; 
 
 const STICKY_TOP = 50;
 const THUMB_HEIGHT = 128;
@@ -117,12 +117,26 @@ export default function Main({
     };
   }, [heroHeight, panelLeft]);
 
+ 
+  const [isContainer, setIsContainer] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsContainer(window.innerWidth > 767); // change 768 to your breakpoint
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white pt-100">
-      <div className="container">
+    <div className="min-h-screen bg-white pt-5 md:pt-100">
+       <div className={isContainer ? "container" : ""}>
         <div className="flex gap-80 3xl:gap-[109px] items-start">
           {/* ── Left aside ──────────────────────────────────────── */}
-          <aside className="hidden md:block shrink-0 w-[150px] 3xl:w-[176px] self-stretch">
+          <aside className="hidden lg:block shrink-0 w-[150px] 3xl:w-[176px] self-stretch">
             <div ref={anchorRef} className="relative h-full">
               {/* Next project panel */}
               {heroHeight > 0 && (
@@ -166,12 +180,12 @@ export default function Main({
               <ProjectImageSlider project={project} />
             </div>
 
-            <div className="mb-80">
+            <div className="mb-12.5 md:mb-80">
               <SpecGrid specs={project.specifications} />
             </div>
-
+<div className="container">
             {/* Challenge — ref for deco alignment */}
-            <section ref={challengeRef} className="mb-80">
+            <section ref={challengeRef} className="mb-7.5 md:mb-80">
               <TextandDescription
                 title={project.challenge.heading}
                 description={project.challenge.description}
@@ -180,21 +194,22 @@ export default function Main({
 
             <Divider />
 
-            <section className="my-80">
+            <section className="mt-7.5 mb-5 md:my-80">
               <TextandDescription
                 title={project.dosteenSolution.heading}
                 description={project.dosteenSolution.description}
               />
             </section>
 
-            <section className="mb-80">
+            <section className="mb-5 md:mb-80">
               <SolutionSlider images={project.dosteenSolution.images} />
             </section>
-
-            <section className="mb-80">
+</div>
+            <section className="mb-7.5 md:mb-80">
               <SystemsTable rows={project.systemsAndProducts} />
             </section>
 
+<div className="container mb-[70px] md:mb-0">
             <section>
               <TextandDescription
                 title={project.outcome.heading}
@@ -202,14 +217,15 @@ export default function Main({
               />
             </section>
 
-            <div className="md:hidden mt-10">
+            {/* <div className="md:hidden mt-10">
               <NextProjectPanel project={nextProject} />
+            </div> */}
             </div>
           </main>
         </div>
       </div>
 
-      <div className="container mt-140 3xl:mt-200 mb-120">
+      <div className="container mt-140 3xl:mt-200 mb-120 hidden md:block">
         <Divider />
       </div>
     </div>

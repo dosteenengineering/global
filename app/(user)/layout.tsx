@@ -3,12 +3,11 @@ import { Poppins, DM_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import LenisProvider from "../components/LenisProvider";
-import Navbar from "../components/client/Layout/Navbar";
-import Footer from "../components/client/Layout/Footer";
+import UserChrome from "../components/client/Layout/UserChrome";
 
 export const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["200", "300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-poppins",
 });
@@ -42,9 +41,7 @@ export default function RootLayout({
         className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}
       >
         <LenisProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <UserChrome>{children}</UserChrome>
         </LenisProvider>
       </body>
     </html>

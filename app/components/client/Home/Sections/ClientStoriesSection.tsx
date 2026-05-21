@@ -242,7 +242,7 @@ export default function ClientStoriesSection() {
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="lg:hidden relative z-10 container pt-140 pb-[70px]">
+      <div className="lg:hidden relative z-10 container pt-140 pb-[82px]">
         <SectionTitle
           title={clientStoriesData.title}
           className="text-white section-heading uppercase mb-[30px] md:mb-40"
@@ -324,7 +324,7 @@ export default function ClientStoriesSection() {
         </div>
 
         {/* Quote / description */}
-        <div className="overflow-hidden mb-[50px] md:mb-15 h-[120px] md:h-[165px] max-w-[400px] md:max-w-[700px]">
+        <div className="overflow-hidden mb-[50px] md:mb-15 md:h-[165px] max-w-[400px] md:max-w-[700px]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.p
               key={`mobile-quote-${activeIndex}`}
@@ -336,7 +336,7 @@ export default function ClientStoriesSection() {
                 y: -24,
                 transition: { duration: 0.2, ease: "easeIn" },
               }}
-              className="text-white text-55 leading-[1.33] -tracking-[2%] font-poppins font-[300]"
+              className="text-white text-55 leading-[1.455] md:leading-[1.33] -tracking-[2%] font-poppins font-[300]"
             >
               {activeStory.quote}
             </motion.p>
@@ -359,7 +359,7 @@ export default function ClientStoriesSection() {
               className="flex items-end justify-between gap-4"
             >
               <div className="flex flex-col gap-[5px] sm:gap-[6px] font-light text-white font-poppins -tracking-[2%]">
-                <p className="text-25 leading-[1.33]">{activeStory.name}</p>
+                <p className="text-[18px] md:text-25 leading-[1.56] md:leading-[1.33]">{activeStory.name}</p>
                 <p className="text-19 leading-[1.52]">
                   {activeStory.company} – {activeStory.designation}
                 </p>

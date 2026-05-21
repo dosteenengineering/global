@@ -6,7 +6,7 @@ const FaqCta = () => {
   return (
     <section>
       <div className="w-fit">
-        <div className="flex lg:items-center items-start flex-col lg:flex-row gap-50 px-30 3xl:px-[32px] py-20 3xl:py-[24px] lg:justify-between relative">
+        <div className="flex lg:items-center items-start flex-col lg:flex-row gap-5 md:gap-50 px-30 3xl:px-[32px] py-5 md:py-20 3xl:py-[24px] lg:justify-between relative">
           <StatNoise1 />
           <div
             className="text-30 leading-[1.33] tracking-[-0.02em] text-paragraph max-w-[804px] font-light"

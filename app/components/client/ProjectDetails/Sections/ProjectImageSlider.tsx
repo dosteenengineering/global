@@ -15,7 +15,7 @@ export default function ProjectImageSlider({ project }: { project: Project }) {
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <div className="relative w-full h-[600px] 3xl:h-[740px]">
+    <div className="relative w-full h-[323px] md:h-[400px] lg:h-[600px] 3xl:h-[740px]">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"

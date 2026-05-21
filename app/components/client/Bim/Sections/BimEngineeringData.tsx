@@ -3,13 +3,25 @@ import { bimEngineeringData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 
-export default function BimEngineeringData() {
-  const { title, stats } = bimEngineeringData;
+interface dataProps {
+  descMaxWidth?: string;
+  data: {
+    title: string;
+    stats: {
+      id: number;
+      value: string;
+      label: string;
+    }[];
+  };
+}
+
+export default function BimEngineeringData({ data, descMaxWidth }: dataProps) {
+  const { title, stats } = data;
 
   return (
     <section className="w-full relative">
         <SecondaryNoise />
-      <div className="container py-140 3xl:py-150 relative">
+      <div className="container py-12.5 md:py-140 3xl:py-150 relative">
         {/* Title */}
         <SectionTitle
           title={title}
@@ -17,18 +29,24 @@ export default function BimEngineeringData() {
         />
 
         {/* Stats box */}
-        <div className="px-80 py-50 3xl:py-[56px] relative">
-            <StatNoise1 />
-          <div className="relative z-10 flex flex-wrap gap-70 3xl:gap-[76px]">
-            {stats.map((stat) => (
-              <div key={stat.id} className="flex flex-col">
-                <span className="text-55 leading-[1.1818] text-primary mb-[5px] font-light">
-                  {stat.value}
-                </span>
-                <span className="text-paragraph text-description">
-                  {stat.label}
-                </span>
-              </div>
+        <div className="lg:px-80 py-50 3xl:py-[56px] relative">
+            <div className="lg:block hidden">
+              <StatNoise1 />
+            </div>
+          {/* <div className="relative z-10 flex flex-wrap gap-70 3xl:gap-[76px]"> */}
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-[346px_346px_346px_auto] gap-2.5 lg:gap-5 3xl:gap-[37px]">
+            {stats.map((stat) => ( 
+              <div className="relative"> 
+            <div className="lg:hidden"> <StatNoise1 /></div>
+                  <div key={stat.id} className="flex flex-col w-full p-5">
+                  <span className="text-55 leading-[1.1818] text-primary mb-[5px] font-light">
+                    {stat.value}
+                  </span>
+                  <span className={`text-paragraph text-description ${descMaxWidth} `}>
+                    {stat.label}
+                  </span> 
+                </div> 
+                </div>
             ))}
           </div>
         </div>

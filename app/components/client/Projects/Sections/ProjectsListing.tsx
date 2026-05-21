@@ -40,19 +40,19 @@ export default function ProjectsListing() {
   }
 
   return (
-    <section className="container pt-120 pb-140 3xl:pb-200">
+    <section className="container pt-17.5 md:pt-120 pb-140 3xl:pb-200">
       {/* Header */}
-      <div className="flex items-center justify-between mb-80">
-        <div className="flex items-center gap-30 3xl:gap-[36px]">
-          <span className="text-paragraph text-55 leading-[1.1818] font-light tracking-[-0.02em]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-7.5 md:mb-80">
+        <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px] mb-5 md:mb-0">
+          <span className="text-secondary md:text-paragraph text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
             All Projects
           </span>
-          <span className="text-primary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
+          <span className="text-primary text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
             {projectsData.length}
           </span>
         </div>
-        <button className="flex items-center gap-4">
-          <span className="text-paragraph text-55 leading-[1.1818] font-light tracking-[-0.02em]">
+        <button className="flex items-center justify-between md:justify-start gap-4 border-y md:border-y-0 border-bdr-gray  py-2.5 md:py-0">
+          <span className="text-secondary md:text-paragraph text-[18px] md:text-55 leading-[1.56] md:leading-[1.1818] font-light tracking-[-0.02em]">
             Filter
           </span>
           <Image
@@ -60,7 +60,7 @@ export default function ProjectsListing() {
             alt="filter"
             width={50}
             height={50}
-            className="w-[38px] h-[38px]"
+            className="w-5 h-5 lg:w-[38px] lg:h-[38px]"
           />
         </button>
       </div>
@@ -71,7 +71,7 @@ export default function ProjectsListing() {
           row.type === "grid" ? (
             <div
               key={`grid-${ri}`}
-              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-30"
+              className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-y-0 gap-x-30 divide-y divide-bdr-gray"
             >
               {row.projects.map((p, i) => (
                 <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>

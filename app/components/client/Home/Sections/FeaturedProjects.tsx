@@ -216,7 +216,7 @@ export default function FeaturedProjectsSection() {
               text={featuredProjectsData.viewAllLabel}
               borderColor="black"
               textColor="black"
-              px="md:px-[35px] px-[18px]"
+              px="md:px-[35px] px-[23px]"
               hoverBg="black"
             />
           </motion.div>
@@ -327,10 +327,10 @@ export default function FeaturedProjectsSection() {
                           isActive ? "opacity-100" : "opacity-0"
                         }`}
                       >
-                        <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-4">
+                        <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
                           {project.name}
                         </p>
-                        <div className="h-[1px] bg-white/30 mb-4" />
+                        <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
                         <div className="flex items-center gap-3 justify-between">
                           <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
                             Location: {project.location}

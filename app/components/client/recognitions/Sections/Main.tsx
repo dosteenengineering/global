@@ -19,13 +19,13 @@ export default function Main() {
 
   return (
     <section className="w-full relative">
-      <div className="absolute right-0 top-[-34%] 3xl:top-[-33.2%]">
+      <div className="absolute right-[-13%] lg:right-0 top-[-21.7%] lg:top-[-34%] 3xl:top-[-33.2%]">
         <Image
           src="/assets/images/recognitions/bg-lines.svg"
           alt="bg-svg"
           width={900}
           height={900}
-          className="object-contain pointer-events-none w-full h-[930px] 3xl:h-full"
+          className="object-contain pointer-events-none w-full h-[280px] lg:h-[930px] 3xl:h-full"
         />
       </div>
       <div className="container mt-80 mb-140 3xl:mb-200">
@@ -35,7 +35,7 @@ export default function Main() {
             <button
               key={cat.value}
               onClick={() => setActive(cat.value)}
-              className={`px-[35px] py-[14px] 2xl:h-[54px] rounded-[50px] border text-15 leading-[1.73] text-secondary font-normal uppercase transition-all duration-200
+              className={` tracking-[-2%] md:tracking-normal py-[4px] px-2.5 md:py-[14px] md:px-[35px] 2xl:h-[54px] rounded-[50px] border text-15 leading-[1.73] text-secondary font-normal uppercase transition-all duration-200
                   ${
                     active === cat.value
                       ? "border-primary bg-primary/10"
@@ -47,7 +47,7 @@ export default function Main() {
           ))}
         </div>
         {/* Grid */}
-        <div className="grid grid-cols-3 gap-x-20 3xl:gap-x-[25px] gap-y-50 ">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[32px] md:gap-x-20 3xl:gap-x-[25px] gap-y-10 md:gap-y-50 ">
           {filtered.map((item, itemIdx) => (
             <Reveal
               key={item.id}
@@ -66,12 +66,12 @@ export default function Main() {
 function AwardCard({ image, title }: { image: string; title: string }) {
   return (
     <div className="flex flex-col items-center group">
-      <div className="relative w-full overflow-hidden pt-100 pb-70 border-b border-[#c2c2c2]">
+      <div className="relative w-full overflow-hidden pt-[11px] lg:pt-100 pb-2.5 md:pb-70 border-b border-[#c2c2c2]">
         <div className="absolute bottom-0 left-0 w-full h-0 group-hover:h-full transition-all duration-500 ease-in-out pointer-events-none z-10">
           <AwardsNoise />
         </div>
 
-        <div className="relative h-[220px] 3xl:h-[300px] w-full">
+        <div className="relative h-[100px] md:h-[220px] 3xl:h-[300px] w-full">
           <Image
             src={image}
             alt={title}
@@ -82,7 +82,7 @@ function AwardCard({ image, title }: { image: string; title: string }) {
       </div>
 
       {/* Title */}
-      <p className="text-center text-30 leading-[1.333] text-secondary font-light mt-30 3xl:mt-[32px]">
+      <p className="text-center text-30 leading-[1.333] text-secondary font-light mt-2.5 md:mt-30 3xl:mt-[32px]">
         {title}
       </p>
     </div>
