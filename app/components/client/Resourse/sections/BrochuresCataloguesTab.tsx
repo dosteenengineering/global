@@ -21,7 +21,7 @@ const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
   const items = getBrochureItems(tab.items);
 
   return (
-    <div className="pt-70 md:pt-100">
+    <div className="pt-[30px] md:pt-70 md:pt-100">
       <h2 className="text-[38px] md:text-55 leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-50">
         {tab.title}
       </h2>

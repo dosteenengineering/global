@@ -134,7 +134,7 @@ const counterPill = (
             {WhyChooseData.description}
           </p>
         </div>
-   <motion.div
+          <motion.div
             variants={moveUp(0.5)}
             initial="hidden"
             whileInView="show"

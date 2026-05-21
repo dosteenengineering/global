@@ -121,6 +121,7 @@ body::-webkit-scrollbar {
     --secondary: #161616;
     --paragraph: #626262;
     --bdr-gray: #C2C2C2;
+    --bdr-blue: #76A7FF; 
 
     /* small */
     --text-15: clamp(12px, 0.5vw + 10px, 15px);
@@ -158,6 +159,30 @@ body::-webkit-scrollbar {
     --space-150: clamp(44px, 7.5vw + 17px, 150px);
     --space-180: clamp(54px, 9.0vw + 20px, 180px);
     --space-200: clamp(52px, 10.5vw + 13px, 200px);
+
+
+
+     --glass-surface-padding-inline: 0;
+    --glass-content-padding-inline: 1.75em;
+    --glass-border-width: clamp(1px, .0625em, 4px);
+    --glass-shadow-cutoff-fix: 2em;
+    --glass-shadow-offset-top: 2em;
+    --glass-shadow-offset-left: 2em;
+    --glass-text-color: #323232;
+    --glass-font-size: 18px;
+    --glass-font-weight: 500;
+    --glass-letter-spacing: -.18px;
+    --glass-content-blend-mode: normal;
+    --glass-content-text-shadow: 0 .05em .05em #0000000d;
+    --glass-content-shine-display: block;
+    /* --glass-surface-background: linear-gradient(-75deg, #ffffff0d, #fff3, #ffffff0d); */
+    --glass-surface-shadow:   inset 1px 0px 5px #ffffff52, inset 4px 0px 1px #0000000d, 0 -0.75em 1px -1px #0000
+    --glass-surface-shadow-hover: inset 0 1px 1px #0000000d, inset 0 -1px 1px #ffffff80, 0 .15em .05em -.1em #00000040, 0 0 .05em .1em inset #ffffff80, 0 0 0 0 #fff;
+    --glass-surface-shadow-active: inset 0 1px 1px #0000000d, inset 0 -1px 1px #ffffff80, 0 1px 1px -1px #0003, 0 0 .1em .25em inset #fff3, 0 .225em .05em 0 #0000000d, 0 .25em 0 0 #ffffffbf, inset 0 .25em .05em 0 #00000026;
+    
+
+
+
 }
 
 
@@ -167,6 +192,7 @@ body::-webkit-scrollbar {
     --color-secondary: var(--secondary);
     --color-paragraph: var(--paragraph);
     --color-bdr-gray: var(--bdr-gray);
+    --color-bdr-blue: var(--bdr-blue);
     --breakpoint-7xl: 103.125rem;
     --container-7xl: 98.125rem;
 
@@ -237,7 +263,7 @@ body::-webkit-scrollbar {
 }
 
 .hero-heading {
-    @apply text-[32px] lg:text-[36px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
+    @apply text-[36px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
 }
 
 .text-description {
@@ -249,13 +275,40 @@ body::-webkit-scrollbar {
 }
 
 .glass-effect {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22),
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.14),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  position: relative;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow:inset 1px 1px #ffffff63, inset -1px -1px #ffffff63, inset 0 0 20px #ffffff00, 0 8px 32px #00000000;
+  border: none !important; /* let box-shadow handle the border */
 }
 
+.glass-effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  /* background: linear-gradient( 
+    135deg,
+    #ffffff60 0%,    top-left bright  
+    #ffffff10 40%,     fade to transparent 
+    #ffffff00 50%,    middle transparent  
+    #ffffff10 60%,     fade in  
+    #ffffff40 100%    bottom-right subtle  
+  );*/
+  background: linear-gradient(
+358deg, #ffffffa8 0%, #e4d8d81f 40%, #edebeb0d 50%, #e3e3e326 60%, #ffffffa8 100%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 
 /* ─── Featured Projects ─── */
 
@@ -487,4 +540,30 @@ body::-webkit-scrollbar {
     [class*="map-point-scale"] {
         animation: none !important;
     }
+}
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes item-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@theme {
+  --animate-dropdown-in: dropdown-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  --animate-item-in: item-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }

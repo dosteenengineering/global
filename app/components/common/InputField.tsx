@@ -24,7 +24,7 @@ export function InputField({
   return (
     <div className="relative w-full group">
       {/* Label — always fixed, never moves */}
-      <span className="block text-description text-paragraph mb-[33px]">
+      <span className="block text-description text-paragraph mb-5 lg:mb-[33px]">
         {label}
       </span>
 

@@ -49,7 +49,7 @@ const [openId, setOpenId] = useState<number | null>(IndustriesData.items[0].id);
           const detail = IndustriesData.items.find((i) => i.id === item.id)!;
 
           return (
-            <div key={item.id} className="relative first:border-t border-b border-[#76A7FF] py-5">
+            <div key={item.id} className="relative first:border-t border-b border-bdr-blue py-5">
               {/* Accordion header */}
               <button
                 type="button"
@@ -132,7 +132,7 @@ const [openId, setOpenId] = useState<number | null>(IndustriesData.items[0].id);
               type="button"
               key={item.id}
               onClick={() => setActiveId(item.id)}
-              className={`group relative flex items-center justify-between text-left w-full first:border-t border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${
+              className={`group relative flex items-center justify-between text-left w-full first:border-t border-b border-bdr-blue transition-all duration-300 cursor-pointer ${
                 isActive ? "px-20" : ""
               }`}
               style={
