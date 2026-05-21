@@ -75,12 +75,12 @@ export default function ContactForm() {
       </div>
       <SectionTitle
         title="Tell Us About Your Project"
-        className="max-w-[20ch] section-heading mb-80"
+        className="max-w-[20ch] section-heading mb-10 lg:mb-80"
       />
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Row 1 */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-7.5 lg:gap-y-80 mb-80">
           <Controller
             name="firstName"
             control={control}
@@ -198,7 +198,7 @@ export default function ContactForm() {
         </div>
 
         {/* Row 4 — Project Brief full width */}
-        <div className="mb-80">
+        <div className="mb-10 lg:mb-80">
           <Controller
             name="projectBrief"
             control={control}
@@ -209,7 +209,7 @@ export default function ContactForm() {
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 error={errors.projectBrief?.message}
-                height="h-[100px]"
+                height="h-[50px] lg:h-[100px]"
               />
             )}
           />

@@ -27,9 +27,9 @@ export default function Navbar() {
 
       tl.fromTo(
         navPillRef.current,
-        { clipPath: "inset(0 100% 0 0 round 50px)" },
+        { clipPath: "inset(-3px 100% -3px -3px round 50px)" },
         {
-          clipPath: "inset(0 0% 0 0 round 50px)",
+          clipPath: "inset(-3px 0% -3px -3px round 50px)",
           duration: 0.9,
           ease: "power3.out",
         },
@@ -85,9 +85,10 @@ export default function Navbar() {
       <div className="container flex items-center justify-between gap-4 w-full">
         <div
           ref={navPillRef}
-          className="flex h-[62px] md:h-[70px] rounded-[50px] w-full max-w-[1127px]"
+          className="flex h-[62px] md:h-[70px] rounded-[50px] w-full max-w-[1127px] backdrop-blur-[2px] "
+          
         >
-          <div className="flex items-center justify-between rounded-[50px] border border-white/30 bg-white/8 glass-effect overflow-hidden w-full">
+          <div className="flex items-center justify-between rounded-[50px] border border-white/30 bg-white/8 glass-effect    w-full">
             {/* Logo */}
             <div
               ref={logoRef}
@@ -171,7 +172,7 @@ export default function Navbar() {
         {/* Right group — Contact + Hamburger */}
         <div className="hidden md:flex items-center gap-3 shrink-0">
           {/* Contact pill */}
-          <div className="rounded-[50px] overflow-hidden">
+          <div className="rounded-[50px]   backdrop-blur-[2px]">
             <Link
               ref={contactRef}
               href="/contact"
@@ -192,7 +193,7 @@ export default function Navbar() {
           </div>
 
           {/* Hamburger pill */}
-          <div className="rounded-full overflow-hidden">
+          <div className="rounded-full   backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
               className="cursor-pointer flex items-center justify-center group w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-white/8 border border-white/30 glass-effect"

@@ -78,9 +78,9 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
           </p>
         </div>
 
-        <div className="border-t border-[#76A7FF] pt-40 lg:pt-50">
+        <div className="border-t border-bdr-blue pt-40 lg:pt-50">
           <div className="grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
-            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-[#76A7FF] xl:pt-40 h-full">
+            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40 h-full">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
                   {data.doors.map((door) => { const isActive = activeId === door.id;

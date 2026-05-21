@@ -56,7 +56,7 @@ export default function FeaturedProjects() {
       <div className="container">
 
         {/* Title */}
-         <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-[#76A7FF] pb-5 relative ">
+         <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-bdr-blue pb-5 relative ">
           <SectionTitle title={title} className="section-heading text-white" />
 
           {showNav && (

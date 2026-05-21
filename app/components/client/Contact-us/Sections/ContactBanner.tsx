@@ -29,13 +29,13 @@ export default function ContactBanner({
         />
       </div>
       {/* 1. Gradient block — standalone, no content */}
-      <div className="w-full h-[250px] 3xl:h-[286px] relative">
+      <div className="w-full h-[154px] lg:h-[250px] 3xl:h-[286px] relative">
         <BannerNoise />
       </div>
 
       {/* 2. Content — line, title, description */}
       <div className="container">
-        <div className="w-full mb-80">
+        <div className="w-full mb-[70px] lg:mb-80">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -46,14 +46,14 @@ export default function ContactBanner({
         </div>
 
         <h1
-          className={`text-secondary mb-20 hero-heading leading-[100%] ${titleMaxWidth}`}
+          className={`text-secondary mb-5 md:mb-20 hero-heading leading-[100%] ${titleMaxWidth}`}
         >
           {title}
         </h1>
 
         {description && (
           <p
-            className={`text-paragraph text-description mb-140 3xl:mb-150 ${descriptionMaxWidth}`}
+            className={`text-paragraph text-description mb-7.5 lg:mb-140 3xl:mb-150 ${descriptionMaxWidth}`}
           >
             {description}
           </p>
