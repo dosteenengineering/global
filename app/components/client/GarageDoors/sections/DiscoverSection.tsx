@@ -38,17 +38,32 @@ function DoorContent({ door }: { door: DoorItem }) {
   const [imageSrc, setImageSrc] = useState(door.image);
 
   return (
-    <article className="pr-4">
-      <h3 className="text-40 lg:text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-40 lg:mb-50">{door.title}</h3>
-      <div className="relative w-full aspect-[2.08/1] mb-40 overflow-hidden bg-white/10">
-        <Image src={imageSrc} alt={door.title} fill sizes="(min-width: 1280px) 920px, 100vw" className="object-cover" 
-        onError={() => setImageSrc("/assets/images/garage-doors/garage-doors.jpg")} />
+    <article className="pr-0 xl:pr-4">
+      <h3 className="hidden xl:block text-40 lg:text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-40 lg:mb-50">
+        {door.title}
+      </h3>
+      <div className="relative w-full aspect-[8/6] xl:aspect-[2.08/1] mb-5 xl:mb-40 overflow-hidden bg-white/10">
+        <Image
+          src={imageSrc}
+          alt={door.title}
+          fill
+          sizes="(min-width: 1280px) 920px, 100vw"
+          className="object-cover"
+          onError={() => setImageSrc("/assets/images/garage-doors/garage-doors.jpg")}
+        />
       </div>
-      <p className="w-fit rounded-full border border-white/70 px-6 py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white mb-30"> {door.idealFor} </p>
-      <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30"> {door.heading} </h4>
+      <p className="w-fit rounded-full border border-white/70 px-[16.5px]  md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white mb-30">
+        {door.idealFor}
+      </p>
+      <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30">
+        {door.heading}
+      </h4>
       <ul className="space-y-2 xl:space-y-6 3xl:pb-[97px]">
         {door.points.map((point) => (
-          <li key={point} className="relative pl-5 text-19 text-white/90 leading-[1.526315789473684] font-light" >
+          <li
+            key={point}
+            className="relative pl-5 text-19 text-white/90 leading-[1.526315789473684] font-light"
+          >
             <span className="absolute left-0 top-1/2 -translate-y-1/2 h-[5px] w-[5px] bg-white" />
             {point}
           </li>
@@ -60,49 +75,133 @@ function DoorContent({ door }: { door: DoorItem }) {
 
 const DiscoverSection = ({ data }: DiscoverSectionProps) => {
   const [activeId, setActiveId] = useState(data.doors[0]?.id ?? 0);
+
+  // Mobile accordion — can open/close independently
+  const [openAccordionId, setOpenAccordionId] = useState<number | null>(
+    data.doors[0]?.id ?? null
+  );
+
   const activeDoor = data.doors.find((door) => door.id === activeId) ?? data.doors[0];
 
-  const handleMenuClick = (id: number) => {
-    setActiveId(id);
+  const toggleAccordion = (id: number) => {
+    setOpenAccordionId((prev) => (prev === id ? null : id));
   };
 
   return (
-    <section className="relative py-100 lg:py-150">
+    <section className="relative py-12.5 md:py-100 lg:py-150">
       <PrimaryNoise />
       <div className="container relative z-10">
-        <SectionTitle title={data.sectionTitle} className="section-heading text-white mb-50 uppercase" />
+        <SectionTitle
+          title={data.sectionTitle}
+          className="section-heading text-white mb-50 uppercase"
+        />
 
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
-          <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50 max-w-[52.5ch]">
+          <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">
             {data.sectionDesc}
           </p>
         </div>
 
-        <div className="border-t border-bdr-blue pt-40 lg:pt-50">
-          <div className="grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
+        <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
+
+          {/* ── Mobile: Accordion ── */}
+          <div className="xl:hidden space-y-0">
+            {data.doors.map((door) => {
+              const isOpen = openAccordionId === door.id;
+              return (
+                <div key={door.id} className="border-b border-bdr-blue">
+                  {/* Accordion trigger */}
+                  <button
+                    type="button"
+                    onClick={() => toggleAccordion(door.id)}
+                    className="w-full flex items-center justify-between gap-4 py-[18px] text-left"
+                  >
+                    <span
+                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${
+                        isOpen ? "font-[500]" : "font-light"
+                      }`}
+                    >
+                      {door.menuTitle}
+                    </span>
+                    <span
+                      className={`shrink-0 flex items-center justify-center   transition-all duration-300  `}
+                    > 
+                        
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+               className={`transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : "rotate-0"
+                        }`}>
+              <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+
+                    </span>
+                  </button>
+
+                  {/* Accordion content */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key={door.id}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-5  ">
+                          <DoorContent door={door} />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ── Desktop: Original sidebar + content ── */}
+          <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
             <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40 h-full">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
-                  {data.doors.map((door) => { const isActive = activeId === door.id;
-
+                  {data.doors.map((door) => {
+                    const isActive = activeId === door.id;
                     return (
-                      <button key={door.id} type="button" onClick={() => handleMenuClick(door.id)}
-                        className={`group flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0  rounded-full px-4 first:mb-2 text-left transition-colors duration-300 xl:w-full xl:rounded-none xl:px-0 
-                          ${isActive ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]" : "xl:py-20 " }`} >
-                        <span className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
-                        ${isActive ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]" : "font-light leading-[1.2]" }`} >
+                      <button
+                        key={door.id}
+                        type="button"
+                        onClick={() => setActiveId(door.id)}
+                        className={`group flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0 rounded-full px-4 first:mb-2 text-left transition-colors duration-300 xl:w-full xl:rounded-none xl:px-0 
+                          ${isActive
+                            ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]"
+                            : "xl:py-20"
+                          }`}
+                      >
+                        <span
+                          className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
+                          ${isActive
+                            ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
+                            : "font-light leading-[1.2]"
+                          }`}
+                        >
                           {door.menuTitle}
                         </span>
-                          { isActive &&(
-                        <span
-                          className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex
-                           ${ isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100" }`} >
-                          <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-2 w-2 md:h-auto md:w-auto" />
-                        </span>
-
-                            )
-                          }
-
+                        {isActive && (
+                          <span
+                            className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex ${
+                              isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            }`}
+                          >
+                            <Image
+                              src="/assets/icons/arrow-right-primary.svg"
+                              alt=""
+                              aria-hidden="true"
+                              width={15}
+                              height={15}
+                              className="h-2 w-2 md:h-auto md:w-auto"
+                            />
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -113,7 +212,13 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
             <div className="pt-40 xl:pl-70 3xl:pl-[86px]">
               <AnimatePresence mode="wait">
                 {activeDoor && (
-                  <motion.div key={activeDoor.id} variants={moveUpV2} initial="hidden" animate="show" exit={{ opacity: 0, y: -24, transition: { duration: 0.25 } }} >
+                  <motion.div
+                    key={activeDoor.id}
+                    variants={moveUpV2}
+                    initial="hidden"
+                    animate="show"
+                    exit={{ opacity: 0, y: -24, transition: { duration: 0.25 } }}
+                  >
                     <DoorContent door={activeDoor} />
                   </motion.div>
                 )}
@@ -123,7 +228,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         </div>
 
         {data.ctaData && (
-          <div className="mt-100 bg-gradient-to-r from-white/2 to-white/20 px-8 py-12 lg:px-50 lg:py-50 3xl:px-[55px] 3xl:py-[52px]">
+          <div className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-[55px] 3xl:py-[52px]">
             <h3 className="text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-25">
               <span className="font-semibold">
                 {data.ctaData.title.split("?")[0]}?
@@ -132,14 +237,24 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                 ? data.ctaData.title.slice(data.ctaData.title.indexOf("?") + 1)
                 : ""}
             </h3>
-
-            <p className="text-30 text-white leading-[1.333333333333333] font-light max-w-[70ch] mb-50">
+            <p className="text-30 text-white leading-[1.333333333333333] font-light max-w-[70ch] mb-7.5 md:mb-50">
               {data.ctaData.description}
             </p>
-
             <div className="flex flex-wrap gap-4">
-              <BorderButton text={data.ctaData.buttonOneTitle} href={data.ctaData.buttonOneLink} px="px-6" className="min-w-[190px]" />
-              <BorderButton text={data.ctaData.buttonTwoTitle} href={data.ctaData.buttonTwoLink} px="px-6" className="min-w-[190px]" />
+              <BorderButton
+                text={data.ctaData.buttonOneTitle}
+                href={data.ctaData.buttonOneLink}
+                iconColor="white"
+                px="px-6"
+                className="min-w-[190px]"
+              />
+              <BorderButton
+                text={data.ctaData.buttonTwoTitle}
+                href={data.ctaData.buttonTwoLink}
+                iconColor="white"
+                px="px-6"
+                className="min-w-[190px]"
+              />
             </div>
           </div>
         )}

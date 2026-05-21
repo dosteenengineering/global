@@ -59,7 +59,7 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
-      <h2 className="text-[38px] md:text-55 leading-[1.1] font-light text-secondary max-w-[28ch] mb-50">
+      <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[28ch] mb-7.5 md:mb-50">
         {tab.title}
       </h2>
 
@@ -70,14 +70,14 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
           return (
             <button key={item.id} type="button" onClick={() => setActiveVideo(item)} className="group text-left" >
               {/* IMAGE */}
-              <div className="relative aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-[18.7/10] md:aspect-[16/10] overflow-hidden">
                 <Image src={item.image} alt={item.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
 
                 {/* DARK OVERLAY */}
                 <div className="absolute inset-0 bg-black/70 transition-colors duration-300 group-hover:bg-black/45" />
 
                 {/* PLAY BUTTON */}
-                <div className="absolute cursor-pointer left-1/2 top-1/2 flex h-10 h-10 xl:w-[71px] xl:h-[71px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-110">
+                <div className="absolute cursor-pointer left-1/2 top-1/2 flex w-10 h-10 xl:w-[71px] xl:h-[71px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-110">
                   <svg width="10" height="13" viewBox="0 0 10 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.79091 6.48023L0 0V12.9605L9.79091 6.48023Z" fill="#1C1C1C" />
                   </svg>
@@ -86,20 +86,20 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
               </div>
 
               {/* CONTENT */}
-              <div className="bg-[#F4F4F4] p-10">
+              <div className="bg-[#F4F4F4] p-5 lg:p-10">
                 <h3 className="text-30 leading-[1.333333333333333] font-light text-secondary transition-colors duration-300 group-hover:text-primary">
                   {item.title}
                 </h3>
 
-                <div className="mt-[15px] flex items-center gap-[10px] flex-wrap">
+                <div className="mt-2.5 md:mt-[15px] flex items-center gap-[5px] md:gap-[10px] flex-wrap">
                   {label && (
-                    <span className="rounded-full bg-primary/5 px-[18.5px] py-[5px] flex items-center justify-center text-15 
+                    <span className="rounded-full bg-primary/5 px-2.5 md:px-[22.5px] md:py-[5px] flex items-center justify-center text-15 
                     leading-[1.733333333333333] font-[400] text-secondary">
                       {label}
                     </span>
                   )}
 
-                  <div className="flex items-center gap-1 rounded-full bg-primary/5 px-[22.5px] py-[5px] flex items-center justify-center text-15 leading-[1.733333333333333] font-[400] text-secondary">
+                  <div className="flex items-center gap-1 rounded-full bg-primary/5 px-2.5 md:px-[22.5px] md:py-[5px] flex items-center justify-center text-15 leading-[1.733333333333333] font-[400] text-secondary">
                     <span>{item.duration}</span>
                   </div>
                 </div>

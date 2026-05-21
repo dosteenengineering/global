@@ -8,14 +8,14 @@ const BannerBottom = () => {
   const rightInset = useGetContainerSpacing(containerRef);
 
   return (
-    <section className="relative pt-120 pb-200 overflow-hidden">
+    <section className="relative pt-12.5 md:pt-120 pb-[70px] md:pb-200 overflow-hidden">
       <div ref={containerRef} className="container" />
 
       <div
         className="ml-auto max-w-[1252px] px-[16px] 2xl:px-0"
         style={{ marginRight: rightInset }}
       >
-        <p className="text-30 leading-[1.33] font-light tracking-[-0.02em]  mb-40 3xl:pr-5">
+        <p className="text-30 leading-[1.33] font-light tracking-[-0.02em] mb-5 md:mb-40 3xl:pr-5">
           In the demanding climates and architecturally refined neighborhoods of
           Oman, UAE, and the wider MENA region, a garage door should do more
           than just serve as a point of entry. It should enhance your home&apos;s

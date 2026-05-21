@@ -41,10 +41,10 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     <section className="relative w-full lg:min-h-screen overflow-hidden">
       <SecondaryNoise/>
 
-      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden">
+      <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
           <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase max-w-[24ch]" />
-          <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-6">
+          <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p>
           {/* ================= DESKTOP ================= */}
@@ -127,7 +127,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                   {/* Accordion trigger */}
                   <button
                     onClick={() => setActiveTab(isOpen ? null : tab.key)}
-                    className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-[10px]"
+                    className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-5 md:py-[10px]"
                   >
                     <motion.div
                       initial="hidden"
@@ -139,7 +139,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       <span
                         className={
                           isOpen
-                            ? "font-[600] text-secondary"
+                            ? "font-[500] text-secondary"
                             : "font-[300] text-paragraph transition-all duration-300"
                         }
                       >
@@ -155,36 +155,33 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                   </button>
                   {/* Accordion body */}
                   <div
-                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 pt-20" : "grid-rows-[0fr] opacity-0"} overflow-hidden border-t border-bdr-gray`}
+                    className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 " : "grid-rows-[0fr] opacity-0"} overflow-hidden `}
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3 className="text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
+                      <h3 className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`}>
                         {tab.leftTitle}
                       </h3>
 
                       {/* Right items */}
-                     <div className="grid md:grid-cols-2 xl:gap-y-2 text-19 font-[300] leading-[1.5] md:leading-[2.63] font-poppins -tracking-[2%] pb-8">
-                        {tab.rightItems.map((item: string, index: number) => (
-                          <motion.div
-                            key={`${activeTab}-${index}`}
-                            initial="hidden"
-                            whileInView="show"
-                            variants={moveUp(index * 0.06)}
-                            viewport={{ once: true }}
-                            className="flex items-center"
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            onTouchStart={() => setHoveredIndex(index)}
-                            onTouchEnd={() => setHoveredIndex(null)}
-                          >
-                            <span className={`transition-all duration-300   ${
-                                hoveredIndex === index ? "font-[700]" : ""
-                              }`}  >{item}</span>
-                          
-                          </motion.div>
-                        ))}
-                      </div>
+                     
+                      <div className="w-full text-19 font-[300] leading-[1.789473684210526] font-poppins -tracking-[2%] ">
+                    {tab.rightItems.map((item, index) => (
+                      <motion.ul
+                        key={`${activeTab}-${index}`}
+                        initial="hidden"
+                        whileInView="show"
+                        variants={moveUp(index * 0.15)}
+                        viewport={{ once: true }}
+                        className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
+                      >
+                        <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2 mb-[5px]">
+                          <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
+                        </li>
+                        
+                      </motion.ul>
+                    ))}
+                  </div>
                     </div>
                   </div>
                 </motion.div>
