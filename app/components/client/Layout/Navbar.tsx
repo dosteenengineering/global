@@ -128,6 +128,7 @@ export default function Navbar() {
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let ticking = false;
+    const threshold = 10; // Scroll distance threshold in pixels to prevent flickering
 
     const handleScroll = () => {
       if (!ticking) {
@@ -137,16 +138,21 @@ export default function Navbar() {
           // 1. Sticky background threshold (scrolled past 80px)
           setIsSticky(currentScrollY > 80);
 
-          // 2. Visibility state (hide on scroll down, show on scroll up/top)
+          // 2. Visibility state with accumulated threshold to prevent jitter/flicker
+          const diff = currentScrollY - lastScrollY;
+
           if (currentScrollY <= 80) {
             setIsVisible(true);
-          } else if (currentScrollY > lastScrollY) {
-            setIsVisible(false);
-          } else {
-            setIsVisible(true);
+            lastScrollY = currentScrollY;
+          } else if (Math.abs(diff) >= threshold) {
+            if (currentScrollY > lastScrollY) {
+              setIsVisible(false); // Scrolling down
+            } else {
+              setIsVisible(true);  // Scrolling up
+            }
+            lastScrollY = currentScrollY;
           }
 
-          lastScrollY = currentScrollY;
           ticking = false;
         });
         ticking = true;
