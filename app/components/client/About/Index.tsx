@@ -6,6 +6,7 @@ import WhyChooseDosteen from "./Sections/WhyChooseDosteen";
 import OurValues from "./Sections/OurValues";
 import CtaSection from "../../common/CtaSection";
 import { CtaData } from "./data";
+import ServingMap from "./Sections/ServingMap";
 
 const Index = () => {
   return (
@@ -23,6 +24,7 @@ const Index = () => {
       <WhyChooseDosteen />
       <MissionVision />
       <OurValues />
+      <ServingMap/>
       <CtaSection {...CtaData} descriptionWidth="max-w-[968px]" />
     </>
   );

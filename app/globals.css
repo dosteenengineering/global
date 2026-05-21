@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import 'flag-icons/css/flag-icons.min.css';
 
+
 html,
 body {
     min-height: 100%;
@@ -236,7 +237,7 @@ body::-webkit-scrollbar {
 }
 
 .hero-heading {
-    @apply text-[36px] md:text-95 font-helvetica uppercase leading-[1];
+    @apply text-[36px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
 }
 
 .text-description {
@@ -466,4 +467,24 @@ body::-webkit-scrollbar {
 
 .partner-phone-input .react-international-phone-input {
     padding-bottom: 1px;
+}
+
+@keyframes map-point-scale {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    [style*="map-point-scale"],
+    [class*="map-point-scale"] {
+        animation: none !important;
+    }
 }
