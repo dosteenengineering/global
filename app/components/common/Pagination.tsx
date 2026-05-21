@@ -9,7 +9,7 @@ export default function Pagination({
   totalPages: number;
 }) {
   return (
-    <div className="flex flex-row-reverse lg:flex-row items-center gap-200 3xl:gap-[218px]">
+    <div className="flex flex-row-reverse lg:flex-row justify-center lg:justify-start items-center gap-7.5 lg:gap-200 3xl:gap-[218px]">
       <div className="flex items-center gap-2.5 md:gap-[18px]">
         {currentPage > 1 ? (
           <Link
