@@ -195,3 +195,21 @@ export const CtaData = {
     },
   ],
 };
+
+export const servingMapData = {
+  title: "Serving UAE, Oman & the MENA Region",
+  countries: [
+    { name: "Ethiopia", x: 50.5, y: 60.5 },
+    { name: "Saudi", x: 51.5, y: 50.4 },
+    { name: "Iraq", x: 52.1, y: 45.1 },
+    { name: "Pakistan", x: 58.6, y: 48.3 },
+    { name: "Kenya", x: 50.0, y: 68.6 },
+    { name: "Nigeria", x: 42.2, y: 61.1 },
+    { name: "Bahrain", x: 52.8, y: 49.0 },
+    { name: "Ghana", x: 40.2, y: 61.0 },
+    { name: "Georgia", x: 50.4, y: 39.8 },
+    { name: "Afghanistan", x: 57.4, y: 45.5 },
+    { name: "Qatar", x: 53.2, y: 49.7 },
+    { name: "Taiwan", x: 70.0, y: 50.8 },
+  ],
+};
