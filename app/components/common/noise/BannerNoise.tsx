@@ -26,11 +26,11 @@ export default function BannerNoise() {
   return (
     <>
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 bg-[length:150px_100%]"
         style={{
           backgroundImage: "url(/assets/noise/banner-noise2.png)",
           backgroundRepeat: "repeat-x",
-          backgroundSize: "150px 100%",
+           
         }}
       />
     </>

@@ -58,7 +58,7 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
   }, [activeVideo]);
 
   return (
-    <div className="pt-70 md:pt-100">
+    <div className="pt-[30px] md:pt-70 md:pt-100">
       <h2 className="text-[38px] md:text-55 leading-[1.1] font-light text-secondary max-w-[28ch] mb-50">
         {tab.title}
       </h2>

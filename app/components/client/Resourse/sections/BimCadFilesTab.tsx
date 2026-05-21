@@ -34,10 +34,10 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
         .flatMap((filter) => itemsByFilter[filter] ?? [])
       : itemsByFilter[activeFilter] ?? [];
   return (
-    <div className="pt-70 md:pt-100">
+    <div className="pt-[30px] md:pt-70 md:pt-100">
       <div className="flex justify-between flex-wrap">
         <div>
-          <h2 className="text-[38px] md:text-55 leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
+          <h2 className="text-[24px] md:text-55 leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
             {tab.title}
           </h2>
           <p className="text-16 md:text-19 leading-[1.526315789473684] font-poppins font-light text-paragraph mb-40 max-w-[88ch]">
@@ -61,7 +61,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
 
           return (
             <button key={filter} type="button" onClick={() => setActiveFilter(filter)}
-              className={`h-50 rounded-full border px-25 text-15 leading-[1] cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-paragraph/60 text-paragraph hover:border-primary hover:text-primary"}`}
+              className={`h-7.5 md:h-50 rounded-full border px-25 text-15 leading-[1] cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-paragraph/60 text-paragraph hover:border-primary hover:text-primary"}`}
             >
               {filter}
             </button>

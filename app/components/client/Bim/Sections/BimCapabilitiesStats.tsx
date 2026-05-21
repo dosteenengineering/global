@@ -61,7 +61,7 @@ export default function BimCapabilitiesStats() {
             <div key={rowIndex}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-70 3xl:gap-x-[76px]">
                 {row.map((item) => (
-                  <div key={item.id} className="border-t border-[#76A7FF]">
+                  <div key={item.id} className="border-t border-bdr-blue">
                     <CapabilityCard item={item} />
                   </div>
                 ))}
@@ -70,8 +70,8 @@ export default function BimCapabilitiesStats() {
           ))}
           {/* Single bottom border after last row */}
           <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-x-70 3xl:gap-x-[76px]">
-            <div className="border-t border-[#76A7FF]" />
-            <div className="border-t border-[#76A7FF]" />
+            <div className="border-t border-bdr-blue" />
+            <div className="border-t border-bdr-blue" />
           </div>
         </div>
       </div>

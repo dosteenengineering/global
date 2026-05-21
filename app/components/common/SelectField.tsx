@@ -35,12 +35,12 @@ export function SelectField({
       onClick={() => setOpen((o) => !o)}
     >
       {/* Label — always fixed */}
-      <span className="block text-description text-paragraph mb-[33px]">
+      <span className="block text-description text-paragraph mb-5 lg:mb-[33px] mt-7.5 lg:mt-0">
         {label}
       </span>
 
       {/* Arrow — absolute, aligned to label baseline (top-0, h matches label line-height) */}
-      <div className="absolute top-0 right-0 flex items-center">
+      <div className="absolute top-1/2 lg:top-0 right-0 flex items-center">
         <Image
           src="/assets/icons/arrow-down-tip-gray.svg"
           alt="open dropdown"

@@ -19,7 +19,7 @@ export default function Main() {
 
   return (
     <section className="w-full relative">
-      <div className="absolute right-[-12%] lg:right-0 top-[-22%] lg:top-[-34%] 3xl:top-[-33.2%]">
+      <div className="absolute right-[-13%] lg:right-0 top-[-21.7%] lg:top-[-34%] 3xl:top-[-33.2%]">
         <Image
           src="/assets/images/recognitions/bg-lines.svg"
           alt="bg-svg"

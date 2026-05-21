@@ -25,7 +25,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         </h2>
 
         {/* Divider */}
-        <div className="w-full border-t border-[#76A7FF] mb-[30px] md:mb-80 3xl:mb-100" />
+        <div className="w-full border-t border-bdr-blue mb-[30px] md:mb-80 3xl:mb-100" />
 
         {/* Description */}
         <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
