@@ -122,21 +122,41 @@ export default function Navbar() {
   }, [isMenuOpen]);
   const lenis = useLenis();
   const [isSticky, setIsSticky] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isMenuTransformDisabled, setIsMenuTransformDisabled] = useState(false);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 80);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+
+          // 1. Sticky background threshold (scrolled past 80px)
+          setIsSticky(currentScrollY > 80);
+
+          // 2. Visibility state (hide on scroll down, show on scroll up/top)
+          if (currentScrollY <= 80) {
+            setIsVisible(true);
+          } else if (currentScrollY > lastScrollY) {
+            setIsVisible(false);
+          } else {
+            setIsVisible(true);
+          }
+
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   useEffect(() => {
     if (!lenis) return;
 
@@ -147,11 +167,34 @@ export default function Navbar() {
     }
   }, [isMenuOpen, lenis]);
 
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | undefined;
+
+    if (isMenuOpen) {
+      setIsMenuTransformDisabled(true);
+    } else {
+      // Delay re-enabling header transforms until the 800ms menu closing transition is complete
+      timeoutId = setTimeout(() => {
+        setIsMenuTransformDisabled(false);
+      }, 850);
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isMenuOpen]);
+
   return (
     // <header className="absolute top-[30px] md:top-[23px] left-0 w-full z-[150]">
-    <header className={`left-0 w-full z-[150] top-[30px] md:top-[23px] transition-all duration-500
-    ${isSticky ? "fixed py-2" : "absolute "} `}
+    <header className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
+      ${isMenuTransformDisabled
+        ? ""
+        : "transition-transform duration-300 ease-out " + (isVisible ? "translate-y-0" : "-translate-y-[150%] pointer-events-none")
+      }`}
     >
+
+ 
+ 
       <div className="container relative z-[160] flex items-center justify-between gap-4 w-full">
         <div
           ref={navPillRef}
