@@ -7,6 +7,8 @@ import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 
 import "swiper/css";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 interface SolutionSliderProps {
   images: string[];
@@ -32,7 +34,7 @@ export default function SolutionSlider({ images }: SolutionSliderProps) {
       >
         {images.map((src, i) => (
           <SwiperSlide key={i}>
-            <div className="overflow-hidden w-full relative h-[169px] md:h-[480px] 3xl:h-[680px]">
+            <motion.div variants={moveUp(0.2*i)} initial="hidden" whileInView="show" viewport={{ once: true }} className="overflow-hidden w-full relative h-[169px] md:h-[480px] 3xl:h-[680px]">
               <Image
                 src={src}
                 alt={`Solution image ${i + 1}`}
@@ -40,7 +42,7 @@ export default function SolutionSlider({ images }: SolutionSliderProps) {
                 className="object-cover"
                 draggable={false}
               />
-            </div>
+            </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>
