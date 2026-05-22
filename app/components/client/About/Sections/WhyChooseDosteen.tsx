@@ -11,6 +11,7 @@ import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import NavButton from "@/app/components/common/NavigationButton"; 
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 function IconWrapper({ icon, label }: { icon: string; label: string }) {
   return (
@@ -34,13 +35,19 @@ function FeatureCard({
   icon,
   title,
   description,
+  delay,
 }: {
   icon: string;
   title: string;
   description: string;
+  delay: number;
 }) {
   return (
-    <div
+    <motion.div 
+    variants={moveUp(delay)}
+    initial="hidden"
+    whileInView="show"
+    viewport={{once:true}}
       className="flex flex-col p-5 md:p-50 backdrop-blur-[20px] h-auto md:h-[481px]"
       style={{
         background:
@@ -52,7 +59,7 @@ function FeatureCard({
         {title}
       </h3>
       <p className="text-white text-description !tracking-[2%]">{description}</p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -130,9 +137,10 @@ const counterPill = (
         />
 
         <div className="lg:pl-[25.3%] w-full">
-          <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
+          {/* <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
             {WhyChooseData.description}
-          </p>
+          </p> */}
+          <SectionDescription text={WhyChooseData.description} delay={0.5} className="text-white font-light !text-30 !leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
           <motion.div
             variants={moveUp(0.5)}
@@ -204,6 +212,7 @@ const counterPill = (
                     icon={item.icon}
                     title={item.title}
                     description={item.description}
+                    delay={0.5 + slideIndex * 0.1}
                   />
                 ))}
               </div>

@@ -6,6 +6,8 @@ import { AboutData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import StatNoise2 from "@/app/components/common/noise/StatNoise2";
+import { motion } from "framer-motion";
+import { moveLeft, moveUp } from "@/app/components/motionVariants";
 
 function StatCard({
   icon,
@@ -67,25 +69,13 @@ export default function AboutDetails() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <div className="absolute -top-43   lg:-top-68 left-[-131px] lg:left-0 pointer-events-none">
-        <Image
-          src="/assets/icons/bg-svg/top-left-animated.svg"
-          alt="decorative lines"
-          width={600}
-          height={500}
-          className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]"
-        />
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]" />
       </div>
 
       <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-70px md:pt-120 px-[15px] lg:px-0 container w-full">
-        <SectionTitle
-          text={AboutData.title}
-          className="section-heading text-secondary uppercase mb-20px md:mb-50"
-        />
+        <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" />
 
-        <div
-          className="text-paragraph text-description"
-          dangerouslySetInnerHTML={{ __html: AboutData.description }}
-        />
+        <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="text-paragraph text-description" dangerouslySetInnerHTML={{ __html: AboutData.description }} />
       </div>
 
       {/* Stats Swiper */}
@@ -103,7 +93,7 @@ export default function AboutDetails() {
           {slideGroups.map((group, slideIndex) => (
             <SwiperSlide key={slideIndex}>
               {/* 1 column, 2 stacked cards, 10px gap */}
-              <div className="flex flex-col gap-[5px] md:gap-[10px]">
+              <motion.div variants={moveUp(0.5+0.1*slideIndex)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="flex flex-col gap-[5px] md:gap-[10px]">
                 {group.map((stat, cardIndex) => (
                   <StatCard
                     key={stat.id}
@@ -114,7 +104,7 @@ export default function AboutDetails() {
                     noiseVariant={cardIndex === 0 ? 1 : 2}
                   />
                 ))}
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>
