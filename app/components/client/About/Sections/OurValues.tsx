@@ -24,7 +24,7 @@ function ValueCard({
       <h3 className="text-55 font-[300] leading-[1.334] md:leading-[1.1818] uppercase text-secondary">
         {title}
       </h3>
-      <p className="text-description text-paragraph max-w-[540px]">
+      <p className="text-description !leading-[1.68] md:!leading-[1.54] text-paragraph max-w-[540px]">
         {description}
       </p>
     </motion.div>

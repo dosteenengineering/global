@@ -183,7 +183,7 @@ export default function Main({
             <div className="mb-12.5 md:mb-80">
               <SpecGrid specs={project.specifications} />
             </div>
-<div className="container">
+<div className="container px-[16px] sm:px-0">
             {/* Challenge — ref for deco alignment */}
             <section ref={challengeRef} className="mb-7.5 md:mb-80">
               <TextandDescription
