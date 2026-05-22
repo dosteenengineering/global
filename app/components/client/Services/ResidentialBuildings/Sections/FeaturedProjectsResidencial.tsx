@@ -12,6 +12,8 @@ import { featuredProjectsData, type Project } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import NavButton from "@/app/components/common/NavigationButton";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 // ── Helpers ──────────────────────────────────────────────
 function getInactiveProjects(
@@ -32,11 +34,13 @@ function InactiveSlot({
   direction,
   changeCount,
   onClick,
+  delay,
 }: {
   project: Project;
   direction: "left" | "right";
   changeCount: number;
   onClick: () => void;
+  delay: number;
 }) {
   const prevProjectRef = useRef<Project>(project);
   const [displayed, setDisplayed] = useState<{
@@ -64,37 +68,16 @@ function InactiveSlot({
   const exitTo = direction === "right" ? "-100%" : "100%";
 
   return (
-    <div
-      className="flex flex-col flex-1 min-w-0 cursor-pointer"
-      onClick={onClick}
-    >
+    <motion.div className="flex flex-col flex-1 min-w-0 cursor-pointer" onClick={onClick} variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true }}  >
       {/* Image — fixed h-[313px], content animates */}
       <div className="relative w-full h-[280px] 3xl:h-[313px] overflow-hidden mb-20">
         {displayed.animating && (
-          <div
-            className="absolute inset-0 slot-exit"
-            style={{ ["--exit-to" as string]: exitTo }}
-          >
-            <Image
-              src={displayed.prev.image}
-              alt={displayed.prev.name}
-              fill
-              className="object-cover pointer-events-none"
-            />
+          <div className="absolute inset-0 slot-exit" style={{ ["--exit-to" as string]: exitTo }} >
+            <Image src={displayed.prev.image} alt={displayed.prev.name} fill className="object-cover pointer-events-none" />
           </div>
         )}
-        <div
-          className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`}
-          style={
-            displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-          }
-        >
-          <Image
-            src={displayed.next.image}
-            alt={displayed.next.name}
-            fill
-            className="object-cover pointer-events-none"
-          />
+        <div className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`} style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
+          <Image src={displayed.next.image} alt={displayed.next.name} fill className="object-cover pointer-events-none" />
         </div>
       </div>
 
@@ -137,7 +120,7 @@ function InactiveSlot({
 
       {/* Divider */}
       <div className="w-full h-[2px] bg-[#c2c2c2]" />
-    </div>
+    </motion.div>
   );
 }
 
@@ -212,9 +195,9 @@ export default function FeaturedProjectsResidencial() {
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 className="w-full h-[549px] 3xl:h-[649px]"
               >
-                {projects.map((project) => (
+                {projects.map((project,index) => (
                   <SwiperSlide key={project.key}>
-                    <div
+                    <motion.div variants={moveUp(0.2+index*0.2)} initial="hidden" whileInView={"show"} viewport={{once:true}}
                       className="relative w-full h-[549px] 3xl:h-[649px] group cursor-pointer"
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
@@ -255,7 +238,7 @@ export default function FeaturedProjectsResidencial() {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -289,6 +272,7 @@ export default function FeaturedProjectsResidencial() {
                     project={project}
                     direction={direction}
                     changeCount={changeCount}
+                    delay={0.2 + i * 0.1}
                     onClick={() =>
                       activeSwiperRef.current?.slideToLoop(projectIndex)
                     }
