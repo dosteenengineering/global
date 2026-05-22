@@ -18,7 +18,7 @@ export default function SystemsTable({
               key={key}
               className="grid md:grid-cols-[34%_66%] pb-30 pt-30 3xl:pb-[36px] 3xl:pt-[36px] first:pt-0 last:pb-0 gap-[5px] md:gap-0"
             >
-              <span className="text-19 leading-[1.52] tracking-[0.02em] text-secondary font-medium max-w-[200px]">
+              <span className="text-19 leading:[1.69] md:leading-[1.52] tracking-[0.02em] text-secondary font-medium max-w-[200px]">
                 {key}
               </span>
               <span className="text-description text-paragraph">{value}</span>

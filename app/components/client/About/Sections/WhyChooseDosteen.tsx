@@ -58,7 +58,7 @@ function FeatureCard({
       <h3 className="text-white text-30 font-light leading-[1.333] tracking-[-0.02em] mt-5 md:mt-30 mb-[10px] md:mb-20">
         {title}
       </h3>
-      <p className="text-white text-description !tracking-[2%]">{description}</p>
+      <p className="text-white text-description !leading-[1.68] md:!leading-[1.54] !tracking-[2%]">{description}</p>
     </motion.div>
   );
 }
@@ -140,7 +140,7 @@ const counterPill = (
           {/* <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
             {WhyChooseData.description}
           </p> */}
-          <SectionDescription text={WhyChooseData.description} delay={0.5} className="text-white font-light !text-30 !leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
+          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
           <motion.div
             variants={moveUp(0.5)}

@@ -15,13 +15,13 @@ const ServingMap = () => {
   };
 
   return (
-    <section className="relative overflow-hidden py-150">
+    <section className="relative overflow-hidden py-12.5 md:py-150">
       <SecondaryNoise />
       <div className="container">
-        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading text-secondary uppercase mb-50 max-w-[22ch]" />
+        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
         <div className="grid grid-cols-1 xl:grid-cols-[auto_1fr] 3xl:grid-cols-[auto_410px] relative z-2">
           <div>
-            <div className="flex gap-[15px] mb-80">
+            <div className="flex gap-[7px] md:gap-[15px] mb-80">
               {/* <div className="bg-white/8 relative overflow-hidden z-10 rounded-full px-60 py-[13px]
                
   backdrop-blur-[5px]
@@ -37,7 +37,7 @@ const ServingMap = () => {
               initial="hidden"
               whileInView="show"
               viewport={{once:true}}
-               className="relative overflow-hidden z-10 rounded-full px-60 py-[13px]">
+               className="relative overflow-hidden z-10 rounded-full px-[22px] md:px-60 py-[13px] min-w-[139px]">
                 <div className="absolute inset-0 w-full h-full z-1">
                   <img src="./assets/images/about/map-section/glass-1.png" alt="" className="w-full h-full" />
                 </div>
@@ -49,7 +49,7 @@ const ServingMap = () => {
               initial="hidden"
               whileInView="show"
               viewport={{once:true}}
-               className="relative overflow-hidden rounded-full px-60 py-[13px]">
+               className="relative overflow-hidden rounded-full px-[21px] md:px-60 py-[13px]">
                 <div className="absolute top-0 left-0 w-full h-full z-1">
                   <img src="./assets/images/about/map-section/glass-2.png" alt="" className="w-full h-full object-cover" />
                 </div>
@@ -99,8 +99,8 @@ const ServingMap = () => {
                             transition={{ type: "spring", stiffness: 380, damping: 28 }}
                             className="absolute left-0 top-1/2 z-20 flex h-[28px] items-center overflow-hidden rounded-[12px] origin-left pointer-events-none justify-end"
                           >
-                            <div className="flex h-full items-center pl-[29px] pr-[13px] min-w-max justify-end">
-                              <p className="text-white font-light leading-[1.5] text-description !text-base uppercase text-right w-full">{country.name}</p>
+                            <div className="flex h-full items-center pl-[23px] pr-[13px] min-w-max justify-end">
+                              <p className="!text-[12px] md:!text-19 text-white font-light leading-[1.5] text-description !text-base uppercase text-right w-full">{country.name}</p>
                             </div>
                           </motion.div>
                         </>
@@ -112,8 +112,8 @@ const ServingMap = () => {
             </motion.div>
           </div>
           <div>
-            <div>
-              <div className="mb-50">
+            <div className="border-t border-bdr-gray  xl:border-t-0 pt-7.5 md:pt-12 xl:pt-0 mt-7.5 md:mt-12 xl:mt-0">
+              <div className="mb-50 flex gap-2 xl:block">
                 <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} className="text-55 leading-[1.181818181818182] font-light text-primary">10 <span>+</span></motion.h3>
                 {/* <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3> */}
                 <SectionTitle text="Countries, Global Partners" as="h3" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
@@ -121,7 +121,7 @@ const ServingMap = () => {
               <div className="grid grid-cols-2">
                 {servingMapData.countries.map((item,index) => (
                   <motion.div variants={moveUp(0.2+index*0.1)} initial="hidden" whileInView="show" viewport={{once:true}} key={item.name}>
-                    <p className="text-19 tracking-[-0.02em] font-light text-paragraph leading-[2.105263157894737]">{item.name}</p>
+                    <p className="text-19 tracking-[-0.02em] font-light text-paragraph leading-[1.65] md:leading-[2.105263157894737]">{item.name}</p>
                   </motion.div>
                 ))}
               </div>
@@ -129,8 +129,11 @@ const ServingMap = () => {
           </div>
         </div>
       </div>
-      <div className="absolute right-0 top-20 xl:top-100 3xl:top-[225px]">
-        <img src="./assets/images/about/map-section/elipse.svg" className="w-50 xl:w-auto h-auto" alt="" />
+      <div className="absolute right-0 top-20 xl:top-100 3xl:top-[225px] hidden xl:block ">
+        <img src="./assets/images/about/map-section/elipse.svg" className="xl:w-auto h-auto" alt="" />
+      </div>
+      <div className="absolute left-0 bottom-20  w-full 3xl:top-[225px]  xl:hidden ">
+        <img src="./assets/images/about/map-section/elipse2.svg" className="w-full xl:w-auto h-auto" alt="" />
       </div>
     </section>
   );

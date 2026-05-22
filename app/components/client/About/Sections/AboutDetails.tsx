@@ -22,9 +22,13 @@ function StatCard({
   subLabel: string;
   noiseVariant: 1 | 2;
 }) {
+  const isMobile =  typeof window !== "undefined" && window.innerWidth < 1024;
   return (
-    <div className="flex items-center py-[15px] md:py-25 px-[40px] md:px-50 gap-[55px] md:gap-200 3xl:gap-[296px]  relative flex-1 min-w-0 max-h-[148px]">
-      {noiseVariant === 1 ? <StatNoise1 /> : <StatNoise2 />}
+    <div className="flex items-center py-[15px] md:py-25 px-[40px] md:px-50 gap-[55px]  lg:gap-200 3xl:gap-[296px]  relative flex-1 min-w-0 max-h-[148px]">
+  
+    {/* {noiseVariant === 1 ? <StatNoise1 /> : <StatNoise1 />} */}
+      {isMobile ? <StatNoise1 />  : (noiseVariant === 1 ? <StatNoise1 /> : <StatNoise2 />)
+}
 
       {/* Icon */}
       <div className="relative shrink-0 h-[40px] w-[40px] md:h-[60px] md:w-[60px] 2xl:w-[70px] 2xl:h-[70px]">
@@ -57,7 +61,7 @@ function StatCard({
 // Group stats into pairs: [[stat1, stat2], [stat3, stat4]]
 const slideGroups = AboutData.stats.reduce<(typeof AboutData.stats)[]>(
   (acc, stat, i) => {
-    const groupSize = typeof window !== "undefined" && window.innerWidth < 768 ? 4 : 2;
+    const groupSize = typeof window !== "undefined" && window.innerWidth < 1024 ? 4 : 2;
     if (i % groupSize === 0) acc.push([stat]);
     else acc[acc.length - 1].push(stat);
     return acc;
