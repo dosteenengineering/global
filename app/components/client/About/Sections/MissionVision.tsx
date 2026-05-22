@@ -28,11 +28,11 @@ function Card({
         <div className="w-[50px] h-[50px] lg:w-[120px] lg:h-[120px] relative lg:mb-100">
           <Image src={icon} alt={title} fill className="object-contain" />
         </div>
-        <div className="flex flex-col gap-10px md:gap-20">
+        <div className="flex flex-col gap-[10px] md:gap-20">
           <h2 className="section-heading">
             {title}
           </h2>
-          <p className="text-description text-paragraph">
+          <p className="text-description text-paragraph !leading-[1.68] md:!leading-[1.54]">
             {description}
           </p>
         </div>
