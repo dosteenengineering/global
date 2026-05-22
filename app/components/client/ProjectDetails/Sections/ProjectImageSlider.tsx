@@ -9,13 +9,15 @@ import type { Project } from "../data";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import NavButton from "@/app/components/common/NavigationButton";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 export default function ProjectImageSlider({ project }: { project: Project }) {
 
   const swiperRef = useRef<SwiperType | null>(null);
 
   return (
-    <div className="relative w-full h-[323px] md:h-[400px] lg:h-[600px] 3xl:h-[740px]">
+    <motion.div variants={moveUp(0.2+0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative w-full h-[323px] md:h-[400px] lg:h-[600px] 3xl:h-[740px]">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -57,6 +59,6 @@ export default function ProjectImageSlider({ project }: { project: Project }) {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
