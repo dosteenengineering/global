@@ -2,6 +2,10 @@
 import Image from "next/image";
 import BorderButton from "@/app/components/common/BorderButton";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
+import SectionTitle from "./animations/SectionTitle";
+import { SectionDescription } from "./animations/SectionDescription";
+import { motion } from "framer-motion";
+import { moveUp } from "../motionVariants";
 
 export default function CtaSection({title, titleWidth, description, descriptionWidth, buttons}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, buttons: {text: string, href: string}[]}) {
   return (
@@ -20,30 +24,25 @@ export default function CtaSection({title, titleWidth, description, descriptionW
 
       <div className="relative z-10 container py-12.5 md:py-140 3xl:py-150 w-full">
         {/* Title */}
-        <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
+        {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
-        </h2>
+        </h2> */}
+        <SectionTitle text={title} className="section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px]" />
 
         {/* Divider */}
         <div className="w-full border-t border-bdr-blue mb-[30px] md:mb-80 3xl:mb-100" />
 
         {/* Description */}
-        <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
+        {/* <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
           {description}
-        </p>
-
+        </p> */}
+          <SectionDescription text={description} className={`text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
-          {buttons.map((btn) => (
-            <BorderButton
-              key={btn.text}
-              text={btn.text}
-              iconColor="white"
-              px="px-[24px] md:px-30 3xl:px-[35px]"
-              href={btn.href}
-              hoverBg="white"
-              className="w-fit"
-            />
+          {buttons.map((btn,index) => (
+            <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}}>
+            <BorderButton key={btn.text} text={btn.text} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.href} hoverBg="white" className="w-fit" />
+            </motion.div>
           ))}
         </div>
       </div>

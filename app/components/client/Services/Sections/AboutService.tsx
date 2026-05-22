@@ -3,32 +3,21 @@
 import "swiper/css";
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { aboutServicesData } from "../data";
 
 export default function AboutDetails() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <div className="absolute -top-43 md:top-[-10.5%] left-[-131px] md:left-0 pointer-events-none  ">
-        <Image
-          src="/assets/icons/bg-svg/top-left-animated.svg"
-          alt="decorative lines"
-          width={600}
-          height={500}
-          className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]"
-        />
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]" />
       </div>
 
       <div className="pt-[70px] md:pt-120 px-[15px] lg:px-0 container w-full">
-        <SectionTitle
-          text={aboutServicesData.title}
-          className="section-heading text-secondary uppercase mb-5 md:mb-80 max-w-[1538px]"
-        />
+        <SectionTitle text={aboutServicesData.title} className="section-heading text-secondary uppercase mb-5 md:mb-80 max-w-[1538px]" />
 
         <div className="w-full lg:pl-[24.3%]">
-            <div
-              className="text-paragraph text-description max-w-[1110px]"
-              dangerouslySetInnerHTML={{ __html: aboutServicesData.description }}
-            />
+          <SectionDescription text={aboutServicesData.description} className="text-paragraph text-description max-w-[1110px]" as="div" />
         </div>
       </div>
     </section>

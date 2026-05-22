@@ -4,7 +4,8 @@
 import { useEffect, useRef } from "react";
 
 interface SectionDescriptionProps {
-  text: string;
+  text?: string;
+  dangerouslySetInnerHTML?: { __html: string };
   className?: string;
   as?: "p" | "span" | "div";
   delay?: number;
@@ -24,12 +25,15 @@ const ensureStyles = () => {
       from { transform: translateY(105%); opacity: 0; }
       to   { transform: translateY(0);    opacity: 1; }
     }
+    .sd-rich-html { transform: translateY(20px); opacity: 0; transition: transform var(--dur) ${EASE} var(--del), opacity var(--dur) ${EASE} var(--del); }
+    .sd-rich-html.in { transform: translateY(0); opacity: 1; }
   `;
   document.head.appendChild(s);
 };
 
 export function SectionDescription({
   text,
+  dangerouslySetInnerHTML,
   className = "",
   as: Tag = "p",
   delay = 0.4,
@@ -41,9 +45,38 @@ export function SectionDescription({
     if (!el) return;
     ensureStyles();
 
+    const htmlContent = dangerouslySetInnerHTML?.__html;
+    const isHTML = htmlContent && /<[a-z][\s\S]*>/i.test(htmlContent);
+
+    if (isHTML) {
+      el.innerHTML = htmlContent;
+      el.classList.add("sd-rich-html");
+      el.style.setProperty("--del", `${delay}s`);
+      el.style.setProperty("--dur", "0.9s");
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          requestAnimationFrame(() => {
+            el.classList.add("in");
+          });
+          observer.disconnect();
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(el);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+
+    const plainText = text || htmlContent || "";
+    if (!plainText) return;
+
     // Step 1 — render words as plain inline spans to let browser do layout
     el.innerHTML = "";
-    text.split(/(\s+)/).forEach((word, i, arr) => {
+    plainText.split(/(\s+)/).forEach((word, i, arr) => {
       const s = document.createElement("span");
       s.style.display = "inline";
       s.textContent = word + (i < arr.length - 1 ? " " : "");
@@ -115,13 +148,12 @@ export function SectionDescription({
 
     return () => {
       observer?.disconnect();
-      el.textContent = text;
+      el.textContent = plainText;
     };
-  }, [text, delay]);
+  }, [text, dangerouslySetInnerHTML, delay]);
 
   return (
-    <Tag
-      ref={ref as React.RefObject<HTMLParagraphElement & HTMLSpanElement & HTMLDivElement>}
+    <Tag ref={ref as React.RefObject<HTMLParagraphElement & HTMLSpanElement & HTMLDivElement>}
       className={`text-description ${className}`}
     />
   );
