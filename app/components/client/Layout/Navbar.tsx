@@ -6,6 +6,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import FullscreenMenu from "./FullscreenMenu";
 import { useLenis } from "lenis/react";
+import { motion } from "framer-motion";
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
@@ -15,11 +17,44 @@ export default function Navbar() {
   const contactRef = useRef<HTMLAnchorElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const searchRef = useRef<HTMLButtonElement>(null);
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navItems = [
-    { label: "ABOUT US", hasDropdown: true, href: "/about" },
-    { label: "SERVICES", hasDropdown: true, href: "/services" },
-    { label: "SOLUTIONS", hasDropdown: true, href: "#" },
+    {
+      label: "ABOUT US",
+      hasDropdown: true,
+      href: "/about",
+      subItems: [
+        { label: "Our Story", href: "/about/our-story" },
+        { label: "Leadership Team", href: "/about/leadership" },
+        { label: "Mission & Values", href: "/about/mission" },
+        { label: "Certifications", href: "/about/certifications" },
+      ],
+    },
+    {
+      label: "SERVICES",
+      hasDropdown: true,
+      href: "/services",
+      subItems: [
+        { label: "MEP Engineering", href: "/services/mep" },
+        { label: "Fire Protection", href: "/services/fire-protection" },
+        { label: "HVAC Design", href: "/services/hvac" },
+        { label: "Electrical Systems", href: "/services/electrical" },
+        { label: "Plumbing Design", href: "/services/plumbing" },
+      ],
+    },
+    {
+      label: "SOLUTIONS",
+      hasDropdown: true,
+      href: "#",
+      subItems: [
+        { label: "Smart Buildings", href: "/solutions/smart-buildings" },
+        { label: "Energy Efficiency", href: "/solutions/energy" },
+        { label: "Sustainable Design", href: "/solutions/sustainable" },
+      ],
+    },
     { label: "RESOURCE HUB", hasDropdown: false, href: "#" },
     { label: "PROJECTS", hasDropdown: false, href: "/projects" },
   ];
@@ -34,7 +69,8 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    setShouldStartMenuInSearch(false);
+    setIsSearchExpanded(false);
+    setSearchQuery("");
   };
 
   const openMenu = () => {
@@ -148,7 +184,7 @@ export default function Navbar() {
             if (currentScrollY > lastScrollY) {
               setIsVisible(false); // Scrolling down
             } else {
-              setIsVisible(true);  // Scrolling up
+              setIsVisible(true); // Scrolling up
             }
             lastScrollY = currentScrollY;
           }
@@ -162,7 +198,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   useEffect(() => {
     if (!lenis) return;
 
@@ -192,27 +228,32 @@ export default function Navbar() {
 
   return (
     // <header className="absolute top-[30px] md:top-[23px] left-0 w-full z-[150]">
-    <header className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
-      ${isMenuTransformDisabled
-        ? ""
-        : "transition-transform duration-300 ease-out " + (isVisible ? "translate-y-0" : "-translate-y-[150%] pointer-events-none")
+    <header
+      className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
+      ${
+        isMenuTransformDisabled
+          ? ""
+          : "transition-transform duration-300 ease-out " +
+            (isVisible
+              ? "translate-y-0"
+              : "-translate-y-[150%] pointer-events-none")
       }`}
     >
-
- 
- 
       <div className="container relative z-[160] flex items-center justify-between gap-4 w-full">
         <div
           ref={navPillRef}
-          className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${isMenuOpen ? "w-full lg:max-w-[57.5%]" : "w-full max-w-[1127px] backdrop-blur-[2px] "
-          
-            }`}
+          className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${
+            isMenuOpen
+              ? "w-full lg:max-w-[57.5%]"
+              : "w-full max-w-[1127px] backdrop-blur-[2px] "
+          }`}
         >
           <div
             className={`flex items-center justify-between w-full transition-all duration-500 ease-out 
-              ${isMenuOpen
-                ? "rounded-none border border-transparent overflow-visible bg-transparent"
-                : "rounded-[50px] border border-white/30 glass-effect overflow-hidden"
+              ${
+                isMenuOpen
+                  ? "rounded-none border border-transparent overflow-visible bg-transparent"
+                  : "rounded-[50px] border border-white/30 glass-effect overflow-hidden"
               }
               ${isSticky ? "bg-black/50" : "bg-transparent"}
               `}
@@ -237,9 +278,10 @@ export default function Navbar() {
             {/* Nav items */}
             <div
               className={`hidden min-[1200px]:flex items-center flex-1 overflow-hidden transition-all duration-200 ease-in-out 
-                ${isMenuOpen
-                ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
-                : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
+                ${
+                  isMenuOpen
+                    ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
+                    : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
                 }`}
             >
               {navItems.map((item, i) => (
@@ -273,52 +315,99 @@ export default function Navbar() {
             </div>
 
             {/* Search icon */}
-            <button
-              ref={searchRef}
-              className="hidden md:flex shrink-0 cursor-pointer items-center justify-center w-[38px] h-[38px] md:w-[45.61px] md:h-[45.61px] rounded-full bg-white/8 border border-white/20 backdrop-blur-[10px] mr-[20.39px]"
-              onClick={openMenuSearch}
-              aria-label={isMenuOpen && shouldStartMenuInSearch ? "Close search" : "Open search"}
+            {/* Search — single pill expands leftward */}
+            <motion.div
+              className="relative hidden md:flex items-center mr-[20.39px] h-[45.61px] rounded-full border border-white/20 bg-white/8 backdrop-blur-[10px] overflow-hidden"
+              initial={{ width: 45.61 }}
+              animate={{
+                width: isSearchExpanded ? 300 : 45.61,
+                transition: isSearchExpanded
+                  ? { duration: 0.45, ease: [0.76, 0, 0.24, 1] }
+                  : { duration: 0.35, ease: [0.76, 0, 0.24, 1] },
+              }}
             >
-              {/* Search icon */}
-              <Image
-                src="/assets/icons/search.svg"
-                alt="Search"
-                width={30}
-                height={30}
-                className={`absolute w-auto h-[15px] md:w-[20.64px] md:h-[20.64px] pointer-events-none
-      transition-all duration-300 ease-in-out
-      ${isMenuOpen && shouldStartMenuInSearch
-                    ? "opacity-0 scale-50 rotate-90"
-                    : "opacity-100 scale-100 rotate-0"
-                  }`}
+              {/* Input — sits on the left, only visible when expanded */}
+              <input
+                ref={searchInputRef}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                className={`h-full bg-transparent ${isSearchExpanded ? "pl-5" : ""}  text-15 text-white outline-none placeholder:text-white/50 transition-all duration-300 ${
+                  isSearchExpanded
+                    ? "w-full opacity-100"
+                    : "w-0 opacity-0 pointer-events-none"
+                }`}
               />
 
-              {/* Close icon */}
-              <Image
-                src="/assets/icons/close-icon.svg"
-                alt="Close"
-                width={30}
-                height={30}
-                className={`absolute w-auto h-[15px] md:w-[20.64px] md:h-[20.64px] pointer-events-none
-      transition-all duration-300 ease-in-out
-      ${isMenuOpen && shouldStartMenuInSearch
-                    ? "opacity-100 scale-100 rotate-0"
-                    : "opacity-0 scale-50 -rotate-90"
-                  }`}
-              />
-            </button>
+              {/* Button — always on the right, fixed size */}
+              <button
+                ref={searchRef}
+                className="shrink-0 cursor-pointer flex items-center justify-center w-[45.61px] h-[45.61px] rounded-full"
+                onClick={() => {
+                  if (isSearchExpanded) {
+                    setIsSearchExpanded(false);
+                    setSearchQuery("");
+                  } else {
+                    setIsSearchExpanded(true);
+                    setIsMenuOpen(true);
+                    setTimeout(() => searchInputRef.current?.focus(), 50);
+                  }
+                }}
+                aria-label={isSearchExpanded ? "Close search" : "Open search"}
+              >
+                <Image
+                  src="/assets/icons/search.svg"
+                  alt="Search"
+                  width={30}
+                  height={30}
+                  className={`absolute w-auto h-[15px] md:w-[20.64px] md:h-[20.64px] pointer-events-none transition-all duration-300 ease-in-out
+        ${isSearchExpanded ? "opacity-0 scale-50 rotate-90" : "opacity-100 scale-100 rotate-0"}`}
+                />
+                <Image
+                  src="/assets/icons/close-icon.svg"
+                  alt="Close"
+                  width={30}
+                  height={30}
+                  className={`absolute w-auto h-[15px] md:w-[20.64px] md:h-[20.64px] pointer-events-none transition-all duration-300 ease-in-out
+        ${isSearchExpanded ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-50 -rotate-90"}`}
+                />
+              </button>
+            </motion.div>
 
-            <div className="md:hidden rounded-full shrink-0 over pr-[15px]">
+<div className={`${isMenuOpen ? "hidden" : ""} md:hidden rounded-full shrink-0 pr-[15px]`}>
               <button
                 className="cursor-pointer flex items-center justify-center group shrink-0"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isMenuOpen}
                 onClick={isMenuOpen ? closeMenu : openMenu}
               >
-                <svg className="h-[15px] w-[20px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 21" fill="none" >
-                  <line className={`origin-center transition-transform duration-300 ${isMenuOpen ? "translate-y-[10px] rotate-45" : ""}`} y1="0.5" x2="31" y2="0.5" stroke="white" />
-                  <line className={`transition-opacity duration-200 ${isMenuOpen ? "opacity-0" : "opacity-100"}`} y1="10.5" x2="31" y2="10.5" stroke="white" />
-                  <line className={`origin-center transition-transform duration-300 ${isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""}`} y1="20.5" x2="31" y2="20.5" stroke="white" />
+                <svg
+                  className="h-[15px] w-[20px]"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 31 21"
+                  fill="none"
+                >
+                  <line
+                    className={`origin-center transition-transform duration-300 ${isMenuOpen ? "translate-y-[10px] rotate-45" : ""}`}
+                    y1="0.5"
+                    x2="31"
+                    y2="0.5"
+                    stroke="white"
+                  />
+                  <line
+                    className={`transition-opacity duration-200 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
+                    y1="10.5"
+                    x2="31"
+                    y2="10.5"
+                    stroke="white"
+                  />
+                  <line
+                    className={`origin-center transition-transform duration-300 ${isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""}`}
+                    y1="20.5"
+                    x2="31"
+                    y2="20.5"
+                    stroke="white"
+                  />
                 </svg>
               </button>
             </div>
@@ -326,13 +415,13 @@ export default function Navbar() {
         </div>
 
         {/* Right group — Contact + Hamburger */}
-        <div className="hidden md:flex items-center gap-3 shrink-0">
+<div className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-3 shrink-0`}>
           {/* Contact pill */}
-          <div className="rounded-[50px]   backdrop-blur-[2px]">
+          <div className="rounded-[50px] backdrop-blur-[2px] h-[62px] md:h-auto w-[122px] md:w-auto">
             <Link
               ref={contactRef}
               href="/contact"
-              className={`hidden min-[1400px]:flex group items-center gap-3 justify-center h-[70px] pr-[14.2px] pl-6 rounded-[50px]  border border-white/30 glass-effect group
+className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-6 rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}
@@ -356,7 +445,7 @@ export default function Navbar() {
           <div className="rounded-full   backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
-              className={`cursor-pointer flex items-center justify-center group w-[60px] h-[60px] md:w-[70px] md:h-[70px] rounded-full
+              className={`cursor-pointer flex items-center justify-center group w-[62px] h-[62px] md:w-[70px] md:h-[70px] rounded-full
                border border-white/30 glass-effect ${isMenuOpen && "bg-white/8"}
                 ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -365,25 +454,26 @@ export default function Navbar() {
               style={{ opacity: 0 }}
             >
               <span className="relative block h-[21px] w-[31px] group-hover:scale-[1.08] transition-transform duration-300 ease-in-out">
-
                 {/* Top line */}
                 <span
-                  className={`absolute left-0 top-0 h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-y-[10px] rotate-45" : ""
-                    }`}
+                  className={`absolute left-0 top-0 h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${
+                    isMenuOpen ? "translate-y-[10px] rotate-45" : ""
+                  }`}
                 />
 
                 {/* Middle line */}
                 <span
-                  className={`absolute left-0 top-[10px] h-[1.5px] w-full bg-white transition-all duration-200 ease-in-out ${isMenuOpen ? "opacity-0" : "opacity-100"
-                    }`}
+                  className={`absolute left-0 top-[10px] h-[1.5px] w-full bg-white transition-all duration-200 ease-in-out ${
+                    isMenuOpen ? "opacity-0" : "opacity-100"
+                  }`}
                 />
 
                 {/* Bottom line */}
                 <span
-                  className={`absolute left-0 top-[20px] h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""
-                    }`}
+                  className={`absolute left-0 top-[20px] h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${
+                    isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""
+                  }`}
                 />
-
               </span>
             </button>
           </div>
@@ -391,9 +481,14 @@ export default function Navbar() {
       </div>
       <FullscreenMenu
         isOpen={isMenuOpen}
-        startInSearch={shouldStartMenuInSearch}
+        startInSearch={false}
+        searchQuery={searchQuery}
         menuItems={menuItems}
-        navItems={navItems.map((item) => ({ label: item.label, href: item.href }))}
+        navItems={navItems.map((item) => ({
+          label: item.label,
+          href: item.href,
+          subItems: item.subItems ?? [],
+        }))}
         onClose={closeMenu}
       />
     </header>
