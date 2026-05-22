@@ -9,9 +9,10 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper"; 
-import NavButton from "@/app/components/common/NavigationButton"; 
-
+import type { Swiper as SwiperType } from "swiper";
+import NavButton from "@/app/components/common/NavigationButton";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+const MotionLink = motion.create(Link);
 interface IDosteenSystemsProps {
   data: {
     description: string;
@@ -27,11 +28,13 @@ interface IDosteenSystemsProps {
 
 function SystemCard({
   system,
+  delay,
 }: {
   system: IDosteenSystemsProps["data"]["systems"][0];
+  delay: number;
 }) {
   return (
-    <Link href={`/${system.slug}`} className="group block">
+    <MotionLink variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true , amount: 0.3 }} href={`/${system.slug}`} className="group block">
       <div className="relative h-[322px] overflow-hidden">
         {/* Image */}
         <Image
@@ -61,29 +64,29 @@ function SystemCard({
         {system.title}
       </p>
 
-      
-    </Link>
+
+    </MotionLink>
   );
 }
 
 export default function DosteenSystems({ data }: IDosteenSystemsProps) {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-    const [slidesPerView, setSlidesPerView] = useState(1);
-  
-    function updateState(swiper: SwiperType) {
-      setActiveIndex(swiper.activeIndex);
-      setSlidesPerView(
-        typeof swiper.params.slidesPerView === "number"
-          ? swiper.params.slidesPerView
-          : 1,
-      );
-    }
-  
-    const dotCount = data.systems.length - slidesPerView + 1;
-    const showPagination = dotCount > 1;
-  
-    const total = data.systems.length;
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  function updateState(swiper: SwiperType) {
+    setActiveIndex(swiper.activeIndex);
+    setSlidesPerView(
+      typeof swiper.params.slidesPerView === "number"
+        ? swiper.params.slidesPerView
+        : 1,
+    );
+  }
+
+  const dotCount = data.systems.length - slidesPerView + 1;
+  const showPagination = dotCount > 1;
+
+  const total = data.systems.length;
   const counterPill = (
     <div className="flex items-center justify-center border   text-paragraph font-poppins font-[300] leading-[0.5] border-primary rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
       <span className="font-[600]">
@@ -113,7 +116,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
       </div>
 
       <div className="absolute top-[2%] lg:top-[-39%] left-[-131px] lg:left-[-0.9%] pointer-events-none h-full">
-         
+
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
@@ -124,10 +127,14 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
       </div>
 
       <div className="w-full px-[16px] lg:pl-[28.6%] pt-120">
-        <div
+        {/* <div
           className="text-paragraph text-description max-w-[1110px] mb-60"
           dangerouslySetInnerHTML={{ __html: data.description }}
           suppressHydrationWarning
+        /> */}
+        <SectionDescription
+          className="text-paragraph text-description max-w-[1110px] mb-60"
+          dangerouslySetInnerHTML={{ __html: data.description }}
         />
 
         <div className="w-full h-px bg-[#c2c2c2] mb-140 3xl:mb-150" />
@@ -142,13 +149,13 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
 
       {/* Cards Grid */}
       <div className="container ">
-      <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
-        {data.systems.map((system) => (
-          <SystemCard key={system.id} system={system} />
-        ))}
-      </div>
+        <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
+          {data.systems.map((system, index) => (
+            <SystemCard key={system.id} system={system} delay={0.5 + index * 0.1} />
+          ))}
+        </div>
         {/* ── MOBILE: Swiper slider (< 768px) ── */}
-      <div className="md:hidden w-full"> 
+        <div className="md:hidden w-full">
           <motion.div
             variants={moveUp(0.5)}
             initial="hidden"
@@ -179,7 +186,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                 direction="left"
                 disabled={false}
                 ariaLabel="Previous"
-                borderColor="border-[#161616]" 
+                borderColor="border-[#161616]"
               />
               <NavButton
                 onClick={() => {
@@ -189,7 +196,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                 direction="right"
                 disabled={false}
                 ariaLabel="Next"
-                borderColor="border-[#161616]" 
+                borderColor="border-[#161616]"
               />
             </motion.div>
           </motion.div>
@@ -201,14 +208,14 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
             spaceBetween={20}
             className="w-full"
           >
-            {data.systems.map((system) => (
+            {data.systems.map((system, index) => (
               <SwiperSlide key={system.id}>
-                <SystemCard system={system} />
+                <SystemCard system={system} delay={index * 0.1} />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-    </div>
+      </div>
 
     </section>
   );

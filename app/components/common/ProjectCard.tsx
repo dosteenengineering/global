@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 interface ProjectCardProps {
   project: {
     title: string;
@@ -9,16 +10,21 @@ interface ProjectCardProps {
     image: string;
   };
   variant?: "dark" | "light";
+  delay?: number;
 }
+
 
 export default function ProjectCard({
   project,
-  variant = "light",
+  variant = "light",  
+  delay ,
 }: ProjectCardProps) {
   const isDark = variant === "dark";
 
   return (
-    <Link href={`/projects/${project.title.toLowerCase().replace(" ", "-")}`}>
+    <motion.div variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }} >
+
+    <Link  href={`/projects/${project.title.toLowerCase().replace(" ", "-")}`}>
       <div className="flex flex-col group cursor-pointer">
         {/* Image */}
         <div className="relative w-full aspect-[11.2/12] lg:aspect-square  overflow-hidden mb-30 3xl:mb-[32px]">
@@ -95,5 +101,6 @@ export default function ProjectCard({
         )}
       </div>
     </Link>
+    </motion.div>
   );
 }
