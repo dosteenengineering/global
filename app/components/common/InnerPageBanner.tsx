@@ -47,7 +47,7 @@ export default function InnerPageBanner({
           // <p className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}>
           //   {description}
           // </p>
-          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light !text-30 !leading-[1.333]`}/>
+          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}/>
         )}
       </div>
 

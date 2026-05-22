@@ -6,7 +6,7 @@ import { dosteenSystemsData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
 
 const activeGradient =
@@ -15,26 +15,129 @@ const activeGradient =
 export default function DosteenSystems() {
   const { title, systems } = dosteenSystemsData;
   const [activeId, setActiveId] = useState(systems[0].id);
+  const [openAccordionId, setOpenAccordionId] = useState<number | null>(systems[0].id);
 
   const activeSystem = systems.find((s) => s.id === activeId)!;
+
+  const toggleAccordion = (id: number) => {
+    setOpenAccordionId((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section className="w-full bg-white relative py-140 3xl:py-150">
       <SecondaryNoise />
       <div className="container">
-        {/* Title */}
-        <SectionTitle title={title} delay={0.2} className="section-heading text-secondary uppercase mb-50" />
-        {/* Two col layout */}
-        <div className="flex gap-60 3xl:gap-[68px]">
-          {/* Left col — 46.85% width, full-height border-right */}
-          <div className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative" style={{ width: "47%" }} >
+        <SectionTitle
+          title={title}
+          className="section-heading text-secondary uppercase mb-50"
+        />
+
+        {/* ── Mobile: Accordion ── */}
+        <div className="md:hidden relative">
+          {systems.map((system) => {
+            const isOpen = openAccordionId === system.id;
+            return (
+              <div
+                key={system.id}
+                className="border-t-2 border-[#c2c2c2] last:border-b-2"
+              >
+                {/* Trigger */}
+                <button
+                  type="button"
+                  onClick={() => toggleAccordion(system.id)}
+                  className="w-full flex justify-between gap-4 py-5 text-left transition-all duration-300"
+                  
+                >
+                  <span
+                    className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${
+                      isOpen ? "  font-[500]" : "font-light"
+                    }`}
+                  >
+                    {system.title}
+                  </span>
+                  <span
+                    className={`shrink-0 flex pt-2.5 justify-center   transition-all duration-300 `}
+                  >
+                    {isOpen ? (
+
+                <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
+                        className="object-contain     rotate-90  ">
+                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                      
+                    ) : (
+                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
+                     >
+                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    )}
+                  </span>
+                </button>
+
+                {/* Content */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key={system.id}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-5  ">
+                        <div className="relative mb-5 overflow-hidden w-full h-[225px]">
+                          <Image
+                            src={system.image}
+                            alt={system.title}
+                            fill
+                            className="object-cover"
+                          />
+                          <div
+                            className="absolute inset-0"
+                            style={{
+                              background:
+                                "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)",
+                            }}
+                          />
+                        </div> 
+                        <p className="text-description text-paragraph leading-[1.6] mb-30">
+                          {system.description}
+                        </p>
+                        <BorderButton
+                          text="View System"
+                          borderColor="black"
+                          textColor="black"
+                          iconColor="primary"
+                          hoverBg="black"
+                          className="w-fit px-[27px]"
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── Desktop: Original two-col layout ── */}
+        <div className="hidden md:flex gap-60 3xl:gap-[68px]">
+          {/* Left col */}
+          <div
+            className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative"
+            style={{ width: "47%" }}
+          >
             {systems.map((system,index) => {
               const isActive = system.id === activeId;
               return (
                 <div
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
-                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${isActive ? "pl-20" : ""}`}
+                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${
+                    isActive ? "pl-20" : ""
+                  }`}
                   style={{
                     background: isActive ? activeGradient : "transparent",
                   }}
@@ -45,21 +148,16 @@ export default function DosteenSystems() {
                     {system.title}
                   </motion.span>
 
-                  {/* Arrow — visible on active or hover */}
                   <div
                     className={`shrink-0 transition-opacity duration-300 ${
-                      isActive
-                        ? "opacity-100"
-                        : "opacity-0"
+                      isActive ? "opacity-100" : "opacity-0"
                     }`}
                   >
-                    {/* Primary circle with arrow icon */}
                     <div className="w-[51px] h-[51px] rounded-full bg-primary flex items-center justify-center">
                       <Image src="/assets/icons/arrow-right-white-small.svg" alt="arrow" width={20} height={20} className="object-contain invert brightness-0 w-auto h-[22px]" />
                     </div>
                   </div>
 
-                  {/* Hover gradient — only for inactive items */}
                   {!isActive && (
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -71,7 +169,7 @@ export default function DosteenSystems() {
             })}
           </div>
 
-          {/* Right col — remaining width */}
+          {/* Right col */}
           <div className="flex-1 min-w-0 relative">
             <div key={activeSystem.id} className="flex flex-col h-full">
               {/* Title */}

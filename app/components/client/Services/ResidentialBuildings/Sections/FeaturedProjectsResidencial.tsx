@@ -15,7 +15,6 @@ import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-// ── Helpers ──────────────────────────────────────────────
 function getInactiveProjects(
   projects: Project[],
   activeIndex: number,
@@ -28,7 +27,6 @@ function getInactiveProjects(
   );
 }
 
-// ── Animated inactive slot (fixed frame, content slides in/out) ──
 function InactiveSlot({
   project,
   direction,
@@ -81,80 +79,59 @@ function InactiveSlot({
         </div>
       </div>
 
-      {/* Title */}
       <div className="relative min-h-[36px] mb-[15px] overflow-hidden">
         {displayed.animating && (
-          <p
-            className="absolute inset-x-0 top-0 text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] slot-exit"
-            style={{ ["--exit-to" as string]: exitTo }}
-          >
+          <p className="absolute inset-x-0 top-0 text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] slot-exit" style={{ ["--exit-to" as string]: exitTo }}>
             {displayed.prev.name}
           </p>
         )}
-        <p
-          className={`text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em]${displayed.animating ? " slot-enter" : ""}`}
-          style={
-            displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-          }
-        >
+        <p className={`text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em]${displayed.animating ? " slot-enter" : ""}`}
+          style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
           {displayed.next.name}
         </p>
       </div>
 
-      {/* Location + Category */}
       <div className="flex items-center justify-between mb-[15px] pr-40">
         <span className="flex items-center gap-[10px] text-description text-paragraph font-light">
-          <Image
-            src="/assets/icons/location-pin-gray.svg"
-            alt="location"
-            width={20}
-            height={20}
-            className="object-contain pointer-events-none w-[11px] h-[14px] -mt-1"
-          />
+          <Image src="/assets/icons/location-pin-gray.svg" alt="location" width={20} height={20} className="object-contain pointer-events-none w-[11px] h-[14px] -mt-1" />
           {displayed.next.location}
         </span>
-        <span className="text-description text-paragraph font-light">
-          {displayed.next.category}
-        </span>
+        <span className="text-description text-paragraph font-light">{displayed.next.category}</span>
       </div>
-
-      {/* Divider */}
       <div className="w-full h-[2px] bg-[#c2c2c2]" />
     </motion.div>
   );
 }
 
-// ── Main component ────────────────────────────────────────
 export default function FeaturedProjectsResidencial() {
   const { title, projects } = featuredProjectsData;
 
   const activeSwiperRef = useRef<SwiperType | null>(null);
+  const mobileSwiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [changeCount, setChangeCount] = useState(0);
   const prevIndexRef = useRef(0);
 
-  // Only enable swiper when 3+ slides
   const enableSwiper = projects.length >= 3;
   const enableNavigation = projects.length > 3;
   const inactiveProjects = getInactiveProjects(projects, activeIndex, 2);
+  const mobileActiveProject = projects[mobileActiveIndex];
 
   const handleActiveInit = useCallback((s: SwiperType) => {
     activeSwiperRef.current = s;
   }, []);
 
-  const handleSlideChange = useCallback(
-    (s: SwiperType) => {
-      const newIndex = s.realIndex;
-      const total = projects.length;
-      const diff = (newIndex - prevIndexRef.current + total) % total;
-      setDirection(diff <= total / 2 ? "right" : "left");
-      setActiveIndex(newIndex);
-      setChangeCount((c) => c + 1);
-      prevIndexRef.current = newIndex;
-    },
-    [projects.length],
-  );
+  const handleSlideChange = useCallback((s: SwiperType) => {
+    const newIndex = s.realIndex;
+    const total = projects.length;
+    const diff = (newIndex - prevIndexRef.current + total) % total;
+    setDirection(diff <= total / 2 ? "right" : "left");
+    setActiveIndex(newIndex);
+    setChangeCount((c) => c + 1);
+    prevIndexRef.current = newIndex;
+  }, [projects.length]);
 
   const handleMouseEnter = useCallback(() => {
     activeSwiperRef.current?.autoplay.stop();
@@ -165,17 +142,99 @@ export default function FeaturedProjectsResidencial() {
   }, []);
 
   return (
-    <section className="w-full bg-white py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
+    <section className="w-full bg-white py-[70px] md:py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
       <div className="container">
-        {/* Title */}
-        <SectionTitle
-          text={title}
-          className="section-heading text-secondary mb-50"
-        />
+        <SectionTitle text={title} className="section-heading text-secondary mb-50" />
 
-        {/* Two-col layout */}
-        <div className="flex gap-40 3xl:gap-50 items-stretch">
-          {/* ── Left: big active swiper (fixed position, content swaps) ── */}
+        {/* ── Mobile layout ── */}
+        <div className="md:hidden">
+          {/* Top row: All Projects + Nav buttons */}
+          <div className="flex items-center justify-between mb-5 pb-5 border-b border-bdr-gray">
+            <BorderButton
+              text="All Projects"
+              borderColor="black"
+              textColor="black"
+              iconColor="primary"
+              hoverBg="black"
+            />
+            <div className="flex gap-[10px]">
+              <NavButton
+                onClick={() => mobileSwiperRef.current?.slidePrev()}
+                direction="left"
+                disabled={false}
+                ariaLabel="Previous project"
+              />
+              <NavButton
+                onClick={() => mobileSwiperRef.current?.slideNext()}
+                direction="right"
+                disabled={false}
+                ariaLabel="Next project"
+              />
+            </div>
+          </div>
+
+          {/* Full-width swiper */}
+          <Swiper
+            loop
+            modules={[Autoplay]}
+            onSwiper={(s) => {
+              mobileSwiperRef.current = s;
+              setMobileActiveIndex(s.realIndex);
+            }}
+            onSlideChange={(s) => setMobileActiveIndex(s.realIndex)}
+            slidesPerView={1}
+            spaceBetween={0}
+            speed={600}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            className="w-full h-[383px] md:h-[280px] mb-[20px]"
+          >
+            {projects.map((project) => (
+              <SwiperSlide key={project.key}>
+                <div className="relative w-full h-[383px] md:h-[280px]">
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,0.7) 100%)",
+                    }}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Project info below image */}
+          <div className="">
+            <p className="text-secondary text-[22px] font-light leading-[1.3] tracking-[-0.02em] mb-2.5">
+              {mobileActiveProject?.name}
+            </p>
+            <div className="flex items-center justify-between border-b pb-2.5 border-bdr-gray">
+              <span className="flex items-center gap-[8px] text-paragraph font-light text-[13px]">
+                <Image
+                  src="/assets/icons/location-pin-gray.svg"
+                  alt="location"
+                  width={11}
+                  height={14}
+                  className="object-contain w-[11px] h-[14px] -mt-[2px]"
+                />
+                Location: {mobileActiveProject?.location}
+              </span>
+              <span className="text-paragraph font-light text-[13px]">
+                {mobileActiveProject?.category}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Desktop layout (unchanged) ── */}
+        <div className="hidden md:flex gap-40 3xl:gap-50 items-stretch">
+          {/* Left: big active swiper */}
           <div className="shrink-0 w-[45%]">
             {enableSwiper ? (
               <Swiper
@@ -202,40 +261,17 @@ export default function FeaturedProjectsResidencial() {
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <Image
-                        src={project.image}
-                        alt={project.name}
-                        fill
-                        className="object-cover pointer-events-none"
-                        priority
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(0, 0, 0, 0) 38.14%, rgba(0, 0, 0, 0.85) 89.52%)",
-                        }}
-                      />
-                      {/* Bottom info */}
+                      <Image src={project.image} alt={project.name} fill className="object-cover pointer-events-none" priority />
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
                       <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
-                        <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">
-                          {project.name}
-                        </p>
+                        <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{project.name}</p>
                         <div className="h-[1px] bg-white/30 mb-20" />
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-[10px] text-white font-light">
-                            <Image
-                              src="/assets/icons/location-pin.svg -mt-1"
-                              alt="location"
-                              width={20}
-                              height={20}
-                              className="object-contain pointer-events-none w-[11px] h-[14px]"
-                            />
+                            <Image src="/assets/icons/location-pin.svg" alt="location" width={11} height={14} className="object-contain pointer-events-none w-[11px] h-[14px]" />
                             {project.location}
                           </span>
-                          <span className="text-white text-paragraph font-light">
-                            {project.category}
-                          </span>
+                          <span className="text-white text-paragraph font-light">{project.category}</span>
                         </div>
                       </div>
                     </motion.div>
@@ -243,27 +279,15 @@ export default function FeaturedProjectsResidencial() {
                 ))}
               </Swiper>
             ) : (
-              // Static single project when < 3 slides
               <div className="relative w-full h-[549px] 3xl:h-[649px]">
-                <Image
-                  src={projects[0].image}
-                  alt={projects[0].name}
-                  fill
-                  className="object-cover pointer-events-none"
-                  priority
-                />
+                <Image src={projects[0].image} alt={projects[0].name} fill className="object-cover pointer-events-none" priority />
               </div>
             )}
           </div>
 
-          {/* ── Right: nav + two inactive slots + all projects btn ── */}
+          {/* Right: nav + inactive slots + all projects btn */}
           <div className="flex-1 min-w-0 flex flex-col justify-between">
-            {/* Two inactive slots side by side */}
-            <div
-              className="flex gap-40 3xl:gap-50 items-start flex-1"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
+            <div className="flex gap-40 3xl:gap-50 items-start flex-1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               {inactiveProjects.map((project, i) => {
                 const projectIndex = projects.indexOf(project);
                 return (
@@ -281,7 +305,6 @@ export default function FeaturedProjectsResidencial() {
               })}
             </div>
 
-            {/* All projects button */}
             <div className="mt-30 w-full flex justify-between">
               <BorderButton
                 text="All Projects"
@@ -293,18 +316,8 @@ export default function FeaturedProjectsResidencial() {
               />
               {enableNavigation && (
                 <div className="flex gap-[15px]">
-                  <NavButton
-                    onClick={() => activeSwiperRef.current?.slidePrev()}
-                    direction="left"
-                    disabled={false}
-                    ariaLabel="Previous project"
-                  />
-                  <NavButton
-                    onClick={() => activeSwiperRef.current?.slideNext()}
-                    direction="right"
-                    disabled={false}
-                    ariaLabel="Next project"
-                  />
+                  <NavButton onClick={() => activeSwiperRef.current?.slidePrev()} direction="left" disabled={false} ariaLabel="Previous project" />
+                  <NavButton onClick={() => activeSwiperRef.current?.slideNext()} direction="right" disabled={false} ariaLabel="Next project" />
                 </div>
               )}
             </div>

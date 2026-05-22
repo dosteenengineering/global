@@ -35,7 +35,7 @@ export default function Hero() {
           {/* Title */}
           <TitleReveal
             text="Where Engineering Meets Assurance"
-            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] hero-heading lg:max-w-[800px] xl:max-w-[800px] 2xl:max-w-none 3xl:max-w-none font-bold uppercase font-helvetica "
+            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] banner-heading lg:max-w-[800px] xl:max-w-[800px] 2xl:max-w-none 3xl:max-w-none font-bold uppercase font-helvetica "
           />
           {/* <h1 className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] hero-heading lg:max-w-[800px] xl:max-w-[800px] 2xl:max-w-none 3xl:max-w-none font-bold uppercase font-helvetica ">
             Where Engineering Meets Assurance
