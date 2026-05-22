@@ -4,6 +4,8 @@ import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { servingMapData } from "../data";
 import Image from "next/image";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn, moveLeft, moveRight, moveUp } from "@/app/components/motionVariants";
 
 const ServingMap = () => {
   const [activeCountry, setActiveCountry] = useState<string | null>(null);
@@ -30,27 +32,37 @@ const ServingMap = () => {
   before:pointer-events-none
  
               "> */}
-              <div className="relative overflow-hidden z-10 rounded-full px-60 py-[13px]">
+              <motion.div
+              variants={moveRight(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{once:true}}
+               className="relative overflow-hidden z-10 rounded-full px-60 py-[13px]">
                 <div className="absolute inset-0 w-full h-full z-1">
                   <img src="./assets/images/about/map-section/glass-1.png" alt="" className="w-full h-full" />
                 </div>
                 <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10">20 <span className="text-primary">+</span></h3>
                 <p className="text-description relative z-1">Global Partners</p>
-              </div>
-              <div className="relative overflow-hidden rounded-full px-60 py-[13px]">
+              </motion.div>
+              <motion.div
+              variants={moveRight(0.8)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{once:true}}
+               className="relative overflow-hidden rounded-full px-60 py-[13px]">
                 <div className="absolute top-0 left-0 w-full h-full z-1">
                   <img src="./assets/images/about/map-section/glass-2.png" alt="" className="w-full h-full object-cover" />
                 </div>
                 <h3 className="text-55 leading-[1.181818181818182] font-light relative z-1">10 <span className="text-primary">+</span></h3>
                 <p className="text-description relative z-1">Countries, Product Exported </p>
-              </div>
+              </motion.div>
             </div>
-            <div className="relative overflow-hidden">
+            <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="relative overflow-hidden">
               <Image src="./assets/images/about/map-section/map.svg" width={1109.98} height={537} alt="world map" />
               {servingMapData.countries.map((country) => (
                 <div
                   key={country.name}
-                  className="absolute z-50 -translate-x-1/2 -translate-y-1/2"
+                  className={`absolute -translate-x-1/2 -translate-y-1/2 ${activeCountry === country.name ? "z-[100]" : "z-50"}`}
                   style={{ left: `${country.x}%`, top: `${country.y}%` }}
                 >
                   <div className="relative h-[15px] w-[15px]">
@@ -63,32 +75,54 @@ const ServingMap = () => {
                     >
                       <img src="./assets/images/about/map-section/map-point.svg" alt="" className="block h-full w-full object-contain hover:scale-105" />
                     </button>
-                    {activeCountry === country.name && (
-                      <div className="absolute left-[-10px] top-1/2 z-10 flex h-[28px] -translate-y-1/2 items-center rounded-[0.5em] pl-[29px] pr-[13px] min-w-max  ">
-                        <div className="absolute top-0 left-0 z-0 pointer-events-none w-full h-full overflow-hidden rounded-full
-                        backdrop-blur-[9px] backdrop-saturate-[100%] bg-[rgba(0,0,0,0.15)] 
-                        rounded-[12px] border border-[rgba(255,255,255,0.125)]">
-                          {/* <img src="./assets/images/about/map-section/map-glass.png" alt="" className="w-full h-full  z-0" /> */}
-                        </div>
-                        <p className="text-white font-light relative z-1 leading-[1.5] text-description uppercase">{country.name}</p>
-                      </div>
-                    )}
+                    <AnimatePresence>
+                      {activeCountry === country.name && (
+                        <>
+                          {/* Sibling 1: Static Glass Background (Fades in instantly with no delay or flicker) */}
+                          <motion.div
+                            initial={{ opacity: 0, y: "-50%" }}
+                            animate={{ opacity: 1, y: "-50%" }}
+                            exit={{ opacity: 0, y: "-50%" }}
+                            transition={{ duration: 0.15, ease: "easeOut" }}
+                            className="absolute left-[-10px] top-1/2 z-10 h-[28px] pointer-events-none
+                            backdrop-blur-[9px] backdrop-saturate-[100%] bg-[rgba(20,20,20,0.45)] 
+                            rounded-[12px] border border-[rgba(255,255,255,0.125)] pl-[29px] pr-[13px] min-w-max flex items-center justify-end text-right"
+                          >
+                            <span className="opacity-0 select-none font-light leading-[1.5] text-description uppercase w-fit ml-auto block">{country.name}</span>
+                          </motion.div>
+
+                          {/* Sibling 2: Growing Text Reveal Wrapper */}
+                          <motion.div
+                            initial={{ width: 0, opacity: 0, y: "-50%" }}
+                            animate={{ width: "auto", opacity: 1, y: "-50%" }}
+                            exit={{ width: 0, opacity: 0, y: "-50%" }}
+                            transition={{ type: "spring", stiffness: 380, damping: 28 }}
+                            className="absolute left-0 top-1/2 z-20 flex h-[28px] items-center overflow-hidden rounded-[12px] origin-left pointer-events-none justify-end"
+                          >
+                            <div className="flex h-full items-center pl-[29px] pr-[13px] min-w-max justify-end">
+                              <p className="text-white font-light leading-[1.5] text-description !text-base uppercase text-right w-full">{country.name}</p>
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
           <div>
             <div>
               <div className="mb-50">
-                <h3 className="text-55 leading-[1.181818181818182] font-light text-primary">10 <span>+</span></h3>
-                <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3>
+                <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} className="text-55 leading-[1.181818181818182] font-light text-primary">10 <span>+</span></motion.h3>
+                {/* <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3> */}
+                <SectionTitle text="Countries, Global Partners" as="h3" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
               </div>
               <div className="grid grid-cols-2">
-                {servingMapData.countries.map((item) => (
-                  <div key={item.name}>
+                {servingMapData.countries.map((item,index) => (
+                  <motion.div variants={moveUp(0.2+index*0.1)} initial="hidden" whileInView="show" viewport={{once:true}} key={item.name}>
                     <p className="text-19 tracking-[-0.02em] font-light text-paragraph leading-[2.105263157894737]">{item.name}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

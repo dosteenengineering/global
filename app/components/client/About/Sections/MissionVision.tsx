@@ -2,18 +2,27 @@
 import Image from "next/image";
 import { MissionVisionData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 function Card({
   icon,
   title,
   description,
+  delay,
 }: {
   icon: string;
   title: string;
   description: string;
+  delay: number;
 }) {
   return (
-    <div className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full">
+    <motion.div 
+    variants={moveUp(delay)}
+    initial="hidden"
+    whileInView="show"
+    viewport={{once:true}}
+    className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full">
       <SecondaryNoise />
       <div className="relative z-10 flex flex-col gap-8">
         <div className="w-[50px] h-[50px] lg:w-[120px] lg:h-[120px] relative lg:mb-100">
@@ -28,7 +37,7 @@ function Card({
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -44,6 +53,7 @@ export default function MissionVision() {
                 icon={mission.icon}
                 title={mission.title}
                 description={mission.description}
+                delay={0.5}
               />
           </div>
           <div className="lg:pt-100">
@@ -51,6 +61,7 @@ export default function MissionVision() {
                 icon={vision.icon}
                 title={vision.title}
                 description={vision.description}
+                delay={0.8}
               />
           </div>
         </div>
