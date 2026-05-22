@@ -108,9 +108,9 @@ export default function FeaturedProjects() {
         }}
         className="w-full"
       >
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <SwiperSlide key={project.id}>
-            <ProjectCard project={project} />
+            <ProjectCard project={project} delay={0.2 + index * 0.3} />
           </SwiperSlide>
         ))}
       </Swiper>
