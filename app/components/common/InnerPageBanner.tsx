@@ -4,7 +4,8 @@ import Image from "next/image";
 import BannerNoise from "./noise/BannerNoise";
 import { motion } from "framer-motion";
 import { useParallax } from "./animations/useParallax";
-
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { SectionDescription } from "./animations/SectionDescription";
 interface InnerPageBannerProps {
   title: string;
   titleMaxWidth?: string;
@@ -33,27 +34,20 @@ export default function InnerPageBanner({
       {/* 2. Content — line, title, description */}
       <div className="container">
         <div className="w-full mb-[70px] lg:mb-80">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
-            className="h-px w-full bg-[#c2c2c2] origin-center"
-          />
+          <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
+            className="h-px w-full bg-[#c2c2c2] origin-center" />
         </div>
 
-        <h1
-          className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}
-        >
+        {/* <h1 className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}>
           {title}
-        </h1>
-
+        </h1> */}
+        
+        <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`} />
         {description && (
-          <p
-            className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}
-          >
-            {description}
-          </p>
+          // <p className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}>
+          //   {description}
+          // </p>
+          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}/>
         )}
       </div>
 

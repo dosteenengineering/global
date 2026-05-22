@@ -116,7 +116,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                 alt=""
                 width={24}
                 height={24}
-                className="h-6 w-6 shrink-0 object-contain"
+                className="w-[32px] h-[32px] md:h-6 md:w-6 shrink-0 object-contain"
               />
               <span className="text-[18px] md:text-15 font-poppins font-medium text-secondary">
                 {activeTabData.label}

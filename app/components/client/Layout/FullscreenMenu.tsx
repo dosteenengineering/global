@@ -16,7 +16,7 @@ type MenuLink = {
 };
 
 type FullscreenMenuProps = {
-  isOpen: boolean;
+  isOpen: boolean; 
   startInSearch: boolean;
   menuItems: MenuLink[];
   navItems: MenuLink[];

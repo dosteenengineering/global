@@ -181,7 +181,7 @@ export const ValuesData = {
 
 
 export const CtaData = {
-  title: "GET YOUR FREE ENGINEERING\nQUOTE WITHIN 48 HOURS.",
+  title: "GET YOUR FREE ENGINEERING QUOTE WITHIN 48 HOURS.",
   description:
     "Our engineering team is ready to review your project specifications, provide a compliant solution recommendation, and deliver a detailed quote — typically within 48 hours.",
   buttons: [

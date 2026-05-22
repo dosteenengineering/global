@@ -263,6 +263,9 @@ body::-webkit-scrollbar {
 }
 
 .hero-heading {
+    @apply text-[32px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
+}
+.banner-heading {
     @apply text-[36px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
 }
 
@@ -278,7 +281,7 @@ body::-webkit-scrollbar {
   position: relative;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.08);
+  /* background: rgba(255, 255, 255, 0.08); */
   box-shadow:inset 1px 1px #ffffff63, inset -1px -1px #ffffff63, inset 0 0 20px #ffffff00, 0 8px 32px #00000000;
   border: none !important; /* let box-shadow handle the border */
 }
