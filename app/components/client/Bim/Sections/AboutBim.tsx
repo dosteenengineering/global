@@ -4,6 +4,7 @@ import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { AboutBimData } from "../data";
 import StatNoise1 from "@/app/components/common/noise/StatNoise1";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 export default function AboutBim() {
   return (
@@ -24,22 +25,35 @@ export default function AboutBim() {
           className="section-heading text-secondary uppercase mb-50"
         />
 
-        <div
-          className="text-paragraph text-description mb-7.5 md:mb-100"
-          dangerouslySetInnerHTML={{ __html: AboutBimData.description }}
+        <SectionDescription
+          as="div"
+          dangerouslySetInnerHTML={{
+            __html: AboutBimData.description.join("<br /><br />"),
+          }}
+          className="text-paragraph text-description mb-7.5 md:mb-100 max-w-[105ch]"
         />
 
         <div className="px-5 md:px-70 py-7.5 md:pb-70 md:pt-60 relative">
           <StatNoise1 />
           <div className="flex flex-col gap-y-2.5 md:gap-y-40">
-            <h2 className="text-55 leading-[1.18181] tracking-[-0.02em] text-secondary font-light">
-              {AboutBimData.subTitle}
-            </h2>
-            <div
+     
+            <SectionTitle
+              as="h2"
+              text={AboutBimData.subTitle}
+              className="text-55 leading-[1.18181] tracking-[-0.02em] text-secondary font-light max-w-full"
+            />
+            {/* <div
               className="text-30 leading-[1.33] tracking-[-0.02em] text-paragraph max-w-[1112px] font-light"
               dangerouslySetInnerHTML={{
                 __html: AboutBimData.subDescription,
               }}
+            /> */}
+            <SectionDescription
+              as="p"
+              dangerouslySetInnerHTML={{
+                __html: AboutBimData.subDescription,
+              }}
+              className="!text-30 leading-[1.33] tracking-[-0.02em] text-paragraph max-w-[1112px] font-light"
             />
           </div>
         </div>

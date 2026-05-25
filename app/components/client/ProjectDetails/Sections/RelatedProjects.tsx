@@ -89,9 +89,9 @@ const updateDots = (swiper: SwiperType) => {
           }}
           className="w-full"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <SwiperSlide key={project.id}>
-              <ProjectCard project={project} variant="dark" />
+              <ProjectCard project={project} variant="dark" delay={index * 0.12} />
             </SwiperSlide>
           ))}
         </Swiper>

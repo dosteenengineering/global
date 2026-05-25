@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 interface AccordionItem {
   id: string | number;
@@ -12,6 +13,7 @@ interface AccordionItem {
 interface AccordionProps {
   items: AccordionItem[];
   allowMultiple?: boolean;
+  staggerItems?: boolean;
 }
 
 interface AccordionItemProps {
@@ -20,6 +22,7 @@ interface AccordionItemProps {
   onToggle: () => void;
   isFirst: boolean;
   isLast: boolean;
+  delay?: number;
 }
 
 const spring = { type: "spring", stiffness: 220, damping: 30 } as const;
@@ -29,9 +32,20 @@ const AccordionItemComponent = ({
   isOpen,
   onToggle,
   isFirst,
+  delay,
 }: AccordionItemProps) => {
+  const Wrapper = delay !== undefined ? motion.div : "div";
+
   return (
-    <div
+    <Wrapper
+      {...(delay !== undefined
+        ? {
+            variants: moveUp(delay),
+            initial: "hidden",
+            whileInView: "show",
+            viewport: { once: true, amount: 0.3 },
+          }
+        : {})}
       className={`border-b border-[#c2c2c2] ${isFirst ? "border-t border-[#c2c2c2]" : ""} `}
     >
       <button
@@ -95,13 +109,14 @@ const AccordionItemComponent = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </Wrapper>
   );
 };
 
 export default function Accordion({
   items,
   allowMultiple = false,
+  staggerItems = false,
 }: AccordionProps) {
 const [openIds, setOpenIds] = useState<Set<string | number>>(
   new Set([items[1]?.id])
@@ -130,6 +145,7 @@ const [openIds, setOpenIds] = useState<Set<string | number>>(
           onToggle={() => toggle(item.id)}
           isFirst={index === 0}
           isLast={index === items.length - 1}
+          delay={staggerItems ? index * 0.12 : undefined}
         />
       ))}
     </div>

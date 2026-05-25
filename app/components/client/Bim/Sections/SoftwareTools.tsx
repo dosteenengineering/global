@@ -1,6 +1,11 @@
+"use client"
 import Image from "next/image";
 import { softwareToolsSection, SoftwareTool } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
+import { del } from "framer-motion/client";
 
 // ── Single tool row ───────────────────────────────────────────────────────────
 
@@ -9,14 +14,16 @@ function ToolRow({
   isFirst,
   isLast,
   index,
+  delay,
 }: {
   tool: SoftwareTool;
   isFirst: boolean;
   isLast: boolean;
   index: number;
-}) {
+  delay: number;
+  }) {
   return (
-    <div
+    <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true }}
       className={`grid grid-cols-[105px_1px_1fr] md:grid-cols-[233px_1px_1fr] border-[#c2c2c2]
         ${isFirst ? "border-t" : ""}
         border-b
@@ -45,7 +52,7 @@ function ToolRow({
         </h3>
         <p className="text-paragraph text-description">{tool.description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -82,9 +89,13 @@ export default function SoftwareTools() {
               title={title}
               className="mb-50 lg:max-w-[13ch] section-heading"
             />
-            <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
+            {/* <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
               {description}
-            </p>
+            </p> */}
+            <SectionDescription
+              text={description}
+              className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]"
+            />
           </div>
 
           {/* Right — tools table */}
@@ -96,6 +107,7 @@ export default function SoftwareTools() {
                 tool={tool}
                 isFirst={i === 0}
                 isLast={i === tools.length - 1}
+                delay={i * 0.1}
               />
             ))}
           </div>

@@ -3,6 +3,7 @@ import "swiper/css";
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { aboutPartners } from "../data";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 export default function AboutPartners() {
   return (
@@ -23,9 +24,13 @@ export default function AboutPartners() {
           className="text-secondary font-light text-30 leading-[1.33] -tracking-[0.02em] mb-40 max-w-[1207px]"
         />
 
-        <div
+        {/* <div
           className="text-paragraph text-description max-w-[1252px]"
           dangerouslySetInnerHTML={{ __html: aboutPartners.description }}
+        /> */}
+        <SectionDescription
+          text={aboutPartners.description}
+          className="text-description text-paragraph max-w-[1252px]"
         />
       </div>
     </section>

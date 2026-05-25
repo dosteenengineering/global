@@ -25,7 +25,7 @@ export default function Main({
   const mainRef = useRef<HTMLElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const challengeRef = useRef<HTMLElement>(null);
+  const challengeRef = useRef<HTMLDivElement>(null);
 
   const [heroHeight, setHeroHeight] = useState(0);
   const [panelLeft, setPanelLeft] = useState(0);
@@ -185,39 +185,39 @@ export default function Main({
             </div>
             <div className="container px-[16px] sm:px-0">
               {/* Challenge — ref for deco alignment */}
-              <section ref={challengeRef} className="mb-7.5 md:mb-80">
+              <div ref={challengeRef} className="mb-7.5 md:mb-80">
                 <TextandDescription
                   title={project.challenge.heading}
                   description={project.challenge.description}
                 />
-              </section>
+              </div>
 
               <Divider />
 
-              <section className="mt-7.5 mb-5 md:my-80">
+              <div className="mt-7.5 mb-5 md:my-80">
                 <TextandDescription
                   title={project.dosteenSolution.heading}
                   description={project.dosteenSolution.description}
                   delay={0.3}
                 />
-              </section>
+              </div>
 
-              <section className="mb-5 md:mb-80">
+              <div className="mb-5 md:mb-80">
                 <SolutionSlider images={project.dosteenSolution.images} />
-              </section>
+              </div>
             </div>
-            <section className="mb-7.5 md:mb-80">
+            <div className="mb-7.5 md:mb-80">
               <SystemsTable rows={project.systemsAndProducts} />
-            </section>
+            </div>
 
             <div className="container mb-[70px] md:mb-0">
-              <section>
+              <div>
                 <TextandDescription
                   title={project.outcome.heading}
                   description={project.outcome.description}
                   delay={0.4}
                 />
-              </section>
+              </div>
 
               {/* <div className="md:hidden mt-10">
               <NextProjectPanel project={nextProject} />

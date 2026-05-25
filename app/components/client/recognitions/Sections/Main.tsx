@@ -5,7 +5,9 @@ import Image from "next/image";
 import { items, type Category } from "../data";
 import AwardsNoise from "@/app/components/common/noise/AwardsNoise";
 import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
-import { moveUpV2 } from "@/app/components/motionVariants";
+import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
+import { motion } from "framer-motion";
+import { div } from "framer-motion/client";
 
 const categories: { label: string; value: Category }[] = [
   { label: "Certifications", value: "certifications" },
@@ -31,7 +33,8 @@ export default function Main() {
       <div className="container mt-80 mb-140 3xl:mb-200">
         {/* Category Tabs */}
         <div className="flex gap-[10px] mb-50">
-          {categories.map((cat) => (
+          {categories.map((cat,index) => (
+            <motion.div key={cat.value} variants={moveUp(index * 0.12)} initial="hidden" whileInView={"show"} viewport={{ once: true }}>
             <button
               key={cat.value}
               onClick={() => setActive(cat.value)}
@@ -44,7 +47,9 @@ export default function Main() {
             >
               {cat.label}
             </button>
+            </motion.div>
           ))}
+
         </div>
         {/* Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[32px] md:gap-x-20 3xl:gap-x-[25px] gap-y-10 md:gap-y-50 ">

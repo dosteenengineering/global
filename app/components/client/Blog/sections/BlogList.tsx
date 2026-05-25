@@ -3,6 +3,7 @@
 import Pagination from "@/app/components/common/Pagination";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -36,7 +37,7 @@ const BlogList = ({ data }: BlogListProps) => {
     <div>
       {
         pageBlogs.map((blog) => (
-          <div key={blog.id} className="grid grid-cols-1 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
+          <Link href={`/blog/${blog.title.toLowerCase().replace(/\s+/g, '-')}`} key={blog.id} className="grid grid-cols-1 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
             <div className="flex gap-5 justify-between">
               <span className="text-description text-paragraph">{blog.date}</span>
               <div className="max-w-[350px] overflow-hidden">
@@ -47,7 +48,7 @@ const BlogList = ({ data }: BlogListProps) => {
               <h2 className="text-30 leading-[1.333333333333333] font-light max-w-[25ch]">{blog.title}</h2>
               <button className="text-description text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-1 xl:px-[18px] uppercase border border-bdr-gray rounded-full">{blog.category}</button>
             </div>
-          </div>
+          </Link>
         ))
       }
       {totalPages > 1 && (
