@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/image";
 import { bimCapabilities } from "../data";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 type BimCapability = {
   id: string;
@@ -10,9 +13,9 @@ type BimCapability = {
   description: string;
 };
 
-function CapabilityCard({ item }: { item: BimCapability }) {
+function CapabilityCard({ item, delay }: { item: BimCapability; delay: number }) {
   return (
-    <div className="flex gap-5 md:gap-40 3xl:gap-[43px] pt-7.5 pb-7.5 md:pt-50 md:pb-80 3xl:pb-100 ">
+    <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="flex gap-5 md:gap-40 3xl:gap-[43px] pt-7.5 pb-7.5 md:pt-50 md:pb-80 3xl:pb-100 ">
     <div className="relative flex-shrink-0 w-12.5 h-12.5 md:w-[90px] md:h-[90px] 3xl:w-[100px] 3xl:h-[100px] backdrop-blur-sm rounded-full">
       <Image
         src="/assets/images/about/why-choose/card-bg-cricle.svg"
@@ -34,7 +37,7 @@ function CapabilityCard({ item }: { item: BimCapability }) {
         {item.description}
       </p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -58,11 +61,11 @@ export default function BimCapabilitiesStats() {
         {/* Rows with horizontal dividers */}
         <div>
           {rows.map((row, rowIndex) => (
-            <div key={rowIndex}>
+            <div  key={rowIndex}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-70 3xl:gap-x-[76px]">
                 {row.map((item) => (
                   <div key={item.id} className="border-t border-bdr-blue">
-                    <CapabilityCard item={item} />
+                    <CapabilityCard item={item} delay={rowIndex * 0.12} />
                   </div>
                 ))}
               </div>

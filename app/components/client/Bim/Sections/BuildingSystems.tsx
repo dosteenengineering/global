@@ -6,10 +6,11 @@ import "swiper/css";
 import { buildingSystemsData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import Image from "next/image";
-import NavButton from "@/app/components/common/NavigationButton"; 
+import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-import type { Swiper as SwiperType } from "swiper"; 
+import type { Swiper as SwiperType } from "swiper";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const out: T[][] = [];
@@ -25,11 +26,16 @@ interface CellProps {
   isFirstSlide: boolean;
   fixedHeight?: number;
   onRef: (el: HTMLDivElement | null) => void;
+  delay?: number;
 }
 
-function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
+function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: CellProps) {
   return (
-    <div
+    <motion.div
+      variants={moveUp(delay)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
       ref={onRef}
       style={fixedHeight != null ? { height: fixedHeight } : undefined}
       className={[
@@ -44,22 +50,22 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
       <div className="mb-7.5 md:mb-50">
         <div className="flex items-center gap-1 justify-between">
           <Image
-          src={item.icon}
-          alt="icon"
-          aria-hidden="true"
-          width={100}
-          height={100}
-          className="object-contain w-10 h-10 2xl:w-12 2xl:h-12 3xl:w-15 3xl:h-15 group-hover:scale-110 transition-all duration-300"
-        />
-         <div className="  lg:hidden">
-          <Image
-            src="/assets/icons/arrow-right-top-primary-26.svg"
-            alt={`Go to ${item.title}`}
-            width={40}
-            height={40}
-            className="object-contain w-5 h-5 lg:w-[26px] lg:h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
+            src={item.icon}
+            alt="icon"
+            aria-hidden="true"
+            width={100}
+            height={100}
+            className="object-contain w-10 h-10 2xl:w-12 2xl:h-12 3xl:w-15 3xl:h-15 group-hover:scale-110 transition-all duration-300"
           />
-        </div>
+          <div className="  lg:hidden">
+            <Image
+              src="/assets/icons/arrow-right-top-primary-26.svg"
+              alt={`Go to ${item.title}`}
+              width={40}
+              height={40}
+              className="object-contain w-5 h-5 lg:w-[26px] lg:h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
+            />
+          </div>
         </div>
       </div>
 
@@ -80,7 +86,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
           className="object-contain w-[26px] h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
         />
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -126,10 +132,10 @@ export default function BuildingSystems() {
   }, []);
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-    const [slidesPerView, setSlidesPerView] = useState(1);
+  const [slidesPerView, setSlidesPerView] = useState(1);
 
-    const total = items.length;
-const counterPill = (
+  const total = items.length;
+  const counterPill = (
     <div className="flex items-center justify-center border   text-paragraph font-poppins font-[300] leading-[0.5] border-primary rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
       <span className="font-[600]">
         {String(activeIndex + 1).padStart(2, "0")}
@@ -146,9 +152,10 @@ const counterPill = (
             title={title}
             className="section-heading text-secondary mb-30"
           />
-          <p className="text-30 leading-[1.333] text-paragraph max-w-[1395px] font-light mb-5 md:mb-80 border-b border-bdr-gray pb-5">
+          {/* <p className="text-30 leading-[1.333] text-paragraph max-w-[1395px] font-light mb-5 md:mb-80 border-b border-bdr-gray pb-5">
             {description}
-          </p>
+          </p> */}
+          <SectionDescription text={description} className="!text-30 leading-[1.333] text-paragraph max-w-[1395px] font-light mb-5 md:mb-80 " />
         </div>
 
         <div className="w-full">
@@ -174,6 +181,7 @@ const counterPill = (
                           isTopRow={true}
                           isFirstSlide={idx === 0}
                           fixedHeight={rowHeights?.[0]}
+                          delay={(idx % 4) * 0.1}
                           onRef={(el) => {
                             topRefs.current[idx] = el;
                           }}
@@ -185,6 +193,7 @@ const counterPill = (
                           isTopRow={false}
                           isFirstSlide={idx === 0}
                           fixedHeight={rowHeights?.[1]}
+                          delay={(idx % 4) * 0.1 + 0.08}
                           onRef={(el) => {
                             bottomRefs.current[idx] = el;
                           }}
@@ -199,74 +208,75 @@ const counterPill = (
 
           {/* ── Mobile: one item per slide ── */}
           <div className="md:hidden">
-            <div className=" w-full"> 
-          <motion.div
-            variants={moveUp(0.5)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="flex items-center justify-between mb-[30px]"
-          >
-            <motion.div
-              variants={moveUp(0.3)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-            >
-              {counterPill}
-            </motion.div>
-            <motion.div
-              variants={moveUp(0.5)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex items-center gap-[10px] md:gap-[15px]"
-            >
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slidePrev();
-                }}
-                direction="left"
-                disabled={false}
-                ariaLabel="Previous"
-                borderColor="border-[#161616]" 
-              />
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slideNext();
-                }}
-                direction="right"
-                disabled={false}
-                ariaLabel="Next"
-                borderColor="border-[#161616]" 
-              />
-            </motion.div>
-          </motion.div> 
-        </div>
-            <Swiper
-                spaceBetween={0}
-                slidesPerView={1}
-                onSwiper={(swiper) => {
-                  swiperRef.current = swiper;
-                }}
-                onSlideChange={(swiper) => {
-                  setActiveIndex(swiper.activeIndex);
-                }}
-                className="!overflow-hidden !px-[1px]"
+            <div className=" w-full">
+              <motion.div
+                variants={moveUp(0.5)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex items-center justify-between mb-[30px]"
               >
-                {items.map((item, idx) => (
-                  <SwiperSlide key={idx} className="!h-auto">
-                    <Cell
-                      item={item}
-                      isTopRow={true}
-                      isFirstSlide={idx === 0}
-                      onRef={() => {}}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                <motion.div
+                  variants={moveUp(0.3)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                >
+                  {counterPill}
+                </motion.div>
+                <motion.div
+                  variants={moveUp(0.5)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="flex items-center gap-[10px] md:gap-[15px]"
+                >
+                  <NavButton
+                    onClick={() => {
+                      const s = swiperRef.current;
+                      if (s && !s.destroyed) s.slidePrev();
+                    }}
+                    direction="left"
+                    disabled={false}
+                    ariaLabel="Previous"
+                    borderColor="border-[#161616]"
+                  />
+                  <NavButton
+                    onClick={() => {
+                      const s = swiperRef.current;
+                      if (s && !s.destroyed) s.slideNext();
+                    }}
+                    direction="right"
+                    disabled={false}
+                    ariaLabel="Next"
+                    borderColor="border-[#161616]"
+                  />
+                </motion.div>
+              </motion.div>
+            </div>
+            <Swiper
+              spaceBetween={0}
+              slidesPerView={1}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              onSlideChange={(swiper) => {
+                setActiveIndex(swiper.activeIndex);
+              }}
+              className="!overflow-hidden !px-[1px]"
+            >
+              {items.map((item, idx) => (
+                <SwiperSlide key={idx} className="!h-auto">
+                  <Cell
+                    item={item}
+                    isTopRow={true}
+                    isFirstSlide={idx === 0}
+                    delay={(idx % 4) * 0.1}
+                    onRef={() => { }}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </div>

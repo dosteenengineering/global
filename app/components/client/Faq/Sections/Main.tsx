@@ -9,6 +9,8 @@ import Image from "next/image";
 import BorderButton from "@/app/components/common/BorderButton";
 import FaqCta from "./FaqCta";
 import Pagination from "@/app/components/common/Pagination";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 const ITEMS_PER_PAGE = 7;
 
@@ -58,19 +60,38 @@ export default function FaqSection() {
 
       <div className="container lg:pl-[15.6%] z-20 relative">
         <div>
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
           <SectionTitle
             title={title}
             className={`section-heading ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
           />
+          </motion.div>
           {filtered.length > 0 && (
-            <div className="mb-140 3xl:mb-150">
+            <motion.div
+              variants={moveUp(0.35)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              className="mb-140 3xl:mb-150"
+            >
               <FaqCta />
-            </div>
+            </motion.div>
           )}
         </div>
 
         {/* Toolbar */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-20 mb-60">
+        <motion.div
+          variants={moveUp(0.25)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="flex flex-col lg:flex-row lg:items-center justify-between gap-20 mb-60"
+        >
           <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px]">
             <span className="text-secondary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
               All Questions
@@ -108,13 +129,19 @@ export default function FaqSection() {
               />
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Accordion */}
         {paginated.length > 0 ? (
-          <Accordion key={`${search}-${page}`} items={paginated} />
+          <Accordion key={`${search}-${page}`} items={paginated} staggerItems />
         ) : (
-          <div className="flex flex-col relative">
+          <motion.div
+            variants={moveUp(0.35)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="flex flex-col relative"
+          >
              <div
               className={`absolute  lg:hidden  top-7.5  w-full  left-[-21%]  h-[353px] z-0 pointer-events-none`}
             >
@@ -139,7 +166,7 @@ export default function FaqSection() {
               No results found
             </h3>
             <p className="mb-5 md:mb-60 text-30 leading-[1.333] tracking-[-0.02em] font-light text-secondary">
-              If you don't see your question here, feel free to ask it here
+              If you don&apos;t see your question here, feel free to ask it here
             </p>
             <BorderButton
               href="/contact"
@@ -148,14 +175,20 @@ export default function FaqSection() {
               textColor="black"
               className="w-fit"
             />
-          </div>
+          </motion.div>
         )}
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-10 md:mt-80">
+          <motion.div
+            variants={moveUp(0.2)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mt-10 md:mt-80"
+          >
             <Pagination currentPage={page} totalPages={totalPages} />
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

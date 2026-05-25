@@ -21,6 +21,19 @@ export const moveUp = (delay: number = 0) => ({
   },
 });
 
+export const zoomIn = (delay: number = 0) => ({
+  hidden: { opacity: 0, scale: 0.9 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: delay,
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+    },
+  },
+});
+
 export const moveUpV2 = {
   hidden: { opacity: 0, y: 60 },
   show: {

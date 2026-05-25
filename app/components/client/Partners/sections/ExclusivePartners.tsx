@@ -12,6 +12,8 @@ import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 const AUTOPLAY_DELAY = 3500;
 
@@ -119,21 +121,19 @@ const Partners = () => {
 
           return (
             <SwiperSlide key={slide.id}>
-              <div
+              <motion.div 
+                variants={moveUp(index * 0.12)} 
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-100px" }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
-                className={`
-                  relative cursor-pointer select-none
-                  border-l border-y border-[#c2c2c2]
-                  ${isLast ? "border-r" : ""}
-                  transition-colors duration-500
-                `}
+                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] ${isLast ? "border-r" : ""} transition-colors duration-500`}
                 style={{ minHeight: "282px" }}
               >
-<div
-                  className={`absolute inset-0 transition-opacity duration-400 ${
-                    isActive ? "opacity-100" : "opacity-0"
-                  }`}
+                <div
+                  className={`absolute inset-0 transition-opacity duration-400 ${isActive ? "opacity-100" : "opacity-0"
+                    }`}
                 >
                   <PrimaryNoise2 />
                 </div>
@@ -153,11 +153,10 @@ const Partners = () => {
                     </div>
 
                     <p
-                      className={`text-description text-white transition-all duration-400 ${
-                        isActive
+                      className={`text-description text-white transition-all duration-400 ${isActive
                           ? "opacity-100 max-h-[30px]"
                           : "opacity-0 max-h-0 overflow-hidden pointer-events-none"
-                      }`}
+                        }`}
                     >
                       {slide.title}
                     </p>
@@ -167,16 +166,15 @@ const Partners = () => {
                 {/* BOTTOM-LEFT: country — always visible, bordered box */}
                 <div className="absolute bottom-0 left-0">
                   <p
-                    className={`text-15 text-center capitalize min-w-[113px] h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-400 ${
-                      isActive
+                    className={`text-15 text-center capitalize min-w-[113px] h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-400 ${isActive
                         ? "text-white border-white"
                         : "text-paragraph border-[#c2c2c2]"
-                    }`}
+                      }`}
                   >
                     {slide.country}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             </SwiperSlide>
           );
         })}
