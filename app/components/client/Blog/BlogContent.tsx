@@ -5,6 +5,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import BlogLatest from "./sections/BlogLatest";
 import BlogList from "./sections/BlogList";
+import { motion } from "framer-motion";
+import { moveUp } from "../../motionVariants";
 
 const STICKY_TOP = 120;
 const DESKTOP_BREAKPOINT = 768;
@@ -126,11 +128,11 @@ const BlogContent = ({ data }: BlogContentProps) => {
             className="md:col-start-1 relative self-stretch md:w-[150px] 3xl:w-[176px]"
           >
             <div ref={panelRef} className="flex flex-col gap-y-1 text-left">
-              {categories.map((category) => {
+              {categories.map((category,index) => {
                 const isActive = selectedCategory === category;
 
                 return (
-                  <div key={category}>
+                  <motion.div variants={moveUp(index * 0.1)} initial="hidden" whileInView={"show"} viewport={{once:true,amount:0.3}} key={category}>
                     <button
                       type="button"
                       onClick={() => handleCategoryChange(category)}
@@ -154,7 +156,7 @@ const BlogContent = ({ data }: BlogContentProps) => {
                         />
                       </span>
                     </button>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

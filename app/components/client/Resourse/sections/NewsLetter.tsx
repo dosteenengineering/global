@@ -1,6 +1,7 @@
 import BorderButton from "@/app/components/common/BorderButton";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 interface Props {
   data:{
@@ -16,10 +17,11 @@ const NewsLetter = ({data}: Props) => {
       <SecondaryNoise/>
       <div className="container relative z-2">
         <SectionTitle text={data.title} className="text-left section-heading uppercase mb-50" />
-        <p className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50">{data.desc}</p>
+        {/* <p className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50">{data.desc}</p> */}
+        <SectionDescription text={data.desc} className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50" />
         <form className="flex w-full max-w-[478px] items-center overflow-hidden rounded-full border border-black/80">
           <input type="email" aria-label="Email address" placeholder="Enter Your Email"
-            className="min-w-0 flex-1 bg-transparent px-6 md:py-4 text-[12px] text-16 text-black outline-none placeholder:text-black/55 md:px-25"
+            className="min-w-0 flex-1 bg-transparent px-6 md:py-4 xl:text-15 text-black outline-none placeholder:text-black/55 md:px-25"
           />
           <BorderButton
             text="Subscribe"

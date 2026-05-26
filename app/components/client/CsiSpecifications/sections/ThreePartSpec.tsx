@@ -111,6 +111,7 @@ export default function ThreePartSpec() {
               description={item.desc}
               isEven={index % 2 !== 0}
               index={index}
+              delay={index * 0.15}
             />
           ))}
         </div>

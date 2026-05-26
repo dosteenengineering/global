@@ -4,6 +4,8 @@ import Pagination from "@/app/components/common/Pagination";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -33,11 +35,13 @@ const BlogList = ({ data }: BlogListProps) => {
   const start = (safeCurrentPage - 1) * ITEMS_PER_PAGE;
   const pageBlogs = data.slice(start, start + ITEMS_PER_PAGE);
 
+  const MotionLink = motion(Link);
+
   return (
     <div>
       {
-        pageBlogs.map((blog) => (
-          <Link href={`/blog/${blog.title.toLowerCase().replace(/\s+/g, '-')}`} key={blog.id} className="grid grid-cols-1 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
+        pageBlogs.map((blog,index) => (
+          <MotionLink variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} href={`/blog/${blog.title.toLowerCase().replace(/\s+/g, '-')}`} key={blog.id} className="grid grid-cols-1 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
             <div className="flex gap-5 justify-between">
               <span className="text-description text-paragraph">{blog.date}</span>
               <div className="max-w-[350px] overflow-hidden">
@@ -48,7 +52,7 @@ const BlogList = ({ data }: BlogListProps) => {
               <h2 className="text-30 leading-[1.333333333333333] font-light max-w-[25ch]">{blog.title}</h2>
               <button className="text-description text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-1 xl:px-[18px] uppercase border border-bdr-gray rounded-full">{blog.category}</button>
             </div>
-          </Link>
+          </MotionLink>
         ))
       }
       {totalPages > 1 && (

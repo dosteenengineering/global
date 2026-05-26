@@ -1,5 +1,8 @@
 import type { ResourceHubTab } from "../data";
 import { Download } from "lucide-react";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 type BrochuresCataloguesTabProps = {
   tab: ResourceHubTab;
@@ -22,23 +25,26 @@ const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
-      <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50">
+      {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50">
         {tab.title}
-      </h2>
+      </h2> */}
+      <SectionTitle title={tab.title} 
+      className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
-        {items.map((item) => (
-          <ResourceDownloadCard key={item.id} item={item} />
+        {items.map((item, index) => (
+          <ResourceDownloadCard key={item.id} item={item} delay={0.1 * index} />
         ))}
       </div>
     </div>
   );
 };
 
-const ResourceDownloadCard = ({ item }: { item: BrochuresCataloguesItem }) => {
+const ResourceDownloadCard = ({ item, delay }: { item: BrochuresCataloguesItem, delay: number }) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
-     <article className="h-[116px] md:h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
+    <motion.article
+      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-[116px] md:h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
       <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 font-poppins font-[600] 
       ${ isDwg ? "bg-[#E3EFE8] text-[#147C39]" : "bg-[#E6EBFF] text-primary" }`}
       >
@@ -62,7 +68,7 @@ const ResourceDownloadCard = ({ item }: { item: BrochuresCataloguesItem }) => {
          </a>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

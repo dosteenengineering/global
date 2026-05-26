@@ -11,6 +11,9 @@ import VideosDemosTab from "./VideosDemosTab";
 import Image from "next/image";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { motion } from "framer-motion";
+import { fadeIn, moveDown, moveUp } from "@/app/components/motionVariants";
 
 interface ResourseTabProps {
   data: ResourceHubData;
@@ -97,9 +100,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             title={data.sectionTitle}
             className="section-heading max-w-[1290px] mb-5 uppercase"
           />
-          <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
+          {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
-          </p>
+          </p> */}
+          <SectionDescription text={data.sectionDesc} className="text-description text-paragraph max-w-[75ch] font-light mb-50" />
         </div>
 
         {/* ── Mobile: Custom Select ── */}
@@ -192,8 +196,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               {data.tabs.map((tab, index) => {
                 const isActive = activeTab === tab.id;
                 return (
+                  <motion.div variants={fadeIn(0.12*index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }} key={tab.id}>
                   <button
-                    key={tab.id}
                     ref={(el) => { buttonRefs.current[index] = el; }}
                     type="button"
                     onClick={() => handleTabChange(tab)}
@@ -213,6 +217,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                       {tab.label}
                     </span>
                   </button>
+                  </motion.div>
                 );
               })}
 
