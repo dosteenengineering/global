@@ -117,22 +117,20 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                     className="w-full flex items-center justify-between gap-4 py-[18px] text-left"
                   >
                     <span
-                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${
-                        isOpen ? "font-[500]" : "font-light"
-                      }`}
+                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${isOpen ? "font-[500]" : "font-light"
+                        }`}
                     >
                       {door.menuTitle}
                     </span>
                     <span
                       className={`shrink-0 flex items-center justify-center   transition-all duration-300  `}
-                    > 
-                        
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-               className={`transition-transform duration-300 ${
-                          isOpen ? "rotate-180" : "rotate-0"
-                        }`}>
-              <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+                    >
+
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
+                          }`}>
+                        <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
 
                     </span>
                   </button>
@@ -180,17 +178,16 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                         <span
                           className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
                           ${isActive
-                            ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
-                            : "font-light leading-[1.2]"
-                          }`}
+                              ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
+                              : "font-light leading-[1.2]"
+                            }`}
                         >
                           {door.menuTitle}
                         </span>
                         {isActive && (
                           <span
-                            className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex ${
-                              isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                            }`}
+                            className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                              }`}
                           >
                             <Image
                               src="/assets/icons/arrow-right-primary.svg"

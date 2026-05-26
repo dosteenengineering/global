@@ -46,12 +46,11 @@ export default function DosteenSystems() {
                   type="button"
                   onClick={() => toggleAccordion(system.id)}
                   className="w-full flex justify-between gap-4 py-5 text-left transition-all duration-300"
-                  
+
                 >
                   <span
-                    className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${
-                      isOpen ? "  font-[500]" : "font-light"
-                    }`}
+                    className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${isOpen ? "  font-[500]" : "font-light"
+                      }`}
                   >
                     {system.title}
                   </span>
@@ -60,17 +59,17 @@ export default function DosteenSystems() {
                   >
                     {isOpen ? (
 
-                <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
+                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                         className="object-contain     rotate-90  ">
-                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
 
-                      
+
                     ) : (
-                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
-                     >
-                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                     )}
                   </span>
                 </button>
@@ -101,7 +100,7 @@ export default function DosteenSystems() {
                                 "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)",
                             }}
                           />
-                        </div> 
+                        </div>
                         <p className="text-description text-paragraph leading-[1.6] mb-30">
                           {system.description}
                         </p>
@@ -129,29 +128,27 @@ export default function DosteenSystems() {
             className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative"
             style={{ width: "47%" }}
           >
-            {systems.map((system,index) => {
+            {systems.map((system, index) => {
               const isActive = system.id === activeId;
               return (
                 <div
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
-                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${
-                    isActive ? "pl-20" : ""
-                  }`}
+                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${isActive ? "pl-20" : ""
+                    }`}
                   style={{
                     background: isActive ? activeGradient : "transparent",
                   }}
                 >
-                  <motion.span variants={moveRight(0.6+index*0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
+                  <motion.span variants={moveRight(0.6 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
                     className={`py-30 3xl:py-[31px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}
                   >
                     {system.title}
                   </motion.span>
 
                   <div
-                    className={`shrink-0 transition-opacity duration-300 ${
-                      isActive ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`shrink-0 transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-0"
+                      }`}
                   >
                     <div className="w-[51px] h-[51px] rounded-full bg-primary flex items-center justify-center">
                       <Image src="/assets/icons/arrow-right-white-small.svg" alt="arrow" width={20} height={20} className="object-contain invert brightness-0 w-auto h-[22px]" />
@@ -180,7 +177,7 @@ export default function DosteenSystems() {
               {/* Image */}
               <motion.div variants={moveRight(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mb-20 overflow-hidden w-full h-[441px]" >
                 <Image src={activeSystem.image} alt={activeSystem.title} fill className="object-cover" />
-                <div className="absolute inset-0" style={{background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)"}} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)" }} />
               </motion.div>
 
               {/* Description */}
@@ -190,14 +187,14 @@ export default function DosteenSystems() {
 
               {/* CTA Button */}
               <motion.div variants={moveRight(0.8)} initial="hidden" whileInView="show" viewport={{ once: true }}>
-              <BorderButton
-                text="View System"
-                borderColor="black"
-                textColor="black"
-                iconColor="primary"
-                hoverBg="black"
-                className="w-fit"
-              />
+                <BorderButton
+                  text="View System"
+                  borderColor="black"
+                  textColor="black"
+                  iconColor="primary"
+                  hoverBg="black"
+                  className="w-fit"
+                />
               </motion.div>
             </div>
           </div>
