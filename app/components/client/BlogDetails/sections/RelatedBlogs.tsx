@@ -158,7 +158,7 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
         {/* ── Desktop: Original grid ── */}
         <div className="hidden xl:grid xl:grid-cols-3 3xl:grid-cols-[705.74px_566.99px_auto] text-secondary relative z-2 gap-y-5 items-end">
           {data.items.map((item, index) => (
-            <div
+            <motion.div variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{once:true}}
               key={item.id}
               className="border-b pb-4 xl:pb-0 md:border-b-0 xl:border-l border-bdr-gray px-0 xl:px-[20px] flex flex-col h-full"
             >
@@ -178,7 +178,7 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
                 alt={item.title}
                 className={`w-full object-cover h-[200px] md:h-[300px] lg:h-[350px] ${imageHeightClasses[index] ?? imageHeightClasses[0]}`}
               />
-            </div>
+            </motion.div>
           ))}
         </div>
 

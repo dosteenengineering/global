@@ -14,9 +14,9 @@ export const MasterFormatData = {
   title: "What Is CSI MasterFormat",
 
   description: `
-    <p>
+    
       CSI MasterFormat is the universal framework architects, consultants, and contractors use to organise construction specifications — assigning every building product and system a structured division and section number. Dosteen's specification documents follow MasterFormat 2018, the current edition used on UAE and Oman projects.
-    </p>
+    
     
   `,
   subTitle: "CSI MasterFormat — The Essentials",

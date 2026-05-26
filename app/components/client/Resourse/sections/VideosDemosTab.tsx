@@ -4,6 +4,9 @@ import { Clock, Play, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import type { ResourceHubTab } from "../data";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 type VideosDemosTabProps = {
   tab: ResourceHubTab;
@@ -59,15 +62,16 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
-      <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[28ch] mb-7.5 md:mb-50">
+      {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[28ch] mb-7.5 md:mb-50">
         {tab.title}
-      </h2>
-
+      </h2> */}
+      <SectionTitle title={tab.title} className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[28ch] mb-7.5 md:mb-50" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-30">
-        {videos.map((item) => {
+        {videos.map((item,index) => {
           const label = item.tag ?? item.tags?.[0] ?? item.type;
 
           return (
+            <motion.div variants={moveUp(0.4+ index * 0.1)} initial="hidden" animate="show" viewport={{ once: false }}>
             <button key={item.id} type="button" onClick={() => setActiveVideo(item)} className="group text-left" >
               {/* IMAGE */}
               <div className="relative aspect-[18.7/10] md:aspect-[16/10] overflow-hidden">
@@ -105,6 +109,7 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
                 </div>
               </div>
             </button>
+            </motion.div>
           );
         })}
       </div>

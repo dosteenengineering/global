@@ -1,5 +1,8 @@
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import type { ResourceHubTab } from "../data";
 import { Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 type CertificationsComplianceTabProps = {
   tab: ResourceHubTab;
 };
@@ -21,23 +24,25 @@ const CertificationsComplianceTab = ({ tab }: CertificationsComplianceTabProps) 
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
-      <h2 className="text-[24px] md:text-55 tracking-[-2%]     leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] max-w-[35ch] text-secondary mb-7.5 md:mb-50">
+      {/* <h2 className="text-[24px] md:text-55 tracking-[-2%]     leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] max-w-[35ch] text-secondary mb-7.5 md:mb-50">
         {tab.title}
-      </h2>
-
+      </h2> */}
+         <SectionTitle title={tab.title} 
+            className="text-[24px] md:text-55 tracking-[-0.02em] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light  text-secondary mb-7.5 md:mb-50 max-w-[35ch]" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
-        {items.map((item) => (
-          <ResourceDownloadCard key={item.id} item={item} />
+        {items.map((item,index) => (
+          <ResourceDownloadCard key={item.id} item={item} delay={index * 0.1} />
         ))}
       </div>
     </div>
   );
 };
 
-const ResourceDownloadCard = ({ item }: { item: CertificationItem }) => {
+const ResourceDownloadCard = ({ item, delay }: { item: CertificationItem, delay: number }) => {
 
   return (
-   <article className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 xl:py-[61px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
+    <motion.article
+      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}  className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 xl:py-[61px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
        <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-30 font-poppins font-[600] bg-[#1E702D1A] text-[#1E702D]`} >
         {item.type}
       </div>
@@ -55,7 +60,7 @@ const ResourceDownloadCard = ({ item }: { item: CertificationItem }) => {
          </a>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

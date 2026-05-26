@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
-import { moveUpV2 } from "@/app/components/motionVariants";
+import { moveRight, moveUp, moveUpV2 } from "@/app/components/motionVariants";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 interface DoorItem {
   id: number;
@@ -97,9 +98,10 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         />
 
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
-          <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">
+          {/* <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">
             {data.sectionDesc}
-          </p>
+          </p> */}
+          <SectionDescription text={data.sectionDesc} className="text-24 lg:!text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 !max-w-[50ch]" />
         </div>
 
         <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
@@ -162,44 +164,49 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
             <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40 h-full">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
-                  {data.doors.map((door) => {
+                  {data.doors.map((door,index) => {
                     const isActive = activeId === door.id;
                     return (
-                      <button
-                        key={door.id}
-                        type="button"
-                        onClick={() => setActiveId(door.id)}
-                        className={`group flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0 rounded-full px-4 first:mb-2 text-left transition-colors duration-300 xl:w-full xl:rounded-none xl:px-0 
-                          ${isActive
-                            ? "bg-gradient-to-r from-transparent from-0% via-51% to-100% via-white/20 to-transparent py-3 xl:py-[16px]"
-                            : "xl:py-20"
-                          }`}
-                      >
-                        <span
-                          className={`text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-colors duration-300 
-                          ${isActive
-                              ? "font-[400] pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
-                              : "font-light leading-[1.2]"
-                            }`}
+                      <motion.div variants={moveRight(index*0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+                        <button
+                          key={door.id}
+                          type="button"
+                          onClick={() => setActiveId(door.id)}
+                          className={`group relative overflow-hidden flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0 rounded-full px-4 first:mb-2 text-left xl:w-full xl:rounded-none xl:px-0 ${isActive ? "py-3 xl:py-[16px]" : "xl:py-20"} transition-[padding] duration-300 cursor-pointer`}
                         >
-                          {door.menuTitle}
-                        </span>
-                        {isActive && (
+
+                          {/* ── Gradient: clipped by button's own border-radius via overflow-hidden ── */}
                           <span
-                            className={`h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 items-center justify-center rounded-full bg-white transition-all duration-300 flex ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                            aria-hidden="true"
+                            className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-[clip-path] duration-500 ease-out
+                            ${isActive
+                                ? "[clip-path:inset(0_0%_0_0)]"
+                                : "[clip-path:inset(0_100%_0_0)]"
+                              }`}
+                          />
+
+                          {/* ── Label ── */}
+                          <span
+                            className={`relative text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-all duration-300 ${isActive
+                              ? "font-light pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
+                              : "font-light leading-[1.2]"
                               }`}
                           >
-                            <Image
-                              src="/assets/icons/arrow-right-primary.svg"
-                              alt=""
-                              aria-hidden="true"
-                              width={15}
-                              height={15}
-                              className="h-2 w-2 md:h-auto md:w-auto"
-                            />
+                            {door.menuTitle}
                           </span>
-                        )}
-                      </button>
+
+                          {/* ── Arrow ── */}
+                          <span
+                            className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${isActive
+                              ? "opacity-100 translate-x-0"
+                              : "opacity-0 -translate-x-3 pointer-events-none"
+                              }`}
+                          >
+                            <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-2 w-2 md:h-auto md:w-auto" />
+                          </span>
+
+                        </button>
+                      </motion.div>
                     );
                   })}
                 </nav>
@@ -225,7 +232,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         </div>
 
         {data.ctaData && (
-          <div className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-[55px] 3xl:py-[52px]">
+          <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-[55px] 3xl:py-[52px]">
             <h3 className="text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-25">
               <span className="font-semibold">
                 {data.ctaData.title.split("?")[0]}?
@@ -253,7 +260,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                 className="min-w-[190px]"
               />
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>

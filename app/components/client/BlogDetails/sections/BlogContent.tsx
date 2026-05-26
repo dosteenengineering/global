@@ -1,5 +1,7 @@
 "use client";
 
+import { moveUp } from "@/app/components/motionVariants";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef } from "react";
 
@@ -84,7 +86,7 @@ const BlogContent = () => {
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] 3xl:grid-cols-[255px_auto] gap-5 3xl:gap-[173px]">
           <div ref={anchorRef} className="relative self-stretch">
-            <div ref={panelRef}>
+            <div ref={panelRef} className="pb-30">
               <div className="border-y border-bdr-gray pt-[12px] pb-30">
                 <h4 className="text-description text-paragraph">Published</h4>
                 <h5 className="text-description text-paragraph !font-bold">22-02-2025</h5>
@@ -107,29 +109,31 @@ const BlogContent = () => {
           </div>
           <div>
             <div className="border-b border-bdr-gray pb-60">
-              <p className="text-30 leading-[1.333333333333333] font-light mb-40">
+              <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-30 leading-[1.333333333333333] font-light mb-40">
                 In today’s fast-paced industrial and commercial environments, facility safety is no longer limited to alarms, cameras, or access control systems. Physical infrastructure — particularly industrial door solutions — plays a crucial role in protecting people, assets, and operations.
-              </p>
-              <p className="text-description text-paragraph">
+              </motion.p>
+              <motion.p variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-description text-paragraph">
                 Advanced door systems are engineered not only for access and efficiency but also for risk mitigation, emergency response, and regulatory compliance. From warehouses and manufacturing plants to airports and commercial complexes, modern door technologies are transforming safety from a reactive measure into a proactive strategy.
-              </p>
+              </motion.p>
             </div>
             <div className="pt-60">
-              <h2 className="text-55 leading-[1.181818181818182] font-light text-secondary">The Evolving Role of Industrial Doors in Safety</h2>
-              <p className="text-description text-paragraph mb-30">Traditionally, doors served a basic function — allowing entry and exit. However, modern facilities demand more complex performance:</p>
+              <motion.h2 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-55 leading-[1.181818181818182] font-light text-secondary mb-30">The Evolving Role of Industrial Doors in Safety</motion.h2>
+              <motion.p variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-description text-paragraph mb-30">Traditionally, doors served a basic function — allowing entry and exit. However, modern facilities demand more complex performance:</motion.p>
               <ul className="text-description text-paragraph list-disc pl-[1em] py-30">
-                <li>Controlled access to sensitive areas</li>
-                <li>Protection against fire, smoke, and environmental hazards</li>
-                <li>Safe interaction between vehicles, equipment, and personnel</li>
-                <li>Integration with building management and security systems</li>
+                <motion.li variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Controlled access to sensitive areas</motion.li>
+                <motion.li variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Protection against fire, smoke, and environmental hazards</motion.li>
+                <motion.li variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Safe interaction between vehicles, equipment, and personnel</motion.li>
+                <motion.li variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Integration with building management and security systems</motion.li>
               </ul>
-              <p className="text-description text-paragraph mb-50">As a result, advanced industrial doors now operate as intelligent safety barriers rather than simple structural components.</p>
-              <Image src="/assets/images/blog/blog-d-1.jpg" 
-              width={1252} height={495} alt=""  className="w-full max-h-[495px] mb-80" />
+              <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-description text-paragraph mb-50">As a result, advanced industrial doors now operate as intelligent safety barriers rather than simple structural components.</motion.p>
+              <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+                <Image src="/assets/images/blog/blog-d-1.jpg" width={1252} height={495} alt="" className="w-full max-h-[495px] mb-80" />
+              </motion.div>
             </div>
             <div>
-              <h2 className="text-55 leading-[1.181818181818182] font-light text-secondary mb-50 tracking-[-0.02em]">Key Safety Features in Advanced Door Solutions</h2>
-              <div className="mb-40">
+              <motion.h2 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-55 leading-[1.181818181818182] font-light text-secondary mb-50 tracking-[-0.02em]">
+                Key Safety Features in Advanced Door Solutions</motion.h2>
+              <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="mb-40">
                 <h3 className="text-30 leading-[1.333333333333333] font-light text-secondary mb-30">
                   1. Automated Obstacle Detection & Motion Safety
                 </h3>
@@ -145,8 +149,8 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   These features significantly reduce collision risks involving forklifts, vehicles, and pedestrians, particularly in high-traffic logistics environments.
                 </p>
-              </div>
-             <div >
+              </motion.div>
+              <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
                 <h3 className="text-30 leading-[1.333333333333333] font-light text-secondary mb-30">
                   2. Fire & Smoke Containment Capabilities
                 </h3>
@@ -162,16 +166,16 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   Automated closure triggered by fire alarm systems ensures immediate response even without human intervention, improving survival and damage control outcomes.
                 </p>
-             </div>
-             <div className="flex gap-30 w-full pt-30 pb-40">
-              <div>
-                <Image src="/assets/images/blog/blog-1/blg-gallery-1.jpg" alt="Blog 1" width={400} height={300} className="w-full h-auto" />
-              </div>
-              <div>
-                <Image src="/assets/images/blog/blog-1/blg-gallery-2.jpg" alt="Blog 2" width={400} height={300} className="w-full h-auto" />
-              </div>
-             </div>
-              <div >
+              </motion.div>
+              <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="flex gap-30 w-full pt-30 pb-40">
+                <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+                  <Image src="/assets/images/blog/blog-1/blg-gallery-1.jpg" alt="Blog 1" width={400} height={300} className="w-full h-auto" />
+                </motion.div>
+                <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+                  <Image src="/assets/images/blog/blog-1/blg-gallery-2.jpg" alt="Blog 2" width={400} height={300} className="w-full h-auto" />
+                </motion.div>
+              </motion.div>
+              <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
                 <h3 className="text-30 leading-[1.333333333333333] font-light text-secondary mb-30">
                   3. Fire & Smoke Containment Capabilities
                 </h3>
@@ -187,7 +191,7 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   Automated closure triggered by fire alarm systems ensures immediate response even without human intervention, improving survival and damage control outcomes.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
