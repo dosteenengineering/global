@@ -40,7 +40,8 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
           {buttons.map((btn,index) => (
-            <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}}>
+            <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" key={index}
+            viewport={{once:true, amount:0.4}}>
             <BorderButton key={btn.text} text={btn.text} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.href} hoverBg="white" className="w-fit" />
             </motion.div>
           ))}

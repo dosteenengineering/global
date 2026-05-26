@@ -126,8 +126,8 @@ export default function ServicesSection() {
     .svg-path {
       fill: none;
       stroke: white;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      strokeLinecap: round;
+      strokeLinejoin: round;
       stroke-dasharray: var(--len);
       stroke-dashoffset: var(--len);
       animation: draw 1s ease forwards;
@@ -180,7 +180,7 @@ export default function ServicesSection() {
 
         {/* ===== Mobile / Tablet ======= */}
         <div className="lg:hidden pt-[28px] md:pt-50">
-          <Swiper 
+          <Swiper
             spaceBetween={44}
             slidesPerView="auto"
             onSlideChange={(swiper) =>
@@ -229,8 +229,8 @@ export default function ServicesSection() {
         .svg-path {
           fill: none;
           stroke: white;
-          stroke-linecap: round;
-          stroke-linejoin: round;
+          strokeLinecap: round;
+          strokeLinejoin: round;
           stroke-dasharray: var(--len);
           stroke-dashoffset: var(--len);
           animation: draw 1s ease forwards;

@@ -36,10 +36,10 @@ export default function Customization() {
   }, [activeTab]);
 
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
-const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <section className="relative w-full lg:min-h-screen overflow-hidden">
-      <SecondaryNoise/>
+      <SecondaryNoise />
 
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
@@ -97,7 +97,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                         <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2">
                           <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
                         </li>
-                        
+
                       </motion.ul>
                     ))}
                   </div>
@@ -145,11 +145,11 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       >
                         {tab.label}
                       </span>
-                      
-                      <div    className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}> 
+
+                      <div className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>  
+                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                       </div>
                     </motion.div>
                   </button>
@@ -164,24 +164,24 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
                       </h3>
 
                       {/* Right items */}
-                     
+
                       <div className="w-full text-19 font-[300] leading-[1.789473684210526] font-poppins -tracking-[2%] ">
-                    {tab.rightItems.map((item, index) => (
-                      <motion.ul
-                        key={`${activeTab}-${index}`}
-                        initial="hidden"
-                        whileInView="show"
-                        variants={moveUp(index * 0.15)}
-                        viewport={{ once: true }}
-                        className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
-                      >
-                        <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2 mb-[5px]">
-                          <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
-                        </li>
-                        
-                      </motion.ul>
-                    ))}
-                  </div>
+                        {tab.rightItems.map((item, index) => (
+                          <motion.ul
+                            key={`${activeTab}-${index}`}
+                            initial="hidden"
+                            whileInView="show"
+                            variants={moveUp(index * 0.15)}
+                            viewport={{ once: true }}
+                            className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
+                          >
+                            <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2 mb-[5px]">
+                              <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
+                            </li>
+
+                          </motion.ul>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -189,7 +189,7 @@ const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
             })}
           </motion.div>
         </div>
-  
+
       </div>
     </section>
   );
