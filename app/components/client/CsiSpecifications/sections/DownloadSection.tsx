@@ -56,7 +56,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
       </div>
 
       <div>
-        <h3 className="mb-[20px] text-30 font-light leading-[1.333] -tracking-[0.02em] text-secondary">
+        <h3 className="mb-5 text-30 font-light leading-[1.333] -tracking-[0.02em] text-secondary">
           {item.title}
         </h3>
         <p className="mb-3 text-19 text-paragraph leading-[1.526315789473684] ">

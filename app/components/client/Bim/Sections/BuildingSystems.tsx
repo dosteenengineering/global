@@ -69,7 +69,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
         </div>
       </div>
 
-      <h3 className="text-30 leading-[1.333] text-secondary font-light mb-2.5 md:mb-[20px]">
+      <h3 className="text-30 leading-[1.333] text-secondary font-light mb-2.5 md:mb-5">
         {item.title}
       </h3>
 

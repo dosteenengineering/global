@@ -186,7 +186,7 @@ export default function FeaturedProjectsResidencial() {
             spaceBetween={0}
             speed={600}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
-            className="w-full h-[383px] md:h-[280px] mb-[20px]"
+            className="w-full h-[383px] md:h-[280px] mb-5"
           >
             {projects.map((project) => (
               <SwiperSlide key={project.key}>
