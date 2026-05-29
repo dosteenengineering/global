@@ -58,10 +58,10 @@ const Systems = ({ data }: Props) => {
         />
       </div>
 
-      <div
-        className="max-w-[1252px] lg:ml-auto px-[16px] 2xl:px-0"
-        style={isMobile ? undefined : { marginRight: `${rightSpace + 16}px` }} 
-      >
+     
+
+         <motion.div   className="max-w-[1252px] lg:ml-auto px-[16px] 2xl:px-0"variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}
+          style={isMobile ? undefined : { marginRight: `${rightSpace + 16}px` }} >
         <SectionTitle
           text={data.title}
           className="section-heading text-secondary uppercase mb-50"
@@ -217,7 +217,7 @@ const Systems = ({ data }: Props) => {
             </tbody>
           </table>
         </div>
-      </div>
+     </motion.div>
     </section>
   );
 };
