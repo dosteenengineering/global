@@ -178,6 +178,7 @@ export default function DownloadSection() {
             })}
           </Swiper>
         </div>
+        
       </div>
     </section>
   );

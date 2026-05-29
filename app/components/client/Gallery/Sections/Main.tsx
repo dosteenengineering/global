@@ -24,14 +24,14 @@ export default function Main() {
   const rows = buildRows(items);
 
   return (
-    <section className="bg-white pt-60 3xl:pt-[58px] pb-140 3xl:pb-200 relative">
-      <div className="absolute right-0 top-[-16%]">
+    <section className="bg-white pt-7.5 md:pt-60 3xl:pt-[58px] pb-140 3xl:pb-200 relative">
+      <div className="absolute right-[-9%] md:right-0 top-[-7%] md:top-[-16%]">
         <Image
           src="/assets/images/gallery/bg-svg.svg"
           alt="bg-svg"
           width={900}
           height={900}
-          className="object-contain pointer-events-none w-full h-[930px] 3xl:h-full"
+          className="object-contain pointer-events-none w-full h-[280px] md:h-[930px] 3xl:h-full"
         />
       </div>
       <div className="container">
@@ -39,7 +39,7 @@ export default function Main() {
           {rows.map((row, rowIdx) => (
             <div
               key={rowIdx}
-              className={`grid gap-30 ${
+              className={`grid gap-7.5 md:gap-30 ${
                 row.isOdd
                   ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                   : "grid-cols-1 sm:grid-cols-2"
@@ -73,8 +73,8 @@ function GalleryCard({ item, isOdd }: { item: GalleryItem; isOdd: boolean }) {
       <div
         className={`relative w-full overflow-hidden group ${
           isOdd
-            ? "h-[220px] sm:h-[280px] md:h-[320px] 2xl:h-[350px] 3xl:h-[400px]"
-            : "h-[260px] sm:h-[360px] md:h-[460px] 2xl:h-[500px] 3xl:h-[611px]"
+            ? "h-[248px] sm:h-[280px] md:h-[320px] 2xl:h-[350px] 3xl:h-[400px]"
+            : "h-[248px] sm:h-[280px] md:h-[460px] 2xl:h-[500px] 3xl:h-[611px]"
         }`}
       >
         <Image
@@ -86,7 +86,7 @@ function GalleryCard({ item, isOdd }: { item: GalleryItem; isOdd: boolean }) {
       </div>
 
       {/* Meta */}
-      <div className="mt-40 flex flex-col items-start gap-[10px]">
+      <div className="mt-40 flex flex-col items-start gap-[5px] md:gap-[10px]">
         <span className="text-30 font-light tracking-[-0.02em] text-secondary leading-[1.33]">
           {item.title}
         </span>
