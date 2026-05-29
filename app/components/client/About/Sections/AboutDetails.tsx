@@ -8,6 +8,8 @@ import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import StatNoise2 from "@/app/components/common/noise/StatNoise2";
 import { motion } from "framer-motion";
 import { moveLeft, moveUp } from "@/app/components/motionVariants";
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 function StatCard({
   icon,
@@ -23,6 +25,37 @@ function StatCard({
   noiseVariant: 1 | 2;
 }) {
   const isMobile =  typeof window !== "undefined" && window.innerWidth < 1024;
+
+  const hasPlus = value.includes("+");
+  const numeric = parseInt(value.replace(/[^0-9]/g, ""), 10);
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const duration = 2000; // ms
+    const increment = numeric / (duration / 16);
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= numeric) {
+        setCount(numeric);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [isInView, numeric]);
+
+  // Format: if original had "K" keep it
+  const hasK = value.toUpperCase().includes("K");
+  const display = hasK ? `${count}K` : `${count}`;
+
   return (
     <div className="flex items-center py-[15px] md:py-25 px-[40px] md:px-50 gap-[55px]  lg:gap-200 3xl:gap-[296px]  relative flex-1 min-w-0 max-h-[148px]">
   
@@ -38,16 +71,16 @@ function StatCard({
       {/* Text */}
       <div>
         <div className="flex items-baseline gap-x-[5px] md:gap-x-[14px]">
-          <div className="flex flex-row items-start">
-            <span className="text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
-              {value.replace("+", "")}
-            </span>
-            {value.includes("+") && (
-              <sup className="align-super text-[18px] md:text-[33px] leading-none relative top-[0px] md:top-[-2px] 2xl:top-[3px] 3xl:top-[5px] text-primary font-light font-poppins">
-                +
-              </sup>
-            )}
-          </div>
+           <div ref={ref} className="flex flex-row items-start">
+              <span className="min-w-[63px] text-right text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
+                {display}
+              </span>
+              {hasPlus && (
+                <sup className="align-super text-[18px] md:text-[33px] leading-none relative top-[0px] md:top-[-2px] 2xl:top-[3px] 3xl:top-[5px] text-primary font-light font-poppins">
+                  +
+                </sup>
+              )}
+            </div>
           <span className="text-[18px] md:text-30 leading-[1.333] font-light -tracking-[0.02em] text-black">
             {label}
           </span>
@@ -72,12 +105,12 @@ const slideGroups = AboutData.stats.reduce<(typeof AboutData.stats)[]>(
 export default function AboutDetails() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
-      <div className="absolute -top-43   lg:-top-68 left-[-131px] lg:left-0 pointer-events-none">
-        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]" />
+      <div className="absolute -top-43   lg:-top-79 left-[-131px] lg:left-0 pointer-events-none">
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[622px]" />
       </div>
 
-      <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-70px md:pt-120 px-[15px] lg:px-0 container w-full">
-        <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" />
+      <div className="lg:pl-[15.3%] 3xl:pl-[23.3%] pt-70px md:pt-120 px-[15px] lg:px-0 container w-full">
+        <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-5 md:mb-50" />
 
         <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="text-paragraph text-description" dangerouslySetInnerHTML={{ __html: AboutData.description }} />
       </div>

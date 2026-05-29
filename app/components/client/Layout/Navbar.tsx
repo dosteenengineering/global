@@ -415,13 +415,13 @@ export default function Navbar() {
         </div>
 
         {/* Right group — Contact + Hamburger */}
-<div className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-3 shrink-0`}>
+<div className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-[18.8px] shrink-0`}>
           {/* Contact pill */}
           <div className="rounded-[50px] backdrop-blur-[2px] h-[62px] md:h-auto w-[122px] md:w-auto">
             <Link
               ref={contactRef}
               href="/contact"
-className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-6 rounded-[50px]  border border-white/30 glass-effect group
+className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}
