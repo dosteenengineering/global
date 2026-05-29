@@ -29,8 +29,8 @@ export default function ValuedClients() {
           {regions.map((region) => (
             <div key={region.label}>
               {/* Pill */}
-              <div className="flex items-center justify-center w-[115px] h-[50px] border border-primary rounded-full mb-30">
-                <span className="text-30 text-secondary tracking-[-0.02em] leading-[1.33] font-light uppercase">
+              <div className="flex items-center justify-center w-[67px] md:w-[115px] h-[30px] md:h-[50px] border border-primary rounded-full mb-30">
+                <span className="text-[12px] md:text-30 text-secondary tracking-[-0.02em] leading-[1.33] font-light uppercase">
                   {region.label}
                 </span>
               </div>
@@ -40,14 +40,14 @@ export default function ValuedClients() {
                 {region.logos.map((logo, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-center border-b border-r border-[#c2c2c2] h-[185px] px-30"
+                    className="flex items-center justify-center border-b border-r border-[#c2c2c2] h-[99px] md:h-[185px] px-30"
                   >
                     <Image
                       src={logo.src}
                       alt=""
                       width={800}
                       height={400}
-                      className="xl:h-[80px] 3xl:h-[100px] max-h-[100px] max-w-[200px] w-auto h-auto object-contain pointer-events-none"
+                      className="xl:h-[80px] 3xl:h-[100px] max-h-[100px] max-w-[81px] md:max-w-[200px] w-auto h-auto object-contain pointer-events-none"
                     />
                   </div>
                 ))}
@@ -58,7 +58,7 @@ export default function ValuedClients() {
 
         {/* Footnote */}
         <p
-          className="mt-80 text-30 leading-[1.33] tracking-[-0.02em] text-secondary font-light"
+          className="mt-5 md:mt-80 text-30 leading-[1.33] tracking-[-0.02em] text-secondary font-light"
           dangerouslySetInnerHTML={{ __html: footnote }}
         />
       </div>

@@ -13,7 +13,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 
-const AUTOPLAY_DELAY = 3500;
+const AUTOPLAY_DELAY = 13500;
 
 const Partners = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -84,7 +84,7 @@ const Partners = () => {
   };
 
   return (
-    <section className="py-100 lg:py-130 3xl:py-150 overflow-hidden relative">
+    <section className="py-12.5 md:py-100 lg:py-130 3xl:py-150 overflow-hidden relative">
       <SecondaryNoise />
 
       {/* HEADER */}
@@ -92,7 +92,7 @@ const Partners = () => {
         <SectionTitle title={title} className="mb-50 section-heading" />
         <SectionDescription
           text={subtitle}
-          className="text-30 leading-[1.33] -tracking-[0.02em] font-light mb-30"
+          className="text-30 leading-[1.33] -tracking-[0.02em] font-light mb-2.5 md:mb-30"
         />
         <SectionDescription
           text={description}
@@ -106,7 +106,7 @@ const Partners = () => {
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         style={{ marginLeft: leftInset }}
         breakpoints={{
-          0: { slidesPerView: 1.3 },
+          0: { slidesPerView: 1.74 },
           640: { slidesPerView: 2.2 },
           768: { slidesPerView: 3.2 },
           1620: { slidesPerView: 4.275 },
@@ -124,11 +124,10 @@ const Partners = () => {
                 onMouseLeave={handleMouseLeave}
                 className={`
                   relative cursor-pointer select-none
-                  border-l border-y border-[#c2c2c2]
+                  border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[282px]
                   ${isLast ? "border-r" : ""}
                   transition-colors duration-500
-                `}
-                style={{ minHeight: "282px" }}
+                `} 
               >
 <div
                   className={`absolute inset-0 transition-opacity duration-400 ${
@@ -138,17 +137,17 @@ const Partners = () => {
                   <PrimaryNoise2 />
                 </div>
                 {/* CENTER: logo + title stacked, always centered as a group */}
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex md:items-center justify-center">
                   <div
-                    className={`flex flex-col items-center transition-all duration-400 ${isActive ? "gap-20" : ""}`}
+                    className={`flex mt-[27px] md:mt-0 flex-col items-center transition-all duration-400 ${isActive ? "gap-0 md:gap-20" : ""}`}
                   >
-                    <div className="relative w-auto 3xl:w-[258px] h-[70px] 3xl:h-[98px]">
+                    <div className="relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px]">
                       <Image
                         src={slide.logo}
                         alt={slide.logoAlt}
                         width={258}
                         height={98}
-                        className={`object-cover ${isActive ? "" : ""}`}
+                        className={`object-cover h-full ${isActive ? "" : ""}`}
                       />
                     </div>
 
@@ -167,7 +166,7 @@ const Partners = () => {
                 {/* BOTTOM-LEFT: country — always visible, bordered box */}
                 <div className="absolute bottom-0 left-0">
                   <p
-                    className={`text-15 text-center capitalize min-w-[113px] h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-400 ${
+                    className={`text-[12px] md:text-15 text-center capitalize min-w-[113px] h-[23px] md:h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-400 ${
                       isActive
                         ? "text-white border-white"
                         : "text-paragraph border-[#c2c2c2]"
