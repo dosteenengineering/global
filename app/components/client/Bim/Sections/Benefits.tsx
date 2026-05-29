@@ -5,6 +5,9 @@ import Image from "next/image";
 import { whoBenefitsSection, BenefitItem } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 type BenefitsData = {
   title: string;
@@ -21,13 +24,19 @@ function AccordionItem({
   item,
   isActive,
   onSelect,
+  delay,
 }: {
   item: BenefitItem;
   isActive: boolean;
   onSelect: () => void;
+  delay: number;
 }) {
   return (
-    <div
+    <motion.div
+      variants={moveUp(delay)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.3 }}
       className={`flex cursor-pointer gap-0 group ${isActive ? "py-5 md:py-50" : "py-5 md:py-40"}`}
       onClick={onSelect}
     >
@@ -73,7 +82,7 @@ function AccordionItem({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -90,13 +99,14 @@ export default function Benefits({
     <section className="relative w-full py-12.5  md:py-140 3xl:py-200">
       {showSecondaryNoise && <SecondaryNoise />}
       <div className="container relative">
-        <SectionTitle className="section-heading max-w-[70ch] mb-30" title={title}
-        />
-
+        <SectionTitle className="section-heading max-w-[70ch] mb-30" title={title} />
         {description && (
-          <p className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80">
-            {description}
-          </p>
+          <>
+            {/* <p className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80">
+              {description}
+            </p> */}
+            <SectionDescription text={description} className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80" />
+          </>
         )}
 
         <div
@@ -106,18 +116,19 @@ export default function Benefits({
         >
           <div className="  shrink-0 md:mt-[10px] border-t lg:border-0 border-bdr-gray">
             <div className="flex flex-col divide-y divide-[#c2c2c2]">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <AccordionItem
                   key={item.id}
                   item={item}
                   isActive={activeId === item.id}
                   onSelect={() => setActiveId(item.id)}
+                  delay={index * 0.12}
                 />
               ))}
             </div>
           </div>
 
-          <div className="hidden lg:flex flex-1 min-w-0">
+          <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="hidden lg:flex flex-1 min-w-0">
             <div className="relative w-full aspect-[4/3] max-h-[650px] overflow-hidden">
               {items.map((item) => (
                 <div
@@ -135,7 +146,7 @@ export default function Benefits({
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -7,6 +7,8 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
 import { TextAreaField } from "@/app/components/common/Textarea";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -80,7 +82,7 @@ export default function ContactForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Row 1 */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-7.5 lg:gap-y-80 mb-80">
+        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-7.5 lg:gap-y-80 mb-80">
           <Controller
             name="firstName"
             control={control}
@@ -121,10 +123,10 @@ export default function ContactForm() {
               />
             )}
           />
-        </div>
+        </motion.div>
 
         {/* Row 2 */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80">
+        <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80">
           <Controller
             name="yourRole"
             control={control}
@@ -165,10 +167,10 @@ export default function ContactForm() {
               />
             )}
           />
-        </div>
+        </motion.div>
 
         {/* Row 3 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 mb-80">
+        <motion.div variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 mb-80">
           <Controller
             name="projectLocation"
             control={control}
@@ -195,10 +197,10 @@ export default function ContactForm() {
               />
             )}
           />
-        </div>
+        </motion.div>
 
         {/* Row 4 — Project Brief full width */}
-        <div className="mb-10 lg:mb-80">
+        <motion.div variants={moveUp(1)} initial="hidden" whileInView="show" viewport={{ once: true }} className="mb-10 lg:mb-80">
           <Controller
             name="projectBrief"
             control={control}
@@ -213,9 +215,9 @@ export default function ContactForm() {
               />
             )}
           />
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={moveUp(1.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <BorderButton
             text="Submit"
             borderColor="black"
@@ -223,7 +225,7 @@ export default function ContactForm() {
             hoverBg="black"
             onClick={() => handleSubmit(onSubmit)()}
           />
-        </div>
+        </motion.div>
       </form>
     </section>
   );

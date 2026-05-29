@@ -15,7 +15,7 @@ const FeaturesList = ({ items }: Props) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-[10px] gap-y-[5px] md:gap-y-3">
           {
             items.map((feature, index) => (
-              <FeaturesCard key={index} title={feature} />
+              <FeaturesCard key={index} title={feature} delay={index * 0.1} />
             ))
           }
         </div>

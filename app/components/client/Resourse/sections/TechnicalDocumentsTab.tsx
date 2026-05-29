@@ -1,8 +1,11 @@
 "use client";
 
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import type { ResourceHubTab } from "../data";
 import { Download } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 
 type TechnicalDocumentsTabProps = {
   tab: ResourceHubTab;
@@ -36,40 +39,45 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
-      <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
+      {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
         {tab.title}
-      </h2>
+      </h2> */}
+      <SectionTitle title={tab.title} className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.2] font-light text-secondary max-w-[30ch] mb-5" />
 
-      <div className="flex flex-wrap gap-[10px] mb-40">
-        {filters.map((filter) => {
+      <div className="flex flex-wrap gap-[10px] mb-50">
+        {filters.map((filter,index) => {
           const isActive = activeFilter === filter;
 
           return (
-            <button key={filter} type="button" onClick={() => setActiveFilter(filter)}
-              className={`h-7.5 md:h-50 rounded-full border px-[9px] md:px-25 text-15 leading-[1] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-paragraph/60 text-paragraph hover:border-primary hover:text-primary"}`}
+            <motion.div key={filter} variants={moveUp(index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+            <button type="button" onClick={() => setActiveFilter(filter)}
+              className={` rounded-full border py-[14px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-[#454545] text-paragraph hover:border-primary hover:text-primary font-light"}`}
             >
               {filter}  
             </button>
+            </motion.div>
           );
         })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
-        {filteredItems.map((item) => (
-          <ResourceDownloadCard key={item.id} item={item} />
+        {filteredItems.map((item,index) => (
+          <ResourceDownloadCard key={item.id} item={item} delay={index * 0.12}/>
         ))}
       </div>
     </div>
   );
 };
 
-const ResourceDownloadCard = ({ item }: { item: TechnicalDocumentItem }) => {
+const ResourceDownloadCard = ({ item, delay }: { item: TechnicalDocumentItem, delay: number }) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
-    <article className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
-      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 font-poppins font-[600] 
-      ${ isDwg ? "bg-[#E3EFE8] text-[#147C39]" : "bg-[#E6EBFF] text-primary" }`}
+    <motion.article
+    variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+     className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
+      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-[600] 
+      ${ isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]" }`}
       >
         {item.type}
       </div>
@@ -92,7 +100,7 @@ const ResourceDownloadCard = ({ item }: { item: TechnicalDocumentItem }) => {
          </a>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

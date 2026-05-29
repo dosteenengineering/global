@@ -10,6 +10,12 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { downloadData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import BorderButton from "@/app/components/common/BorderButton";
+import Link from "next/link";
+import { create } from "domain";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
+
+const MotionLink = motion.create(Link);
 
 type DownloadItem = (typeof downloadData.sections)[0];
 
@@ -25,11 +31,12 @@ interface CellProps {
   isFirstSlide: boolean;
   fixedHeight?: number;
   onRef: (el: HTMLAnchorElement | null) => void;
+  delay?: number;
 }
 
-function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
+function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: CellProps) {
   return (
-    <a ref={onRef} href={item.link} 
+    <MotionLink variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{once:true}} ref={onRef} href={item.link} 
     style={fixedHeight != null ? { height: fixedHeight } : undefined}
 
       className={[ "group flex flex-col p-6 transition-colors duration-300 hover:bg-[#F3F5FB] p-50 2xl:pr-30", "border-r border-b border-[#c2c2c2]",
@@ -64,7 +71,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef }: CellProps) {
         {/* CTA Button */}
         <BorderButton text="Download Specification" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
       </div>
-    </a>
+    </MotionLink>
   );
 }
 
@@ -150,6 +157,7 @@ export default function DownloadSection() {
                         onRef={(el) => {
                           topRefs.current[idx] = el;
                         }}
+                        delay={idx * 0.1}
                       />
                     )}
                     {bottom && (
@@ -161,6 +169,7 @@ export default function DownloadSection() {
                         onRef={(el) => {
                           bottomRefs.current[idx] = el;
                         }}
+                        delay={idx * 0.1}
                       />
                     )}
                   </div>

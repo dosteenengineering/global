@@ -10,6 +10,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 interface WhyChooseProps {
   data: {
@@ -81,9 +82,11 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
           className="section-heading max-w-[1290px] mb-50 uppercase"
         />
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
-          <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
+          {/* <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
             {data.sectionDesc}
-          </p>
+          </p> */}
+          <SectionDescription text={data.sectionDesc} className="!text-24 lg:!text-30 !leading-[1.333333333333333] font-light 
+          tracking-[-0.02em] !mb-100" />
         </div>
 
         {/* ── Mobile: Swiper ── */}
@@ -154,8 +157,10 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
 
         {/* ── Tablet & Desktop: Original grid ── */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-30">
-          {data.items.map((item) => (
-            <Card key={item.id} item={item} />
+          {data.items.map((item,index) => (
+            <motion.div variants={moveUp(index*0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+              <Card key={item.id} item={item} />
+            </motion.div>
           ))}
         </div>
       </div>

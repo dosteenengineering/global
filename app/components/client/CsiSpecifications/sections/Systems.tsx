@@ -2,11 +2,11 @@
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import NavButton from "@/app/components/common/NavigationButton";
-import { motion } from "framer-motion";
-import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
 
 

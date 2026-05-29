@@ -1,7 +1,13 @@
+"use client";
 import Image from "next/image";
 import { valuedClientsData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { motion } from "framer-motion";
+import { fadeIn, moveUp, zoomIn } from "@/app/components/motionVariants";
+
+const LOGO_STAGGER_COLUMNS = 6;
+const LOGO_STAGGER_STEP = 0.08;
 
 export default function ValuedClients() {
   const { title, description, footnote, regions } = valuedClientsData;
@@ -26,22 +32,23 @@ export default function ValuedClients() {
 
         {/* Regions */}
         <div className="flex flex-col gap-y-80">
-          {regions.map((region) => (
+          {regions.map((region,index) => (
             <div key={region.label}>
               {/* Pill */}
-              <div className="flex items-center justify-center w-[67px] md:w-[115px] h-[30px] md:h-[50px] border border-primary rounded-full mb-30">
+              <motion.div variants={moveUp(index*0.12)} initial="hidden" whileInView={"show"} viewport={{ once: true }} className="flex items-center justify-center w-[67px] md:w-[115px] h-[30px] md:h-[50px] border border-primary rounded-full mb-30">
                 <span className="text-[12px] md:text-30 text-secondary tracking-[-0.02em] leading-[1.33] font-light uppercase">
                   {region.label}
                 </span>
-              </div>
+              </motion.div>
 
               {/* Logo grid — 3 cols → 4 cols → 6 cols */}
               <div className="grid grid-cols-3 sm:grid-cols-4 xl:grid-cols-6 border-t border-l border-[#c2c2c2]">
                 {region.logos.map((logo, i) => (
-                  <div
+                  <div 
                     key={i}
                     className="flex items-center justify-center border-b border-r border-[#c2c2c2] h-[99px] md:h-[185px] px-30"
                   >
+                    <motion.div variants={zoomIn((i % LOGO_STAGGER_COLUMNS) * LOGO_STAGGER_STEP)} initial="hidden" whileInView={"show"} viewport={{ once: true }}>
                     <Image
                       src={logo.src}
                       alt=""
@@ -49,6 +56,7 @@ export default function ValuedClients() {
                       height={400}
                       className="xl:h-[80px] 3xl:h-[100px] max-h-[100px] max-w-[81px] md:max-w-[200px] w-auto h-auto object-contain pointer-events-none"
                     />
+                    </motion.div>
                   </div>
                 ))}
               </div>
@@ -57,7 +65,11 @@ export default function ValuedClients() {
         </div>
 
         {/* Footnote */}
-        <p
+        <motion.p
+          variants={fadeIn(0.2)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true }}
           className="mt-5 md:mt-80 text-30 leading-[1.33] tracking-[-0.02em] text-secondary font-light"
           dangerouslySetInnerHTML={{ __html: footnote }}
         />

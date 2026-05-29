@@ -13,6 +13,7 @@ interface InnerPageBannerProps {
   descriptionMaxWidth?: string;
   image?: string;
   imageAlt?: string;
+  publishedDate?: string;
 }
 
 export default function InnerPageBanner({
@@ -22,6 +23,7 @@ export default function InnerPageBanner({
   descriptionMaxWidth = "max-w-[94%] 3xl:max-w-[1395px]",
   image,
   imageAlt = "Banner image",
+  publishedDate,
 }: InnerPageBannerProps) {
   const { ref, parallaxY } = useParallax(10);
   return (
@@ -51,6 +53,13 @@ export default function InnerPageBanner({
         )}
       </div>
 
+      {
+        publishedDate && (
+         <div className="container pt-50">
+            <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px]`}>Published: <span className="font-bold">{publishedDate}</span></h4>
+         </div>
+        )
+      }
       {/* 3. Image */}
       {image && (
         <div ref={ref} className="relative w-full h-[224px] md:h-[450px] xl:h-[650px] overflow-hidden">
