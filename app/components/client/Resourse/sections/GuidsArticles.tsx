@@ -6,10 +6,11 @@ import BorderButton from "@/app/components/common/BorderButton";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import NavButton from "@/app/components/common/NavigationButton"; 
+import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
+import Image, { StaticImageData } from "next/image";
 
 interface GuidesArticlesProps {
   data: {
@@ -20,7 +21,7 @@ interface GuidesArticlesProps {
       audience: string;
       type: string;
       title: string;
-      image: string;
+      image: string | StaticImageData;
       link: string;
     }[];
   };
@@ -31,13 +32,13 @@ const imageHeightClasses = [
   "3xl:h-[458px]",
   "3xl:h-[297px]",
 ];
-  
+
 const GuidesArticles = ({ data }: GuidesArticlesProps) => {
   const links = "#"
   const swiperRef = useRef<SwiperType | null>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [slidesPerView, setSlidesPerView] = useState(1);
-    function updateState(swiper: SwiperType) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(1);
+  function updateState(swiper: SwiperType) {
     setActiveIndex(swiper.activeIndex);
     setSlidesPerView(
       typeof swiper.params.slidesPerView === "number"
@@ -54,13 +55,15 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
             text={data.title}
             className="text-left section-heading uppercase text-white max-w-[28ch]"
           />
-          <BorderButton
-            text="View All"
-            href={links}
-            className="hidden md:inline-flex xl:px-35"
-            iconColor="white"
-            hoverBg="white"
-          />
+          <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <BorderButton
+              text="View All"
+              href={links}
+              className="hidden md:inline-flex xl:px-35"
+              iconColor="white"
+              hoverBg="white"
+            />
+          </motion.div>
         </div>
 
         {/* ── Mobile / Tablet: Swiper ── */}
@@ -79,12 +82,12 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
               viewport={{ once: true }}
             >
               <BorderButton
-            text="View All"
-             href={links}
-            className=" inline-flex md:hidden xl:px-35"
-            iconColor="white"
-            hoverBg="white"
-          />
+                text="View All"
+                href={links}
+                className=" inline-flex md:hidden xl:px-35"
+                iconColor="white"
+                hoverBg="white"
+              />
             </motion.div>
             <motion.div
               variants={moveUp(0.5)}
@@ -118,12 +121,12 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
             </motion.div>
           </motion.div>
           <Swiper
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-            updateState(swiper);
-          }}
-          onSlideChange={(swiper) => updateState(swiper)}
-          onBreakpoint={(swiper) => updateState(swiper)}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              updateState(swiper);
+            }}
+            onSlideChange={(swiper) => updateState(swiper)}
+            onBreakpoint={(swiper) => updateState(swiper)}
             spaceBetween={16}
             slidesPerView={1}
             breakpoints={{
@@ -146,10 +149,12 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
                   <h3 className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-[15px] md:mb-5">
                     {item.title}
                   </h3>
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.title}
                     className="w-full object-cover h-[194px] sm:h-[300px] md:h-[300px] mt-auto"
+                    width={500}
+                    height={300}
                   />
                 </div>
               </SwiperSlide>
@@ -162,24 +167,28 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
           {data.items.map((item, index) => (
             <div
               key={item.id}
-              className="border-b pb-4 xl:pb-0 xl:border-l border-bdr-blue px-0 xl:px-[20px] flex flex-col h-full"
+              className="border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-l border-bdr-blue px-0 xl:px-[20px] flex flex-col h-full"
             >
               <div className="flex justify-between items-center mb-5 xl:mb-10 mt-auto">
-                <span className="text-19 leading-[1.526315789473684] font-light text-white -tracking-[0.02em]">
+                <motion.span variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-19 leading-[1.526315789473684] font-light text-white -tracking-[0.02em]">
                   {item.audience}
-                </span>
-                <button className="text-white border rounded-full border-white text-15 leading-[1.666666666666667] px-[18px]">
+                </motion.span>
+                <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-white border rounded-full border-white text-15 leading-[1.666666666666667] px-[18px]">
                   {item.type}
-                </button>
+                </motion.button>
               </div>
-              <h3 className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-5 xl:mb-50">
+              <motion.h3 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-5 xl:mb-50">
                 {item.title}
-              </h3>
-              <img
-                src={item.image}
-                alt={item.title}
-                className={`w-full object-cover h-[200px] md:h-[300px] lg:h-[350px] ${imageHeightClasses[index] ?? imageHeightClasses[0]}`}
-              />
+              </motion.h3>
+              <motion.div variants={moveUp(1)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  className={`w-full object-cover h-[200px] md:h-[300px] lg:h-[350px] ${imageHeightClasses[index] ?? imageHeightClasses[0]}`}
+                  width={500}
+                  height={500}
+                />
+              </motion.div>
             </div>
           ))}
         </div>

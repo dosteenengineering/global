@@ -8,16 +8,19 @@ export const banner = {
 
 export const AboutBimData = {
   title: "What BIM Means at Dosteen",
-
-  description: `
-    <p>
-      BIM is not a deliverable Dosteen offers as an add-on. It is the engineering methodology our team uses to coordinate every building systems project — integrating our models with your MEP and structural teams to eliminate clashes before a single fixing is drilled into a wall.
-    </p>
-    <p><br /></p>
-    <p>
-      Dosteen's engineers work in Revit and AutoCAD to produce coordinated shop drawings, federated models, and installation-ready documentation for fire protection, flood barriers, entrance systems, docking solutions, parking systems, and industrial doors — across every project stage from design coordination to construction issue.
-    </p>
-  `,
+  description:[
+    " BIM is not a deliverable Dosteen offers as an add-on. It is the engineering methodology our team uses to coordinate every building systems project — integrating our models with your MEP and structural teams to eliminate clashes before a single fixing is drilled into a wall.",
+    "Dosteen's engineers work in Revit and AutoCAD to produce coordinated shop drawings, federated models, and installation-ready documentation for fire protection, flood barriers, entrance systems, docking solutions, parking systems, and industrial doors — across every project stage from design coordination to construction issue."
+  ],
+  // description: `
+  //   <p>
+     
+  //   </p>
+  //   <p><br /></p>
+  //   <p>
+  //     Dosteen's engineers work in Revit and AutoCAD to produce coordinated shop drawings, federated models, and installation-ready documentation for fire protection, flood barriers, entrance systems, docking solutions, parking systems, and industrial doors — across every project stage from design coordination to construction issue.
+  //   </p>
+  // `,
   subTitle: "The Dosteen BIM Promise",
   subDescription:
     "We integrate our building systems models with your MEP and structural BIM environment before any installation begins — so clash errors are resolved in the model, not discovered on site.",

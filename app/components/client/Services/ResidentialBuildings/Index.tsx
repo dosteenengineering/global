@@ -18,11 +18,7 @@ const ResidentialPage = () => {
     <>
       <ResidentialHero />
       <DosteenSystems />
-      <CtaSection
-        {...CtaData}
-        descriptionWidth="max-w-[662px]"
-        titleWidth="max-w-[23ch]"
-      />
+      <CtaSection {...CtaData} descriptionWidth="max-w-[662px]" titleWidth="max-w-[23ch]" />
       <WhyTrustDosteen />
       <FeaturedProjectsResidencial />
     </>

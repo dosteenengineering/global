@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import BannerNoise from "@/app/components/common/noise/BannerNoise";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -52,11 +53,12 @@ export default function ContactBanner({
         </h1>
 
         {description && (
-          <p
-            className={`text-paragraph text-description mb-7.5 lg:mb-140 3xl:mb-150 ${descriptionMaxWidth}`}
-          >
-            {description}
-          </p>
+          // <p
+          //   className={`text-paragraph text-description mb-7.5 lg:mb-140 3xl:mb-150 ${descriptionMaxWidth}`}
+          // >
+          //   {description}
+          // </p>
+          <SectionDescription text={description} className={`text-paragraph text-description mb-7.5 lg:mb-140 3xl:mb-150 ${descriptionMaxWidth}`} />
         )}
       </div>
     </div>

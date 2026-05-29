@@ -9,7 +9,7 @@ import SpecGrid from "./SpecGrid";
 import TextandDescription from "./TextandDescription";
 import SolutionSlider from "./SolutionSlider";
 import Divider from "./Divider";
-import SystemsTable from "./SystemAndProducts"; 
+import SystemsTable from "./SystemAndProducts";
 
 const STICKY_TOP = 50;
 const THUMB_HEIGHT = 128;
@@ -25,7 +25,7 @@ export default function Main({
   const mainRef = useRef<HTMLElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const challengeRef = useRef<HTMLElement>(null);
+  const challengeRef = useRef<HTMLDivElement>(null);
 
   const [heroHeight, setHeroHeight] = useState(0);
   const [panelLeft, setPanelLeft] = useState(0);
@@ -117,7 +117,7 @@ export default function Main({
     };
   }, [heroHeight, panelLeft]);
 
- 
+
   const [isContainer, setIsContainer] = useState(false);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function Main({
 
   return (
     <div className="min-h-screen bg-white pt-5 md:pt-100">
-       <div className={isContainer ? "container" : ""}>
+      <div className={isContainer ? "container" : ""}>
         <div className="flex gap-80 3xl:gap-[109px] items-start">
           {/* ── Left aside ──────────────────────────────────────── */}
           <aside className="hidden lg:block shrink-0 w-[150px] 3xl:w-[176px] self-stretch">
@@ -183,41 +183,43 @@ export default function Main({
             <div className="mb-12.5 md:mb-80">
               <SpecGrid specs={project.specifications} />
             </div>
-<div className="container">
-            {/* Challenge — ref for deco alignment */}
-            <section ref={challengeRef} className="mb-7.5 md:mb-80">
-              <TextandDescription
-                title={project.challenge.heading}
-                description={project.challenge.description}
-              />
-            </section>
+            <div className="container px-[16px] sm:px-0">
+              {/* Challenge — ref for deco alignment */}
+              <div ref={challengeRef} className="mb-7.5 md:mb-80">
+                <TextandDescription
+                  title={project.challenge.heading}
+                  description={project.challenge.description}
+                />
+              </div>
 
-            <Divider />
+              <Divider />
 
-            <section className="mt-7.5 mb-5 md:my-80">
-              <TextandDescription
-                title={project.dosteenSolution.heading}
-                description={project.dosteenSolution.description}
-              />
-            </section>
+              <div className="mt-7.5 mb-5 md:my-80">
+                <TextandDescription
+                  title={project.dosteenSolution.heading}
+                  description={project.dosteenSolution.description}
+                  delay={0.3}
+                />
+              </div>
 
-            <section className="mb-5 md:mb-80">
-              <SolutionSlider images={project.dosteenSolution.images} />
-            </section>
-</div>
-            <section className="mb-7.5 md:mb-80">
+              <div className="mb-5 md:mb-80">
+                <SolutionSlider images={project.dosteenSolution.images} />
+              </div>
+            </div>
+            <div className="mb-7.5 md:mb-80">
               <SystemsTable rows={project.systemsAndProducts} />
-            </section>
+            </div>
 
-<div className="container mb-[70px] md:mb-0">
-            <section>
-              <TextandDescription
-                title={project.outcome.heading}
-                description={project.outcome.description}
-              />
-            </section>
+            <div className="container mb-[70px] md:mb-0">
+              <div>
+                <TextandDescription
+                  title={project.outcome.heading}
+                  description={project.outcome.description}
+                  delay={0.4}
+                />
+              </div>
 
-            {/* <div className="md:hidden mt-10">
+              {/* <div className="md:hidden mt-10">
               <NextProjectPanel project={nextProject} />
             </div> */}
             </div>

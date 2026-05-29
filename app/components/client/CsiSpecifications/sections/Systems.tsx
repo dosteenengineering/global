@@ -2,6 +2,8 @@
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { moveUp } from "@/app/components/motionVariants";
 type SystemRow = {
   id: number;
   division: string;
@@ -55,8 +57,8 @@ const Systems = ({ data }: Props) => {
         <SectionTitle text={data.title} className="section-heading text-secondary uppercase mb-50" />
         {/* <div className="text-paragraph text-description mb-100" dangerouslySetInnerHTML={{ __html: data.description }} /> */}
 
-        <div>
-          <div>
+     
+          <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <table className="w-full border-collapse border border-[#D9D9D9]">
               <thead>
                 <tr className="bg-[#F3F5FB]">
@@ -109,8 +111,8 @@ const Systems = ({ data }: Props) => {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
+          </motion.div>
+       
 
       </div>
     </section>

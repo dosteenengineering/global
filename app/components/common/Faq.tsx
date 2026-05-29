@@ -2,6 +2,8 @@
 
 import Accordion from "@/app/components/common/Accordian";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
+import { moveUp } from "@/app/components/motionVariants";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface FaqData {
@@ -25,15 +27,27 @@ const Faq = ({ faqData }: { faqData: FaqData }) => {
         />
       </div>
       <div className="container">
-        <div className="mb-80">
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mb-80"
+        >
           <SectionTitle
             title={faqData.title}
             className="section-heading max-w-[19ch]"
           />
-        </div>
-        <div className="max-w-[1050px] 3xl:max-w-[1395px] ml-auto">
+        </motion.div>
+        <motion.div
+          variants={moveUp(0.35)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          className="max-w-[1050px] 3xl:max-w-[1395px] ml-auto"
+        >
           <Accordion items={faqData.items} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

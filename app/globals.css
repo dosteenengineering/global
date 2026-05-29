@@ -265,12 +265,12 @@ body::-webkit-scrollbar {
 .hero-heading {
     @apply text-[32px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
 }
-.banner-heading {
-    @apply text-[36px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1];
+.banner-heading { 
+    @apply text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 font-helvetica uppercase;
 }
 
 .text-description {
-    @apply text-19 font-poppins font-light leading-[1.666] md:leading-[1.526] tracking-[2%] lg:tracking-[-0.02em];
+    @apply text-19 font-poppins font-light leading-[1.66] md:leading-[1.526] tracking-[2%] lg:tracking-[-0.02em];
 }
 
 .text-30 {

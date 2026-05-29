@@ -27,7 +27,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
         </h2> */}
-        <SectionTitle text={title} className="section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px]" />
+        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`} />
 
         {/* Divider */}
         <div className="w-full border-t border-bdr-blue mb-[30px] md:mb-80 3xl:mb-100" />
@@ -40,7 +40,8 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
           {buttons.map((btn,index) => (
-            <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}}>
+            <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" key={index}
+            viewport={{once:true, amount:0.4}}>
             <BorderButton key={btn.text} text={btn.text} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.href} hoverBg="white" className="w-fit" />
             </motion.div>
           ))}

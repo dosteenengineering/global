@@ -7,6 +7,7 @@ import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
 import { AnimatePresence, motion } from "framer-motion";
+import { moveRight, moveUp } from "@/app/components/motionVariants";
 
 const activeGradient =
   "linear-gradient(90deg, rgba(41, 69, 150, 0.2) 0%, rgba(41, 69, 150, 0) 100%)";
@@ -45,12 +46,11 @@ export default function DosteenSystems() {
                   type="button"
                   onClick={() => toggleAccordion(system.id)}
                   className="w-full flex justify-between gap-4 py-5 text-left transition-all duration-300"
-                  
+
                 >
                   <span
-                    className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${
-                      isOpen ? "  font-[500]" : "font-light"
-                    }`}
+                    className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${isOpen ? "  font-[500]" : "font-light"
+                      }`}
                   >
                     {system.title}
                   </span>
@@ -59,17 +59,17 @@ export default function DosteenSystems() {
                   >
                     {isOpen ? (
 
-                <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
+                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                         className="object-contain     rotate-90  ">
-                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
 
-                      
+
                     ) : (
-                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg" 
-                     >
-                <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                      <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                     )}
                   </span>
                 </button>
@@ -100,7 +100,7 @@ export default function DosteenSystems() {
                                 "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)",
                             }}
                           />
-                        </div> 
+                        </div>
                         <p className="text-description text-paragraph leading-[1.6] mb-30">
                           {system.description}
                         </p>
@@ -128,36 +128,30 @@ export default function DosteenSystems() {
             className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative"
             style={{ width: "47%" }}
           >
-            {systems.map((system) => {
+            {systems.map((system, index) => {
               const isActive = system.id === activeId;
               return (
                 <div
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
-                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${
-                    isActive ? "pl-20" : ""
-                  }`}
+                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${isActive ? "pl-20" : ""
+                    }`}
                   style={{
                     background: isActive ? activeGradient : "transparent",
                   }}
                 >
-                  <span className="py-30 3xl:py-[31px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300">
+                  <motion.span variants={moveRight(0.6 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
+                    className={`py-30 3xl:py-[31px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}
+                  >
                     {system.title}
-                  </span>
+                  </motion.span>
 
                   <div
-                    className={`shrink-0 transition-opacity duration-300 ${
-                      isActive ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`shrink-0 transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-0"
+                      }`}
                   >
                     <div className="w-[51px] h-[51px] rounded-full bg-primary flex items-center justify-center">
-                      <Image
-                        src="/assets/icons/arrow-right-white-small.svg"
-                        alt="arrow"
-                        width={20}
-                        height={20}
-                        className="object-contain invert brightness-0 w-auto h-[22px]"
-                      />
+                      <Image src="/assets/icons/arrow-right-white-small.svg" alt="arrow" width={20} height={20} className="object-contain invert brightness-0 w-auto h-[22px]" />
                     </div>
                   </div>
 
@@ -175,35 +169,33 @@ export default function DosteenSystems() {
           {/* Right col */}
           <div className="flex-1 min-w-0 relative">
             <div key={activeSystem.id} className="flex flex-col h-full">
-              <h3 className="text-secondary leading-[1.1818] font-light tracking-[-0.02em] mb-20 text-55 max-w-[21ch]">
+              {/* Title */}
+              <motion.h3 variants={moveRight(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-secondary leading-[1.1818] font-light tracking-[-0.02em] mb-20 text-55 max-w-[21ch]">
                 {activeSystem.title}
-              </h3>
-              <div className="relative mb-20 overflow-hidden w-full h-[441px]">
-                <Image
-                  src={activeSystem.image}
-                  alt={activeSystem.title}
-                  fill
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)",
-                  }}
-                />
-              </div>
-              <p className="text-description text-paragraph leading-[1.6] mb-70 3xl:mb-[72px]">
+              </motion.h3>
+
+              {/* Image */}
+              <motion.div variants={moveRight(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mb-20 overflow-hidden w-full h-[441px]" >
+                <Image src={activeSystem.image} alt={activeSystem.title} fill className="object-cover" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)" }} />
+              </motion.div>
+
+              {/* Description */}
+              <motion.p variants={moveRight(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-description text-paragraph leading-[1.6] mb-70 3xl:mb-[72px]">
                 {activeSystem.description}
-              </p>
-              <BorderButton
-                text="View System"
-                borderColor="black"
-                textColor="black"
-                iconColor="primary"
-                hoverBg="black"
-                className="w-fit"
-              />
+              </motion.p>
+
+              {/* CTA Button */}
+              <motion.div variants={moveRight(0.8)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+                <BorderButton
+                  text="View System"
+                  borderColor="black"
+                  textColor="black"
+                  iconColor="primary"
+                  hoverBg="black"
+                  className="w-fit"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
