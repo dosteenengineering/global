@@ -10,6 +10,8 @@ import { moveUp } from "@/app/components/motionVariants";
 import { useRef } from "react";
 import ContainerAnchor from "@/app/components/layout/ContainerAnchor";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
+import { useState, useEffect } from "react";
+import { useInView } from "framer-motion";
 
 function StatCard({
   icon,
