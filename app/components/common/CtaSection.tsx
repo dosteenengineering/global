@@ -14,12 +14,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
 
       {/* Decorative lines — right side */}
       <div className="absolute z-10 right-[-9%] top-[24%] md:right-0 md:top-1/2 -translate-y-1/2 w-[52%] h-[327px] md:w-[42%] md:h-[90%] pointer-events-none">
-        <Image
-          src="/assets/images/about/cta/bg-right.svg"
-          alt=""
-          fill
-          className="object-contain object-right"
-        />
+        <Image src="/assets/images/about/cta/bg-right.svg" alt="" fill className="object-contain object-right" />
       </div>
 
       <div className="relative z-10 container py-12.5 md:py-140 3xl:py-150 w-full">
@@ -27,7 +22,8 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
         </h2> */}
-        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`} />
+        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 2xl:mb-[26px] 3xl:mb-[36px] 
+          ${titleWidth}`} />
 
         {/* Divider */}
         <div className="w-full border-t border-bdr-blue mb-[30px] md:mb-80 3xl:mb-100" />

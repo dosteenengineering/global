@@ -86,23 +86,26 @@ export default function WhyChooseDosteen() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
+  const [canSlide, setCanSlide] = useState(false);
 
   function updateState(swiper: SwiperType) {
-    setActiveIndex(swiper.activeIndex);
-    setSlidesPerView(
+    const currentSlidesPerView =
       typeof swiper.params.slidesPerView === "number"
         ? swiper.params.slidesPerView
-        : 1,
-    );
+        : 1;
+
+    setActiveIndex(swiper.activeIndex);
+    setSlidesPerView(currentSlidesPerView);
+    setCanSlide(swiper.slides.length > currentSlidesPerView);
   }
 
   const dotCount = slideGroups.length - slidesPerView + 1;
-  const showPagination = dotCount > 1;
+  const showPagination = canSlide && dotCount > 1;
 
   const total = slideGroups.length;
 const counterPill = (
-    <div className="flex items-center justify-center border border-primary text-white font-poppins font-[300] leading-[0.5] border-white rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
-      <span className="font-[600]">
+    <div className="flex items-center justify-center border border-primary text-white font-poppins font-light leading-[0.5] border-white rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
+      <span className="font-semibold">
         {String(activeIndex + 1).padStart(2, "0")}
       </span>
       <span>/</span>
@@ -133,61 +136,63 @@ const counterPill = (
       <div className="relative z-10 container py-12.5 md:py-[140px] 3xl:py-[150px] w-full">
         <SectionTitle
           text={WhyChooseData.title}
-          className="section-heading text-white uppercase mb-50 max-w-[30ch]"
+          className="section-heading text-white uppercase mb-50 3xl:mb-[70px] max-w-[27ch]"
         />
 
-        <div className="lg:pl-[25.3%] w-full">
+        <div className="lg:pl-[25.3%] w-full mb-100 3xl:mb-[109px]">
           {/* <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
             {WhyChooseData.description}
           </p> */}
           <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
-          <motion.div
-            variants={moveUp(0.5)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="flex items-center justify-between mb-[30px]"
-          >
-            <motion.div
-              variants={moveUp(0.3)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-            >
-              {counterPill}
-            </motion.div>
+          {showPagination && (
             <motion.div
               variants={moveUp(0.5)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="flex items-center gap-[10px] md:gap-[15px]"
+              className="flex items-center justify-between mb-[30px]"
             >
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slidePrev();
-                }}
-                direction="left"
-                disabled={false}
-                ariaLabel="Previous"
-                borderColor="border-white"
-                className=" icon-invert"
-              />
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slideNext();
-                }}
-                direction="right"
-                disabled={false}
-                ariaLabel="Next"
-                borderColor="border-white"
-                className=" icon-invert"
-              />
+              <motion.div
+                variants={moveUp(0.3)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+              >
+                {counterPill}
+              </motion.div>
+              <motion.div
+                variants={moveUp(0.5)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="flex items-center gap-[10px] md:gap-[15px]"
+              >
+                <NavButton
+                  onClick={() => {
+                    const s = swiperRef.current;
+                    if (s && !s.destroyed) s.slidePrev();
+                  }}
+                  direction="left"
+                  disabled={false}
+                  ariaLabel="Previous"
+                  borderColor="border-white"
+                  className=" icon-invert"
+                />
+                <NavButton
+                  onClick={() => {
+                    const s = swiperRef.current;
+                    if (s && !s.destroyed) s.slideNext();
+                  }}
+                  direction="right"
+                  disabled={false}
+                  ariaLabel="Next"
+                  borderColor="border-white"
+                  className=" icon-invert"
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          )}
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;

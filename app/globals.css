@@ -253,13 +253,13 @@ body::-webkit-scrollbar {
 @utility text-95 {
     font-size: var(--text-95);
 }
-
+ 
 @utility text-250 {
     font-size: var(--text-250);
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111] text-90;
+    @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111111111111111] text-90;
 }
 
 .hero-heading {
@@ -351,9 +351,9 @@ body::-webkit-scrollbar {
     margin-bottom: 20px;
 }
 
-.mb-50 {
+/* .mb-50 {
     margin-bottom: clamp(20px, 2.6vw + 5px, 50px) !important;
-}
+} */
 
 .icon-invert img {
     filter: brightness(0) invert(1);

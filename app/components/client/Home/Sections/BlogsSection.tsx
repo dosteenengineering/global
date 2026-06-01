@@ -80,7 +80,7 @@ export default function BlogsSection() {
           {/* Row 1 */}
           <SectionTitle
             title={blogsData.title}
-            className="text-secondary section-heading mb-70"
+            className="text-secondary section-heading mb-70 xl:mb-80 3xl:mb-[90px] -translate-y-[10px]"
           />
 
           {/* Row 2 */}
@@ -166,10 +166,10 @@ export default function BlogsSection() {
 
                     {/* Text content */}
                     <div className="flex-1 flex flex-col justify-between py-5">
-                      <p className="text-30 text-paragraph font-[300] font-poppins -tracking-[2%] leading-[1.33] max-w-[537px] group-hover:text-secondary transition-colors duration-300">
+                      <p className="text-30 text-secondary font-light font-poppins -tracking-[2%] leading-[1.33] max-w-[537px] group-hover:text-secondary transition-colors duration-300">
                         {post.title}
                       </p>
-                      <div className="flex items-center justify-between gap-5 text-paragraph font-poppins font-[300] text-19 leading-[1.52] max-w-[537px]">
+                      <div className="flex items-center justify-between gap-5 text-paragraph font-poppins font-light text-19 leading-[1.52] max-w-[537px]">
                         <span>{post.category}</span>
                         <span>{post.date}</span>
                       </div>
@@ -178,11 +178,11 @@ export default function BlogsSection() {
                     {/* Arrow */}
                     <div className="flex-shrink-0 self-start w-[60px] h-[50px] pt-2">
                       <Image
-                        src="/assets/icons/button-arrow-top-right.svg"
+                        src="/assets/icons/arrow-primary-top-right.svg"
                         alt="arrow"
-                        width={32}
-                        height={32}
-                        className="w-[28px] h-[28px] 3xl:w-[32px] 3xl:h-[32px] group-hover:rotate-45 transition-all duration-300 shrink-0"
+                        width={49}
+                        height={49}
+                        className="w-[28px] h-[28px] 3xl:w-auto 3xl:h-auto group-hover:rotate-45 transition-all duration-300 shrink-0"
                       />
                     </div>
                   </Link>

@@ -3,11 +3,13 @@ import "swiper/css";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AboutData } from "../data";
-import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import StatNoise2 from "@/app/components/common/noise/StatNoise2";
 import { motion } from "framer-motion";
-import { moveLeft, moveUp } from "@/app/components/motionVariants";
+import { moveUp } from "@/app/components/motionVariants";
+import { useRef } from "react";
+import ContainerAnchor from "@/app/components/layout/ContainerAnchor";
+import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 
 function StatCard({
   icon,
@@ -70,14 +72,25 @@ const slideGroups = AboutData.stats.reduce<(typeof AboutData.stats)[]>(
 );
 
 export default function AboutDetails() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const rightInset = useGetContainerSpacing(containerRef);
+
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
-      <div className="absolute -top-43   lg:-top-68 left-[-131px] lg:left-0 pointer-events-none">
-        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[280px]  2xl:w-[500px] 3xl:w-[600px]" />
+      <ContainerAnchor ref={containerRef} />
+
+      <div className="absolute -top-10 lg:-top-[-10%] 3xl:top-[-9.5%] left-[-131px] lg:left-[-3%] xl:left-[-19.2%] pointer-events-none">
+        <Image src="/assets/icons/bg-svg/top-left-about-1.svg" alt="decorative lines" width={897} height={896} className="object-contain w-[280px] 2xl:w-[500px] 3xl:w-[897px] 3xl:h-[896px] 3xl:scale-120" />
       </div>
 
-      <div className="lg:pl-[15.3%] 3xl:pl-[21.3%] pt-70px md:pt-120 px-[15px] lg:px-0 container w-full">
-        <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" />
+      <div
+        className="ml-auto max-w-[1256px] pt-70 md:pt-120 3xl:pt-100 px-[15px] 2xl:px-0 w-full"
+        style={{ marginRight: rightInset }}
+      >
+        {/* <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" /> */}
+        <h2 className="section-heading text-secondary uppercase mb-20 md:mb-50 3xl:mb-[65px]">
+          {AboutData.title}
+        </h2>
 
         <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="text-paragraph text-description" dangerouslySetInnerHTML={{ __html: AboutData.description }} />
       </div>

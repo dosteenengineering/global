@@ -21,7 +21,7 @@ function ValueCard({
     whileInView="show"
     viewport={{once:true}}
     className="flex flex-col gap-[10px] md:gap-30 border-b border-bdr-gray last:border-b-0 pb-5 last:pb-0 md:border-b-0 md:pb-0">
-      <h3 className="text-55 font-[300] leading-[1.334] md:leading-[1.1818] uppercase text-secondary">
+      <h3 className="text-55 font-light leading-[1.334] md:leading-[1.1818] text-secondary ">
         {title}
       </h3>
       <p className="text-description !leading-[1.68] md:!leading-[1.54] text-paragraph max-w-[540px]">
