@@ -193,7 +193,7 @@ export const solutionsData: {
 };
 
 export const garageDoorFaqData = {
-  title: "Frequently Asked Question",
+  title: "FAQ",
   items: [
     {
       id: "faq-1",

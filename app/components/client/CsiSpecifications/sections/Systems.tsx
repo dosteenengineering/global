@@ -46,9 +46,9 @@ const Systems = ({ data }: Props) => {
   }, []);
  const isMobile =  typeof window !== "undefined" && window.innerWidth < 1024;
   return (
-    <section className="bg-white w-full relative select-none overflow-hidden py-[70px] md:pb-140 3xl:pb-200 md:pt-100">
+    <section className="bg-white w-full relative select-none overflow-hidden py-[70px] md:pb-140 3xl:pb-200 md:pt-100 xl:pt-200">
       <div ref={containerRef} className="container px-[16px] mx-auto" />
-      <div className="absolute top-2 xl:-top-8 left-[-131px] lg:-left-1 pointer-events-none">
+      <div className="absolute top-2 xl:-top-0 left-[-131px] lg:-left-1 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"

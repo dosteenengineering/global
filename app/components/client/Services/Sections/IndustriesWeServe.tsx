@@ -29,7 +29,7 @@ export default function IndustriesWeServe() {
 
       <div className="container py-12.5 md:py-140 3xl:py-150 w-full z-20">
         {/* Title */}
-        <SectionTitle text={IndustriesData.title} className="section-heading text-white uppercase mb-7.5 md:mb-30" />
+        <SectionTitle text={IndustriesData.title} className="section-heading text-white uppercase mb-7.5 md:mb-30 xl:mb-30 translate-y-[-15px]" />
 
         {/* Divider */}
         <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-80 3xl:mb-100 hidden lg:block" />

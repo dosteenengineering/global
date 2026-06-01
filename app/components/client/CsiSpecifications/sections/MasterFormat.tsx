@@ -31,7 +31,7 @@ const Masterformat = ({ data }: Props) => {
     return () => window.removeEventListener("resize", check);
   }, []);
   return (
-    <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200 pt-0 md:pt-50">
+    <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200 pt-0 md:pt-50 xl:pt-0">
       <ContainerAnchor ref={containerRef} />
 
       <div className="absolute top-2 xl:top-0 -left-[23%] pointer-events-none hidden lg:block">
