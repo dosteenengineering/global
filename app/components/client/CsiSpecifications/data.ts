@@ -65,7 +65,7 @@ export const threePartSpecData = {
 };
 
 export const systemsData = {
-  title: "Dosteen Systems — CSI MasterFormat Division Reference",
+  title: "Dosteen Systems — CSI Master Format Division Reference",
 
   tableData: [
     {

@@ -24,8 +24,8 @@ function Card({
     viewport={{once:true}}
     className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full">
       <SecondaryNoise />
-      <div className="relative z-10 flex flex-col gap-8">
-        <div className="w-[50px] h-[50px] lg:w-[120px] lg:h-[120px] relative lg:mb-100">
+      <div className="relative z-10 flex flex-col ">
+        <div className="w-[50px] h-[50px] lg:w-[100px] lg:h-[100px] relative mb-8 lg:mb-100">
           <Image src={icon} alt={title} fill className="object-contain" />
         </div>
         <div className="flex flex-col gap-[10px] md:gap-20">

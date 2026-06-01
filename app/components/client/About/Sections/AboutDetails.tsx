@@ -25,6 +25,37 @@ function StatCard({
   noiseVariant: 1 | 2;
 }) {
   const isMobile =  typeof window !== "undefined" && window.innerWidth < 1024;
+
+  const hasPlus = value.includes("+");
+  const numeric = parseInt(value.replace(/[^0-9]/g, ""), 10);
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const duration = 2000; // ms
+    const increment = numeric / (duration / 16);
+
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= numeric) {
+        setCount(numeric);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
+  }, [isInView, numeric]);
+
+  // Format: if original had "K" keep it
+  const hasK = value.toUpperCase().includes("K");
+  const display = hasK ? `${count}K` : `${count}`;
+
   return (
     <div className="flex items-center py-[15px] md:py-25 px-[40px] md:px-50 gap-[55px]  lg:gap-200 3xl:gap-[296px]  relative flex-1 min-w-0 max-h-[148px]">
   
@@ -40,16 +71,16 @@ function StatCard({
       {/* Text */}
       <div>
         <div className="flex items-baseline gap-x-[5px] md:gap-x-[14px]">
-          <div className="flex flex-row items-start">
-            <span className="text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
-              {value.replace("+", "")}
-            </span>
-            {value.includes("+") && (
-              <sup className="align-super text-[18px] md:text-[33px] leading-none relative top-[0px] md:top-[-2px] 2xl:top-[3px] 3xl:top-[5px] text-primary font-light font-poppins">
-                +
-              </sup>
-            )}
-          </div>
+           <div ref={ref} className="flex flex-row items-start">
+              <span className="min-w-[63px] text-right text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
+                {display}
+              </span>
+              {hasPlus && (
+                <sup className="align-super text-[18px] md:text-[33px] leading-none relative top-[0px] md:top-[-2px] 2xl:top-[3px] 3xl:top-[5px] text-primary font-light font-poppins">
+                  +
+                </sup>
+              )}
+            </div>
           <span className="text-[18px] md:text-30 leading-[1.333] font-light -tracking-[0.02em] text-black">
             {label}
           </span>

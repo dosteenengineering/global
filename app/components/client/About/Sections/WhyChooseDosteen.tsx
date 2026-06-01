@@ -116,7 +116,7 @@ const counterPill = (
     <section className="relative w-full select-none overflow-x-clip">
       <PrimaryNoise2 />
 
-      <div className="absolute right-[-17%] top-[-8%] md:right-[-40%] md:top-[-18%] w-[52%] h-[327px] md:w-[900px] md:h-[900px] 3xl:w-[1280px] 3xl:h-[1280px] pointer-events-none">
+      <div className="absolute right-[-17%] top-[-8%] md:right-[-39.9%] md:top-[-18%] w-[52%] h-[327px] md:w-[900px] md:h-[900px] 3xl:w-[1280px] 3xl:h-[1280px] pointer-events-none">
         <Image
           src="/assets/images/about/why-choose/why-bg2.svg"
           alt=""
@@ -143,7 +143,7 @@ const counterPill = (
           {/* <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
             {WhyChooseData.description}
           </p> */}
-          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
+          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
           {showPagination && (
             <motion.div
