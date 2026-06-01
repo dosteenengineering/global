@@ -214,7 +214,7 @@ export default function WhyDosteen() {
         <div className="flex justify-between w-full">
           <SectionTitle
             text={heading}
-            className="text-left md:text-center text-white font-helvetica uppercase section-heading leading-[1.111] w-full"
+            className="text-left md:text-center text-white font-helvetica uppercase section-heading leading-[1.111] w-full xl:mr-[1em]"
           />
           <div className="md:hidden">
             <div className="flex items-center py-[3px] leading-[0.5] h-[26px] w-[55px] justify-center text-15 font-light font-poppins text-white rounded-full border border-white">

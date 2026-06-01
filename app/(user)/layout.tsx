@@ -13,6 +13,7 @@ export const poppins = Poppins({
 });
 
 const helvetica_neue = localFont({
+  // src: "../../public/fonts/HelveticaNeue2.woff2",
   src: "../../public/fonts/HelveticaNeue2.woff2",
   weight: "700",
   variable: "--font-helvetica-neue",

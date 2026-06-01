@@ -188,7 +188,7 @@ export default function AboutSlider() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="text-description !tracking-[0.02em] text-paragraph font-poppins font-light lg:max-w-[520px]"
+                className="text-description !tracking-[0.02em] text-paragraph font-poppins font-light lg:max-w-[520px] 2xl:max-w-[554px]"
               >
                 <span className="font-[700]">
                   {slidesData[0].description.split(",")[0]},

@@ -35,7 +35,7 @@ function ServeCard({ icon, label,delay }: { icon: string; label: string,delay:nu
 
 export default function WhoYouServe() {
   return (
-    <section className="relative w-full select-none py-12.5 md:py-140 3xl:py-150">
+    <section className="relative w-full select-none py-12.5 md:py-140">
       <SecondaryNoise />
       <div className="container w-full">
         <SectionTitle
