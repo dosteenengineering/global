@@ -79,7 +79,7 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
       <div className="container">
         <SectionTitle
           title={data.sectionTitle}
-          className="section-heading max-w-[1290px] mb-50 uppercase"
+          className="section-heading max-w-[1290px] mb-50 uppercase translate-y-[-15px]"
         />
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
           {/* <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">

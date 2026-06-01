@@ -44,12 +44,12 @@ export default function Customization() {
 
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
-          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase max-w-[24ch]" />
+          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase max-w-[23ch] translate-y-[-15px]" />
           {/* <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p> */}
           <SectionDescription text={solutionsData.mainDescription} 
-          className="!text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6" />
+          className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6" />
           {/* ================= DESKTOP ================= */}
           <motion.div initial="hidden" whileInView="show" variants={moveUp(0.2)} viewport={{ once: true }} className="hidden lg:block" >
             <div className="mt-18 3xl:mt-[109px]">

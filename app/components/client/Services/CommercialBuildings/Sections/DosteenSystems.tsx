@@ -133,13 +133,13 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
           suppressHydrationWarning
         /> */}
         <SectionDescription
-          className="text-paragraph text-description max-w-[1110px] mb-60"
+          className="text-paragraph text-description max-w-[105ch] mb-60 "
           dangerouslySetInnerHTML={{ __html: data.description }}
         />
 
         <div className="w-full h-px bg-[#c2c2c2] mb-140 3xl:mb-150" />
 
-        <div className="px-[15px] lg:px-0 container w-full border-b lg:border-b-0 border-[#c2c2c2] pb-5 lg:pb-0 mb-5 lg:mb-50  ">
+        <div className="px-[15px] lg:px-0 container w-full border-b lg:border-b-0 border-[#c2c2c2] pb-5 lg:pb-0 mb-5 lg:mb-50  translate-y-[-22px]">
           <SectionTitle
             text={data.title}
             className="section-heading text-secondary uppercase  max-w-[1538px]"

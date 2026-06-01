@@ -20,7 +20,7 @@ const PartCard = ({ part, title, shortDesc, description, isEven, index, delay }:
          ${isEven ? 'even:border-transparent bg-gradient-to-b from-[#1853D6] to-[#022E9E] pl-40 xl:pl-60 pr-20 xl:pr-40' : 'px-30 xl:px-50 border-white/30'}`}>
         <div className={`${!isEven && 'bg-white/8  absolute inset-0 z-0 '}`}></div>
         <div className="px-30 py-2 text-center rounded-pill border border-white text-white w-fit rounded-full">
-          <p className="text-19 leading-[1.526315789473684] tracking-[0.02em]">{part}</p>
+          <p className="text-19 leading-[1.526315789473684] tracking-[0.02em] font-light">{part}</p>
         </div>
         <div className="relative z-10">
           <h3 className="text-55 leading-[1.181818181818182] text-white font-light mt-7.5 md:mt-60 mb-2.5 md:mb-2 lg:mb-3 xl:mb-5">{title}</h3>

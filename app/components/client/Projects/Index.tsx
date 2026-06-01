@@ -11,7 +11,7 @@ const Index = () => {
       <Suspense fallback={<div className="h-screen bg-whtie" />}>
         <ProjectsListing />
       </Suspense>
-      <CtaSection {...cta} />
+      <CtaSection {...cta} titleWidth="max-w-[22ch]" />
     </>
   );
 };
