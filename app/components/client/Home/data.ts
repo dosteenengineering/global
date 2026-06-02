@@ -10,7 +10,7 @@ export const slidesData: SlideData[] = [
   {
     id: 1,
     description:
-      "Dosteen's story began over 25+ years ago, driven by a vision to create a safer and more secure environment through exceptional engineering. Since then, we've grown from a regional provider to a trusted partner for businesses and homeowners across Oman and the UAE.",
+      "Dosteen's story began over 25+ years ago, driven by a vision to create a safer and more secure environment through exceptional engineering. Since then, we've grown from a regional provider to a trusted partner for businesses and homeowners across \n Oman and the UAE.",
     stat: "20,000+",
     statLabel: "Projects Delivered",
   },

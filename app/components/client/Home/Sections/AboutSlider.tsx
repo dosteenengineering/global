@@ -193,9 +193,11 @@ export default function AboutSlider() {
                 <span className="font-[700]">
                   {slidesData[0].description.split(",")[0]},
                 </span>
-                {slidesData[0].description.substring(
-                  slidesData[0].description.indexOf(",") + 1,
-                )}
+               <span className="lg:whitespace-pre-line">
+                  {slidesData[0].description.substring(
+                    slidesData[0].description.indexOf(",") + 1,
+                  )}
+                </span>
               </motion.p>
             </div>
             {/* Pagination pill */}
@@ -227,6 +229,7 @@ export default function AboutSlider() {
                   iconColor="primary"
                   hoverBg="black"
                   className="max-w-[215px]"
+                  px="px-[23px] lg:px-[35px]"
                 />
               </div>
             </div>
@@ -243,7 +246,7 @@ export default function AboutSlider() {
                   initial="enter"
                   animate="show"
                   exit="exit"
-                  className="pt-[30px] md:pt-8 lg:pt-[45px]"
+                  className="pt-[30px] md:pt-8 lg:pt-[75px]"
                 >
                   <Counter
                     value={activeSlide.stat}

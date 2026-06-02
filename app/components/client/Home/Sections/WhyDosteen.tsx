@@ -199,7 +199,7 @@ export default function WhyDosteen() {
       : `wmEnterLeft  750ms cubic-bezier(0.4, 0, 0.2, 1) forwards, wmDrift ${AUTOPLAY_MS}ms linear 750ms forwards`;
 
   return (
-    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-12.5 sm:py-140">
+    <section className="relative w-full lg:min-h-screen overflow-hidden flex flex-col select-none py-12.5 sm:py-140 ">
       <PrimaryNoise />
 
       <Image
@@ -207,14 +207,14 @@ export default function WhyDosteen() {
         alt=""
         width={948}
         height={439}
-        className="pointer-events-none absolute right-[-30%] md:right-[5%] lg:right-[12%] bottom-0 w-[400px] h-[110px] sm:w-[460px] sm:h-[200px] md:h-[160px] lg:w-[700px] lg:h-[300px] 3xl:w-[948px] 3xl:h-[430px]"
+        className="pointer-events-none absolute right-[-30%] md:right-[5%] lg:right-[12%] bottom-0 w-[400px] h-[110px] sm:w-[460px] sm:h-[200px] md:h-[160px] lg:w-[700px] lg:h-[300px] 3xl:w-[948px] 3xl:h-[439px]"
       />
 
-      <div className="relative container">
+      <div className="relative container mt-0 xl:mt-[6px]">
         <div className="flex justify-between w-full">
           <SectionTitle
             text={heading}
-            className="text-left md:text-center text-white font-helvetica uppercase section-heading leading-[1.111] w-full xl:mr-[1em]"
+            className="text-left md:text-center text-white font-helvetica uppercase section-heading leading-[1.111] w-full xl:mr-[1.65em]"
           />
           <div className="md:hidden">
             <div className="flex items-center py-[3px] leading-[0.5] h-[26px] w-[55px] justify-center text-15 font-light font-poppins text-white rounded-full border border-white">
@@ -231,7 +231,7 @@ export default function WhyDosteen() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="absolute top-full mt-[15px] sm:mt-80 3xl:mt-[85px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
+          className="absolute top-full mt-[15px] sm:mt-80 3xl:mt-[70px] left-1/2 -translate-x-1/2 w-screen flex justify-center pointer-events-none z-0 overflow-hidden"
           aria-hidden="true"
         >
           {wm.exitingTitle && (
@@ -253,7 +253,7 @@ export default function WhyDosteen() {
         </motion.div>
       </div>
 
-      <div className="relative flex-1 flex items-center pt-[15px] sm:pt-80 3xl:pt-[85px]">
+      <div className="relative flex-1 flex items-center pt-[15px] sm:pt-80 3xl:pt-[70px]">
         <div className="container relative z-20 w-full">
           <div className="hidden md:block absolute left-[15px] bottom-[calc(0%-28px)] lg:top-[calc(50%+18px)]">
             <div className="flex items-center py-[3px] leading-[0.5] h-[24px] w-[58px] sm:h-[28px] sm:w-[70px] lg:h-[31px] lg:w-[78px] justify-center text-[10px] sm:text-[13px] lg:text-15 font-[300] font-poppins text-white rounded-full border border-white">

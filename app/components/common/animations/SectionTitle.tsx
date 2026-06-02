@@ -67,8 +67,13 @@ export default function SectionTitle({
     el.innerHTML = "";
     const fragment = document.createDocumentFragment();
     lines.forEach((line) => {
+      
       const mask = document.createElement("span");
-      mask.style.cssText = "display:block; overflow:hidden; padding-bottom:0.08em; margin-bottom:-0.08em;";
+mask.style.cssText = `
+  display:block;
+  overflow:hidden;
+  ${lines.length > 1 ? "padding-bottom:0.08em; margin-bottom:-0.08em;" : ""}
+`;
       const inner = document.createElement("span");
       inner.style.cssText = "display:block;";
       inner.textContent = line;
