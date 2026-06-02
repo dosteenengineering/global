@@ -38,13 +38,13 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
         .flatMap((filter) => itemsByFilter[filter] ?? [])
       : itemsByFilter[activeFilter] ?? [];
   return (
-    <div className="pt-[30px] md:pt-70 md:pt-100">
+    <div className="pt-[30px] md:pt-70 md:pt-100 xl:pt-120">
       <div className="flex justify-between flex-wrap">
         <div>
           {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
             {tab.title}
           </h2> */}
-          <SectionTitle text={tab.title} className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary !max-w-[30ch] mb-5" />
+          <SectionTitle text={tab.title} className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.1] font-light text-secondary !max-w-[30ch] mb-5 translate-y-[2px]" />
 
           {button && (
             <motion.div variants={moveUp(0.4)} initial="hidden" animate="show" viewport={{ once: false }}>
@@ -86,7 +86,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
           return (
             <motion.div variants={moveUp(0.4 + index * 0.1)} initial="hidden" animate="show" viewport={{ once: false }}>
               <button key={filter} type="button" onClick={() => setActiveFilter(filter)}
-                className={`h-7.5 md:h-50 rounded-full border px-[9px] md:px-25 text-15 leading-[1] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-paragraph/60 text-paragraph hover:border-primary hover:text-primary"}`}
+                className={`h-7.5 md:h-50 rounded-full border px-[9px] md:px-25 2xl:px-[35px] text-15 leading-[1] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-md-gray text-paragraph hover:border-primary hover:text-primary"}`}
               >
                 {filter}
               </button>
@@ -111,8 +111,8 @@ const ResourceDownloadCard = ({ item, delay }: { item: BimCadFilesItem, delay: n
   return (
     <motion.article
       variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-[116px] md:h-auto  bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
-      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 font-poppins font-[600] 
-      ${isDwg ? "bg-[#E3EFE8] text-[#147C39]" : "bg-[#E6EBFF] text-primary"}`}
+      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-30 font-poppins font-[600] 
+      ${isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]"}`}
       >
         {item.type}
       </div>

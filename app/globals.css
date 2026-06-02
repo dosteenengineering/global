@@ -121,6 +121,7 @@ body::-webkit-scrollbar {
     --secondary: #161616;
     --paragraph: #626262;
     --bdr-gray: #C2C2C2;
+    --md-gray:#454545;
     --bdr-blue: #76A7FF; 
 
     /* small */
@@ -193,6 +194,7 @@ body::-webkit-scrollbar {
     --color-paragraph: var(--paragraph);
     --color-bdr-gray: var(--bdr-gray);
     --color-bdr-blue: var(--bdr-blue);
+    --color-md-gray: var(--bdr-md-gray);
     --breakpoint-7xl: 103.125rem;
     --container-7xl: 98.125rem;
 
@@ -259,7 +261,7 @@ body::-webkit-scrollbar {
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111111111111111] text-90;
+    @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111111111111111] text-95;
 }
 
 .hero-heading {

@@ -343,7 +343,7 @@ export const industryGuidesData = {
       featured: true,
       audience: "For Architects",
       type: "STANDARDS",
-      title: "UAE Civil Defence Code: Fire-Rated Door Requirements Explained",
+      title: "UAE Civil Defence Code:\n Fire-Rated  Door Requirements Explained",
       image: "/assets/images/resources/industry-guides/img-2.png",
       link: "#",
     },

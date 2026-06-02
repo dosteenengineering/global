@@ -13,7 +13,7 @@ const Main = () => {
 
   return ( 
     <section className="min-h-screen 3xl:h-screen relative overflow-hidden">
-      <div className="absolute z-2 bottom-[-60%] left-[-20%] max-w-[948px] max-h-[949px] xl:w-[947px] xl:h-[948px] scale-125 rotate-[15]">
+      <div className="absolute z-2 bottom-[-66%] left-[-21%] max-w-[948px] max-h-[949px] xl:w-[947px] xl:h-[948px] scale-125 rotate-[15deg]">
         <img src="./assets/images/become-a-partner/shape.svg" className="w-auto h-auto max-w-[948px] max-h-[949px] " alt="" />
       </div>
       <ContainerAnchor ref={containerRef} />

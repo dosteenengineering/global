@@ -146,7 +146,7 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
                       {item.type}
                     </button>
                   </div>
-                  <h3 className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-[15px] md:mb-5">
+                  <h3 className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-[15px] md:mb-5 ">
                     {item.title}
                   </h3>
                   <Image
@@ -167,17 +167,18 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
           {data.items.map((item, index) => (
             <div
               key={item.id}
-              className="border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-l border-bdr-blue px-0 xl:px-[20px] flex flex-col h-full"
+              className="border-b pb-4 xl:pb-0 xl:border-b-0 xl:border-l border-bdr-blue px-0 xl:px-[20px] first:xl:pt-30 flex flex-col h-full"
             >
               <div className="flex justify-between items-center mb-5 xl:mb-10 mt-auto">
                 <motion.span variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-19 leading-[1.526315789473684] font-light text-white -tracking-[0.02em]">
                   {item.audience}
                 </motion.span>
-                <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-white border rounded-full border-white text-15 leading-[1.666666666666667] px-[18px]">
+                <motion.button variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-white/80 border rounded-full border-white/60 font-light text-15 leading-[1.666666666666667] px-[18px] xl:py-[3px]">
                   {item.type}
                 </motion.button>
               </div>
-              <motion.h3 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-5 xl:mb-50">
+              <motion.h3 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className={`text-30 leading-[1.333333333333333] font-light -tracking-[0.02em] text-white mb-5 xl:mb-50 whitespace-pre-line ${index === 1 ? "" : ""
+                }`}>
                 {item.title}
               </motion.h3>
               <motion.div variants={moveUp(1)} initial="hidden" whileInView="show" viewport={{ once: true }}>

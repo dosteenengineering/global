@@ -54,29 +54,22 @@ export default function CountryCodeSelect({
   return (
     <div ref={ref} className="relative flex-shrink-0">
       {/* Trigger */}
-      <button
-        type="button"
+      <button type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`flex items-center relative text-description bg-transparent cursor-pointer ${isLight
+        className={`flex items-center relative text-description bg-transparent cursor-pointer 
+          ${isLight
             ? "text-white border-white"
             : "text-foreground-light border-foreground-light"
           }`}
       >
-        <div
-          className={`flex items-center gap-[10px] absolute -top-[27px] border-b pr-[15px] ${variant === "light" ? "border-white" : "border-foreground-light"} pb-[2px]`}
+        <div className={`flex items-center gap-[10px] absolute -top-[27px] border-b pr-[15px] 
+            ${variant === "light" ? "border-white" : "border-foreground-light"}`}
         >
-          <span
-            className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block shrink-0`}
+          <span className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block shrink-0`}
             style={{ width: "27px", height: "20px" }}
           />
-          <span className="-mt-1">{selected.code}</span>
-          <Image
-            src="/assets/icons/drop-down-icon.svg"
-            alt="arrow-down"
-            width={10}
-            height={10}
-            className={`h-[7.4px] w-auto mb-[6px] ${isLight ? "invert brightness-0" : ""}`}
-          />
+          <span className="-mt-1 text-15 leading-[2.133333333333333]">{selected.code}</span>
+          <Image src="/assets/icons/drop-down-icon.svg" alt="arrow-down" width={10} height={10} className={`h-[7.4px] w-auto mb-[6px] ${isLight ? "invert brightness-0" : ""}`} />
         </div>
       </button>
 
