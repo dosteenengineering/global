@@ -55,8 +55,8 @@ export default function InnerPageBanner({
 
       {
         publishedDate && (
-         <div className="container pt-50">
-            <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px]`}>Published: <span className="font-bold">{publishedDate}</span></h4>
+         <div className="container pt-50 3xl:pt-[65px]">
+            <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`}>Published &nbsp;&nbsp;<span className="font-bold">{publishedDate}</span></h4>
          </div>
         )
       }

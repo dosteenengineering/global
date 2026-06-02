@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import BorderButton from "@/app/components/common/BorderButton";
 import BusinessInfoStep from "./form-steps/BusinessInfoStep";
 import CompanyDetailsStep from "./form-steps/CompanyDetailsStep";
 import ExperienceDocsStep from "./form-steps/ExperienceDocsStep";
@@ -118,36 +119,37 @@ const PartnerForm = () => {
       <div className="h-full">
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex min-h-full flex-col pt-70 xl:pt-80  h-full  ">
           <Stepper activeStep={activeStep} />
-          <h2 className="mt-50 mb-50  text-[36px] leading-[1.12] text-secondary font-light md:text-55">
+          <h2 className="mt-60 mb-50 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
             {currentStep.title}
           </h2>
           <div className="max-h-[60vh] h-full overflow-y-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-10 " data-lenis-prevent-wheel>
-            <div className="grid grid-cols-1 gap-x-60 gap-y-40 md:grid-cols-2 ">
+            <div className="grid grid-cols-1 gap-x-60 gap-y-60 md:grid-cols-2 ">
               {renderStep()}
             </div>
-            <div className="mt-50 flex items-center gap-4">
+            <div className="mt-50 2xl:mt-80 flex items-center gap-4">
               {!isFirstStep && (
-                <button type="button" onClick={() => setActiveStep((step) => Math.max(step - 1, 0))}
-                  className="group flex h-[42px] items-center justify-center gap-3 rounded-full border border-[#454545] px-6 text-13 uppercase text-secondary transition-colors hover:bg-secondary hover:text-white"
-                >
-                  <ArrowLeft size={16} strokeWidth={1.6} />
-                  Back
-                </button>
+                <BorderButton
+                  type="button"
+                  text="Back"
+                  borderColor="black"
+                  textColor="black"
+                  hoverBg="black"
+                  icon={<ArrowLeft size={24} strokeWidth={1.6} />}
+                  iconPosition="left"
+                  onClick={() => setActiveStep((step) => Math.max(step - 1, 0))}
+                />
               )}
 
-              <button
+              <BorderButton
                 type={isLastStep ? "submit" : "button"}
-                onClick={(event) => {
-                  if (!isLastStep) {
-                    event.preventDefault();
-                    goToNextStep();
-                  }
-                }}
-                className="group flex h-[42px] items-center justify-center gap-3 rounded-full border border-[#454545] px-6 text-13 uppercase text-secondary transition-colors hover:bg-secondary hover:text-white"
-              >
-                {isLastStep ? "Submit Vendor Registration" : "Next"}
-                <ArrowUpRight size={18} strokeWidth={1.6} className="text-primary transition-colors group-hover:text-white" />
-              </button>
+                text={isLastStep ? "Submit Vendor Registration" : "Next"}
+                borderColor="black"
+                textColor="black"
+                hoverBg="black"
+                px="px-6 2xl:px-[35px]"
+                onClick={isLastStep ? undefined : goToNextStep}
+                className="!max-w-full [&_span]:!max-w-full"
+              />
             </div>
           </div>
         </form>
@@ -169,20 +171,16 @@ const Stepper = ({ activeStep }: { activeStep: number }) => {
         const isActive = index === activeStep;
         const isComplete = index < activeStep;
         return (
-          <button
-            key={step.id}
-            type="button"
-            className="group relative z-1 flex w-fit flex-col items-center gap-5"
-          >
-            <span
-              className={`relative z-1 flex h-7 w-7 xl:w-[42px] xl:h-[42px] items-center justify-center rounded-full border text-13 font-light transition-colors ${isActive || isComplete
-                  ? "border-primary bg-primary text-white"
-                  : "border-[#DDE3F2] bg-white text-paragraph"
-                }`}
-            >
-              {isComplete ? <Check size={15} strokeWidth={2} /> : index + 1}
+          <button key={step.id} type="button" className="group relative z-1 flex w-fit flex-col items-center gap-2 relative" >
+            <span className={`relative z-1 flex h-7 w-7 xl:w-[42px] xl:h-[42px] items-center justify-center rounded-full border text-13 font-light transition-colors ${isActive || isComplete ? "border-primary bg-[#022E9E] text-white" : "border-[#DDE3F2] bg-white text-paragraph"}`}>
+              {isComplete ? <Check size={22} strokeWidth={2} /> : index + 1}
+            {!isActive && (
+                <div className="absolute inset-0 h-full w-full">
+                  <img src="/assets/images/become-a-partner/step-stroke.png" alt="stepper background" className="h-full w-full" />
+                </div>
+            )}
             </span>
-            <span className={`w-fit text-center text-14 leading-[1.4] transition-colors ${isActive ? "text-secondary" : "text-paragraph"}`}>
+            <span className={`text-19 w-fit text-center leading-[1.526315789473684] font-light transition-colors -tracking-[0.02em] ${isActive ? "text-secondary" : "text-paragraph"}`}>
               {step.label}
             </span>
           </button>

@@ -1,15 +1,15 @@
 import BorderButton from "@/app/components/common/BorderButton";
 import { faqData } from "../data";
-import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import StatNoise4 from "@/app/components/common/noise/StatNoise4";
 
 const FaqCta = () => {
   return (
     <section>
       <div className="w-fit">
         <div className="flex lg:items-center items-start flex-col lg:flex-row gap-5 md:gap-50 px-30 3xl:px-[32px] py-5 md:py-20 3xl:py-[24px] lg:justify-between relative">
-          <StatNoise1 />
+          <StatNoise4 />
           <motion.div
             variants={moveUp(0.1)}
             initial="hidden"
@@ -31,6 +31,7 @@ const FaqCta = () => {
               iconColor="primary"
               hoverBg="black"
               href={faqData.contactHref}
+              className="3xl:px-[35px]"
             />
           </motion.div>
         </div>

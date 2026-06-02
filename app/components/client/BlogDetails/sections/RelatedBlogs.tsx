@@ -160,13 +160,13 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
           {data.items.map((item, index) => (
             <motion.div variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{once:true}}
               key={item.id}
-              className="border-b pb-4 xl:pb-0 md:border-b-0 xl:border-l border-bdr-gray px-0 xl:px-[20px] flex flex-col h-full"
+              className="border-b pb-4 xl:pb-0 md:border-b-0 xl:border-l border-bdr-gray px-0 xl:px-[20px] xl:first:pt-30 flex flex-col h-full"
             >
               <div className="flex justify-between items-center mb-5 xl:mb-10 mt-auto">
-                <span className="text-19 leading-[1.526315789473684] font-light text-secondary -tracking-[0.02em]">
+                <span className="text-19 leading-[1.526315789473684] font-light text-paragraph -tracking-[0.02em]">
                   {item.audience}
                 </span>
-                <button className="text-secondary border rounded-full border-bdr-gray text-15 leading-[1.666666666666667] px-[18px]">
+                <button className="text-paragraph border font-light rounded-full border-bdr-gray text-15 leading-[1.666666666666667] px-[18px] uppercase">
                   {item.type}
                 </button>
               </div>

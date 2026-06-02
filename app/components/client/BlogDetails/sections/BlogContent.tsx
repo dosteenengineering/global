@@ -79,7 +79,7 @@ const BlogContent = () => {
 
   return (
     <section ref={sectionRef} className="pt-120 pb-200 relative overflow-hidden border-b border-bdr-gray">
-      <div className="absolute top-0 left-0 xl:left-[-14%] xl:top-[-98%] w-full h-full">
+      <div className="absolute top-0 left-0 xl:left-[-20%] xl:top-[-15%] w-full h-full">
         <img src="/assets/images/blog/shape/details-shape-1.svg" alt="shape" className="w-full h-full 
         xl:w-[897px] xl:h-[896px] object-contain" />
       </div>

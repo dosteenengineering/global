@@ -1,4 +1,4 @@
-import { ChevronDown, Paperclip } from "lucide-react";
+import { Paperclip } from "lucide-react";
 import CountryCodeSelect from "@/app/components/common/CountryCodeSelect";
 import { Controller } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
@@ -59,7 +59,7 @@ export const FormInput = ({
 
   return (
     <label className={`block ${className}`}>
-      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph">{label}</span>
+      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
       <input
         type={type}
         {...register(name, required ? { required: "Required" } : undefined)}
@@ -120,7 +120,7 @@ export const PhoneInput = ({
 
   return (
     <label className="block">
-      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph">{label}</span>
+      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
       <Controller
         name={name}
         control={control}
@@ -165,7 +165,7 @@ const PhoneInputControl = ({
   return (
     <div
       ref={phoneRowRef}
-      className="flex items-end pt-[3px] md:pt-20 gap-2 border-b border-[#CFCFCF]"
+      className="flex items-end pt-[3px] md:pt-0 gap-2 border-b border-[#CFCFCF]"
     >
       <CountryCodeSelect
         value={selectedCode}
@@ -203,12 +203,20 @@ export const RadioGroup = ({
 }) => {
   return (
     <fieldset className={className}>
-      <legend className="mb-20 text-15 leading-[1.5] text-secondary">{label}</legend>
+      <legend className="mb-30 text-30 leading-none font-light text-secondary tracking-[-0.02em]">{label}</legend>
       <div className="flex flex-wrap gap-x-35 gap-y-4">
         {options.map((option) => (
-          <label key={option} className="flex items-center gap-2 text-13 leading-none text-secondary">
-            <input type="radio" value={option} {...register(name)} className="h-3.5 w-3.5 accent-primary" />
-            {option}
+          <label key={option} className="flex items-center gap-2 xl:gap-[10px] cursor-pointer">
+            <input
+              type="radio"
+              value={option}
+              {...register(name)}
+              className="peer appearance-none h-[20px] w-[20px] rounded-full border border-primary relative transition-all duration-300 checked:after:scale-100 after:content-[''] after:absolute after:left-1/2 after:top-1/2 after:h-[10px] after:w-[10px] after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:bg-primary after:scale-0 after:transition-transform"
+            />
+
+            <span className="text-19 leading-none font-light text-secondary transition-all duration-300 peer-checked:font-medium tracking-[-0.02em]">
+              {option}
+            </span>
           </label>
         ))}
       </div>
@@ -224,6 +232,10 @@ export const CheckboxGroup = ({
   errors,
   required = false,
   className = "",
+  legendFontSize = "text-30",
+  legendColor = "text-secondary",
+  legendMarginBottom = "mb-20 2xl:mb-30",
+  legendLineHeight = "leading-[1.333333333333333]",
 }: {
   name: keyof PartnerFormValues;
   label: string;
@@ -232,22 +244,90 @@ export const CheckboxGroup = ({
   errors: FieldErrors<PartnerFormValues>;
   required?: boolean;
   className?: string;
+  legendFontSize?: string;
+  legendColor?: string;
+  legendMarginBottom?: string;
+  legendLineHeight?: string;
 }) => {
   const error = errors[name]?.message;
 
   return (
     <fieldset className={className}>
-      <legend className="mb-20 text-15 leading-[1.5] text-secondary">{label}</legend>
-      <div className="flex flex-wrap gap-x-35 gap-y-4">
+      <legend className={`${legendMarginBottom} ${legendFontSize} ${legendLineHeight} font-light ${legendColor} tracking-[-0.02em]`}>{label}</legend>
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 xl:gap-[26px] gap-y-4 xl:gap-y-[12px]">
         {options.map((option) => (
-          <label key={option} className="flex items-center gap-2 text-13 leading-none text-paragraph">
+          // <label key={option} className="flex items-center gap-2 text-13 leading-none text-paragraph">
+          //   <input
+          //     type="checkbox"
+          //     value={option}
+          //     {...register(name, required ? { required: "Required" } : undefined)}
+          //     className="h-3.5 w-3.5 xl:h-5 xl:w-5 accent-primary"
+          //   />
+          //   {option}
+          // </label>
+    //       <label key={option} className="flex items-center gap-2 xl:gap-[10px] text-13 leading-none text-paragraph cursor-pointer">
+    //         <input
+    //           type="checkbox"
+    //           value={option}
+    //           {...register(name, required ? { required: "Required" } : undefined)}
+    //           className="
+    //   peer appearance-none
+    //   h-[14px] w-[14px] xl:h-[20px] xl:w-[20px]
+    //   border border-primary
+    //   rounded-[1px]
+    //   relative
+    //   checked:bg-primary
+    //   transition-all duration-200
+    //   after:content-['']
+    //   after:absolute
+    //   after:left-1/2
+    //   after:top-1/2
+    //   after:w-[5px]
+    //   after:h-[10px]
+    //   after:border-r-[2px]
+    //   after:border-b-[2px]
+    //   after:border-white
+    //   after:-translate-x-1/2
+    //   after:-translate-y-[58%]
+    //   after:rotate-45
+    //   after:scale-0
+    //   checked:after:scale-100
+    //   after:transition-transform
+    // "
+    //         />
+
+    //         <span className="text-19 leading-none font-light text-secondary transition-all duration-300 peer-checked:font-medium tracking-[-0.02em]">
+    //           {option}
+    //         </span>
+    //       </label>
+          <label key={option} className="group flex items-center gap-2 xl:gap-[10px] cursor-pointer">
             <input
               type="checkbox"
               value={option}
               {...register(name, required ? { required: "Required" } : undefined)}
-              className="h-3.5 w-3.5 accent-primary"
+              className="peer sr-only"
             />
-            {option}
+
+            <span className="relative flex h-[20px] w-[20px] items-center justify-center border border-primary rounded-[1px] peer-checked:bg-primary">
+              {/* ✅ Use group-has to check if the label contains a checked input */}
+              <svg
+                className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-50"
+                viewBox="0 0 10 10"
+                fill="none"
+              >
+                <path
+                  d="M2 5.2L4.2 7.3L8 3"
+                  stroke="white"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span className="text-19 leading-none font-light text-secondary peer-checked:font-medium tracking-[-0.02em]">
+              {option}
+            </span>
           </label>
         ))}
       </div>
@@ -268,8 +348,8 @@ export const FileInput = ({
 
   return (
     <label className={`block ${className}`}>
-      <span className="block text-15 leading-[1.5] text-paragraph">{label}</span>
-      <div className="mt-20 flex h-8 items-center border-b border-[#CFCFCF]">
+      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+      <div className=" flex h-8 items-center border-b border-[#CFCFCF]">
         <input type="file" {...register(name)} className="min-w-0 flex-1 text-12 text-paragraph file:hidden" />
         <Paperclip size={16} strokeWidth={1.5} className="shrink-0 text-paragraph" />
       </div>

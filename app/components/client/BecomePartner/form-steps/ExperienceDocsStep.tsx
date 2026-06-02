@@ -24,13 +24,28 @@ const TermsCheckbox = ({ register, errors }: Pick<StepFormProps, "register" | "e
   const error = errors.termsAccepted?.message;
 
   return (
-    <label className="flex items-start gap-2 md:col-span-2">
+    <label className="group flex items-start gap-2 xl:gap-[10px] cursor-pointer md:col-span-2">
       <input
         type="checkbox"
         {...register("termsAccepted", { required: "Required" })}
-        className="mt-1 h-3.5 w-3.5 shrink-0 accent-primary"
+        className="peer sr-only"
       />
-      <span className="text-13 leading-[1.5] text-secondary">
+      <span className="relative mt-[5px] flex h-[20px] w-[20px] shrink-0 items-center justify-center border border-primary rounded-[1px] peer-checked:bg-primary">
+        <svg
+          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-50"
+          viewBox="0 0 10 10"
+          fill="none"
+        >
+          <path
+            d="M2 5.2L4.2 7.3L8 3"
+            stroke="white"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+      <span className="text-19 leading-[1.684210526315789] text-secondary font-medium">
         I confirm all information is accurate and agree to Dosteen&apos;s{" "}
         <a href="#" className="text-primary underline">
           Supplier Terms & Conditions.

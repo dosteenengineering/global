@@ -31,7 +31,7 @@ const NewsLetter = ({data}: Props) => {
             iconColor="primary"
             hoverBg="black"
             px="px-6 md:px-25"
-            className="-ml-px shrink-0 border-[#3946B8] h-full"
+            className="-ml-px shrink-0 border-primary h-full"
           />
         </form>
       </div>

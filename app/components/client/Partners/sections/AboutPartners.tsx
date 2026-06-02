@@ -19,10 +19,7 @@ export default function AboutPartners() {
       </div>
 
       <div className="lg:pl-[17%] 3xl:pl-[23.1%] pt-12.5 md:pt-120 px-[20px] lg:px-0 container w-full">
-        <SectionTitle
-          text={aboutPartners.title}
-          className="text-secondary font-light text-30 leading-[1.33] -tracking-[0.02em] mb-5 md:mb-40 max-w-[1207px]"
-        />
+        <SectionTitle text={aboutPartners.title} className="text-secondary font-light text-30 leading-[1.33] -tracking-[0.02em] mb-5 md:mb-40 max-w-[1207px]" />
 
         {/* <div
           className="text-paragraph text-description max-w-[1252px]"
@@ -30,7 +27,7 @@ export default function AboutPartners() {
         /> */}
         <SectionDescription
           text={aboutPartners.description}
-          className="text-description text-paragraph max-w-[1252px]"
+          className="text-description text-paragraph max-w-[100ch]"
         />
       </div>
     </section>
