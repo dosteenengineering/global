@@ -16,12 +16,38 @@ import { RiShakeHandsLine } from 'react-icons/ri';
 import { GiHealthNormal } from 'react-icons/gi';
 import { FaRobot } from 'react-icons/fa';
 import { MdAppRegistration } from 'react-icons/md';
+import { useRefetchServices } from '@/app/contexts/refetchServices';
 
 
 
 const AdminNavbar = () => {
 
   const [openLink, setOpenLink] = useState<string | null>(null);
+
+      const {refetchServices} = useRefetchServices();
+    
+    useEffect(() => {
+      fetchServiceData()
+  },[refetchServices])
+  
+  const [serviceData, setServiceData] = useState([])
+
+
+  const fetchServiceData = async () => {
+    try {
+        const response = await fetch(`/api/admin/service`);
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data)
+            setServiceData(data.data.thirdSection.items);
+        } else {
+            const data = await response.json();
+            alert(data.message);
+        }
+    } catch (error) {
+        console.log("Error in fetching service data", error);
+    }
+}
   
   const navItems = [
     { name: "Home", href: "/admin/home", icon: HomeIcon },
@@ -31,13 +57,12 @@ const AdminNavbar = () => {
     // { name: "Group Company", href: "/admin/group-company", icon: GroupIcon },
     // { name: "Awards", href: "/admin/awards", icon: AwardIcon },
     // { name: "Clients", href: "/admin/clients", icon: PresentationChartBarIcon },
-    { name: "Services", href: "#", icon: EnvelopeIcon,hasChild:true,children: [
-        { name: "Main Page", href: "/admin/services" },
-        { name: "Engineering", href: "/admin/services/engineering" },
-        { name: "Fabrication", href: "/admin/services/fabrication" },
-        { name: "Blasting", href: "/admin/services/blasting" },
-        { name: "Steel Erection", href: "/admin/services/steel-erection" },
-      ] },
+     { name: "Services", href: "#", icon: EnvelopeIcon,hasChild:true,children: [
+          { name: "Main Page", href: "/admin/services" },
+            ...serviceData.map((service: { _id: string,thumbnailTitle:string }) => (
+              { name: service.title.split(" ").slice(0,2).join(" ") + "...", href: `/admin/services/${service._id}` }
+            )),
+          ] },
     // { name: "Industries", href: "/admin/industries", icon: BriefcaseIcon },
     // {
     //   name: "Expertise", href: "##", icon: GlobeAltIcon, hasChild: true, children: [
@@ -47,6 +72,7 @@ const AdminNavbar = () => {
     //     )),
     //   ]
     // },
+    { name: "Systems", href: "/admin/systems", icon: Workflow },
     { name: "Projects", href: "/admin/projects", icon: Workflow },
     // { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
     { name: "News", href: "/admin/news", icon: NewspaperIcon },

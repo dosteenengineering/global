@@ -1,9 +1,10 @@
+import "../../../globals.css";
+
 export const metadata = {
-    title: "GCC | Backend Console",
-    description: "GCC",
-  };
+  title: "Dosteen | Backend Console",
+  description: "Dosteen",
+};
   
-  import "../../../globals.css";
   export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
       <html lang="en">

@@ -10,6 +10,7 @@ import { ImageUploader } from '@/components/ui/image-uploader'
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
+import { useRefetchServices } from '@/app/contexts/refetchServices';
 
 export interface ServiceFormProps {
 
@@ -24,21 +25,15 @@ export interface ServiceFormProps {
     secondSection: {
         title: string;
         description: string;
-        items: {
-            image: string;
-            imageAlt: string;
-            number: string;
-            value: string;
-        }[]
     };
     thirdSection: {
         title: string;
         items: {
             title: string;
-            description:string;
+            description: string;
             image: string;
             imageAlt: string;
-            buttonLink:string;
+            buttonLink: string;
         }[];
     };
 }
@@ -48,6 +43,7 @@ const ServicePage = () => {
 
     const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<ServiceFormProps>();
 
+    const { refetchServices, setRefetchServices } = useRefetchServices();
 
     const { fields: thirdSectionItems, append: thirdSectionAppend, remove: thirdSectionRemove } = useFieldArray({
         control,
@@ -65,6 +61,7 @@ const ServicePage = () => {
             if (response.ok) {
                 const data = await response.json();
                 alert(data.message);
+                setRefetchServices(!refetchServices);
                 // router.push("/admin/commitment");
             }
         } catch (error) {
@@ -81,7 +78,6 @@ const ServicePage = () => {
                 setValue("metaDescription", data.data.metaDescription);
                 setValue("firstSection", data.data.firstSection);
                 setValue("secondSection", data.data.secondSection);
-                setValue("secondSection.items", data.data.secondSection.items);
                 setValue("thirdSection", data.data.thirdSection);
                 setValue("thirdSection.items", data.data.thirdSection.items);
             } else {
@@ -212,7 +208,6 @@ const ServicePage = () => {
                                                 rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
-                                                        isLogo
                                                         value={field.value}
                                                         onChange={field.onChange}
                                                         recommendedDimension="Recommended: 60 x 50 (px)"
@@ -253,7 +248,7 @@ const ServicePage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description:"", buttonLink:"" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description: "", buttonLink: "" })}>Add Item</Button>
                         </div>
 
 
