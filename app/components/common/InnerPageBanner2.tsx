@@ -21,7 +21,7 @@ export default function InnerPageBanner2({ title, image }: Props) {
 
       {/* Container with title pinned to bottom-74px */}
       <div className="container relative h-full">
-        <h1 className="absolute text-white banner-heading uppercase bottom-[30px] md:bottom-70 3xl:bottom-[74px]">
+        <h1 className="absolute text-white banner-heading uppercase bottom-[30px] md:bottom-70 3xl:bottom-[78px]">
           {title}
         </h1>
       </div>

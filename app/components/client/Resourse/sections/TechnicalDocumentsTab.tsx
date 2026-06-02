@@ -38,11 +38,11 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
       : itemsByFilter[activeFilter] ?? [];
 
   return (
-    <div className="pt-[30px] md:pt-70 md:pt-100">
+    <div className="pt-30 md:pt-70 md:pt-120">
       {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5">
         {tab.title}
       </h2> */}
-      <SectionTitle title={tab.title} className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.2] font-light text-secondary max-w-[30ch] mb-5" />
+      <SectionTitle title={tab.title} className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5 translate-y-[2px]" />
 
       <div className="flex flex-wrap gap-[10px] mb-50">
         {filters.map((filter,index) => {
@@ -51,7 +51,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
           return (
             <motion.div key={filter} variants={moveUp(index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
             <button type="button" onClick={() => setActiveFilter(filter)}
-              className={` rounded-full border py-[14px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-[#454545] text-paragraph hover:border-primary hover:text-primary font-light"}`}
+              className={` rounded-full border py-[14px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-0.02em] cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-md-gray text-paragraph hover:border-primary hover:text-primary font-light"}`}
             >
               {filter}  
             </button>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 
 type BorderButtonProps = {
   text: string;
@@ -15,6 +15,8 @@ type BorderButtonProps = {
   className?: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
 };
 
 export default function BorderButton({
@@ -28,6 +30,8 @@ export default function BorderButton({
   className   = "",
   type,
   onClick,
+  icon,
+  iconPosition = "right",
 }: BorderButtonProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -57,6 +61,16 @@ export default function BorderButton({
     hoverBg === "black" && hovered ? "text-white" :
     "";
 
+  const renderedIcon = icon ? (
+    <span className={`relative z-10 text-primary transition-colors duration-300 ${textHoverClass}`}>
+      {icon}
+    </span>
+  ) : (
+    <Image src={arrowSrc} alt="arrow" width={18} height={18}
+      className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
+    />
+  );
+
   const content = (
     <>
       {/* Animated fill — slides in from left on hover */}
@@ -65,13 +79,12 @@ export default function BorderButton({
           className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`} />
       )}
 
+      {iconPosition === "left" && renderedIcon}
       <span className={`relative z-10 text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300
          ${textHoverClass}`}>
         {text}
       </span>
-      <Image src={arrowSrc} alt="arrow" width={18} height={18}
-        className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
-      />
+      {iconPosition === "right" && renderedIcon}
     </>
   );
 
