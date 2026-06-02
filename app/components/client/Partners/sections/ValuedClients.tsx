@@ -14,20 +14,15 @@ export default function ValuedClients() {
 
   return (
     <section className="py-140 3xl:py-200 relative overflow-hidden">
-      <div className="absolute top-[-18%] right-[-35%] 3xl:top-[-19%] 3xl:right-[-38%] w-full h-full max-h-[900px] max-w-[900px] 3xl:max-h-[1200px] 3xl:max-w-[1200px] z-0">
-        <Image
-          src="/assets/images/partners/clients/bg-svg.svg"
-          alt="faq-question"
-          fill
-          className="object-contain"
-        />
+      <div className="absolute top-[-18%] right-[-35%] 3xl:top-[-19%] 3xl:right-[-38%] w-full h-full max-h-[900px] max-w-[900px] 3xl:max-h-[1200px] 3xl:max-w-[1200px] z-[-1]">
+        <Image src="/assets/images/partners/clients/bg-svg.svg" alt="faq-question" fill className="object-contain" />
       </div>
       <div className="container">
         {/* Header */}
-        <SectionTitle title={title} className="section-heading mb-30" />
+        <SectionTitle title={title} className="section-heading mb-30 translate-y-[-10px]" />
         <SectionDescription
           text={description}
-          className="text-30 leading-[1.33] text-secondary tracking-[-0.02em] mb-80"
+          className="!text-30 leading-[1.33] text-secondary tracking-[-0.02em] mb-80"
         />
 
         {/* Regions */}
@@ -46,7 +41,7 @@ export default function ValuedClients() {
                 {region.logos.map((logo, i) => (
                   <div 
                     key={i}
-                    className="flex items-center justify-center border-b border-r border-[#c2c2c2] h-[99px] md:h-[185px] px-30"
+                    className="flex items-center justify-center border-b border-r border-[#c2c2c2] h-[99px] md:h-[185px] px-30 group"
                   >
                     <motion.div variants={zoomIn((i % LOGO_STAGGER_COLUMNS) * LOGO_STAGGER_STEP)} initial="hidden" whileInView={"show"} viewport={{ once: true }}>
                     <Image
@@ -54,7 +49,7 @@ export default function ValuedClients() {
                       alt=""
                       width={800}
                       height={400}
-                      className="xl:h-[80px] 3xl:h-[100px] max-h-[100px] max-w-[81px] md:max-w-[200px] w-auto h-auto object-contain pointer-events-none"
+                      className="xl:h-[80px] 3xl:h-[100px] max-h-[100px] max-w-[81px] md:max-w-[200px] w-auto h-auto object-contain pointer-events-none group-hover:scale-110 transition-transform duration-300"
                     />
                     </motion.div>
                   </div>

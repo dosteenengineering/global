@@ -120,17 +120,16 @@ const BlogContent = ({ data }: BlogContentProps) => {
   }, [updateCategoryPanelPosition, filteredBlogs.length, listBlogs.length]);
 
   return (
-    <section ref={sectionRef} className="pt-120 pb-200">
+    <section ref={sectionRef} className="pt-120 pb-200 relative">
+      <div className="absolute top-[12%] left-[-25%] w-full h-full">
+        <Image src="/assets/images/blog/shape/list-shape-1.svg" alt="" width={797} height={796} className="w-[70%] h-auto 3xl:w-auto" />
+      </div>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-[auto_1.5fr] 3xl:grid-cols-[auto_1395px]">
-          <div
-            ref={anchorRef}
-            className="md:col-start-1 relative self-stretch md:w-[150px] 3xl:w-[176px]"
-          >
-            <div ref={panelRef} className="flex flex-col gap-y-1 text-left">
+          <div ref={anchorRef} className="md:col-start-1 relative self-stretch md:w-[150px] 3xl:w-[176px] " >
+            <div ref={panelRef} className="flex flex-col gap-y-1 text-left pt-100 pb-50">
               {categories.map((category,index) => {
                 const isActive = selectedCategory === category;
-
                 return (
                   <motion.div variants={moveUp(index * 0.1)} initial="hidden" whileInView={"show"} viewport={{once:true,amount:0.3}} key={category}>
                     <button
