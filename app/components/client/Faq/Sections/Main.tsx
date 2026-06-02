@@ -50,48 +50,26 @@ export default function FaqSection() {
       <div
         className={`absolute hidden lg:block ${filtered.length > 0 ? "top-[33.5%]" : "top-[17.8%]"} bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
       >
-        <Image
-          src="/assets/icons/faq-question.svg"
-          alt="faq-question"
-          fill
-          className="object-contain object-top-left"
-        />
+        <Image src="/assets/icons/faq-question.svg" alt="faq-question" fill className="object-contain object-top-left" />
       </div>
 
       <div className="container lg:pl-[15.6%] z-20 relative">
         <div>
-          <motion.div
-            variants={moveUp(0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-          >
+          <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} >
           <SectionTitle
             title={title}
             className={`section-heading ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
           />
           </motion.div>
           {filtered.length > 0 && (
-            <motion.div
-              variants={moveUp(0.35)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="mb-140 3xl:mb-150"
-            >
+            <motion.div variants={moveUp(0.35)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="mb-140 3xl:mb-150" >
               <FaqCta />
             </motion.div>
           )}
         </div>
 
         {/* Toolbar */}
-        <motion.div
-          variants={moveUp(0.25)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-          className="flex flex-col lg:flex-row lg:items-center justify-between gap-20 mb-60"
-        >
+        <motion.div variants={moveUp(0.25)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="flex flex-col lg:flex-row lg:items-center justify-between gap-20 mb-60" >
           <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px]">
             <span className="text-secondary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
               All Questions
