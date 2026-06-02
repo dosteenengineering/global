@@ -61,7 +61,7 @@ export default function SolutionsSection() {
           >
             <div className="mt-18 3xl:mt-[109px]">
               <div ref={tabsContainerRef} className="relative">
-                <div className="flex gap-80 text-25 xl:text-30 leading-[1.33] font-[300] font-poppins -tracking-[2%] overflow-hidden">
+                <div className="flex gap-80 text-25 xl:text-30 leading-[1.33] font-[300] font-poppins -tracking-[-0.02em] overflow-hidden">
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
                     <button
                       key={tab.key}
@@ -69,13 +69,17 @@ export default function SolutionsSection() {
                         buttonRefs.current[index] = el;
                       }}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`px-0 pb-[13px] transition-colors duration-300 relative ${activeTab === tab.key ? "text-white" : "text-white/60"}`}
+                      className={`px-0 pb-[13px] transition-colors duration-300 relative 
+                        ${activeTab === tab.key ? "text-white" : "text-white/60"}`}
                     >
                       <span className="block font-[600] invisible h-0 overflow-hidden">
                         {tab.label}
                       </span>
                       <span
-                        className={`${activeTab === tab.key ? "font-[600]" : "font-[300]"} transition-all duration-300`}
+                        className={`transition-all duration-300 ${activeTab === tab.key
+                            ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
+                            : "[-webkit-text-stroke:0px_currentColor]"
+                          }`}
                       >
                         {tab.label}
                       </span>
@@ -86,7 +90,7 @@ export default function SolutionsSection() {
                 <div
                   className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300"
                   style={{
-                    width: indicatorStyle.width,
+                    width: indicatorStyle.width+38,
                     left: indicatorStyle.left,
                   }}
                 />

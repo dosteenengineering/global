@@ -31,10 +31,10 @@ const Masterformat = ({ data }: Props) => {
     return () => window.removeEventListener("resize", check);
   }, []);
   return (
-    <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200 pt-0 md:pt-50">
+    <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200 pt-0 md:pt-50 xl:pt-0">
       <ContainerAnchor ref={containerRef} />
 
-      <div className="absolute top-2 xl:top-0 -left-[23%] pointer-events-none">
+      <div className="absolute top-2 xl:top-0 -left-[23%] pointer-events-none hidden lg:block">
         <Image src="/assets/images/csi-specifications/shape-1.svg"
           alt="decorative lines" width={1000} height={1000} className="object-contain 2xl:w-[897px] 2xl:w-[896px]" />
       </div>
@@ -58,7 +58,7 @@ const Masterformat = ({ data }: Props) => {
               data.listItems.map((item, index) => (
                 <div key={index} className="first:border-t first:border-bdr-gray  border-b border-bdr-gray border-t-0">
                   <div className="grid grid-cols-[2.57fr_4fr] lg:grid-cols-[1.2fr_4fr] 3xl:grid-cols-[309px_auto]">
-                    <div className="border-r border-bdr-gray py-8 lg:py-10 xl:py-15">
+                    <div className="border-r border-bdr-gray py-[36px] lg:py-10 xl:py-15">
                       {/* <h3 className="tex-19 md:text-30 font-light">{item.title}</h3> */}
                       <SectionTitle text={item.title} className="tex-19 md:text-30 font-light" as="h3" delay={index*0.12} />
                     </div>

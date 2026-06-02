@@ -125,7 +125,7 @@ export default function DosteenSystems() {
         <div className="hidden md:flex gap-60 3xl:gap-[68px]">
           {/* Left col */}
           <div
-            className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative"
+            className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative pb-100"
             style={{ width: "47%" }}
           >
             {systems.map((system, index) => {
@@ -134,11 +134,9 @@ export default function DosteenSystems() {
                 <div
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
-                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 ${isActive ? "pl-20" : ""
-                    }`}
-                  style={{
-                    background: isActive ? activeGradient : "transparent",
-                  }}
+                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 first:border-t-0 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 
+                    ${isActive ? "pl-20" : "" }`}
+                  style={{ background: isActive ? activeGradient : "transparent" }}
                 >
                   <motion.span variants={moveRight(0.6 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
                     className={`py-30 3xl:py-[31px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}

@@ -117,7 +117,7 @@ export default function SectionTitle({
   return (
     <Tag
       ref={ref as React.RefObject<HTMLHeadingElement>}
-      className={className}
+      className={`relative  ${className}`}
     >
       {content}
     </Tag>

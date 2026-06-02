@@ -37,24 +37,24 @@ const ServingMap = () => {
               initial="hidden"
               whileInView="show"
               viewport={{once:true}}
-               className="relative overflow-hidden z-10 rounded-full px-[22px] md:px-60 py-[13px] min-w-[139px]">
+               className="relative overflow-hidden z-10 rounded-full px-[22px] md:px-60 py-[13px] 3xl:py-[14px] min-w-[139px]">
                 <div className="absolute inset-0 w-full h-full z-1">
                   <img src="./assets/images/about/map-section/glass-1.png" alt="" className="w-full h-full" />
                 </div>
-                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10">20 <span className="text-primary">+</span></h3>
-                <p className="text-description relative z-1">Global Partners</p>
+                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10">20<span className="text-primary">+</span></h3>
+                <p className="text-description !text-paragraph relative z-1">Global Partners</p>
               </motion.div>
               <motion.div
               variants={moveRight(0.8)}
               initial="hidden"
               whileInView="show"
               viewport={{once:true}}
-               className="relative overflow-hidden rounded-full px-[21px] md:px-60 py-[13px]">
-                <div className="absolute top-0 left-0 w-full h-full z-1">
-                  <img src="./assets/images/about/map-section/glass-2.png" alt="" className="w-full h-full object-cover" />
+               className="relative overflow-hidden rounded-full px-[21px] md:px-60 3xl:pl-[53px] py-[13px] xl:py-[14px]">
+                <div className="absolute top-0 left-0 w-[101%] h-[101%] z-1">
+                  <img src="./assets/images/about/map-section/glass-2-new.png" alt="" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-1">10 <span className="text-primary">+</span></h3>
-                <p className="text-description relative z-1">Countries, Product Exported </p>
+                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-1">10<span className="text-primary">+</span></h3>
+                <p className="text-description !text-paragraph relative z-1">Countries, Product Exported </p>
               </motion.div>
             </div>
             <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="relative overflow-hidden">
@@ -114,7 +114,8 @@ const ServingMap = () => {
           <div>
             <div className="border-t border-bdr-gray  xl:border-t-0 pt-7.5 md:pt-12 xl:pt-0 mt-7.5 md:mt-12 xl:mt-0">
               <div className="mb-50 flex gap-2 xl:block">
-                <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} className="text-55 leading-[1.181818181818182] font-light text-primary">10 <span>+</span></motion.h3>
+                <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} 
+                className="text-55 leading-[1.181818181818182] font-medium text-primary">10<span>+</span></motion.h3>
                 {/* <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3> */}
                 <SectionTitle text="Countries, Global Partners" as="h3" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
               </div>

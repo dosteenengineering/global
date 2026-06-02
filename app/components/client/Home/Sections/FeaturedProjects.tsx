@@ -82,7 +82,7 @@ function InactiveSlot({
           </p>
         )}
         <p
-          className={`text-30 font-poppins pr-5 font-[300] text-paragraph -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
+          className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
           style={
             displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
           }
@@ -191,7 +191,7 @@ export default function FeaturedProjectsSection() {
       <div ref={containerRef} className="container">
         <SectionTitle
           text={featuredProjectsData.title}
-          className="section-heading mb-20 md:mb-70 md:text-center"
+          className="section-heading mb-25 md:mb-70 xl:mb-80 md:text-center xl:ml-[1.8em]"
         />
       </div>
 
@@ -403,7 +403,7 @@ export default function FeaturedProjectsSection() {
                   />
                   <div className="absolute top-9 right-9 z-10">
                     <Image
-                      src="/assets/icons/arrow-right-top-big.svg"
+                      src="/assets/icons/arrow-right-top-big-thick.svg"
                       alt="arrow"
                       width={71}
                       height={48}

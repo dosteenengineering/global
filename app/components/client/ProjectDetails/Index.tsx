@@ -10,7 +10,7 @@ const Index = () => {
       <InnerPageBanner title={projects[0].title} />
       <Main project={projects[0]} nextProject={projects[0]} />
       <RelatedProjects />
-      <CtaSection {...ctaData} />
+      <CtaSection {...ctaData} titleWidth="max-w-[22ch]" descriptionWidth="max-w-[70ch]" />
     </>
   );
 };

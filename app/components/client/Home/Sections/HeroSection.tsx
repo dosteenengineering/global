@@ -8,7 +8,7 @@ import { moveUp } from "@/app/components/motionVariants";
 
 export default function Hero() {
   return (
-    <section className="relative h-[85vh] lg:h-[92vh] w-full overflow-hidden">
+    <section className="relative h-[85vh] lg:h-[100dvh] w-full overflow-hidden">
       {/* Background Image */}
       <Image
         src="/assets/images/home/hero/herobg.jpg"
@@ -35,7 +35,7 @@ export default function Hero() {
           {/* Title */}
           <TitleReveal
             text="Where Engineering Meets Assurance"
-            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] banner-heading lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-bold uppercase font-helvetica "
+            className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] banner-heading lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-bold uppercase font-helvetica leading-[1.08]"
           />
         
            
@@ -57,7 +57,7 @@ export default function Hero() {
               textColor="white"
               iconColor="primary"
               hoverBg="white"
-              className="!px-[24px]"
+              className="!px-[23.26px]"
             />
           </motion.div>
         </div>
