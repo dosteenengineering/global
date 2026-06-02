@@ -69,12 +69,12 @@ export default function SolutionsSection() {
                         buttonRefs.current[index] = el;
                       }}
                       onClick={() => setActiveTab(tab.key)}
-                      className={`px-0 pb-[13px] transition-colors duration-300 relative 
+                      className={`px-0 pb-[13px] transition-colors duration-300 relative  cursor-pointer
                         ${activeTab === tab.key ? "text-white" : "text-white/60"}`}
                     >
-                      <span className="block font-[600] invisible h-0 overflow-hidden">
+                      {/* <span className="block font-[600] invisible h-0 overflow-hidden">
                         {tab.label}
-                      </span>
+                      </span> */}
                       <span
                         className={`transition-all duration-300 ${activeTab === tab.key
                             ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
@@ -129,7 +129,7 @@ export default function SolutionsSection() {
                         viewport={{ once: true }}
                         className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
                       >
-                        <span className="transition-all duration-300 group-hover:font-[600]">
+                        <span className="transition-all duration-300 group-hover:[-webkit-text-stroke:.6px_white]">
                           {item}
                         </span>
                         <FiArrowRight
@@ -186,7 +186,7 @@ export default function SolutionsSection() {
 
                       <div className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                     </motion.div>

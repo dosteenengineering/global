@@ -191,7 +191,7 @@ export default function FeaturedProjectsSection() {
       <div ref={containerRef} className="container">
         <SectionTitle
           text={featuredProjectsData.title}
-          className="section-heading mb-25 md:mb-70 xl:mb-80 md:text-center xl:ml-[1.8em]"
+          className="section-heading mb-25 md:mb-70 xl:mb-[76px] md:text-center xl:ml-[1.8em]"
         />
       </div>
 
