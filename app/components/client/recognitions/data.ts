@@ -18,19 +18,19 @@ export const items: AwardItem[] = [
   {
     id: 2,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/2.png",
     title: "Transforming Efficiency",
   },
   {
     id: 3,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/3.png",
     title: "Transforming Efficiency",
   },
   {
     id: 4,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/2.png",
     title: "Transforming Efficiency",
   },
   {
@@ -42,25 +42,25 @@ export const items: AwardItem[] = [
   {
     id: 6,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/4.png",
     title: "Transforming Efficiency",
   },
   {
     id: 7,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/4.png",
     title: "Transforming Efficiency",
   },
   {
     id: 8,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/3.png",
     title: "Transforming Efficiency",
   },
   {
     id: 9,
     category: "certifications",
-    image: "/assets/images/recognitions/awards/1.png",
+    image: "/assets/images/recognitions/awards/5.png",
     title: "Transforming Efficiency",
   },
 

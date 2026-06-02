@@ -30,7 +30,7 @@ export default function Main() {
           className="object-contain pointer-events-none w-full h-[280px] lg:h-[930px] 3xl:h-full"
         />
       </div>
-      <div className="container mt-80 mb-140 3xl:mb-200">
+      <div className="container mt-80 xl:mt-[95px] mb-140 3xl:mb-200">
         {/* Category Tabs */}
         <div className="flex gap-[10px] mb-50">
           {categories.map((cat,index) => (
@@ -38,14 +38,15 @@ export default function Main() {
             <button
               key={cat.value}
               onClick={() => setActive(cat.value)}
-              className={` tracking-[-2%] md:tracking-normal py-[4px] px-2.5 md:py-[14px] md:px-[35px] 2xl:h-[54px] rounded-[50px] border text-15 leading-[1.73] text-secondary font-normal uppercase transition-all duration-200
+                className={`tracking-[-2%] md:tracking-normal py-[4px] px-2.5 md:py-[14px] md:px-[35px] 2xl:h-[54px] rounded-[50px] border text-15 
+                  leading-[1.733333333333333] text-secondary font-normal uppercase transition-all duration-200
                   ${
                     active === cat.value
                       ? "border-primary bg-primary/10"
                       : "border-[#454545]"
                   }`}
             >
-              {cat.label}
+                <span className="pb-1">{cat.label}</span>
             </button>
             </motion.div>
           ))}
@@ -87,7 +88,7 @@ function AwardCard({ image, title }: { image: string; title: string }) {
       </div>
 
       {/* Title */}
-      <p className="text-center text-30 leading-[1.333] text-secondary font-light mt-2.5 md:mt-30 3xl:mt-[32px]">
+      <p className="text-center text-30 leading-[1.333] text-secondary font-light mt-2.5 md:mt-30 3xl:mt-[32px] -tracking-[0.02em]">
         {title}
       </p>
     </div>
