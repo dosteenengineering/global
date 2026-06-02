@@ -1,23 +1,18 @@
 export const banner = {
-  title:
-    "Trusted by UAE & Oman's Leading Developers, Contractors & MEP Consultants",
-  description:
-    "25+ years partnering with main contractors, developers, PMOs, and facility managers on 20,000+ projects across Dubai, Abu Dhabi, Muscat, and beyond.",
+  title: "Trusted by UAE & Oman's Leading Developers, Contractors & MEP Consultants",
+  description: "25+ years partnering with main contractors, developers, PMOs, and facility managers on 20,000+ projects across Dubai, Abu Dhabi, Muscat, and beyond.",
   image: "/assets/images/partners/banner.jpg",
 };
 
 export const aboutPartners = {
-  title:
-    "Since 1998, Dosteen has been the preferred building systems partner for UAE and Oman's most demanding projects.",
-  description:
-    "From Dubai Expo 2020 to Al Mouj Muscat, our engineering teams deliver entrance systems, fire protection, and multi-parking solutions alongside the region's top-tier contractors and developers. These partnerships reflect our commitment to <br /> quality, compliance, and on-time delivery.",
+  title: "Since 1998, Dosteen has been the preferred building systems partner for UAE and Oman's most demanding projects.",
+  description: "From Dubai Expo 2020 to Al Mouj Muscat, our engineering teams deliver entrance systems, fire protection, and multi-parking solutions alongside the region's top-tier contractors and developers. These partnerships reflect our commitment to quality, compliance, and on-time delivery.",
 };
 
 export const partnersData = {
   title: "EXCLUSIVE PARTNERS",
   subtitle: "Global Manufacturers, Local Expertise",
-  description:
-    "Dosteen sources from 20+ world-leading manufacturers across 27 countries, ensuring UAE/Oman climate durability and Civil Defence compliance.",
+  description: "Dosteen sources from 20+ world-leading manufacturers across 27 countries, ensuring UAE/Oman climate durability and Civil Defence compliance.",
   slides: [
     {
       id: 0,
@@ -59,10 +54,8 @@ export const partnersData = {
 
 export const valuedClientsData = {
   title: "Our Valued Clients",
-  description:
-    "Working alongside UAE and Oman's leading main contractors, developers, and MEP consultants.",
-  footnote:
-    "<span class='text-primary'>20,000+</span> projects delivered with zero compromise on quality or compliance.",
+  description: "Working alongside UAE and Oman's leading main contractors, developers, and MEP consultants.",
+  footnote: "<span class='text-primary'>20,000+</span> projects delivered with zero compromise on quality or compliance.",
   regions: [
     {
       label: "UAE",
@@ -121,6 +114,21 @@ export const valuedClientsData = {
         { src: "/assets/images/partners/clients/5.png" },
         { src: "/assets/images/partners/clients/6.png" },
       ],
+    },
+  ],
+};
+
+export const ctaData = {
+  title: "Ready to Partner With Dosteen?",
+  description: "Join 20,000+ successful projects across UAE and Oman. From specification to maintenance, our engineering teams deliver.",
+  buttons: [
+    {
+      text: "REQUEST A SPECIFICATION",
+      href: "#",
+    },
+    {
+      text: "DOWNLOAD ALL SPECS",
+      href: "#",
     },
   ],
 };
