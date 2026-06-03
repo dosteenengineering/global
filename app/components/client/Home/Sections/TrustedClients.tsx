@@ -67,7 +67,7 @@ const TrustedClients = () => {
   }, []);
 
   return (
-    <section className="bg-white py-12.5 md:py-120 overflow-hidden">
+    <section className="bg-white py-12.5 md:py-120 2xl:pt-[122px] 2xl:pb-[126px] overflow-hidden">
       <div className="container">
         <div
           ref={viewportRef}
@@ -85,14 +85,14 @@ const TrustedClients = () => {
             {[...logos, ...logos, ...logos].map((logo, i) => (
               <div
                 key={i}
-                className="shrink-0 flex items-center justify-center w-fit h-[30px] md:h-[50px] lg:h-[80px]"
+                className="shrink-0 flex items-center justify-center w-fit h-[30px] md:h-[50px] lg:h-[80px] 2xl:h-[90px]"
               >
                 <Image
                   src={logo}
                   alt=""
                   height={80}
                   width={0}
-                  className="object-contain max-w-[100 px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] w-auto"
+                  className="object-contain max-w-[100 px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] 2xl:h-[90px] w-auto"
                 />
               </div>
             ))}

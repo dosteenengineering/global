@@ -92,7 +92,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
     <section className="relative py-12.5 md:py-100 lg:py-150">
       <PrimaryNoise />
       <div className="container relative z-10">
-        <SectionTitle title={data.sectionTitle} className="section-heading text-white mb-50 uppercase translate-y-[-15px]" />
+        <SectionTitle title={data.sectionTitle} className="section-heading text-white mb-50 uppercase " />
 
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
           {/* <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">

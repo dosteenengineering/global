@@ -42,19 +42,19 @@ const ServingMap = () => {
                   <img src="./assets/images/about/map-section/glass-1.png" alt="" className="w-full h-full" />
                 </div>
                 <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10">20<span className="text-primary">+</span></h3>
-                <p className="text-description !text-paragraph relative z-1">Global Partners</p>
+                <p className="text-description !text-paragraph relative z-1 tracking-[2%]">Global Partners</p>
               </motion.div>
               <motion.div
               variants={moveRight(0.8)}
               initial="hidden"
               whileInView="show"
               viewport={{once:true}}
-               className="relative overflow-hidden rounded-full px-[21px] md:px-60 3xl:pl-[53px] py-[13px] xl:py-[14px]">
+               className="relative overflow-hidden rounded-full px-[21px] md:px-60 3xl:pl-[53px] 3xl:pr-[52px] py-[13px] xl:py-[14px]">
                 <div className="absolute top-0 left-0 w-[101%] h-[101%] z-1">
                   <img src="./assets/images/about/map-section/glass-2-new.png" alt="" className="w-full h-full object-contain" />
                 </div>
                 <h3 className="text-55 leading-[1.181818181818182] font-light relative z-1">10<span className="text-primary">+</span></h3>
-                <p className="text-description !text-paragraph relative z-1">Countries, Product Exported </p>
+                <p className="text-description !text-paragraph relative z-1 tracking-[2%]">Countries, Product Exported </p>
               </motion.div>
             </div>
             <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="relative overflow-hidden">

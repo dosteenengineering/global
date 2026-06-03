@@ -23,19 +23,19 @@ export default function IndustriesWeServe() {
       <PrimaryNoise2 />
 
       {/* Decorative lines */}
-      <div className="absolute z-30 left-0 bottom-[-36%] w-[420px] h-full pointer-events-none">
+      <div className="absolute z-30 left-0 2xl:left-[-8%] 3xl:left-0  bottom-[-36%] 2xl:bottom-[-41%] 3xl:bottom-[-39%] w-[420px] h-full pointer-events-none">
         <Image src="/assets/images/services/bg-lines.svg" alt="" fill className="object-contain object-left hidden lg:block" />
       </div>
 
       <div className="container py-12.5 md:py-140 3xl:py-150 w-full z-20">
         {/* Title */}
-        <SectionTitle text={IndustriesData.title} className="section-heading text-white uppercase mb-7.5 md:mb-30 xl:mb-30 translate-y-[-15px]" />
+        <SectionTitle text={IndustriesData.title} className="section-heading text-white uppercase mb-7.5 md:mb-30 xl:mb-30 " />
 
         {/* Divider */}
-        <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-80 3xl:mb-100 hidden lg:block" />
+        <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-80 3xl:mb-80 hidden lg:block" />
 
         {/* Body: left list + right detail */}
-        <div className="flex flex-col lg:flex-row gap-150 3xl:gap-[206px]">
+        <div className="flex flex-col lg:flex-row gap-150  3xl:gap-[206px]">
           {/* ── MOBILE: Accordion ── */}
           <div className="flex flex-col lg:hidden w-full">
             {IndustriesData.items.map((item) => {
@@ -86,7 +86,7 @@ export default function IndustriesWeServe() {
 
           {/* ── DESKTOP: Original side-by-side layout ── */}
           {/* Left — industry list */}
-          <div className="shrink-0 hidden lg:flex flex-col w-[334px]">
+          <div className="shrink-0 hidden lg:flex flex-col w-[334px] relative border-t border-bdr-blue ">
             {IndustriesData.items.map((item, index) => {
               const isActive = item.id === activeId;
               return (
@@ -95,7 +95,7 @@ export default function IndustriesWeServe() {
                     type="button"
                     key={item.id}
                     onClick={() => setActiveId(item.id)}
-                    className={`group relative flex items-center justify-between text-left w-full first:border-t border-b border-bdr-blue transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
+                    className={`group relative flex items-center justify-between text-left w-full   border-b border-bdr-blue transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
                       }`}
                     style={
                       isActive

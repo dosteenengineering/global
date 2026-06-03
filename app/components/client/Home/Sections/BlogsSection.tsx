@@ -80,7 +80,7 @@ export default function BlogsSection() {
           {/* Row 1 */}
           <SectionTitle
             title={blogsData.title}
-            className="text-secondary section-heading mb-70 xl:mb-80 3xl:mb-[90px] -translate-y-[10px]"
+            className="text-secondary section-heading mb-70 xl:mb-80 3xl:mb-[70px] "
           />
 
           {/* Row 2 */}
@@ -142,7 +142,7 @@ export default function BlogsSection() {
                 <SwiperSlide key={post.key} style={{ height: "auto" }}>
                   {/* Divider line sits in the gap above this slide (hidden on first) */}
                   <div
-                    className="absolute left-0 right-0 border-t border-[#CCCCCC] group"
+                    className="absolute left-0 right-0 border-t border-[#c2c2c2] group"
                     style={{ top: -(SLIDE_GAP / 2) }}
                   />
                   <Link
@@ -178,7 +178,7 @@ export default function BlogsSection() {
                     {/* Arrow */}
                     <div className="flex-shrink-0 self-start w-[60px] h-[50px] pt-2">
                       <Image
-                        src="/assets/icons/arrow-primary-top-right.svg"
+                        src="/assets/icons/arrowblue.svg"
                         alt="arrow"
                         width={49}
                         height={49}

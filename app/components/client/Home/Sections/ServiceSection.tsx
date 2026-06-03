@@ -25,7 +25,7 @@ export default function ServicesSection() {
     <section ref={ref} className="relative w-full overflow-hidden">
       <PrimaryNoise />
 
-      <div className="absolute top-[-32%] md:-top-85 lg:top-0 right-[-20%] md:-right-88 lg:-right-[320px] w-[250px] h-[350px] md:w-[1062px] md:h-[513px] pointer-events-none">
+      <div className="absolute top-[-32%] md:-top-85 lg:top-0 lg:top-[-300px] xl:top-[-120px]  3xl:top-0 right-[-20%] md:-right-88 lg:-right-[440px] xl:-right-[420px]  2xl:-right-[420px] 3xl:-right-[320px] w-[250px] h-[350px] md:w-[1062px] md:h-[513px] pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-right-animated.svg"
           alt=""

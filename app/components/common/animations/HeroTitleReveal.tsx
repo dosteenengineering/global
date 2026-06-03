@@ -150,17 +150,22 @@ export default function TitleRevealFill({
         }
         .trf-mask {
           display: block; overflow: hidden; line-height: inherit;
-          padding-top: 0.01em;    margin-top: -0.18em;
-          padding-bottom: 0.09em; margin-bottom: -0.09em;
+          padding-top: 0.01em;    margin-top: -0.1489em;
+          padding-bottom: 0.09em;  
         }
         .trf-stroke {
           display: block; color: transparent;
           -webkit-text-stroke: 0.5px #FFFBFB;
-          position: relative; line-height: inherit;
+          position: relative; line-height: 1.1;
         }
         .trf-fill-base {
           position: absolute; inset: 0; display: block; line-height: inherit;
         }
+           @media (max-width: 768px) {
+              .trf-stroke {
+                line-height: 1.0123;
+              }
+            }
         ${css}
       `}</style>
 

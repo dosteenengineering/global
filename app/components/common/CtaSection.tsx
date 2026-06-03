@@ -17,12 +17,12 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         <Image src="/assets/images/about/cta/bg-right.svg" alt="" fill className="object-contain object-right" />
       </div>
 
-      <div className="relative z-10 container py-12.5 md:py-140 3xl:py-150 w-full">
+      <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[145px] 3xl:pb-150 w-full">
         {/* Title */}
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
         </h2> */}
-        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 2xl:mb-[26px] 3xl:mb-[36px] 
+        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 2xl:mb-[26px] 3xl:mb-[26px] 
           ${titleWidth}`} />
 
         {/* Divider */}
