@@ -50,7 +50,7 @@ export default function Hero() {
           initial="hidden"
           whileInView="show"
           viewport={{once: true}}
-          className="mt-20 sm:mt-50 w-fit">
+          className="mt-5 md:mt-50 w-fit">
             <BorderButton
               text="Request a Quote"
               borderColor="white"

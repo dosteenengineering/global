@@ -20,8 +20,8 @@ function ValueCard({
     initial="hidden"
     whileInView="show"
     viewport={{once:true}}
-    className="flex flex-col gap-[10px] md:gap-30 border-b border-bdr-gray last:border-b-0 pb-5 last:pb-0 md:border-b-0 md:pb-0">
-      <h3 className="text-55 font-light leading-[1.334] md:leading-[1.1818] text-secondary ">
+    className="flex flex-col gap-[10px] md:gap-4 2xl:gap-30 border-b border-bdr-gray last:border-b-0 pb-5 last:pb-0 md:border-b-0 md:pb-0">
+      <h3 className="text-55 xl:text-[32px] 3xl:text-55 font-light leading-[1.334] md:leading-[1.1818] text-secondary ">
         {title}
       </h3>
       <p className="text-description !leading-[1.68] md:!leading-[1.54] text-paragraph max-w-[540px]">
@@ -54,7 +54,7 @@ export default function OurValues() {
           </div>
 
           {/* Right — 2-col grid of value cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto] gap-x-60 3xl:gap-x-[125px] gap-y-5 md:gap-y-60 3xl:gap-y-80">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto] gap-x-60 xl:gap-x-[40px] 3xl:gap-x-[125px] gap-y-5 md:gap-y-40 3xl:gap-y-80">
             {ValuesData.items.map((item, index) => (
               <ValueCard
                 key={item.id}

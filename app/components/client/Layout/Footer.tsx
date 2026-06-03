@@ -64,7 +64,7 @@ const SocialIcon = ({
   return (
     <Link
       href={href}
-      className="w-[40px] h-[40px] rounded-full border border-[#C2C2C2] flex items-center justify-center group hover:bg-primary transition-colors duration-300"
+      className="w-[42px] h-[42px] rounded-full border border-[#C2C2C2] flex items-center justify-center group hover:bg-primary transition-colors duration-300"
       aria-label={name}
     >
       {icons[name]}
@@ -228,7 +228,7 @@ const Footer = () => {
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="hidden min-[1120px]:flex relative pt-140">
+      <div className="hidden min-[1110px]:flex relative pt-140 3xl:pt-[143px]">
         {/* ── LEFT COLUMN ── */}
         <div className="flex flex-col flex-1">
           <motion.div
@@ -309,7 +309,7 @@ const Footer = () => {
             </div>
 
             {/* 2xl+ — original single row */}
-            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-60 2xl:pr-40 3xl:pr-[57px]">
+            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-[62px] 2xl:pr-40 3xl:pr-[57px]">
               <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
@@ -325,7 +325,7 @@ const Footer = () => {
                   className="object-contain pointer-events-none"
                 />
               </motion.div>
-              <div className="flex gap-15 3xl:gap-20">
+              <div className="flex gap-15 3xl:gap-[80px]">
                 <motion.div
                   variants={moveUp(0.3)}
                   initial="hidden"
@@ -365,7 +365,7 @@ const Footer = () => {
                   initial="hidden"
                   whileInView="show"
                   viewport={{ amount: 0.1, once: true }}
-                  className="flex items-start gap-[6px] shrink-0"
+                  className="flex items-start gap-[6.39px] shrink-0"
                 >
                   {socials.map((s) => (
                     <SocialIcon
@@ -600,7 +600,7 @@ const Footer = () => {
                 />
                 <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
                   <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
-                  <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
+                  <span className="relative  group-hover:text-white transition-colors duration-300 ease-in-out">
                     Subscribe
                   </span>
                   <Image
@@ -608,7 +608,7 @@ const Footer = () => {
                     alt=""
                     width={25}
                     height={25}
-                    className="relative z-10 w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
+                    className="relative  w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
                   />
                 </button>
               </div>
@@ -660,7 +660,7 @@ const Footer = () => {
                 <span>{contact.email}</span>
               </Link>
             </div>
-            <div>
+            <div className="sm:border-b border-black/35 sm:pb-[10px] xl:pb-0">
               <Link
                 href={`tel:${contact.phone.replace(/\s/g, "")}`}
                 className="flex items-center gap-2 md:gap-3 text-19 font-[500] font-poppins -tracking-[2%] leading-[1.52] text-secondary"

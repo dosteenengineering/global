@@ -117,7 +117,7 @@ export default function AboutSlider() {
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 pointer-events-none">
+      <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 lg:left-[-100px] 3xl:left-0 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
@@ -193,7 +193,7 @@ export default function AboutSlider() {
                 <span className="font-[700]">
                   {slidesData[0].description.split(",")[0]},
                 </span>
-               <span className="lg:whitespace-pre-line">
+               <span className="3xl:whitespace-pre-line">
                   {slidesData[0].description.substring(
                     slidesData[0].description.indexOf(",") + 1,
                   )}

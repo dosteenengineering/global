@@ -48,7 +48,7 @@ function FeatureCard({
     initial="hidden"
     whileInView="show"
     viewport={{once:true}}
-      className="flex flex-col p-5 md:p-50 backdrop-blur-[20px] h-auto md:h-[481px]"
+      className="flex flex-col p-5 md:p-50 backdrop-blur-[20px] h-auto md:min-h-[420px] 2xl:h-[515px] 3xl:h-[481px]"
       style={{
         background:
           "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.2) 100%)",

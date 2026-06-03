@@ -67,7 +67,7 @@ export default function BorderButton({
     </span>
   ) : (
     <Image src={arrowSrc} alt="arrow" width={18} height={18}
-      className={`relative z-10 ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[18px] sm:h-[18px] pointer-events-none`}
+      className={`relative  ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[16px] sm:h-[16px] pointer-events-none`}
     />
   );
 
@@ -80,7 +80,7 @@ export default function BorderButton({
       )}
 
       {iconPosition === "left" && renderedIcon}
-      <span className={`relative z-10 text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300
+      <span className={`relative  text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300
          ${textHoverClass}`}>
         {text}
       </span>
