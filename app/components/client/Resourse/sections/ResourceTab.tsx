@@ -93,17 +93,17 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   };
 
   return (
-    <section className="pt-[70px] md:pt-120 pb-200 overflow-hidden">
+    <section className="pt-70 md:pt-100 pb-200 overflow-hidden">
       <div className="container">
         <div className="mb-50">
           <SectionTitle
             title={data.sectionTitle}
-            className="section-heading max-w-[1290px] mb-5 uppercase"
+            className="section-heading max-w-[26ch] mb-5 xl:mb-10 uppercase leading-none!"
           />
           {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.sectionDesc} className="text-description text-paragraph max-w-[75ch] font-light mb-50" />
+          <SectionDescription text={data.sectionDesc} className="text-description text-paragraph max-w-[70ch] font-light mb-50" />
         </div>
 
         {/* ── Mobile: Custom Select ── */}
@@ -185,10 +185,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             <ChevronLeft size={20} strokeWidth={1.8} />
           </button>
 
-          <div
-            ref={tabsScrollerRef}
-            className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
+          <div ref={tabsScrollerRef} className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div
               ref={tabsContainerRef}
               className="relative flex min-w-max snap-x snap-mandatory items-center gap-5 px-10 sm:px-11 xl:gap-10 2xl:gap-[40px] 3xl:w-full 3xl:min-w-0 3xl:justify-between 3xl:px-0"
@@ -201,7 +198,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                     ref={(el) => { buttonRefs.current[index] = el; }}
                     type="button"
                     onClick={() => handleTabChange(tab)}
-                    className="flex shrink-0 snap-center items-center gap-2 pb-20 text-left transition-colors duration-300"
+                    className="flex shrink-0 snap-center items-center gap-2 pb-20 text-left transition-colors duration-300 cursor-pointer"
                   >
                     <Image
                       src={tab.icon}

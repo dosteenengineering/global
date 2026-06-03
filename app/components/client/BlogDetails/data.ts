@@ -11,7 +11,7 @@ export const RelatedArticlesData = {
     {
       id: 1,
       featured: true,
-      audience: "For Consultants",
+      audience: "22-02-2025",
       type: "knowledge",
       title: "Transforming Efficiency in Modern Warehousing.",
       image: "/assets/images/blog/blog-1/rel-blg-1.jpg",
@@ -21,7 +21,7 @@ export const RelatedArticlesData = {
     {
       id: 2,
       featured: true,
-      audience: "knowledge",
+      audience: "22-02-2025",
       type: "STANDARDS",
       title: "Why Fire & Smoke Curtains Are Critical for Today’s Building Safety Standards",
       image: "/assets/images/blog/blog-1/rel-blg-2.jpg",
@@ -31,7 +31,7 @@ export const RelatedArticlesData = {
     {
       id: 3,
       featured: true,
-      audience: "knowledge",
+      audience: "22-02-2025",
       type: "CHECKLIST",
       title: "The Backbone of Seamless Logistics Operations",
       image: "/assets/images/blog/blog-1/rel-blg-3.jpg",

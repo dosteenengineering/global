@@ -81,7 +81,7 @@ export const SelectInput = ({
     <label className={`block relative ${className}`}>
       {/* Label + Arrow */}
       <div className="flex justify-between">
-        <span className="block text-15 leading-[1.5] text-paragraph">
+        <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">
           {label}
         </span>
 
@@ -98,10 +98,11 @@ export const SelectInput = ({
         <button
           type="button"
           onClick={() => setOpen((p) => !p)}
-          className="flex h-8 w-full items-center justify-between border-b border-[#CFCFCF] text-16 text-secondary"
+          className="flex h-4 w-full items-center justify-between border-b border-[#CFCFCF] text-16 text-secondary"
         >
-          <span className={selected ? "" : "text-secondary/40"}>
-            {selected || `Select ${label}`}
+          <span className={selected ? "pb-5" : "text-secondary/40"}>
+            {/* {selected || `Select ${label}`} */}
+            {selected || ``}
           </span>
         </button>
 

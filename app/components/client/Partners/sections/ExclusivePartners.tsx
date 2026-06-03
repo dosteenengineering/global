@@ -77,7 +77,6 @@ const Partners = () => {
     isHoveredRef.current = true;
     if (timerRef.current) clearTimeout(timerRef.current);
     setActiveIndex(index);
-    requestAnimationFrame(() => ensureSlideVisible(index));
   };
 
   const handleMouseLeave = () => {
@@ -91,34 +90,17 @@ const Partners = () => {
 
       {/* HEADER */}
       <div ref={containerRef} className="relative container mb-50">
-        <SectionTitle title={title} className="mb-50 section-heading" />
-        <SectionDescription
-          text={subtitle}
-          className="text-30 leading-[1.33] -tracking-[0.02em] font-light mb-2.5 md:mb-30"
-        />
-        <SectionDescription
-          text={description}
-          className="text-description text-paragraph max-w-[90ch]"
-        />
+        <SectionTitle title={title} className="mb-50 section-heading translate-y-[-10px]" />
+        <SectionDescription text={subtitle} className="!text-30 leading-[1.33] -tracking-[0.02em] font-light mb-2.5 md:mb-30" />
+        <SectionDescription text={description} className="text-description text-paragraph max-w-[90ch]" />
       </div>
 
       {/* SLIDER */}
-      <Swiper
-        spaceBetween={0}
-        onSwiper={(swiper) => (swiperRef.current = swiper)}
+      <Swiper spaceBetween={0} onSwiper={(swiper) => (swiperRef.current = swiper)}
         style={{ marginLeft: leftInset }}
-        breakpoints={{
-          0: { slidesPerView: 1.74 },
-          640: { slidesPerView: 2.2 },
-          768: { slidesPerView: 3.2 },
-          1620: { slidesPerView: 4.275 },
-        }}
-        className="!overflow-visible"
-      >
-        {slides.map((slide, index) => {
-          const isActive = index === activeIndex;
-          const isLast = index === slides.length - 1;
-
+        breakpoints={{ 0: { slidesPerView: 1.74 }, 640: { slidesPerView: 2.2 }, 768: { slidesPerView: 3.2 }, 1620: { slidesPerView: 4.275 }, }} className="!overflow-visible" >
+        {slides.map((slide, index) => { 
+          const isActive = index === activeIndex; const isLast = index === slides.length - 1;
           return (
             <SwiperSlide key={slide.id}>
               <motion.div 
@@ -128,33 +110,21 @@ const Partners = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[282px] ${isLast ? "border-r" : ""} transition-colors duration-500`} 
+                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[282px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
               >
-                <div
-                  className={`absolute inset-0 transition-opacity duration-400 ${isActive ? "opacity-100" : "opacity-0"
-                    }`}
-                >
+                <div className={`absolute inset-0 transition-opacity duration-700 ease-out will-change-[opacity] ${isActive ? "opacity-100" : "opacity-0" }`} >
                   <PrimaryNoise2 />
                 </div>
                 {/* CENTER: logo + title stacked, always centered as a group */}
                 <div className="absolute inset-0 flex md:items-center justify-center">
-                  <div
-                    className={`flex mt-[27px] md:mt-0 flex-col items-center transition-all duration-400 ${isActive ? "gap-0 md:gap-20" : ""}`}
-                  >
-                    <div className="relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px]">
-                      <Image
-                        src={slide.logo}
-                        alt={slide.logoAlt}
-                        width={258}
-                        height={98}
-                        className={`object-cover h-full ${isActive ? "" : ""}`}
-                      />
+                  <div className="relative mt-[27px] md:mt-0 flex flex-col items-center">
+                    <div className={`relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px] transition-transform duration-700 ease-out will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
+                      <Image src={slide.logo} alt={slide.logoAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
                     </div>
-
-                    <p
-                      className={`text-description text-white transition-all duration-400 ${isActive
-                          ? "opacity-100 max-h-[30px]"
-                          : "opacity-0 max-h-0 overflow-hidden pointer-events-none"
+                    <p className={`absolute top-full mt-0 text-description text-white transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]
+                    ${isActive
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-2 pointer-events-none"
                         }`}
                     >
                       {slide.title}
@@ -164,8 +134,8 @@ const Partners = () => {
 
                 {/* BOTTOM-LEFT: country — always visible, bordered box */}
                 <div className="absolute bottom-0 left-0">
-                  <p
-                    className={`text-[12px] md:text-15 text-center capitalize min-w-[113px] h-[23px] md:h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-400 ${isActive
+                  <p className={`text-[12px] md:text-15 xl:text-19 font-light text-center capitalize min-w-[113px] h-[23px] md:h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-700 ease-out 
+                  ${isActive
                         ? "text-white border-white"
                         : "text-paragraph border-[#c2c2c2]"
                       }`}
