@@ -24,31 +24,31 @@ const AdminNavbar = () => {
 
   const [openLink, setOpenLink] = useState<string | null>(null);
 
-      const {refetchServices} = useRefetchServices();
-    
-    useEffect(() => {
-      fetchServiceData()
-  },[refetchServices])
-  
+  const { refetchServices } = useRefetchServices();
+
+  useEffect(() => {
+    fetchServiceData()
+  }, [refetchServices])
+
   const [serviceData, setServiceData] = useState([])
 
 
   const fetchServiceData = async () => {
     try {
-        const response = await fetch(`/api/admin/service`);
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setServiceData(data.data.thirdSection.items);
-        } else {
-            const data = await response.json();
-            alert(data.message);
-        }
+      const response = await fetch(`/api/admin/service`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        setServiceData(data.data.thirdSection.items);
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
     } catch (error) {
-        console.log("Error in fetching service data", error);
+      console.log("Error in fetching service data", error);
     }
-}
-  
+  }
+
   const navItems = [
     { name: "Home", href: "/admin/home", icon: HomeIcon },
     { name: "About", href: "/admin/about", icon: InfoIcon },
@@ -57,12 +57,14 @@ const AdminNavbar = () => {
     // { name: "Group Company", href: "/admin/group-company", icon: GroupIcon },
     // { name: "Awards", href: "/admin/awards", icon: AwardIcon },
     // { name: "Clients", href: "/admin/clients", icon: PresentationChartBarIcon },
-     { name: "Services", href: "#", icon: EnvelopeIcon,hasChild:true,children: [
-          { name: "Main Page", href: "/admin/services" },
-            ...serviceData.map((service: { _id: string,thumbnailTitle:string }) => (
-              { name: service.title.split(" ").slice(0,2).join(" ") + "...", href: `/admin/services/${service._id}` }
-            )),
-          ] },
+    {
+      name: "Services", href: "#", icon: EnvelopeIcon, hasChild: true, children: [
+        { name: "Main Page", href: "/admin/services" },
+        ...serviceData.map((service: { _id: string, thumbnailTitle: string }) => (
+          { name: service.title.split(" ").slice(0, 2).join(" ") + "...", href: `/admin/services/${service._id}` }
+        )),
+      ]
+    },
     // { name: "Industries", href: "/admin/industries", icon: BriefcaseIcon },
     // {
     //   name: "Expertise", href: "##", icon: GlobeAltIcon, hasChild: true, children: [
@@ -74,6 +76,7 @@ const AdminNavbar = () => {
     // },
     { name: "Systems", href: "/admin/systems", icon: Workflow },
     { name: "Projects", href: "/admin/projects", icon: Workflow },
+    { name: "Bim Capabilities", href: "/admin/bim-capabilities", icon: Share2Icon },
     // { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
     { name: "News", href: "/admin/news", icon: NewspaperIcon },
     { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
@@ -95,7 +98,7 @@ const AdminNavbar = () => {
     },
     { name: "Vendor Registrations", href: "/admin/vendor-registration", icon: MdAppRegistration },
     {
-      name: "Layout", href: "#", icon: LayoutIcon, hasChild: true, children: [
+      name: "Layout", href: "##", icon: LayoutIcon, hasChild: true, children: [
         { name: "Navbar", href: "/admin/navbar" },
         { name: "Footer", href: "/admin/footer" },
         { name: "Social Media", href: "/admin/social-media" },
