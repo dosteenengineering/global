@@ -112,7 +112,7 @@ export default function AboutDetails() {
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <ContainerAnchor ref={containerRef} />
 
-      <div className="absolute -top-10 lg:-top-[-10%] 3xl:top-[-9.5%] left-[-131px] lg:left-[-3%] xl:left-[-19.2%] pointer-events-none">
+      <div className="absolute -top-10 lg:-top-[-10%] xl:top-[-1.5%] 3xl:top-[-9.5%] left-[-131px] lg:left-[-3%] xl:left-[-22%] 3xl:left-[-19.2%] pointer-events-none">
         <Image src="/assets/icons/bg-svg/top-left-about-1.svg" alt="decorative lines" width={897} height={896} className="object-contain w-[280px] 2xl:w-[500px] 3xl:w-[897px] 3xl:h-[896px] 3xl:scale-120" />
       </div>
 
@@ -121,7 +121,7 @@ export default function AboutDetails() {
         style={{ marginRight: rightInset }}
       >
         {/* <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" /> */}
-        <h2 className="section-heading text-secondary uppercase mb-20 md:mb-50 3xl:mb-[65px]">
+        <h2 className="section-heading text-secondary uppercase mb-20 md:mb-50 ">
           {AboutData.title}
         </h2>
 

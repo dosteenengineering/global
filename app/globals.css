@@ -261,7 +261,10 @@ body::-webkit-scrollbar {
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.125] md:leading-[1.111111111111111] text-95;
+    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95;
+}
+.section-heading-90 {
+    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.1112] text-90;
 }
 
 .hero-heading {
@@ -571,4 +574,13 @@ body::-webkit-scrollbar {
 @theme {
   --animate-dropdown-in: dropdown-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   --animate-item-in: item-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+} 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    box-shadow: 0 0 0px 1000px transparent inset !important;
+    -webkit-text-fill-color: #626262 !important;
+    transition: background-color 5000s ease-in-out 0s !important;
 }

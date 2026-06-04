@@ -8,6 +8,7 @@ import "swiper/css/effect-creative";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
+import Link from "next/link";
 
 import { featuredProjectsData, Project } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
@@ -71,56 +72,61 @@ function InactiveSlot({
   const exitTo = direction === "right" ? "-100%" : "100%";
 
   return (
-    <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-      <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
-        {displayed.animating && (
-          <p
-            className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
-            style={{ ["--exit-to" as string]: exitTo }}
-          >
-            {displayed.prev.name}
-          </p>
-        )}
-        <p
-          className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
-          style={
-            displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-          }
-        >
-          {displayed.next.name}
-        </p>
-      </div>
+         
+          <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
 
-      <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
-        {displayed.animating && (
-          <div
-            className="absolute inset-0 slot-exit"
-            style={{ ["--exit-to" as string]: exitTo }}
-          >
-            <Image
-              src={displayed.prev.image}
-              alt={displayed.prev.name}
-              fill
-              className="object-cover"
-            />
+      <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>    
+            <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
+              {displayed.animating && (
+                <p
+                  className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
+                  style={{ ["--exit-to" as string]: exitTo }}
+                >
+                  {displayed.prev.name}
+                </p>
+              )}
+              <p
+                className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
+                style={
+                  displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
+                }
+              >
+                {displayed.next.name}
+              </p>
+            </div> 
+      </Link>
+      <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>    
+            <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
+              {displayed.animating && (
+                <div
+                  className="absolute inset-0 slot-exit"
+                  style={{ ["--exit-to" as string]: exitTo }}
+                >
+                  <Image
+                    src={displayed.prev.image}
+                    alt={displayed.prev.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <div
+                className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`}
+                style={
+                  displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
+                }
+              >
+                <Image
+                  src={displayed.next.image}
+                  alt={displayed.next.name}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
+                />
+              </div>
+            </div>
+      </Link>
           </div>
-        )}
-        <div
-          className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`}
-          style={
-            displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-          }
-        >
-          <Image
-            src={displayed.next.image}
-            alt={displayed.next.name}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
-          />
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -191,7 +197,7 @@ export default function FeaturedProjectsSection() {
       <div ref={containerRef} className="container">
         <SectionTitle
           text={featuredProjectsData.title}
-          className="section-heading mb-25 md:mb-70 xl:mb-[76px] md:text-center xl:ml-[1.8em]"
+          className="section-heading mb-25 md:mb-70  md:text-center xl:ml-[1.8em]"
         />
       </div>
 
@@ -285,7 +291,7 @@ export default function FeaturedProjectsSection() {
               const isActive = idx === mobileActiveIndex;
               return (
                 <SwiperSlide key={project.key}>
-                  <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
+                <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.name}
@@ -326,10 +332,11 @@ export default function FeaturedProjectsSection() {
                         className={`absolute bottom-0 left-0 right-0 px-6 pb-6 z-10 transition-opacity duration-500 ${
                           isActive ? "opacity-100" : "opacity-0"
                         }`}
-                      >
+                      >  
                         <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
                           {project.name}
                         </p>
+                        
                         <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
                         <div className="flex items-center gap-3 justify-between">
                           <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
@@ -342,6 +349,7 @@ export default function FeaturedProjectsSection() {
                       </div>
                     </>
                   </div>
+                
                 </SwiperSlide>
               );
             })}
@@ -352,7 +360,7 @@ export default function FeaturedProjectsSection() {
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-x-140 3xl:gap-x-200 container">
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[713px_auto] gap-x-140 3xl:gap-x-200 container">
         {/* ───────── Row 1 Col 1 — ACTIVE SWIPER ───────── */}
         <motion.div
           variants={moveUp(0.2)}
@@ -386,6 +394,7 @@ export default function FeaturedProjectsSection() {
           >
             {projects.map((project: Project) => (
               <SwiperSlide key={project.key}>
+                 <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
                 <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                   <Image
                     src={project.image}
@@ -425,6 +434,7 @@ export default function FeaturedProjectsSection() {
                     </div>
                   </div>
                 </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>

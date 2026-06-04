@@ -75,7 +75,7 @@ export default function BimSection() {
       <div className="container relative z-10 h-full flex flex-col  py-[105px] lg:py-140 3xl:pt-[177px]">
         <SectionTitle
           text={bimData.heading}
-          className="text-white section-heading max-w-[721px] mb-[30px] md:mb-40 lg:mb-[28px]"
+          className="text-white section-heading max-w-[22ch] mb-[30px] md:mb-40 lg:mb-[28px]"
         />
 
         <motion.div

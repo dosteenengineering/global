@@ -180,59 +180,77 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                 </motion.div>
 
                 <motion.div
-                variants={moveUp(0.55)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ amount: 0.1, once: true }}
-                className="relative">
-                    <Controller
-                        name="solutionType"
-                        control={control}
-                        defaultValue={null}
-                        render={({ field }) => (
-                            <Select<OptionType>
-                                {...field}
-                                options={solutionOptions}
-                                placeholder="Solution Type"
-                                instanceId={hideTitle ? "solution-type-popup" : "solution-type"}
-                                classNamePrefix="rs"
-                                unstyled
-                                isSearchable={false}
-                                menuPosition={hideTitle ? "absolute" : "fixed"}
-                                menuPortalTarget={hideTitle ? undefined : (mounted ? document.body : null)}
-                                menuShouldBlockScroll={!hideTitle}
-                                menuPlacement={hideTitle ? "top" : "auto"}
-                                components={{ MenuList }}
-                                classNames={{
-                                    control: ({ isFocused }) =>
-                                        `border-b pb-4 pt-1 cursor-pointer transition-colors ${
-                                            isFocused ? "border-[#1B2B6B]" : "border-[#C2C2C2]"
-                                        }`,
-                                    placeholder: () =>
-                                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
-                                    singleValue: () =>
-                                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
-                                    indicatorSeparator: () => "hidden",
-                                    dropdownIndicator: () => "text-secondary ml-2",
-                                    menuPortal: () => "z-[10000]",
-                                    menu: () =>
-                                        "bg-[#F4F4F4] border border-[#C2C2C2] rounded-lg shadow-lg",
-                                    menuList: () =>
-                                        `py-1 overflow-y-scroll ${isMobile ? "h-[285px] pt-3" : "max-h-[180px]"}`,
-                                    option: ({ isFocused, isSelected }) =>
-                                        `px-4 py-2 text-[13px] font-poppins font-[300] cursor-pointer transition-colors ${
-                                            isSelected
-                                                ? "bg-[#1B2B6B] text-white"
-                                                : isFocused
-                                                ? "bg-[#E2E2DE] text-secondary"
-                                                : "text-secondary"
-                                        }`,
-                                }}
-                            />
-                        )}
-                    />
-                    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
-                </motion.div>
+    variants={moveUp(0.55)}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ amount: 0.1, once: true }}
+    className="relative"
+>
+    <Controller
+        name="solutionType"
+        control={control}
+        defaultValue={null}
+        render={({ field }) => (
+            <Select<OptionType>
+                {...field}
+                options={solutionOptions}
+                placeholder="Solution Type"
+                instanceId={hideTitle ? "solution-type-popup" : "solution-type"}
+                classNamePrefix="rs"
+                unstyled
+                isSearchable={false}
+                menuPosition={hideTitle ? "absolute" : "fixed"}
+                menuPortalTarget={hideTitle ? undefined : (mounted ? document.body : null)}
+                menuShouldBlockScroll={!hideTitle}
+                menuPlacement={hideTitle ? "top" : "auto"}
+                components={{ MenuList }}
+                classNames={{
+                    control: ({ isFocused }) =>
+                        `border-b pb-4 pt-1 cursor-pointer transition-colors ${
+                            isFocused ? "border-[#1B2B6B]" : "border-[#C2C2C2]"
+                        }`,
+                    placeholder: () =>
+                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
+                    singleValue: () =>
+                        "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
+                    indicatorSeparator: () => "hidden",
+                    dropdownIndicator: () => "!hidden",  // 👈 hide default icon
+                    menuPortal: () => "z-[10000]",
+                    menu: () =>
+                        "bg-[#F4F4F4] border border-[#C2C2C2] rounded-lg shadow-lg",
+                    menuList: () =>
+                        `py-1 overflow-y-scroll ${isMobile ? "h-[285px] pt-3" : "max-h-[180px]"}`,
+                    option: ({ isFocused, isSelected }) =>
+                        `px-4 py-2 text-[13px] font-poppins font-[300] cursor-pointer transition-colors ${
+                            isSelected
+                                ? "bg-[#1B2B6B] text-white"
+                                : isFocused
+                                ? "bg-[#E2E2DE] text-secondary"
+                                : "text-secondary"
+                        }`,
+                }}
+            />
+        )}
+    />
+
+    {/* 👇 Custom arrow — sits in the already-relative wrapper */}
+    <span className="pointer-events-none absolute right-0 top-[15px]">
+       
+        <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_434_443)">
+        <path d="M16.7417 1.19727L8.98329 8.80351L1.25586 1.22317" stroke="#161616" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <defs>
+        <clipPath id="clip0_434_443">
+        <rect width="18" height="10" fill="white"/>
+        </clipPath>
+        </defs>
+        </svg>
+
+    </span>
+
+    <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
+</motion.div>
 
                 {/* Submit */}
                 <motion.div

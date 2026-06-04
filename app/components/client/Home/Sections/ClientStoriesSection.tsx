@@ -53,7 +53,7 @@ export default function ClientStoriesSection() {
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140">
+      <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140 2xl:pt-[148px]">
         <SectionTitle
           title={clientStoriesData.title}
           className="text-white section-heading uppercase mb-80 3xl:mb-[82px]"
@@ -73,7 +73,7 @@ export default function ClientStoriesSection() {
                 alt="quote open"
                 width={120}
                 height={120}
-                className="object-contain opacity-10 w-[80px] h-[140px] md:w-[120px] md:h-[200px] 2xl:w-[160px] 2xl:h-[300px] 3xl:w-[233px] 3xl:h-[446px]"
+                className="object-contain opacity-10 w-[80px] h-[140px] md:w-[120px] md:h-[200px] 2xl:w-[160px] 2xl:h-[300px] 3xl:w-full 3xl:h-[446px]"
               />
             </motion.div>
           </div>
@@ -96,7 +96,7 @@ export default function ClientStoriesSection() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="flex-shrink-0 pr-60 3xl:pr-[66px] -mt-3"
+                className="flex-shrink-0 pr-60 3xl:pr-[62px] -mt-3"
               >
                 <div className="rounded-full border flex justify-center items-center font-[300] border-white w-[78px] h-[31px]">
                   <span className="font-poppins text-15 leading-[1.66] text-white">
@@ -121,7 +121,7 @@ export default function ClientStoriesSection() {
                       key={i}
                       onClick={() => goToSlide(i)}
                       aria-label={`Go to slide ${i + 1}`}
-                      className="flex flex-1 items-center h-[12px] bg-transparent border-none outline-none p-0 m-0 cursor-pointer"
+                      className="flex flex-1 items-center h-[2px] bg-transparent border-none outline-none p-0 m-0 cursor-pointer"
                     >
                       <span className="relative block w-full h-[2px] bg-white/30">
                         {i === activeIndex && (

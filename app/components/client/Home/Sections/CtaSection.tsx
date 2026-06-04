@@ -36,7 +36,7 @@ useEffect(() => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container py-12.5 md:py-140 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
+      <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[146px] 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
         {/* Heading */}
         <SectionTitle
           title={ctaData.heading}
@@ -75,7 +75,7 @@ useEffect(() => {
                 >
                   <Link
                     href={action.href}
-                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:px-[45px] ${i === 0 ? "sm:pl-0" : ""} ${i === ctaData.actions.length - 1 ? "sm:pr-0" : ""}`}
+                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px] ${i === 0 ? "sm:pl-0" : ""} ${i === ctaData.actions.length - 1 ? "sm:pr-0" : ""}`}
                   >
                     <span className="text-white font-poppins font-light text-30 leading-[1.52] -tracking-[2%] uppercase">
                       {action.label}
