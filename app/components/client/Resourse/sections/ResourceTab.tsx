@@ -30,21 +30,39 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   const tabsScrollerRef = useRef<HTMLDivElement>(null);
 
   const activeTabData = data.tabs.find((tab) => tab.id === activeTab) ?? data.tabs[0];
+  const activeTabIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
+  const isAtFirstTab = activeTabIndex <= 0;
+  const isAtLastTab = activeTabIndex >= data.tabs.length - 1;
 
   useLayoutEffect(() => {
     const updateIndicator = () => {
       const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
       const activeButton = buttonRefs.current[activeIndex];
-      if (!activeButton) return;
+      const tabsContainer = tabsContainerRef.current;
+      if (!activeButton || !tabsContainer) return;
+
+      const buttonRect = activeButton.getBoundingClientRect();
+      const containerRect = tabsContainer.getBoundingClientRect();
+
       setIndicatorStyle({
-        width: activeButton.offsetWidth,
-        left: activeButton.offsetLeft,
+        width: buttonRect.width,
+        left: buttonRect.left - containerRect.left,
       });
     };
 
     updateIndicator();
+
+    const resizeObserver = new ResizeObserver(updateIndicator);
+    buttonRefs.current.forEach((button) => {
+      if (button) resizeObserver.observe(button);
+    });
+    if (tabsContainerRef.current) resizeObserver.observe(tabsContainerRef.current);
+
     window.addEventListener("resize", updateIndicator);
-    return () => window.removeEventListener("resize", updateIndicator);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateIndicator);
+    };
   }, [activeTab, data.tabs]);
 
   useLayoutEffect(() => {
@@ -98,7 +116,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
         <div className="mb-50">
           <SectionTitle
             title={data.sectionTitle}
-            className="section-heading max-w-[26ch] mb-5 xl:mb-20 uppercase leading-none! translate-y-[-15px]"
+            className="section-heading max-w-[26ch] mb-5 xl:mb-20 uppercase leading-none! "
           />
           {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
@@ -175,12 +193,16 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           <button
             type="button"
             aria-label="Previous resource tabs"
+            disabled={isAtFirstTab}
             onClick={() => {
-              const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
-              const prevIndex = Math.max(activeIndex - 1, 0);
+              const prevIndex = Math.max(activeTabIndex - 1, 0);
               setActiveTab(data.tabs[prevIndex].id);
             }}
-            className="absolute -left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-colors hover:border-primary hover:text-primary 3xl:hidden"
+            className={`absolute -left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${
+              isAtFirstTab
+                ? "cursor-not-allowed opacity-35"
+                : "hover:border-primary hover:text-primary"
+            }`}
           >
             <ChevronLeft size={20} strokeWidth={1.8} />
           </button>
@@ -207,8 +229,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                       height={32}
                       className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
                     />
-                    <span
-                      className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
+                    <span className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
                         }`}
                     >
                       {tab.label}
@@ -221,7 +242,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               <div className="absolute left-0 right-0 bottom-0 h-px bg-bdr-gray" />
               <div
                 className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300"
-                style={{ width: indicatorStyle.width, left: indicatorStyle.left }}
+                style={{ width: indicatorStyle.width+2, left: indicatorStyle.left }}
               />
             </div>
           </div>
@@ -229,12 +250,16 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           <button
             type="button"
             aria-label="Next resource tabs"
+            disabled={isAtLastTab}
             onClick={() => {
-              const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
-              const nextIndex = Math.min(activeIndex + 1, data.tabs.length - 1);
+              const nextIndex = Math.min(activeTabIndex + 1, data.tabs.length - 1);
               setActiveTab(data.tabs[nextIndex].id);
             }}
-            className="absolute -right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-colors hover:border-primary hover:text-primary 3xl:hidden"
+            className={`absolute -right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${
+              isAtLastTab
+                ? "cursor-not-allowed opacity-35"
+                : "hover:border-primary hover:text-primary"
+            }`}
           >
             <ChevronRight size={20} strokeWidth={1.8} />
           </button>

@@ -296,21 +296,21 @@ export const resourcesKnowledgeHubData = {
         {
           id: 1,
           type: "PDF",
-          title: "Sectional Door- Installation Manual",
+          title: `Sectional Door- Installation\n Manual`,
           desc: "Step-by-step with diagrams",
           download: "#",
         },
         {
           id: 2,
           type: "PDF",
-          title: "Flood Barrier - O&M Manual",
+          title: `Flood Barrier - O&M\n Manual`,
           desc: "Operation, maintenance schedule, parts",
           download: "#",
         },
         {
           id: 3,
           type: "PDF",
-          title: "Gate System-Wiring Diagram",
+          title: `Gate System-Wiring\n Diagram`,
           desc: "Electrical connection guide",
           download: "#",
         },
@@ -361,7 +361,7 @@ export const industryGuidesData = {
 };
 
 export const specificationToolsData = {
-  title: "Specification Tools For Building Professionals",
+  title: "Specification Tools\n For Building Professionals",
 
   items: [
     {
