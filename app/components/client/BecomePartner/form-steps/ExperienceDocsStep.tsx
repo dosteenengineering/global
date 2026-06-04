@@ -1,10 +1,10 @@
 import { keyCertificates, paymentPreference } from "./data";
-import { FileInput, FormInput} from "./formFields";
+import { FileInput, FormInput } from "./formFields";
 import { SelectInput } from "./SelectInput";
 import type { StepFormProps } from "./types";
 
 const ExperienceDocsStep = ({ register, errors, watch }: StepFormProps) => {
- 
+
   return (
     <>
       <FormInput name="relevantExperience" label="Years of Relevant Experience" register={register} errors={errors} />
@@ -13,8 +13,8 @@ const ExperienceDocsStep = ({ register, errors, watch }: StepFormProps) => {
       <FileInput name="brochure" label="Product/Service Brochure or Catalog" helper="Max 10MB, PDF preferred" register={register} errors={errors} />
       <FileInput name="technicalSpecSheet" label="Technical Specifications Sheet" helper="Detailed technical specs - Max 10MB" register={register} errors={errors} />
       <FileInput name="uploadedDocuments" label="Upload Documents" helper="Trade License, VAT Certificate, ISO Certificates, Bank Details, Insurance Certificate (max 15 files, PDF/JPG)" className="md:col-span-2" register={register} errors={errors} />
-      <SelectInput name="paymentTermsPreference" watch={watch} label="Payment Terms Preference" 
-      options={paymentPreference} className="md:col-span-2" register={register} errors={errors} />
+      <SelectInput name="paymentTermsPreference" watch={watch} label="Payment Terms Preference"
+        options={paymentPreference} className="md:col-span-2" register={register} errors={errors} />
       <TermsCheckbox register={register} errors={errors} />
     </>
   );
@@ -32,7 +32,7 @@ const TermsCheckbox = ({ register, errors }: Pick<StepFormProps, "register" | "e
       />
       <span className="relative mt-[5px] flex h-[20px] w-[20px] shrink-0 items-center justify-center border border-primary rounded-[1px] peer-checked:bg-primary">
         <svg
-          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-50"
+          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-0"
           viewBox="0 0 10 10"
           fill="none"
         >

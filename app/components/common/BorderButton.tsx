@@ -80,7 +80,7 @@ export default function BorderButton({
       )}
 
       {iconPosition === "left" && renderedIcon}
-      <span className={`relative  text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300
+      <span className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300
          ${textHoverClass}`}>
         {text}
       </span>

@@ -348,10 +348,12 @@ export const FileInput = ({
 
   return (
     <label className={`block ${className}`}>
-      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+      <div className="flex justify-between">
+        <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+        <Paperclip size={24} strokeWidth={1.5} className="shrink-0 text-paragraph" />
+      </div>
       <div className=" flex h-8 items-center border-b border-[#CFCFCF]">
         <input type="file" {...register(name)} className="min-w-0 flex-1 text-12 text-paragraph file:hidden" />
-        <Paperclip size={16} strokeWidth={1.5} className="shrink-0 text-paragraph" />
       </div>
       <span className="mt-1 block text-11 leading-[1.45] text-paragraph">{helper}</span>
       {error && <span className="mt-2 block text-12 text-red-500">{error}</span>}
