@@ -8,7 +8,7 @@ export const residentialData = {
   second: {
     heading: "ENGINEERED FOR SAFE, STYLISH LIVING",
     description:
-      "combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking \n systems for high-rise towers",
+      "Combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking \n systems for high-rise towers",
     leftImages: [
       "/assets/images/services/residential/1.jpg",
       "/assets/images/services/residential/2.jpg",

@@ -17,7 +17,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         <Image src="/assets/images/about/cta/bg-right.svg" alt="" fill className="object-contain object-right" />
       </div>
 
-      <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[145px] 3xl:pb-150 w-full">
+      <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[147px] 3xl:pb-150 w-full">
         {/* Title */}
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
@@ -32,7 +32,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
           {description}
         </p> */}
-          <SectionDescription text={description} className={`text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
+          <SectionDescription text={description} className={`max-w-[70ch] text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
           {buttons.map((btn,index) => (
