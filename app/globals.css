@@ -261,10 +261,10 @@ body::-webkit-scrollbar {
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95;
+    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95 translate-y-[-15px];
 }
 .section-heading-90 {
-    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.1112] text-90;
+    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.1112] text-90 translate-y-[-15px];
 }
 
 .hero-heading {

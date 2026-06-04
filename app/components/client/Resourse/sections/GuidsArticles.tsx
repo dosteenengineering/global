@@ -28,9 +28,9 @@ interface GuidesArticlesProps {
 }
 
 const imageHeightClasses = [
-  "3xl:h-[579px]",
-  "3xl:h-[458px]",
-  "3xl:h-[297px]",
+  "2xl:h-[450px] 3xl:h-[579px]",
+  "2xl:h-[350px] 3xl:h-[458px]",
+  "2xl:h-[250px] 3xl:h-[297px]",
 ];
 
 const GuidesArticles = ({ data }: GuidesArticlesProps) => {
@@ -50,11 +50,8 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
     <section className="relative overflow-hidden py-12.5 md:py-120 md:py-140 2xl:py-150">
       <PrimaryNoise2 />
       <div className="container">
-        <div className="flex justify-between mb-50 md:mb-100 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
-          <SectionTitle
-            text={data.title}
-            className="text-left section-heading uppercase text-white max-w-[28ch]"
-          />
+        <div className="flex justify-between mb-50 md:mb-60 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
+          <SectionTitle text={data.title} className="text-left section-heading !text-90 uppercase text-white max-w-[28ch] translate-y-[-15px] !leading-[1.1]" />
           <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <BorderButton
               text="View All"

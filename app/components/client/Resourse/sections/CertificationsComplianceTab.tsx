@@ -27,9 +27,8 @@ const CertificationsComplianceTab = ({ tab }: CertificationsComplianceTabProps) 
       {/* <h2 className="text-[24px] md:text-55 tracking-[-2%]     leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] max-w-[35ch] text-secondary mb-7.5 md:mb-50">
         {tab.title}
       </h2> */}
-         <SectionTitle title={tab.title} 
-            className="text-[24px] md:text-55 leading-[1.34] md:leading-[1.181818181818182] font-light  text-secondary mb-7.5 md:mb-50 max-w-[35ch]" />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
+         <SectionTitle title={tab.title} className="text-[24px] md:text-55 leading-[1.34] md:leading-[1.181818181818182] font-light text-secondary mb-7.5 md:mb-50 max-w-[35ch] tracking-[-0.02em]" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-30 gap-y-30 xl:gap-x-30 xl:gap-y-40">
         {items.map((item,index) => (
           <ResourceDownloadCard key={item.id} item={item} delay={index * 0.1} />
         ))}
@@ -42,8 +41,8 @@ const ResourceDownloadCard = ({ item, delay }: { item: CertificationItem, delay:
 
   return (
     <motion.article
-      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}  className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 xl:py-[61px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
-       <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-30 font-poppins font-[600] bg-[#1E702D1A] text-[#1E702D]`} >
+      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}  className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 3xl:px-40 py-[15px] md:py-6 xl:py-35 3xl:py-[61px] 3xl:min-h-[245px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 3xl:gap-10 ">
+       <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-30 font-poppins font-semibold bg-[#1E702D1A] text-[#1E702D]`} >
         {item.type}
       </div>
 
@@ -56,7 +55,8 @@ const ResourceDownloadCard = ({ item, delay }: { item: CertificationItem, delay:
       
           <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
             <span className="uppercase font-normal leading-[1.67]">Download</span>
-            <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
+            <img src="/assets/icons/download.svg" width={"26px"} height={"24px"} alt="Download" className="object-contain w-[22px] h-[20px] 
+            xl:h-[22px] xl:w-[24px] transition-transform duration-300 group-hover:translate-y-1" />
           </a>
         </div>
       </div>

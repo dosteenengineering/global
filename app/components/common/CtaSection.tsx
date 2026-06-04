@@ -22,7 +22,7 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}
         </h2> */}
-        <SectionTitle text={title} className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 2xl:mb-[26px] 3xl:mb-[26px] 
+        <SectionTitle text={title} className={`section-heading-90 text-white uppercase whitespace-pre-line mb-5 md:mb-20 2xl:mb-[26px] 3xl:mb-[26px] 
           ${titleWidth}`} />
 
         {/* Divider */}
