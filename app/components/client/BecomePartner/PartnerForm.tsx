@@ -116,13 +116,13 @@ const PartnerForm = () => {
   return (
     <>
       <ThankYouModal isOpen={isSubmitted} />
-      <div className="h-full">
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex min-h-full flex-col pt-70 xl:pt-80  h-full  ">
+      <div className="min-h-full pb-4">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex min-h-full flex-col pt-70 xl:pt-80 ">
           <Stepper activeStep={activeStep} />
-          <h2 className="mt-60 mb-50 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
+          <h2 className="mt-60 mb-50 shrink-0 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
             {currentStep.title}
           </h2>
-          <div className="max-h-[60vh] h-full overflow-y-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden pb-10 " data-lenis-prevent-wheel>
+          <div className="pb-10 max-h-[70vh] overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pb-50">
             <div className="grid grid-cols-1 gap-x-60 gap-y-60 md:grid-cols-2 ">
               {renderStep()}
             </div>
@@ -148,7 +148,7 @@ const PartnerForm = () => {
                 hoverBg="black"
                 px="px-6 2xl:px-[35px]"
                 onClick={isLastStep ? undefined : goToNextStep}
-                className="!max-w-full [&_span]:!max-w-full"
+                className="!items-start !max-w-full [&_span]:!max-w-full !leading-none"
               />
             </div>
           </div>
@@ -160,7 +160,7 @@ const PartnerForm = () => {
 
 const Stepper = ({ activeStep }: { activeStep: number }) => {
   return (
-    <div className="relative flex w-full justify-between">
+    <div className="relative flex w-full shrink-0 justify-between">
       <span className="absolute left-[58px] right-[73px] top-[14px] h-px bg-bdr-gray xl:top-[20px]">
         <span
           className="block h-full bg-primary transition-[width]"

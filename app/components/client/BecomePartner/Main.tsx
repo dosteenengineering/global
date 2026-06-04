@@ -12,13 +12,13 @@ const Main = () => {
   const containerInset = useGetContainerSpacing(containerRef);
 
   return ( 
-    <section className="min-h-screen 3xl:h-screen relative overflow-hidden">
+    <section className="relative h-[100svh] ove rflow-hidden">
       <div className="absolute z-2 bottom-[-66%] left-[-21%] max-w-[948px] max-h-[949px] xl:w-[947px] xl:h-[948px] scale-125 rotate-[15deg]">
         <img src="./assets/images/become-a-partner/shape.svg" className="w-auto h-auto max-w-[948px] max-h-[949px] " alt="" />
       </div>
       <ContainerAnchor ref={containerRef} />
-      <div className="grid xl:grid-cols-[1.2fr_2fr] 2xl:grid-cols-[1.5fr_2fr] 3xl:grid-cols-[841px_auto] h-full min-h-screen">
-        <div style={{ paddingLeft: containerInset }} className="relative overflow-hidden h-full py-80 pr-5 md:pr-100 3xl:pr-[110px]">
+      <div className="grid h-full min-h-0 xl:grid-cols-[1.2fr_2fr] 2xl:grid-cols-[1.5fr_2fr] 3xl:grid-cols-[841px_auto]">
+        <div style={{ paddingLeft: containerInset }} className="relative h-full min-h-0 overflow-hidden py-80 pr-5 md:pr-100 3xl:pr-[110px]">
           <PrimaryNoise />
           <div className="relative z-2 h-full">
             <Image src={"/assets/logos/logo-white-full.png"} width={708} height={188} alt="logo" className="h-[61px] w-auto" />
@@ -34,7 +34,11 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div style={{ paddingRight: containerInset }} className="bg-white pl-5 md:pl-70 xl:pl-80 3xl:pl-[72px]">
+        <div
+          style={{ paddingRight: containerInset }}
+          data-lenis-prevent
+          className="h-full min-h-0 overflow-y-auto overscroll-contain bg-white pl-5 md:pl-70 xl:pl-80 3xl:pl-[72px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           <PartnerForm />
         </div>
       </div>
