@@ -23,7 +23,7 @@ export const AboutBimData = {
   // `,
   subTitle: "The Dosteen BIM Promise",
   subDescription:
-    "We integrate our building systems models with your MEP and structural BIM environment before any installation begins — so clash errors are resolved in the model, not discovered on site.",
+    '"We integrate our building systems models with your MEP and structural BIM environment before any installation begins — so clash errors are resolved in the model, not discovered on site."',
 };
 
 export const bimCapabilities = {

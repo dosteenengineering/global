@@ -44,7 +44,7 @@ export default function InnerPageBanner({
           {title}
         </h1> */}
         
-        <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading !leading-[100%] ${titleMaxWidth}`} />
+        <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading !leading-[1.125] md:!leading-[1]  ${titleMaxWidth}`} />
         {description && (
           // <p className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}>
           //   {description}

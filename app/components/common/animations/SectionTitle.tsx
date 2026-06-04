@@ -72,7 +72,7 @@ export default function SectionTitle({
          mask.style.cssText = `
         display:block;
         overflow:hidden;
-        ${lines.length > 1 ? "padding-bottom:0.00277em; margin-bottom:-0.00277em;" : ""}
+        ${lines.length > 1 ? "padding-bottom:0.00277em; padding-top:1px; margin-bottom:-1.7px;" : ""}
       `;
       const inner = document.createElement("span");
       inner.style.cssText = "display:block;";

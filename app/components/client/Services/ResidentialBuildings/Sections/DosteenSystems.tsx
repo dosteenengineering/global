@@ -134,21 +134,21 @@ export default function DosteenSystems() {
                 <div
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
-                  className={`relative flex items-center gap-20 cursor-pointer border-t-2 first:border-t-0 border-[#c2c2c2] last:border-b-2 group transition-all duration-300 
-                    ${isActive ? "pl-20" : "" }`}
+                  className={`group hover:pl-2 md:pe-3 3xl:pe-0 hover:3xl:pl-20 relative flex items-center gap-20 cursor-pointer transition-all duration-300 border-t-2 first:border-t-2 hover:first:border-t-transparent  border-[#c2c2c2] last:border-b-2 group transition-all duration-300 
+                    ${isActive ? "pl-2 3xl:pl-20 first:border-t-transparent" : "" }`}
                   style={{ background: isActive ? activeGradient : "transparent" }}
                 >
                   <motion.span variants={moveRight(0.6 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
-                    className={`py-30 3xl:py-[31px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}
+                    className={`py-30 3xl:py-[29px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}
                   >
                     {system.title}
                   </motion.span>
 
                   <div
-                    className={`shrink-0 transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-0"
+                    className={`shrink-0 transition-opacity duration-300 group-hover:opacity-100 ${isActive ? "opacity-100" : "opacity-0"
                       }`}
                   >
-                    <div className="w-[51px] h-[51px] rounded-full bg-primary flex items-center justify-center">
+                    <div className="w-[51px] h-[51px] rounded-full bg-primary border-1 border-[#76A7FF] flex items-center justify-center">
                       <Image src="/assets/icons/arrow-right-white-small.svg" alt="arrow" width={20} height={20} className="object-contain invert brightness-0 w-auto h-[22px]" />
                     </div>
                   </div>
@@ -192,6 +192,7 @@ export default function DosteenSystems() {
                   iconColor="primary"
                   hoverBg="black"
                   className="w-fit"
+                    px="px-6 2xl:px-[35.5px]"
                 />
               </motion.div>
             </div>

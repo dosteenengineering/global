@@ -8,7 +8,7 @@ import { SectionDescription } from "@/app/components/common/animations/SectionDe
 export default function AboutPartners() {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-12.5 md:pb-140 3xl:pb-200">
-      <div className="absolute top-[-36%] md:-top-88 lg:-top-71 left-[-23%] md:left-[-4.8%] pointer-events-none">
+      <div className="absolute top-[-36%] md:-top-88  lg:-top-21 2xl:-top-71 3xl:-top-71 left-[-23%] md:left-[-1.8%] 2xl:left-[-11%] 3xl:left-[-4.8%] pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
