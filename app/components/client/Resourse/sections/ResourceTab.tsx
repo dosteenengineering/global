@@ -93,12 +93,12 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   };
 
   return (
-    <section className="pt-70 md:pt-[120px] pb-200 overflow-hidden">
+    <section className="pt-70 md:pt-100 xl:pt-120 pb-200 overflow-hidden">
       <div className="container">
         <div className="mb-50">
           <SectionTitle
             title={data.sectionTitle}
-            className="section-heading max-w-[26ch] mb-5 xl:mb-10 uppercase leading-none!"
+            className="section-heading max-w-[26ch] mb-5 xl:mb-20 uppercase leading-none! translate-y-[-15px]"
           />
           {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
@@ -188,27 +188,27 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           <div ref={tabsScrollerRef} className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <div
               ref={tabsContainerRef}
-              className="relative flex min-w-max snap-x snap-mandatory items-center gap-5 px-10 sm:px-11 xl:gap-10 2xl:gap-[40px] 3xl:w-full 3xl:min-w-0 3xl:justify-between 3xl:px-0"
+              className="relative flex min-w-max snap-x snap-mandatory items-center gap-5 px-10 sm:px-11 xl:gap-10 2xl:gap-[40px] 3xl:gap-[45px] 3xl:w-full 3xl:justify-between 3xl:px-0"
             >
               {data.tabs.map((tab, index) => {
                 const isActive = activeTab === tab.id;
                 return (
-                  <motion.div variants={fadeIn(0.12*index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }} key={tab.id}>
+                  <motion.div variants={fadeIn(0.12*index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }} key={tab.id} className="">
                   <button
                     ref={(el) => { buttonRefs.current[index] = el; }}
                     type="button"
                     onClick={() => handleTabChange(tab)}
-                    className="flex shrink-0 snap-center items-center gap-2 pb-20 text-left transition-colors duration-300 cursor-pointer"
+                    className="flex shrink-0 snap-center items-center gap-[10px] pb-20 text-left transition-colors duration-300 cursor-pointer w-fit"
                   >
                     <Image
                       src={tab.icon}
                       alt=""
-                      width={28}
-                      height={28}
-                      className="h-7 w-7 shrink-0 object-contain"
+                      width={32}
+                      height={32}
+                      className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
                     />
                     <span
-                      className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all duration-300 ${isActive ? "font-medium" : "font-light"
+                      className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
                         }`}
                     >
                       {tab.label}
