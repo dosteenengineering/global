@@ -15,7 +15,7 @@ import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-const AUTOPLAY_DELAY = 13500;
+const AUTOPLAY_DELAY = 3500;
 
 const Partners = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,8 +90,8 @@ const Partners = () => {
 
       {/* HEADER */}
       <div ref={containerRef} className="relative container mb-50">
-        <SectionTitle title={title} className="mb-50 section-heading translate-y-[-10px]" />
-        <SectionDescription text={subtitle} className="!text-30 leading-[1.33] -tracking-[0.02em] font-light mb-2.5 md:mb-30" />
+        <SectionTitle title={title} className="mb-50 section-heading " />
+        <SectionDescription text={subtitle} className="!text-30 !leading-[1.334] -tracking-[0.02em] font-light mb-2.5 md:mb-30" />
         <SectionDescription text={description} className="text-description text-paragraph max-w-[90ch]" />
       </div>
 
@@ -110,13 +110,13 @@ const Partners = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[282px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
+                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[284px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
               >
                 <div className={`absolute inset-0 transition-opacity duration-700 ease-out will-change-[opacity] ${isActive ? "opacity-100" : "opacity-0" }`} >
                   <PrimaryNoise2 />
                 </div>
                 {/* CENTER: logo + title stacked, always centered as a group */}
-                <div className="absolute inset-0 flex md:items-center justify-center">
+                <div className="absolute 3xl:top-[-31px] inset-0 flex md:items-center justify-center">
                   <div className="relative mt-[27px] md:mt-0 flex flex-col items-center">
                     <div className={`relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px] transition-transform duration-700 ease-out will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
                       <Image src={slide.logo} alt={slide.logoAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
