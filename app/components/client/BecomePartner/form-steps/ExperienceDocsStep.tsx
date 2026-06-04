@@ -32,7 +32,7 @@ const TermsCheckbox = ({ register, errors }: Pick<StepFormProps, "register" | "e
       />
       <span className="relative mt-[5px] flex h-[20px] w-[20px] shrink-0 items-center justify-center border border-primary rounded-[1px] peer-checked:bg-primary">
         <svg
-          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-50"
+          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-0"
           viewBox="0 0 10 10"
           fill="none"
         >
