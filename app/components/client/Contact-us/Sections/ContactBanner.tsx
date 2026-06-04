@@ -46,9 +46,7 @@ export default function ContactBanner({
           />
         </div>
 
-        <h1
-          className={`text-secondary mb-5 md:mb-20 hero-heading leading-[100%] ${titleMaxWidth}`}
-        >
+        <h1 className={`text-secondary mb-5 md:mb-20 hero-heading !leading-none translate-y-[-15px] ${titleMaxWidth}`} >
           {title}
         </h1>
 

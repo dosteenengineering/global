@@ -43,7 +43,7 @@ export default function BorderButton({
     hoverBg === "white" ? "bg-white" :
     hoverBg === "black" ? "bg-[#161616]" : "";
 
-  const sharedClass = `group relative overflow-hidden  flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-[14px] md:text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
+  const sharedClass = `group relative overflow-hidden  flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[17.5px] py-[14px] uppercase text-[14px] md:text-15 leading-[1.733333333333333] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
 
   const arrowSrc =
     hoverBg === "white" && hovered
@@ -80,7 +80,7 @@ export default function BorderButton({
       )}
 
       {iconPosition === "left" && renderedIcon}
-      <span className={`relative  text-[14px] md:text-15 leading-[1] max-w-[200px] font-dm-sans transition-colors duration-300
+      <span className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300
          ${textHoverClass}`}>
         {text}
       </span>
