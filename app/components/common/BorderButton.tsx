@@ -43,7 +43,7 @@ export default function BorderButton({
     hoverBg === "white" ? "bg-white" :
     hoverBg === "black" ? "bg-[#161616]" : "";
 
-  const sharedClass = `group relative overflow-hidden  flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[21.5px] py-[11px] uppercase text-[14px] md:text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
+  const sharedClass = `group relative overflow-hidden  flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[18px] py-[11px] uppercase text-[14px] md:text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
 
   const arrowSrc =
     hoverBg === "white" && hovered

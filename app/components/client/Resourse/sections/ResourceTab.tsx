@@ -93,7 +93,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   };
 
   return (
-    <section className="pt-70 md:pt-100 pb-200 overflow-hidden">
+    <section className="pt-70 md:pt-[120px] pb-200 overflow-hidden">
       <div className="container">
         <div className="mb-50">
           <SectionTitle

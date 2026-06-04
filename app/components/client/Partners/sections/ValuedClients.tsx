@@ -19,7 +19,7 @@ export default function ValuedClients() {
       </div>
       <div className="container">
         {/* Header */}
-        <SectionTitle title={title} className="section-heading mb-30 translate-y-[-10px]" />
+        <SectionTitle title={title} className="section-heading mb-30 " />
         <SectionDescription
           text={description}
           className="!text-30 leading-[1.33] text-secondary tracking-[-0.02em] mb-80"
@@ -31,7 +31,7 @@ export default function ValuedClients() {
             <div key={region.label}>
               {/* Pill */}
               <motion.div variants={moveUp(index*0.12)} initial="hidden" whileInView={"show"} viewport={{ once: true }} className="flex items-center justify-center w-[67px] md:w-[115px] h-[30px] md:h-[50px] border border-primary rounded-full mb-30">
-                <span className="text-[12px] md:text-30 text-secondary tracking-[-0.02em] leading-[1.33] font-light uppercase">
+                <span className="text-[12px] md:text-30 text-secondary tracking-[-0.02em] leading-[1.33] font-light ">
                   {region.label}
                 </span>
               </motion.div>

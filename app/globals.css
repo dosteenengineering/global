@@ -584,3 +584,13 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #626262 !important;
     transition: background-color 5000s ease-in-out 0s !important;
 }
+@media (min-width: 1024px) {
+  .gridlst:nth-last-child(1) .last-st{
+    padding-bottom: 0px !important;
+  }
+}
+@media (max-width: 1023px) {
+  .gridlst:nth-last-child(1) .border-bdr-blue:nth-last-child(1) .last-st{
+    padding-bottom: 0px !important;
+  }
+}

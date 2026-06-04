@@ -13,11 +13,11 @@ export default function CtaSection({title, titleWidth, description, descriptionW
       <PrimaryNoise2 />
 
       {/* Decorative lines — right side */}
-      <div className="absolute z-10 right-[-9%] top-[24%] md:right-0 md:top-1/2 -translate-y-1/2 w-[52%] h-[327px] md:w-[42%] md:h-[90%] pointer-events-none">
+      <div className="absolute z-10 right-[-9%] top-[24%] md:right-0 md:top-[55%] -translate-y-1/2 w-[52%] h-[327px] md:w-[42%] md:h-[90%] pointer-events-none">
         <Image src="/assets/images/about/cta/bg-right.svg" alt="" fill className="object-contain object-right" />
       </div>
 
-      <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[147px] 3xl:pb-150 w-full">
+      <div className="relative z-10 container py-12.5 md:py-140   3xl:py-150 w-full">
         {/* Title */}
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-5 md:mb-20 3xl:mb-[26px] ${titleWidth}`}>
           {title}

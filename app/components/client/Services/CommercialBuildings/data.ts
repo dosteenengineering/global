@@ -64,7 +64,7 @@ export const DosteenSystemsData = {
 };
 
 export const ProjectCtaData = {
-    description: "<p>Need something built to spec? We also offer <span class='font-medium'>custom solutions tailored</span> to your exact requirements.</p>",
+    description: "<p>Need something built to spec? We also offer <span class='font-semibold'>custom solutions tailored</span> to your exact requirements.</p>",
     buttonText: "Discuss your project",
     buttonLink: "#",
 }

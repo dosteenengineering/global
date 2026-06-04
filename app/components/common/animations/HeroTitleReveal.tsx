@@ -150,7 +150,8 @@ export default function TitleRevealFill({
         }
         .trf-mask {
           display: block; overflow: hidden; line-height: inherit;
-          padding-top: 0.01em;    margin-top: -0.1489em;
+          padding-top: 0.01em;    
+          margin-top: -0.3em;
           padding-bottom: 0.09em;  
         }
         .trf-stroke {
@@ -163,8 +164,11 @@ export default function TitleRevealFill({
         }
            @media (max-width: 768px) {
               .trf-stroke {
-                line-height: 1.0123;
+                line-height: 1;
               }
+                 .trf-mask {    
+          margin-top: -0.13em; 
+        }
             }
         ${css}
       `}</style>
