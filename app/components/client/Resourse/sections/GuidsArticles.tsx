@@ -51,7 +51,7 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
       <PrimaryNoise2 />
       <div className="container">
         <div className="flex justify-between mb-50 md:mb-60 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
-          <SectionTitle text={data.title} className="text-left section-heading !text-90 uppercase text-white max-w-[28ch] translate-y-[-15px] !leading-[1.1]" />
+          <SectionTitle text={data.title} className="text-left section-heading-90 !text-90 uppercase text-white max-w-[28ch] translate-y-[-15px] !leading-[1.1]" />
           <motion.div variants={moveUp(0.5)} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <BorderButton
               text="View All"

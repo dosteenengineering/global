@@ -6,7 +6,7 @@ export default function StatNoise4() {
         style={{
           backgroundImage: "url(/assets/noise/stat-noise-4-hr.svg)",
           backgroundRepeat: "repeat-y",
-          backgroundSize: "100% 50px",
+          backgroundSize: "100%",
           // mixBlendMode: "multiply",
           // opacity: 0.3,
         }}

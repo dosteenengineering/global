@@ -136,7 +136,7 @@ const counterPill = (
       <div className="relative z-10 container py-12.5 md:py-[140px] 3xl:py-[150px] w-full">
         <SectionTitle
           text={WhyChooseData.title}
-          className="section-heading text-white uppercase mb-50 3xl:mb-[70px] max-w-[27ch]"
+          className="section-heading-90 text-white uppercase mb-50 3xl:mb-[70px] max-w-[27ch]"
         />
 
         <div className="lg:pl-[25.3%] w-full mb-100 3xl:mb-[109px]">

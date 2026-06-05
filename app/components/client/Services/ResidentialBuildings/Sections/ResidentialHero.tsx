@@ -186,7 +186,7 @@ export default function ResidentialHero() {
               <h1
                 key={i}
                 ref={i === 0 ? titleLine0Ref : titleLine1Ref}
-                className="text-white section-heading will-change-transform"
+                className="text-white section-heading-90 will-change-transform"
               >
                 {line}
               </h1>
@@ -252,7 +252,7 @@ export default function ResidentialHero() {
                 ref={centerSlotRef}
                 className="w-[120px] h-[120px] lg:w-[200px] lg:h-[200px] shrink-0 mb-40 lg:mb-80"
               />
-              <h2 className="section-heading text-secondary text-center max-w-[18ch] lg:max-w-[12ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
+              <h2 className="section-heading-90 text-secondary text-center max-w-[18ch] lg:max-w-[12ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
                 {second.heading}
               </h2>
               <p className="text-center text-description text-paragraph max-w-[320px] lg:max-w-[930px] whitespace-pre-line">

@@ -19,7 +19,7 @@ export default function ValuedClients() {
       </div>
       <div className="container">
         {/* Header */}
-        <SectionTitle title={title} className="section-heading mb-30 " />
+        <SectionTitle title={title} className="section-heading-90 mb-30 " />
         <SectionDescription
           text={description}
           className="!text-30 leading-[1.33] text-secondary tracking-[-0.02em] mb-80"

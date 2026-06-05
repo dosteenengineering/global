@@ -144,7 +144,7 @@ export default function FeaturedProjectsResidencial() {
   return (
     <section className="w-full bg-white py-[70px] md:py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
       <div className="container">
-        <SectionTitle text={title} className="section-heading text-secondary mb-50" />
+        <SectionTitle text={title} className="section-heading-90 text-secondary mb-50" />
 
         {/* ── Mobile layout ── */}
         <div className="md:hidden">

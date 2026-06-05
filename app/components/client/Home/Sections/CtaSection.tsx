@@ -40,7 +40,7 @@ useEffect(() => {
         {/* Heading */}
         <SectionTitle
           title={ctaData.heading}
-          className="text-white section-heading text-center max-w-[1492px]"
+          className="text-white section-heading-90 text-center max-w-[1492px]"
         />
 
         {/* Actions row */}

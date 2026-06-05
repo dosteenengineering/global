@@ -77,7 +77,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
         {item.description}
       </p>
 
-      <div className="mt-auto hidden lg:block">
+      <div className=" hidden lg:block">
         <Image
           src="/assets/icons/arrow-right-top-primary-26.svg"
           alt={`Go to ${item.title}`}

@@ -245,7 +245,7 @@ export default function ClientStoriesSection() {
       <div className="lg:hidden relative z-10 container pt-140 pb-[82px]">
         <SectionTitle
           title={clientStoriesData.title}
-          className="text-white section-heading uppercase mb-[30px] md:mb-40"
+          className="text-white section-heading-90 uppercase mb-[30px] md:mb-40"
         />
 
         {/* Progress bars — full width */}

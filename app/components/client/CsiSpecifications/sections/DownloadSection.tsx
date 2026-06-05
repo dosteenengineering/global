@@ -39,7 +39,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
     <MotionLink variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{once:true}} ref={onRef} href={item.link} 
     style={fixedHeight != null ? { height: fixedHeight } : undefined}
 
-      className={[ "group flex flex-col p-6 transition-colors duration-300 hover:bg-[#F3F5FB] p-50 2xl:pr-30", "border-r border-b border-[#c2c2c2]",
+      className={[ "group flex flex-col p-6 transition-colors duration-300 bg-white/30 hover:bg-[#F3F5FB] p-50 2xl:pr-30", "border-r border-b border-[#c2c2c2]",
         isTopRow ? "border-t border-[#c2c2c2]" : "",
         isFirstSlide ? "border-l border-[#c2c2c2]" : "",
       ]
@@ -59,7 +59,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
         <h3 className="mb-5 text-30 font-light leading-[1.333] -tracking-[0.02em] text-secondary">
           {item.title}
         </h3>
-        <p className="mb-3 text-19 text-paragraph leading-[1.526315789473684] ">
+        <p className=" text-19 text-paragraph leading-[1.526315789473684] ">
           <span className="font-semibold">Division: </span><span className="">{item.division}</span>
         </p>
         <p className="text-paragraph text-description   ">
@@ -69,7 +69,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
 
       <div className="mt-30 flex items-center justify-between gap-4">
         {/* CTA Button */}
-        <BorderButton text="Download Specification" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
+        <BorderButton text="Download Specification" px="px-[21px] 3xl:px-9" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
       </div>
     </MotionLink>
   );
@@ -122,7 +122,7 @@ export default function DownloadSection() {
     <section className="relative w-full bg-white">
       <SecondaryNoise />
       <div className="container relative z-10 py-140 3xl:py-150">
-        <SectionTitle text={downloadData.sectionTitle} className="section-heading mb-50 text-secondary uppercase" />
+        <SectionTitle text={downloadData.sectionTitle} className="section-heading-90 mb-50 text-secondary uppercase" />
         <div className="w-full">
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -141,7 +141,7 @@ export default function DownloadSection() {
               640: { slidesPerView: 2 },
               1200: { slidesPerView: 3 },
             }}
-            className="download-section-swiper !overflow-hidden !px-[1px] !pb-14 [&_.swiper-pagination-bullet-active]:!bg-primary [&_.swiper-pagination-bullet]:!h-2 [&_.swiper-pagination-bullet]:!w-2 [&_.swiper-pagination-bullet]:!bg-primary/40 [&_.swiper-pagination-bullet]:!opacity-100"
+            className="download-section-swiper !overflow-hidden !px-[1px]  [&_.swiper-pagination-bullet-active]:!bg-primary [&_.swiper-pagination-bullet]:!h-2 [&_.swiper-pagination-bullet]:!w-2 [&_.swiper-pagination-bullet]:!bg-primary/40 [&_.swiper-pagination-bullet]:!opacity-100"
           >
             {pairs.map((pair, idx) => {
               const [top, bottom] = pair;

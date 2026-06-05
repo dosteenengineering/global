@@ -24,7 +24,7 @@ export default function Main() {
   const rows = buildRows(items);
 
   return (
-    <section className="bg-white pt-7.5 md:pt-60 3xl:pt-[72px] pb-140 3xl:pb-200 relative">
+    <section className="bg-white pt-7.5 md:pt-60 3xl:pt-[58px] pb-140 3xl:pb-200 relative">
       <div className="absolute right-[-9%] md:right-0 top-[-7%] md:top-[-16%] xl:top-[-14.85%]">
         <Image
           src="/assets/images/gallery/bg-svg.svg"

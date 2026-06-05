@@ -142,7 +142,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
         <div className="px-[15px] lg:px-0 container w-full border-b lg:border-b-0 border-[#c2c2c2] pb-5 lg:pb-0 mb-5 lg:mb-50   ">
           <SectionTitle
             text={data.title}
-            className="section-heading text-secondary uppercase  max-w-[1538px]"
+            className="section-heading-90 text-secondary uppercase  max-w-[1538px]"
           />
         </div>
       </div>

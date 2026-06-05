@@ -22,7 +22,7 @@ export default function AboutBim() {
       <div className="lg:pl-[15.3%] 3xl:pl-[23.96%] pt-12.5 md:pt-120 px-[15px] lg:px-0 container w-full">
         <SectionTitle
           text={AboutBimData.title}
-          className="section-heading text-secondary uppercase mb-50 max-w-[18ch]"
+          className="section-heading-90 text-secondary uppercase mb-50 max-w-[18ch]"
         />
 
         <SectionDescription

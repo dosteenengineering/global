@@ -103,7 +103,7 @@ const AccordionItemComponent = ({
             transition={{ height: spring, opacity: { duration: 0.25 } }}
             style={{ overflow: "hidden" }}
           >
-            <p className={`text-description !text-paragraph max-w-[86%] 3xl:max-w-[1203px] mb-5 md:mb-60 ${isOpen ? "lg:pl-50" : ""}`}>
+            <p className={`text-description !text-paragraph max-w-[107ch] 3xl:max-w-[1203px] mb-5 md:mb-60 ${isOpen ? "lg:pl-50" : ""}`}>
               {item.answer}
             </p>
           </motion.div>
