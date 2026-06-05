@@ -150,7 +150,7 @@ export default function BuildingSystems() {
         <div className="md:mb-12">
           <SectionTitle
             title={title}
-            className="section-heading text-secondary mb-30"
+            className="section-heading-90 text-secondary mb-30"
           />
           {/* <p className="text-30 leading-[1.333] text-paragraph max-w-[1395px] font-light mb-5 md:mb-80 border-b border-bdr-gray pb-5">
             {description}
