@@ -62,7 +62,7 @@ export default function InnerPageBanner({
       }
       {/* 3. Image */}
       {image && (
-        <div ref={ref} className="relative w-full h-[224px] md:h-[450px] xl:h-[650px] overflow-hidden">
+        <div ref={ref} className="relative w-full h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px] overflow-hidden">
           <Image
             src={image}
             alt={imageAlt}

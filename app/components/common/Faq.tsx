@@ -18,7 +18,7 @@ interface FaqData {
 const Faq = ({ faqData }: { faqData: FaqData }) => {
   return (
     <section className="py-140 3xl:py-200 relative">
-      <div className=" absolute top-80 3xl:top-[87px] bottom-70 3xl:bottom-[77px] left-[-7%] 3xl:left-[-162px] w-full max-w-[550px] 3xl:max-w-[783px] max-h-[1203px] z-0 hidden lg:block">
+      <div className="absolute top-80 3xl:top-[87px] bottom-70 3xl:bottom-[77px] left-[-7%] 3xl:left-[-162px] w-full max-w-[550px] 3xl:max-w-[783px] max-h-[1203px] z-0 hidden lg:block">
         <Image
           src="/assets/icons/faq-question.svg"
           alt="faq-question"
@@ -39,12 +39,12 @@ const Faq = ({ faqData }: { faqData: FaqData }) => {
             className="section-heading-90 max-w-[19ch]"
           />
         </motion.div>
-        <motion.div
+        <motion.div 
           variants={moveUp(0.35)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="max-w-[1050px] 3xl:max-w-[1395px] ml-auto"
+          className="max-w-[1050px] 3xl:max-w-[1395px] ml-auto relative z-10"
         >
           <Accordion items={faqData.items} />
         </motion.div>
