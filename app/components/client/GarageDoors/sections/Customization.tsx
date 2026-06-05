@@ -44,23 +44,23 @@ export default function Customization() {
 
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
-          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading uppercase max-w-[23ch] " />
+          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading-90 uppercase max-w-[23ch] " />
           {/* <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p> */}
           <SectionDescription text={solutionsData.mainDescription} 
-          className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6" />
+            className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6 !leading-[1.333333333333333]" />
           {/* ================= DESKTOP ================= */}
           <motion.div initial="hidden" whileInView="show" variants={moveUp(0.2)} viewport={{ once: true }} className="hidden lg:block" >
             <div className="mt-18 3xl:mt-[109px]">
               <div ref={tabsContainerRef} className="relative">
-                <div className="flex gap-80 text-19 leading-[2.631578947368421] font-[300] font-poppins -tracking-[2%] overflow-hidden">
+                <div className="flex gap-10 2xl:gap-80 text-19 2xl:leading-[2.631578947368421] font-light font-poppins -tracking-[2%] overflow-hidden">
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
                     <button key={tab.key} ref={(el) => { buttonRefs.current[index] = el; }} onClick={() => setActiveTab(tab.key)}
-                      className={`px-0 pb-[13px] transition-colors duration-300 relative ${activeTab === tab.key ? "text-secondary" : "text-paragraph"}`}
+                      className={`px-0 pb-[13px] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.key ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
                     >
-                      <span className="block font-[600] invisible h-0 overflow-hidden"> {tab.label}</span>
-                      <span className={`${activeTab === tab.key ? "font-[600]" : "font-[300]"} transition-all duration-300`} >
+                      <span className="block font-semibold invisible h-0 overflow-hidden "> {tab.label}</span>
+                      <span className={`${activeTab === tab.key ? "font-semibold" : "font-light"} transition-all duration-300`} >
                         {tab.label}
                       </span>
                     </button>
@@ -70,10 +70,10 @@ export default function Customization() {
                 <div className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300" style={{ width: indicatorStyle.width, left: indicatorStyle.left, }} />
               </div>
             </div>
-            <div className="mt-[76px]" />
+            <div className="mt-50" />
             {activeData && (
-              <div className="grid grid-cols-[1fr_2.5fr] 3xl:grid-cols-[478px_auto]">
-                <div className=" pt-50 pb-200 3xl:pb-[204px] border-r border-bdr-gray">
+              <div className="grid grid-cols-[1.2fr_2.5fr] 3xl:grid-cols-[478px_auto] pb-150">
+                <div className=" pt-50 pb-50 3xl:pb-[126px] border-r border-bdr-gray">
                   <motion.h3
                     key={activeTab}
                     initial="hidden"
@@ -87,7 +87,7 @@ export default function Customization() {
                 </div>
                 {/* <motion.div initial="hidden" whileInView="show" variants={moveUpVariant(0.2)} viewport={{ once: true }} className="w-px bg-bdr-gray" /> */}
                 <div className="ml-15 2xl:ml-100 3xl:ml-[150px] pt-50">
-                  <div className="w-full text-19 font-[300] leading-[1.789473684210526] font-poppins -tracking-[2%] ">
+                  <div className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] ">
                     {activeData.rightItems.map((item, index) => (
                       <motion.ul
                         key={`${activeTab}-${index}`}
@@ -143,7 +143,7 @@ export default function Customization() {
                         className={
                           isOpen
                             ? "font-[500] text-secondary"
-                            : "font-[300] text-paragraph transition-all duration-300"
+                            : "font-light text-paragraph transition-all duration-300"
                         }
                       >
                         {tab.label}
@@ -151,7 +151,7 @@ export default function Customization() {
 
                       <div className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                     </motion.div>
@@ -168,7 +168,7 @@ export default function Customization() {
 
                       {/* Right items */}
 
-                      <div className="w-full text-19 font-[300] leading-[1.789473684210526] font-poppins -tracking-[2%] ">
+                      <div className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] ">
                         {tab.rightItems.map((item, index) => (
                           <motion.ul
                             key={`${activeTab}-${index}`}

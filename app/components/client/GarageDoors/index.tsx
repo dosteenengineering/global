@@ -9,7 +9,7 @@ import Faq from "../../common/Faq";
 const Index = () => {
   return ( 
     <>
-    <InnerPageBanner titleMaxWidth="max-w-[30ch] 3xl:max-w-[25ch]" descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]" {...banner} />
+    <InnerPageBanner titleMaxWidth="max-w-[30ch] xl:max-w-[25ch]" descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]" {...banner}  />
     <BannerBottom/>
     <DiscoverSection data={garageDoorData} />
     <WhyChoose data={whyChooseData} />

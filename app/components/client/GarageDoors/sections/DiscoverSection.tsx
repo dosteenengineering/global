@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
-import { moveRight, moveUp, moveUpV2 } from "@/app/components/motionVariants";
+import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 interface DoorItem {
@@ -43,23 +43,25 @@ function DoorContent({ door }: { door: DoorItem }) {
       <h3 className="hidden xl:block text-40 lg:text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-40 lg:mb-50">
         {door.title}
       </h3>
-      <div className="relative w-full aspect-[8/6] xl:aspect-[2.08/1] mb-5 xl:mb-40 overflow-hidden bg-white/10">
+      {/* <div className="relative w-full aspect-[8/6] xl:aspect-[2.08/1] mb-5 xl:mb-40 overflow-hidden bg-white/10"> */}
+      <div className="relative w-full h-[300px] max-h-[482px] 2xl:h-[482px] mb-5 xl:mb-40 2xl:mb-50 overflow-hidden bg-white/10">
         <Image
           src={imageSrc}
           alt={door.title}
           fill
           sizes="(min-width: 1280px) 920px, 100vw"
-          className="object-cover"
+          className="object-cover "
           onError={() => setImageSrc("/assets/images/garage-doors/garage-doors.jpg")}
         />
+   
       </div>
-      <p className="w-fit rounded-full border border-white/70 px-[16.5px]  md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white mb-30">
+      <p className="w-fit rounded-full border border-white/80 px-[16.5px] font-light md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white/80 mb-30">
         {door.idealFor}
       </p>
       <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30">
         {door.heading}
       </h4>
-      <ul className="space-y-2 xl:space-y-6 3xl:pb-[97px]">
+      <ul className="space-y-2 xl:space-y-6 xl:pb-50 3xl:pb-[97px]">
         {door.points.map((point) => (
           <li
             key={point}
@@ -98,7 +100,8 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
           {/* <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.sectionDesc} className="text-24 lg:!text-30 text-white !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50 !max-w-[55ch]" />
+          <SectionDescription text={data.sectionDesc} className="text-24 lg:!text-30 text-white
+           !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50  whitespace-pre-line" />
         </div>
 
         <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
@@ -128,7 +131,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                         className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
                           }`}>
-                        <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
 
                     </span>
@@ -161,15 +164,14 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
             <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40 h-full">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
-                  {data.doors.map((door,index) => {
+                  {data.doors.map((door) => {
                     const isActive = activeId === door.id;
                     return (
-                      <motion.div variants={moveRight(index*0.1)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+                      <motion.div variants={moveUp(0.2)} initial="hidden" whileInView={"show"} viewport={{once:true,amount:0.2}} key={door.id}>
                         <button
-                          key={door.id}
                           type="button"
                           onClick={() => setActiveId(door.id)}
-                          className={`group relative overflow-hidden flex min-w-fit w-full max-w-[98%] items-center justify-between gap-0 rounded-full px-4 first:mb-2 text-left xl:w-full xl:rounded-none xl:px-0 ${isActive ? "py-3 xl:py-[16px]" : "xl:py-20"} transition-[padding] duration-300 cursor-pointer`}
+                          className={`group relative flex  min-w-fit w-full max-w-[98%] items-center overflow-hidden rounded-full px-4 py-[16px]  text-left transition-all duration-300 xl:w-full xl:rounded-none xl:px-0 cursor-pointer ${activeId === door.id ? 'min-h-[82px] xl:py-0 my-2' : 'xl:py-20'}`}
                         >
 
                           {/* ── Gradient: clipped by button's own border-radius via overflow-hidden ── */}
@@ -195,8 +197,8 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                           {/* ── Arrow ── */}
                           <span
                             className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${isActive
-                              ? "opacity-100 translate-x-0"
-                              : "opacity-0 -translate-x-3 pointer-events-none"
+                              ? "opacity-100 translate-x-0 flex"
+                              : "opacity-0 -translate-x-3 pointer-events-none hidden"
                               }`}
                           >
                             <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-2 w-2 md:h-auto md:w-auto" />
@@ -215,7 +217,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                 {activeDoor && (
                   <motion.div
                     key={activeDoor.id}
-                    variants={moveUpV2}
+                    variants={moveUp(0.2)}
                     initial="hidden"
                     animate="show"
                     exit={{ opacity: 0, y: -24, transition: { duration: 0.25 } }}
@@ -229,7 +231,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         </div>
 
         {data.ctaData && (
-          <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-[55px] 3xl:py-[52px]">
+          <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-60 3xl:py-60 ">
             <h3 className="text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-25">
               <span className="font-semibold">
                 {data.ctaData.title.split("?")[0]}?
@@ -238,23 +240,25 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                 ? data.ctaData.title.slice(data.ctaData.title.indexOf("?") + 1)
                 : ""}
             </h3>
-            <p className="text-30 text-white leading-[1.333333333333333] font-light max-w-[70ch] mb-7.5 md:mb-50">
+            <p className="text-30 text-white leading-[1.333333333333333] font-light max-w-[80ch] mb-7.5 md:mb-50">
               {data.ctaData.description}
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-[10px]">
               <BorderButton
                 text={data.ctaData.buttonOneTitle}
                 href={data.ctaData.buttonOneLink}
                 iconColor="white"
                 px="px-6"
-                className="min-w-[190px]"
+                className="min-w-[190px] xl:!px-35"
+                hoverBg="white"
               />
               <BorderButton
                 text={data.ctaData.buttonTwoTitle}
                 href={data.ctaData.buttonTwoLink}
                 iconColor="white"
                 px="px-6"
-                className="min-w-[190px]"
+                className="min-w-[190px] xl:!px-35"
+                hoverBg="white"
               />
             </div>
           </motion.div>

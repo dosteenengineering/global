@@ -154,7 +154,7 @@ export function SectionDescription({
 
   return (
     <Tag ref={ref as React.RefObject<HTMLParagraphElement & HTMLSpanElement & HTMLDivElement>}
-      className={`text-description ${className}`}
+      className={`text-description  ${className}`}
     />
   );
 }
