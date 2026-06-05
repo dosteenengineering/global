@@ -135,7 +135,7 @@ export default function WhyTrustDosteen() {
           <div className="border-b-2 border-[#c2c2c2] pb-140 3xl:pb-150">
             <SectionTitle
               title={title}
-              className="mb-50 section-heading text-secondary max-w-[24ch]"
+              className="mb-50 section-heading-90 text-secondary max-w-[24ch]"
             />
 
             {/* ── Mobile: Stacked full-width cards ── */}

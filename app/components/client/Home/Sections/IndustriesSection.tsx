@@ -255,7 +255,7 @@ export default function IndustriesSection() {
             <div />
             <SectionTitle
               text={industriesData.title}
-              className="section-heading max-w-[1129px]"
+              className="section-heading-90 max-w-[1129px]"
             />
           </div>
 
@@ -328,7 +328,7 @@ export default function IndustriesSection() {
         <div className="py-140 container">
           <SectionTitle
             text={industriesData.title}
-            className="section-heading w-full mb-20 sm:mb-40 text-secondary"
+            className="section-heading-90 w-full mb-20 sm:mb-40 text-secondary"
           />
 
           <div className="w-full h-px bg-[#C2C2C2] mb-20 md:mb-8" />

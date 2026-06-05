@@ -56,7 +56,7 @@ export default function BimCapabilitiesStats() {
         {/* Title */}
         <SectionTitle
           title={title}
-          className="text-white uppercase mb-7.5 md:mb-80 section-heading"
+          className="text-white uppercase mb-7.5 md:mb-80 section-heading-90"
         />
         {/* Rows with horizontal dividers */}
         <div>

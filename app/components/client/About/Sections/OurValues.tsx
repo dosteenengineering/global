@@ -49,7 +49,7 @@ export default function OurValues() {
           <div className="shrink-0">
             <SectionTitle
               text={ValuesData.title}
-              className="section-heading text-secondary uppercase"
+              className="section-heading-90 text-secondary uppercase"
             />
           </div>
 

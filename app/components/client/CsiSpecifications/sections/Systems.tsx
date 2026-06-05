@@ -46,9 +46,9 @@ const Systems = ({ data }: Props) => {
   }, []);
  const isMobile =  typeof window !== "undefined" && window.innerWidth < 1024;
   return (
-    <section className="bg-white w-full relative select-none overflow-hidden py-[70px] md:pb-140 3xl:pb-200 md:pt-100 xl:pt-200">
+    <section className="bg-white w-full relative select-none overflow-hidden py-[70px] md:pb-140 3xl:pb-[206px] md:pt-100 xl:pt-200">
       <div ref={containerRef} className="container px-[16px] mx-auto" />
-      <div className="absolute top-2 xl:-top-0 left-[-131px] lg:-left-1 pointer-events-none">
+      <div className="absolute top-2 xl:top-[8%] left-[-131px] lg:-left-1 pointer-events-none">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
@@ -64,7 +64,7 @@ const Systems = ({ data }: Props) => {
           style={isMobile ? undefined : { marginRight: `${rightSpace + 16}px` }} >
         <SectionTitle
           text={data.title}
-          className="section-heading text-secondary uppercase mb-50"
+          className="section-heading-90 text-secondary uppercase mb-50"
         />
 
         {/* ── Mobile: Swiper ── */}
@@ -136,7 +136,7 @@ const Systems = ({ data }: Props) => {
                     <p className="text-[12px] leading-[1.67] tracking-[0.08em] text-primary font-light mb-2.5">
                       Division
                     </p>
-                    <h3 className="text-[18px] leading-[1.56] font-light text-[#202020]">
+                    <h3 className="text-[18px] leading-[1.56] font-light text-secondary">
                       {item.division}
                     </h3>
                     <p className="mt-[2px] text-[12px] tracking-[2%] leading-[1.67] font-light text-[#7B7B7B]">
@@ -149,7 +149,7 @@ const Systems = ({ data }: Props) => {
                     <p className="text-[12px] leading-[1.67] tracking-[0.08em] text-primary font-light mb-2.5">
                       Section Number & Title
                     </p>
-                    <h3 className="text-[18px] leading-[1.56] font-light text-[#202020]">
+                    <h3 className="text-[18px] leading-[1.56] font-light text-secondary">
                       {item.sectionNumber}
                     </h3>
                     <p className="mt-[2px] text-[12px] tracking-[2%] leading-[1.67] font-light text-[#7B7B7B]">
@@ -176,7 +176,7 @@ const Systems = ({ data }: Props) => {
         <div className="hidden md:block">
           <table className="w-full border-collapse border border-[#D9D9D9]">
             <thead>
-              <tr className="bg-[#F3F5FB]">
+              <tr className="bg-[linear-gradient(270deg,rgba(24,83,214,0.05)_7.21%,rgba(24,83,214,0.16)_29.81%,rgba(2,46,158,0.05)_76.92%)]">
                 <th className="w-[33.33%] border-r border-b border-[#D9D9D9] px-2 md:px-30 py-[16px] xl:py-[26px] text-left text-19 md:text-30 font-light text-primary leading-[1.333333333333333]">
                   Division
                 </th>
@@ -192,23 +192,23 @@ const Systems = ({ data }: Props) => {
               {data.tableData.map((item) => (
                 <tr key={item.id} className="bg-white border-b border-[#D9D9D9] last:border-b-0">
                   <td className="border-r border-[#D9D9D9] px-2 py-2 md:p-30 align-top">
-                    <h3 className="text-[14px] md:text-30 leading-[1.333333333333333] font-light text-[#202020]">
+                    <h3 className="text-[14px] md:text-30 leading-[1.333333333333333] font-light text-secondary tracking-[2%] md:tracking-[-2%]">
                       {item.division}
                     </h3>
-                    <p className="mt-[10px] text-19 leading-[1.526315789473684] font-light text-[#7B7B7B]">
+                    <p className="mt-[10px] text-19 leading-[1.526315789473684] font-light text-paragraph tracking-[2%] md:tracking-[-2%]">
                       {item.category}
                     </p>
                   </td>
                   <td className="border-r border-[#D9D9D9] px-2 py-2 md:p-30 align-top">
-                    <h3 className="text-[18px] md:text-30 leading-[1.333333333333333] font-light text-[#202020]">
+                    <h3 className="text-[18px] md:text-30 leading-[1.333333333333333] font-light text-secondary tracking-[2%] md:tracking-[-2%]">
                       {item.sectionNumber}
                     </h3>
-                    <p className="mt-[10px] text-19 leading-[1.526315789473684] font-light text-[#7B7B7B]">
+                    <p className="mt-[10px] text-19 leading-[1.526315789473684] font-light text-paragraph tracking-[2%] md:tracking-[-2%]">
                       {item.sectionTitle}
                     </p>
                   </td>
                   <td className="px-2 py-2 md:p-30 align-top">
-                    <p className="text-19 leading-[1.526315789473684] font-light text-[#7B7B7B]">
+                    <p className="text-19 leading-[1.526315789473684] font-light text-paragraph tracking-[2%] md:tracking-[-2%]">
                       {item.system}
                     </p>
                   </td>

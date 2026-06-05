@@ -37,7 +37,7 @@ function AccordionItem({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className={`flex cursor-pointer gap-0 group ${isActive ? "py-5 md:py-50" : "py-5 md:py-40"}`}
+      className={`flex cursor-pointer gap-0 group ${isActive ? "py-5 lg:py-7 xl:py-50" : "py-5 lg:py-7 xl:py-40"}`}
       onClick={onSelect}
     >
       <div
@@ -72,7 +72,7 @@ function AccordionItem({
           </p>
 
           {/* Mobile image — shown below description, hidden on lg+ */}
-          <div className="block lg:hidden mt-[5px] md:mt-5 relative w-full aspect-[12.1/6] md:aspect-[4/3] overflow-hidden">
+          <div className="block lg:hidden mt-[5px] md:mt-5 relative w-full aspect-[12.1/6] lg:aspect-[4/3] overflow-hidden">
             <Image
               src={item.image}
               alt={item.label}
@@ -100,9 +100,9 @@ export default function Benefits({
     <section className="relative w-full py-12.5  md:py-140 3xl:py-200">
       {showSecondaryNoise && <SecondaryNoise />}
       <div className="container relative">
-        <SectionTitle className={`section-heading max-w-[70ch] `} title={titleParts[0]} as="h2" /> 
-        <SectionTitle className="section-heading max-w-[70ch] " title={titleParts[1]} as="h2" /> 
-        {description && (
+   <SectionTitle className={`section-heading-90 max-w-[70ch] whitespace-pre-line mb-5 lg:mb-50 `}
+           title={title} as="h2"/>
+                {description && (
           <>
             {/* <p className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80">
               {description}
@@ -116,7 +116,7 @@ export default function Benefits({
             description ? "" : "mt-7.5 md:mt-50"
           }`}
         >
-          <div className="  shrink-0 md:mt-[10px] border-t lg:border-0 border-bdr-gray">
+          <div className="  shrink-0 xl:mt-[10px] border-t lg:border-0 border-bdr-gray">
             <div className="flex flex-col divide-y divide-[#c2c2c2]">
               {items.map((item, index) => (
                 <AccordionItem
@@ -131,7 +131,7 @@ export default function Benefits({
           </div>
 
           <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="hidden lg:flex flex-1 min-w-0">
-            <div className="relative w-full aspect-[4/3] max-h-[650px] overflow-hidden">
+            <div className="relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full 3xl:max-h-[650px] overflow-hidden">
               {items.map((item) => (
                 <div
                   key={item.id}

@@ -121,7 +121,7 @@ export default function AboutDetails() {
         style={{ marginRight: rightInset }}
       >
         {/* <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" /> */}
-        <h2 className="section-heading text-secondary uppercase mb-20 md:mb-50 ">
+        <h2 className="section-heading-90 text-secondary uppercase mb-20 md:mb-50 ">
           {AboutData.title}
         </h2>
 

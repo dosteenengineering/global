@@ -18,7 +18,7 @@ const ServingMap = () => {
     <section className="relative overflow-hidden py-12.5 md:py-150">
       <SecondaryNoise />
       <div className="container">
-        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
+        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading-90 text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
         <div className="grid grid-cols-1 xl:grid-cols-[auto_1fr] 3xl:grid-cols-[auto_410px] relative z-2">
           <div>
             <div className="flex gap-[7px] md:gap-[15px] mb-80">

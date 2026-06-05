@@ -29,7 +29,7 @@ export default function DosteenSystems() {
       <div className="container">
         <SectionTitle
           title={title}
-          className="section-heading text-secondary uppercase mb-50"
+          className="section-heading-90 text-secondary uppercase mb-50"
         />
 
         {/* ── Mobile: Accordion ── */}

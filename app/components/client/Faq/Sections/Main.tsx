@@ -46,7 +46,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="pt-17.5 lg:pt-120 pb-[265px] lg:pb-140 3xl:pb-200 relative ">
+    <section className="py-17.5 lg:pt-120   lg:pb-140 3xl:pb-200 relative ">
       <div
         className={`absolute hidden lg:block ${filtered.length > 0 ? "top-[33.5%]" : "top-[17.8%]"} bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
       >
@@ -58,7 +58,7 @@ export default function FaqSection() {
           <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} >
           <SectionTitle
             title={title}
-            className={`section-heading ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
+            className={`section-heading-90 ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
           />
           </motion.div>
           {filtered.length > 0 && (
@@ -118,7 +118,7 @@ export default function FaqSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="flex flex-col relative"
+            className="flex flex-col relative pb-[195px] lg-pb-0"
           >
              <div
               className={`absolute  lg:hidden  top-7.5  w-full  left-[-21%]  h-[353px] z-0 pointer-events-none`}

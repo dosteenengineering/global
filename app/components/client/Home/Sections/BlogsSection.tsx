@@ -80,7 +80,7 @@ export default function BlogsSection() {
           {/* Row 1 */}
           <SectionTitle
             title={blogsData.title}
-            className="text-secondary section-heading mb-70 xl:mb-80 3xl:mb-[70px] "
+            className="text-secondary section-heading-90 mb-70 xl:mb-80 3xl:mb-[70px] "
           />
 
           {/* Row 2 */}
@@ -201,7 +201,7 @@ export default function BlogsSection() {
           ref={containerRef}
           className="container flex items-center justify-between mb-[30px] md:mb-12"
         >
-          <h2 className="text-secondary section-heading w-full">
+          <h2 className="text-secondary section-heading-90 w-full">
             {blogsData.title}
           </h2>
           {/* Nav buttons — left aligned */}

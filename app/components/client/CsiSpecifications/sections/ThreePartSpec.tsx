@@ -21,8 +21,8 @@ export default function ThreePartSpec() {
   return (
     <section className="w-full relative">
       <PrimaryNoise2 />
-      <div className="relative container py-12.5 md:pt-140 3xl:pt-150 md:pb-120">
-        <SectionTitle title={title} className="text-white uppercase mb-5 md:mb-80 section-heading border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0" />
+      <div className="relative container py-12.5 md:py-140 3xl:py-150 ">
+        <SectionTitle title={title} className="text-white uppercase mb-5 md:mb-80 3xl:mb-[102px] section-heading-90 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0" />
 
         {/* ── Mobile: Swiper ── */}
         <div className="md:hidden">

@@ -83,7 +83,7 @@ export default function BimProcess() {
           {/* Title */}
           <SectionTitle
             title={title}
-            className="section-heading text-white mb-7.5 md:mb-50 min-w-[17ch] max-w-[17ch]"
+            className="section-heading-90 text-white mb-7.5 md:mb-50 min-w-[17ch] max-w-[17ch]"
           />
 
           {/* Steps */}

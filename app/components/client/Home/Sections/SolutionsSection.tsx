@@ -49,7 +49,7 @@ export default function SolutionsSection() {
         <div className="container">
           <SectionTitle
             text={solutionsData.mainTitle}
-            className="text-left lg:text-center section-heading uppercase"
+            className="text-left lg:text-center section-heading-90 uppercase"
           />
           {/* ================= DESKTOP ================= */}
           <motion.div
