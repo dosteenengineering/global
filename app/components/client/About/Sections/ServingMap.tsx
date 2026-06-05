@@ -117,7 +117,7 @@ const ServingMap = () => {
                 <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} 
                 className="text-55 leading-[1.181818181818182] font-medium text-primary">10<span>+</span></motion.h3>
                 {/* <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3> */}
-                <SectionTitle text="Countries, Global Partners" as="h3" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
+                <SectionTitle text="Countries, Global Partners" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
               </div>
               <div className="grid grid-cols-2">
                 {servingMapData.countries.map((item,index) => (

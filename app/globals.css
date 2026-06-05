@@ -263,12 +263,12 @@ body::-webkit-scrollbar {
 .section-heading {
     @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95 translate-y-[-15px];
 }
-.section-heading-90 {
-    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.1112] text-90 translate-y-[-15px];
+.section-heading-90 {   
+    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-90 translate-y-[-15px] ;
 }
 
 .hero-heading {
-    @apply text-[32px] md:text-95 font-helvetica uppercase 2xl:leading-[1.1] translate-y-[-15px];
+    @apply text-[32px] md:text-95 font-helvetica uppercase translate-y-[-16px] leading-[1];
 }
 .banner-heading { 
     @apply text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 font-helvetica uppercase;
