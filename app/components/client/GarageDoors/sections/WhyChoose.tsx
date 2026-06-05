@@ -79,7 +79,7 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
       <div className="container">
         <SectionTitle
           title={data.sectionTitle}
-          className="section-heading max-w-[1290px] mb-50 uppercase "
+          className="section-heading-90 max-w-[22ch] mb-50 uppercase "
         />
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
           {/* <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
@@ -158,7 +158,7 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
         {/* ── Tablet & Desktop: Original grid ── */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-30">
           {data.items.map((item,index) => (
-            <motion.div variants={moveUp(index*0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} key={item.id} >
               <Card key={item.id} item={item} />
             </motion.div>
           ))}

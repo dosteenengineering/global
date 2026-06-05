@@ -14,7 +14,7 @@ const BannerBottom = () => {
       <div ref={containerRef} className="container" />
 
       <div
-        className="ml-auto max-w-[1252px] px-[16px] 2xl:px-0"
+        className="ml-auto xl:max-w-[80%] 2xl:max-w-[1252px] px-[16px] 2xl:px-0"
         style={{ marginRight: rightInset }}
       >
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} 

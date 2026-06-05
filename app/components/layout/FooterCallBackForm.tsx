@@ -235,8 +235,8 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                     <span className="pointer-events-none absolute right-0 top-[15px]">
 
                         <svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_434_443)">
-                                <path d="M16.7417 1.19727L8.98329 8.80351L1.25586 1.22317" stroke="#161616" strokeLinecap="round" stroke-linejoin="round" />
+                            <g clipPath="url(#clip0_434_443)">
+                                <path d="M16.7417 1.19727L8.98329 8.80351L1.25586 1.22317" stroke="#161616" strokeLinecap="round" strokeLinejoin="round" />
                             </g>
                             <defs>
                                 <clipPath id="clip0_434_443">
