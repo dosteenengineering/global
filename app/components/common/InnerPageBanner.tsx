@@ -35,16 +35,16 @@ export default function InnerPageBanner({
 
       {/* 2. Content — line, title, description */}
       <div className="container">
-        <div className="w-full mb-[70px] xl:mb-80 ">
+        <div className="w-full mb-70 xl:mb-80 ">
           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
             className="h-px w-full bg-[#c2c2c2] origin-center" />
         </div>
 
-        {/* <h1 className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading leading-[100%] ${titleMaxWidth}`}>
+        {/* <h1 className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading !leading-[1] ${titleMaxWidth}`}>
           {title}
         </h1> */}
         
-        <SectionTitle as={"h1"} text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading !leading-[1.125] md:!leading-[1]  ${titleMaxWidth}`} />
+        <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth}`} as="h1" />
         {description && (
           // <p className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}>
           //   {description}

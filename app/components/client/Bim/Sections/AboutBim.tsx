@@ -38,7 +38,6 @@ export default function AboutBim() {
           <div className="flex flex-col gap-y-2.5 md:gap-y-40">
      
             <SectionTitle
-              as="h2"
               text={AboutBimData.subTitle}
               className="text-55 leading-[1.18181] tracking-[-0.02em] text-secondary font-light max-w-full"
             />
