@@ -120,7 +120,7 @@ export interface BenefitItem {
 }
 
 export const whoBenefitsSection = {
-  title: "WHO BENEFITS FROM DOSTEEN'S BIM CAPABILITY",
+  title: "WHO BENEFITS FROM \n DOSTEEN'S BIM CAPABILITY", 
   items: [
     {
       id: "mep-consultants",
@@ -156,7 +156,7 @@ export interface BimProcessStep {
 }
 
 export const bimProcessSection = {
-  title: "THE DOSTEEN BIM\nPROCESS",
+  title: "THE DOSTEEN BIM PROCESS",
   steps: [
     {
       id: "bep-review",

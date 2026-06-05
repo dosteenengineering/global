@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
 type BenefitsData = {
-  title: string;
+  title: string; 
   description?: string;
   items: BenefitItem[];
 };
@@ -52,7 +52,7 @@ function AccordionItem({
 
       <div className="flex-1">
         <div className="flex items-center gap-1 justify-between">
-          <p className={`text-30  leading-[1.333] tracking-[-0.02em] transition-all duration-300 ${isActive ? "font-[500]" : "font-light"}`}>
+          <p className={`text-30  leading-[1.333] tracking-[-0.02em] transition-all duration-300 ${isActive ? "font-[500] lg:font-light" : "font-light"}`}>
           {item.label}
         </p>
 
@@ -67,7 +67,7 @@ function AccordionItem({
             isActive ? "opacity-100 mt-2.5 md:mt-20" : "max-h-0 opacity-0"
           }`}
         >
-          <p className="text-paragraph text-[14px] leading-[1.75] font-light max-w-[calc(100%-20px)] lg:max-w-[480px]">
+          <p className="text-paragraph text-19 leading-[1.67] lg:leading-[1.53] font-light max-w-[calc(100%-20px)] lg:max-w-[59ch] tracking-[-2%]">
             {item.description}
           </p>
 
@@ -94,12 +94,14 @@ export default function Benefits({
   const [activeId, setActiveId] = useState<string>(
     items[1]?.id ?? items[0]?.id ?? ""
   );
+  const [titleParts] = useState<string[]>(title.split('\n')); 
 
   return (
     <section className="relative w-full py-12.5  md:py-140 3xl:py-200">
       {showSecondaryNoise && <SecondaryNoise />}
       <div className="container relative">
-        <SectionTitle className="section-heading max-w-[70ch] mb-30" title={title} />
+        <SectionTitle className={`section-heading max-w-[70ch] `} title={titleParts[0]} as="h2" /> 
+        <SectionTitle className="section-heading max-w-[70ch] " title={titleParts[1]} as="h2" /> 
         {description && (
           <>
             {/* <p className="text-19 leading-[1.3333333333] text-paragraph max-w-[130ch] font-light mb-80">
