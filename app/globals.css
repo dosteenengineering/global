@@ -607,3 +607,36 @@ input:-webkit-autofill:active {
     padding-bottom: 0px !important;
   }
 }
+
+
+path {
+    stroke-dasharray: var(--len);
+    stroke-dashoffset: var(--len);
+    opacity: 0;
+}
+
+@keyframes p1-draw {
+    0% {
+        stroke-dashoffset: var(--len);
+        opacity: 0;
+    }
+
+    0.1% {
+        opacity: 1;
+    }
+
+    10% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    99% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    100% {
+        stroke-dashoffset: var(--len);
+        opacity: 0;
+    }
+}

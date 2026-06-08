@@ -1,0 +1,99 @@
+<svg class="animate" width="630" height="200" viewBox="0 0 630 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .animate .p1  { animation: p1-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p2  { animation: p2-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p3  { animation: p3-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p4  { animation: p4-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p5  { animation: p5-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p6  { animation: p6-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p13 { animation: p13-draw 5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p12 { animation: p12-draw 5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p10 { animation: p10-draw 5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p9  { animation: p9-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p8  { animation: p8-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p11 { animation: p11-draw 5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+    .animate .p7  { animation: p7-draw  5s cubic-bezier(0.4,0,0.2,1) 0s infinite; }
+
+    /* 0% always starts hidden with exact value — no var(), no flash */
+    @keyframes p1-draw {
+      0%,100% { stroke-dashoffset: 460; stroke-dasharray: 460; }
+      10%     { stroke-dashoffset: 0; }
+      99%     { stroke-dashoffset: 0; }
+    }
+    @keyframes p2-draw {
+      0%,2.4%,100% { stroke-dashoffset: 492; stroke-dasharray: 492; }
+      12.4%        { stroke-dashoffset: 0; }
+      99%          { stroke-dashoffset: 0; }
+    }
+    @keyframes p3-draw {
+      0%,6%,100% { stroke-dashoffset: 172; stroke-dasharray: 172; }
+      9.6%       { stroke-dashoffset: 0; }
+      99%        { stroke-dashoffset: 0; }
+    }
+    @keyframes p4-draw {
+      0%,7.6%,100% { stroke-dashoffset: 172; stroke-dasharray: 172; }
+      11.2%        { stroke-dashoffset: 0; }
+      99%          { stroke-dashoffset: 0; }
+    }
+    @keyframes p5-draw {
+      0%,9.2%,100% { stroke-dashoffset: 172; stroke-dasharray: 172; }
+      12.8%        { stroke-dashoffset: 0; }
+      99%          { stroke-dashoffset: 0; }
+    }
+    @keyframes p6-draw {
+      0%,10.8%,100% { stroke-dashoffset: 172; stroke-dasharray: 172; }
+      14.4%         { stroke-dashoffset: 0; }
+      99%           { stroke-dashoffset: 0; }
+    }
+    @keyframes p13-draw {
+      0%,17%,100% { stroke-dashoffset: 300; stroke-dasharray: 300; }
+      25%         { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+    @keyframes p12-draw {
+      0%,21%,100% { stroke-dashoffset: 66; stroke-dasharray: 66; }
+      25.4%       { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+    @keyframes p10-draw {
+      0%,29%,100% { stroke-dashoffset: 66; stroke-dasharray: 66; }
+      32.6%       { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+    @keyframes p9-draw {
+      0%,31%,100% { stroke-dashoffset: 132; stroke-dasharray: 132; }
+      35.4%       { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+    @keyframes p8-draw {
+      0%,33.6%,100% { stroke-dashoffset: 242; stroke-dasharray: 242; }
+      39.2%         { stroke-dashoffset: 0; }
+      99%           { stroke-dashoffset: 0; }
+    }
+    @keyframes p11-draw {
+      0%,37%,100% { stroke-dashoffset: 130; stroke-dasharray: 130; }
+      40.6%       { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+    @keyframes p7-draw {
+      0%,39%,100% { stroke-dashoffset: 510; stroke-dasharray: 510; }
+      55%         { stroke-dashoffset: 0; }
+      99%         { stroke-dashoffset: 0; }
+    }
+  </style>
+
+  <!-- stroke-dasharray + stroke-dashoffset as presentation attributes — hidden before CSS even loads -->
+  <path class="p1"  stroke-dasharray="460" stroke-dashoffset="460" d="M3.35742 3.35571H196.79V38.1879H3.35742V3.35571Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p2"  stroke-dasharray="492" stroke-dashoffset="492" d="M14.1035 38.188V196.644H186.044V38.188" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p3"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 69.8657H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p4"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 101.544H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p5"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 133.289H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p6"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 164.967H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p13" stroke-dasharray="300" stroke-dashoffset="300" d="M218.283 196.644H239.776L357.985 35.1677H433.209" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p12" stroke-dasharray="66"  stroke-dashoffset="66"  d="M411 13.2886L433.231 35.5033L411 57.8523" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p10" stroke-dasharray="66"  stroke-dashoffset="66"  d="M519.18 24.8322V4.02686H540.672V24.8322" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p9"  stroke-dasharray="132" stroke-dashoffset="132" d="M486.939 46.3088V24.8323H572.91V46.3088" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p8"  stroke-dasharray="242" stroke-dashoffset="242" d="M465.447 101.543V46.3086H594.402V101.543" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p11" stroke-dasharray="130" stroke-dashoffset="130" d="M529.926 69.8657V196.644" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p7"  stroke-dasharray="510" stroke-dashoffset="510" d="M433.209 121.476L476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

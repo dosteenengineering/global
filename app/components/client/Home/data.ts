@@ -110,7 +110,7 @@ export const servicesData: ServicesData = {
     {
       key: "amc",
       label: "AMC",
-      image: "/assets/images/home/service/export.svg",
+      image: "/assets/images/home/service/service-img-1.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
@@ -150,13 +150,12 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Annual maintenance contracts ensuring reliable performance and continuity.",
+      description: "Annual maintenance contracts ensuring reliable performance and continuity.",
     },
     {
       key: "export",
       label: "Export",
-      image: "/assets/images/home/service/export.svg",
+      image: "/assets/images/home/service/service-img-1.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
@@ -196,13 +195,12 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Seamless export services delivering engineered solutions worldwide.",
+      description: "Seamless export services delivering engineered solutions worldwide.",
     },
     {
       key: "instant-call",
       label: "Instant Call Service",
-      image: "/assets/images/home/service/export.svg",
+      image: "/assets/images/home/service/service-img-1.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
@@ -242,8 +240,7 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Round-the-clock call services for immediate technical support and help.",
+      description: "Round-the-clock call services for immediate technical support and help.",
     },
   ],
 };

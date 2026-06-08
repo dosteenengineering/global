@@ -118,22 +118,14 @@ export default function AboutSlider() {
       onPointerLeave={handlePointerUp}
     >
       <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 lg:left-[-100px] 3xl:left-0 pointer-events-none">
-        <Image
-          src="/assets/icons/bg-svg/top-left-animated.svg"
-          alt="decorative lines"
-          width={600}
-          height={500}
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500}
           className="object-contain min-w-[280px] w-[53.14%] sm:w-[60%] lg:w-full h-full"
         />
       </div>
 
       <div className="overflow-hidden">
         {/* Invisible Swiper — autoplay clock */}
-        <div
-          aria-hidden="true"
-          className="absolute opacity-0 pointer-events-none"
-          style={{ width: "1px", height: "1px", overflow: "hidden" }}
-        >
+        <div aria-hidden="true" className="absolute opacity-0 pointer-events-none" style={{ width: "1px", height: "1px", overflow: "hidden" }}>
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: SLIDE_INTERVAL, disableOnInteraction: false }}
@@ -153,8 +145,8 @@ export default function AboutSlider() {
         </div>
         <div className="lg:ml-[29%] pt-[70px] lg:pt-120 px-[15px] lg:px-0 container">
           <SectionTitle
-            text="DELIVERING EXCELLENCE BEYOND BORDERS,"
-            className="section-heading-90 max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase"
+            text="DELIVERING EXCELLENCE BEYOND BORDERS"
+            className="section-heading-90 max-w-[20ch] md:max-w-[25ch] 3xl:max-w-[23ch] text-secondary uppercase"
           />
         </div>
         <div className="container mt-[10px] md:mt-6 lg:mt-[30px]">
