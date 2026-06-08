@@ -45,14 +45,14 @@ const Masterformat = ({ data }: Props) => {
         style={{ marginRight: isLg ? rightInset : undefined }}
 
       >
-        <SectionTitle text={data.title} className="section-heading text-secondary uppercase mb-50" />
+        <SectionTitle text={data.title} className="section-heading-90 text-secondary uppercase mb-50" />
         {/* <div className="text-paragraph text-description mb-7.5 md:mb-100" dangerouslySetInnerHTML={{ __html: data.description }} /> */}
         <SectionDescription text={data.description} 
           className="text-paragraph text-description mb-7.5 md:mb-100" />
 
         <div>
           {/* <h3 className="text-55 leading-[1.34] md:leading-[1.181818181818182] mb-50 font-light -tracking-[0.02em]">{data.subTitle}</h3> */}
-          <SectionTitle text={data.subTitle} className="text-55 leading-[1.34] md:leading-[1.181818181818182] mb-50 font-light -tracking-[0.02em]" as="h3" />
+          <SectionTitle text={data.subTitle} className="text-55 text-secondary leading-[1.34] md:leading-[1.181818181818182] mb-50 font-light -tracking-[0.02em]" />
           <div>
             {
               data.listItems.map((item, index) => (
@@ -60,7 +60,7 @@ const Masterformat = ({ data }: Props) => {
                   <div className="grid grid-cols-[2.57fr_4fr] lg:grid-cols-[1.2fr_4fr] 3xl:grid-cols-[309px_auto]">
                     <div className="border-r border-bdr-gray py-[36px] lg:py-10 xl:py-15">
                       {/* <h3 className="tex-19 md:text-30 font-light">{item.title}</h3> */}
-                      <SectionTitle text={item.title} className="tex-19 md:text-30 font-light" as="h3" delay={index*0.12} />
+                      <SectionTitle text={item.title} className="tex-19 md:text-30 font-light text-secondary" />
                     </div>
                     <div className="py-5 md:py-8 lg:py-10 xl:py-15 pl-5 lg:pl-10 xl:pl-15">
                       {/* <p className="text-paragraph text-description max-w-xl">{item.description}</p> */}

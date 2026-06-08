@@ -16,7 +16,7 @@ const NewsLetter = ({data}: Props) => {
     <section className="relative py-12.5 md:py-120 md:py-140 xl:py-150 overflow-hidden">
       <SecondaryNoise/>
       <div className="container relative z-2">
-        <SectionTitle text={data.title} className="text-left section-heading uppercase mb-50" />
+        <SectionTitle text={data.title} className="text-left section-heading-90 uppercase mb-20" />
         {/* <p className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50">{data.desc}</p> */}
         <SectionDescription text={data.desc} className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50" />
         <form className="flex w-full max-w-[478px] items-center overflow-hidden rounded-full border border-black/80">

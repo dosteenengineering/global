@@ -23,7 +23,7 @@ export const AboutBimData = {
   // `,
   subTitle: "The Dosteen BIM Promise",
   subDescription:
-    "We integrate our building systems models with your MEP and structural BIM environment before any installation begins — so clash errors are resolved in the model, not discovered on site.",
+    '"We integrate our building systems models with your MEP and structural BIM environment before any installation begins — so clash errors are resolved in the model, not discovered on site."',
 };
 
 export const bimCapabilities = {
@@ -120,7 +120,7 @@ export interface BenefitItem {
 }
 
 export const whoBenefitsSection = {
-  title: "WHO BENEFITS FROM DOSTEEN'S BIM CAPABILITY",
+  title: "WHO BENEFITS FROM \n DOSTEEN'S BIM CAPABILITY", 
   items: [
     {
       id: "mep-consultants",
@@ -156,7 +156,7 @@ export interface BimProcessStep {
 }
 
 export const bimProcessSection = {
-  title: "THE DOSTEEN BIM\nPROCESS",
+  title: "THE DOSTEEN BIM PROCESS",
   steps: [
     {
       id: "bep-review",
@@ -203,12 +203,29 @@ export const buildingSystemsData = {
         "Revit families, housing clearance modelling, fixing schedules, Civil Defence-compliant record models.",
       arrow: "/icons/arrow.svg",
     },
+    
+    {
+      id: 5,
+      icon: "/assets/images/building/5.svg",
+      title: "Parking Systems",
+      description:
+        "Structural grid coordination, drive path modelling, MEP and access control integration.",
+      arrow: "/icons/arrow.svg",
+    },
     {
       id: 2,
       icon: "/assets/images/building/2.svg",
       title: "Flood Barriers",
       description:
         "Threshold modelling, door frame and drainage integration, activation mechanism clearance zones.",
+      arrow: "/icons/arrow.svg",
+    },
+     {
+      id: 6,
+      icon: "/assets/images/building/6.svg",
+      title: "Industrial Doors",
+      description:
+        "Door leaf operation envelope modelling, guide rail coordination, overhead clearance checks.",
       arrow: "/icons/arrow.svg",
     },
     {
@@ -219,36 +236,22 @@ export const buildingSystemsData = {
         "Door leaf, frame, and hardware modelling, access control coordination, structural opening confirmation.",
       arrow: "/icons/arrow.svg",
     },
-    {
-      id: 4,
-      icon: "/assets/images/building/4.svg",
-      title: "Docking Solutions",
-      description:
-        "Dock leveller pit modelling, loading platform levels, vehicle clearance envelopes, drainage coordination.",
-      arrow: "/icons/arrow.svg",
-    },
-    {
-      id: 5,
-      icon: "/assets/images/building/5.svg",
-      title: "Parking Systems",
-      description:
-        "Structural grid coordination, drive path modelling, MEP and access control integration.",
-      arrow: "/icons/arrow.svg",
-    },
-    {
-      id: 6,
-      icon: "/assets/images/building/6.svg",
-      title: "Industrial Doors",
-      description:
-        "Door leaf operation envelope modelling, guide rail coordination, overhead clearance checks.",
-      arrow: "/icons/arrow.svg",
-    },
+    
     {
       id: 7,
       icon: "/assets/images/building/7.svg",
       title: "Architectural Shading",
       description:
         "Facade attachment modelling, bracket coordination with structural frame, shading geometry.",
+      arrow: "/icons/arrow.svg",
+    },
+
+    {
+      id: 4,
+      icon: "/assets/images/building/4.svg",
+      title: "Docking Solutions",
+      description:
+        "Dock leveller pit modelling, loading platform levels, vehicle clearance envelopes, drainage coordination.",
       arrow: "/icons/arrow.svg",
     },
     {

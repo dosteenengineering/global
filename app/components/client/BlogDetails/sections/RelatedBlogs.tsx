@@ -50,7 +50,7 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
         <div className="flex justify-between mb-50 md:mb-100 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
           <SectionTitle
             text={data.title}
-            className="text-left section-heading uppercase text-secondary max-w-[28ch]"
+            className="text-left section-heading-90 uppercase text-secondary max-w-[28ch]"
           />
           <BorderButton
             text="View All"

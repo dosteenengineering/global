@@ -54,7 +54,7 @@ const AccordionItemComponent = ({
         aria-expanded={isOpen}
         aria-controls={`accordion-body-${item.id}`}
         id={`accordion-trigger-${item.id}`}
-        className={`flex w-full items-center cursor-pointer justify-between gap-4 text-left transition-all duration-300 ${isOpen ? "pt-5 lg:pt-50 3xl:pt-60 pb-2.5 md:pb-30 lg:pl-50" : "py-5 lg:py-40 3xl:py-50"}`}
+        className={`flex w-full items-center cursor-pointer justify-between gap-4 text-left transition-all duration-300 ${isOpen ? "pt-5 lg:pt-50 3xl:pt-60 pb-2.5 md:pb-30 lg:pl-50" : "py-5 lg:py-40 3xl:pt-50 3xl:pb-[45px]"}`}
       >
         <span
           className={`text-30 leading-[1.33] font-light tracking-[-0.02em] max-w-[90%] 3xl:max-w-none ${isOpen ? "text-secondary" : "text-paragraph"}`}
@@ -103,7 +103,7 @@ const AccordionItemComponent = ({
             transition={{ height: spring, opacity: { duration: 0.25 } }}
             style={{ overflow: "hidden" }}
           >
-            <p className={`text-description max-w-[86%] 3xl:max-w-[1203px] mb-5 md:mb-60 ${isOpen ? "lg:pl-50" : ""}`}>
+            <p className={`text-description !text-paragraph max-w-[107ch] 3xl:max-w-[1203px] mb-5 md:mb-60 ${isOpen ? "lg:pl-50" : ""}`}>
               {item.answer}
             </p>
           </motion.div>

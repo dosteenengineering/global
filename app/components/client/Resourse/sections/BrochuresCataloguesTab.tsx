@@ -44,8 +44,9 @@ const ResourceDownloadCard = ({ item, delay }: { item: BrochuresCataloguesItem, 
 
   return (
     <motion.article
-      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10">
-      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-[600] 
+      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 md:px-25 3xl:px-40 py-[15px] md:py-6 xl:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] 2xl:grid-cols-[101px_1fr] 
+      gap-[15px] 2xl:gap-5 3xl:gap-10">
+      <div className={`w-12.5 sm:w-[78px] 2xl:w-[101px] h-12.5 sm:h-[78px] 2xl:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-semibold 
       ${ isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]" }`}
       >
         {item.type}

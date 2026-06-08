@@ -9,7 +9,7 @@ export const banner = {
 export const garageDoorData = {
   sectionTitle: "DISCOVER THE RIGHT GARAGE DOOR FOR YOUR HOME",
 
-  sectionDesc: "Every home is different. That’s why we offer a range of garage doors customized to your space, design, and usage needs in Dubai, Oman, and beyond.",
+  sectionDesc: `Every home is different. That’s why we offer a range of garage\n doors customized to your space, design, and usage needs in Dubai, Oman, and beyond.`,
 
   doors: [
     {
@@ -19,7 +19,7 @@ export const garageDoorData = {
       image: "/assets/images/garage-doors/sectional-overhead-doors.jpg",
       idealFor: "Ideal For",
       heading: "Wide openings with lateral movement",
-      points: ["Curved or straight tracks for flexible installation", "Optimized for both residential and commercial garages", "Smooth sliding mechanism for effortless access, Curved or straight tracks for flexible installation"],
+      points: ["Curved or straight tracks for flexible installation", "Optimized for both residential and commercial garages", "Smooth sliding mechanism for effortless access"],
     },
 
     {

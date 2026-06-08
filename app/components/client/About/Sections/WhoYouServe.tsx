@@ -40,7 +40,7 @@ export default function WhoYouServe() {
       <div className="container w-full">
         <SectionTitle
           text={WhoWeServeData.title}
-          className="section-heading text-secondary uppercase mb-[30px] md:mb-80"
+          className="section-heading-90 text-secondary uppercase mb-[30px] md:mb-80"
         />
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-[35px] md:gap-x-5">
           {WhoWeServeData.items.map((item) => (

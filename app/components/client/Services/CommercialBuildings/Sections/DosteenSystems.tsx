@@ -98,7 +98,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
   );
   return (
     <section className="bg-white w-full relative select-none overflow-hidden">
-      <div className="absolute -top-49 lg:top-[-39%] left-[-131px] lg:left-[-0.9%] pointer-events-none h-full">
+      <div className="absolute -top-49 md:top-[-40%] 3xl:top-[-36%] left-[-131px] md:left-[-3%] 3xl:left-[-0.9%] pointer-events-none h-full">
         <Image
           src="/assets/images/services/bg-common-service.svg"
           alt="decorative lines"
@@ -126,23 +126,23 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
         />
       </div>
 
-      <div className="w-full px-[16px] lg:pl-[28.6%] pt-120">
+      <div className="container px-[16px] lg:pl-[21%] 3xl:pl-[23.1%] pt-120">
         {/* <div
           className="text-paragraph text-description max-w-[1110px] mb-60"
           dangerouslySetInnerHTML={{ __html: data.description }}
           suppressHydrationWarning
         /> */}
         <SectionDescription
-          className="text-paragraph text-description max-w-[105ch] mb-60 "
+          className="text-paragraph text-description   mb-60 "
           dangerouslySetInnerHTML={{ __html: data.description }}
         />
 
-        <div className="w-full h-px bg-[#c2c2c2] mb-140 3xl:mb-150" />
+        <div className="w-full h-px bg-[#c2c2c2] mb-120 3xl:mb-150" />
 
-        <div className="px-[15px] lg:px-0 container w-full border-b lg:border-b-0 border-[#c2c2c2] pb-5 lg:pb-0 mb-5 lg:mb-50  translate-y-[-22px]">
+        <div className="px-[15px] lg:px-0 container w-full border-b lg:border-b-0 border-[#c2c2c2] pb-5 lg:pb-0 mb-5 lg:mb-50   ">
           <SectionTitle
             text={data.title}
-            className="section-heading text-secondary uppercase  max-w-[1538px]"
+            className="section-heading-90 text-secondary uppercase  max-w-[1538px]"
           />
         </div>
       </div>

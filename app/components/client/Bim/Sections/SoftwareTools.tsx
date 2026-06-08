@@ -87,7 +87,7 @@ export default function SoftwareTools() {
           <div className="shrink-0 lg:w-[40.65%]">
             <SectionTitle
               title={title}
-              className="mb-50 lg:max-w-[13ch] section-heading"
+              className="mb-50 lg:max-w-[14ch] section-heading-90"
             />
             {/* <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
               {description}

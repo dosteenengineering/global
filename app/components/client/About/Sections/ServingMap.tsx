@@ -18,7 +18,7 @@ const ServingMap = () => {
     <section className="relative overflow-hidden py-12.5 md:py-150">
       <SecondaryNoise />
       <div className="container">
-        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
+        <SectionTitle text="Serving UAE, Oman & the MENA Region" className="section-heading-90 text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
         <div className="grid grid-cols-1 xl:grid-cols-[auto_1fr] 3xl:grid-cols-[auto_410px] relative z-2">
           <div>
             <div className="flex gap-[7px] md:gap-[15px] mb-80">
@@ -117,7 +117,7 @@ const ServingMap = () => {
                 <motion.h3 variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true}} 
                 className="text-55 leading-[1.181818181818182] font-medium text-primary">10<span>+</span></motion.h3>
                 {/* <h3 className="text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]">Countries, Global Partners</h3> */}
-                <SectionTitle text="Countries, Global Partners" as="h3" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
+                <SectionTitle text="Countries, Global Partners" className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]" />
               </div>
               <div className="grid grid-cols-2">
                 {servingMapData.countries.map((item,index) => (

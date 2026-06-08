@@ -77,7 +77,7 @@ export default function ContactForm() {
       </div>
       <SectionTitle
         title="Tell Us About Your Project"
-        className="max-w-[20ch] section-heading mb-10 lg:mb-80"
+        className="max-w-[20ch] section-heading-90 mb-10 lg:mb-80"
       />
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>

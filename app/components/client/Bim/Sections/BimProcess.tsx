@@ -58,7 +58,7 @@ export default function BimProcess() {
   const { title, steps } = bimProcessSection;
 
   return (
-    <section className="w-full py-12.5 md:py-120 3xl:py-[140px] relative">
+    <section className="w-full py-12.5 md:py-120 3xl:py-[150px] relative">
       <div className="absolute left-0 top-10 3xl:-top-[3%] z-10 hidden lg:block">
         <Image
           src="/assets/images/bim/process/bg-lines.svg"
@@ -83,7 +83,7 @@ export default function BimProcess() {
           {/* Title */}
           <SectionTitle
             title={title}
-            className="section-heading text-white mb-7.5 md:mb-50 max-w-[17ch]"
+            className="section-heading-90 text-white mb-7.5 md:mb-50 min-w-[17ch] max-w-[17ch]"
           />
 
           {/* Steps */}

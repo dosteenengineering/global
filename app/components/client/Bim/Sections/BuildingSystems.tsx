@@ -77,7 +77,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
         {item.description}
       </p>
 
-      <div className="mt-auto hidden lg:block">
+      <div className=" hidden lg:block">
         <Image
           src="/assets/icons/arrow-right-top-primary-26.svg"
           alt={`Go to ${item.title}`}
@@ -150,7 +150,7 @@ export default function BuildingSystems() {
         <div className="md:mb-12">
           <SectionTitle
             title={title}
-            className="section-heading text-secondary mb-30"
+            className="section-heading-90 text-secondary mb-30"
           />
           {/* <p className="text-30 leading-[1.333] text-paragraph max-w-[1395px] font-light mb-5 md:mb-80 border-b border-bdr-gray pb-5">
             {description}

@@ -48,7 +48,7 @@ const updateDots = (swiper: SwiperType) => {
             <div className="flex gap-2 justify-between items-center pb-5 md:pb-0 mb-5 md:mb-60   border-b border-bdr-gray md:border-0">
                 <SectionTitle
                   title={title}
-                  className="section-heading text-secondary w-full "
+                  className="section-heading-90 text-secondary w-full "
                 />
                 {showNav && (
                   <motion.div

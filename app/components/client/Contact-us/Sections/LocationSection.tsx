@@ -123,10 +123,10 @@ function LocationCard({
   showCountry = true,
 }: LocationCardProps) {
   return (
-    <div className="flex flex-col 2xl:max-w-[427px] 3xl:min-w-[427px] text-white p-5 lg:p-0 bg-gradient-to-r from-[#022e9e3b] to-[#d4e6ff33] backdrop-blur-sm lg:bg-none">
+    <div className="flex flex-col 2xl:max-w-[427px] 3xl:min-w-[427px] text-white p-5 lg:p-0 bg-gradient-to-r from-[#022e9e3b] to-[#d4e6ff33] max-sm:backdrop-blur-sm lg:bg-none">
       {/* Country — desktop only */}
       {showCountry && (
-        <h3 className="text-30 font-medium leading-[2.1666] tracking-[-0.02em] mb-[10px]">
+        <h3 className="text-30 font-medium leading-[2.1666] tracking-[-0.02em] mb-[10px] xl:mb-20">
           {country}
         </h3>
       )}

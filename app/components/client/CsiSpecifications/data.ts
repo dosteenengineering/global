@@ -52,7 +52,7 @@ export const threePartSpecData = {
       part: "Part 2",
       title: "Products",
       shortDesc: "Materials, manufactured units, fabrication",
-      desc: "Defines the specific product standards, materials, performance criteria, and fabrication requirements. For DOSTEEN systems this includes fire rating requirements, wind load data, operational specifications, finishes, hardware, and manufacturer qualifications — all to the UAE and Oman compliance standard.",
+      desc: "Defines the specific product standards, materials, performance criteria, and fabrication requirements. For Dosteen systems this includes fire rating requirements, wind load data, operational specifications, finishes, hardware, and manufacturer qualifications — all to the UAE and Oman compliance standard.",
     },
     {
       id: 3,

@@ -60,7 +60,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-30 gap-y-40">
         {filteredItems.map((item,index) => (
           <ResourceDownloadCard key={item.id} item={item} delay={index * 0.12}/>
         ))}
@@ -88,16 +88,16 @@ const ResourceDownloadCard = ({ item, delay }: { item: TechnicalDocumentItem, de
         <div className="mt-[6px] md:mt-auto flex flex-wrap items-center justify-between gap-2 lg:gap-20">
           <div className="flex flex-wrap gap-[5px] md:gap-[10px] ">
             {item.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-primary/5 px-2.5 min-w-[51px] md:min-w-[82px] md:px-[15.5px] py-[3.5px] md:py-[10px] flex items-center justify-center text-[12px] md:text-[15px] leading-none font-poppins font-light text-secondary" >
+              <span key={tag} className="rounded-full bg-primary/5 px-2.5 min-w-[51px] md:min-w-[82px] md:px-[15.5px] py-[3.5px] md:py-[10px] flex items-center justify-center text-[12px] md:text-[15px] leading-none font-poppins font-normal text-secondary" >
                 {tag}
               </span>
             ))}
           </div>
 
-          <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
-            <span className="uppercase font-normal md:font-[300] leading-[1.67]">Download</span>
-            <Download className="w-[16px] h-[15px] lg:w-[22px] lg:h-[20px] transition-transform duration-300 group-hover:translate-y-1" strokeWidth={1.8} /> 
-         </a>
+          <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
+            <span className="uppercase font-normal leading-[1.67]">Download</span>
+            <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[16px] h-auto xl:w-auto xl:h-auto transition-transform duration-300 group-hover:translate-y-1" />
+          </a>
         </div>
       </div>
     </motion.article>

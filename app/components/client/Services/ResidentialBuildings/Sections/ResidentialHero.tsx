@@ -134,12 +134,12 @@ export default function ResidentialHero() {
       tl.to(
         leftImagesRef.current,
         { y: "-120px", ease: "none", duration: 0.8 },
-        5,
+        5.2,
       );
       tl.to(
         rightImagesRef.current,
         { y: "-120px", ease: "none", duration: 0.8 },
-        5,
+        5.2,
       );
     }, containerRef);
 
@@ -186,7 +186,7 @@ export default function ResidentialHero() {
               <h1
                 key={i}
                 ref={i === 0 ? titleLine0Ref : titleLine1Ref}
-                className="text-white section-heading will-change-transform"
+                className="text-white section-heading-90 will-change-transform"
               >
                 {line}
               </h1>
@@ -247,12 +247,12 @@ export default function ResidentialHero() {
             </div>
 
             {/* Center — invisible landing slot (244px from top via pt-[243px] on parent) + heading + description */}
-            <div className="flex flex-col items-center justify-center flex-1 px-0 lg:px-0">
+            <div className="flex flex-col items-center justify-center flex-1 px-0 lg:px-3 3xl:px-0">
               <div
                 ref={centerSlotRef}
                 className="w-[120px] h-[120px] lg:w-[200px] lg:h-[200px] shrink-0 mb-40 lg:mb-80"
               />
-              <h2 className="section-heading text-secondary text-center max-w-[18ch] lg:max-w-[12ch] lg:max-w-[40ch] mb-5 md:mb-20">
+              <h2 className="section-heading-90 text-secondary text-center max-w-[18ch] lg:max-w-[12ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
                 {second.heading}
               </h2>
               <p className="text-center text-description text-paragraph max-w-[320px] lg:max-w-[930px] whitespace-pre-line">
