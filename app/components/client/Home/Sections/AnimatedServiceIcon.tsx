@@ -90,6 +90,8 @@ export default function AnimatedServiceIcon({ src, trigger, className }: Props) 
       timersRef.current.push(loopTimer);
     };
 
+    
+
     startCycle();
 
     // Cleanup on unmount or re-trigger
