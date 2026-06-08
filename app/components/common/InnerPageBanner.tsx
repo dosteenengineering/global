@@ -35,7 +35,7 @@ export default function InnerPageBanner({
 
       {/* 2. Content — line, title, description */}
       <div className="container">
-        <div className="w-full mb-70 xl:mb-80 ">
+        <div className="w-full mb-[70px] 2xl:mb-80 ">
           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
             className="h-px w-full bg-[#c2c2c2] origin-center" />
         </div>
