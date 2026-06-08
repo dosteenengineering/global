@@ -48,7 +48,7 @@ const Systems = ({ data }: Props) => {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden py-[70px] md:pb-140 3xl:pb-[206px] md:pt-100 xl:pt-200">
       <div ref={containerRef} className="container px-[16px] mx-auto" />
-      <div className="absolute top-2 xl:top-[8%] left-[-131px] lg:-left-1 pointer-events-none">
+      <div className="absolute top-2 xl:top-[8%] left-[-131px]  3xl:-left-1 pointer-events-none lg:rotate-10 3xl:rotate-0">
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
@@ -60,7 +60,7 @@ const Systems = ({ data }: Props) => {
 
      
 
-         <motion.div   className="max-w-[1252px] lg:ml-auto px-[16px] 2xl:px-0"variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}
+         <motion.div   className="lg:max-w-[1076px] 3xl:max-w-[1252px] lg:ml-auto px-[16px] 2xl:px-0"variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}
           style={isMobile ? undefined : { marginRight: `${rightSpace + 16}px` }} >
         <SectionTitle
           text={data.title}
