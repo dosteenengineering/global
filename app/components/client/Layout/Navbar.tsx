@@ -6,11 +6,14 @@ import Image from "next/image";
 import gsap from "gsap";
 import FullscreenMenu from "./FullscreenMenu";
 import { useLenis } from "lenis/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { navItems, menuItems } from "./data";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
   const logoRef = useRef<HTMLDivElement>(null);
   const navPillRef = useRef<HTMLDivElement>(null);
   const navItemRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -20,52 +23,6 @@ export default function Navbar() {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const navItems = [
-    {
-      label: "ABOUT US",
-      hasDropdown: true,
-      href: "/about",
-      subItems: [
-        { label: "Our Story", href: "/about/our-story" },
-        { label: "Leadership Team", href: "/about/leadership" },
-        { label: "Mission & Values", href: "/about/mission" },
-        { label: "Certifications", href: "/about/certifications" },
-      ],
-    },
-    {
-      label: "SERVICES",
-      hasDropdown: true,
-      href: "/services",
-      subItems: [
-        { label: "MEP Engineering", href: "/services/mep" },
-        { label: "Fire Protection", href: "/services/fire-protection" },
-        { label: "HVAC Design", href: "/services/hvac" },
-        { label: "Electrical Systems", href: "/services/electrical" },
-        { label: "Plumbing Design", href: "/services/plumbing" },
-      ],
-    },
-    {
-      label: "SOLUTIONS",
-      hasDropdown: true,
-      href: "#",
-      subItems: [
-        { label: "Smart Buildings", href: "/solutions/smart-buildings" },
-        { label: "Energy Efficiency", href: "/solutions/energy" },
-        { label: "Sustainable Design", href: "/solutions/sustainable" },
-      ],
-    },
-    { label: "RESOURCE HUB", hasDropdown: false, href: "#" },
-    { label: "PROJECTS", hasDropdown: false, href: "/projects" },
-  ];
-
-  const menuItems = [
-    { label: "BIM Capabilities", href: "/bim" },
-    { label: "CSI Specifications", href: "/csi-specifications" },
-    { label: "Resources", href: "/resources" },
-    { label: "Blog", href: "/blog" },
-    { label: "Gallery", href: "/gallery" },
-  ];
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -101,6 +58,9 @@ export default function Navbar() {
           clipPath: "inset(-3px 0% -3px -3px round 50px)",
           duration: 0.9,
           ease: "power3.out",
+          onComplete: () => {
+            gsap.set(navPillRef.current, { clipPath: "none" });
+          },
         },
         0.1,
       );
@@ -253,7 +213,7 @@ export default function Navbar() {
               ${
                 isMenuOpen
                   ? "rounded-none border border-transparent overflow-visible bg-transparent"
-                  : "rounded-[50px] border border-white/30 glass-effect overflow-hidden"
+                  : "rounded-[50px] border border-white/30 glass-effect"
               }
               ${isSticky ? "bg-black/50" : "bg-transparent"}
               `}
@@ -277,12 +237,12 @@ export default function Navbar() {
 
             {/* Nav items */}
             <div
-              className={`hidden min-[1200px]:flex items-center flex-1 overflow-hidden transition-all duration-200 ease-in-out 
-                ${
-                  isMenuOpen
-                    ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
-                    : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
-                }`}
+              className={`hidden min-[1200px]:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
+    ${
+      isMenuOpen
+        ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
+        : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
+    }`}
             >
               {navItems.map((item, i) => (
                 <div
@@ -292,6 +252,10 @@ export default function Navbar() {
                   }}
                   className="relative group"
                   style={{ opacity: 0 }}
+                  onMouseEnter={() =>
+                    item.hasDropdown && setOpenDropdown(item.label)
+                  }
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
                   <Link
                     href={item.href}
@@ -306,15 +270,65 @@ export default function Navbar() {
                         alt=""
                         width={15}
                         height={10}
-                        className="w-auto h-[7px] pointer-events-none"
+                        className={`w-auto h-[7px] pointer-events-none transition-transform duration-300 ease-out ${
+                          openDropdown === item.label ? "rotate-180" : ""
+                        }`}
                       />
                     )}
                   </Link>
+
+                  {item.hasDropdown && (
+  <div className="absolute top-full left-0 w-full h-[25px]" />
+)}
+
+                  {/* Dropdown */}
+                  {item.hasDropdown && item.subItems && (
+                    <AnimatePresence>
+                      {openDropdown === item.label && (
+                        <motion.div
+                          initial={{
+                            clipPath: "inset(0% 0% 100% 0% round 16px)",
+                          }}
+                          animate={{
+                            clipPath: "inset(0% 0% 0% 0% round 16px)",
+                          }}
+                          exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                          transition={{
+                            duration: 0.38,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                          className="absolute top-[calc(100%+25px)] left-0 z-50 rounded-[16px] border border-white/15 bg-black/80 overflow-hidden"
+                        >
+                          <ul className="py-[10px] min-w-[280px]">
+                            {item.subItems.map((sub, si) => (
+                              <motion.li
+                                key={sub.label}
+                                initial={{ opacity: 0, y: -10, x: -2 }}
+                                animate={{ opacity: 1, y: 0, x: 0 }}
+                                exit={{ opacity: 0, y: -10, x: -2 }}
+                                transition={{
+                                  duration: 0.2,
+                                  ease: "easeOut",
+                                  delay: si * 0.065,
+                                }}
+                              >
+                                <Link
+                                  href={sub.href}
+                                  className="flex items-center px-[20px] py-[11px] text-white text-[14px] uppercase tracking-wide hover:bg-white/8 hover:translate-x-1 transition-all duration-300"
+                                >
+                                  {sub.label}
+                                </Link>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
                 </div>
               ))}
             </div>
 
-            {/* Search icon */}
             {/* Search — single pill expands leftward */}
             <motion.div
               className="relative hidden md:flex items-center mr-[20.39px] h-[45.61px] rounded-full border border-white/20 bg-white/8 backdrop-blur-[10px] overflow-hidden"
@@ -374,7 +388,9 @@ export default function Navbar() {
               </button>
             </motion.div>
 
-<div className={`${isMenuOpen ? "hidden" : ""} md:hidden rounded-full shrink-0 pr-[15px]`}>
+            <div
+              className={`${isMenuOpen ? "hidden" : ""} md:hidden rounded-full shrink-0 pr-[15px]`}
+            >
               <button
                 className="cursor-pointer flex items-center justify-center group shrink-0"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -415,13 +431,15 @@ export default function Navbar() {
         </div>
 
         {/* Right group — Contact + Hamburger */}
-<div className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-[18.8px] shrink-0`}>
+        <div
+          className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-[18.8px] shrink-0`}
+        >
           {/* Contact pill */}
           <div className="rounded-[50px] backdrop-blur-[2px] h-[62px] md:h-auto w-[122px] md:w-auto">
             <Link
               ref={contactRef}
               href="/contact"
-className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
+              className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}

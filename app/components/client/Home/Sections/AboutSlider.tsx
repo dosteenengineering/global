@@ -153,7 +153,7 @@ export default function AboutSlider() {
         </div>
         <div className="lg:ml-[29%] pt-[70px] lg:pt-120 px-[15px] lg:px-0 container">
           <SectionTitle
-            text="DELIVERING EXCELLENCE BEYOND BORDERS"
+            text="DELIVERING EXCELLENCE BEYOND BORDERS,"
             className="section-heading-90 max-w-[400px] md:max-w-[560px] lg:max-w-[880px] xl:max-w-[880px] 3xl:max-w-[1049px] text-secondary uppercase"
           />
         </div>

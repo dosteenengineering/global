@@ -17,13 +17,13 @@ export const footerData = {
         {
             title: "Quick Links",
             links: [
-                { label: "About Us", href: "#" },
+                { label: "About Us", href: "/about" },
                 { label: "Why Dosteen", href: "#" },
-                { label: "Projects", href: "#" },
+                { label: "Projects", href: "/projects" },
                 { label: "Case Studies", href: "#" },
-                { label: "BIM", href: "#" },
-                { label: "Blog", href: "#" },
-                { label: "Contact", href: "#" },
+                { label: "BIM", href: "/bim-capabilities" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contact", href: "/contact-us" },
                 { label: "Request a Quote", href: "#" },
                 { label: "Careers", href: "#" },
             ],
@@ -31,34 +31,34 @@ export const footerData = {
         {
             title: "Residential Solutions",
             links: [
-                { label: "Garage Solutions", href: "#" },
-                { label: "Architectural Shades", href: "#" },
-                { label: "Shutters", href: "#" },
-                { label: "Flood Barriers", href: "#" },
-                { label: "Garbage & Linen Chutes", href: "#" },
-                { label: "Multi Parking Solutions", href: "#" },
-                { label: "Bespoke Steel gates", href: "#" },
-                { label: "Fly Mesh & Insect Screens", href: "#" },
-                { label: "Retractable Pool Covers", href: "#" },
+                { label: "Garage Solutions", href: "/solutions/residential-developments" },
+                { label: "Architectural Shades", href: "/solutions/residential-developments" },
+                { label: "Shutters", href: "/solutions/residential-developments" },
+                { label: "Flood Barriers", href: "/solutions/residential-developments" },
+                { label: "Garbage & Linen Chutes", href: "/solutions/residential-developments" },
+                { label: "Multi Parking Solutions", href: "/solutions/residential-developments" },
+                { label: "Bespoke Steel gates", href: "/solutions/residential-developments" },
+                { label: "Fly Mesh & Insect Screens", href: "/solutions/residential-developments" },
+                { label: "Retractable Pool Covers", href: "/solutions/residential-developments" },
             ],
         },
         {
             title: "Industrial & Commercial Solutions",
             links: [
-                { label: "Docking Solutions", href: "#" },
-                { label: "Sectional Overhead Doors", href: "#" },
-                { label: "Garbage & Linen Chutes", href: "#" },
-                { label: "Architectural Tensile Shades", href: "#" },
-                { label: "Entrance Systems", href: "#" },
-                { label: "Fire Protection", href: "#" },
-                { label: "Flood Protection", href: "#" },
-                { label: "Gate Systems", href: "#" },
-                { label: "Forced Entry Solutions", href: "#" },
-                { label: "Operable Partitions", href: "#" },
-                { label: "Traffic Safety Solutions", href: "#" },
-                { label: "Multi-Parking Solutions", href: "#" },
-                { label: "Emergency Lighting Systems", href: "#" },
-                { label: "Space Frame Structures", href: "#" },
+                { label: "Docking Solutions", href: "/solutions/commercial-developments" },
+                { label: "Sectional Overhead Doors", href: "/solutions/commercial-developments" },
+                { label: "Garbage & Linen Chutes", href: "/solutions/commercial-developments" },
+                { label: "Architectural Tensile Shades", href: "/solutions/commercial-developments" },
+                { label: "Entrance Systems", href: "/solutions/commercial-developments" },
+                { label: "Fire Protection", href: "/solutions/commercial-developments" },
+                { label: "Flood Protection", href: "/solutions/commercial-developments" },
+                { label: "Gate Systems", href: "/solutions/commercial-developments" },
+                { label: "Forced Entry Solutions", href: "/solutions/commercial-developments" },
+                { label: "Operable Partitions", href: "/solutions/commercial-developments" },
+                { label: "Traffic Safety Solutions", href: "/solutions/commercial-developments" },
+                { label: "Multi-Parking Solutions", href: "/solutions/commercial-developments" },
+                { label: "Emergency Lighting Systems", href: "/solutions/commercial-developments" },
+                { label: "Space Frame Structures", href: "/solutions/commercial-developments" },
             ],
         },
         {
@@ -96,3 +96,49 @@ export const footerData = {
 };
 
 export type FooterData = typeof footerData;
+
+
+export const navItems = [
+  {
+    label: "ABOUT US",
+    hasDropdown: true,
+    href: "#",
+    subItems: [
+      { label: "Overview", href: "/about" },
+      { label: "Why Dosteen", href: "#" },
+      { label: "Partners & Clients", href: "/about/partners" },
+      { label: "Awards & Certifications", href: "/about/recognitions" },
+      { label: "FAQs", href: "/about/faq" },
+    ],
+  },
+  {
+    label: "SERVICES",
+    hasDropdown: true,
+    href: "#",
+    subItems: [
+      { label: "AMC", href: "/services/mep" },
+      { label: "Instant Call Service", href: "/services/fire-protection" },
+      { label: "Export", href: "/services/hvac" },
+    ],
+  },
+  {
+    label: "SOLUTIONS",
+    hasDropdown: true,
+    href: "#",
+    subItems: [
+      { label: "Overview", href: "/solutions" },
+      { label: "Residential Solutions", href: "/solutions/residential-developments" },
+      { label: "Industrial & Commercial Solution", href: "/solutions/commercial-developments" },
+    ],
+  },
+  { label: "RESOURCE HUB", hasDropdown: false, href: "/resource" },
+  { label: "PROJECTS", hasDropdown: false, href: "/projects" },
+];
+
+ export const menuItems = [
+    { label: "BIM Capabilities", href: "/bim-capabilities" },
+    { label: "CSI Specifications", href: "/csi-specifications" },
+    { label: "Resources", href: "/resource" },
+    { label: "Blog", href: "/blog" },
+    { label: "Gallery", href: "/gallery" },
+  ];

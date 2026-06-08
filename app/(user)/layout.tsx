@@ -12,12 +12,13 @@ export const poppins = Poppins({
   variable: "--font-poppins",
 });
 
-const helvetica_neue = localFont({
-  // src: "../../public/fonts/HelveticaNeue2.woff2",
-  src: "../../public/fonts/HelveticaNeue2.woff2",
-  weight: "700",
-  variable: "--font-helvetica-neue",
-});
+// const helvetica_neue = localFont({
+//   // src: "../../public/fonts/HelveticaNeue2.woff2",
+//   // src: "../../public/fonts/HelveticaNeue2.woff2",
+//   src: "../../public/fonts/HelveticaNeueLTProBd.woff2",
+//   weight: "700",
+//   variable: "--font-helvetica-neue",
+// });
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -39,7 +40,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}
+        // className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}
+        className={`${poppins.variable} ${dmSans.variable} antialiased`}
       >
         <LenisProvider>
           <UserChrome>{children}</UserChrome>
