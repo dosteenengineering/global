@@ -151,15 +151,9 @@ export default function ServicesSection() {
 
           <div className="h-[1px] bg-[#76A7FF] mb-[30px] md:mb-6 md:mb-14 relative bottom-[1px]" />
           <div>
-            <div className="relative w-auto sm:h-[180px] mb-[30px] md:mb-12">
+            <div className="relative w-auto h-[120px] sm:h-[180px] mb-[30px] md:mb-12">
         
-              {/* <Image
-                key={activeData.key}
-                src={activeData.image}
-                alt={activeData.label}
-                fill
-                className="object-contain object-left"
-              /> */}
+           
               <AnimatedServiceIcon
                 src={activeData.image}
                 trigger={`${activeTab}-${reloadKeys[activeTab] ?? 0}`}  // same ?v= idea, as a string

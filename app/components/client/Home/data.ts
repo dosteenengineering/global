@@ -110,7 +110,7 @@ export const servicesData: ServicesData = {
     {
       key: "amc",
       label: "AMC",
-      image: "/assets/images/home/service/service-img-1.svg",
+      image: "/assets/images/home/service/export.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
