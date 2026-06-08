@@ -438,7 +438,7 @@ export default function Navbar() {
           <div className="rounded-[50px] backdrop-blur-[2px] h-[62px] md:h-auto w-[122px] md:w-auto">
             <Link
               ref={contactRef}
-              href="/contact"
+              href="/contact-us"
               className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
