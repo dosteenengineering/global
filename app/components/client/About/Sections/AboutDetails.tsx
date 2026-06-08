@@ -74,7 +74,7 @@ function StatCard({
       <div>
         <div className="flex items-baseline gap-x-[5px] md:gap-x-[14px]">
            <div ref={ref} className="flex flex-row items-start">
-              <span className="min-w-[63px] text-right text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
+              <span className="xl:min-w-[63px]  text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
                 {display}
               </span>
               {hasPlus && (
@@ -83,7 +83,7 @@ function StatCard({
                 </sup>
               )}
             </div>
-          <span className="text-[18px] md:text-30 leading-[1.333] font-light -tracking-[0.02em] text-black">
+          <span className="text-[24px] md:text-30 leading-[1.333] font-light -tracking-[0.02em] text-black">
             {label}
           </span>
         </div>
@@ -125,7 +125,8 @@ export default function AboutDetails() {
           {AboutData.title}
         </h2>
 
-        <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="text-paragraph text-description" dangerouslySetInnerHTML={{ __html: AboutData.description }} />
+        <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{once:true, amount:0.4}} className="text-paragraph text-description"
+         dangerouslySetInnerHTML={{ __html: AboutData.description }} />
       </div>
 
       {/* Stats Swiper */}

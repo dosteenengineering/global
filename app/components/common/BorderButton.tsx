@@ -23,11 +23,11 @@ export default function BorderButton({
   text,
   href,
   borderColor = "white",
-  textColor   = "white",
-  iconColor   = "primary",
+  textColor = "white",
+  iconColor = "primary",
   hoverBg,
-  px          = "px-6",
-  className   = "",
+  px = "px-6",
+  className = "",
   type,
   onClick,
   icon,
@@ -36,14 +36,22 @@ export default function BorderButton({
   const [hovered, setHovered] = useState(false);
 
   const borderClass = borderColor === "white" ? "border-white" : "border-[#454545]";
-  const textClass   = textColor === "white" ? "text-white" : "text-secondary";
-  const iconClass   = iconColor === "white" ? "invert brightness-0" : "";
+  const textClass = textColor === "white" ? "text-white" : "text-secondary";
+  const iconClass = iconColor === "white" ? "invert brightness-0" : "";
 
   const fillBg =
     hoverBg === "white" ? "bg-white" :
-    hoverBg === "black" ? "bg-[#161616]" : "";
+      hoverBg === "black" ? "bg-[#161616]" : "";
 
-  const sharedClass = `group relative overflow-hidden  flex items-center justify-center gap-3 border rounded-[50px] ${px} md:py-[18px] py-[8px] uppercase text-[14px] md:text-15 leading-[1.73] font-[400] cursor-pointer active:scale-95 transition-all duration-300 ${borderClass} ${textClass} ${className}`;
+  const sharedClass = `
+    group relative overflow-hidden flex items-center justify-center gap-3
+    border rounded-[50px] ${px} md:py-[18px] py-[8px]
+    uppercase text-[14px] md:text-15 leading-[1.73] font-[400]
+    cursor-pointer active:scale-95 transition-all duration-300
+    touch-action-manipulation [-webkit-tap-highlight-color:transparent]
+    select-none
+    ${borderClass} ${textClass} ${className}
+  `;
 
   const arrowSrc =
     hoverBg === "white" && hovered
@@ -52,51 +60,58 @@ export default function BorderButton({
 
   const imgClass =
     hoverBg === "white" && hovered ? "" :
-    hoverBg === "black" && hovered ? "invert brightness-0" :
-    iconClass;
+      hoverBg === "black" && hovered ? "invert brightness-0" :
+        iconClass;
 
-  // Text color flips when hovered (for white/black hoverBg)
   const textHoverClass =
     hoverBg === "white" && hovered ? "text-[#161616]" :
-    hoverBg === "black" && hovered ? "text-white" :
-    "";
+      hoverBg === "black" && hovered ? "text-white" : "";
 
   const renderedIcon = icon ? (
     <span className={`relative z-10 text-primary transition-colors duration-300 ${textHoverClass}`}>
       {icon}
     </span>
   ) : (
-    <Image src={arrowSrc} alt="arrow" width={18} height={18}
-      className={`relative  ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[16px] sm:h-[16px] pointer-events-none`}
+    <Image
+      src={arrowSrc} alt="" aria-hidden="true"
+      width={18} height={18}
+      className={`relative ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[16px] sm:h-[16px] pointer-events-none`}
     />
   );
 
   const content = (
     <>
-      {/* Animated fill — slides in from left on hover */}
       {hoverBg && (
-        <span aria-hidden="true"
-          className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`} />
+        <span
+          aria-hidden="true"
+          className={`absolute inset-0 ${fillBg} rounded-[50px] origin-left transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${hovered ? "scale-x-100" : "scale-x-0"}`}
+        />
       )}
-
       {iconPosition === "left" && renderedIcon}
-      <span className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300
-         ${textHoverClass}`}>
+      <span className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300 ${textHoverClass}`}>
         {text}
       </span>
       {iconPosition === "right" && renderedIcon}
     </>
   );
 
-  const events = { onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false), };
+  // ✅ Use pointer events instead of mouse events
+  const events = {
+    onPointerEnter: () => setHovered(true),
+    onPointerLeave: () => setHovered(false),
+  };
 
   if (type || onClick) {
     return (
-      <button type={type ?? "button"} onClick={onClick} className={sharedClass} {...events}> {content} </button>
+      <button type={type ?? "button"} onClick={onClick} className={sharedClass} {...events}>
+        {content}
+      </button>
     );
   }
 
   return (
-    <Link href={href ?? "#"} className={sharedClass} {...events}> {content} </Link>
+    <Link href={href ?? "#"} className={sharedClass} {...events}>
+      {content}
+    </Link>
   );
 }

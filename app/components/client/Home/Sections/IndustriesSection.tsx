@@ -209,8 +209,9 @@ export default function IndustriesSection() {
   const lgOffsetBefore = lgSlideWidth + SPACE_BETWEEN;
 
   const counterPill = (
-    <div className="flex items-center justify-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5] border-gray-300 rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
-      <span className="font-[600]">
+    <div className="flex items-center justify-center border border-primary text-paragraph font-poppins font-[300] leading-[0.5]
+     border-gray-300 rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
+      <span className="font-semibold">
         {String(activeIndex + 1).padStart(2, "0")}
       </span>
       <span>/</span>
