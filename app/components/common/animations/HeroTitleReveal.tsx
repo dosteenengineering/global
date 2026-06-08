@@ -53,10 +53,6 @@
 //   );
 // }
 
-
-
-
-
 "use client";
 import { useEffect, useRef, useState } from "react";
 
@@ -71,12 +67,12 @@ interface TitleRevealFillProps {
 }
 
 export default function TitleRevealFill({
-  text       = "Where Engineering Meets Assurance",
-  className  = "",
-  delay      = 60,
-  revealDur  = 750,
-  linePause  = 120,
-  fillDur    = 900,
+  text = "Where Engineering Meets Assurance",
+  className = "",
+  delay = 60,
+  revealDur = 750,
+  linePause = 120,
+  fillDur = 900,
   fillOffset = 80,
 }: TitleRevealFillProps) {
   const measureRef = useRef<HTMLHeadingElement>(null);
@@ -88,7 +84,7 @@ export default function TitleRevealFill({
     const measure = () => {
       if (!measureRef.current) return;
       const spans = Array.from(
-        measureRef.current.querySelectorAll<HTMLElement>("[data-word]")
+        measureRef.current.querySelectorAll<HTMLElement>("[data-word]"),
       );
       if (!spans.length) return;
 
@@ -114,7 +110,10 @@ export default function TitleRevealFill({
     const ro = new ResizeObserver(measure);
     const el = measureRef.current;
     if (el) ro.observe(el);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
   }, [text]);
 
   const revealStart = (i: number) => delay + i * (revealDur * 0.5 + linePause);
@@ -123,7 +122,9 @@ export default function TitleRevealFill({
       ? revealStart(i + 1) + fillOffset
       : revealStart(i) + revealDur * 0.75;
 
-  const css = (lineGroups ?? []).map((_, i) => `
+  const css = (lineGroups ?? [])
+    .map(
+      (_, i) => `
     .trf-inner-${i} {
       display: block; opacity: 0; line-height: inherit;
       animation: trfUp ${revealDur}ms cubic-bezier(0.16,1,0.3,1) forwards;
@@ -135,7 +136,9 @@ export default function TitleRevealFill({
       animation: trfWipe ${fillDur}ms cubic-bezier(0.65,0,0.35,1) forwards;
       animation-delay: ${fillStart(i, lineGroups?.length ?? 0)}ms;
     }
-  `).join("\n");
+  `,
+    )
+    .join("\n");
 
   return (
     <>
@@ -149,26 +152,24 @@ export default function TitleRevealFill({
           to   { clip-path: inset(0 0% 0 0); }
         }
         .trf-mask {
-          display: block; overflow: hidden; line-height: inherit;
-          padding-top: 0.01em;    
-          margin-top: -0.3em;
-          padding-bottom: 0.09em;  
+          display: block; overflow: hidden; line-height: inherit;  
+          margin-bottom: -0.04em;
         }
         .trf-stroke {
           display: block; color: transparent;
           -webkit-text-stroke: 0.5px #FFFBFB;
-          position: relative; line-height: 1.1;
+          position: relative; line-height: 1.05;
         }
         .trf-fill-base {
           position: absolute; inset: 0; display: block; line-height: inherit;
         }
            @media (max-width: 768px) {
               .trf-stroke {
-                line-height: 1;
+                line-height: 1.01;
               }
-                 .trf-mask {    
-          margin-top: -0.13em; 
-        }
+              .trf-mask {
+                margin-bottom: 0;
+              }
             }
         ${css}
       `}</style>
@@ -182,7 +183,8 @@ export default function TitleRevealFill({
         >
           {words.map((w, i) => (
             <span key={i} data-word={w} style={{ display: "inline" }}>
-              {w}{i < words.length - 1 ? " " : ""}
+              {w}
+              {i < words.length - 1 ? " " : ""}
             </span>
           ))}
         </h1>
@@ -205,10 +207,6 @@ export default function TitleRevealFill({
     </>
   );
 }
-
-
-
-
 
 // "use client";
 // import { useEffect, useRef, useState } from "react";
@@ -558,11 +556,6 @@ export default function TitleRevealFill({
 //     </>
 //   );
 // }
-
-
-
-
-
 
 // 4
 // "use client";

@@ -1,6 +1,17 @@
 @import "tailwindcss";
 @import 'flag-icons/css/flag-icons.min.css';
 
+@font-face {
+  font-family: "HelveticaNeueBd";
+  src: url("/fonts/HelveticaNeueLTProBd.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  ascent-override: 71.4%;
+  descent-override: 28.6%;
+  line-gap-override: 0%;
+}
+
 
 html,
 body {
@@ -28,6 +39,7 @@ body::-webkit-scrollbar {
 
 @utility font-helvetica {
     font-family: var(--font-helvetica-neue);
+    /* font-weight: 700; */
 }
 
 @utility font-dm-sans {
@@ -123,6 +135,7 @@ body::-webkit-scrollbar {
     --bdr-gray: #C2C2C2;
     --md-gray:#454545;
     --bdr-blue: #76A7FF; 
+    --font-helvetica-neue: "HelveticaNeueBd", sans-serif;
 
     /* small */
     --text-15: clamp(12px, 0.5vw + 10px, 15px);
@@ -261,10 +274,10 @@ body::-webkit-scrollbar {
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95 translate-y-[-15px];
+    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95 ;
 }
 .section-heading-90 {   
-    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-90 translate-y-[-15px] ;
+    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-90 ;
 }
 
 .hero-heading {
