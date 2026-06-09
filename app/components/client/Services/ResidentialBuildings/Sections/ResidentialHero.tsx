@@ -120,8 +120,10 @@ export default function ResidentialHero() {
             const { top, height } = slot.getBoundingClientRect();
             // return top + height / 2 - window.innerHeight / 2;
             return window.innerWidth < 768
-              ? top + height / 2 - window.innerHeight / 2
-              : top + height / 2 - window.innerHeight / 2;
+              ? top + height / 4 - window.innerHeight / 2 // Mobile
+              : window.innerWidth < 1024
+                ? top + height / 6 - window.innerHeight / 2 // Tablet
+                : top + height / 2 - window.innerHeight / 2; // Desktop
           },
           ease: "power2.inOut",
           duration: 1.6,
