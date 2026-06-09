@@ -21,7 +21,7 @@ function ToolRow({
   isLast: boolean;
   index: number;
   delay: number;
-  }) {
+}) {
   return (
     <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true }}
       className={`grid grid-cols-[105px_1px_1fr] md:grid-cols-[233px_1px_1fr] border-[#c2c2c2]
@@ -73,29 +73,17 @@ export default function SoftwareTools() {
         />
       </div>
       <div className="absolute w-[436px] lg:w-full top-[-24%] lg:-top-61 left-[-21%] lg:left-0 pointer-events-none lg:hidden">
-              <Image
-                src="/assets/icons/bg-svg/top-left-animated.svg"
-                alt="decorative lines"
-                width={600}
-                height={500}
-                className="object-contain w-[250px] 2xl:w-[500px] 3xl:w-[600px]"
-              />
-            </div>
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[250px] 2xl:w-[500px] 3xl:w-[600px]" />
+      </div>
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-7.5 lg:gap-140 3xl:gap-[142px] items-start">
           {/* Left — title + description */}
           <div className="shrink-0 lg:w-[40.65%]">
-            <SectionTitle
-              title={title}
-              className="mb-50 lg:max-w-[14ch] section-heading-90"
-            />
+            <SectionTitle title={title} className="mb-50 lg:max-w-[14ch] section-heading-90" />
             {/* <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
               {description}
             </p> */}
-            <SectionDescription
-              text={description}
-              className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]"
-            />
+            <SectionDescription text={description} className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]" />
           </div>
 
           {/* Right — tools table */}

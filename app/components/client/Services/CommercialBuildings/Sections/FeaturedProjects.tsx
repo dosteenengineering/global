@@ -31,6 +31,9 @@ export default function FeaturedProjects() {
   const [totalSlides, setTotalSlides] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
 
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   const updateDots = (swiper: SwiperType) => {
     const total = swiper.slides.length;
     const perView = Math.round(swiper.params.slidesPerView as number);
@@ -46,6 +49,8 @@ export default function FeaturedProjects() {
         ? swiper.params.slidesPerView
         : 1
     );
+   setIsBeginning(swiper.isBeginning);
+   setIsEnd(swiper.isEnd);
   };
 
   // Hide nav if all slides fit in view
@@ -73,7 +78,7 @@ export default function FeaturedProjects() {
                   if (s && !s.destroyed) s.slidePrev();
                 }}
                 direction="left"
-                disabled={false}
+                disabled={isBeginning}
                 ariaLabel="Previous"
                 borderColor="border-white"
                 className="icon-invert"
@@ -84,7 +89,7 @@ export default function FeaturedProjects() {
                   if (s && !s.destroyed) s.slideNext();
                 }}
                 direction="right"
-                disabled={false}
+                disabled={isEnd}
                 ariaLabel="Next"
                 borderColor="border-white"
                 className="icon-invert"

@@ -99,6 +99,9 @@ export default function BuildingSystems() {
   const topRefs = useRef<(HTMLDivElement | null)[]>([]);
   const bottomRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   useEffect(() => {
     function measure() {
       [...topRefs.current, ...bottomRefs.current].forEach((el) => {
@@ -144,6 +147,12 @@ export default function BuildingSystems() {
       <span>{String(total).padStart(2, "0")}</span>
     </div>
   );
+
+  const updateState = (swiper: SwiperType) => {
+    setActiveIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
   return (
     <section className="w-full bg-white">
       <div className="container py-140 3xl:py-200">
@@ -237,9 +246,10 @@ export default function BuildingSystems() {
                       if (s && !s.destroyed) s.slidePrev();
                     }}
                     direction="left"
-                    disabled={false}
+                    disabled={isBeginning}
                     ariaLabel="Previous"
                     borderColor="border-[#161616]"
+                    disableMode="dark"
                   />
                   <NavButton
                     onClick={() => {
@@ -247,9 +257,10 @@ export default function BuildingSystems() {
                       if (s && !s.destroyed) s.slideNext();
                     }}
                     direction="right"
-                    disabled={false}
+                    disabled={isEnd}
                     ariaLabel="Next"
                     borderColor="border-[#161616]"
+                    disableMode="dark"
                   />
                 </motion.div>
               </motion.div>
@@ -259,14 +270,16 @@ export default function BuildingSystems() {
               slidesPerView={1}
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
+                updateState(swiper);
               }}
               onSlideChange={(swiper) => {
                 setActiveIndex(swiper.activeIndex);
+                updateState(swiper);
               }}
-              className="!overflow-hidden !px-[1px]"
+              className="overflow-hidden px-px"
             >
               {items.map((item, idx) => (
-                <SwiperSlide key={idx} className="!h-auto">
+                <SwiperSlide key={idx} className="h-auto">
                   <Cell
                     item={item}
                     isTopRow={true}

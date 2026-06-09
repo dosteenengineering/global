@@ -113,16 +113,16 @@ export function SectionDescription({
     if (!plainText) return;
 
     // const words = plainText.split(/\s+/).filter(Boolean);
-    const words = plainText
-      .split(/\s+/)
-      .filter(Boolean)
-      .flatMap((word) =>
-        word.includes("-")
-          ? word.split("-").flatMap((part, i, arr) =>
-            i < arr.length - 1 ? [part + "-"] : [part]
-          )
-          : [word]
-      );
+    // const words = plainText
+    //   .split(/\s+/)
+    //   .filter(Boolean)
+    //   .flatMap((word) =>
+    //     word.includes("-")
+    //       ? word.split("-").flatMap((part, i, arr) =>
+    //         i < arr.length - 1 ? [part + "-"] : [part]
+    //       )
+    //       : [word]
+    //   );
 
     // Tracks whether animation has already played (don't re-animate on resize)
     let hasAnimated = false;
@@ -130,7 +130,11 @@ export function SectionDescription({
     let pendingRaf1 = 0;
     let pendingRaf2 = 0;
 
+    let isBuilding = false;
+
     const buildLines = (skipAnimation = false) => {
+      if (isBuilding) return;
+      isBuilding = true;
       const words = plainText
         .split(/\s+/)
         .filter(Boolean)
@@ -209,6 +213,7 @@ export function SectionDescription({
               });
             });
           }
+          isBuilding = false; 
         });
       });
     };
@@ -221,6 +226,7 @@ export function SectionDescription({
     let lastWidth = el.getBoundingClientRect().width;
 
     const resizeObserver = new ResizeObserver((entries) => {
+      if (isBuilding) return;
       const newWidth = entries[0].contentRect.width;
       // Only re-measure if width actually changed (ignore height-only changes)
       if (Math.abs(newWidth - lastWidth) < 1) return;

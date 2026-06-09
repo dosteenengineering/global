@@ -21,12 +21,7 @@ function ProcessStep({
       <div className="flex flex-col items-center shrink-0">
         {/* Circle */}
         <motion.div variants={zoomIn(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="relative z-[2] w-12.5 h-12.5 md:w-[90px] md:h-[90px] 3xl:w-[100px] 3xl:h-[100px] shrink-0 backdrop-blur-sm rounded-full">
-          <Image
-            src="/assets/images/about/why-choose/card-bg-cricle.svg"
-            alt=""
-            fill
-            className="object-contain"
-          />
+          <Image src="/assets/images/about/why-choose/card-bg-cricle.svg" alt="" fill className="object-contain" />
           <div className="absolute inset-0 flex items-center justify-center ">
             <span className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] md:hidden">
               {step.number.toString().replace(/^0+/, '')}

@@ -15,6 +15,7 @@ interface NavButtonProps {
   hoverBgColor?: string;
   className?: string;
   ariaLabel?: string;
+  disableMode?: string;
 }
 
 const directionRotation = {
@@ -47,6 +48,7 @@ const NavButton = forwardRef<HTMLButtonElement, NavButtonProps>(
       hoverBgColor = "bg-secondary",
       className = "",
       ariaLabel,
+      disableMode = "light",
     }: NavButtonProps,
     ref: React.Ref<HTMLButtonElement>,
   ) {
@@ -88,7 +90,8 @@ const NavButton = forwardRef<HTMLButtonElement, NavButtonProps>(
           alt={direction}
           width={17}
           height={17}
-          className={`relative z-10 transition-all duration-300 xl:w-auto xl:h-[24px] md:w-[17px] md:h-[17px] w-20 h-auto pointer-events-none ${hovered ? "invert brightness-0" : ""} ${directionRotation[direction]}`}
+          className={`relative z-10 transition-all duration-300 xl:w-auto xl:h-[24px] md:w-[17px] md:h-[17px] w-20 h-auto pointer-events-none
+             ${hovered && disableMode === "light" ? "invert brightness-0" : ""} ${directionRotation[direction]}`}
         />
       </button>
     );
