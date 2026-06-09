@@ -326,14 +326,22 @@ export const whyDosteenData = {
 export type WhyDosteenSlide = (typeof whyDosteenData.slides)[number];
 
 //seventh Section
-export const bimData = {
-  heading: "ADVANCED BIM CAPABILITIES",
-  progressLabel: "CSI Specification Documentation",
-  description:
-    "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
-  videoSrc: "/assets/videos/bim-bg-vdo.mp4",
-  arrowImage: "/assets/icons/arrow-right-top-big.svg",
-};
+export const bimData = [
+  {
+    heading: "ADVANCED BIM CAPABILITIES",
+    description:
+      "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
+    background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    link: "/bim-capabilities",
+  },
+  {
+    heading: "CSI SPECIFICATION DOCUMENTATION",
+    description:
+      "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
+    background: { type: "image" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    link: "/csi-specifications",
+  },
+];
 
 //eighth Section
 export interface Project {
