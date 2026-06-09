@@ -84,29 +84,25 @@ export interface SoftwareTool {
 
 export const softwareToolsSection = {
   title: "SOFTWARE &\nTOOLS",
-  description:
-    "Dosteen's team works across major BIM platforms for seamless model exchange on UAE and Oman projects.",
+  description: "Dosteen's team works across major BIM platforms for seamless model exchange on UAE and Oman projects.",
   tools: [
     {
       id: "revit",
       icon: "/assets/images/bim/tools/1.svg",
       title: "Autodesk Revit",
-      description:
-        "BIM model authoring, Revit family creation, shop drawing production. Delivers .RVT and .IFC.",
+      description: "BIM model authoring, Revit family creation, shop drawing production. Delivers .RVT and .IFC.",
     },
     {
       id: "autocad",
       icon: "/assets/images/bim/tools/2.svg",
       title: "AutoCAD",
-      description:
-        "2D shop drawings, fixing schedules, installation documentation. Delivers .DWG and .PDF.",
+      description: "2D shop drawings, fixing schedules, installation documentation. Delivers .DWG and .PDF.",
     },
     {
       id: "navisworks",
       icon: "/assets/images/bim/tools/3.svg",
-      title: "Navisworks",
-      description:
-        "Clash detection, model federation, cloud-based coordination. Also supports IFC and COBie for FM handover.",
+      title: "Navisworks / BIM 360",
+      description: "Clash detection, model federation, cloud-based coordination. Also supports IFC and COBie for FM handover.",
     },
   ] satisfies SoftwareTool[],
 };

@@ -28,6 +28,9 @@ export default function RelatedProjects() {
   const [dotCount, setDotCount] = useState(0);
   const [showDots, setShowDots] = useState(false);
 
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
  const [showNav, setShowNav] = useState(false);
 
 const updateDots = (swiper: SwiperType) => {
@@ -39,6 +42,11 @@ const updateDots = (swiper: SwiperType) => {
   setShowNav(dots > 1); // ← add this
 }; 
 
+  const updateState = (swiper: SwiperType) => {
+    setActiveIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
  
 
   return (
@@ -61,14 +69,16 @@ const updateDots = (swiper: SwiperType) => {
                     <NavButton
                       onClick={() => { const s = swiperRef.current; if (s && !s.destroyed) s.slidePrev(); }}
                       direction="left"
-                      disabled={false}
+                      disabled={isBeginning}
                       ariaLabel="Previous"
+                      disableMode="dark"
                     />
                     <NavButton
                       onClick={() => { const s = swiperRef.current; if (s && !s.destroyed) s.slideNext(); }}
                       direction="right"
-                      disabled={false}
+                      disabled={isEnd}
                       ariaLabel="Next"
+                      disableMode="dark"
                     />
                   </motion.div>
                 )}
@@ -78,9 +88,15 @@ const updateDots = (swiper: SwiperType) => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
             updateDots(swiper);
+            updateState(swiper);
           }}
-          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-          onBreakpoint={(swiper) => updateDots(swiper)}
+          onSlideChange={(swiper) =>{
+            updateState(swiper);
+          }}
+          onBreakpoint={(swiper) => {
+             updateDots(swiper);
+             updateState(swiper);
+          }}
           spaceBetween={30}
           slidesPerView={1}
           breakpoints={{

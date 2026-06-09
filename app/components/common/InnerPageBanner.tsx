@@ -39,17 +39,10 @@ export default function InnerPageBanner({
           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
             className="h-px w-full bg-[#c2c2c2] origin-center" />
         </div>
-
-        {/* <h1 className={`text-secondary ${description ? "mb-[20px] md:mb-30" : "mb-0"} hero-heading !leading-[1] ${titleMaxWidth}`}>
-          {title}
-        </h1> */}
         
         <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth}`} as="h1" />
         {description && (
-          // <p className={`text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[1.333] font-light ${descriptionMaxWidth}`}>
-          //   {description}
-          // </p>
-          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120  text-30 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}/>
+          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}/>
         )}
       </div>
 
