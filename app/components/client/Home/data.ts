@@ -332,14 +332,14 @@ export const bimData = [
     description:
       "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
     background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
-    link: "#",
+    link: "/bim-capabilities",
   },
   {
     heading: "CSI SPECIFICATION DOCUMENTATION",
     description:
       "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
-    background: { type: "image" as const, src: "/assets/images/bim-slide-2.jpg" },
-    link: "#",
+    background: { type: "image" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    link: "/csi-specifications",
   },
 ];
 

@@ -370,7 +370,7 @@ export default function BimSection() {
           </div>
           {/* next slide title shown as label */}
           <span
-            className="text-white/60 text-19 leading-[1.67] md:leading-[1.52] font-light font-poppins -tracking-[2%] cursor-pointer hover:text-white/90 transition-colors duration-300"
+            className="text-white/60 text-19 leading-[1.67] md:leading-[1.52] min-w-[321px] font-light font-poppins -tracking-[2%] cursor-pointer hover:text-white/90 transition-colors duration-300"
             onClick={() => goTo(next)}
           >
             {nextSlide.heading}
