@@ -8,6 +8,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
+import { useRef } from "react";
 
 const activeGradient =
   "linear-gradient(90deg, rgba(41, 69, 150, 0.2) 0%, rgba(41, 69, 150, 0) 100%)";
@@ -16,11 +17,38 @@ export default function DosteenSystems() {
   const { title, systems } = dosteenSystemsData;
   const [activeId, setActiveId] = useState(systems[0].id);
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(systems[0].id);
+  const accordionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+
+  // const [openUpward, setOpenUpward] = useState<number | null>(null);
 
   const activeSystem = systems.find((s) => s.id === activeId)!;
 
+  // const toggleAccordion = (id: number) => {
+  //   setOpenAccordionId((prev) => (prev === id ? null : id));
+  // };
+
   const toggleAccordion = (id: number) => {
-    setOpenAccordionId((prev) => (prev === id ? null : id));
+    const isClosing = openAccordionId === id;
+
+    setOpenAccordionId(isClosing ? null : id);
+
+    if (!isClosing) {
+      setTimeout(() => {
+        const accordion = accordionRefs.current[id];
+
+        if (!accordion) return;
+
+        const rect = accordion.getBoundingClientRect();
+
+        // If the opened accordion extends below the viewport
+        if (rect.bottom > window.innerHeight) {
+          accordion.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 350); // same as Framer Motion duration
+    }
   };
 
   return (
@@ -36,15 +64,18 @@ export default function DosteenSystems() {
         <div className="md:hidden relative">
           {systems.map((system) => {
             const isOpen = openAccordionId === system.id;
+
             return (
-              <div
-                key={system.id}
-                className="border-t-2 border-[#c2c2c2] last:border-b-2"
-              >
+              <div key={system.id}
+                ref={(el) => {
+                  accordionRefs.current[system.id] = el;
+                }}
+               className="border-t-2 border-[#c2c2c2] last:border-b-2" >
+
                 {/* Trigger */}
                 <button
                   type="button"
-                  onClick={() => toggleAccordion(system.id)}
+                  onClick={(e) => toggleAccordion(system.id)}
                   className="w-full flex justify-between gap-4 py-5 text-left transition-all duration-300"
 
                 >
@@ -60,15 +91,14 @@ export default function DosteenSystems() {
                     {isOpen ? (
 
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        className="object-contain     rotate-90  ">
-                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        className="object-contain rotate-180  ">
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
-
 
                     ) : (
                       <svg width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M14.2 1L8.76667 6.43333C8.125 7.075 7.075 7.075 6.43333 6.43333L1 1" stroke="#161616" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
                   </span>
@@ -82,10 +112,13 @@ export default function DosteenSystems() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                      transition={{
+                        duration: 0.35,
+                        ease: [0.25, 1, 0.5, 1],
+                      }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-5  ">
+                      <div className="pb-5">
                         <div className="relative mb-5 overflow-hidden w-full h-[225px]">
                           <Image
                             src={system.image}
@@ -93,6 +126,7 @@ export default function DosteenSystems() {
                             fill
                             className="object-cover"
                           />
+
                           <div
                             className="absolute inset-0"
                             style={{
@@ -101,9 +135,11 @@ export default function DosteenSystems() {
                             }}
                           />
                         </div>
+
                         <p className="text-description text-paragraph leading-[1.6] mb-30">
                           {system.description}
                         </p>
+
                         <BorderButton
                           text="View System"
                           borderColor="black"
@@ -116,6 +152,7 @@ export default function DosteenSystems() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+                
               </div>
             );
           })}

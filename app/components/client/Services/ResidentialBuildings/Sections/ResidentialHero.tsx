@@ -120,7 +120,7 @@ export default function ResidentialHero() {
             const { top, height } = slot.getBoundingClientRect();
             // return top + height / 2 - window.innerHeight / 2;
             return window.innerWidth < 768
-              ? top + height / 4 - window.innerHeight / 2
+              ? top + height / 2 - window.innerHeight / 2
               : top + height / 2 - window.innerHeight / 2;
           },
           ease: "power2.inOut",
@@ -161,6 +161,7 @@ export default function ResidentialHero() {
         <div
           ref={bannerImageRef}
           className="absolute inset-0 w-full h-full overflow-hidden bg-white"
+          // style={{ marginInline: "auto", marginTop: "50%", zIndex: 5 }}
           style={{ margin: "auto", zIndex: 5 }}
         >
           <Image
@@ -220,7 +221,7 @@ export default function ResidentialHero() {
             {/* Left images — 200px from section top, 200×200 each */}
             <div
               ref={leftImagesRef}
-              className="absolute left-[-10%] xl:left-0 top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
+              className="absolute left-[-10%] xl:left-0 top-[23%] xl:top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
             >
               {second.leftImages.map((src, i) => (
                 <div
@@ -263,7 +264,7 @@ export default function ResidentialHero() {
             {/* Right images — 200px from section top, 200×200 each */}
             <div
               ref={rightImagesRef}
-              className="absolute right-[-10%] xl:right-0 top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
+              className="absolute right-[-10%] xl:right-0 top-[23%] xl:top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
             >
               {second.rightImages.map((src, i) => (
                 <div
