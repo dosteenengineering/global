@@ -37,7 +37,7 @@ function StatCard({
         src={card.image}
         alt={card.title}
         fill
-        className="object-cover grayscale group-hover:grayscale-0 [.is-active_&]:grayscale-0 transition-all duration-500"
+        className="object-cover object-top grayscale group-hover:grayscale-0 [.is-active_&]:grayscale-0 transition-all duration-500"
       />
       <div className="absolute inset-0" style={{ background: cardGradient }} />
       <div className="absolute bottom-0 left-0 p-40 z-10">
@@ -149,7 +149,7 @@ export default function WhyTrustDosteen() {
                     src={card.image}
                     alt={card.title}
                     fill
-                    className="object-cover grayscale"
+                    className="object-cover grayscale object-[center_35%]"
                   />
                   <div
                     className="absolute inset-0"

@@ -150,13 +150,12 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Annual maintenance contracts ensuring reliable performance and continuity.",
+      description: "Annual maintenance contracts ensuring reliable performance and continuity.",
     },
     {
       key: "export",
       label: "Export",
-      image: "/assets/images/home/service/export.svg",
+      image: "/assets/images/home/service/service-img-1.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
@@ -196,13 +195,12 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Seamless export services delivering engineered solutions worldwide.",
+      description: "Seamless export services delivering engineered solutions worldwide.",
     },
     {
       key: "instant-call",
       label: "Instant Call Service",
-      image: "/assets/images/home/service/export.svg",
+      image: "/assets/images/home/service/service-img-1.svg",
       svgPaths: [
         // Left box
         // Left box - fix these two paths
@@ -242,8 +240,7 @@ export const servicesData: ServicesData = {
         },
         { d: "M411 57.8523L433.231 35.5033L411 13.2886", len: 200, delay: 1.5 },
       ],
-      description:
-        "Round-the-clock call services for immediate technical support and help.",
+      description: "Round-the-clock call services for immediate technical support and help.",
     },
   ],
 };
@@ -329,14 +326,22 @@ export const whyDosteenData = {
 export type WhyDosteenSlide = (typeof whyDosteenData.slides)[number];
 
 //seventh Section
-export const bimData = {
-  heading: "ADVANCED BIM CAPABILITIES",
-  progressLabel: "CSI Specification Documentation",
-  description:
-    "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
-  videoSrc: "/assets/videos/bim-bg-vdo.mp4",
-  arrowImage: "/assets/icons/arrow-right-top-big.svg",
-};
+export const bimData = [
+  {
+    heading: "ADVANCED BIM CAPABILITIES",
+    description:
+      "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
+    background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    link: "/bim-capabilities",
+  },
+  {
+    heading: "CSI SPECIFICATION DOCUMENTATION",
+    description:
+      "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
+    background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    link: "/csi-specifications",
+  },
+];
 
 //eighth Section
 export interface Project {

@@ -23,6 +23,7 @@ const ProjectCta = () => {
             iconColor="primary"
             px="px-8 lg:px-[35px]"
             hoverBg="black"
+            className="z-10"
           />
         </div>
       </div>

@@ -106,7 +106,7 @@ export default function ResidentialHero() {
       tl.to(
         bannerImageRef.current,
         {
-            width: window.innerWidth < 768 ? "120px" : "200px",
+          width: window.innerWidth < 768 ? "120px" : "200px",
           height: window.innerWidth < 768 ? "120px" : "200px",
           x: () => {
             const slot = centerSlotRef.current;
@@ -120,14 +120,16 @@ export default function ResidentialHero() {
             const { top, height } = slot.getBoundingClientRect();
             // return top + height / 2 - window.innerHeight / 2;
             return window.innerWidth < 768
-    ? top + height / 4 - window.innerHeight / 2
-    : top + height / 2 - window.innerHeight / 2;
+              ? top + height / 4 - window.innerHeight / 2 // Mobile
+              : window.innerWidth < 1024
+                ? top + height / 6 - window.innerHeight / 2 // Tablet
+                : top + height / 2 - window.innerHeight / 2; // Desktop
           },
           ease: "power2.inOut",
           duration: 1.6,
           invalidateOnRefresh: true, // recalculates on every ScrollTrigger.refresh()
         },
-       window.innerWidth < 768 ? 1.5 :  3.8,
+        window.innerWidth < 768 ? 1.5 : 3.8,
       );
 
       // Side images parallax up
@@ -161,6 +163,7 @@ export default function ResidentialHero() {
         <div
           ref={bannerImageRef}
           className="absolute inset-0 w-full h-full overflow-hidden bg-white"
+          // style={{ marginInline: "auto", marginTop: "50%", zIndex: 5 }}
           style={{ margin: "auto", zIndex: 5 }}
         >
           <Image
@@ -201,7 +204,7 @@ export default function ResidentialHero() {
                     if (el) descWordsRef.current[i] = el;
                   }}
                   className="inline-block opacity-100 md:opacity-0"
-                  // style={{ opacity: 0 }}
+                // style={{ opacity: 0 }}
                 >
                   {word}
                   {i < descWords.length - 1 ? "\u00A0" : ""}
@@ -220,20 +223,20 @@ export default function ResidentialHero() {
             {/* Left images — 200px from section top, 200×200 each */}
             <div
               ref={leftImagesRef}
-              className="absolute left-0 top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
+              className="absolute left-[-10%] xl:left-0 top-[23%] xl:top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
             >
               {second.leftImages.map((src, i) => (
                 <div
-                  key={i} 
-                   className={`relative overflow-hidden  w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
-                  
+                  key={i}
+                  className={`relative overflow-hidden  w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
+
                 >
                   <Image
                     src={src}
                     alt={`Left ${i + 1}`}
                     fill
                     className="object-cover"
-                    
+
                   />
                   <div
                     className="absolute inset-0"
@@ -263,13 +266,13 @@ export default function ResidentialHero() {
             {/* Right images — 200px from section top, 200×200 each */}
             <div
               ref={rightImagesRef}
-               className="absolute right-0 top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
- >
+              className="absolute right-[-10%] xl:right-0 top-[23%] xl:top-10 lg:static flex flex-col gap-200 3xl:gap-[244px] will-change-transform"
+            >
               {second.rightImages.map((src, i) => (
                 <div
                   key={i}
-                   className={`relative overflow-hidden w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
-                 
+                  className={`relative overflow-hidden w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
+
                 >
                   <Image
                     src={src}

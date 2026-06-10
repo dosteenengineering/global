@@ -9,12 +9,12 @@ const ComplianceSection = () => {
   return (
     <section className="relative w-full select-none overflow-hidden">
       <PrimaryNoise2 />
-      <motion.div variants={moveUp(0.8)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }}
-        className="absolute z-10 -right-[29.5%] -top-[38.5%] w-[42%] h-[90%] xl:w-[1200px] xl:h-[1225px] pointer-events-none scale-[1.1] origin-top-right ">
+      <div 
+        className="absolute z-10 -right-[29.5%] -top-[38.5%] w-[42%] h-[90%] xl:w-[863px] xl:h-[876px] 3xl:w-[1200px] 3xl:h-[1225px] pointer-events-none scale-[1.1] origin-top-right ">
         <div className="relative w-full h-full animate-rotate-swing">
           <Image src="/assets/images/csi-specifications/shape-2.svg" alt="" fill className="object-contain object-right" />
         </div>
-      </motion.div>
+      </div>
       <motion.div variants={moveUp(0.8)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }} 
       className="container py-12.5 md:py-140 3xl:py-150 relative z-10">
         <SectionTitle title="UAE & Oman Compliance — Built Into Every Specification" className="section-heading-90 text-white mb-5 md:mb-50 leading-[1.111111111111111] max-w-[26ch]" />

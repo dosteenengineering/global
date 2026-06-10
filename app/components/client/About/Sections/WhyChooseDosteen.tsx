@@ -8,7 +8,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { WhyChooseData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
-import NavButton from "@/app/components/common/NavigationButton"; 
+import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
@@ -43,11 +43,11 @@ function FeatureCard({
   delay: number;
 }) {
   return (
-    <motion.div 
-    variants={moveUp(delay)}
-    initial="hidden"
-    whileInView="show"
-    viewport={{once:true}}
+    <motion.div
+      variants={moveUp(delay)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true }}
       className="flex flex-col p-5 md:p-50 backdrop-blur-[20px] h-auto md:min-h-[420px] 2xl:h-[515px] 3xl:h-[481px]"
       style={{
         background:
@@ -63,14 +63,6 @@ function FeatureCard({
   );
 }
 
-// const slideGroups = WhyChooseData.items.reduce<(typeof WhyChooseData.items)[]>(
-//   (acc, item, i) => {
-//     if (i % 2 === 0) acc.push([items]);
-//     else acc[acc.length - 1].push(item);
-//     return acc;
-//   },
-//   [],
-// );
 
 const slideGroups = WhyChooseData.items.reduce<(typeof WhyChooseData.items)[]>(
   (acc, items, i) => {
@@ -88,7 +80,13 @@ export default function WhyChooseDosteen() {
   const [slidesPerView, setSlidesPerView] = useState(1);
   const [canSlide, setCanSlide] = useState(false);
 
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   function updateState(swiper: SwiperType) {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+
     const currentSlidesPerView =
       typeof swiper.params.slidesPerView === "number"
         ? swiper.params.slidesPerView
@@ -103,7 +101,7 @@ export default function WhyChooseDosteen() {
   const showPagination = canSlide && dotCount > 1;
 
   const total = slideGroups.length;
-const counterPill = (
+  const counterPill = (
     <div className="flex items-center justify-center border border-primary text-white font-poppins font-light leading-[0.5] border-white rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
       <span className="font-semibold">
         {String(activeIndex + 1).padStart(2, "0")}
@@ -124,10 +122,10 @@ const counterPill = (
           className="object-contain hidden lg:block"
           priority
         />
-         <Image
+        <Image
           src="/assets/images/about/cta/bg-right.svg"
-          alt="" 
-         fill
+          alt=""
+          fill
           className="object-contain lg:hidden w-[203px] h-[327px]"
           priority
         />
@@ -140,59 +138,57 @@ const counterPill = (
         />
 
         <div className="lg:pl-[25.3%] w-full mb-100 3xl:mb-[109px]">
-          {/* <p className="text-white font-light text-30 leading-[1.333] tracking-[-0.02em] mb-20px md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0">
-            {WhyChooseData.description}
-          </p> */}
-          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
+         
+          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] xl:max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
-          {showPagination && (
+        {showPagination && (
+          <motion.div
+            variants={moveUp(0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="flex items-center justify-between mb-[30px]"
+          >
+            <motion.div
+              variants={moveUp(0.3)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              {counterPill}
+            </motion.div>
             <motion.div
               variants={moveUp(0.5)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="flex items-center justify-between mb-[30px]"
+              className="flex items-center gap-[10px] md:gap-[15px]"
             >
-              <motion.div
-                variants={moveUp(0.3)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-              >
-                {counterPill}
-              </motion.div>
-              <motion.div
-                variants={moveUp(0.5)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="flex items-center gap-[10px] md:gap-[15px]"
-              >
-                <NavButton
-                  onClick={() => {
-                    const s = swiperRef.current;
-                    if (s && !s.destroyed) s.slidePrev();
-                  }}
-                  direction="left"
-                  disabled={false}
-                  ariaLabel="Previous"
-                  borderColor="border-white"
-                  className=" icon-invert"
-                />
-                <NavButton
-                  onClick={() => {
-                    const s = swiperRef.current;
-                    if (s && !s.destroyed) s.slideNext();
-                  }}
-                  direction="right"
-                  disabled={false}
-                  ariaLabel="Next"
-                  borderColor="border-white"
-                  className=" icon-invert"
-                />
-              </motion.div>
+              <NavButton
+                onClick={() => {
+                  const s = swiperRef.current;
+                  if (s && !s.destroyed) s.slidePrev();
+                }}
+                direction="left"
+                disabled={isBeginning}
+                ariaLabel="Previous"
+                borderColor="border-white"
+                className=" icon-invert"
+              />
+              <NavButton
+                onClick={() => {
+                  const s = swiperRef.current;
+                  if (s && !s.destroyed) s.slideNext();
+                }}
+                direction="right"
+                disabled={isEnd}
+                ariaLabel="Next"
+                borderColor="border-white"
+                className=" icon-invert"
+              />
             </motion.div>
-          )}
+          </motion.div>
+        )}
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -225,20 +221,6 @@ const counterPill = (
           ))}
         </Swiper>
 
-        {/* {showPagination && (
-          <div className="flex items-center justify-center gap-[10px] mt-10">
-            {Array.from({ length: dotCount }).map((_, i) => (
-              <button type="button"
-                key={i}
-                onClick={() => swiperRef.current?.slideTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-                className={`w-[10px] h-[10px] rounded-full border border-white cursor-pointer transition-all duration-300 ${
-                  i === activeIndex ? "bg-white" : "bg-transparent"
-                }`}
-              />
-            ))}
-          </div>
-        )} */}
       </div>
     </section>
   );
