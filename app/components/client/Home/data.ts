@@ -338,7 +338,7 @@ export const bimData = [
     heading: "CSI SPECIFICATION DOCUMENTATION",
     description:
       "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
-    background: { type: "image" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
+    background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
     link: "/csi-specifications",
   },
 ];
