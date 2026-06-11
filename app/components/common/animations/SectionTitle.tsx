@@ -95,7 +95,7 @@ export default function SectionTitle({
       // mask.style.cssText = "display:block; overflow:hidden; padding-bottom:0.08em; margin-bottom:-0.08em;";
          mask.style.cssText = `
         display:block;
-        overflow:hidden;
+        // overflow:hidden;
         ${lines.length > 1 ? "padding-bottom:0.00277em; padding-top:1px; margin-bottom:-1.7px;" : ""}
       `;
       const inner = document.createElement("span");

@@ -6,13 +6,14 @@ import Link from "next/link";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
 import { motion } from "framer-motion";
-import { moveUp } from "@/app/components/motionVariants";
+import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import NavButton from "@/app/components/common/NavigationButton";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
-const MotionLink = motion.create(Link);
+import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
+
 interface IDosteenSystemsProps {
   data: {
     description: string;
@@ -28,14 +29,12 @@ interface IDosteenSystemsProps {
 
 function SystemCard({
   system,
-  delay,
 }: {
   system: IDosteenSystemsProps["data"]["systems"][0];
-  delay: number;
 }) {
   return (
-    <MotionLink variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true , amount: 0.3 }} href={`/${system.slug}`} className="group block">
-      <div className="relative h-[322px] overflow-hidden">
+    <Link href={`/${system.slug}`} className="group block">
+      <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden">
         {/* Image */}
         <Image
           src={system.image}
@@ -60,12 +59,15 @@ function SystemCard({
       </div>
 
       {/* Title */}
-      <p className="mt-[10px] text-[18px] leading-[1.56] md:leading-[1.333] font-medium text-secondary group-hover:font-medium transition-all duration-300 tracking-[-0.02em]">
+      <p className="mt-[10px] lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300">
         {system.title}
       </p>
 
-
-    </MotionLink>
+      <div className="relative w-full h-[2px] mt-30 hidden lg:block">
+        <div className="absolute inset-0 bg-[#C2C2C2] h-px" />
+        <div className="absolute inset-0 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out h-[2px]" />
+      </div>
+    </Link>
   );
 }
 
@@ -116,7 +118,6 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
       </div>
 
       <div className="absolute top-[2%] lg:top-[-39%] left-[-131px] lg:left-[-0.9%] pointer-events-none h-full">
-
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"
           alt="decorative lines"
@@ -151,7 +152,9 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
       <div className="container ">
         <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
           {data.systems.map((system, index) => (
-            <SystemCard key={system.id} system={system} delay={0.5 + index * 0.1} />
+            <Reveal variants={moveUpV2} delayRange={index * 0.12}>
+              <SystemCard key={system.id} system={system} />
+            </Reveal>
           ))}
         </div>
         {/* ── MOBILE: Swiper slider (< 768px) ── */}
@@ -210,13 +213,14 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
           >
             {data.systems.map((system, index) => (
               <SwiperSlide key={system.id}>
-                <SystemCard system={system} delay={index * 0.1} />
+                <Reveal variants={moveUpV2} delayRange={index * 0.12}>
+                  <SystemCard system={system} />
+                </Reveal>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
       </div>
-
     </section>
   );
 }

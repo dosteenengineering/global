@@ -175,7 +175,7 @@ export default function DosteenSystems() {
                     ${isActive ? "pl-2 3xl:pl-20 first:border-t-transparent" : "" }`}
                   style={{ background: isActive ? activeGradient : "transparent" }}
                 >
-                  <motion.span variants={moveRight(0.6 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
+                  <motion.span variants={moveRight(index * 0.06)} initial="hidden" whileInView="show" viewport={{ once: true }}
                     className={`py-30 3xl:py-[29px] text-secondary text-30 leading-[1.333] font-light tracking-[-0.02em] transition-colors duration-300 max-w-[35ch]`}
                   >
                     {system.title}
@@ -210,18 +210,18 @@ export default function DosteenSystems() {
               </motion.h3>
 
               {/* Image */}
-              <motion.div variants={moveRight(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mb-20 overflow-hidden w-full h-[441px]" >
+              <motion.div variants={moveRight(0.3)} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative mb-20 overflow-hidden w-full h-[441px]" >
                 <Image src={activeSystem.image} alt={activeSystem.title} fill className="object-cover" />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%)" }} />
               </motion.div>
 
               {/* Description */}
-              <motion.p variants={moveRight(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-description text-paragraph leading-[1.6] mb-70 3xl:mb-[72px]">
+              <motion.p variants={moveRight(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-description text-paragraph leading-[1.6] mb-70 3xl:mb-[72px]">
                 {activeSystem.description}
               </motion.p>
 
               {/* CTA Button */}
-              <motion.div variants={moveRight(0.8)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+              <motion.div variants={moveRight(0.5)} initial="hidden" whileInView="show" viewport={{ once: true }}>
                 <BorderButton
                   text="View System"
                   borderColor="black"

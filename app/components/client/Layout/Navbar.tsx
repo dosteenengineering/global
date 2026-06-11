@@ -8,8 +8,11 @@ import FullscreenMenu from "./FullscreenMenu";
 import { useLenis } from "lenis/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { navItems, menuItems } from "./data";
+import { useIntroComplete } from "../../../context/IntroContext";
 
 export default function Navbar() {
+  const introComplete = useIntroComplete();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -48,6 +51,8 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    if (!introComplete) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -107,7 +112,7 @@ export default function Navbar() {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [introComplete]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -116,6 +121,7 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
   const lenis = useLenis();
   const [isSticky, setIsSticky] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -190,6 +196,7 @@ export default function Navbar() {
     // <header className="absolute top-[30px] md:top-[23px] left-0 w-full z-[150]">
     <header
       className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
+      ${!introComplete ? "invisible" : ""}
       ${
         isMenuTransformDisabled
           ? ""
@@ -205,7 +212,7 @@ export default function Navbar() {
           className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${
             isMenuOpen
               ? "w-full lg:max-w-[57.5%]"
-              : "w-full max-w-[1127px] backdrop-blur-[2px] "
+              : "w-full max-w-[1127px] bg-white/8 backdrop-blur-[2px]"
           }`}
         >
           <div
@@ -278,8 +285,8 @@ export default function Navbar() {
                   </Link>
 
                   {item.hasDropdown && (
-  <div className="absolute top-full left-0 w-full h-[25px]" />
-)}
+                    <div className="absolute top-full left-0 w-full h-[25px]" />
+                  )}
 
                   {/* Dropdown */}
                   {item.hasDropdown && item.subItems && (
@@ -460,7 +467,7 @@ export default function Navbar() {
           </div>
 
           {/* Hamburger pill */}
-          <div className="rounded-full   backdrop-blur-[2px]">
+          <div className="rounded-full backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
               className={`cursor-pointer flex items-center justify-center group w-[62px] h-[62px] md:w-[70px] md:h-[70px] rounded-full

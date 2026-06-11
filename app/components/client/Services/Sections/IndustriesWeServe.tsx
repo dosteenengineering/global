@@ -64,7 +64,7 @@ export default function IndustriesWeServe() {
                     {/* Chevron icon */}
                     <span className={`relative z-10 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" stroke-width="2" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" stroke-width="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                   </button>

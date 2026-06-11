@@ -41,8 +41,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         // className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}
-        className={`${poppins.variable} ${dmSans.variable} antialiased`}
+        className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}
       >
+        {/* <div id="intro-overlay" /> */}
         <LenisProvider>
           <UserChrome>{children}</UserChrome>
         </LenisProvider>
