@@ -116,9 +116,9 @@ export const navItems = [
     hasDropdown: true,
     href: "#",
     subItems: [
-      { label: "AMC", href: "/services/mep" },
-      { label: "Instant Call Service", href: "/services/fire-protection" },
-      { label: "Export", href: "/services/hvac" },
+      { label: "AMC", href: "#" },
+      { label: "Instant Call Service", href: "#" },
+      { label: "Export", href: "#" },
     ],
   },
   {
