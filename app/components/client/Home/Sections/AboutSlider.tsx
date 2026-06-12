@@ -238,7 +238,7 @@ export default function AboutSlider() {
                   initial="enter"
                   animate="show"
                   exit="exit"
-                  className="pt-[30px] md:pt-8 lg:pt-[75px]"
+                  className="pt-[30px] md:pt-8 lg:pt-[45px]"
                 >
                   <Counter
                     value={activeSlide.stat}

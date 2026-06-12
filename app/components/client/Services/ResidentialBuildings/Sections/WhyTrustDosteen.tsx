@@ -70,7 +70,6 @@ export default function WhyTrustDosteen() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    // Only run GSAP animation on md+ (768px+)
     if (window.innerWidth < 768) return;
 
     const section = sectionRef.current;
@@ -85,51 +84,53 @@ export default function WhyTrustDosteen() {
 
     spacer.style.height = `${totalScrollLength}px`;
 
-    gsap.set(cards, { clipPath: "inset(100% 0% 0% 0%)" });
+    const ctx = gsap.context(() => {
+      gsap.set(cards, { clipPath: "inset(100% 0% 0% 0%)" });
 
-    const setActiveCard = (progress: number) => {
-      const step = 1 / cards.length;
-      const currentIndex = Math.min(
-        Math.floor(progress / step),
-        cards.length - 1
-      );
-      cards.forEach((card, i) => {
-        if (i === currentIndex) card.classList.add("is-active");
-        else card.classList.remove("is-active");
+      const setActiveCard = (progress: number) => {
+        const step = 1 / cards.length;
+        const currentIndex = Math.min(
+          Math.floor(progress / step),
+          cards.length - 1,
+        );
+        cards.forEach((card, i) => {
+          if (i === currentIndex) card.classList.add("is-active");
+          else card.classList.remove("is-active");
+        });
+        if (progress >= 1)
+          cards.forEach((card) => card.classList.remove("is-active"));
+      };
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "5% top",
+          end: `+=${totalScrollLength}`,
+          pin: true,
+          pinSpacing: false,
+          scrub: 0.8,
+          anticipatePin: 1,
+          onUpdate: (self) => setActiveCard(self.progress),
+        },
       });
-      if (progress >= 1) {
-        cards.forEach((card) => card.classList.remove("is-active"));
-      }
-    };
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "5% top",
-        end: `+=${totalScrollLength}`,
-        pin: true,
-        pinSpacing: false,
-        scrub: 0.8,
-        anticipatePin: 1,
-        onUpdate: (self) => setActiveCard(self.progress),
-      },
-    });
-
-    cards.forEach((_, i) => {
-      tl.to(
-        cards[i],
-        { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out", duration: 1 },
-        i
-      );
+      cards.forEach((_, i) => {
+        tl.to(
+          cards[i],
+          { clipPath: "inset(0% 0% 0% 0%)", ease: "power2.out", duration: 1 },
+          i,
+        );
+      });
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ctx.revert();
+      spacer.style.height = "";
     };
   }, []);
 
   return (
-    <>
+    <div className="relative">
       <section ref={sectionRef} className="w-full bg-white pt-140 3xl:pt-200">
         <div className="container">
           <div className="border-b-2 border-[#c2c2c2] pb-140 3xl:pb-150">
@@ -181,7 +182,7 @@ export default function WhyTrustDosteen() {
                   swiperRef.current = swiper;
                   const total = swiper.slides.length;
                   const perView = Math.round(
-                    swiper.params.slidesPerView as number
+                    swiper.params.slidesPerView as number,
                   );
                   const dots = Math.max(0, total - perView + 1);
                   setDotCount(dots);
@@ -191,7 +192,7 @@ export default function WhyTrustDosteen() {
                 onBreakpoint={(swiper) => {
                   const total = swiper.slides.length;
                   const perView = Math.round(
-                    swiper.params.slidesPerView as number
+                    swiper.params.slidesPerView as number,
                   );
                   const dots = Math.max(0, total - perView + 1);
                   setDotCount(dots);
@@ -240,6 +241,6 @@ export default function WhyTrustDosteen() {
       </section>
 
       <div ref={spacerRef} aria-hidden="true" />
-    </>
+    </div>
   );
 }

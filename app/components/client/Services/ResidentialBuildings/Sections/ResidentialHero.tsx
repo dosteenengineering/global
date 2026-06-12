@@ -143,22 +143,22 @@ export default function ResidentialHero() {
         { y: "-120px", ease: "none", duration: 0.8 },
         5.2,
       );
-    }, containerRef);
+    });
 
     const timer = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 300);
     return () => {
-      ctx.revert();
       clearTimeout(timer);
+      ctx.revert();
     };
   }, []);
 
   const descWords = banner.description.split(" ");
 
   return (
-    <div ref={containerRef} className="relative">
-      <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative">
+      <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
         {/* Banner image — shrinks and flies to center slot */}
         <div
           ref={bannerImageRef}
@@ -204,7 +204,7 @@ export default function ResidentialHero() {
                     if (el) descWordsRef.current[i] = el;
                   }}
                   className="inline-block opacity-100 md:opacity-0"
-                // style={{ opacity: 0 }}
+                  // style={{ opacity: 0 }}
                 >
                   {word}
                   {i < descWords.length - 1 ? "\u00A0" : ""}
@@ -229,14 +229,12 @@ export default function ResidentialHero() {
                 <div
                   key={i}
                   className={`relative overflow-hidden  w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
-
                 >
                   <Image
                     src={src}
                     alt={`Left ${i + 1}`}
                     fill
                     className="object-cover"
-
                   />
                   <div
                     className="absolute inset-0"
@@ -272,7 +270,6 @@ export default function ResidentialHero() {
                 <div
                   key={i}
                   className={`relative overflow-hidden w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
-
                 >
                   <Image
                     src={src}

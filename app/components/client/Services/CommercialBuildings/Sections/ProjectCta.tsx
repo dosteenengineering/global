@@ -8,7 +8,7 @@ import { moveRight } from "@/app/components/motionVariants";
 
 const ProjectCta = () => {
   return (
-    <motion.section variants={moveRight(0.8)} initial="hidden" whileInView={"show"} className="pt-[30px] md:pt-80 pb-140 3xl:pb-200">
+    <motion.section variants={moveRight(0.2)} initial="hidden" whileInView={"show"} className="pt-[30px] md:pt-80 pb-140 3xl:pb-200">
       <div className="container w-full">
         <div className="flex lg:items-center items-start flex-col lg:flex-row gap-y-5 md:gap-y-[40px] lg:justify-between p-5 md:p-60 relative">
           <StatNoise1 />

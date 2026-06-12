@@ -27,7 +27,7 @@ export default function InnerPageBanner({
 }: InnerPageBannerProps) {
   const { ref, parallaxY } = useParallax(10);
   return (
-    <div className="w-full">
+    <div className="w-full bg-white">
       {/* 1. Gradient block — standalone, no content */}
       <div className="w-full h-[154px] lg:h-[250px] 3xl:h-[286px] relative">
         <BannerNoise />
@@ -36,26 +36,44 @@ export default function InnerPageBanner({
       {/* 2. Content — line, title, description */}
       <div className="container">
         <div className="w-full mb-[70px] 2xl:mb-80 ">
-          <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
-            className="h-px w-full bg-[#c2c2c2] origin-center" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.77, 0, 0.175, 1] }}
+            className="h-px w-full bg-[#c2c2c2] origin-center"
+          />
         </div>
-        
-        <SectionTitle text={title} className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth}`} as="h1" />
+
+        <SectionTitle
+          text={title}
+          className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth}`}
+          as="h1"
+        />
         {description && (
-          <SectionDescription text={description} className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}/>
+          <SectionDescription
+            text={description}
+            className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}
+          />
         )}
       </div>
 
-      {
-        publishedDate && (
-         <div className="container pt-50 3xl:pt-[65px]">
-            <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`}>Published &nbsp;&nbsp;<span className="font-bold">{publishedDate}</span></h4>
-         </div>
-        )
-      }
+      {publishedDate && (
+        <div className="container pt-50 3xl:pt-[65px]">
+          <h4
+            className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`}
+          >
+            Published &nbsp;&nbsp;
+            <span className="font-bold">{publishedDate}</span>
+          </h4>
+        </div>
+      )}
       {/* 3. Image */}
       {image && (
-        <div ref={ref} className="relative w-full h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px] overflow-hidden">
+        <div
+          ref={ref}
+          className="relative w-full h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px] overflow-hidden"
+        >
           <Image
             src={image}
             alt={imageAlt}
