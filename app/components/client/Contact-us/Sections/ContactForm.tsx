@@ -8,7 +8,9 @@ import BorderButton from "@/app/components/common/BorderButton";
 import { TextAreaField } from "@/app/components/common/Textarea";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { moveUp } from "@/app/components/motionVariants";
+import { useLenis } from "@/app/components/LenisProvider";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -63,9 +65,21 @@ export default function ContactForm() {
 
   // Watch all fields so InputField re-renders on value change
   const values = watch();
+  const { scrollTo } = useLenis();
+
+  useEffect(() => {
+    if (window.location.hash !== "#contact-form") return;
+
+    const timeout = setTimeout(() => {
+      const el = document.getElementById("contact-form");
+      if (el) scrollTo(el, { offset: -80, duration: 1.5 });
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
-    <section className="container py-140 3xl:py-200 relative">
+    <section id="contact-form" className="container py-140 3xl:py-200 relative">
       <div className="absolute bottom-[-35.3%] right-[-15%] 3xl:right-[-3.5%]">
         <Image
           src="/assets/images/contact-us/form-bg-svg.svg"
@@ -82,7 +96,13 @@ export default function ContactForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         {/* Row 1 */}
-        <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-7.5 lg:gap-y-80 mb-80">
+        <motion.div
+          variants={moveUp(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-7.5 lg:gap-y-80 mb-80"
+        >
           <Controller
             name="firstName"
             control={control}
@@ -126,7 +146,13 @@ export default function ContactForm() {
         </motion.div>
 
         {/* Row 2 */}
-        <motion.div variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80">
+        <motion.div
+          variants={moveUp(0.2)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80"
+        >
           <Controller
             name="yourRole"
             control={control}
@@ -170,7 +196,13 @@ export default function ContactForm() {
         </motion.div>
 
         {/* Row 3 */}
-        <motion.div variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 mb-80">
+        <motion.div
+          variants={moveUp(0.3)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-x-30 mb-80"
+        >
           <Controller
             name="projectLocation"
             control={control}
@@ -200,7 +232,13 @@ export default function ContactForm() {
         </motion.div>
 
         {/* Row 4 — Project Brief full width */}
-        <motion.div variants={moveUp(1)} initial="hidden" whileInView="show" viewport={{ once: true }} className="mb-10 lg:mb-80">
+        <motion.div
+          variants={moveUp(0.4)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="mb-10 lg:mb-80"
+        >
           <Controller
             name="projectBrief"
             control={control}
@@ -217,7 +255,12 @@ export default function ContactForm() {
           />
         </motion.div>
 
-        <motion.div variants={moveUp(1.2)} initial="hidden" whileInView="show" viewport={{ once: true }}>
+        <motion.div
+          variants={moveUp(0.5)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           <BorderButton
             text="Submit"
             borderColor="black"

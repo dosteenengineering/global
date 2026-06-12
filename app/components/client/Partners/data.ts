@@ -124,7 +124,7 @@ export const ctaData = {
   buttons: [
     {
       text: "REQUEST A SPECIFICATION",
-      href: "#",
+      href: "/contact-us#contact-form",
     },
     {
       text: "DOWNLOAD ALL SPECS",

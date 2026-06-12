@@ -223,7 +223,7 @@ export default function IndustriesSection() {
     <SwiperSlide key={industry.key} style={{ width: `${currentSlideWidth}px` }}>
       <div
         data-inner
-        className="relative cursor-pointer"
+        className="relative cursor-grab"
         style={{
           width: `${currentSlideWidth}px`,
           height: `${getInitialHeight(index)}px`,
