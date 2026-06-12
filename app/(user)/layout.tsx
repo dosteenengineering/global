@@ -39,6 +39,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/assets/noise/primary-noise-vertical.png"
+          as="image"
+          type="image/png"
+        />
+      </head>
       <body
         // className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}
         className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}
