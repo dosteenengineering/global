@@ -34,7 +34,6 @@ export default function Pagination({
         {currentPage > 1 ? (
           <button
             onClick={() => {
-              handlePageChange();
               handlePrev();
             }}
             className="flex items-center gap-[9px] cursor-pointer"
