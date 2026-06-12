@@ -35,7 +35,7 @@ export const zoomIn = (delay: number = 0) => ({
 });
 
 export const moveUpV2 = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 40 },
   show: {
     opacity: 1,
     y: 0,

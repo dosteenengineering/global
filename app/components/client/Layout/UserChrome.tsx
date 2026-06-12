@@ -29,10 +29,14 @@
 
 // export default UserChrome;
 
+
+
+
+
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import IntroAnimation from "../../common/animations/IntroAnimation";
@@ -43,7 +47,7 @@ type UserChromeProps = {
 };
 
 const ROUTES_WITHOUT_CHROME = ["/become-a-partner", "/partner-registration"];
-const INTRO_SESSION_KEY = "intro_done";
+let introPlayedThisLoad = false;
 
 const UserChrome = ({ children }: UserChromeProps) => {
   const pathname = usePathname();
@@ -54,9 +58,7 @@ const UserChrome = ({ children }: UserChromeProps) => {
   );
 
   useEffect(() => {
-    const already = sessionStorage.getItem(INTRO_SESSION_KEY);
-
-    if (already) {
+    if (introPlayedThisLoad) {
       setIntroState("done");
     } else {
       setIntroState("running");
@@ -64,7 +66,7 @@ const UserChrome = ({ children }: UserChromeProps) => {
   }, []);
 
   const handleIntroComplete = () => {
-    sessionStorage.setItem(INTRO_SESSION_KEY, "1");
+    introPlayedThisLoad = true;
     setIntroState("done");
   };
 
