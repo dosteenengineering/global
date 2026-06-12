@@ -22,6 +22,7 @@ const FaqCta = () => {
             variants={moveUp(0.2)}
             initial="hidden"
             whileInView="show"
+            className="z-10"
             viewport={{ once: true, amount: 0.3 }}
           >
             <BorderButton

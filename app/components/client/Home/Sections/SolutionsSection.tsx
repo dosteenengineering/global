@@ -7,6 +7,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 import BorderButton from "@/app/components/common/BorderButton";
+import Link from "next/link";
 
 export default function SolutionsSection() {
   const [activeTab, setActiveTab] = useState<string | null>(
@@ -76,10 +77,11 @@ export default function SolutionsSection() {
                         {tab.label}
                       </span> */}
                       <span
-                        className={`transition-all duration-300 ${activeTab === tab.key
+                        className={`transition-all duration-300 ${
+                          activeTab === tab.key
                             ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
                             : "[-webkit-text-stroke:0px_currentColor]"
-                          }`}
+                        }`}
                       >
                         {tab.label}
                       </span>
@@ -90,7 +92,7 @@ export default function SolutionsSection() {
                 <div
                   className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300"
                   style={{
-                    width: indicatorStyle.width+38,
+                    width: indicatorStyle.width + 38,
                     left: indicatorStyle.left,
                   }}
                 />
@@ -129,9 +131,11 @@ export default function SolutionsSection() {
                         viewport={{ once: true }}
                         className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
                       >
-                        <span className="transition-all duration-300 group-hover:[-webkit-text-stroke:.6px_white]">
-                          {item}
-                        </span>
+                        <Link href={item.link}>
+                          <span className="transition-all duration-300 group-hover:[-webkit-text-stroke:.6px_white]">
+                            {item.label}
+                          </span>
+                        </Link>
                         <FiArrowRight
                           size={28}
                           className="ml-2 opacity-0 translate-x-[-6px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1"
@@ -184,9 +188,24 @@ export default function SolutionsSection() {
                         {tab.label}
                       </span>
 
-                      <div className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      <div
+                        className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeMiterlimit="10"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                     </motion.div>
@@ -203,7 +222,7 @@ export default function SolutionsSection() {
 
                       {/* Right items */}
                       <div className="grid grid-cols-2 gap-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] pb-8">
-                        {tab.rightItems.map((item: string, index: number) => (
+                        {tab.rightItems.map((item: {label: string, link: string}, index: number) => (
                           <motion.div
                             key={`${activeTab}-${index}`}
                             initial="hidden"
@@ -216,12 +235,22 @@ export default function SolutionsSection() {
                             onTouchStart={() => setHoveredIndex(index)}
                             onTouchEnd={() => setHoveredIndex(null)}
                           >
-                            <span className={`transition-all duration-300   ${hoveredIndex === index ? "font-[700]" : ""
-                              }`}  >{item}</span>
+                            <Link href={item.link}>
+                              <span
+                                className={`transition-all duration-300   ${
+                                  hoveredIndex === index ? "font-[700]" : ""
+                                }`}
+                              >
+                                {item.label}
+                              </span>
+                            </Link>
                             <FiArrowRight
                               size={20}
-                              className={` transition-all duration-300 ${hoveredIndex === index ? "opacity-100 translate-x-1" : "opacity-0 -translate-x-1"
-                                }`}
+                              className={` transition-all duration-300 ${
+                                hoveredIndex === index
+                                  ? "opacity-100 translate-x-1"
+                                  : "opacity-0 -translate-x-1"
+                              }`}
                             />
                           </motion.div>
                         ))}
@@ -235,7 +264,10 @@ export default function SolutionsSection() {
         </div>
         <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-40 lg:mt-0">
           <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px] text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
-            <span className="max-w-[997px]" dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }} />
+            <span
+              className="max-w-[997px]"
+              dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }}
+            />
             <BorderButton
               text={solutionsData.btnText}
               iconColor="white"

@@ -63,6 +63,7 @@ const SocialIcon = ({
 
   return (
     <Link
+      target="_blank"
       href={href}
       className="w-[40px] h-[40px] 2xl:w-[42px] 2xl:h-[42px] rounded-full border border-[#C2C2C2] flex items-center justify-center group hover:bg-primary transition-colors duration-300"
       aria-label={name}
@@ -390,7 +391,8 @@ const Footer = () => {
 
             {/* Nav columns */}
             <div className=" pt-40 3xl:pt-60 pb-50 3xl:pb-70 font-poppins -tracking-[2%] 2xl:pr-40 3xl:pr-[57px] relative overflow-hidden">
-              <div className="flex gap-70 3xl:gap-80">
+              {/* <div className="flex gap-70 3xl:gap-80"> */}
+              <div className="flex gap-100 3xl:gap-120">
                 {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
                 <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
                   {mergedCols.map((col, i) => (
@@ -586,7 +588,7 @@ const Footer = () => {
             style={{ paddingRight: leftPadding }}
             className="py-40 3xl:pt-40 3xl:pb-[42px] border-t border-[#D0CFC9] pl-40 3xl:pl-90"
           >
-            <div>
+            <div className="">
               <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                 Subscribe to our newsletter
               </p>
@@ -596,7 +598,7 @@ const Footer = () => {
                   placeholder="Enter Your Email"
                   className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
                 />
-                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group shrink-0 overflow-hidden">
+                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden">
                   <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
                   <span className="relative  group-hover:text-white transition-colors duration-300 ease-in-out">
                     Subscribe

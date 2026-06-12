@@ -222,6 +222,7 @@ export default function AboutSlider() {
                   hoverBg="black"
                   className="max-w-[215px]"
                   px="px-[23px] lg:px-[35px]"
+                  href="/about"
                 />
               </div>
             </div>

@@ -313,6 +313,7 @@ export default function FeaturedProjectsResidencial() {
                 iconColor="primary"
                 px="px-6 lg:px-[35px]"
                 hoverBg="black"
+                href="/projects"
               />
               {enableNavigation && (
                 <div className="flex gap-[15px]">

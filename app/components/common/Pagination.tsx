@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useLenis } from "@/app/components/LenisProvider";
 import { useRouter } from "next/navigation";
-
 
 export default function Pagination({
   currentPage,
@@ -12,43 +11,28 @@ export default function Pagination({
   currentPage: number;
   totalPages: number;
 }) {
- const handlePageChange = () => {
-  setTimeout(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, 100);
-};
+  const router = useRouter();
+  const { scrollTo } = useLenis();
 
-const router = useRouter();
-const handlePrev = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  const handlePrev = () => {
+    scrollTo(document.documentElement, { duration: 1.5, offset: 0 });
+    setTimeout(() => {
+      router.push(`?page=${currentPage - 1}`);
+    }, 1000);
+  };
 
-  setTimeout(() => {
-    router.push(`?page=${currentPage - 1}`);
-  }, 1000); // delay in ms
-};
-
-const handleNext = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-
-  setTimeout(() => {
-    router.push(`?page=${currentPage + 1}`);
-  }, 1000);
-};
+  const handleNext = () => {
+    scrollTo(document.documentElement, { duration: 1.5, offset: 0 });
+    setTimeout(() => {
+      router.push(`?page=${currentPage + 1}`);
+    }, 1000);
+  };
 
   return (
     <div className="flex flex-row-reverse lg:flex-row justify-center lg:justify-start items-center gap-7.5 lg:gap-200 3xl:gap-[218px]">
       <div className="flex items-center gap-2.5 md:gap-[18px]">
         {currentPage > 1 ? (
-          <button  
+          <button
             onClick={() => {
               handlePageChange();
               handlePrev();
@@ -82,11 +66,10 @@ const handleNext = () => {
         )}
 
         {currentPage < totalPages ? (
-          <button 
+          <button
             onClick={() => {
-              handlePageChange();
-              handleNext(); 
-            }} 
+              handleNext();
+            }}
             className="flex items-center gap-[9px] cursor-pointer"
           >
             <span className="w-10 h-10 lg:w-12 lg:h-12 3xl:w-15 3xl:h-15 rounded-full border border-secondary flex items-center justify-center">

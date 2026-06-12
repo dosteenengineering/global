@@ -24,7 +24,7 @@ export const IndustriesData = {
       description:
         "Residential developments in the UAE and Oman demand building systems that combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking systems for high-rise towers — Dosteen engineers solutions that comply with Dubai Municipality and civil defence requirements while meeting the finish quality expected in premium residential projects.",
       image: "/assets/images/services/1.jpg",
-      href: "/industries/residential-developments",
+      href: "/solutions/residential-developments",
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ export const IndustriesData = {
       description:
         "Residential developments in the UAE and Oman demand building systems that combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking systems for high-rise towers — Dosteen engineers solutions that comply with Dubai Municipality and civil defence requirements while meeting the finish quality expected in premium residential projects.",
       image: "/assets/images/services/2.jpg",
-      href: "/industries/commercial-buildings",
+      href: "/solutions/commercial-buildings",
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ export const IndustriesData = {
       description:
         "Industrial and logistics facilities require robust, high-cycle door systems and access control solutions engineered for demanding operational environments.",
       image: "/assets/images/about/banner.jpg",
-      href: "/industries/warehouses-logistics",
+      href: "/solutions/warehouses-logistics",
     },
     {
       id: 4,
@@ -51,7 +51,7 @@ export const IndustriesData = {
       description:
         "Healthcare environments demand hygienic, hermetically sealed, and fire-rated door solutions that meet stringent safety and infection control standards.",
       image: "/assets/images/home/hero/heroBg.jpg",
-      href: "/industries/healthcare-facilities",
+      href: "/solutions/healthcare-facilities",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ export const IndustriesData = {
       description:
         "High-traffic transport infrastructure requires durable, high-speed access systems with advanced security integration and minimal downtime.",
       image: "/assets/images/home/blogs/b1.jpg",
-      href: "/industries/airports-transport-hubs",
+      href: "/solutions/airports-transport-hubs",
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export const IndustriesData = {
       description:
         "Retail environments need visually appealing, reliable entrance systems and security solutions that enhance shopper experience and protect assets.",
       image: "/assets/images/home/blogs/b2.jpg",
-      href: "/industries/retail-malls",
+      href: "/solutions/retail-malls",
     },
     {
       id: 7,
@@ -78,7 +78,7 @@ export const IndustriesData = {
       description:
         "Heavy-duty industrial operations require engineered door and access systems that withstand extreme conditions and high operational cycles.",
       image: "/assets/images/home/solution/solution-bg.jpg",
-      href: "/industries/industrial-facilities",
+      href: "/solutions/industrial-facilities",
     },
     {
       id: 8,
@@ -87,7 +87,7 @@ export const IndustriesData = {
       description:
         "Government and civic buildings require high-security access control, blast-resistant doors, and systems compliant with national safety codes.",
       image: "/assets/images/home/blogs/b1.jpg",
-      href: "/industries/government-buildings",
+      href: "/solutions/government-buildings",
     },
     {
       id: 9,
@@ -96,7 +96,7 @@ export const IndustriesData = {
       description:
         "Hospitality projects demand elegant, whisper-quiet door systems and seamless access solutions that complement premium interior design.",
       image: "/assets/images/home/blogs/b2.jpg",
-      href: "/industries/hospitality-hotels",
+      href: "/solutions/hospitality-hotels",
     },
   ],
 };

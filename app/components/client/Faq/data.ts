@@ -18,7 +18,7 @@ export type FaqData = {
 };
 
 export const faqData: FaqData = {
-  title: "Got Questions? We've Got Answers",
+  title: "Got Questions? We’ve Got Answers",
   contactText: "If you don't see your question here, feel free to ask it here",
   contactHref: "/contact",
   contactLabel: "Contact",
