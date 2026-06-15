@@ -135,7 +135,7 @@ const BlogContent = ({ data }: BlogContentProps) => {
                     <button
                       type="button"
                       onClick={() => handleCategoryChange(category)}
-                      className={`w-fit text-19 leading-[1.2] text-paragraph h-fit py-[3px] font-light flex items-center gap-x-2 group transition-all duration-100 ease-in-out ${
+                      className={`w-fit text-19 leading-[1.2] text-paragraph h-fit py-[3px] font-light flex items-center gap-x-2 group transition-all duration-100 ease-in-out cursor-pointer ${
                         isActive ? "!font-bold" : "hover:font-bold"
                       }`}
                     >
@@ -161,7 +161,7 @@ const BlogContent = ({ data }: BlogContentProps) => {
             </div>
           </div>
 
-          <div className="md:col-start-2">
+          <div className="md:col-start-2 z-10">
             <BlogLatest data={filteredBlogs} />
             <BlogList data={listBlogs} />
           </div>

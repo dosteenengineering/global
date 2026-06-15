@@ -86,9 +86,9 @@ export const garageDoorData = {
     title: "Don’t See the Right Fit? We Build to Your Spec.",
     description: "Non-standard sizes, custom finishes, bespoke automation — Dosteen engineers garage door solutions from scratch for any residential requirement.",
     buttonOneTitle: "Request custom quote",
-    buttonOneLink: "/contact",
+    buttonOneLink: "/contact-us#contact-form",
     buttonTwoTitle: "Speak to an engineer",
-    buttonTwoLink: "/contact",
+    buttonTwoLink: "/contact-us#contact-form",
   },
 };
 

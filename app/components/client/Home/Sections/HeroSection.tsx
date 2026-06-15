@@ -59,6 +59,7 @@ export default function Hero() {
                 iconColor="primary"
                 hoverBg="white"
                 className="!px-[24px] !py-[11.2px]"
+                href="/contact-us#contact-form"
               />
             </motion.div>
           )}

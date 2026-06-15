@@ -49,7 +49,7 @@ export type SolutionTab = {
   key: string;
   label: string;
   leftTitle: string;
-  rightItems: string[];
+  rightItems: {label: string, link: string}[];
 };
 
 export const solutionsData: {
@@ -63,7 +63,7 @@ export const solutionsData: {
   mainTitle: "SOLUTIONS",
   secondTitle: "Need something built to spec? We also offer <span class='font-semibold'>custom solutions tailored</span> to your exact requirements.",
   btnText: "Discuss your project",
-  btnLink: "#",
+  btnLink: "/contact-us#contact-form",
   backgroundImage: "/assets/images/home/solution/solution-bg.jpg",
 
   tabs: [
@@ -71,19 +71,19 @@ export const solutionsData: {
       key: "residential",
       label: "Residential Systems",
       leftTitle: "Integrated Systems Designed for Modern Homes",
-      rightItems: ["Garage Doors", "Multi-Parking Solutions", "Architectural Shades", "Bespoke Steel Gates", "Shutters", "Fly Mesh & Insect Screens", "Flood Barriers", "Retractable Pool Covers", "Garage & Linen Chutes"],
+      rightItems: [{label:"Garage Doors", link:"/solutions/residential/garage-doors"}, {label:"Multi-Parking Solutions", link:"/solutions/residential/multi-parking-solutions"}, {label:"Architectural Shades", link:"/solutions/residential/architectural-shades"}, {label:"Bespoke Steel Gates", link:"/solutions/residential/bespoke-steel-gates"}, {label:"Shutters", link:"/solutions/residential/shutters"}, {label:"Fly Mesh & Insect Screens", link:"/solutions/residential/fly-mesh-insect-screens"}, {label:"Flood Barriers", link:"/solutions/residential/flood-barriers"}, {label:"Retractable Pool Covers", link:"/solutions/residential/retractable-pool-covers"}, {label:"Garage & Linen Chutes", link:"/solutions/residential/garage-linen-chutes"}],
     },
     {
       key: "commercial",
       label: "Commercial & Industrial Systems",
       leftTitle: "High Systems for Commercial Spaces",
-      rightItems: ["Industrial Doors", "Loading Bay Systems", "Security Shutters", "Dock Levelers", "Fire Rated Doors", "Warehouse Automation"],
+      rightItems: [{label:"Industrial Doors", link:"/solutions/commercial/industrial-doors"}, {label:"Loading Bay Systems", link:"/solutions/commercial/loading-bay-systems"}, {label:"Security Shutters", link:"/solutions/commercial/security-shutters"}, {label:"Dock Levelers", link:"/solutions/commercial/dock-levelers"}, {label:"Fire Rated Doors", link:"/solutions/commercial/fire-rated-doors"}, {label:"Warehouse Automation", link:"/solutions/commercial/warehouse-automation"}],
     },
     {
       key: "defense",
       label: "Defense & Government",
       leftTitle: "Advanced Security Systems for Critical Infrastructure",
-      rightItems: ["Blast Resistant Doors", "Perimeter Security Gates", "Ballistic Barriers", "High Security Bollards", "Military Hangar Doors"],
+      rightItems: [{label:"Blast Resistant Doors", link:"/solutions/defense/blast-resistant-doors"}, {label:"Perimeter Security Gates", link:"/solutions/defense/perimeter-security-gates"}, {label:"Ballistic Barriers", link:"/solutions/defense/ballistic-barriers"}, {label:"High Security Bollards", link:"/solutions/defense/high-security-bollards"}, {label:"Military Hangar Doors", link:"/solutions/defense/military-hangar-doors"}],
     },
   ],
 };
@@ -470,7 +470,7 @@ export const blogsData: BlogsData = {
       category: "General",
       date: "25-01-2026",
       image: "/assets/images/home/blogs/b1.jpg",
-      href: "#",
+      href: "/blog/what-modern-engineering-demands-from-todays-built-spaces",
     },
     {
       key: "blog-2",
@@ -478,7 +478,7 @@ export const blogsData: BlogsData = {
       category: "Technology",
       date: "25-01-2026",
       image: "/assets/images/home/blogs/b2.jpg",
-      href: "#",
+      href: "/blog/what-modern-engineering-demands-from-todays-built-spaces",
     },
     {
       key: "blog-3",
@@ -486,7 +486,7 @@ export const blogsData: BlogsData = {
       category: "Sustainability",
       date: "18-01-2026",
       image: "/assets/images/home/blogs/b1.jpg",
-      href: "#",
+      href: "/blog/the-future-of-sustainable-infrastructure-in-urban-development",
     },
     {
       key: "blog-4",
@@ -494,7 +494,7 @@ export const blogsData: BlogsData = {
       category: "Technology",
       date: "10-01-2026",
       image: "/assets/images/home/blogs/b2.jpg",
-      href: "#",
+      href: "/blog/how-bim-is-transforming-construction-project-management",
     },
   ],
 };
@@ -520,12 +520,12 @@ export const ctaData = {
     {
       key: "quote",
       label: "REQUEST A QUOTE",
-      href: "#",
+      href: "/contact-us#contact-form",
     },
     {
       key: "team",
       label: "SPEAK TO OUR TEAM",
-      href: "#",
+      href: "/contact-us#contact-form",
     },
   ],
 };

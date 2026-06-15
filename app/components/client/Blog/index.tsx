@@ -4,14 +4,14 @@ import BlogContent from "./BlogContent";
 import { banner, blogs } from "./data";
 
 const Index = () => {
-  return ( 
+  return (
     <>
-    <InnerPageBanner2 {...banner} />
-    <Suspense>
-    <BlogContent data={blogs} />
-    </Suspense>
+      <InnerPageBanner2 {...banner} />
+      <Suspense>
+        <BlogContent data={blogs} />
+      </Suspense>
     </>
-   );
-}
- 
+  );
+};
+
 export default Index;

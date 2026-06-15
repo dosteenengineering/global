@@ -1,6 +1,12 @@
 "use client";
 
-import { useRef, useCallback, useState, useLayoutEffect, useEffect } from "react";
+import {
+  useRef,
+  useCallback,
+  useState,
+  useLayoutEffect,
+  useEffect,
+} from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCreative } from "swiper/modules";
@@ -72,61 +78,63 @@ function InactiveSlot({
   const exitTo = direction === "right" ? "-100%" : "100%";
 
   return (
-         
-          <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-
-      <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>    
-            <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
-              {displayed.animating && (
-                <p
-                  className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
-                  style={{ ["--exit-to" as string]: exitTo }}
-                >
-                  {displayed.prev.name}
-                </p>
-              )}
-              <p
-                className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
-                style={
-                  displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-                }
-              >
-                {displayed.next.name}
-              </p>
-            </div> 
+    <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
+      <Link href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
+        <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
+          {displayed.animating && (
+            <p
+              className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
+              style={{ ["--exit-to" as string]: exitTo }}
+            >
+              {displayed.prev.name}
+            </p>
+          )}
+          <p
+            className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
+            style={
+              displayed.animating
+                ? { ["--enter-from" as string]: enterFrom }
+                : {}
+            }
+          >
+            {displayed.next.name}
+          </p>
+        </div>
       </Link>
-      <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>    
-            <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
-              {displayed.animating && (
-                <div
-                  className="absolute inset-0 slot-exit"
-                  style={{ ["--exit-to" as string]: exitTo }}
-                >
-                  <Image
-                    src={displayed.prev.image}
-                    alt={displayed.prev.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div
-                className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`}
-                style={
-                  displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}
-                }
-              >
-                <Image
-                  src={displayed.next.image}
-                  alt={displayed.next.name}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
-                />
-              </div>
+      <Link href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
+        <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
+          {displayed.animating && (
+            <div
+              className="absolute inset-0 slot-exit"
+              style={{ ["--exit-to" as string]: exitTo }}
+            >
+              <Image
+                src={displayed.prev.image}
+                alt={displayed.prev.name}
+                fill
+                className="object-cover pointer-events-none"
+              />
             </div>
-      </Link>
+          )}
+          <div
+            className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`}
+            style={
+              displayed.animating
+                ? { ["--enter-from" as string]: enterFrom }
+                : {}
+            }
+          >
+            <Image
+              src={displayed.next.image}
+              alt={displayed.next.name}
+              fill
+              className="object-cover pointer-events-none"
+              sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
+            />
           </div>
+        </div>
+      </Link>
+    </div>
   );
 }
 
@@ -210,7 +218,7 @@ export default function FeaturedProjectsSection() {
         </div>
         {/* Nav buttons right-aligned, under title */}
         <div className="flex items-center justify-between mb-[30px] sm:mb-8 container">
-                    {/* View all button */}
+          {/* View all button */}
           <motion.div
             variants={moveUp(0.4)}
             initial="hidden"
@@ -291,7 +299,7 @@ export default function FeaturedProjectsSection() {
               const isActive = idx === mobileActiveIndex;
               return (
                 <SwiperSlide key={project.key}>
-                <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
+                  <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.name}
@@ -332,11 +340,11 @@ export default function FeaturedProjectsSection() {
                         className={`absolute bottom-0 left-0 right-0 px-6 pb-6 z-10 transition-opacity duration-500 ${
                           isActive ? "opacity-100" : "opacity-0"
                         }`}
-                      >  
+                      >
                         <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
                           {project.name}
                         </p>
-                        
+
                         <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
                         <div className="flex items-center gap-3 justify-between">
                           <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
@@ -349,7 +357,6 @@ export default function FeaturedProjectsSection() {
                       </div>
                     </>
                   </div>
-                
                 </SwiperSlide>
               );
             })}
@@ -394,46 +401,48 @@ export default function FeaturedProjectsSection() {
           >
             {projects.map((project: Project) => (
               <SwiperSlide key={project.key}>
-                 <Link  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
-                <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(0,0,0,0) 35.9%, rgba(0,0,0,0.85) 86.75%)",
-                    }}
-                  />
-                  <div className="absolute top-9 right-9 z-10">
+                <Link
+                  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}
+                >
+                  <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                     <Image
-                      src="/assets/icons/arrow-right-top-big-thick.svg"
-                      alt="arrow"
-                      width={71}
-                      height={48}
-                      className="-translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
+                      src={project.image}
+                      alt={project.name}
+                      fill
+                      className="object-cover"
+                      priority
                     />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 px-50 pb-40 3xl:pb-[43px] z-10">
-                    <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px]">
-                      {project.name}
-                    </p>
-                    <div className="h-[1px] bg-white/30 mb-20 2xl:mb-[22px]" />
-                    <div className="flex items-center gap-150 3xl:gap-[163px]">
-                      <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
-                        Location: {project.location}
-                      </span>
-                      <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
-                        Client: {project.client}
-                      </span>
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(0,0,0,0) 35.9%, rgba(0,0,0,0.85) 86.75%)",
+                      }}
+                    />
+                    <div className="absolute top-9 right-9 z-10">
+                      <Image
+                        src="/assets/icons/arrow-right-top-big-thick.svg"
+                        alt="arrow"
+                        width={71}
+                        height={48}
+                        className="-translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
+                      />
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 px-50 pb-40 3xl:pb-[43px] z-10">
+                      <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px]">
+                        {project.name}
+                      </p>
+                      <div className="h-[1px] bg-white/30 mb-20 2xl:mb-[22px]" />
+                      <div className="flex items-center gap-150 3xl:gap-[163px]">
+                        <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
+                          Location: {project.location}
+                        </span>
+                        <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
+                          Client: {project.client}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
                 </Link>
               </SwiperSlide>
             ))}

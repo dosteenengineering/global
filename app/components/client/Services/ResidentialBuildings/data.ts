@@ -29,7 +29,7 @@ export const dosteenSystemsData = {
       image: "/assets/images/services/residential/systems/1.jpg",
       description:
         "Sectional garage doors (residential grade) are designed to offer a perfect balance of durability, functionality, and modern aesthetics for everyday home use.",
-      slug: "sectional-garage-doors",
+      slug: "/solutions/residential-developments/sectional-garage-doors",
     },
     {
       id: 2,
@@ -37,7 +37,7 @@ export const dosteenSystemsData = {
       image: "/assets/images/services/1.jpg",
       description:
         "Elegant shading solutions including pergolas, ouvres, and awnings that blend seamlessly with modern architectural design.",
-      slug: "architectural-shading",
+      slug: "/solutions/residential-developments/architectural-shading",
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ export const dosteenSystemsData = {
       image: "/assets/images/about/banner.jpg",
       description:
         "High-performance automated gate systems and barriers engineered for security, reliability, and smooth operation in any environment.",
-      slug: "automated-gate-systems",
+      slug: "/solutions/residential-developments/automated-gate-systems",
     },
     {
       id: 4,
@@ -53,15 +53,15 @@ export const dosteenSystemsData = {
       image: "/assets/images/services/2.jpg",
       description:
         "Intelligent multi-level parking systems that maximize space efficiency in residential and commercial developments.",
-      slug: "multi-level-parking",
+      slug: "/solutions/residential-developments/multi-level-parking",
     },
     {
       id: 5,
       title: "Fire-rated doors and fire curtains",
-      image: "/assets/images/home/hero/heroBg.jpg",
+      image: "/assets/images/home/hero/herobg.jpg",
       description:
         "Certified fire-rated doors and fire curtains providing critical passive fire protection for buildings of all types.",
-      slug: "fire-rated-doors",
+      slug: "/solutions/residential-developments/fire-rated-doors",
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export const dosteenSystemsData = {
       image: "/assets/images/home/blogs/b1.jpg",
       description:
         "Hygienic and efficient garbage chute systems built for high-rise residential and commercial properties.",
-      slug: "garbage-chute-systems",
+      slug: "/solutions/residential-developments/garbage-chute-systems",
     },
     {
       id: 7,
@@ -77,7 +77,7 @@ export const dosteenSystemsData = {
       image: "/assets/images/home/blogs/b2.jpg",
       description:
         "Robust flood barrier systems specifically engineered to protect basement car parks and below-grade structures from water ingress.",
-      slug: "flood-barriers",
+      slug: "/solutions/residential-developments/flood-barriers",
     },
   ],
 };
@@ -89,7 +89,7 @@ export const CtaData = {
   buttons: [
     {
       text: "Discuss your project",
-      href: "#",
+      href: "/contact-us#contact-form",
     },
   ],
 };

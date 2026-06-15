@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
-import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
+import { moveUp } from "@/app/components/motionVariants";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { useLenis } from "@/app/components/LenisProvider";
 
 interface DoorItem {
   id: number;
@@ -51,9 +52,10 @@ function DoorContent({ door }: { door: DoorItem }) {
           fill
           sizes="(min-width: 1280px) 920px, 100vw"
           className="object-cover "
-          onError={() => setImageSrc("/assets/images/garage-doors/garage-doors.jpg")}
+          onError={() =>
+            setImageSrc("/assets/images/garage-doors/garage-doors.jpg")
+          }
         />
-   
       </div>
       <p className="w-fit rounded-full border border-white/80 px-[16.5px] font-light md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white/80 mb-30">
         {door.idealFor}
@@ -78,34 +80,43 @@ function DoorContent({ door }: { door: DoorItem }) {
 
 const DiscoverSection = ({ data }: DiscoverSectionProps) => {
   const [activeId, setActiveId] = useState(data.doors[0]?.id ?? 0);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { scrollTo } = useLenis();
 
   // Mobile accordion — can open/close independently
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(
-    data.doors[0]?.id ?? null
+    data.doors[0]?.id ?? null,
   );
 
-  const activeDoor = data.doors.find((door) => door.id === activeId) ?? data.doors[0];
+  const activeDoor =
+    data.doors.find((door) => door.id === activeId) ?? data.doors[0];
 
   const toggleAccordion = (id: number) => {
     setOpenAccordionId((prev) => (prev === id ? null : id));
   };
 
   return (
+    // <section className="relative py-12.5 md:py-100 lg:py-150">
     <section className="relative py-12.5 md:py-100 lg:py-150">
       <PrimaryNoise />
       <div className="container relative z-10">
-        <SectionTitle title={data.sectionTitle} className="section-heading-90 text-white mb-50 uppercase " />
+        <SectionTitle
+          title={data.sectionTitle}
+          className="section-heading-90 text-white mb-50 uppercase "
+        />
 
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
           {/* <p className="text-24 lg:text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-7.5 md:mb-50 max-w-[52.5ch]">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.sectionDesc} className="text-24 lg:!text-30 text-white
-           !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50  whitespace-pre-line" />
+          <SectionDescription
+            text={data.sectionDesc}
+            className="text-24 lg:!text-30 text-white
+           !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50  whitespace-pre-line"
+          />
         </div>
 
         <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
-
           {/* ── Mobile: Accordion ── */}
           <div className="xl:hidden space-y-0">
             {data.doors.map((door) => {
@@ -119,21 +130,34 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                     className="w-full flex items-center justify-between gap-4 py-[18px] text-left"
                   >
                     <span
-                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${isOpen ? "font-[500]" : "font-light"
-                        }`}
+                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${
+                        isOpen ? "font-[500]" : "font-light"
+                      }`}
                     >
                       {door.menuTitle}
                     </span>
                     <span
                       className={`shrink-0 flex items-center justify-center   transition-all duration-300  `}
                     >
-
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
-                          }`}>
-                        <path d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825" stroke="white" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={`transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : "rotate-0"
+                        }`}
+                      >
+                        <path
+                          d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeMiterlimit="10"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
-
                     </span>
                   </button>
 
@@ -161,49 +185,71 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
 
           {/* ── Desktop: Original sidebar + content ── */}
           <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
-            <aside className="xl:sticky xl:top-24 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40 h-full">
+            <aside className="xl:sticky xl:top-5 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
                   {data.doors.map((door) => {
                     const isActive = activeId === door.id;
                     return (
-                      <motion.div variants={moveUp(0.2)} initial="hidden" whileInView={"show"} viewport={{once:true,amount:0.2}} key={door.id}>
+                      <motion.div
+                        variants={moveUp(0.2)}
+                        initial="hidden"
+                        whileInView={"show"}
+                        viewport={{ once: true, amount: 0.2 }}
+                        key={door.id}
+                      >
                         <button
                           type="button"
-                          onClick={() => setActiveId(door.id)}
-                          className={`group relative flex  min-w-fit w-full max-w-[98%] items-center overflow-hidden rounded-full px-4 py-[16px]  text-left transition-all duration-300 xl:w-full xl:rounded-none xl:px-0 cursor-pointer ${activeId === door.id ? 'min-h-[82px] xl:py-0 my-2' : 'xl:py-20'}`}
+                          onClick={() => {
+                            setActiveId(door.id);
+                            if (contentRef.current) {
+                              scrollTo(contentRef.current, {
+                                offset: -100,
+                                duration: 1.2,
+                              });
+                            }
+                          }}
+                          className={`group relative flex  min-w-fit w-full max-w-[98%] items-center overflow-hidden rounded-full px-4 py-[16px]  text-left transition-all duration-300 xl:w-full xl:rounded-none xl:px-0 cursor-pointer ${activeId === door.id ? "min-h-[82px] xl:py-0 my-2" : "xl:py-20"}`}
                         >
-
                           {/* ── Gradient: clipped by button's own border-radius via overflow-hidden ── */}
                           <span
                             aria-hidden="true"
                             className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-[clip-path] duration-500 ease-out
-                            ${isActive
+                            ${
+                              isActive
                                 ? "[clip-path:inset(0_0%_0_0)]"
                                 : "[clip-path:inset(0_100%_0_0)]"
-                              }`}
+                            }`}
                           />
 
                           {/* ── Label ── */}
                           <span
-                            className={`relative text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-all duration-300 ${isActive
-                              ? "font-light pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
-                              : "font-light leading-[1.2]"
-                              }`}
+                            className={`relative text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-all duration-300 ${
+                              isActive
+                                ? "font-light pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
+                                : "font-light leading-[1.2]"
+                            }`}
                           >
                             {door.menuTitle}
                           </span>
 
                           {/* ── Arrow ── */}
                           <span
-                            className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${isActive
-                              ? "opacity-100 translate-x-0 flex"
-                              : "opacity-0 -translate-x-3 pointer-events-none hidden"
-                              }`}
+                            className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${
+                              isActive
+                                ? "opacity-100 translate-x-0 flex"
+                                : "opacity-0 -translate-x-3 pointer-events-none hidden"
+                            }`}
                           >
-                            <Image src="/assets/icons/arrow-right-primary.svg" alt="" aria-hidden="true" width={15} height={15} className="h-2 w-2 md:h-auto md:w-auto" />
+                            <Image
+                              src="/assets/icons/arrow-right-primary.svg"
+                              alt=""
+                              aria-hidden="true"
+                              width={15}
+                              height={15}
+                              className="h-2 w-2 md:h-auto md:w-auto"
+                            />
                           </span>
-
                         </button>
                       </motion.div>
                     );
@@ -212,7 +258,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
               </div>
             </aside>
 
-            <div className="pt-40 xl:pl-70 3xl:pl-[86px]">
+            <div ref={contentRef} className="pt-40 xl:pl-70 3xl:pl-[86px]">
               <AnimatePresence mode="wait">
                 {activeDoor && (
                   <motion.div
@@ -220,7 +266,11 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                     variants={moveUp(0.2)}
                     initial="hidden"
                     animate="show"
-                    exit={{ opacity: 0, y: -24, transition: { duration: 0.25 } }}
+                    exit={{
+                      opacity: 0,
+                      y: -24,
+                      transition: { duration: 0.25 },
+                    }}
                   >
                     <DoorContent door={activeDoor} />
                   </motion.div>
@@ -231,7 +281,13 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         </div>
 
         {data.ctaData && (
-          <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-60 3xl:py-60 ">
+          <motion.div
+            variants={moveUp(0.4)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mt-7.5 md:mt-100 bg-gradient-to-r from-white/2 to-white/20 p-5 md:px-8 md:py-12 lg:px-50 lg:py-50 3xl:px-60 3xl:py-60 "
+          >
             <h3 className="text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-25">
               <span className="font-semibold">
                 {data.ctaData.title.split("?")[0]}?

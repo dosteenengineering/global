@@ -187,11 +187,11 @@ export const CtaData = {
   buttons: [
     {
       text: "REQUEST A QUOTE",
-      href: "/contact?type=quote",
+      href: "/contact-us#contact-form",
     },
     {
       text: "SPEAK TO OUR TEAM",
-      href: "/contact?type=team",
+      href: "/contact-us#contact-form",
     },
   ],
 };
