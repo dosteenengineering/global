@@ -155,8 +155,6 @@
 
 
 
-
-
 "use client";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -191,57 +189,57 @@ export default function SectionTitle({
     let cancelled = false;
     let ctx: gsap.Context | undefined;
 
-    const run = () => {
-      if (cancelled || !el.isConnected) return;
+const run = () => {
+  if (cancelled || !el.isConnected) return;
 
-      // Step 1: Element already has plain text content rendered (from JSX below).
-      const elRect = el.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+  const computed = window.getComputedStyle(el);
 
-      // Step 2: Clone IN-PLACE (same parent) so inherited styles/context match exactly.
-      const clone = el.cloneNode(false) as HTMLElement;
-      const computed = window.getComputedStyle(el);
+  // Split on \n first — each segment is a forced line group
+  const segments = content.split("\n").map((s) => s.trim()).filter(Boolean);
 
-      Object.assign(clone.style, {
-        position: "absolute",
-        top: "0",
-        left: "0",
-        visibility: "hidden",
-        pointerEvents: "none",
-        zIndex: "-1",
-        margin: "0",
-        boxSizing: computed.boxSizing,
-        width:
-          computed.boxSizing === "border-box"
-            ? `${elRect.width}px`
-            : computed.width,
-        font: computed.font,
-        letterSpacing: computed.letterSpacing,
-        wordSpacing: computed.wordSpacing,
-        textTransform: computed.textTransform,
-        lineHeight: computed.lineHeight,
-        whiteSpace: "normal",
-      });
+  const measureSegment = (text: string): string[] => {
+    const clone = el.cloneNode(false) as HTMLElement;
+    Object.assign(clone.style, {
+      position: "absolute",
+      top: "0", left: "0",
+      visibility: "hidden",
+      pointerEvents: "none",
+      zIndex: "-1",
+      margin: "0",
+      boxSizing: computed.boxSizing,
+      width: computed.boxSizing === "border-box" ? `${elRect.width}px` : computed.width,
+      font: computed.font,
+      letterSpacing: computed.letterSpacing,
+      wordSpacing: computed.wordSpacing,
+      textTransform: computed.textTransform,
+      lineHeight: computed.lineHeight,
+      whiteSpace: "normal",
+    });
 
-      const words = content.split(" ").filter(Boolean);
-      clone.innerHTML = words
-        .map(
-          (w, i) =>
-            `<span data-i="${i}">${w}</span>${i < words.length - 1 ? " " : ""}`,
-        )
-        .join("");
+    const words = text.split(" ").filter(Boolean);
+    clone.innerHTML = words
+      .map((w, i) => `<span data-i="${i}">${w}</span>${i < words.length - 1 ? " " : ""}`)
+      .join("");
 
-      // Append as sibling within same parent (preserves cascade/context).
-      el.parentElement?.appendChild(clone);
+    el.parentElement?.appendChild(clone);
 
-      const spans = Array.from(clone.querySelectorAll<HTMLElement>("[data-i]"));
-      const lineMap = new Map<number, string[]>();
-      spans.forEach((s) => {
-        const top = Math.round(s.getBoundingClientRect().top);
-        if (!lineMap.has(top)) lineMap.set(top, []);
-        lineMap.get(top)!.push(s.textContent ?? "");
-      });
-      const lines = Array.from(lineMap.values()).map((w) => w.join(" "));
-      clone.remove();
+    const spans = Array.from(clone.querySelectorAll<HTMLElement>("[data-i]"));
+    const lineMap = new Map<number, string[]>();
+    spans.forEach((s) => {
+      const top = Math.round(s.getBoundingClientRect().top);
+      if (!lineMap.has(top)) lineMap.set(top, []);
+      lineMap.get(top)!.push(s.textContent ?? "");
+    });
+
+    clone.remove();
+    return Array.from(lineMap.values()).map((w) => w.join(" "));
+  };
+
+  // Each \n segment measured independently, results concatenated
+  const lines = segments.flatMap((seg) => measureSegment(seg));
+
+      // clone.remove();
 
       // Step 3: Rebuild with mask > inner per line
       el.innerHTML = "";

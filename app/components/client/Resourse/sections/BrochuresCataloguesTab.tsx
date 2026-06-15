@@ -32,7 +32,7 @@ const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
       className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
         {items.map((item, index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={0.1 * index} />
+          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
         ))}
       </div>
     </div>

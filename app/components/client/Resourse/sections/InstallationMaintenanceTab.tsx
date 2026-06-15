@@ -33,7 +33,7 @@ const InstallationMaintenanceTab = ({ tab }: InstallationMaintenanceTabProps) =>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 md:gap-30">
         {items.map((item, index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={index * 0.2} />
+          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
         ))}
       </div>
 
