@@ -30,7 +30,7 @@ const CertificationsComplianceTab = ({ tab }: CertificationsComplianceTabProps) 
          <SectionTitle title={tab.title} className="text-[24px] md:text-55 leading-[1.34] md:leading-[1.181818181818182] font-light text-secondary mb-7.5 md:mb-50 max-w-[35ch] tracking-[-0.02em]" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-30 gap-y-30 xl:gap-x-30 xl:gap-y-40">
         {items.map((item,index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={index * 0.1} />
+          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
         ))}
       </div>
     </div>

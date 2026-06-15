@@ -71,7 +71,7 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
           const label = item.tag ?? item.tags?.[0] ?? item.type;
 
           return (
-            <motion.div variants={moveUp(0.4+ index * 0.1)} initial="hidden" animate="show" viewport={{ once: false }}>
+            <motion.div variants={moveUp(0.06)} initial="hidden" animate="show" viewport={{ once: false }}>
             <button key={item.id} type="button" onClick={() => setActiveVideo(item)} className="group text-left" >
               {/* IMAGE */}
               <div className="relative aspect-[18.7/10] md:aspect-[16/10] overflow-hidden">

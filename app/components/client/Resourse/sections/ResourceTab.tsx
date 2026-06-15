@@ -29,7 +29,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const tabsScrollerRef = useRef<HTMLDivElement>(null);
 
-  const activeTabData = data.tabs.find((tab) => tab.id === activeTab) ?? data.tabs[0];
+  const activeTabData =
+    data.tabs.find((tab) => tab.id === activeTab) ?? data.tabs[0];
   const activeTabIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
   const isAtFirstTab = activeTabIndex <= 0;
   const isAtLastTab = activeTabIndex >= data.tabs.length - 1;
@@ -56,7 +57,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
     buttonRefs.current.forEach((button) => {
       if (button) resizeObserver.observe(button);
     });
-    if (tabsContainerRef.current) resizeObserver.observe(tabsContainerRef.current);
+    if (tabsContainerRef.current)
+      resizeObserver.observe(tabsContainerRef.current);
 
     window.addEventListener("resize", updateIndicator);
     return () => {
@@ -78,7 +80,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -121,7 +126,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.sectionDesc} className="text-description text-paragraph max-w-[70ch] font-light mb-50" />
+          <SectionDescription
+            text={data.sectionDesc}
+            className="text-description text-paragraph max-w-[70ch] font-light mb-50"
+          />
         </div>
 
         {/* ── Mobile: Custom Select ── */}
@@ -145,11 +153,23 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               </span>
             </div>
 
-            <svg width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : "rotate-0"
-              }`}>
-              <path d="M15.9858 0.5L8.22743 8.10624L0.5 0.525901" stroke="#161616" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="17"
+              height="9"
+              viewBox="0 0 17 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={`transition-transform duration-300 ${
+                isDropdownOpen ? "rotate-180" : "rotate-0"
+              }`}
+            >
+              <path
+                d="M15.9858 0.5L8.22743 8.10624L0.5 0.525901"
+                stroke="#161616"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
-
           </button>
 
           {/* Dropdown list */}
@@ -163,10 +183,11 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                     type="button"
                     onClick={() => handleTabChange(tab)}
                     style={{ animationDelay: `${idx * 30}ms` }}
-                    className={`[animation:var(--animate-item-in)] w-full flex items-center gap-[10px] px-[16px] py-[12px] text-left transition-colors duration-200 border-b border-bdr-gray last:border-b-0 opacity-0 animate-[item-in_0.2s_cubic-bezier(0.25,1,0.5,1)_forwards] ${isActive
-                      ? "bg-primary/5 text-primary"
-                      : "bg-white text-secondary hover:bg-gray-50"
-                      }`}
+                    className={`[animation:var(--animate-item-in)] w-full flex items-center gap-[10px] px-[16px] py-[12px] text-left transition-colors duration-200 border-b border-bdr-gray last:border-b-0 opacity-0 animate-[item-in_0.2s_cubic-bezier(0.25,1,0.5,1)_forwards] ${
+                      isActive
+                        ? "bg-primary/5 text-primary"
+                        : "bg-white text-secondary hover:bg-gray-50"
+                    }`}
                   >
                     <Image
                       src={tab.icon}
@@ -175,7 +196,9 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                       height={24}
                       className="h-6 w-6 shrink-0 object-contain"
                     />
-                    <span className={`text-15 font-poppins ${isActive ? "font-medium" : "font-light"}`}>
+                    <span
+                      className={`text-15 font-poppins ${isActive ? "font-medium" : "font-light"}`}
+                    >
                       {tab.label}
                     </span>
                     {isActive && (
@@ -207,7 +230,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             <ChevronLeft size={20} strokeWidth={1.8} />
           </button>
 
-          <div ref={tabsScrollerRef} className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div
+            ref={tabsScrollerRef}
+            className="overflow-x-auto overflow-y-hidden scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             <div
               ref={tabsContainerRef}
               className="relative flex min-w-max snap-x snap-mandatory items-center gap-5 px-10 sm:px-11 xl:gap-10 2xl:gap-[40px] 3xl:gap-[45px] 3xl:w-full 3xl:justify-between 3xl:px-0"
@@ -215,26 +241,37 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               {data.tabs.map((tab, index) => {
                 const isActive = activeTab === tab.id;
                 return (
-                  <motion.div variants={fadeIn(0.12*index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.5 }} key={tab.id} className="">
-                  <button
-                    ref={(el) => { buttonRefs.current[index] = el; }}
-                    type="button"
-                    onClick={() => handleTabChange(tab)}
-                    className="flex shrink-0 snap-center items-center gap-[10px] pb-20 text-left transition-colors duration-300 cursor-pointer w-fit"
+                  <motion.div
+                    variants={fadeIn(0.12 * index)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.5 }}
+                    key={tab.id}
+                    className=""
                   >
-                    <Image
-                      src={tab.icon}
-                      alt=""
-                      width={32}
-                      height={32}
-                      className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
-                    />
-                    <span className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
-                        }`}
+                    <button
+                      ref={(el) => {
+                        buttonRefs.current[index] = el;
+                      }}
+                      type="button"
+                      onClick={() => handleTabChange(tab)}
+                      className="flex shrink-0 snap-center items-center gap-[10px] pb-20 text-left transition-colors duration-300 cursor-pointer w-fit"
                     >
-                      {tab.label}
-                    </span>
-                  </button>
+                      <Image
+                        src={tab.icon}
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
+                      />
+                      <span
+                        className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${
+                          isActive ? "font-medium" : "font-light"
+                        }`}
+                      >
+                        {tab.label}
+                      </span>
+                    </button>
                   </motion.div>
                 );
               })}
@@ -242,7 +279,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               <div className="absolute left-0 right-0 bottom-0 h-px bg-bdr-gray" />
               <div
                 className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300"
-                style={{ width: indicatorStyle.width+2, left: indicatorStyle.left }}
+                style={{
+                  width: indicatorStyle.width + 2,
+                  left: indicatorStyle.left,
+                }}
               />
             </div>
           </div>
@@ -252,7 +292,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             aria-label="Next resource tabs"
             disabled={isAtLastTab}
             onClick={() => {
-              const nextIndex = Math.min(activeTabIndex + 1, data.tabs.length - 1);
+              const nextIndex = Math.min(
+                activeTabIndex + 1,
+                data.tabs.length - 1,
+              );
               setActiveTab(data.tabs[nextIndex].id);
             }}
             className={`absolute -right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${
