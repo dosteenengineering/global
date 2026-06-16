@@ -41,16 +41,16 @@ const BlogList = ({ data }: BlogListProps) => {
     <div>
       {
         pageBlogs.map((blog,index) => (
-          <MotionLink variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} href={`/blog/${blog.title.toLowerCase().replace(/\s+/g, '-')}`} key={blog.id} className="grid grid-cols-1 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
-            <div className="flex gap-5 justify-between">
+          <MotionLink variants={moveUp(0.2*index)} initial="hidden" whileInView="show" viewport={{once:true,amount:0.3}} href={`/blog/${blog.title.toLowerCase().replace(/\s+/g, '-')}`} key={blog.id} className="grid md:grid-cols-[auto_1fr] 3xl:grid-cols-[513px_auto] gap-20 3xl:gap-[138px] py-40 border-b border-bdr-gray first:border-t first:border-bdr-gray">
+            <div className="flex gap-7 md:gap-10 3xl:gap-5 justify-between">
               <span className="text-description text-paragraph">{blog.date}</span>
               <div className="max-w-[350px] overflow-hidden">
-                <Image src={blog.img} alt={blog.title} width={513} height={300} />
+                <Image src={blog.img} alt={blog.title} width={513} height={300} className="h-[236px] object-cover" />
               </div>
             </div>
             <div className="flex justify-between ">
               <h2 className="text-30 leading-[1.333333333333333] font-light max-w-[25ch]">{blog.title}</h2>
-              <button className="text-description text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-1 xl:px-[18px] uppercase border border-bdr-gray rounded-full">{blog.category}</button>
+              <button className="text-description !text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-1 xl:px-[18px] uppercase border border-bdr-gray rounded-full">{blog.category}</button>
             </div>
           </MotionLink>
         ))

@@ -121,8 +121,8 @@ const BlogContent = ({ data }: BlogContentProps) => {
 
   return (
     <section ref={sectionRef} className="pt-120 pb-200 relative">
-      <div className="absolute top-[12%] left-[-25%] w-full h-full">
-        <Image src="/assets/images/blog/shape/list-shape-1.svg" alt="" width={797} height={796} className="w-[70%] h-auto 3xl:w-auto" />
+      <div className="absolute top-[14%] left-[-25%] w-full h-full">
+        <Image src="/assets/images/blog/shape/list-shape-1.svg" alt="" width={797} height={796} className="w-[50%] h-auto 3xl:w-auto" />
       </div>
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-[auto_1.5fr] 3xl:grid-cols-[auto_1395px]">
