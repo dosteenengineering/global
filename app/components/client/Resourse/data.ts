@@ -361,7 +361,7 @@ export const industryGuidesData = {
 };
 
 export const specificationToolsData = {
-  title: "Specification Tools\n For Building Professionals",
+  title: "Specification Tools \n For Building Professionals",
 
   items: [
     {

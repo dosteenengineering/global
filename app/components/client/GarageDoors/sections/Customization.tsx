@@ -1,39 +1,57 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { solutionsData, SolutionTab } from "../data";
-import { FiArrowRight } from "react-icons/fi";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
 
 export default function Customization() {
   const [activeTab, setActiveTab] = useState<string | null>(
     solutionsData.tabs[0].key,
   );
-  const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
 
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
 
-  useLayoutEffect(() => {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
+  const updateIndicator = () => {
+    const swiper = swiperRef.current;
+    if (!swiper) return;
+
     const activeIndex = solutionsData.tabs.findIndex(
-      (t) => t.key === activeTab,
+      (t) => t.key === activeTabRef.current,
     );
-    const activeButton = buttonRefs.current[activeIndex];
-    const container = tabsContainerRef.current;
 
-    if (activeButton && container) {
-      const buttonRect = activeButton.getBoundingClientRect();
-      const containerRect = container.getBoundingClientRect();
+    const slide = swiper.slides[activeIndex] as HTMLElement;
+    if (!slide) return;
+    const btn = slide.querySelector("button") as HTMLElement;
+    if (!btn) return;
 
-      setIndicatorStyle({
-        width: activeButton.offsetWidth,
-        left: buttonRect.left - containerRect.left,
-      });
-    }
+    // slide.offsetLeft = position within swiper wrapper (no transform)
+    // swiper.translate = current drag offset (negative)
+    // btn.offsetLeft = button position within the slide
+    const left = slide.offsetLeft + btn.offsetLeft + (swiper.translate ?? 0);
+
+    setIndicatorStyle({
+      width: btn.offsetWidth,
+      left,
+    });
+  };
+
+  const activeTabRef = useRef(activeTab);
+
+  useEffect(() => {
+    activeTabRef.current = activeTab;
+    setTimeout(() => updateIndicator(), 0);
   }, [activeTab]);
 
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
@@ -44,30 +62,98 @@ export default function Customization() {
 
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
-          <SectionTitle text={solutionsData.mainTitle} className="text-left section-heading-90 uppercase max-w-[23ch] " />
+          <SectionTitle
+            text={solutionsData.mainTitle}
+            className="text-left section-heading-90 uppercase max-w-[23ch] "
+          />
           {/* <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p> */}
-          <SectionDescription text={solutionsData.mainDescription} 
-            className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6 !leading-[1.333333333333333]" />
+          <SectionDescription
+            text={solutionsData.mainDescription}
+            className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6 !leading-[1.333333333333333]"
+          />
           {/* ================= DESKTOP ================= */}
-          <motion.div initial="hidden" whileInView="show" variants={moveUp(0.2)} viewport={{ once: true }} className="hidden lg:block" >
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            variants={moveUp(0.2)}
+            viewport={{ once: true }}
+            className="hidden lg:block"
+          >
             <div className="mt-18 3xl:mt-[109px]">
-              <div ref={tabsContainerRef} className="relative">
-                <div className="flex gap-10 2xl:gap-80 text-19 2xl:leading-[2.631578947368421] font-light font-poppins -tracking-[2%] overflow-hidden">
+              <div ref={tabsContainerRef} className="relative overflow-hidden">
+                <Swiper
+                  modules={[FreeMode]}
+                  freeMode={{ enabled: true, sticky: false }}
+                  slidesPerView="auto"
+                  spaceBetween={0}
+                  onTouchStart={() => {
+                    isDraggingRef.current = true;
+                  }}
+                  onTouchEnd={() => {
+                    isDraggingRef.current = false;
+                  }}
+                  onSwiper={(s) => {
+                    swiperRef.current = s;
+                    setTimeout(() => updateIndicator(), 0);
+                  }}
+                  onSetTranslate={() => updateIndicator()}
+                  className="!overflow-visible"
+                >
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
-                    <button key={tab.key} ref={(el) => { buttonRefs.current[index] = el; }} onClick={() => setActiveTab(tab.key)}
-                      className={`px-0 pb-[13px] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.key ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
-                    >
-                      <span className="block font-semibold invisible h-0 overflow-hidden "> {tab.label}</span>
-                      <span className={`${activeTab === tab.key ? "font-semibold" : "font-light"} transition-all duration-300`} >
-                        {tab.label}
-                      </span>
-                    </button>
+                    <SwiperSlide key={tab.key} className="!w-auto">
+                      <button
+                        onClick={() => {
+                          setActiveTab(tab.key);
+                          const swiper = swiperRef.current;
+                          if (!swiper) return;
+
+                          const slide = swiper.slides[index] as HTMLElement;
+                          const translate = swiper.translate ?? 0;
+
+                          const slideLeft = slide.offsetLeft + translate;
+                          const slideRight = slideLeft + slide.offsetWidth;
+
+                          const isVisible =
+                            slideLeft >= 0 && slideRight <= swiper.width;
+
+                          if (!isVisible) {
+                            swiper.setTranslate(
+                              Math.min(
+                                0,
+                                -(
+                                  slide.offsetLeft -
+                                  (swiper.width / 2 - slide.offsetWidth / 2)
+                                ),
+                              ),
+                            );
+                            swiper.updateProgress();
+                          }
+                        }}
+                        className={`px-0 pb-[13px] mr-10 lg:mr-60 3xl:mr-80 text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.key ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
+                      >
+                        <span className="block font-semibold invisible h-0 overflow-hidden">
+                          {tab.label}
+                        </span>
+                        <span
+                          className={`${activeTab === tab.key ? "font-semibold" : "font-light"} transition-all duration-300`}
+                        >
+                          {tab.label}
+                        </span>
+                      </button>
+                    </SwiperSlide>
                   ))}
-                </div>
+                </Swiper>
                 <div className="absolute left-0 right-0 bottom-0 h-px bg-bdr-gray" />
-                <div className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300" style={{ width: indicatorStyle.width, left: indicatorStyle.left, }} />
+                <div
+                  className="absolute bottom-0 h-[4px] bg-primary"
+                  style={{
+                    width: indicatorStyle.width,
+                    left: indicatorStyle.left,
+                    transition: isDraggingRef.current ? "none" : "all 300ms",
+                  }}
+                />
               </div>
             </div>
             <div className="mt-50" />
@@ -98,9 +184,9 @@ export default function Customization() {
                         className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
                       >
                         <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2">
-                          <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
+                          <span className="w-[5px] h-[5px] bg-primary block"></span>
+                          <span>{item}</span>
                         </li>
-
                       </motion.ul>
                     ))}
                   </div>
@@ -149,9 +235,24 @@ export default function Customization() {
                         {tab.label}
                       </span>
 
-                      <div className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825" stroke="black" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                      <div
+                        className={`transition-transform duration-300 ${isOpen ? "" : "-rotate-90"}`}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16.6 7.45825L11.1667 12.8916C10.525 13.5333 9.47502 13.5333 8.83336 12.8916L3.40002 7.45825"
+                            stroke="black"
+                            strokeWidth="2"
+                            strokeMiterlimit="10"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       </div>
                     </motion.div>
@@ -162,7 +263,9 @@ export default function Customization() {
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3 className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`}>
+                      <h3
+                        className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`}
+                      >
                         {tab.leftTitle}
                       </h3>
 
@@ -179,9 +282,9 @@ export default function Customization() {
                             className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
                           >
                             <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2 mb-[5px]">
-                              <span className="w-[5px] h-[5px] bg-primary block"></span><span>{item}</span>
+                              <span className="w-[5px] h-[5px] bg-primary block"></span>
+                              <span>{item}</span>
                             </li>
-
                           </motion.ul>
                         ))}
                       </div>
@@ -192,7 +295,6 @@ export default function Customization() {
             })}
           </motion.div>
         </div>
-
       </div>
     </section>
   );

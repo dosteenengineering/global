@@ -66,7 +66,15 @@ const defaultValues: PartnerFormValues = {
 
 const stepFields: Record<string, (keyof PartnerFormValues)[]> = {
   personal: ["fullName", "jobTitle", "email", "phone"],
-  company: ["companyLegalName", "tradeLicense", "yearOfEstablishment", "companyAddress", "countryCity", "companyEmail", "companyPhone"],
+  company: [
+    "companyLegalName",
+    "tradeLicense",
+    "yearOfEstablishment",
+    "companyAddress",
+    "countryCity",
+    "companyEmail",
+    "companyPhone",
+  ],
   business: ["businessType", "productServices", "marketsServed"],
   docs: ["termsAccepted"],
 };
@@ -76,7 +84,7 @@ const PartnerForm = () => {
   const currentStep = steps[activeStep];
   const isFirstStep = activeStep === 0;
   const isLastStep = activeStep === steps.length - 1;
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const {
     register,
     control,
@@ -96,7 +104,7 @@ const PartnerForm = () => {
 
   const onSubmit = (values: PartnerFormValues) => {
     console.log("Partner form:", values);
-    setIsSubmitted(true)
+    setIsSubmitted(true);
   };
 
   const renderStep = () => {
@@ -117,7 +125,11 @@ const PartnerForm = () => {
     <>
       <ThankYouModal isOpen={isSubmitted} />
       <div className="min-h-full pb-4">
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex min-h-full flex-col pt-70 xl:pt-80 ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="flex min-h-full flex-col pt-70 xl:pt-80 "
+        >
           <Stepper activeStep={activeStep} />
           <h2 className="mt-60 mb-50 shrink-0 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
             {currentStep.title}
@@ -171,16 +183,28 @@ const Stepper = ({ activeStep }: { activeStep: number }) => {
         const isActive = index === activeStep;
         const isComplete = index < activeStep;
         return (
-          <button key={step.id} type="button" className="group relative z-1 flex w-fit flex-col items-center gap-2 relative" >
-            <span className={`relative z-1 flex h-7 w-7 xl:w-[42px] xl:h-[42px] items-center justify-center rounded-full border text-13 font-light transition-colors ${isActive || isComplete ? "border-primary bg-[#022E9E] text-white" : "border-[#DDE3F2] bg-white text-paragraph"}`}>
+          <button
+            key={step.id}
+            type="button"
+            className="group relative z-1 flex w-fit flex-col items-center gap-2 relative"
+          >
+            <span
+              className={`relative z-1 flex h-7 w-7 xl:w-[42px] xl:h-[42px] items-center justify-center rounded-full border text-13 font-light transition-colors ${isActive || isComplete ? "border-primary bg-[#022E9E] text-white" : "border-[#DDE3F2] bg-white text-paragraph"}`}
+            >
               {isComplete ? <Check size={22} strokeWidth={2} /> : index + 1}
-            {!isActive && (
+              {!isActive && (
                 <div className="absolute inset-0 h-full w-full">
-                  <img src="/assets/images/become-a-partner/step-stroke.png" alt="stepper background" className="h-full w-full" />
+                  <img
+                    src="/assets/images/become-a-partner/step-stroke.png"
+                    alt="stepper background"
+                    className="h-full w-full"
+                  />
                 </div>
-            )}
+              )}
             </span>
-            <span className={`text-19 w-fit text-center leading-[1.526315789473684] font-light transition-colors -tracking-[0.02em] ${isActive ? "text-secondary" : "text-paragraph"}`}>
+            <span
+              className={`text-19 w-fit text-center leading-[1.526315789473684] font-light transition-colors -tracking-[0.02em] ${isActive ? "text-secondary" : "text-paragraph"}`}
+            >
               {step.label}
             </span>
           </button>

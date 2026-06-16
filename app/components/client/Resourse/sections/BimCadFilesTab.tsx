@@ -97,7 +97,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
         {filteredItems.map((item,index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={index * 0.12} />
+          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
         ))}
       </div>
     </div>
