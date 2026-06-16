@@ -17,6 +17,7 @@ import { GiHealthNormal } from 'react-icons/gi';
 import { FaRobot } from 'react-icons/fa';
 import { MdAppRegistration } from 'react-icons/md';
 import { useRefetchServices } from '@/app/contexts/refetchServices';
+import { useRefetchSecondSection } from '@/app/contexts/refetchSecondSection';
 
 
 
@@ -26,11 +27,18 @@ const AdminNavbar = () => {
 
   const { refetchServices } = useRefetchServices();
 
+  const { refetchSecondSection } = useRefetchSecondSection();
+
   useEffect(() => {
     fetchServiceData()
   }, [refetchServices])
 
+  useEffect(() => {
+    fetchSecondSectionData()
+  }, [refetchSecondSection])
+
   const [serviceData, setServiceData] = useState([])
+  const [secondSectionData, setSecondSectionData] = useState([])
 
 
   const fetchServiceData = async () => {
@@ -46,6 +54,22 @@ const AdminNavbar = () => {
       }
     } catch (error) {
       console.log("Error in fetching service data", error);
+    }
+  }
+
+  const fetchSecondSectionData = async () => {
+    try {
+      const response = await fetch(`/api/admin/resource`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data)
+        setSecondSectionData(data.data.secondSection.items);
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log("Error in fetching resource data", error);
     }
   }
 
@@ -77,11 +101,21 @@ const AdminNavbar = () => {
     { name: "Systems", href: "/admin/systems", icon: Workflow },
     { name: "Projects", href: "/admin/projects", icon: Workflow },
     { name: "Bim Capabilities", href: "/admin/bim-capabilities", icon: Share2Icon },
-    // { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
-    { name: "News", href: "/admin/news", icon: NewspaperIcon },
+    { name: "Csi Specifications", href: "/admin/csi-specifications", icon: Share2Icon },
+    { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
+    // { name: "News", href: "/admin/news", icon: NewspaperIcon },
     { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
     { name: "Gallery", href: "/admin/gallery", icon: GalleryThumbnails },
-    { name: "QHSE", href: "/admin/qhse", icon: GiHealthNormal },
+    { name: "Awards", href: "/admin/awards", icon: AwardIcon },
+    // { name: "Resources", href: "/admin/resources", icon: MdAppRegistration },
+    {
+      name: "Resources", href: "#####", icon: MdAppRegistration, hasChild: true, children: [
+        { name: "Main Page", href: "/admin/resources" },
+        ...secondSectionData.map((service: { _id: string, thumbnailTitle: string }) => (
+          { name: service.title.split(" ").slice(0, 2).join(" ") + "...", href: `/admin/resources/${service._id}` }
+        )),
+      ]
+    },
     { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
     { name: "AI Technology", href: "/admin/ai-technology", icon: FaRobot },
     {
@@ -96,7 +130,6 @@ const AdminNavbar = () => {
         { name: "Enquiries", href: "/admin/contact/enquiries" }
       ]
     },
-    { name: "Vendor Registrations", href: "/admin/vendor-registration", icon: MdAppRegistration },
     {
       name: "Layout", href: "##", icon: LayoutIcon, hasChild: true, children: [
         { name: "Navbar", href: "/admin/navbar" },

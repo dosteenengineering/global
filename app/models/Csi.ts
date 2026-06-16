@@ -1,0 +1,283 @@
+import mongoose, { Schema } from "mongoose";
+
+const CsiSchema = new Schema(
+  {
+    metaTitle: {
+      type: String,
+      default: "",
+    },
+    metaDescription: {
+      type: String,
+      default: "",
+    },
+
+    firstSection: {
+      image: {
+        type: String,
+        default: "",
+      },
+      imageAlt: {
+        type: String,
+        default: "",
+      },
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+    },
+
+    secondSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          title: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    thirdSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+      itemTitle: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          title: {
+            type: String,
+            default: "",
+          },
+          description: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    fourthSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          title: {
+            type: String,
+            default: "",
+          },
+          subTitle: {
+            type: String,
+            default: "",
+          },
+          description: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    fifthSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          title: {
+            type: String,
+            default: "",
+          },
+          subItems: [
+            {
+              _id: false,
+              title: {
+                type: String,
+                default: "",
+              },
+            },
+          ],
+        },
+      ],
+    },
+
+    sixthSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          image: {
+            type: String,
+            default: "",
+          },
+          imageAlt: {
+            type: String,
+            default: "",
+          },
+          file: {
+            type: String,
+            default: "",
+          },
+          title: {
+            type: String,
+            default: "",
+          },
+          division: {
+            type: String,
+            default: "",
+          },
+          section: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    seventhSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          image: {
+            type: String,
+            default: "",
+          },
+          imageAlt: {
+            type: String,
+            default: "",
+          },
+          title: {
+            type: String,
+            default: "",
+          },
+          description: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    eighthSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+      image: {
+        type: String,
+        default: "",
+      },
+      imageAlt: {
+        type: String,
+        default: "",
+      },
+    },
+
+    ninethSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          number: {
+            type: String,
+            default: "",
+          },
+          value: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    tenthSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          question: {
+            type: String,
+            default: "",
+          },
+          answer: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+
+    lastSection: {
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
+      items: [
+        {
+          _id: false,
+          buttonText: {
+            type: String,
+            default: "",
+          },
+          buttonLink: {
+            type: String,
+            default: "",
+          },
+        },
+      ],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export default mongoose.models.Csi ||
+  mongoose.model("Csi", CsiSchema);

@@ -1,5 +1,5 @@
 import { Dropbox } from "dropbox";
-import fetch, { RequestInfo, RequestInit, Response } from "node-fetch";
+// import fetch, { RequestInfo, RequestInit, Response } from "node-fetch";
 
 const APP_KEY = process.env.NEXT_PUBLIC_DROPBOX_APP_KEY;
 const APP_SECRET = process.env.NEXT_PUBLIC_DROPBOX_APP_SECRET;
