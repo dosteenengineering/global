@@ -78,15 +78,14 @@ const BlogContent = () => {
   }, [updateInfoPanelPosition]);
 
   return (
-    <section ref={sectionRef} className="pt-120 pb-200 relative overflow-hidden border-b border-bdr-gray">
-      <div className="absolute top-0 left-0 xl:left-[-20%] xl:top-[-15%] w-full h-full">
-        <img src="/assets/images/blog/shape/details-shape-1.svg" alt="shape" className="w-full h-full 
-        xl:w-[897px] xl:h-[896px] object-contain" />
+    <section ref={sectionRef} className="pt-120 relative overflow-hidden ">
+      <div className="absolute top-0 left-0 xl:left-[-20%] xl:top-[-15%] w-full h-full z-[-1]">
+        <img src="/assets/images/blog/shape/details-shape-1.svg" alt="shape" className="w-full h-full xl:w-[897px] xl:h-[896px] object-contain" />
       </div>
-      <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] 3xl:grid-cols-[255px_auto] gap-5 3xl:gap-[173px]">
-          <div ref={anchorRef} className="relative self-stretch">
-            <div ref={panelRef} className="pb-30">
+      <div className="container ">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_auto] 3xl:grid-cols-[255px_auto] gap-5 lg:gap-100 3xl:gap-[173px] border-b border-bdr-gray pb-200">
+          <div ref={anchorRef} className="relative  min-w-[200px]">
+            <div ref={panelRef} className="pb-200">
               <div className="border-y border-bdr-gray pt-[12px] pb-30">
                 <h4 className="text-description text-paragraph">Published</h4>
                 <h5 className="text-description text-paragraph !font-bold">22-02-2025</h5>
@@ -117,9 +116,10 @@ const BlogContent = () => {
               </motion.p>
             </div>
             <div className="pt-60">
-              <motion.h2 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-55 leading-[1.181818181818182] font-light text-secondary mb-30">The Evolving Role of Industrial Doors in Safety</motion.h2>
-              <motion.p variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-description text-paragraph mb-30">Traditionally, doors served a basic function — allowing entry and exit. However, modern facilities demand more complex performance:</motion.p>
-              <ul className="text-description text-paragraph list-disc pl-[1em] py-30">
+              <motion.h2 variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}
+               className="text-55 leading-[1.181818181818182] font-light text-secondary mb-30 tracking-[-0.02em]">The Evolving Role of Industrial Doors in Safety</motion.h2>
+              <motion.p variants={moveUp(0.8)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-description text-paragraph ">Traditionally, doors served a basic function — allowing entry and exit. However, modern facilities demand more complex performance:</motion.p>
+              <ul className="text-description text-paragraph list-disc pl-[1em] py-30 blog-content-ul">
                 <motion.li variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Controlled access to sensitive areas</motion.li>
                 <motion.li variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Protection against fire, smoke, and environmental hazards</motion.li>
                 <motion.li variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>Safe interaction between vehicles, equipment, and personnel</motion.li>
@@ -140,7 +140,7 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   Modern doors incorporate multiple sensing technologies to prevent accidents:
                 </p>
-                <ul className="text-description text-paragraph list-disc pl-[1em] py-30">
+                <ul className="text-description text-paragraph list-disc pl-[1em] py-30 blog-content-ul">
                   <li>Infrared and radar motion detectors</li>
                   <li>Safety light curtains protecting door travel zones</li>
                   <li>Pressure-sensitive safety edges</li>
@@ -157,7 +157,7 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   Fire-rated doors and curtains are critical life-safety components that help:
                 </p>
-                <ul className="text-description text-paragraph list-disc pl-[1em] py-30">
+                <ul className="text-description text-paragraph list-disc pl-[1em] py-30 blog-content-ul">
                   <li>Compartmentalize fire zones</li>
                   <li>Slow flame and smoke spread</li>
                   <li>Protect evacuation routes</li>
@@ -169,10 +169,10 @@ const BlogContent = () => {
               </motion.div>
               <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="flex gap-30 w-full pt-30 pb-40">
                 <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
-                  <Image src="/assets/images/blog/blog-1/blg-gallery-1.jpg" alt="Blog 1" width={400} height={300} className="w-full h-auto" />
+                  <Image src="/assets/images/blog/blog-1/blg-gallery-1.jpg" alt="Blog 1" width={400} height={300} className="w-full h-auto lg:min-h-[300px] xl:min-h-[400px] 3xl:min-h-[495px]" />
                 </motion.div>
                 <motion.div variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
-                  <Image src="/assets/images/blog/blog-1/blg-gallery-2.jpg" alt="Blog 2" width={400} height={300} className="w-full h-auto" />
+                  <Image src="/assets/images/blog/blog-1/blg-gallery-2.jpg" alt="Blog 2" width={400} height={300} className="w-full h-auto lg:min-h-[300px] xl:min-h-[400px] 3xl:min-h-[495px]" />
                 </motion.div>
               </motion.div>
               <motion.div variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
@@ -182,7 +182,7 @@ const BlogContent = () => {
                 <p className="text-description text-paragraph">
                   Fire-rated doors and curtains are critical life-safety components that help:
                 </p>
-                <ul className="text-description text-paragraph list-disc pl-[1em] py-30">
+                <ul className="text-description text-paragraph list-disc pl-[1em] py-30 blog-content-ul">
                   <li>Compartmentalize fire zones</li>
                   <li>Slow flame and smoke spread</li>
                   <li>Protect evacuation routes</li>

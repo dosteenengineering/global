@@ -14,6 +14,7 @@ interface InnerPageBannerProps {
   image?: string;
   imageAlt?: string;
   publishedDate?: string;
+  bannerImgHeight?: string;
 }
 
 export default function InnerPageBanner({
@@ -24,6 +25,7 @@ export default function InnerPageBanner({
   image,
   imageAlt = "Banner image",
   publishedDate,
+  bannerImgHeight = "h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px]",
 }: InnerPageBannerProps) {
   const { ref, parallaxY } = useParallax(10);
   return (
@@ -60,9 +62,7 @@ export default function InnerPageBanner({
 
       {publishedDate && (
         <div className="container pt-50 3xl:pt-[65px]">
-          <h4
-            className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`}
-          >
+          <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`} >
             Published &nbsp;&nbsp;
             <span className="font-bold">{publishedDate}</span>
           </h4>
@@ -70,20 +70,8 @@ export default function InnerPageBanner({
       )}
       {/* 3. Image */}
       {image && (
-        <div
-          ref={ref}
-          className="relative w-full h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px] overflow-hidden"
-        >
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            className="object-cover object-center-top lg:object-top-left"
-            style={{
-              transform: `scale(${1}) translateY(${parallaxY}vh)`,
-            }}
-            priority
-          />
+        <div ref={ref} className={`relative w-full ${bannerImgHeight} overflow-hidden`}>
+          <Image src={image} alt={imageAlt} fill className="object-cover object-center-top lg:object-top-left" style={{ transform: `scale(${1}) translateY(${parallaxY}vh)`, }} priority />
         </div>
       )}
     </div>

@@ -64,8 +64,8 @@ export default function BorderButton({
         iconClass;
 
   const textHoverClass =
-    hoverBg === "white" && hovered ? "text-[#161616]" :
-      hoverBg === "black" && hovered ? "text-white" : "";
+    hoverBg === "white" && hovered ? "!text-[#161616]" :
+      hoverBg === "black" && hovered ? "!text-white" : "";
 
   const renderedIcon = icon ? (
     <span className={`relative z-10 text-primary transition-colors duration-300 ${textHoverClass}`}>

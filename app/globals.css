@@ -609,3 +609,9 @@ input:-webkit-autofill:active {
 }
 
 
+.blog-content-ul li::marker{
+    font-size: 13px!important;
+}
+.blog-content-ul{
+    @apply ml-[10px];
+}
