@@ -576,7 +576,7 @@ const Footer = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ amount: 0.1, once: true }}
-          className="flex flex-col justify-between"
+          className="flex flex-col justify-between max-2xl:max-w-[450px]"
         >
           <div
             style={{ paddingRight: leftPadding }}
