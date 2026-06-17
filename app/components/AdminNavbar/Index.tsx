@@ -116,27 +116,27 @@ const AdminNavbar = () => {
         )),
       ]
     },
-    { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
-    { name: "AI Technology", href: "/admin/ai-technology", icon: FaRobot },
-    {
-      name: "Current Openings", href: "####", icon: BriefcaseIcon, hasChild: true, children: [
-        { name: "Main Page", href: "/admin/current-openings" },
-        { name: "Enquiries", href: "/admin/current-openings/enquiries" }
-      ]
-    },
+    { name: "Become a Partner", href: "/admin/become-a-partner", icon: GroupIcon },
+    // { name: "AI Technology", href: "/admin/ai-technology", icon: FaRobot },
+    // {
+    //   name: "Current Openings", href: "####", icon: BriefcaseIcon, hasChild: true, children: [
+    //     { name: "Main Page", href: "/admin/current-openings" },
+    //     { name: "Enquiries", href: "/admin/current-openings/enquiries" }
+    //   ]
+    // },
     {
       name: "Contact", href: "###", icon: PhoneIcon, hasChild: true, children: [
         { name: "Main Page", href: "/admin/contact" },
         { name: "Enquiries", href: "/admin/contact/enquiries" }
       ]
     },
-    {
-      name: "Layout", href: "##", icon: LayoutIcon, hasChild: true, children: [
-        { name: "Navbar", href: "/admin/navbar" },
-        { name: "Footer", href: "/admin/footer" },
-        { name: "Social Media", href: "/admin/social-media" },
-      ]
-    },
+    // {
+    //   name: "Layout", href: "##", icon: LayoutIcon, hasChild: true, children: [
+    //     { name: "Navbar", href: "/admin/navbar" },
+    //     { name: "Footer", href: "/admin/footer" },
+    //     { name: "Social Media", href: "/admin/social-media" },
+    //   ]
+    // },
     // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
