@@ -6,7 +6,7 @@ export const blogs = [
   {
     id: 1,
     title: "How Advanced Door Solutions Improve Facility Safety.",
-    date: "2026-02-22",
+    date: "22-02-2026",
     desc: "Explore how advanced industrial door systems enhance safety, security, and operational efficiency across modern facilities.",
     img: "/assets/images/blog/blog-dummy-img.jpg",
     link: "/blogs/how-advanced-door-solutions-improve-facility-safety",
@@ -20,7 +20,7 @@ export const blogs = [
   {
     id: 2,
     title: "Transforming Efficiency in Modern Warehousing.",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Learn how innovative warehousing infrastructure and automation improve logistics performance and productivity.",
     img: "/assets/images/blog/blog-thumb-1.jpg",
     link: "/blogs/transforming-efficiency-in-modern-warehousing",
@@ -34,7 +34,7 @@ export const blogs = [
   {
     id: 3,
     title: "Why Fire & Smoke Curtains Are Critical For Today’s Building Safety Standards",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Understand the importance of fire and smoke curtain systems in meeting modern building safety requirements.",
     img: "/assets/images/blog/blog-thumb-2.jpg",
     link: "/blogs/why-fire-smoke-curtains-are-critical-for-todays-building-safety-standards",
@@ -48,7 +48,7 @@ export const blogs = [
   {
     id: 4,
     title: "The Backbone of Seamless Logistics Operations",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Discover the infrastructure and systems that support efficient logistics and supply chain operations.",
     img: "/assets/images/blog/blog-thumb-3.jpg",
     link: "/blogs/the-backbone-of-seamless-logistics-operations",
@@ -62,7 +62,7 @@ export const blogs = [
   {
     id: 5,
     title: "Integrating Safety, Automation & Access Solutions",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "See how combining safety, automation, and access technologies creates smarter facilities.",
     img: "/assets/images/blog/blog-thumb-4.jpg",
     link: "/blogs/integrating-safety-automation-access-solutions",
@@ -76,7 +76,7 @@ export const blogs = [
   {
     id: 6,
     title: "How Advanced Door Solutions Improve Facility Safety.",
-    date: "2026-02-22",
+    date: "22-02-2025",
     desc: "Explore how advanced industrial door systems enhance safety, security, and operational efficiency across modern facilities.",
     img: "/assets/images/blog/blog-dummy-img.jpg",
     link: "/blogs/how-advanced-door-solutions-improve-facility-safety",
@@ -90,7 +90,7 @@ export const blogs = [
   {
     id: 7,
     title: "Transforming Efficiency in Modern Warehousing.",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Learn how innovative warehousing infrastructure and automation improve logistics performance and productivity.",
     img: "/assets/images/blog/blog-thumb-1.jpg",
     link: "/blogs/transforming-efficiency-in-modern-warehousing",
@@ -104,7 +104,7 @@ export const blogs = [
   {
     id: 8,
     title: "Why Fire & Smoke Curtains Are Critical For Today’s Building Safety Standards",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Understand the importance of fire and smoke curtain systems in meeting modern building safety requirements.",
     img: "/assets/images/blog/blog-thumb-2.jpg",
     link: "/blogs/why-fire-smoke-curtains-are-critical-for-todays-building-safety-standards",
@@ -118,7 +118,7 @@ export const blogs = [
   {
     id: 9,
     title: "The Backbone of Seamless Logistics Operations",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "Discover the infrastructure and systems that support efficient logistics and supply chain operations.",
     img: "/assets/images/blog/blog-thumb-3.jpg",
     link: "/blogs/the-backbone-of-seamless-logistics-operations",
@@ -132,7 +132,7 @@ export const blogs = [
   {
     id: 10,
     title: "Integrating Safety, Automation & Access Solutions",
-    date: "2025-02-22",
+    date: "22-02-2025",
     desc: "See how combining safety, automation, and access technologies creates smarter facilities.",
     img: "/assets/images/blog/blog-thumb-4.jpg",
     link: "/blogs/integrating-safety-automation-access-solutions",
