@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useLenis } from "@/app/components/LenisProvider";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Pagination({
   currentPage,
@@ -12,20 +12,24 @@ export default function Pagination({
   totalPages: number;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { scrollTo } = useLenis();
 
-  const handlePrev = () => {
+  const goToPage = (page: number) => {
     scrollTo(document.documentElement, { duration: 1.5, offset: 0 });
     setTimeout(() => {
-      router.push(`?page=${currentPage - 1}`);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", String(page));
+      router.push(`?${params.toString()}`);
     }, 1000);
   };
 
+  const handlePrev = () => {
+    goToPage(currentPage - 1);
+  };
+
   const handleNext = () => {
-    scrollTo(document.documentElement, { duration: 1.5, offset: 0 });
-    setTimeout(() => {
-      router.push(`?page=${currentPage + 1}`);
-    }, 1000);
+    goToPage(currentPage + 1);
   };
 
   return (
