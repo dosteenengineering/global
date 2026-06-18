@@ -1,3 +1,22 @@
+export interface GalleryData {
+  metaTitle: string;
+  metaDescription: string;
+  firstSection: {
+    title: string;
+  };
+  secondSection: {
+    items: GalleryItem[];
+  };
+}
+
+export interface GalleryItem {
+  title: string;
+  image: string;
+  imageAlt: string;
+  date: string; // YYYY-MM-DD
+}
+
+
 export const galleryData = {
   items: [
     {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { partnersData } from "../data";
+import { ClientPageData } from "../data";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 
 import "swiper/css";
@@ -17,7 +17,7 @@ import { moveUp } from "@/app/components/motionVariants";
 
 const AUTOPLAY_DELAY = 3500;
 
-const Partners = () => {
+const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const leftInset = useGetContainerSpacing(containerRef);
   const swiperRef = useRef<SwiperClass | null>(null);
@@ -26,7 +26,11 @@ const Partners = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { title, subtitle, description, slides } = partnersData;
+  // const { title, subtitle, description, slides } = partnersData;
+  const title = data.title
+  const subtitle = data.subTitle
+  const description = data.description
+  const slides = data.items
 
   const getSlidesPerView = useCallback(() => {
     const swiper = swiperRef.current;
@@ -102,7 +106,7 @@ const Partners = () => {
         {slides.map((slide, index) => { 
           const isActive = index === activeIndex; const isLast = index === slides.length - 1;
           return (
-            <SwiperSlide key={slide.id}>
+            <SwiperSlide key={index}>
               <motion.div 
                 variants={moveUp(index * 0.12)} 
                 initial="hidden"
@@ -119,7 +123,7 @@ const Partners = () => {
                 <div className="absolute 3xl:top-[-31px] inset-0 flex md:items-center justify-center">
                   <div className="relative mt-[27px] md:mt-0 flex flex-col items-center">
                     <div className={`relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px] transition-transform duration-700 ease-out will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
-                      <Image src={slide.logo} alt={slide.logoAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
+                      <Image src={slide.image} alt={slide.imageAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
                     </div>
                     <p className={`absolute top-full mt-0 text-description text-white transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]
                     ${isActive
@@ -140,7 +144,7 @@ const Partners = () => {
                         : "text-paragraph border-[#c2c2c2]"
                       }`}
                   >
-                    {slide.country}
+                    {slide.location}
                   </p>
                 </div>
               </motion.div>

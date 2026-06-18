@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { galleryData } from "../data";
+import { GalleryData, galleryData } from "../data";
 import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
 import { moveUpV2 } from "@/app/components/motionVariants";
 
@@ -19,8 +19,8 @@ function buildRows(items: typeof galleryData.items) {
   return rows;
 }
 
-export default function Main() {
-  const { items } = galleryData;
+export default function Main({data}:{data:GalleryData['secondSection']}) {
+  const items = data.items;
   const rows = buildRows(items);
 
   return (
@@ -90,7 +90,11 @@ function GalleryCard({ item, isOdd }: { item: GalleryItem; isOdd: boolean }) {
         <span className="text-30 font-light tracking-[-0.02em] text-secondary leading-[1.33]">
           {item.title}
         </span>
-        <span className="text-description text-paragraph">{item.date}</span>
+        <span className="text-description text-paragraph">{new Date(item.date).toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }).replace(/\//g, '-')}</span>
       </div>
     </div>
   );
