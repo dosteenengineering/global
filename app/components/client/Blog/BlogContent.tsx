@@ -7,6 +7,7 @@ import BlogLatest from "./sections/BlogLatest";
 import BlogList from "./sections/BlogList";
 import { motion } from "framer-motion";
 import { moveUp } from "../../motionVariants";
+import { BlogItem } from "./data";
 
 const STICKY_TOP = 120;
 const DESKTOP_BREAKPOINT = 768;
@@ -27,7 +28,7 @@ interface Blog {
 }
 
 interface BlogContentProps {
-  data: Blog[];
+  data: BlogItem[];
 }
 
 const BlogContent = ({ data }: BlogContentProps) => {
@@ -38,16 +39,16 @@ const BlogContent = ({ data }: BlogContentProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const categories = ["All", ...new Set(data.map((blog) => blog.category))];
+  const categories = ["All", ...new Set(data.map((blog) => blog.category.name))];
   const filteredBlogs =
     selectedCategory === "All"
       ? data
-      : data.filter((blog) => blog.category === selectedCategory);
+      : data.filter((blog) => blog.category.name === selectedCategory);
   const latestBlog = [...filteredBlogs].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )[0];
   const listBlogs = latestBlog
-    ? filteredBlogs.filter((blog) => blog.id !== latestBlog.id)
+    ? filteredBlogs.filter((blog) => blog.title !== latestBlog.title)
     : [];
 
   const handleCategoryChange = (category: string) => {

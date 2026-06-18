@@ -51,6 +51,14 @@ const projectItemSchema = new mongoose.Schema(
             description: { type: String, required: true },
         },
 
+        scopeSection: {
+            items: [
+                {
+                    title: { type: String, required: true },
+                },
+            ],
+        },
+
         images: [{ type: String }],
 
         slug: {

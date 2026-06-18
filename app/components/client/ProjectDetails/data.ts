@@ -29,6 +29,89 @@ export interface Project {
   };
 }
 
+
+export interface ProjectItemProps {
+    _id?: string;
+
+    firstSection: {
+        title: string;
+        sector: {name:string};
+        location: {name:string};
+        status: string;
+        client: string;
+        consultant: string;
+        contractor: string;
+        coverImage: string;
+        coverImageAlt: string;
+    };
+
+    secondSection: {
+        title: string;
+        description: string;
+    };
+
+    thirdSection: {
+        title: string;
+        description: string;
+        items: {
+            image: string;
+            imageAlt?: string;
+        }[];
+    };
+
+    fourthSection: {
+        title: string;
+        items: {
+            title: string;
+            description: string;
+        }[];
+    };
+
+    fifthSection: {
+        title: string;
+        description: string;
+    };
+
+    scopeSection: {
+        items: {
+            title: string;
+        }[];
+    };
+
+    images: string[];
+
+    slug: string;
+
+    thumbnail: string;
+    thumbnailAlt: string;
+
+    metaTitle?: string;
+    metaDescription?: string;
+}
+
+
+export interface AllProjectData {
+    _id: string;
+    bannerSection: {
+        image: string;
+        imageAlt?: string;
+        title: string;
+    };
+    lastSection: {
+        title: string;
+        description: string;
+        items: {
+            _id: string;
+            buttonText: string;
+            buttonLink: string;
+        }[];
+    };
+    projects: ProjectItemProps[];
+    metaTitle?: string;
+    metaDescription?: string;
+    updatedAt?: string;
+}
+
 export const projects: Project[] = [
   {
     title: "EXPO 2020, DUBAI",

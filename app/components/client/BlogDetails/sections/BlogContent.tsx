@@ -4,11 +4,12 @@ import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useRef } from "react";
+import {BlogItem } from "../../Blog/data";
 
 const STICKY_TOP = 120;
 const DESKTOP_BREAKPOINT = 1024;
 
-const BlogContent = () => {
+const BlogContent = ({ data }: {data:BlogItem}) => {
   const sectionRef = useRef<HTMLElement>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -88,7 +89,11 @@ const BlogContent = () => {
             <div ref={panelRef} className="pb-200">
               <div className="border-y border-bdr-gray pt-[12px] pb-30">
                 <h4 className="text-description text-paragraph">Published</h4>
-                <h5 className="text-description text-paragraph !font-bold">22-02-2025</h5>
+                <h5 className="text-description text-paragraph !font-bold">{new Date(data.date).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric'
+                }).replace(/\//g, '-')}</h5>
               </div>
               <div className="pt-[12px]">
                 <h4 className="text-description text-paragraph !font-bold pb-[12px]">Share</h4>
@@ -106,8 +111,8 @@ const BlogContent = () => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="border-b border-bdr-gray pb-60">
+          <div dangerouslySetInnerHTML={{ __html: data.content }}>
+            {/* <div className="border-b border-bdr-gray pb-60">
               <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-30 leading-[1.333333333333333] font-light mb-40">
                 In today’s fast-paced industrial and commercial environments, facility safety is no longer limited to alarms, cameras, or access control systems. Physical infrastructure — particularly industrial door solutions — plays a crucial role in protecting people, assets, and operations.
               </motion.p>
@@ -192,7 +197,7 @@ const BlogContent = () => {
                   Automated closure triggered by fire alarm systems ensures immediate response even without human intervention, improving survival and damage control outcomes.
                 </p>
               </motion.div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

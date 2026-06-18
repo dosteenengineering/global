@@ -7,7 +7,7 @@ import { SectionDescription } from "./animations/SectionDescription";
 import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
 
-export default function CtaSection({title, titleWidth, description, descriptionWidth, buttons}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, buttons: {text: string, href: string}[]}) {
+export default function CtaSection({title, titleWidth, description, descriptionWidth, items}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, items: {buttonText: string, buttonLink: string}[]}) {
   return (
     <section className="relative w-full select-none overflow-hidden">
       <PrimaryNoise2 />
@@ -35,10 +35,10 @@ export default function CtaSection({title, titleWidth, description, descriptionW
           <SectionDescription text={description} className={`max-w-[70ch] text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
-          {buttons.map((btn,index) => (
+          {items.map((btn,index) => (
             <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" key={index}
             viewport={{once:true, amount:0.4}}>
-            <BorderButton key={btn.text} text={btn.text} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.href} hoverBg="white" className="w-fit" />
+            <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.buttonLink} hoverBg="white" className="w-fit" />
             </motion.div>
           ))}
         </div>

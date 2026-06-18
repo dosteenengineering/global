@@ -84,7 +84,7 @@ const AdminNavbar = () => {
     {
       name: "Services", href: "#", icon: EnvelopeIcon, hasChild: true, children: [
         { name: "Main Page", href: "/admin/services" },
-        ...serviceData.map((service: { _id: string, thumbnailTitle: string }) => (
+        ...serviceData.map((service: { _id: string, title: string }) => (
           { name: service.title.split(" ").slice(0, 2).join(" ") + "...", href: `/admin/services/${service._id}` }
         )),
       ]
@@ -111,7 +111,7 @@ const AdminNavbar = () => {
     {
       name: "Resources", href: "#####", icon: MdAppRegistration, hasChild: true, children: [
         { name: "Main Page", href: "/admin/resources" },
-        ...secondSectionData.map((service: { _id: string, thumbnailTitle: string }) => (
+        ...secondSectionData.map((service: { _id: string, title: string }) => (
           { name: service.title.split(" ").slice(0, 2).join(" ") + "...", href: `/admin/resources/${service._id}` }
         )),
       ]

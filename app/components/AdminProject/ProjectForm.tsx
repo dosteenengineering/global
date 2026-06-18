@@ -31,60 +31,66 @@ import { statusData } from './statusData'
 
 
 interface ProjectFormProps {
-  bannerSection: {
-    image: string;
-    imageAlt: string;
-  };
+    bannerSection: {
+        image: string;
+        imageAlt: string;
+    };
 
-  firstSection: {
-    title: string;
-    description: string;
-    sector: string;
-    location: string;
-    status: string;
-    client: string;
-    consultant: string;
-    contractor: string;
-    coverImage: string;
-    coverImageAlt: string;
-  };
+    firstSection: {
+        title: string;
+        description: string;
+        sector: string;
+        location: string;
+        status: string;
+        client: string;
+        consultant: string;
+        contractor: string;
+        coverImage: string;
+        coverImageAlt: string;
+    };
 
-  secondSection: {
-    title: string;
-    description: string;
-  };
+    secondSection: {
+        title: string;
+        description: string;
+    };
 
-  thirdSection: {
-    title: string;
-    description: string;
-    items: {
-      image: string;
-      imageAlt: string;
-    }[];
-  };
+    thirdSection: {
+        title: string;
+        description: string;
+        items: {
+            image: string;
+            imageAlt: string;
+        }[];
+    };
 
-  fourthSection: {
-    title: string;
-    items: {
-      title: string;
-      description: string;
-    }[];
-  };
+    fourthSection: {
+        title: string;
+        items: {
+            title: string;
+            description: string;
+        }[];
+    };
 
-  fifthSection: {
-    title: string;
-    description: string;
-  };
+    scopeSection: {
+        items: {
+            title: string;
+        }[];
+    };
 
-  images: string[];
+    fifthSection: {
+        title: string;
+        description: string;
+    };
 
-  slug: string;
+    images: string[];
 
-  thumbnail: string;
-  thumbnailAlt: string;
+    slug: string;
 
-  metaTitle: string;
-  metaDescription: string;
+    thumbnail: string;
+    thumbnailAlt: string;
+
+    metaTitle: string;
+    metaDescription: string;
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -107,6 +113,11 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
     const { fields: fourthSectionItems, append: fourthSectionAppend, remove: fourthSectionRemove } = useFieldArray({
         control,
         name: "fourthSection.items"
+    });
+
+    const { fields: scopeItems, append: scopeSectionAppend, remove: scopeSectionRemove } = useFieldArray({
+        control,
+        name: "scopeSection.items"
     });
 
 
@@ -143,6 +154,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("fourthSection", data.data.fourthSection);
                 setValue("fourthSection.items", data.data.fourthSection.items);
                 setValue("fifthSection", data.data.fifthSection);
+                setValue("scopeSection.items", data.data.scopeSection.items);
                 setValue("thumbnail", data.data.thumbnail);
                 setValue("thumbnailAlt", data.data.thumbnailAlt);
                 setValue("metaTitle", data.data.metaTitle);
@@ -572,10 +584,10 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                                         <div className='flex flex-col gap-2'>
                                             <div className='flex flex-col gap-2'>
                                                 <Label className=' font-bold'>Title</Label>
-                                                <Input type='text' placeholder='Title' {...register(`fourthSection.items.${index}.title`,{required:"Title is required"})} />
+                                                <Input type='text' placeholder='Title' {...register(`fourthSection.items.${index}.title`, { required: "Title is required" })} />
                                                 {errors.fourthSection?.items?.[index]?.title && (
-                                                <p className="text-red-500">{errors.fourthSection?.items?.[index]?.title.message}</p>
-                                            )}
+                                                    <p className="text-red-500">{errors.fourthSection?.items?.[index]?.title.message}</p>
+                                                )}
                                             </div>
                                         </div>
 
@@ -615,6 +627,44 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                             <Textarea placeholder='Description' {...register("fifthSection.description", { required: "Description is required" })} />
                             {errors.fifthSection?.description && <p className='text-red-500'>{errors.fifthSection.description.message}</p>}
                         </div>
+                    </div>
+                </AdminItemContainer>
+
+
+                <AdminItemContainer>
+                    <Label className='' main>Scope Section</Label>
+                    <div className='p-5 flex flex-col gap-2'>
+                        <div className='flex flex-col gap-2'>
+                            <Label className=' font-bold'>Items</Label>
+                            <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
+
+
+                                {scopeItems.map((field, index) => (
+                                    <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20  pb-5'>
+                                        <div className='absolute top-2 right-2'>
+                                            <RiDeleteBinLine onClick={() => scopeSectionRemove(index)} className='cursor-pointer text-red-600' />
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className=' font-bold'>Title</Label>
+                                                <Input type='text' placeholder='Title' {...register(`scopeSection.items.${index}.title`, { required: "Title is required" })} />
+                                                {errors.scopeSection?.items?.[index]?.title && (
+                                                    <p className="text-red-500">{errors.scopeSection?.items?.[index]?.title.message}</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+
+                                <div className='flex justify-end'>
+                                    <Button type='button' className="" addItem onClick={() => scopeSectionAppend({ title: "" })}>Add Item</Button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </AdminItemContainer>
 
