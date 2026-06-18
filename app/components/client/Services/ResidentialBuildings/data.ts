@@ -92,6 +92,12 @@ export const CtaData = {
       href: "/contact-us#contact-form",
     },
   ],
+  items: [
+    {
+      buttonText: "Discuss your project",
+      buttonLink: "/contact-us#contact-form",
+    },
+  ],
 };
 
 export const whyTrustData = {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-import { ProjectItemProps } from "../data";
+import { AllProjectData, ProjectItemProps } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import ProjectCard from "@/app/components/common/ProjectCard";
 import { motion } from "framer-motion";
@@ -14,7 +14,7 @@ import NavButton from "@/app/components/common/NavigationButton";
 import { Project } from "../../Projects/data";
 
 
-export default function RelatedProjects({data}:{data:any}) {
+export default function RelatedProjects({data}:{data:AllProjectData}) {
   console.log(data)
   const title = "Related Case Studies";
   const projects = data.projects;

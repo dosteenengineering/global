@@ -9,8 +9,8 @@ export default function GridCard({ project }: { project: Project }) {
       {/* Image */}
       <div className="relative w-full aspect-4/4 max-h-[540px] overflow-hidden mb-30 3xl:mb-[32px]">
         <Image
-          src={project.image}
-          alt={project.title}
+          src={project.thumbnail}
+          alt={project.thumbnailAlt}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -30,7 +30,7 @@ export default function GridCard({ project }: { project: Project }) {
 
       {/* Title */}
       <h3 className="text-secondary text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[15px]">
-        {project.title}
+        {project.firstSection.title}
       </h3>
 
       {/* Location + Category */}
@@ -43,10 +43,10 @@ export default function GridCard({ project }: { project: Project }) {
             height={20}
             className="object-contain w-[11px] h-[14px] -mt-1"
           />
-          {project.location}
+          {project.firstSection.location.name}
         </div>
         <span className="text-description text-paragraph">
-          {project.category}
+          {project.firstSection.sector.name}
         </span>
       </div>
 
