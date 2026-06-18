@@ -27,9 +27,9 @@ interface GuidesArticlesProps {
 }
 
 const imageHeightClasses = [
-  "3xl:h-[579px]",
-  "3xl:h-[458px]",
-  "3xl:h-[336.88px]",
+  "xl:h-[350px] 2xl:h-[450px] 3xl:h-[579px]",
+  "xl:h-[250px] 2xl:h-[350px] 3xl:h-[458px]",
+  "xl:h-[200px] 2xl:h-[250px] 3xl:h-[336.88px]",
 ];
 
 const GuidesArticles = ({ data }: { data: AllBlogData }) => {

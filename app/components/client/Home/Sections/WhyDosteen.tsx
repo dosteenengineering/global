@@ -349,7 +349,7 @@ export default function WhyDosteen() {
                     left: getLeft(offset, n, circleSm),
                     opacity: isVisible ? 1 : 0,
                     zIndex: isActive ? 3 : isNext ? 2 : 1,
-                    backdropFilter: "blur(7px)",
+                    backdropFilter: "blur(15px)",
                     transition: BEZIER,
                   }}
                 >
@@ -372,7 +372,7 @@ export default function WhyDosteen() {
                       transition: BEZIER,
                     }}
                   />
-                  <div className="relative w-full h-full rounded-full flex flex-col items-center justify-center">
+                  <div className="relative w-full h-full rounded-full flex flex-col items-center justify-center ">
                     {/* Icon — width/height/marginBottom all interpolated */}
                     <div
                       className="relative flex items-center justify-center shrink-0 pointer-events-none"
