@@ -194,6 +194,16 @@ export const CtaData = {
       href: "/contact-us#contact-form",
     },
   ],
+items: [
+    {
+      buttonText: "REQUEST A QUOTE",
+      buttonLink: "/contact-us#contact-form",
+    },
+    {
+      buttonText: "SPEAK TO OUR TEAM",
+      buttonLink: "/contact-us#contact-form",
+    },
+  ],
 };
 
 export const servingMapData = {

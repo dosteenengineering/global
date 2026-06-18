@@ -2,13 +2,15 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { projectsData, Project } from "../data";
+// import { projectsData, Project } from "../data";
 import ProjectEvenRowCard from "./ProjectEvenRowCard";
 import Pagination from "@/app/components/common/Pagination";
 import Image from "next/image";
 import ProjectCard from "@/app/components/common/ProjectCard";
 import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
 import { moveUpV2 } from "@/app/components/motionVariants";
+import { statusData } from "@/app/components/AdminProject/statusData";
+import { Project } from "../data";
 
 const ITEMS_PER_PAGE = 11;
 const ALL_FILTER = "All";
@@ -98,7 +100,7 @@ function FilterDropdown({
   );
 }
 
-export default function ProjectsListing() {
+export default function ProjectsListing({data}:{data:Project[]}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -115,33 +117,33 @@ export default function ProjectsListing() {
   const categories = useMemo(
     () => [
       ALL_FILTER,
-      ...getUniqueOptions(projectsData.map((project) => project.category)),
+      ...getUniqueOptions(data.map((project) => project.firstSection.sector.name)),
     ],
     [],
   );
   const locations = useMemo(
     () => [
       ALL_FILTER,
-      ...getUniqueOptions(projectsData.map((project) => project.location)),
+      ...getUniqueOptions(data.map((project) => project.firstSection.location.name)),
     ],
     [],
   );
   const statuses = useMemo(
     () => [
       ALL_FILTER,
-      ...getUniqueOptions(projectsData.map((project) => project.status)),
+      ...getUniqueOptions(statusData.map((project) => project.name)),
     ],
     [],
   );
 
   const filteredProjects = useMemo(() => {
-    return projectsData.filter((project) => {
+    return data.filter((project) => {
       const categoryMatches =
-        activeCategory === ALL_FILTER || project.category === activeCategory;
+        activeCategory === ALL_FILTER || project.firstSection.sector.name === activeCategory;
       const locationMatches =
-        activeLocation === ALL_FILTER || project.location === activeLocation;
+        activeLocation === ALL_FILTER || project.firstSection.location.name === activeLocation;
       const statusMatches =
-        activeStatus === ALL_FILTER || project.status === activeStatus;
+        activeStatus === ALL_FILTER || project.firstSection.status === activeStatus;
 
       return categoryMatches && locationMatches && statusMatches;
     });

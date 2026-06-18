@@ -4,16 +4,27 @@ export const banner = {
 };
 
 export interface Project {
-  image: string;
-  title: string;
-  location: string;
-  category: string;
-  status: string;
-  scopes: string[];
+  thumbnail: string;
+  thumbnailAlt: string;
+  firstSection: {
+    title: string;
+    location: {
+      name: string;
+    }
+    sector: {
+      name: string;
+    };
+    status: string;
+  }
+  scopeSection: {
+    items: {
+      title: string;
+    }[]
+  };
   slug: string;
 }
 
-export const projectsData: Project[] = [
+export const projectsData = [
   {
     image: "/assets/images/projects/1.jpg",
     title: "Expo 2020, Dubai",

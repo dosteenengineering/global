@@ -11,7 +11,7 @@ import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import ProjectCard from "@/app/components/common/ProjectCard";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-import NavButton from "@/app/components/common/NavigationButton"; 
+import NavButton from "@/app/components/common/NavigationButton";
 
 interface Project {
   id: number;
@@ -41,7 +41,7 @@ export default function FeaturedProjects() {
     setDotCount(dots);
     setShowDots(dots > 1);
   };
- const updateState = (swiper: SwiperType) => {
+  const updateState = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
     setTotalSlides(swiper.slides.length);
     setSlidesPerView(
@@ -49,19 +49,19 @@ export default function FeaturedProjects() {
         ? swiper.params.slidesPerView
         : 1
     );
-   setIsBeginning(swiper.isBeginning);
-   setIsEnd(swiper.isEnd);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
   };
 
   // Hide nav if all slides fit in view
   const showNav = totalSlides > slidesPerView;
   return (
     <section className="w-full relative py-12.5 md:py-140 3xl:py-150">
-        <PrimaryNoise2 />
+      <PrimaryNoise2 />
       <div className="container">
 
         {/* Title */}
-         <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-bdr-blue pb-5 relative ">
+        <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-bdr-blue pb-5 relative ">
           <SectionTitle title={title} className="section-heading-90 text-white" />
 
           {showNav && (
@@ -98,27 +98,28 @@ export default function FeaturedProjects() {
           )}
         </div>
 
-      <Swiper
-        onSwiper={(swiper) => {
-          swiperRef.current = swiper;
-          updateState(swiper);
-        }}
-        onSlideChange={(swiper) => updateState(swiper)}
-        onBreakpoint={(swiper) => updateState(swiper)}
-        spaceBetween={30}
-        slidesPerView={1}
-        breakpoints={{
-          768:  { slidesPerView: 2 },
-          1400: { slidesPerView: 3 },
-        }}
-        className="w-full"
-      >
-        {projects.map((project, index) => (
-          <SwiperSlide key={project.id}>
-            <ProjectCard project={project} delay={0.2 + index * 0.3} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <Swiper
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            updateState(swiper);
+          }}
+          onSlideChange={(swiper) => updateState(swiper)}
+          onBreakpoint={(swiper) => updateState(swiper)}
+          spaceBetween={30}
+          slidesPerView={1}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1400: { slidesPerView: 3 },
+          }}
+          className="w-full"
+        >
+          {projects.map((project, index) => (
+            <SwiperSlide key={project.id}>
+              {/* @ts-ignore */}
+              <ProjectCard project={project} delay={0.2 + index * 0.3} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
 
         {/* Pagination dots */}
         {showDots && (
@@ -129,9 +130,8 @@ export default function FeaturedProjects() {
                 key={i}
                 onClick={() => swiperRef.current?.slideTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`w-[10px] h-[10px] rounded-full border border-white cursor-pointer transition-all duration-300 ${
-                  i === activeIndex ? "bg-white" : "bg-transparent"
-                }`}
+                className={`w-[10px] h-[10px] rounded-full border border-white cursor-pointer transition-all duration-300 ${i === activeIndex ? "bg-white" : "bg-transparent"
+                  }`}
               />
             ))}
           </div>
@@ -140,4 +140,5 @@ export default function FeaturedProjects() {
       </div>
     </section>
   );
+  
 }

@@ -1,14 +1,14 @@
 import { Suspense } from "react";
 import InnerPageBanner2 from "../../common/InnerPageBanner2";
 import BlogContent from "./BlogContent";
-import { banner, blogs } from "./data";
+import { AllBlogData, banner, blogs } from "./data";
 
-const Index = () => {
+const Index = ({data}:{data:AllBlogData}) => {
   return (
     <>
-      <InnerPageBanner2 {...banner} />
+      <InnerPageBanner2 {...data.bannerSection} />
       <Suspense>
-        <BlogContent data={blogs} />
+        <BlogContent data={data.blogs} />
       </Suspense>
     </>
   );

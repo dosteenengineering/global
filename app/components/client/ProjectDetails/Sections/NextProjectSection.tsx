@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { Project } from "../data";
+import { Project, ProjectItemProps } from "../data";
 import Image from "next/image";
 
 
-export default function NextProjectPanel({ project }: { project: Project }) {
+export default function NextProjectPanel({ project }: { project: ProjectItemProps }) {
   return (
     <Link
-      href={`/projects/${project.title.toLowerCase().replace(" ", "-")}`}
+      href={`/projects/${project.slug}`}
       className="group"
     >
       <div className="relative w-[150px] 3xl:w-[176px] h-[110px] 3xl:h-[128px] overflow-hidden">
         <Image
-          src={project.images[0]}
-          alt={project.title}
+          src={project.thumbnail}
+          alt={project.thumbnailAlt}
           fill
           className="object-cover w-[176px] h-[128px] transition-transform duration-500 group-hover:scale-110"
         />

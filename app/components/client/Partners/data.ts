@@ -131,4 +131,14 @@ export const ctaData = {
       href: "#",
     },
   ],
+  items: [
+    {
+      buttonText: "REQUEST A SPECIFICATION",
+      buttonLink: "/contact-us#contact-form",
+    },
+    {
+      buttonText: "DOWNLOAD ALL SPECS",
+      buttonLink: "#",
+    },
+  ],
 };

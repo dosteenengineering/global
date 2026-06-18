@@ -5,24 +5,19 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-import { featuredProjectsData } from "../data";
+import { AllProjectData, ProjectItemProps } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import ProjectCard from "@/app/components/common/ProjectCard";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import NavButton from "@/app/components/common/NavigationButton";
+import { Project } from "../../Projects/data";
 
-interface Project {
-  id: number;
-  title: string;
-  location: string;
-  category: string;
-  image: string;
-  slug: string;
-}
 
-export default function RelatedProjects() {
-  const { title, projects } = featuredProjectsData;
+export default function RelatedProjects({data}:{data:AllProjectData}) {
+  console.log(data)
+  const title = "Related Case Studies";
+  const projects = data.projects;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dotCount, setDotCount] = useState(0);
@@ -106,7 +101,7 @@ const updateDots = (swiper: SwiperType) => {
           className="w-full"
         >
           {projects.map((project, index) => (
-            <SwiperSlide key={project.id}>
+            <SwiperSlide key={index}>
               <ProjectCard project={project} variant="dark" delay={index * 0.12} />
             </SwiperSlide>
           ))}

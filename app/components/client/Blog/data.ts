@@ -1,3 +1,34 @@
+export interface BlogItem {
+    _id: string;
+    title: string;
+    thumbnail: string;
+    thumbnailAlt: string;
+    coverImage?: string;
+    coverImageAlt?: string;
+    content: string;
+    category: {
+        _id: string;
+        name: string;
+    };
+    date: string;
+    slug: string;
+    metaTitle?: string;
+    metaDescription?: string;
+}
+
+export interface AllBlogData {
+    _id: string;
+    bannerSection: {
+        image: string;
+        imageAlt?: string;
+        title: string;
+    };
+    blogs: BlogItem[];
+    metaTitle?: string;
+    metaDescription?: string;
+}
+
+
 export const banner = {
   title: "BLOGS",
   image: "/assets/images/projects/banner.jpg",

@@ -302,6 +302,16 @@ export const ctaData = {
       href: "#",
     },
   ],
+  items: [
+    {
+      buttonText: "REQUEST A BIM PROPOSAL",
+      buttonLink: "#",
+    },
+    {
+      buttonText: "SPEAK TO OUR TEAM",
+      buttonLink: "#",
+    },
+  ],
 };
 
 

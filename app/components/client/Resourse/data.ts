@@ -409,4 +409,14 @@ export const ctaData = {
       href: "#",
     },
   ],
+   items: [
+    {
+      buttonText: "Contact technical team",
+      buttonLink: "#",
+    },
+    {
+      buttonText: "Request a custom pack",
+      buttonLink: "#",
+    },
+  ],
 };

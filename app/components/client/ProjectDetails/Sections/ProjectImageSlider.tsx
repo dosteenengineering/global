@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { useRef } from "react";
 import type { Swiper as SwiperType } from "swiper";
-import type { Project } from "../data";
+import type { Project, ProjectItemProps } from "../data";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -12,7 +12,7 @@ import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-export default function ProjectImageSlider({ project }: { project: Project }) {
+export default function ProjectImageSlider({ project }: { project: ProjectItemProps }) {
 
   const swiperRef = useRef<SwiperType | null>(null);
 
@@ -33,7 +33,7 @@ export default function ProjectImageSlider({ project }: { project: Project }) {
           <SwiperSlide key={i}>
             <img
               src={src}
-              alt={i === 0 ? project.title : `${project.title} image ${i + 1}`}
+              alt={i === 0 ? project.firstSection.title : `${project.firstSection.title} image ${i + 1}`}
               className="w-full h-full object-cover"
               draggable={false}
             />

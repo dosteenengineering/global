@@ -64,7 +64,11 @@ export default function InnerPageBanner({
         <div className="container pt-50 3xl:pt-[65px]">
           <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`} >
             Published &nbsp;&nbsp;
-            <span className="font-bold">{publishedDate}</span>
+            <span className="font-bold">{new Date(publishedDate).toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }).replace(/\//g, '-')}</span>
           </h4>
         </div>
       )}

@@ -4,14 +4,14 @@ import ProjectsListing from "./Sections/ProjectsListing";
 import { Suspense } from "react";
 import CtaSection from "../../common/CtaSection";
 
-const Index = () => {
+const Index = ({data}:any) => {
   return (
     <>
-      <InnerPageBanner2 {...banner} />
+      <InnerPageBanner2 {...data.bannerSection} />
       <Suspense fallback={<div className="h-screen bg-whtie" />}>
-        <ProjectsListing />
+        <ProjectsListing data={[...data.projects]}/>
       </Suspense>
-      <CtaSection {...cta} titleWidth="max-w-[22ch]" />
+      <CtaSection {...data.lastSection} titleWidth="max-w-[22ch]" />
     </>
   );
 };
