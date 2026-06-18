@@ -6,11 +6,25 @@ import { SectionDescription } from "@/app/components/common/animations/SectionDe
 import { motion } from "framer-motion";
 import { fadeIn, moveUp, zoomIn } from "@/app/components/motionVariants";
 
+
+interface ValuedClientsData {
+  title: string;
+  description: string;
+  footnote: string;
+  regions: {
+    label: string;
+    logos: {
+      src: string;
+      alt: string;
+    }[];
+  }[];
+}
+
 const LOGO_STAGGER_COLUMNS = 6;
 const LOGO_STAGGER_STEP = 0.08;
 
-export default function ValuedClients() {
-  const { title, description, footnote, regions } = valuedClientsData;
+export default function ValuedClients({data}:{data:ValuedClientsData}) {
+  const { title, description, footnote, regions } = data;
 
   return (
     <section className="py-140 3xl:py-200 relative overflow-hidden">

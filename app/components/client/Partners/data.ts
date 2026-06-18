@@ -1,3 +1,62 @@
+export interface ClientPageData {
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+  };
+
+  thirdSection: {
+    title: string;
+    subTitle: string;
+    description: string;
+    items: ThirdSectionItem[];
+  };
+
+  fourthSection: {
+    title: string;
+    firstDescription: string;
+    secondDescription: string;
+    items: FourthSectionItem[];
+  };
+
+  lastSection: {
+    title: string;
+    description: string;
+    items: LastSectionItem[];
+  };
+}
+
+export interface ThirdSectionItem {
+  image: string;
+  imageAlt: string;
+  title: string;
+  location: string;
+}
+
+export interface FourthSectionItem {
+  title: string;
+  subItems: FourthSectionSubItem[];
+}
+
+export interface FourthSectionSubItem {
+  image: string;
+  imageAlt: string;
+}
+
+export interface LastSectionItem {
+  buttonText: string;
+  buttonLink: string;
+}
+
 export const banner = {
   title: "Trusted by UAE & Oman's Leading Developers, Contractors & MEP Consultants",
   description: "25+ years partnering with main contractors, developers, PMOs, and facility managers on 20,000+ projects across Dubai, Abu Dhabi, Muscat, and beyond.",

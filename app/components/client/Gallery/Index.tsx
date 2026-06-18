@@ -1,11 +1,12 @@
 import InnerPageBanner from "../../common/InnerPageBanner";
+import { GalleryData } from "./data";
 import Main from "./Sections/Main";
 
-const Index = () => {
+const Index = ({data}:{data:GalleryData}) => {
   return (
     <>
-      <InnerPageBanner title="Gallery" />
-      <Main />
+      <InnerPageBanner title={data.firstSection.title} />
+      <Main data={data.secondSection}/>
     </>
   );
 };

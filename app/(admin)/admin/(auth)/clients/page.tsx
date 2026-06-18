@@ -166,6 +166,7 @@ const ClientPage = () => {
                 setValue("firstSection", data.data.firstSection);
                 setValue("secondSection", data.data.secondSection);
                 setValue("thirdSection", data.data.thirdSection);
+                setValue("thirdSection.items", data.data.thirdSection.items);
                 setValue("fourthSection", data.data.fourthSection);
                 setValue("fourthSection.items", data.data.fourthSection.items);
                 setValue("lastSection", data.data.lastSection);
