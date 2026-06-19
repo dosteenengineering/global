@@ -6,7 +6,13 @@ import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import { motion } from "framer-motion";
 import { moveRight } from "@/app/components/motionVariants";
 
-const ProjectCta = () => {
+interface CtaProps {
+    description: string;
+    buttonText:string;
+    buttonLink:string;
+}
+
+const ProjectCta = ({data}:{data:CtaProps}) => {
   return (
     <motion.section variants={moveRight(0.2)} initial="hidden" whileInView={"show"} className="pt-[30px] md:pt-80 pb-140 3xl:pb-200">
       <div className="container w-full">
@@ -14,16 +20,17 @@ const ProjectCta = () => {
           <StatNoise1 />
           <div
             className="text-30 leading-[1.33] tracking-[-0.02em] text-secondary max-w-[908px] font-light"
-            dangerouslySetInnerHTML={{ __html: ProjectCtaData.description }}
+            dangerouslySetInnerHTML={{ __html: data.description }}
           />
           <BorderButton
-            text="Discuss your project"
+            text={data.buttonText}
             borderColor="black"
             textColor="black"
             iconColor="primary"
             px="px-8 lg:px-[35px]"
             hoverBg="black"
             className="z-10"
+            href={data.buttonLink}
           />
         </div>
       </div>

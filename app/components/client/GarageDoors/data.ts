@@ -1,3 +1,90 @@
+export interface IndividualSystemData {
+  _id: string;
+  metaTitle: string;
+  metaDescription: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+
+  firstSection: {
+    title: string;
+    subTitle: string;
+    firstDescription: string;
+    secondDescription: string;
+    image: string;
+    imageAlt: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      buttonText: string;
+      description: string;
+    }[];
+  };
+
+  thirdSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      title: string;
+      link: string;
+    }[];
+  };
+
+  fourthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      logo: string;
+      logoAlt: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+    }[];
+  };
+
+  fifthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      title: string;
+      description: string;
+      image: string;
+      imageAlt: string;
+    }[];
+  };
+
+  sixthSection: {
+    title: string;
+    items: {
+      _id: string;
+      clientName: string;
+      designation: string;
+      description: string;
+    }[];
+  };
+
+  seventhSection: {
+    title: string;
+    items: {
+      _id: string;
+      question: string;
+      answer: string;
+    }[];
+  };
+
+  images: string[];
+}
 
 export const banner = {
   title: "Premium Residential Garage Doors Across UAE, Oman & MENA",

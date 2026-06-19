@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import { IndividualSystemData } from "../data";
 
 interface WhyChooseProps {
   data: {
@@ -25,7 +26,7 @@ interface WhyChooseProps {
   };
 }
 
-function Card({ item }: { item: WhyChooseProps["data"]["items"][0] }) {
+function Card({ item }: { item: IndividualSystemData["fourthSection"]["items"][0] }) {
   return (
     <div className="group bg-white/10 relative overflow-hidden h-[300px] 2xl:h-[416px] p-5 md:p-40 3xl:p-50 cursor-pointer">
       <div className="relative z-[5] w-full h-full flex flex-col justify-between">
@@ -36,8 +37,8 @@ function Card({ item }: { item: WhyChooseProps["data"]["items"][0] }) {
             alt=""
           />
           <img
-            src={item.icon}
-            alt={item.title}
+            src={item.logo}
+            alt={item.logoAlt}
             width="64px"
             height="64px"
             className="w-16 h-16 group-hover:invert-1 group-hover:brightness-1000 transition-all duration-300 ease-in-out"
@@ -49,7 +50,7 @@ function Card({ item }: { item: WhyChooseProps["data"]["items"][0] }) {
       </div>
       <Image
         src={item.image}
-        alt={item.title}
+        alt={item.imageAlt}
         width={1000}
         height={1000}
         className="absolute bottom-0 left-0 translate-y-full group-hover:translate-0 w-full h-full object-cover z-[-1] transition-all duration-700 ease-in-out"
@@ -69,7 +70,7 @@ function Card({ item }: { item: WhyChooseProps["data"]["items"][0] }) {
   );
 }
 
-const WhyChoose = ({ data }: WhyChooseProps) => {
+const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const total = data.items.length;
@@ -78,14 +79,14 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
     <section className="relative py-[70px] md:py-100 lg:py-150 3xl:py-200 overflow-hidden">
       <div className="container">
         <SectionTitle
-          title={data.sectionTitle}
+          title={data.title}
           className="section-heading-90 max-w-[22ch] mb-50 uppercase "
         />
         <div className="max-w-[967px] 3xl:mr-[285px] ml-auto">
           {/* <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.sectionDesc} className="!text-24 lg:!text-30 !leading-[1.333333333333333] font-light 
+          <SectionDescription text={data.description} className="!text-24 lg:!text-30 !leading-[1.333333333333333] font-light 
           tracking-[-0.02em] !mb-100" />
         </div>
 
@@ -147,8 +148,8 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
             onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             className="!overflow-visible"
           >
-            {data.items.map((item) => (
-              <SwiperSlide key={item.id}>
+            {data.items.map((item,index) => (
+              <SwiperSlide key={index}>
                 <Card item={item} />
               </SwiperSlide>
             ))}
@@ -158,8 +159,8 @@ const WhyChoose = ({ data }: WhyChooseProps) => {
         {/* ── Tablet & Desktop: Original grid ── */}
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-30">
           {data.items.map((item,index) => (
-            <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} key={item.id} >
-              <Card key={item.id} item={item} />
+            <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} key={index} >
+              <Card key={index} item={item} />
             </motion.div>
           ))}
         </div>

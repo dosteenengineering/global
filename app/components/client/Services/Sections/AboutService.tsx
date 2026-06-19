@@ -4,9 +4,9 @@ import "swiper/css";
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
-import { aboutServicesData } from "../data";
+import { aboutServicesData, IndustriesPageData } from "../data";
 
-export default function AboutDetails() {
+export default function AboutDetails({data}:{data:IndustriesPageData['secondSection']}) {
   return (
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <div className="absolute -top-43 md:top-[-10.5%]  left-[-131px] md:left-[-5%] 3xl:left-0 pointer-events-none  ">
@@ -14,10 +14,10 @@ export default function AboutDetails() {
       </div>
 
       <div className="pt-[70px] md:pt-120 px-[15px]  container w-full">
-        <SectionTitle text={aboutServicesData.title} className="section-heading-90 text-secondary uppercase mb-5 md:mb-80 max-w-[33ch]" />
+        <SectionTitle text={data.title} className="section-heading-90 text-secondary uppercase mb-5 md:mb-80 max-w-[33ch]" />
 
         <div className="w-full lg:pl-[24.3%]">
-          <SectionDescription text={aboutServicesData.description} className="text-paragraph text-description max-w-[1110px]" as="div" />
+          <SectionDescription text={data.description} className="text-paragraph text-description max-w-[1110px]" as="div" />
         </div>
       </div>
     </section>

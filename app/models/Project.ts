@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const projectItemSchema = new mongoose.Schema(
     {
@@ -58,6 +58,13 @@ const projectItemSchema = new mongoose.Schema(
                 },
             ],
         },
+
+        featuredServices: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Service",
+            },
+        ],
 
         images: [{ type: String }],
 

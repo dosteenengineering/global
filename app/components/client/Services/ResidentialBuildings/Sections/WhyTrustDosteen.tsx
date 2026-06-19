@@ -12,6 +12,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface WhyTrustData {
+  title: string;
+  stats: {
+    id: number;
+    value: string;
+    title: string;
+    image: string;
+  }[];
+}
+
 const cardGradient = `linear-gradient(180deg, rgba(0,0,0,0) 50%, #000000 100%), linear-gradient(180deg, rgba(41,69,150,0) 0%, rgba(41,69,150,0.3) 100%)`;
 
 interface StatCard {
@@ -57,8 +67,8 @@ function StatCard({
   );
 }
 
-export default function WhyTrustDosteen() {
-  const { title, stats } = whyTrustData;
+export default function WhyTrustDosteen({data}:{data:WhyTrustData}) {
+  const { title, stats } = data;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dotCount, setDotCount] = useState(0);

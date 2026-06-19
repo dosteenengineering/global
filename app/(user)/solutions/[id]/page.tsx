@@ -8,9 +8,23 @@ export default async function ServicePage({
 }) {
   const { id } = await params;
 
+  const response = await fetch(
+    `${process.env.BASE_URL}/api/admin/service?slug=${id}`,
+    { next: { revalidate: 60 } },
+  );
+
+  const data = await response.json();
+
+    const projectsResponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/project`,
+    { next: { revalidate: 60 } },
+  );
+
+  const projectsData = await projectsResponse.json();
+
   if (id === "residential-developments") {
-    return <ResidentialPage />;
+    return <ResidentialPage data={data.data} projectsData={projectsData.data.projects}/>;
   }
 
-  return <DefaultServicePageIndex />;
-}
+  return <DefaultServicePageIndex data={data.data} projectsData={projectsData.data.projects}/>;
+}   

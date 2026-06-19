@@ -1,3 +1,158 @@
+export interface ResidentialDevelopmentData {
+  _id: string;
+  __v: number;
+
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    title: string;
+    image: string;
+    imageAlt: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    items: SecondSectionItem[];
+  };
+
+  systemSection: {
+    title: string;
+    items: SystemItem[];
+  };
+
+  thirdSection: {
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+
+  fourthSection: {
+    title: string;
+    items: TrustItem[];
+  };
+}
+
+export interface SecondSectionItem {
+  _id: string;
+  image: string;
+  imageAlt: string;
+}
+
+export interface SystemItem {
+  _id: string;
+  __v: number;
+
+  metaTitle: string;
+  metaDescription: string;
+
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+
+  images: string[];
+
+  firstSection: {
+    title: string;
+    subTitle: string;
+    firstDescription: string;
+    secondDescription: string;
+    image: string;
+    imageAlt: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    items: ProductTypeItem[];
+  };
+
+  thirdSection: {
+    title: string;
+    description: string;
+    items: CtaItem[];
+  };
+
+  fourthSection: {
+    title: string;
+    description: string;
+    items: WhyChooseItem[];
+  };
+
+  fifthSection: {
+    title: string;
+    description: string;
+    items: CustomizationItem[];
+  };
+
+  sixthSection: {
+    title: string;
+    items: TestimonialItem[];
+  };
+
+  seventhSection: {
+    title: string;
+    items: FaqItem[];
+  };
+}
+
+export interface ProductTypeItem {
+  _id: string;
+  image: string;
+  imageAlt: string;
+  title: string;
+  buttonText: string;
+  description: string;
+}
+
+export interface CtaItem {
+  _id: string;
+  title: string;
+  link: string;
+}
+
+export interface WhyChooseItem {
+  _id: string;
+  logo: string;
+  logoAlt: string;
+  image: string;
+  imageAlt: string;
+  title: string;
+}
+
+export interface CustomizationItem {
+  _id: string;
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}
+
+export interface TestimonialItem {
+  _id: string;
+  clientName: string;
+  designation: string;
+  description: string;
+}
+
+export interface FaqItem {
+  _id: string;
+  question: string;
+  answer: string;
+}
+
+export interface TrustItem {
+  _id: string;
+  image: string;
+  imageAlt: string;
+  number: string;
+  value: string;
+}
+
+
 export const residentialData = {
   banner: {
     image: "/assets/images/services/1.jpg",

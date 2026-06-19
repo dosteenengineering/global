@@ -5,7 +5,7 @@ import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-const BannerBottom = () => {
+const BannerBottom = ({firstDescription,secondDescription}:{firstDescription:string,secondDescription:string}) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rightInset = useGetContainerSpacing(containerRef);
 
@@ -19,22 +19,11 @@ const BannerBottom = () => {
       >
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} 
          className="text-30 leading-[1.33] font-light tracking-[-0.02em] mb-5 md:mb-40 3xl:pr-5">
-          In the demanding climates and architecturally refined neighborhoods of
-          Oman, UAE, and the wider MENA region, a garage door should do more
-          than just serve as a point of entry. It should enhance your home&apos;s
-          aesthetics, offer reliable protection, and operate quietly and
-          efficiently every time.
+          {firstDescription}
         </motion.p>
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
          className="text-description text-paragraph ">
-          Leveraging our global sourcing network and long-standing partnerships
-          across 35+ countries, every garage door system is built using premium
-          components that undergo rigorous quality checks and on-site
-          inspections. This ensures superior durability, smarter automation, and
-          long-term performance suited to the region&apos;s climate. Whether you&apos;re
-          building new or upgrading your space, we combine world-class
-          engineering with high-end design to deliver garage doors that truly
-          stand out.
+          {secondDescription}
         </motion.p>
       </div>
     </section>

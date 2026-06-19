@@ -33,7 +33,7 @@ function SystemCard({
   system: IDosteenSystemsProps["data"]["systems"][0];
 }) {
   return (
-    <Link href={`/${system.slug}`} className="group block">
+    <Link href={`${system.slug}`} className="group block">
       <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden">
         {/* Image */}
         <Image

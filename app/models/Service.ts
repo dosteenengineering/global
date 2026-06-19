@@ -26,6 +26,7 @@ const serviceSchema = new mongoose.Schema({
                 title: { type: String, required: true },
                 description: { type: String, required: true },
                 buttonLink: { type: String, required: true },
+                slug: { type: String, required: true },
                 metaTitle: String,
                 metaDescription: String,
 
@@ -35,6 +36,18 @@ const serviceSchema = new mongoose.Schema({
                     imageAlt: String,
                     firstDescription: String,
                     secondDescription: String,
+                    description: String
+                },
+
+                secondSection: {
+                    title: String,
+                    description: String,
+                    items: [
+                        {
+                            image: String,
+                            imageAlt: String,
+                        },
+                    ],
                 },
 
                 systemSection: {
@@ -49,9 +62,22 @@ const serviceSchema = new mongoose.Schema({
                 },
 
                 thirdSection: {
+                    title: String,
                     description: String,
                     buttonText: String,
                     buttonLink: String,
+                },
+
+                fourthSection: {
+                    title: String,
+                    items: [
+                        {
+                            image: String,
+                            imageAlt: String,
+                            number: String,
+                            value: String,
+                        },
+                    ],
                 },
             }
         ]
