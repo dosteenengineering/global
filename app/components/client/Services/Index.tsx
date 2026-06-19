@@ -1,22 +1,24 @@
 import InnerPageBanner from "../../common/InnerPageBanner";
-import { BannerData } from "./data";
+import { BannerData, IndustriesPageData } from "./data";
 import AboutService from "./Sections/AboutService";
 import IndustriesWeServe from "./Sections/IndustriesWeServe";
 
-const Index = () => {
+const Index = ({data}:{data:IndustriesPageData}) => {
+
+  console.log(data)
   return (
     <>
       <InnerPageBanner
-        title={BannerData.title}
+        title={data.firstSection.title}
         titleMaxWidth="max-w-[1270px] 3xl:max-w-[1563px]"
         descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]"
-        description={BannerData.description}
-        image={BannerData.image}
-        imageAlt={BannerData.imageAlt}
+        description={data.firstSection.description}
+        image={data.firstSection.image}
+        imageAlt={data.firstSection.imageAlt}
         bannerImgHeight="h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[785px]"
       />
-      <AboutService />
-      <IndustriesWeServe />
+      <AboutService data={data.secondSection}/>
+      <IndustriesWeServe data={data.thirdSection}/>
     </>
   );
 };

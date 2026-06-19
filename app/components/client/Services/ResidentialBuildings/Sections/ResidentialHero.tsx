@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { residentialData } from "../data";
+import { residentialData, ResidentialDevelopmentData } from "../data";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ResidentialHero() {
+export default function ResidentialHero({ firstSection, secondSection }: { firstSection: ResidentialDevelopmentData['firstSection'], secondSection: ResidentialDevelopmentData['secondSection'] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bannerImageRef = useRef<HTMLDivElement>(null);
   const titleLine0Ref = useRef<HTMLHeadingElement>(null);
@@ -19,6 +19,26 @@ export default function ResidentialHero() {
   const centerSlotRef = useRef<HTMLDivElement>(null);
   const leftImagesRef = useRef<HTMLDivElement>(null);
   const rightImagesRef = useRef<HTMLDivElement>(null);
+
+  const residentialData = {
+    banner: {
+      image: firstSection.image,
+      title: firstSection.title,
+      description: firstSection.description,
+    },
+
+    second: {
+      heading: secondSection.title,
+      description: secondSection.description,
+      leftImages: secondSection.items
+        .slice(0, Math.ceil(secondSection.items.length / 2))
+        .map((item) => item.image),
+
+      rightImages: secondSection.items
+        .slice(Math.ceil(secondSection.items.length / 2))
+        .map((item) => item.image),
+    },
+  };
 
   const { banner, second } = residentialData;
 
@@ -204,7 +224,7 @@ export default function ResidentialHero() {
                     if (el) descWordsRef.current[i] = el;
                   }}
                   className="inline-block opacity-100 md:opacity-0"
-                  // style={{ opacity: 0 }}
+                // style={{ opacity: 0 }}
                 >
                   {word}
                   {i < descWords.length - 1 ? "\u00A0" : ""}

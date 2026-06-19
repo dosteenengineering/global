@@ -2,22 +2,31 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { items, type Category } from "../data";
+import { Award, AwardCategory, items, type Category } from "../data";
 import AwardsNoise from "@/app/components/common/noise/AwardsNoise";
 import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
 import { moveUp, moveUpV2 } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
-import { div } from "framer-motion/client";
 
-const categories: { label: string; value: Category }[] = [
-  { label: "Certifications", value: "certifications" },
-  { label: "Awards", value: "awards" },
-];
+export default function Main({ data }: { data: Award[] }) {
 
-export default function Main() {
-  const [active, setActive] = useState<Category>("certifications");
+  const categories: { label: string; value: AwardCategory }[] = [
+    ...Array.from(
+      new Map(
+        data.map((award) => [
+          award.category._id,
+          {
+            label: award.category.name,
+            value: award.category,
+          },
+        ])
+      ).values()
+    ),
+  ]; 
 
-  const filtered = items.filter((item) => item.category === active);
+  const [active, setActive] = useState<AwardCategory>(categories[0].value);
+
+  const filtered = data.filter((item) => item.category === active);
 
   return (
     <section className="w-full relative">
@@ -33,21 +42,19 @@ export default function Main() {
       <div className="container mt-80  mb-140 3xl:mb-200">
         {/* Category Tabs */}
         <div className="flex gap-[10px] mb-50">
-          {categories.map((cat,index) => (
-            <motion.div key={cat.value} variants={moveUp(index * 0.12)} initial="hidden" whileInView={"show"} viewport={{ once: true }}>
-            <button
-              key={cat.value}
-              onClick={() => setActive(cat.value)}
+          {categories.map((cat, index) => (
+            <motion.div key={index} variants={moveUp(index * 0.12)} initial="hidden" whileInView={"show"} viewport={{ once: true }}>
+              <button
+                onClick={() => setActive(cat.value)}
                 className={`cursor-pointer tracking-[-2%] md:tracking-normal py-[4px] px-2.5 md:py-[14px] md:px-[35px] 2xl:h-[54px] rounded-[50px] border text-15 
                   leading-[1.733333333333333] text-secondary font-normal uppercase transition-all duration-200
-                  ${
-                    active === cat.value
-                      ? "border-primary bg-primary/10"
-                      : "border-[#454545]"
+                  ${active === cat.value
+                    ? "border-primary bg-primary/10"
+                    : "border-[#454545]"
                   }`}
-            >
+              >
                 <span className="pb-1">{cat.label}</span>
-            </button>
+              </button>
             </motion.div>
           ))}
 
@@ -56,7 +63,7 @@ export default function Main() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-[32px] md:gap-x-20 3xl:gap-x-[25px] gap-y-10 md:gap-y-50 ">
           {filtered.map((item, itemIdx) => (
             <Reveal
-              key={item.id}
+              key={itemIdx}
               variants={moveUpV2}
               delayRange={itemIdx * 0.12}
             >

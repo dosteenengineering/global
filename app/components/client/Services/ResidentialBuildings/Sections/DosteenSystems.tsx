@@ -10,11 +10,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
 import { useRef } from "react";
 
+interface DosteenSystemsProps {
+    title: string;
+    systems: {
+      id: number;
+      title: string;
+      image: string;
+      description: string;
+      slug: string;
+    }[];
+}
+
 const activeGradient =
   "linear-gradient(90deg, rgba(41, 69, 150, 0.2) 0%, rgba(41, 69, 150, 0) 100%)";
 
-export default function DosteenSystems() {
-  const { title, systems } = dosteenSystemsData;
+export default function DosteenSystems({data}:{data:DosteenSystemsProps}) {
+  const { title, systems } = data;
   const [activeId, setActiveId] = useState(systems[0].id);
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(
     systems[0].id,

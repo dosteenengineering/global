@@ -8,12 +8,24 @@ import "swiper/css/effect-creative";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
-import { featuredProjectsData, type Project } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { Project } from "../../../Projects/data";
+
+// function getInactiveProjects(
+//   projects: Project[],
+//   activeIndex: number,
+//   count: number,
+// ): Project[] {
+//   const total = projects.length;
+//   return Array.from(
+//     { length: count },
+//     (_, i) => projects[(activeIndex + 1 + i) % total],
+//   );
+// }
 
 function getInactiveProjects(
   projects: Project[],
@@ -21,8 +33,9 @@ function getInactiveProjects(
   count: number,
 ): Project[] {
   const total = projects.length;
+  const available = Math.min(count, total - 1); // never more than what's left
   return Array.from(
-    { length: count },
+    { length: available },
     (_, i) => projects[(activeIndex + 1 + i) % total],
   );
 }
@@ -71,40 +84,40 @@ function InactiveSlot({
       <div className="relative w-full h-[280px] 3xl:h-[313px] overflow-hidden mb-20">
         {displayed.animating && (
           <div className="absolute inset-0 slot-exit" style={{ ["--exit-to" as string]: exitTo }} >
-            <Image src={displayed.prev.image} alt={displayed.prev.name} fill className="object-cover pointer-events-none" />
+            <Image src={displayed.prev.thumbnail} alt={displayed.prev.thumbnailAlt} fill className="object-cover pointer-events-none" />
           </div>
         )}
         <div className={`absolute inset-0${displayed.animating ? " slot-enter" : ""}`} style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
-          <Image src={displayed.next.image} alt={displayed.next.name} fill className="object-cover pointer-events-none" />
+          <Image src={displayed.next.thumbnail} alt={displayed.next.thumbnailAlt} fill className="object-cover pointer-events-none" />
         </div>
       </div>
 
       <div className="relative min-h-[36px] mb-[15px] overflow-hidden">
         {displayed.animating && (
           <p className="absolute inset-x-0 top-0 text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] slot-exit" style={{ ["--exit-to" as string]: exitTo }}>
-            {displayed.prev.name}
+            {displayed.prev.firstSection.title}
           </p>
         )}
         <p className={`text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em]${displayed.animating ? " slot-enter" : ""}`}
           style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
-          {displayed.next.name}
+          {displayed.next.firstSection.title}
         </p>
       </div>
 
       <div className="flex items-center justify-between mb-[15px] pr-40">
         <span className="flex items-center gap-[10px] text-description text-paragraph font-light">
           <Image src="/assets/icons/location-pin-gray.svg" alt="location" width={20} height={20} className="object-contain pointer-events-none w-[11px] h-[14px] -mt-1" />
-          {displayed.next.location}
+          {displayed.next.firstSection.location.name}
         </span>
-        <span className="text-description text-paragraph font-light">{displayed.next.category}</span>
+        <span className="text-description text-paragraph font-light">{displayed.next.firstSection.sector.name}</span>
       </div>
       <div className="w-full h-[2px] bg-[#c2c2c2]" />
     </motion.div>
   );
 }
 
-export default function FeaturedProjectsResidencial() {
-  const { title, projects } = featuredProjectsData;
+export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) {
+  const projects = [...data];
 
   const activeSwiperRef = useRef<SwiperType | null>(null);
   const mobileSwiperRef = useRef<SwiperType | null>(null);
@@ -114,7 +127,6 @@ export default function FeaturedProjectsResidencial() {
   const [changeCount, setChangeCount] = useState(0);
   const prevIndexRef = useRef(0);
 
-  const enableSwiper = projects.length >= 3;
   const enableNavigation = projects.length > 3;
   const inactiveProjects = getInactiveProjects(projects, activeIndex, 2);
   const mobileActiveProject = projects[mobileActiveIndex];
@@ -144,7 +156,7 @@ export default function FeaturedProjectsResidencial() {
   return (
     <section className="w-full bg-white py-[70px] md:py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
       <div className="container">
-        <SectionTitle text={title} className="section-heading-90 text-secondary mb-50" />
+        <SectionTitle text={"FEATURED PROJECTS"} className="section-heading-90 text-secondary mb-50" />
 
         {/* ── Mobile layout ── */}
         <div className="md:hidden">
@@ -188,12 +200,12 @@ export default function FeaturedProjectsResidencial() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             className="w-full h-[383px] md:h-[280px] mb-5"
           >
-            {projects.map((project) => (
-              <SwiperSlide key={project.key}>
+            {projects.map((project,index) => (
+              <SwiperSlide key={index}>
                 <div className="relative w-full h-[383px] md:h-[280px]">
                   <Image
-                    src={project.image}
-                    alt={project.name}
+                    src={project.thumbnail}
+                    alt={project.thumbnailAlt}
                     fill
                     className="object-cover"
                     priority
@@ -212,7 +224,7 @@ export default function FeaturedProjectsResidencial() {
           {/* Project info below image */}
           <div className="">
             <p className="text-secondary text-[22px] font-light leading-[1.3] tracking-[-0.02em] mb-2.5">
-              {mobileActiveProject?.name}
+              {mobileActiveProject?.firstSection.title}
             </p>
             <div className="flex items-center justify-between border-b pb-2.5 border-bdr-gray">
               <span className="flex items-center gap-[8px] text-paragraph font-light text-[13px]">
@@ -223,10 +235,10 @@ export default function FeaturedProjectsResidencial() {
                   height={14}
                   className="object-contain w-[11px] h-[14px] -mt-[2px]"
                 />
-                Location: {mobileActiveProject?.location}
+                Location: {mobileActiveProject?.firstSection.location.name}
               </span>
               <span className="text-paragraph font-light text-[13px]">
-                {mobileActiveProject?.category}
+                {mobileActiveProject?.firstSection.sector.name}
               </span>
             </div>
           </div>
@@ -236,7 +248,25 @@ export default function FeaturedProjectsResidencial() {
         <div className="hidden md:flex gap-40 3xl:gap-50 items-stretch">
           {/* Left: big active swiper */}
           <div className="shrink-0 w-[45%]">
-            {enableSwiper ? (
+            {projects.length === 1 ? (
+              <div
+                className="relative w-full h-[549px] 3xl:h-[649px] group cursor-pointer"
+              >
+                <Image src={projects[0].thumbnail} alt={projects[0].thumbnailAlt} fill className="object-cover pointer-events-none" priority />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
+                <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
+                  <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{projects[0].firstSection.title}</p>
+                  <div className="h-[1px] bg-white/30 mb-20" />
+                  <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-[10px] text-white font-light">
+                      <Image src="/assets/icons/location-pin.svg" alt="location" width={11} height={14} className="object-contain pointer-events-none w-[11px] h-[14px]" />
+                      {projects[0].firstSection.location.name}
+                    </span>
+                    <span className="text-white text-paragraph font-light">{projects[0].firstSection.sector.name}</span>
+                  </div>
+                </div>
+              </div>
+            ) : (
               <Swiper
                 loop
                 modules={[Autoplay, EffectCreative]}
@@ -254,34 +284,30 @@ export default function FeaturedProjectsResidencial() {
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 className="w-full h-[549px] 3xl:h-[649px]"
               >
-                {projects.map((project,index) => (
-                  <SwiperSlide key={project.key}>
-                    <motion.div variants={moveUp(0.2+index*0.2)} initial="hidden" whileInView={"show"} viewport={{once:true}}
+                {projects.map((project, index) => (
+                  <SwiperSlide key={index}>
+                    <motion.div variants={moveUp(0.2 + index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}
                       className="relative w-full h-[549px] 3xl:h-[649px] group cursor-pointer"
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <Image src={project.image} alt={project.name} fill className="object-cover pointer-events-none" priority />
+                      <Image src={project.thumbnail} alt={project.thumbnailAlt} fill className="object-cover pointer-events-none" priority />
                       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
                       <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
-                        <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{project.name}</p>
+                        <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{project.firstSection.title}</p>
                         <div className="h-[1px] bg-white/30 mb-20" />
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-[10px] text-white font-light">
                             <Image src="/assets/icons/location-pin.svg" alt="location" width={11} height={14} className="object-contain pointer-events-none w-[11px] h-[14px]" />
-                            {project.location}
+                            {project.firstSection.location.name}
                           </span>
-                          <span className="text-white text-paragraph font-light">{project.category}</span>
+                          <span className="text-white text-paragraph font-light">{project.firstSection.sector.name}</span>
                         </div>
                       </div>
                     </motion.div>
                   </SwiperSlide>
                 ))}
               </Swiper>
-            ) : (
-              <div className="relative w-full h-[549px] 3xl:h-[649px]">
-                <Image src={projects[0].image} alt={projects[0].name} fill className="object-cover pointer-events-none" priority />
-              </div>
             )}
           </div>
 

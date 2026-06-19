@@ -63,6 +63,7 @@ export async function PATCH(request: NextRequest) {
             foundProject.bannerSection = body.bannerSection;
             foundProject.fifthSection = body.fifthSection;
             foundProject.scopeSection = body.scopeSection;
+            foundProject.featuredServices = body.featuredServices;
             foundProject.images = body.images;
             foundProject.slug = body.slug;
             foundProject.thumbnail = body.thumbnail;

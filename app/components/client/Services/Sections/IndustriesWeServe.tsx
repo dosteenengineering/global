@@ -1,19 +1,19 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { IndustriesData } from "../data";
+import {IndustriesPageData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
-export default function IndustriesWeServe() {
+export default function IndustriesWeServe({data}:{data:IndustriesPageData['thirdSection']}) {
 
-  const [activeId, setActiveId] = useState(IndustriesData.items[0].id);
+  const [activeId, setActiveId] = useState(1);
   // Mobile accordion: track which item is open (null = all closed) 
-  const [openId, setOpenId] = useState<number | null>(IndustriesData.items[0].id);
-  const active = IndustriesData.items.find((i) => i.id === activeId)!;
+  const [openId, setOpenId] = useState<number | null>(1);
+  const active = data.items.find((i,idx) => idx === activeId)!;
 
   const toggleAccordion = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -29,7 +29,7 @@ export default function IndustriesWeServe() {
 
       <div className="container py-12.5 md:py-140 3xl:py-150 w-full z-20">
         {/* Title */}
-        <SectionTitle text={IndustriesData.title} className="section-heading-90 text-white uppercase mb-7.5 md:mb-30 xl:mb-30 " />
+        <SectionTitle text={data.title} className="section-heading-90 text-white uppercase mb-7.5 md:mb-30 xl:mb-30 " />
 
         {/* Divider */}
         <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-80 3xl:mb-80 hidden lg:block" />
@@ -38,14 +38,14 @@ export default function IndustriesWeServe() {
         <div className="flex flex-col lg:flex-row gap-150  3xl:gap-[206px]">
           {/* ── MOBILE: Accordion ── */}
           <div className="flex flex-col lg:hidden w-full">
-            {IndustriesData.items.map((item) => {
-              const isOpen = item.id === openId;
-              const detail = IndustriesData.items.find((i) => i.id === item.id)!;
+            {data.items.map((item,idx) => {
+              const isOpen = idx === openId;
+              const detail = data.items.find((i,index) => index === idx)!;
 
               return (
-                <div key={item.id} className="relative first:border-t border-b border-bdr-blue py-5">
+                <div key={idx} className="relative first:border-t border-b border-bdr-blue py-5">
                   {/* Accordion header */}
-                  <button type="button" onClick={() => toggleAccordion(item.id)} className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
+                  <button type="button" onClick={() => toggleAccordion(idx)} className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
                     {/* Hover bg */}
                     {!isOpen && (
                       <span
@@ -58,7 +58,7 @@ export default function IndustriesWeServe() {
                     )}
 
                     <span className={`relative z-10 text-[18px] leading-[1.55] tracking-[-0.02em] transition-all duration-300 ${isOpen ? "text-white font-medium" : "text-white font-light"}`}>
-                      {item.label}
+                      {item.title}
                     </span>
 
                     {/* Chevron icon */}
@@ -76,7 +76,7 @@ export default function IndustriesWeServe() {
                       <div className="relative w-full h-[269px] mb-30">
                         <Image src={detail.image} alt={detail.title} fill className="object-cover transition-all duration-500" />
                       </div>
-                      <BorderButton text={IndustriesData.btnText} iconColor="white" px="px-[23px] md:px-30" href={detail.href} hoverBg="white" className="w-fit" />
+                      <BorderButton text={"Read More"} iconColor="white" px="px-[23px] md:px-30" href={detail.buttonLink} hoverBg="white" className="w-fit" />
                     </div>
                   </div>
                 </div>
@@ -87,14 +87,14 @@ export default function IndustriesWeServe() {
           {/* ── DESKTOP: Original side-by-side layout ── */}
           {/* Left — industry list */}
           <div className="shrink-0 hidden lg:flex flex-col w-[334px] relative border-t border-bdr-blue ">
-            {IndustriesData.items.map((item, index) => {
-              const isActive = item.id === activeId;
+            {data.items.map((item, index) => {
+              const isActive = index === activeId;
               return (
                 <motion.div variants={moveUp(0.1 * index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.1 * index, ease: "easeInOut" }}>
                   <button
                     type="button"
-                    key={item.id}
-                    onClick={() => setActiveId(item.id)}
+                    key={index}
+                    onClick={() => setActiveId(index)}
                     className={`group relative flex items-center justify-between text-left w-full   border-b border-bdr-blue transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
                       }`}
                     style={
@@ -123,7 +123,7 @@ export default function IndustriesWeServe() {
                         : "text-white font-light"
                         }`}
                     >
-                      {item.label}
+                      {item.title}
                     </span>
 
                     {/* Arrow — only visible on active or hover */}
@@ -171,7 +171,7 @@ export default function IndustriesWeServe() {
             </motion.div>
 
             <motion.div variants={moveUp(0.4)}>
-              <BorderButton text={IndustriesData.btnText} iconColor="white" px="px-30 3xl:px-[35px]" href={active.href} hoverBg="white" className="w-fit" />
+              <BorderButton text={"Read More"} iconColor="white" px="px-30 3xl:px-[35px]" href={active.buttonLink} hoverBg="white" className="w-fit" />
             </motion.div>
           </motion.div>
         </div>

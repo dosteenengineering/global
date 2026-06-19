@@ -22,6 +22,9 @@ export interface Project {
     }[]
   };
   slug: string;
+  featuredServices:{
+    _id:string;
+  }[];
 }
 
 export const projectsData = [

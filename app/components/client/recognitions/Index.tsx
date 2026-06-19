@@ -1,14 +1,15 @@
 import InnerPageBanner from "../../common/InnerPageBanner";
+import { AwardsPageData } from "./data";
 import Main from "./Sections/Main";
 
-const Index = () => {
+const Index = ({data}:{data:AwardsPageData}) => {
   return (
     <>
       <InnerPageBanner
-        title="Recognition That Defines Us"
+        title={data.firstSection.title}
         titleMaxWidth="max-w-[19ch]"
       />
-      <Main />
+      <Main data={data.awards}/>
     </>
   );
 };

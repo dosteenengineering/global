@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { solutionsData, SolutionTab } from "../data";
+import { IndividualSystemData, SolutionTab } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
@@ -12,9 +12,9 @@ import { FreeMode } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 
-export default function Customization() {
+export default function Customization({ data }: { data: IndividualSystemData['fifthSection'] }) {
   const [activeTab, setActiveTab] = useState<string | null>(
-    solutionsData.tabs[0].key,
+    data.items[0].title,
   );
 
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -27,8 +27,8 @@ export default function Customization() {
     const swiper = swiperRef.current;
     if (!swiper) return;
 
-    const activeIndex = solutionsData.tabs.findIndex(
-      (t) => t.key === activeTabRef.current,
+    const activeIndex = data.items.findIndex(
+      (t) => t.title === activeTabRef.current,
     );
 
     const slide = swiper.slides[activeIndex] as HTMLElement;
@@ -54,7 +54,7 @@ export default function Customization() {
     setTimeout(() => updateIndicator(), 0);
   }, [activeTab]);
 
-  const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
+  const activeData = data.items.find((tab) => tab.title === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
     <section className="relative w-full lg:min-h-screen overflow-hidden">
@@ -63,14 +63,14 @@ export default function Customization() {
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
           <SectionTitle
-            text={solutionsData.mainTitle}
+            text={data.title}
             className="text-left section-heading-90 uppercase max-w-[23ch] "
           />
           {/* <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p> */}
           <SectionDescription
-            text={solutionsData.mainDescription}
+            text={data.description}
             className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6 !leading-[1.333333333333333]"
           />
           {/* ================= DESKTOP ================= */}
@@ -101,11 +101,11 @@ export default function Customization() {
                   onSetTranslate={() => updateIndicator()}
                   className="!overflow-visible"
                 >
-                  {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
-                    <SwiperSlide key={tab.key} className="!w-auto">
+                  {data.items.map((tab, index: number) => (
+                    <SwiperSlide key={index} className="!w-auto">
                       <button
                         onClick={() => {
-                          setActiveTab(tab.key);
+                          setActiveTab(tab.title);
                           const swiper = swiperRef.current;
                           if (!swiper) return;
 
@@ -131,15 +131,15 @@ export default function Customization() {
                             swiper.updateProgress();
                           }
                         }}
-                        className={`px-0 pb-[13px] mr-10 lg:mr-60 3xl:mr-80 text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.key ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
+                        className={`px-0 pb-[13px] mr-10 lg:mr-60 3xl:mr-80 text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
                       >
                         <span className="block font-semibold invisible h-0 overflow-hidden">
-                          {tab.label}
+                          {tab.title}
                         </span>
                         <span
-                          className={`${activeTab === tab.key ? "font-semibold" : "font-light"} transition-all duration-300`}
+                          className={`${activeTab === tab.title ? "font-semibold" : "font-light"} transition-all duration-300`}
                         >
-                          {tab.label}
+                          {tab.title}
                         </span>
                       </button>
                     </SwiperSlide>
@@ -168,13 +168,13 @@ export default function Customization() {
                     viewport={{ once: true }}
                     className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light"
                   >
-                    {activeData.leftTitle}
+                    {activeData.title}
                   </motion.h3>
                 </div>
                 {/* <motion.div initial="hidden" whileInView="show" variants={moveUpVariant(0.2)} viewport={{ once: true }} className="w-px bg-bdr-gray" /> */}
                 <div className="ml-15 2xl:ml-100 3xl:ml-[150px] pt-50">
-                  <div className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] ">
-                    {activeData.rightItems.map((item, index) => (
+                  <div dangerouslySetInnerHTML={{__html:activeData.description}} className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system">
+                    {/* {activeData.rightItems.map((item, index) => (
                       <motion.ul
                         key={`${activeTab}-${index}`}
                         initial="hidden"
@@ -188,7 +188,7 @@ export default function Customization() {
                           <span>{item}</span>
                         </li>
                       </motion.ul>
-                    ))}
+                    ))} */}
                   </div>
                 </div>
               </div>
@@ -202,20 +202,20 @@ export default function Customization() {
             viewport={{ once: true }}
             className="lg:hidden mb-12 mt-[30px] md:mt-12"
           >
-            {solutionsData.tabs.map((tab: SolutionTab, index: number) => {
-              const isOpen = activeTab === tab.key;
+            {data.items.map((tab, index: number) => {
+              const isOpen = activeTab === tab.title;
               return (
                 <motion.div
                   initial="hidden"
                   whileInView="show"
                   variants={moveUp(index * 0.14)}
                   viewport={{ once: true }}
-                  key={tab.key}
+                  key={index}
                   className="border-b first:border-t border-bdr-gray"
                 >
                   {/* Accordion trigger */}
                   <button
-                    onClick={() => setActiveTab(isOpen ? null : tab.key)}
+                    onClick={() => setActiveTab(isOpen ? null : tab.title)}
                     className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-5 md:py-[10px]"
                   >
                     <motion.div
@@ -232,7 +232,7 @@ export default function Customization() {
                             : "font-light text-paragraph transition-all duration-300"
                         }
                       >
-                        {tab.label}
+                        {tab.title}
                       </span>
 
                       <div
@@ -266,13 +266,13 @@ export default function Customization() {
                       <h3
                         className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`}
                       >
-                        {tab.leftTitle}
+                        {tab.title}
                       </h3>
 
                       {/* Right items */}
 
-                      <div className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] ">
-                        {tab.rightItems.map((item, index) => (
+                      <div dangerouslySetInnerHTML={{__html:tab.description}} className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system-mobile">
+                        {/* {tab.rightItems.map((item, index) => (
                           <motion.ul
                             key={`${activeTab}-${index}`}
                             initial="hidden"
@@ -286,7 +286,7 @@ export default function Customization() {
                               <span>{item}</span>
                             </li>
                           </motion.ul>
-                        ))}
+                        ))} */}
                       </div>
                     </div>
                   </div>

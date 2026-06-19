@@ -12,18 +12,12 @@ import ProjectCard from "@/app/components/common/ProjectCard";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import NavButton from "@/app/components/common/NavigationButton";
+import { Project } from "../../../Projects/data";
 
-interface Project {
-  id: number;
-  title: string;
-  location: string;
-  category: string;
-  image: string;
-  slug: string;
-}
 
-export default function FeaturedProjects() {
-  const { title, projects } = featuredProjectsData;
+export default function FeaturedProjects({data}:{data:Project[]}) {
+  // const { title, projects } = featuredProjectsData;
+  const projects = [...data]
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dotCount, setDotCount] = useState(0);
@@ -62,7 +56,7 @@ export default function FeaturedProjects() {
 
         {/* Title */}
         <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-bdr-blue pb-5 relative ">
-          <SectionTitle title={title} className="section-heading-90 text-white" />
+          <SectionTitle title={"FEATURED PROJECTS"} className="section-heading-90 text-white" />
 
           {showNav && (
             <motion.div
@@ -114,7 +108,7 @@ export default function FeaturedProjects() {
           className="w-full"
         >
           {projects.map((project, index) => (
-            <SwiperSlide key={project.id}>
+            <SwiperSlide key={index}>
               {/* @ts-ignore */}
               <ProjectCard project={project} delay={0.2 + index * 0.3} />
             </SwiperSlide>
@@ -140,5 +134,5 @@ export default function FeaturedProjects() {
       </div>
     </section>
   );
-  
+
 }

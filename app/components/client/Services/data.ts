@@ -1,3 +1,49 @@
+export interface IndustriesPageData {
+  _id: string;
+  __v: number;
+
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+  };
+
+  thirdSection: {
+    title: string;
+    items: IndustryItem[];
+  };
+}
+
+export interface IndustryItem {
+  _id: string;
+  image: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  buttonLink: string;
+
+  systemSection: {
+    items: SystemItem[];
+  };
+}
+
+export interface SystemItem {
+  image: string;
+  imageAlt: string;
+  title: string;
+  description?: string;
+  buttonLink?: string;
+}
+
 export const BannerData = {
   title: "Building Systems Engineering for Every Industry — UAE & Oman",
   description:

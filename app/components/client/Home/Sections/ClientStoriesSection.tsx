@@ -7,19 +7,32 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 
-import { clientStoriesData, ClientStory } from "../data";
+import {clientStoriesData, ClientStory } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import { moveLeft, moveRight, moveUp } from "@/app/components/motionVariants";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
+interface Story {
+  key: string;
+  quote: string;
+  name: string;
+  company: string;
+  designation: string;
+}
+
+interface ClientStoriesData {
+  title: string;
+  stories: Story[];
+}
+
 const SLIDE_DELAY = 5000;
 
-export default function ClientStoriesSection() {
+export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientStoriesDataFromApi?:ClientStoriesData}) {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
-  const total = clientStoriesData.stories.length;
-  const activeStory: ClientStory = clientStoriesData.stories[activeIndex];
+  const total = clientStoriesDataFromApi ? clientStoriesDataFromApi.stories.length : clientStoriesData?.stories.length;
+  const activeStory = clientStoriesData?.stories[activeIndex]
 
   useEffect(() => {
     const id = setTimeout(() => {

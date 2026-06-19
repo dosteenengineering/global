@@ -1,3 +1,28 @@
+export interface AwardsPageData {
+  _id: string;
+  __v: number;
+  metaTitle: string;
+  metaDescription: string;
+  firstSection: {
+    title: string;
+  };
+  awards: Award[];
+}
+
+export interface Award {
+  _id: string;
+  title: string;
+  image: string;
+  imageAlt: string;
+  category: AwardCategory;
+}
+
+export interface AwardCategory {
+  _id: string;
+  name: string;
+}
+
+
 export type Category = "certifications" | "awards";
 
 export interface AwardItem {

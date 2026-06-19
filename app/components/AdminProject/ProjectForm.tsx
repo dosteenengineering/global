@@ -91,6 +91,15 @@ interface ProjectFormProps {
 
     metaTitle: string;
     metaDescription: string;
+
+    availableServices?: {
+        _id: string;
+        firstSection: {
+            title: string;
+        };
+    }[];
+
+    featuredServices: string[];
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -101,6 +110,12 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
     const [sectorList, setSectorList] = useState<{ _id: string; name: string }[]>([]);
     const [locationList, setLocationList] = useState<{ _id: string; name: string }[]>([]);
     const [reorderMode, setReorderMode] = useState(false);
+    // Change the state type to match the actual API response shape
+    const [availableServices, setAvailableServices] = useState<{
+        _id: string;
+         title: string;
+    }[]
+    >([]);
 
     const { register, handleSubmit, setValue, watch, control, formState: { errors } } = useForm<ProjectFormProps>();
 
@@ -120,6 +135,20 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         name: "scopeSection.items"
     });
 
+
+    const fetchServiceData = async () => {
+        try {
+            const response = await fetch("/api/admin/service");
+
+            if (response.ok) {
+                const data = await response.json();
+
+                setAvailableServices(data.data.thirdSection.items);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleAddProject = async (data: ProjectFormProps) => {
         try {
@@ -161,6 +190,9 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("metaDescription", data.data.metaDescription);
                 setValue("images", data.data.images);
                 setValue("slug", data.data.slug);
+                setValue("featuredServices", data.data.featuredServices?.map((s: any) =>
+                    typeof s === "object" ? s._id : s
+                ) ?? []);
                 setImageUrls(data.data.images);
             } else {
                 const data = await response.json();
@@ -199,9 +231,9 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
 
     useEffect(() => {
         if (editMode) {
-            fetchLocation().then(() => fetchSector()).then(() => fetchProjectData());
+            fetchLocation().then(() => fetchSector()).then(() => fetchServiceData()).then(() => fetchProjectData());
         } else {
-            fetchLocation().then(() => fetchSector());
+            fetchLocation().then(() => fetchSector().then(() => fetchServiceData()));
         }
     }, []);
 
@@ -253,6 +285,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
         setValue("images", newPosition);
 
     };
+
 
     useEffect(() => {
         console.log(imageUrls);
@@ -665,6 +698,62 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                         </div>
 
 
+                    </div>
+                </AdminItemContainer>
+
+                <AdminItemContainer>
+                    <Label main>Featured In Services</Label>
+
+                    <div className="p-5 flex flex-col gap-5 rounded-md">
+
+                        <div className="flex flex-col gap-3">
+                            <Label className="font-bold">Select Services</Label>
+
+                            <Controller
+                                control={control}
+                                name="featuredServices"
+                                defaultValue={[]}
+                                render={({ field }) => (
+                                    <div className="grid grid-cols-2 gap-3">
+
+                                        {availableServices?.map((service) => {
+                                            const checked = field.value?.includes(service._id);
+
+                                            return (
+                                                <div
+                                                    key={service._id}
+                                                    className="flex items-center gap-2"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={checked}
+                                                        onChange={() => {
+                                                            if (checked) {
+                                                                field.onChange(
+                                                                    field.value.filter(
+                                                                        (id: string) => id !== service._id
+                                                                    )
+                                                                );
+                                                            } else {
+                                                                field.onChange([
+                                                                    ...(field.value || []),
+                                                                    service._id,
+                                                                ]);
+                                                            }
+                                                        }}
+                                                    />
+
+                                                    <span>
+                                                        {service.title}
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
+
+                                    </div>
+                                )}
+                            />
+                        </div>
                     </div>
                 </AdminItemContainer>
 

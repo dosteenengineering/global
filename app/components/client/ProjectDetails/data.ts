@@ -78,6 +78,10 @@ export interface ProjectItemProps {
         }[];
     };
 
+    featuredServices:{
+      _id:string;
+    }[]
+
     images: string[];
 
     slug: string;

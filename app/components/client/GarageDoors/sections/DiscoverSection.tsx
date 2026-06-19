@@ -9,6 +9,7 @@ import BorderButton from "@/app/components/common/BorderButton";
 import { moveUp } from "@/app/components/motionVariants";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { useLenis } from "@/app/components/LenisProvider";
+import { IndividualSystemData } from "../data";
 
 interface DoorItem {
   id: number;
@@ -36,7 +37,7 @@ interface DiscoverSectionProps {
   };
 }
 
-function DoorContent({ door }: { door: DoorItem }) {
+function DoorContent({ door }: { door: IndividualSystemData['secondSection']['items'][0] }) {
   const [imageSrc, setImageSrc] = useState(door.image);
 
   return (
@@ -58,12 +59,15 @@ function DoorContent({ door }: { door: DoorItem }) {
         />
       </div>
       <p className="w-fit rounded-full border border-white/80 px-[16.5px] font-light md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white/80 mb-30">
-        {door.idealFor}
+        {door.buttonText}
       </p>
-      <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30">
-        {door.heading}
-      </h4>
-      <ul className="space-y-2 xl:space-y-6 xl:pb-50 3xl:pb-[97px]">
+      {/* <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30">
+        {door.title}
+      </h4> */}
+      <div dangerouslySetInnerHTML={{__html:door.description}} className="indi-system-points">
+
+      </div>
+      {/* <ul className="space-y-2 xl:space-y-6 xl:pb-50 3xl:pb-[97px]">
         {door.points.map((point) => (
           <li
             key={point}
@@ -73,23 +77,21 @@ function DoorContent({ door }: { door: DoorItem }) {
             {point}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </article>
   );
 }
 
-const DiscoverSection = ({ data }: DiscoverSectionProps) => {
-  const [activeId, setActiveId] = useState(data.doors[0]?.id ?? 0);
+const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']}) => {
+  const [activeId, setActiveId] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const { scrollTo } = useLenis();
 
   // Mobile accordion — can open/close independently
-  const [openAccordionId, setOpenAccordionId] = useState<number | null>(
-    data.doors[0]?.id ?? null,
-  );
+  const [openAccordionId, setOpenAccordionId] = useState<number | null>(0);
 
   const activeDoor =
-    data.doors.find((door) => door.id === activeId) ?? data.doors[0];
+    data.items.find((_,index) => index === activeId) ?? data.items[0];
 
   const toggleAccordion = (id: number) => {
     setOpenAccordionId((prev) => (prev === id ? null : id));
@@ -101,7 +103,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
       <PrimaryNoise />
       <div className="container relative z-10">
         <SectionTitle
-          title={data.sectionTitle}
+          title={data.title}
           className="section-heading-90 text-white mb-50 uppercase "
         />
 
@@ -110,7 +112,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
             {data.sectionDesc}
           </p> */}
           <SectionDescription
-            text={data.sectionDesc}
+            text={data.description}
             className="text-24 lg:!text-30 text-white
            !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50  whitespace-pre-line"
           />
@@ -119,14 +121,14 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
         <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
           {/* ── Mobile: Accordion ── */}
           <div className="xl:hidden space-y-0">
-            {data.doors.map((door) => {
-              const isOpen = openAccordionId === door.id;
+            {data.items.map((door,index) => {
+              const isOpen = openAccordionId === index;
               return (
-                <div key={door.id} className="border-b border-bdr-blue">
+                <div key={index} className="border-b border-bdr-blue">
                   {/* Accordion trigger */}
                   <button
                     type="button"
-                    onClick={() => toggleAccordion(door.id)}
+                    onClick={() => toggleAccordion(index)}
                     className="w-full flex items-center justify-between gap-4 py-[18px] text-left"
                   >
                     <span
@@ -134,7 +136,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                         isOpen ? "font-[500]" : "font-light"
                       }`}
                     >
-                      {door.menuTitle}
+                      {door.title}
                     </span>
                     <span
                       className={`shrink-0 flex items-center justify-center   transition-all duration-300  `}
@@ -165,7 +167,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
-                        key={door.id}
+                        key={door.title}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -188,20 +190,20 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
             <aside className="xl:sticky xl:top-5 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
-                  {data.doors.map((door) => {
-                    const isActive = activeId === door.id;
+                  {data.items.map((door,index) => {
+                    const isActive = activeId === index;
                     return (
                       <motion.div
                         variants={moveUp(0.2)}
                         initial="hidden"
                         whileInView={"show"}
                         viewport={{ once: true, amount: 0.2 }}
-                        key={door.id}
+                        key={index}
                       >
                         <button
                           type="button"
                           onClick={() => {
-                            setActiveId(door.id);
+                            setActiveId(index);
                             if (contentRef.current) {
                               scrollTo(contentRef.current, {
                                 offset: -100,
@@ -209,7 +211,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                               });
                             }
                           }}
-                          className={`group relative flex  min-w-fit w-full max-w-[98%] items-center overflow-hidden rounded-full px-4 py-[16px]  text-left transition-all duration-300 xl:w-full xl:rounded-none xl:px-0 cursor-pointer ${activeId === door.id ? "min-h-[82px] xl:py-0 my-2" : "xl:py-20"}`}
+                          className={`group relative flex  min-w-fit w-full max-w-[98%] items-center overflow-hidden rounded-full px-4 py-[16px]  text-left transition-all duration-300 xl:w-full xl:rounded-none xl:px-0 cursor-pointer ${activeId === index ? "min-h-[82px] xl:py-0 my-2" : "xl:py-20"}`}
                         >
                           {/* ── Gradient: clipped by button's own border-radius via overflow-hidden ── */}
                           <span
@@ -230,7 +232,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
                                 : "font-light leading-[1.2]"
                             }`}
                           >
-                            {door.menuTitle}
+                            {door.title}
                           </span>
 
                           {/* ── Arrow ── */}
@@ -262,7 +264,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
               <AnimatePresence mode="wait">
                 {activeDoor && (
                   <motion.div
-                    key={activeDoor.id}
+                    key={activeDoor.title}
                     variants={moveUp(0.2)}
                     initial="hidden"
                     animate="show"
@@ -280,7 +282,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
           </div>
         </div>
 
-        {data.ctaData && (
+        {/* {data.ctaData && (
           <motion.div
             variants={moveUp(0.4)}
             initial="hidden"
@@ -318,7 +320,7 @@ const DiscoverSection = ({ data }: DiscoverSectionProps) => {
               />
             </div>
           </motion.div>
-        )}
+        )} */}
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { Button } from '@/components/ui/button'
 import { ImageUploader } from '@/components/ui/image-uploader'
-import { RiDeleteBinLine } from "react-icons/ri";
+import { RiAiGenerateText, RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { useRefetchServices } from '@/app/contexts/refetchServices';
@@ -34,6 +34,7 @@ export interface ServiceFormProps {
             image: string;
             imageAlt: string;
             buttonLink: string;
+            slug:string;
         }[];
     };
 }
@@ -41,7 +42,7 @@ export interface ServiceFormProps {
 const ServicePage = () => {
 
 
-    const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<ServiceFormProps>();
+    const { register, handleSubmit, setValue, control, formState: { errors }, watch } = useForm<ServiceFormProps>();
 
     const { refetchServices, setRefetchServices } = useRefetchServices();
 
@@ -89,6 +90,19 @@ const ServicePage = () => {
         }
     }
 
+    const handleAutoGenerate = (index: number) => {
+        const title = watch(`thirdSection.items.${index}.title`);
+
+        if (!title) return;
+
+        const slug = title
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "");
+
+        setValue(`thirdSection.items.${index}.slug`, slug);
+    };
 
 
     useEffect(() => {
@@ -229,6 +243,41 @@ const ServicePage = () => {
                                             <Input type='text' placeholder='Title' {...register(`thirdSection.items.${index}.title`)} />
                                         </div>
 
+                                        <div>
+                                            <Label className="flex gap-2 items-center mb-1">
+                                                Slug
+                                                <div
+                                                    className="flex gap-2 items-center bg-green-600 text-white p-1 rounded-md cursor-pointer w-fit"
+                                                    onClick={() => handleAutoGenerate(index)}
+                                                >
+                                                    <p>Auto Generate</p>
+                                                    <RiAiGenerateText />
+                                                </div>
+                                            </Label>
+
+                                            <Input
+                                                type="text"
+                                                placeholder="Slug"
+                                                {...register(`thirdSection.items.${index}.slug`, {
+                                                    onBlur: (e) => {
+                                                        const slug = e.target.value
+                                                            .toLowerCase()
+                                                            .trim()
+                                                            .replace(/[^a-z0-9]+/g, "-")
+                                                            .replace(/^-+|-+$/g, "");
+
+                                                        setValue(`thirdSection.items.${index}.slug`, slug);
+                                                    },
+                                                })}
+                                            />
+
+                                            {errors.thirdSection?.items?.[index]?.slug && (
+                                                <p className="text-red-500">
+                                                    {errors.thirdSection.items[index]?.slug?.message}
+                                                </p>
+                                            )}
+                                        </div>
+
                                         <div className='flex flex-col gap-1'>
                                             <Label className='font-bold'>Description</Label>
                                             <Controller name={`thirdSection.items.${index}.description`} control={control} render={({ field }) => {
@@ -248,7 +297,7 @@ const ServicePage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description: "", buttonLink: "" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description: "", buttonLink: "",slug:"" })}>Add Item</Button>
                         </div>
 
 

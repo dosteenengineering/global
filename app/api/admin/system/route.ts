@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
         const { searchParams } = new URL(request.url);
         const id = searchParams.get("id");
 
-        // Fetch single system if id exists
+        // Fetch single system if id or slug exists
         if (id) {
             const system = await System.findById(id);
 
@@ -23,10 +23,25 @@ export async function GET(request: NextRequest) {
             }
 
             return NextResponse.json(
-                {
-                    data: system,
-                    message: "System fetched successfully",
-                },
+                { data: system, message: "System fetched successfully" },
+                { status: 200 }
+            );
+        }
+
+        const slug = searchParams.get("slug");
+
+        if (slug) {
+            const system = await System.findOne({ slug });
+
+            if (!system) {
+                return NextResponse.json(
+                    { message: "System not found" },
+                    { status: 404 }
+                );
+            }
+
+            return NextResponse.json(
+                { data: system, message: "System fetched successfully" },
                 { status: 200 }
             );
         }

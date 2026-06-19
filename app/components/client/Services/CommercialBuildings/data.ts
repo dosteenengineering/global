@@ -1,3 +1,125 @@
+export interface CommercialBuildingData {
+  _id: string;
+  __v?: number;
+
+  metaTitle: string;
+  metaDescription: string;
+
+  image: string;
+  imageAlt: string;
+  title: string;
+  description: string;
+  buttonLink: string;
+  slug: string;
+
+  firstSection: {
+    title: string;
+    image: string;
+    imageAlt: string;
+    firstDescription: string;
+    secondDescription: string;
+  };
+
+  systemSection: {
+    title: string;
+    items: {
+      _id: string;
+      __v: number;
+
+      metaTitle: string;
+      metaDescription: string;
+
+      slug: string;
+      createdAt: string;
+      updatedAt: string;
+
+      images: string[];
+
+      firstSection: {
+        title: string;
+        subTitle: string;
+        firstDescription: string;
+        secondDescription: string;
+        image: string;
+        imageAlt: string;
+      };
+
+      secondSection: {
+        title: string;
+        description: string;
+        items: {
+          _id: string;
+          image: string;
+          imageAlt: string;
+          title: string;
+          buttonText: string;
+          description: string;
+        }[];
+      };
+
+      thirdSection: {
+        title: string;
+        description: string;
+        items: {
+          _id: string;
+          title: string;
+          link: string;
+        }[];
+      };
+
+      fourthSection: {
+        title: string;
+        description: string;
+        items: {
+          _id: string;
+          logo: string;
+          logoAlt: string;
+          image: string;
+          imageAlt: string;
+          title: string;
+        }[];
+      };
+
+      fifthSection: {
+        title: string;
+        description: string;
+        items: {
+          _id: string;
+          title: string;
+          description: string;
+          image: string;
+          imageAlt: string;
+        }[];
+      };
+
+      sixthSection: {
+        title: string;
+        items: {
+          _id: string;
+          clientName: string;
+          designation: string;
+          description: string;
+        }[];
+      };
+
+      seventhSection: {
+        title: string;
+        items: {
+          _id: string;
+          question: string;
+          answer: string;
+        }[];
+      };
+    }[];
+  };
+
+  thirdSection: {
+    description: string;
+    buttonText:string;
+    buttonLink:string;
+  };
+}
+
 export const BannerData = {
   title: "Commercial Buildings",
   description:
