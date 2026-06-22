@@ -647,14 +647,8 @@ const CsiPage = () => {
                                                                             placeholder="Sub Title"
                                                                             {...register(
                                                                                 `fifthSection.items.${index}.subItems.${fileIndex}.subTitle`,
-                                                                                { required: "Sub Title is required" }
                                                                             )}
                                                                         />
-                                                                        {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.subTitle && (
-                                                                            <p className="text-red-500">
-                                                                                {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.subTitle.message}
-                                                                            </p>
-                                                                        )}
                                                                     </div>
                                                                 )}
 
