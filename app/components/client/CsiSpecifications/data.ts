@@ -13,6 +13,8 @@ export type Csi = {
     title: string;
     items: {
       title: string;
+      image:string;
+      imageAlt:string;
     }[];
   };
 
