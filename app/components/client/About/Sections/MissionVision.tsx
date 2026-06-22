@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { MissionVisionData } from "../data";
+import { AboutPageData, MissionVisionData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
@@ -41,8 +41,8 @@ function Card({
   );
 }
 
-export default function MissionVision() {
-  const { mission, vision } = MissionVisionData;
+export default function MissionVision({data}:{data:AboutPageData['fifthSection']}) {
+  // const { mission, vision } = MissionVisionData;
 
   return (
     <section className="bg-white w-full select-none">
@@ -50,17 +50,17 @@ export default function MissionVision() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[10px] md:gap-30 border-b border-[#c2c2c2] py-140 3xl:py-200 ">
           <div>
               <Card
-                icon={mission.icon}
-                title={mission.title}
-                description={mission.description}
+                icon={data.items[0].image}
+                title={data.items[0].title}
+                description={data.items[0].description}
                 delay={0.5}
               />
           </div>
           <div className="lg:pt-100">
               <Card
-                icon={vision.icon}
-                title={vision.title}
-                description={vision.description}
+                icon={data.items[0].image}
+                title={data.items[0].title}
+                description={data.items[0].description}
                 delay={0.8}
               />
           </div>

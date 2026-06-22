@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { softwareToolsSection, SoftwareTool } from "../data";
+import { softwareToolsSection, SoftwareTool, Capability } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { motion } from "framer-motion";
@@ -16,7 +16,7 @@ function ToolRow({
   index,
   delay,
 }: {
-  tool: SoftwareTool;
+  tool: Capability['fifthSection']['items'][0];
   isFirst: boolean;
   isLast: boolean;
   index: number;
@@ -33,8 +33,8 @@ function ToolRow({
       <div className="flex flex-col justify-center md:pl-30">
         <div>
           <Image
-            src={tool.icon}
-            alt="icon"
+            src={tool.image}
+            alt={tool.imageAlt}
             width={150}
             height={150}
             className={`object-contain w-auto ${index === 2 ? "h-[74px] md:h-[129px]" : "h-[29px] md:h-[50px]"}`}
@@ -58,8 +58,16 @@ function ToolRow({
 
 // ── Section ───────────────────────────────────────────────────────────────────
 
-export default function SoftwareTools() {
-  const { title, description, tools } = softwareToolsSection;
+export default function SoftwareTools({data}:{data:Capability['fifthSection']}) {
+  // const { title, description, tools } = softwareToolsSection;
+
+const tools = data.items.map((item) => ({
+  _id: item._id,
+  image: item.image,
+  imageAlt: item.imageAlt,
+  title: item.title,
+  description: item.description,
+}));
 
   return (
     <section className="w-full py-140 3xl:py-200 relative ">
@@ -79,11 +87,11 @@ export default function SoftwareTools() {
         <div className="flex flex-col lg:flex-row gap-7.5 lg:gap-140 3xl:gap-[142px] items-start">
           {/* Left — title + description */}
           <div className="shrink-0 lg:w-[40.65%]">
-            <SectionTitle title={title} className="mb-50 lg:max-w-[14ch] section-heading-90" />
+            <SectionTitle title={data.title} className="mb-50 lg:max-w-[14ch] section-heading-90" />
             {/* <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
               {description}
             </p> */}
-            <SectionDescription text={description} className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]" />
+            <SectionDescription text={data.description} className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]" />
           </div>
 
           {/* Right — tools table */}
@@ -91,7 +99,7 @@ export default function SoftwareTools() {
             {tools.map((tool, i) => (
               <ToolRow
                 index={i}
-                key={tool.id}
+                key={i}
                 tool={tool}
                 isFirst={i === 0}
                 isLast={i === tools.length - 1}

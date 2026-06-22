@@ -5,27 +5,24 @@ import WhoYouServe from "./Sections/WhoYouServe";
 import WhyChooseDosteen from "./Sections/WhyChooseDosteen";
 import OurValues from "./Sections/OurValues";
 import CtaSection from "../../common/CtaSection";
-import { CtaData } from "./data";
+import { AboutPageData } from "./data";
 import ServingMap from "./Sections/ServingMap";
 
-const Index = () => {
+const Index = ({data}:{data:AboutPageData}) => {
   return (
     <>
       <InnerPageBanner
-        title="25 Years of Building Systems Excellence Across UAE & Oman"
+        {...data.firstSection}
         titleMaxWidth="max-w-[30ch] 3xl:max-w-[1563px]"
         descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]"
-        description="Trusted provider of building systems, entrance solutions, fire protection, flood control, and access management — serving residential, commercial, and industrial clients since 1999."
-        image="/assets/images/about/banner.jpg"
-        imageAlt="About Us"
       />
-      <AboutDetails />
-      <WhoYouServe />
-      <WhyChooseDosteen />
-      <MissionVision />
-      <OurValues />
-      <ServingMap/>
-      <CtaSection {...CtaData} descriptionWidth="max-w-[968px]" />
+      <AboutDetails data={data.secondSection}/>
+      <WhoYouServe data={data.thirdSection}/>
+      <WhyChooseDosteen data={data.fourthSection}/>
+      <MissionVision data={data.fifthSection}/>
+      <OurValues data={data.sixthSection}/>
+      <ServingMap seventhSection={data.seventhSection} eighthSection={data.eighthSection}/>
+      <CtaSection {...data.ninethSection} descriptionWidth="max-w-[968px]" />
     </>
   );
 };

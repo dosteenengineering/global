@@ -58,7 +58,7 @@ function ClientSideLink({
           }
         }}
         className={cn(
-          "flex items-center px-4 py-2 text-[16px] font-medium rounded-md transition-colors justify-between",
+          "flex items-center px-4 py-2 text-[14px] font-medium rounded-md transition-colors justify-between",
           "hover:bg-gray-50 hover:text-primary",
           isActive ? "bg-gray-50 text-primary" : "text-gray-700",
           className
@@ -77,7 +77,7 @@ function ClientSideLink({
             <div>-</div>
             <Link
               href={item.href}
-              className="w-full rounded-md cursor-pointer hover:bg-gray-50 hover:text-primary text-[16px] font-medium"
+              className="w-full rounded-md cursor-pointer hover:bg-gray-50 hover:text-primary text-[14px] font-medium"
             >
               {item.name}
             </Link>

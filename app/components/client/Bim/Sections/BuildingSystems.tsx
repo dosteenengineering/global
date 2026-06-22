@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { buildingSystemsData } from "../data";
+import { buildingSystemsData, Capability } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import Image from "next/image";
 import NavButton from "@/app/components/common/NavigationButton";
@@ -21,7 +21,7 @@ function chunk<T>(arr: T[], size: number): T[][] {
 type Item = (typeof buildingSystemsData.items)[0];
 
 interface CellProps {
-  item: Item;
+  item: Capability['eighthSection']['items'][0];
   isTopRow: boolean;
   isFirstSlide: boolean;
   fixedHeight?: number;
@@ -50,8 +50,8 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
       <div className="mb-7.5 md:mb-50">
         <div className="flex items-center gap-1 justify-between">
           <Image
-            src={item.icon}
-            alt="icon"
+            src={item.image}
+            alt={item.imageAlt}
             aria-hidden="true"
             width={100}
             height={100}
@@ -90,9 +90,9 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
   );
 }
 
-export default function BuildingSystems() {
-  const { title, description, items } = buildingSystemsData;
-  const pairs = chunk(items, 2) as [Item, Item | undefined][];
+export default function BuildingSystems({data}:{data:Capability['eighthSection']}) {
+  const { title, description, items } = data;
+  const pairs = chunk(items, 2) as [Capability['eighthSection']['items'][0], Capability['eighthSection']['items'][0] | undefined][];
 
   const [rowHeights, setRowHeights] = useState<[number, number] | null>(null);
 

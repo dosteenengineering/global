@@ -4,21 +4,20 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import StatNoise1 from "@/app/components/common/noise/StatNoise1";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { Capability } from "../data";
 
 interface dataProps {
   descMaxWidth?: string;
-  data: {
-    title: string;
-    stats: {
-      id: number;
-      value: string;
-      label: string;
-    }[];
-  };
+  data: Capability['ninethSection']
 }
 
 export default function BimEngineeringData({ data, descMaxWidth }: dataProps) {
-  const { title, stats } = data;
+  const { title } = data;
+  const stats = data.items.map((item, index) => ({
+    id: index + 1,
+    value: item.number,
+    label: item.value,
+  }));
 
   return (
     <section className="w-full relative">

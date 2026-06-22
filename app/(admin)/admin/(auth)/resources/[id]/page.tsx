@@ -19,12 +19,12 @@ import Image from "next/image"
 import { Check } from "lucide-react"
 
 const SECTION_TYPES = [
-    { value: "technicalDocuments", label: "Technical Documents",image:"/assets/images/admin/type-1.jpg" },
-    { value: "bimCadFiles", label: "BIM & CAD Files", image:"/assets/images/admin/type-2.jpg" },
-    { value: "videosDemos", label: "Videos & Demos", image:"/assets/images/admin/type-3.jpg" },
-    { value: "brochures", label: "Brochures & Catalogues", image:"/assets/images/admin/type-4.jpg" },
-    { value: "certifications", label: "Certifications & Compliance", image:"/assets/images/admin/type-5.jpg" },
-    { value: "installationMaintenance", label: "Installation & Maintenance", image:"/assets/images/admin/type-6.jpg" },
+    { value: "technicalDocuments", label: "Technical Documents", image: "/assets/images/admin/type-1.jpg" },
+    { value: "bimCadFiles", label: "BIM & CAD Files", image: "/assets/images/admin/type-2.jpg" },
+    { value: "videosDemos", label: "Videos & Demos", image: "/assets/images/admin/type-3.jpg" },
+    { value: "brochures", label: "Brochures & Catalogues", image: "/assets/images/admin/type-4.jpg" },
+    { value: "certifications", label: "Certifications & Compliance", image: "/assets/images/admin/type-5.jpg" },
+    { value: "installationMaintenance", label: "Installation & Maintenance", image: "/assets/images/admin/type-6.jpg" },
 ]
 
 
@@ -73,6 +73,7 @@ export interface SecondSectionItemFormProps {
             title: string;
             tags: string;
             videoUrl: string;
+            duration: string;
         }[];
     };
 
@@ -122,17 +123,16 @@ const SecondSectionItemPage = () => {
             certifications: { title: "", items: [] },
             installationMaintenance: { title: "", items: [] },
         },
-        shouldUnregister: true,
     });
 
     const selectedType = watch("type");
 
-const { fields: techDocFields, append: techDocAppend, remove: techDocRemove, replace: techDocReplace } = useFieldArray({ control, name: "technicalDocuments.items" });
-const { fields: bimFields, append: bimAppend, remove: bimRemove, replace: bimReplace } = useFieldArray({ control, name: "bimCadFiles.items" });
-const { fields: videoFields, append: videoAppend, remove: videoRemove, replace: videoReplace } = useFieldArray({ control, name: "videosDemos.items" });
-const { fields: brochureFields, append: brochureAppend, remove: brochureRemove, replace: brochureReplace } = useFieldArray({ control, name: "brochures.items" });
-const { fields: certificationFields, append: certificationAppend, remove: certificationRemove, replace: certificationReplace } = useFieldArray({ control, name: "certifications.items" });
-const { fields: installFields, append: installAppend, remove: installRemove, replace: installReplace } = useFieldArray({ control, name: "installationMaintenance.items" });
+    const { fields: techDocFields, append: techDocAppend, remove: techDocRemove, replace: techDocReplace } = useFieldArray({ control, name: "technicalDocuments.items" });
+    const { fields: bimFields, append: bimAppend, remove: bimRemove, replace: bimReplace } = useFieldArray({ control, name: "bimCadFiles.items" });
+    const { fields: videoFields, append: videoAppend, remove: videoRemove, replace: videoReplace } = useFieldArray({ control, name: "videosDemos.items" });
+    const { fields: brochureFields, append: brochureAppend, remove: brochureRemove, replace: brochureReplace } = useFieldArray({ control, name: "brochures.items" });
+    const { fields: certificationFields, append: certificationAppend, remove: certificationRemove, replace: certificationReplace } = useFieldArray({ control, name: "certifications.items" });
+    const { fields: installFields, append: installAppend, remove: installRemove, replace: installReplace } = useFieldArray({ control, name: "installationMaintenance.items" });
 
     // Generic helpers for the "column + subItems" pattern (Technical Documents / BIM & CAD Files)
     const handleAddSubItem = (
@@ -159,65 +159,84 @@ const { fields: installFields, append: installAppend, remove: installRemove, rep
     };
 
 
-useEffect(() => {
-    if (!id) return;
+    useEffect(() => {
+        if (!id) return;
 
-    const fetchItem = async () => {
-        try {
-            const res = await fetch(`/api/admin/resource/second-section/item/${id}`);
-            const { item } = await res.json();
-            const type = item.type;
+        const fetchItem = async () => {
+            try {
+                const res = await fetch(`/api/admin/resource/second-section/item/${id}`);
+                const { item } = await res.json();
+                const type = item.type;
 
-            setValue("type", type);
+                setValue("type", type);
 
-            if (type === "technicalDocuments") {
-                setValue("technicalDocuments.title", item.title);
-                techDocReplace(
-                    (item.columnItems ?? []).map((col: any) => ({
-                        title: col.title,
-                        subItems: col.subItems ?? [],
-                    }))
-                );
-            } else if (type === "bimCadFiles") {
-                setValue("bimCadFiles.title", item.title);
-                setValue("bimCadFiles.description", item.description ?? "");
-                setValue("bimCadFiles.buttonText", item.buttonText ?? "");
-                setValue("bimCadFiles.buttonLink", item.buttonLink ?? "");
-                bimReplace(
-                    (item.columnItems ?? []).map((col: any) => ({
-                        title: col.title,
-                        subItems: col.subItems ?? [],
-                    }))
-                );
-            } else if (type === "videosDemos") {
-                setValue("videosDemos.title", item.title);
-                videoReplace(item.videoItems ?? []);
-            } else if (type === "brochures") {
-                setValue("brochures.title", item.title);
-                brochureReplace(
-                    (item.brochureItems ?? []).map((i: any) => ({
-                        ...i,
-                        tags: Array.isArray(i.tags) ? i.tags.join(", ") : i.tags,
-                    }))
-                );
-            } else if (type === "certifications") {
-                setValue("certifications.title", item.title);
-                certificationReplace(item.certificationItems ?? []);
-            } else if (type === "installationMaintenance") {
-                setValue("installationMaintenance.title", item.title);
-                installReplace(item.installItems ?? []);
+                if (type === "technicalDocuments") {
+                    setValue("technicalDocuments.title", item.title);
+                    techDocReplace(
+                        (item.columnItems ?? []).map((col: any) => ({
+                            title: col.title,
+                            subItems: col.subItems ?? [],
+                        }))
+                    );
+
+                    console.log(item.columnItems)
+                } else if (type === "bimCadFiles") {
+                    setValue("bimCadFiles.title", item.title);
+                    setValue("bimCadFiles.description", item.description ?? "");
+                    setValue("bimCadFiles.buttonText", item.buttonText ?? "");
+                    setValue("bimCadFiles.buttonLink", item.buttonLink ?? "");
+                    bimReplace(
+                        (item.columnItems ?? []).map((col: any) => ({
+                            title: col.title,
+                            subItems: col.subItems ?? [],
+                        }))
+                    );
+                } else if (type === "videosDemos") {
+                    setValue("videosDemos.title", item.title);
+                    const videoItems = item.videoItems ?? [];
+                    videoReplace(
+                        videoItems.map((v: any) => ({
+                            image: v.image ?? "",
+                            imageAlt: v.imageAlt ?? "",
+                            title: v.title ?? "",
+                            tags: v.tags ?? "",
+                            videoUrl: v.videoUrl ?? "",
+                            duration: v.duration ?? "",  // add this
+                        }))
+                    );
+                    // Force RHF to register the Controller values explicitly
+                    videoItems.forEach((v: any, i: number) => {
+                        setValue(`videosDemos.items.${i}.image`, v.image ?? "", { shouldValidate: false });
+                        setValue(`videosDemos.items.${i}.videoUrl`, v.videoUrl ?? "", { shouldValidate: false });
+                    });
+                } else if (type === "brochures") {
+                    setValue("brochures.title", item.title);
+                    brochureReplace(
+                        (item.brochureItems ?? []).map((i: any) => ({
+                            ...i,
+                            tags: Array.isArray(i.tags) ? i.tags.join(", ") : i.tags,
+                        }))
+                    );
+                } else if (type === "certifications") {
+                    setValue("certifications.title", item.title);
+                    certificationReplace(item.certificationItems ?? []);
+                } else if (type === "installationMaintenance") {
+                    setValue("installationMaintenance.title", item.title);
+                    installReplace(item.installItems ?? []);
+                }
+            } catch (error) {
+                console.error("Error loading item", error);
             }
-        } catch (error) {
-            console.error("Error loading item", error);
-        }
-    };
+        };
 
-    fetchItem();
-}, [id, setValue, techDocReplace, bimReplace, videoReplace, brochureReplace, certificationReplace, installReplace]);
+        fetchItem();
+    }, [id, setValue, techDocReplace, bimReplace, videoReplace, brochureReplace, certificationReplace, installReplace]);
 
     const onSubmit = async (data: SecondSectionItemFormProps) => {
         try {
             let payload: Record<string, unknown> = { type: data.type };
+
+            console.log(payload)
 
             if (data.type === "technicalDocuments") {
                 payload = {
@@ -284,62 +303,61 @@ useEffect(() => {
         <form className='flex flex-col gap-5' onSubmit={handleSubmit(onSubmit)}>
 
             <div className='flex flex-col gap-2'>
-    <Label className='font-bold'>Type</Label>
-    <Controller
-        name="type"
-        control={control}
-        rules={{ required: "Type is required" }}
-        render={({ field }) => (
-            <div
-                role="radiogroup"
-                aria-label="Type"
-                className="grid grid-cols-2 sm:grid-cols-3 gap-4"
-            >
-                {SECTION_TYPES.map((t) => {
-                    const isSelected = field.value === t.value;
-                    return (
+                <Label className='font-bold'>Type</Label>
+                <Controller
+                    name="type"
+                    control={control}
+                    rules={{ required: "Type is required" }}
+                    render={({ field }) => (
                         <div
-                            key={t.value}
-                            role="radio"
-                            aria-checked={isSelected}
-                            tabIndex={0}
-                            onClick={() => field.onChange(t.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    field.onChange(t.value);
-                                }
-                            }}
-                            className={`relative flex flex-col items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                                isSelected
-                                    ? "border-primary bg-primary/5"
-                                    : "border-muted hover:border-muted-foreground/40"
-                            }`}
+                            role="radiogroup"
+                            aria-label="Type"
+                            className="grid grid-cols-2 sm:grid-cols-3 gap-4"
                         >
-                            {isSelected ? (
-                                <div className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground z-10">
-                                    <Check className="h-3 w-3" />
-                                </div>
-                            ) : <div className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-primary-foreground z-10 border-2">
-                                    
-                                </div>}
-                            <div className="relative h-[200px] w-full overflow-hidden rounded-md">
-                                <Image
-                                    src={t.image}
-                                    alt={t.label}
-                                    fill
-                                    className="object-contain"
-                                />
-                            </div>
-                            <span className="text-sm font-medium text-center">{t.label}</span>
+                            {SECTION_TYPES.map((t) => {
+                                const isSelected = field.value === t.value;
+                                return (
+                                    <div
+                                        key={t.value}
+                                        role="radio"
+                                        aria-checked={isSelected}
+                                        tabIndex={0}
+                                        onClick={() => field.onChange(t.value)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter" || e.key === " ") {
+                                                e.preventDefault();
+                                                field.onChange(t.value);
+                                            }
+                                        }}
+                                        className={`relative flex flex-col items-center gap-2 rounded-lg border-2 p-3 cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${isSelected
+                                            ? "border-primary bg-primary/5"
+                                            : "border-muted hover:border-muted-foreground/40"
+                                            }`}
+                                    >
+                                        {isSelected ? (
+                                            <div className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground z-10">
+                                                <Check className="h-3 w-3" />
+                                            </div>
+                                        ) : <div className="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-primary-foreground z-10 border-2">
+
+                                        </div>}
+                                        <div className="relative h-[200px] w-full overflow-hidden rounded-md">
+                                            <Image
+                                                src={t.image}
+                                                alt={t.label}
+                                                fill
+                                                className="object-contain"
+                                            />
+                                        </div>
+                                        <span className="text-sm font-medium text-center">{t.label}</span>
+                                    </div>
+                                );
+                            })}
                         </div>
-                    );
-                })}
+                    )}
+                />
+                {errors.type && <p className='text-red-500'>{errors.type.message}</p>}
             </div>
-        )}
-    />
-    {errors.type && <p className='text-red-500'>{errors.type.message}</p>}
-</div>
 
             {/* Technical Documents */}
             {selectedType === "technicalDocuments" && (
@@ -904,7 +922,12 @@ useEffect(() => {
                                                     render={({ field }) => (
                                                         <VideoUploader
                                                             value={field.value}
-                                                            onChange={field.onChange}
+                                                            onChange={(url, duration) => {
+                                                                field.onChange(url);
+                                                                if (duration) {
+                                                                    setValue(`videosDemos.items.${index}.duration`, duration);
+                                                                }
+                                                            }}
                                                         />
                                                     )}
                                                 />
@@ -927,6 +950,7 @@ useEffect(() => {
                                                 title: "",
                                                 tags: "",
                                                 videoUrl: "",
+                                                duration: "",
                                             })
                                         }
                                     >

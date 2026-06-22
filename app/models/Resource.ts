@@ -47,13 +47,14 @@ const ResourceSchema = new Schema(
               title: { type: String, default: "" },
               tags: { type: String, default: "" },
               videoUrl: { type: String, default: "" },
+              duration: { type: String, default: "" },
             },
           ],
           brochureItems: [
             {
               // fileType: { type: String, default: "PDF" },
               title: { type: String, default: "" },
-              // tags: [{ type: String }],
+              tags: [{ type: String }],
               file: { type: String, default: "" },
             },
           ],
