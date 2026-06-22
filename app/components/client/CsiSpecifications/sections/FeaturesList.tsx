@@ -9,7 +9,7 @@ const FeaturesList = ({ items }:{items:Csi['secondSection']['items']} ) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-x-[10px] gap-y-[5px] md:gap-y-3">
           {
             items.map((feature, index) => (
-              <FeaturesCard key={index} title={feature.title} delay={index * 0.1} />
+              <FeaturesCard key={index} title={feature.title} delay={index * 0.1} image={feature.image} imageAlt={feature.imageAlt}/>
             ))
           }
         </div>

@@ -27,6 +27,8 @@ export interface CsiFormProps {
         title: string;
         items: {
             title: string;
+            image:string;
+            imageAlt:string;
         }[];
     };
 
@@ -189,7 +191,7 @@ const CsiPage = () => {
         const currentFiles = watch(`fifthSection.items.${index}.subItems`) || [];
         setValue(`fifthSection.items.${index}.subItems`, [
             ...currentFiles,
-            { title: "",subTitle:"" },
+            { title: "", subTitle: "" },
         ]);
     };
 
@@ -314,10 +316,34 @@ const CsiPage = () => {
                                     <div className='absolute top-2 right-2'>
                                         <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
                                     </div>
-                                    <div className='grid grid-cols-1 gap-2'>
+                                    <div className='grid grid-cols-2 gap-2'>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Title</Label>
-                                            <Input type='text' placeholder='Title' {...register(`secondSection.items.${index}.title`)} />
+                                            <Label className='font-bold'>Image</Label>
+                                            <Controller
+                                                name={`secondSection.items.${index}.image`}
+                                                control={control}
+                                                rules={{ required: "Image is required" }}
+                                                render={({ field }) => (
+                                                    <ImageUploader
+                                                        isLogo
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        recommendedDimension="Recommended: 30 x 35 (px)"
+                                                    />
+                                                )}
+                                            />
+                                            {errors.secondSection?.items?.[index]?.image && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.image.message}</p>}
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Alt Tag</Label>
+                                            <Input type='text' placeholder='Alt Tag' {...register(`secondSection.items.${index}.imageAlt`)} />
+                                        </div>
+
+                                        <div>
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Title</Label>
+                                                <Input type='text' placeholder='Title' {...register(`secondSection.items.${index}.title`)} />
+                                            </div>
                                         </div>
                                     </div>
 
@@ -326,7 +352,7 @@ const CsiPage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => secondSectionAppend({ title: "" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => secondSectionAppend({ title: "", image:"", imageAlt:"" })}>Add Item</Button>
                         </div>
 
 

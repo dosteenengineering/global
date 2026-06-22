@@ -42,6 +42,14 @@ const CsiSchema = new Schema(
             type: String,
             default: "",
           },
+          image: {
+            type: String,
+            default: "",
+          },
+          imageAlt: {
+            type: String,
+            default: "",
+          },
         },
       ],
     },
