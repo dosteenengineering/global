@@ -1,10 +1,11 @@
 "use client"
 import Image from "next/image";
-import { bimProcessSection, BimProcessStep } from "../data";
+import { bimProcessSection, BimProcessStep, Capability } from "../data";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp, zoomIn } from "@/app/components/motionVariants";
+import { AboutPageData } from "../../About/data";
 
 function ProcessStep({
   step,
@@ -49,8 +50,14 @@ function ProcessStep({
   );
 }
 
-export default function BimProcess() {
-  const { title, steps } = bimProcessSection;
+export default function BimProcess({data}:{data:Capability['seventhSection']}) {
+  const { title} = data;
+  const steps = data.items.map((item, index) => ({
+  id: item._id,
+  number: String(index + 1).padStart(2, "0"),
+  title: item.title,
+  description: item.description,
+}));
 
   return (
     <section className="w-full py-12.5 md:py-120 3xl:py-[150px] relative">

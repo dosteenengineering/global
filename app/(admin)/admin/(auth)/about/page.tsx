@@ -29,10 +29,11 @@ export interface AboutFormProps {
             imageAlt: string;
             number: string;
             value: string;
+            subValue: string;
         }[]
     };
     thirdSection: {
-        title:string;
+        title: string;
         items: {
             title: string;
             image: string;
@@ -58,14 +59,14 @@ export interface AboutFormProps {
         }[];
     };
     sixthSection: {
-        title:string;
+        title: string;
         items: {
             title: string;
             description: string;
         }[];
     };
     seventhSection: {
-        title:string;
+        title: string;
         image: string;
         imageAlt: string;
         items: {
@@ -74,13 +75,15 @@ export interface AboutFormProps {
         }[];
     };
     eighthSection: {
-        title:string;
+        title: string;
         items: {
             title: string;
+            xValue: string;
+            yValue: string;
         }[];
     };
     ninethSection: {
-        title:string;
+        title: string;
         description: string;
         items: {
             buttonText: string;
@@ -338,6 +341,16 @@ const AboutPage = () => {
                                                     {errors.secondSection?.items?.[index]?.value && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.value.message}</p>}
                                                 </div>
                                             </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Sub Value</Label>
+                                                    <Input type='text' placeholder='Sub Value' {...register(`secondSection.items.${index}.subValue`, {
+                                                        required: "Sub Value is required"
+                                                    })} />
+                                                    {errors.secondSection?.items?.[index]?.subValue && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.subValue.message}</p>}
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -347,7 +360,7 @@ const AboutPage = () => {
 
                             </div>
                             <div className='flex justify-end mt-2'>
-                                <Button type='button' addItem onClick={() => secondSectionAppend({ number: "", value: "", image: "", imageAlt: "" })}>Add Item</Button>
+                                <Button type='button' addItem onClick={() => secondSectionAppend({ number: "", value: "", image: "", imageAlt: "", subValue: "" })}>Add Item</Button>
                             </div>
                         </div>
 
@@ -508,51 +521,51 @@ const AboutPage = () => {
 
                                 {fifthSectionItems.map((field, index) => (
                                     <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-2 last:border-b-0'>
-                                    <div className='absolute top-2 right-2'>
-                                        <RiDeleteBinLine onClick={() => fifthSectionRemove(index)} className='cursor-pointer text-red-600' />
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Image</Label>
-                                            <Controller
-                                                name={`fifthSection.items.${index}.image`}
-                                                control={control}
-                                                rules={{ required: "Logo is required" }}
-                                                render={({ field }) => (
-                                                    <ImageUploader
-                                                        isLogo
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                        recommendedDimension="Recommended: 30 x 35 (px)"
-                                                    />
-                                                )}
-                                            />
-                                            {errors.fifthSection?.items?.[index]?.image && <p className='text-red-500'>{errors.fifthSection?.items?.[index]?.image.message}</p>}
+                                        <div className='absolute top-2 right-2'>
+                                            <RiDeleteBinLine onClick={() => fifthSectionRemove(index)} className='cursor-pointer text-red-600' />
                                         </div>
                                         <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Alt Tag</Label>
-                                            <Input type='text' placeholder='Alt Tag' {...register(`fifthSection.items.${index}.imageAlt`)} />
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Image</Label>
+                                                <Controller
+                                                    name={`fifthSection.items.${index}.image`}
+                                                    control={control}
+                                                    rules={{ required: "Logo is required" }}
+                                                    render={({ field }) => (
+                                                        <ImageUploader
+                                                            isLogo
+                                                            value={field.value}
+                                                            onChange={field.onChange}
+                                                            recommendedDimension="Recommended: 30 x 35 (px)"
+                                                        />
+                                                    )}
+                                                />
+                                                {errors.fifthSection?.items?.[index]?.image && <p className='text-red-500'>{errors.fifthSection?.items?.[index]?.image.message}</p>}
+                                            </div>
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Alt Tag</Label>
+                                                <Input type='text' placeholder='Alt Tag' {...register(`fifthSection.items.${index}.imageAlt`)} />
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Title</Label>
+                                                <Input type='text' placeholder='Title' {...register(`fifthSection.items.${index}.title`)} />
+                                            </div>
+                                            <div className='flex flex-col gap-2'>
+                                                <Label className='font-bold'>Description</Label>
+                                                <Textarea placeholder='Description' {...register(`fifthSection.items.${index}.description`)} />
+                                            </div>
+
                                         </div>
 
                                     </div>
-
-                                    <div>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Title</Label>
-                                            <Input type='text' placeholder='Title' {...register(`fifthSection.items.${index}.title`)} />
-                                        </div>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Description</Label>
-                                            <Textarea placeholder='Description' {...register(`fifthSection.items.${index}.description`)} />
-                                        </div>
-
-                                    </div>
-
-                                </div>
                                 ))}
 
                                 <div className='flex justify-end'>
-                                    <Button type='button' className="" addItem onClick={() => fifthSectionAppend({ title: "", description: "", image:"", imageAlt:"" })}>Add Item</Button>
+                                    <Button type='button' className="" addItem onClick={() => fifthSectionAppend({ title: "", description: "", image: "", imageAlt: "" })}>Add Item</Button>
                                 </div>
 
                             </div>
@@ -621,25 +634,25 @@ const AboutPage = () => {
                             </div>
 
                             <div className='flex flex-col gap-1'>
-                                    <Label className='font-bold'>Image</Label>
-                                    <Controller
-                                        name="seventhSection.image"
-                                        control={control}
-                                        rules={{ required: "Image is required" }}
-                                        render={({ field }) => (
-                                            <ImageUploader
-                                                value={field.value}
-                                                onChange={field.onChange}
-                                                recommendedDimension="Recommended: 637 x 508 (px)"
-                                            />
-                                        )}
-                                    />
-                                    {errors.seventhSection?.image && (
-                                        <p className="text-red-500">{errors.seventhSection?.image.message}</p>
+                                <Label className='font-bold'>Image</Label>
+                                <Controller
+                                    name="seventhSection.image"
+                                    control={control}
+                                    rules={{ required: "Image is required" }}
+                                    render={({ field }) => (
+                                        <ImageUploader
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            recommendedDimension="Recommended: 637 x 508 (px)"
+                                        />
                                     )}
-                                    <Label className='font-bold'>Alt Tag</Label>
-                                    <Input type='text' placeholder='Alt Tag' {...register("seventhSection.imageAlt")} />
-                                </div>
+                                />
+                                {errors.seventhSection?.image && (
+                                    <p className="text-red-500">{errors.seventhSection?.image.message}</p>
+                                )}
+                                <Label className='font-bold'>Alt Tag</Label>
+                                <Input type='text' placeholder='Alt Tag' {...register("seventhSection.imageAlt")} />
+                            </div>
 
                         </div>
 
@@ -728,6 +741,27 @@ const AboutPage = () => {
                                                     {errors.eighthSection?.items?.[index]?.title && <p className='text-red-500'>{errors.eighthSection?.items?.[index]?.title.message}</p>}
                                                 </div>
                                             </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>X Value</Label>
+                                                    <Input type='text' placeholder='X Value' {...register(`eighthSection.items.${index}.xValue`, {
+                                                        required: "X Value is required"
+                                                    })} />
+                                                    {errors.eighthSection?.items?.[index]?.xValue && <p className='text-red-500'>{errors.eighthSection?.items?.[index]?.xValue.message}</p>}
+                                                </div>
+                                            </div>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Y Value</Label>
+                                                    <Input type='text' placeholder='Y Value' {...register(`eighthSection.items.${index}.yValue`, {
+                                                        required: "Y Value is required"
+                                                    })} />
+                                                    {errors.eighthSection?.items?.[index]?.yValue && <p className='text-red-500'>{errors.eighthSection?.items?.[index]?.yValue.message}</p>}
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                     </div>
@@ -737,7 +771,7 @@ const AboutPage = () => {
 
                             </div>
                             <div className='flex justify-end mt-2'>
-                                <Button type='button' addItem onClick={() => eighthSectionAppend({ title: "" })}>Add Item</Button>
+                                <Button type='button' addItem onClick={() => eighthSectionAppend({ title: "", xValue:"", yValue:"" })}>Add Item</Button>
                             </div>
                         </div>
 

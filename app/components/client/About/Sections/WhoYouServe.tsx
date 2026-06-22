@@ -2,7 +2,7 @@
 import "swiper/css";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { WhoWeServeData } from "../data";
+import { AboutPageData, WhoWeServeData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { motion } from "framer-motion";
@@ -33,19 +33,19 @@ function ServeCard({ icon, label,delay }: { icon: string; label: string,delay:nu
   );
 }
 
-export default function WhoYouServe() {
+export default function WhoYouServe({data}:{data:AboutPageData['thirdSection']}) {
   return (
     <section className="relative w-full select-none py-12.5 md:py-140">
       <SecondaryNoise />
       <div className="container w-full">
         <SectionTitle
-          text={WhoWeServeData.title}
+          text={data.title}
           className="section-heading-90 text-secondary uppercase mb-[30px] md:mb-80"
         />
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-[35px] md:gap-x-5">
-          {WhoWeServeData.items.map((item) => (
-            <div key={item.id}>
-              <ServeCard delay={0.5+item.id*0.1} icon={item.icon} label={item.label} />
+          {data.items.map((item,index) => (
+            <div key={index}>
+              <ServeCard delay={0.5+index*0.1} icon={item.image} label={item.title} />
             </div>
           ))}
         </div>

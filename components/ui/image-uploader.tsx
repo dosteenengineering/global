@@ -21,7 +21,7 @@ export function ImageUploader({ value, onChange, className, deleteAfterUpload = 
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
-  const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [isUploadComplete, setIsUploadComplete] = useState(!!value);
 
   useEffect(() => {
     setIsUploadComplete(!!value);

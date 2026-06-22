@@ -12,7 +12,18 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
 
-export default function ThreePartSpec() {
+interface ThreePartSpecData {
+  title: string;
+  items: {
+    id: number;
+    part: string;
+    title: string;
+    shortDesc: string;
+    desc: string;
+  }[];
+}
+
+export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:ThreePartSpecData}) {
   const { title } = threePartSpecData;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);

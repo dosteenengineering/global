@@ -21,6 +21,7 @@ const aboutSchema = new mongoose.Schema({
             imageAlt: { type: String, required: true },
             number: { type: String, required: true },
             value: { type: String, required: true },
+            subValue: { type: String, required: true },
         }]
     },
     thirdSection: {
@@ -80,6 +81,8 @@ const aboutSchema = new mongoose.Schema({
         items: [
             {
                 title: { type: String, required: true },
+                xValue: { type: String, required: true },
+                yValue: { type: String, required: true },
             }
         ]
     },

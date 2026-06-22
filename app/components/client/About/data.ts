@@ -1,3 +1,110 @@
+export interface AboutPageData {
+  _id: string;
+  __v: number;
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    imageAlt: string;
+    title: string;
+    image: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    items: {
+      image: string;
+      imageAlt: string;
+      number: string;
+      value: string;
+      subValue: string;
+      _id: string;
+    }[];
+  };
+
+  thirdSection: {
+    title: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  fourthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  fifthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  sixthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  seventhSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      number: string;
+      value: string;
+    }[];
+  };
+
+  eighthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+      xValue:string;
+      yValue:string;
+    }[];
+  };
+
+  ninethSection: {
+    title: string;
+    description: string;
+    items: {
+      buttonText:string;
+      buttonLink:string;
+    }[];
+  };
+}
+
 export const AboutData = {
   title: "Dosteen: A UAE & Oman Building Systems Engineering Company",
 

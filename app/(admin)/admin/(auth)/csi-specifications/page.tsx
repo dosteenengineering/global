@@ -13,106 +13,107 @@ import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { FileUploader } from '@/components/ui/file-uploader';
 
 export interface CsiFormProps {
-  metaTitle: string;
-  metaDescription: string;
+    metaTitle: string;
+    metaDescription: string;
 
-  firstSection: {
-    image: string;
-    imageAlt: string;
-    title: string;
-    description: string;
-  };
-
-  secondSection: {
-    title: string;
-    items: {
-      title: string;
-    }[];
-  };
-
-  thirdSection: {
-    title: string;
-    description: string;
-    itemTitle: string;
-    items: {
-      title: string;
-      description: string;
-    }[];
-  };
-
-  fourthSection: {
-    title: string;
-    items: {
-      title: string;
-      subTitle: string;
-      description: string;
-    }[];
-  };
-
-  fifthSection: {
-    title: string;
-    items: {
-      title: string;
-      subItems: {
+    firstSection: {
+        image: string;
+        imageAlt: string;
         title: string;
-      }[];
-    }[];
-  };
+        description: string;
+    };
 
-  sixthSection: {
-    title: string;
-    items: {
-      image: string;
-      imageAlt: string;
-      file: string;
-      title: string;
-      division: string;
-      section: string;
-    }[];
-  };
+    secondSection: {
+        title: string;
+        items: {
+            title: string;
+        }[];
+    };
 
-  seventhSection: {
-    title: string;
-    description: string;
-    items: {
-      image: string;
-      imageAlt: string;
-      title: string;
-      description: string;
-    }[];
-  };
+    thirdSection: {
+        title: string;
+        description: string;
+        itemTitle: string;
+        items: {
+            title: string;
+            description: string;
+        }[];
+    };
 
-  eighthSection: {
-    title: string;
-    description: string;
-    image: string;
-    imageAlt: string;
-  };
+    fourthSection: {
+        title: string;
+        items: {
+            title: string;
+            subTitle: string;
+            description: string;
+        }[];
+    };
 
-  ninethSection: {
-    title: string;
-    items: {
-      number: string;
-      value: string;
-    }[];
-  };
+    fifthSection: {
+        title: string;
+        items: {
+            title: string;
+            subItems: {
+                title: string;
+                subTitle: string;
+            }[];
+        }[];
+    };
 
-  tenthSection: {
-    title: string;
-    items: {
-      question: string;
-      answer: string;
-    }[];
-  };
+    sixthSection: {
+        title: string;
+        items: {
+            image: string;
+            imageAlt: string;
+            file: string;
+            title: string;
+            division: string;
+            section: string;
+        }[];
+    };
 
-  lastSection: {
-    title: string;
-    description: string;
-    items: {
-      buttonText: string;
-      buttonLink: string;
-    }[];
-  };
+    seventhSection: {
+        title: string;
+        description: string;
+        items: {
+            image: string;
+            imageAlt: string;
+            title: string;
+            description: string;
+        }[];
+    };
+
+    eighthSection: {
+        title: string;
+        description: string;
+        image: string;
+        imageAlt: string;
+    };
+
+    ninethSection: {
+        title: string;
+        items: {
+            number: string;
+            value: string;
+        }[];
+    };
+
+    tenthSection: {
+        title: string;
+        items: {
+            question: string;
+            answer: string;
+        }[];
+    };
+
+    lastSection: {
+        title: string;
+        description: string;
+        items: {
+            buttonText: string;
+            buttonLink: string;
+        }[];
+    };
 }
 
 const CsiPage = () => {
@@ -188,7 +189,7 @@ const CsiPage = () => {
         const currentFiles = watch(`fifthSection.items.${index}.subItems`) || [];
         setValue(`fifthSection.items.${index}.subItems`, [
             ...currentFiles,
-            { title: "" },
+            { title: "",subTitle:"" },
         ]);
     };
 
@@ -500,7 +501,7 @@ const CsiPage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => fourthSectionAppend({ title: "",subTitle:"", description: "" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => fourthSectionAppend({ title: "", subTitle: "", description: "" })}>Add Item</Button>
                         </div>
 
 
@@ -602,21 +603,35 @@ const CsiPage = () => {
                                                                         placeholder="Title"
                                                                         {...register(
                                                                             `fifthSection.items.${index}.subItems.${fileIndex}.title`,
-                                                                            {
-                                                                                required: "Title is required",
-                                                                            }
+                                                                            { required: "Title is required" }
                                                                         )}
                                                                     />
-                                                                    {errors.fifthSection?.items?.[index]
-                                                                        ?.subItems?.[fileIndex]?.title && (
+                                                                    {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.title && (
+                                                                        <p className="text-red-500">
+                                                                            {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.title.message}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+
+                                                                {index !== 2 && (
+                                                                    <div className="flex flex-col gap-2">
+                                                                        <Label className="font-bold">Sub Title</Label>
+                                                                        <Input
+                                                                            type="text"
+                                                                            placeholder="Sub Title"
+                                                                            {...register(
+                                                                                `fifthSection.items.${index}.subItems.${fileIndex}.subTitle`,
+                                                                                { required: "Sub Title is required" }
+                                                                            )}
+                                                                        />
+                                                                        {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.subTitle && (
                                                                             <p className="text-red-500">
-                                                                                {
-                                                                                    errors.fifthSection?.items?.[index]
-                                                                                        ?.subItems?.[fileIndex]?.title.message
-                                                                                }
+                                                                                {errors.fifthSection?.items?.[index]?.subItems?.[fileIndex]?.subTitle.message}
                                                                             </p>
                                                                         )}
-                                                                </div>
+                                                                    </div>
+                                                                )}
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -739,7 +754,7 @@ const CsiPage = () => {
                                 ))}
 
                                 <div className='flex justify-end'>
-                                    <Button type='button' className="" addItem onClick={() => sixthSectionAppend({ title: "", division: "", section:"", image: "", imageAlt: "",file:"" })}>Add Item</Button>
+                                    <Button type='button' className="" addItem onClick={() => sixthSectionAppend({ title: "", division: "", section: "", image: "", imageAlt: "", file: "" })}>Add Item</Button>
                                 </div>
 
                             </div>

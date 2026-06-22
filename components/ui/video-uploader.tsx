@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 interface VideoUploaderProps {
   value?: string;
-  onChange: (url: string, videoData?: File) => void;
+  onChange: (url: string, duration?: string, videoData?: File) => void;  // add duration
   className?: string;
   deleteAfterUpload?: boolean;
 }
@@ -19,55 +19,49 @@ export function VideoUploader({ value, onChange, className, deleteAfterUpload = 
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [localVideoUrl, setLocalVideoUrl] = useState<string | null>(null);
-  const [isUploadComplete, setIsUploadComplete] = useState(false);
+  const [isUploadComplete, setIsUploadComplete] = useState(!!value);
 
   useEffect(() => {
     setIsUploadComplete(!!value);
   }, [value]);
 
-  const onDrop = useCallback(
-    async (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
-      if (!file) return;
+const onDrop = useCallback(
+  async (acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    if (!file) return;
 
-      try {
-        setIsUploading(true);
-        setError(null);
-        setIsUploadComplete(false);
+    try {
+      setIsUploading(true);
+      setError(null);
 
-        // const formData = new FormData();
-        // formData.append("file", file);
-        // formData.append("fileType", "video");
-        // const response = await fetch("/api/admin/upload", {
-        //   method: "POST",
-        //   body: formData,
-        // });
+      // Read duration from file before uploading
+      const duration = await new Promise<string>((resolve) => {
+        const video = document.createElement("video");
+        video.preload = "metadata";
+        video.onloadedmetadata = () => {
+          URL.revokeObjectURL(video.src);
+          const m = Math.floor(video.duration / 60);
+          const s = Math.floor(video.duration % 60);
+          resolve(`${m}:${s.toString().padStart(2, "0")}`);
+        };
+        video.onerror = () => resolve("");
+        video.src = URL.createObjectURL(file);
+      });
 
-        // if (response.status !== 200) {
-        //   setLocalVideoUrl(null);
-        //   alert("Upload failed");
-        //   return;
-        // }
-
-        // const data = await response.json();
-        const filePath = `/uploads/video/${Date.now()}${file.name}`;
-        const uploadResult = await uploadToDropbox(file, filePath);
-        setLocalVideoUrl(uploadResult);
-        onChange(uploadResult, file);
-        setIsUploadComplete(true);
-        if (deleteAfterUpload) {
-          setLocalVideoUrl(null);
-          setIsUploadComplete(false);
-        }
-      } catch (err) {
-        setLocalVideoUrl(null);
-        setError(err instanceof Error ? err.message : "Failed to upload video");
-      } finally {
-        setIsUploading(false);
-      }
-    },
-    [onChange]
-  );
+      const filePath = `/uploads/video/${Date.now()}${file.name}`;
+      const uploadResult = await uploadToDropbox(file, filePath);
+      setLocalVideoUrl(uploadResult);
+      onChange(uploadResult, duration, file);  // pass duration
+      setIsUploadComplete(true);
+    } catch (err) {
+      setLocalVideoUrl(null);
+      setError(err instanceof Error ? err.message : "Failed to upload video");
+    } finally {
+      setIsUploading(false);
+    }
+  },
+  [onChange]
+);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -95,6 +89,10 @@ export function VideoUploader({ value, onChange, className, deleteAfterUpload = 
       setIsUploadComplete(false);
       onChange("", undefined);
       toast.success("Video deleted successfully")
+    }else{
+      setLocalVideoUrl(null);
+      setIsUploadComplete(false);
+      onChange("", undefined);
     }
   };
 

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { ValuesData } from "../data";
+import { AboutPageData, ValuesData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
@@ -31,7 +31,7 @@ function ValueCard({
   );
 }
 
-export default function OurValues() {
+export default function OurValues({data}:{data:AboutPageData['sixthSection']}) {
   return (
     <section className="bg-white w-full select-none overflow-hidden relative">
       <div className="absolute -top-13 left-0 pointer-events-none hidden lg:block">
@@ -48,16 +48,16 @@ export default function OurValues() {
           {/* Left — sticky title */}
           <div className="shrink-0">
             <SectionTitle
-              text={ValuesData.title}
+              text={data.title}
               className="section-heading-90 text-secondary uppercase"
             />
           </div>
 
           {/* Right — 2-col grid of value cards */}
           <div className="grid grid-cols-1 sm:grid-cols-[auto_auto] gap-x-60 xl:gap-x-[40px] 3xl:gap-x-[125px] gap-y-5 md:gap-y-40 3xl:gap-y-80">
-            {ValuesData.items.map((item, index) => (
+            {data.items.map((item, index) => (
               <ValueCard
-                key={item.id}
+                key={index}
                 title={item.title}
                 description={item.description}
                 delay={index * 0.1 + 0.2} 

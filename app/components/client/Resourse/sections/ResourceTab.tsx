@@ -1,7 +1,7 @@
 "use client";
 
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
-import type { ResourceHubData, ResourceHubTab } from "../data";
+import type { DynamicResourceHubData, ResourceHubData, ResourceHubTab } from "../data";
 import BimCadFilesTab from "./BimCadFilesTab";
 import BrochuresCataloguesTab from "./BrochuresCataloguesTab";
 import CertificationsComplianceTab from "./CertificationsComplianceTab";
@@ -15,9 +15,35 @@ import { SectionDescription } from "@/app/components/common/animations/SectionDe
 import { motion } from "framer-motion";
 import { fadeIn, moveDown, moveUp } from "@/app/components/motionVariants";
 
+// In ResourseTab.tsx - replace the interface
+
 interface ResourseTabProps {
-  data: ResourceHubData;
+  data: {
+    sectionTitle: string;
+    sectionDesc: string;
+    tabs: {
+      id: string;
+      label: string;
+      icon: string;
+      title: string;
+      description?: string;
+      button?: { text: string; link: string };
+      filters?: string[];
+      items?: Record<string, any[]> | any[];
+    }[];
+  };
 }
+
+type LooseTab = {
+  id: string;
+  label: string;
+  icon: string;
+  title: string;
+  description?: string;
+  button?: { text: string; link: string };
+  filters?: string[];
+  items?: Record<string, any[]> | any[];
+};
 
 const ResourseTab = ({ data }: ResourseTabProps) => {
   const [activeTab, setActiveTab] = useState(data.tabs[0].id);
@@ -91,25 +117,25 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleTabChange = (tab: ResourceHubTab) => {
+  const handleTabChange = (tab: LooseTab) => {
     setActiveTab(tab.id);
     setIsDropdownOpen(false);
   };
 
-  const renderTabContent = (tab: ResourceHubTab) => {
+  const renderTabContent = (tab: LooseTab) => {
     switch (tab.id) {
       case "technical-documents":
-        return <TechnicalDocumentsTab tab={tab} />;
+        return <TechnicalDocumentsTab tab={tab as any} />;
       case "bim-cad-files":
-        return <BimCadFilesTab tab={tab} />;
+        return <BimCadFilesTab tab={tab as any} />;
       case "videos-demos":
-        return <VideosDemosTab tab={tab} />;
+        return <VideosDemosTab tab={tab as any} />;
       case "brochures-catalogues":
-        return <BrochuresCataloguesTab tab={tab} />;
+        return <BrochuresCataloguesTab tab={tab as any} />;
       case "certifications-compliance":
-        return <CertificationsComplianceTab tab={tab} />;
+        return <CertificationsComplianceTab tab={tab as any} />;
       case "installation-maintenance":
-        return <InstallationMaintenanceTab tab={tab} />;
+        return <InstallationMaintenanceTab tab={tab as any} />;
       default:
         return null;
     }

@@ -117,6 +117,10 @@ const CsiSchema = new Schema(
                 type: String,
                 default: "",
               },
+              subTitle: {
+                type: String,
+                default: "",
+              },
             },
           ],
         },
@@ -130,7 +134,6 @@ const CsiSchema = new Schema(
       },
       items: [
         {
-          _id: false,
           image: {
             type: String,
             default: "",
@@ -170,7 +173,6 @@ const CsiSchema = new Schema(
       },
       items: [
         {
-          _id: false,
           image: {
             type: String,
             default: "",

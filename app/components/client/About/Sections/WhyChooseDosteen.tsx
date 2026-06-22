@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
-import { WhyChooseData } from "../data";
+import { AboutPageData, WhyChooseData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import NavButton from "@/app/components/common/NavigationButton";
@@ -64,7 +64,13 @@ function FeatureCard({
 }
 
 
-const slideGroups = WhyChooseData.items.reduce<(typeof WhyChooseData.items)[]>(
+export default function WhyChooseDosteen({data}:{data:AboutPageData['fourthSection']}) {
+  const swiperRef = useRef<SwiperType | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(1);
+  const [canSlide, setCanSlide] = useState(false);
+
+  const slideGroups = data.items.reduce<(typeof data.items)[]>(
   (acc, items, i) => {
     const groupSize = typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 2;
     if (i % groupSize === 0) acc.push([items]);
@@ -73,12 +79,6 @@ const slideGroups = WhyChooseData.items.reduce<(typeof WhyChooseData.items)[]>(
   },
   [],
 );
-
-export default function WhyChooseDosteen() {
-  const swiperRef = useRef<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [slidesPerView, setSlidesPerView] = useState(1);
-  const [canSlide, setCanSlide] = useState(false);
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -133,13 +133,13 @@ export default function WhyChooseDosteen() {
 
       <div className="relative z-10 container py-12.5 md:py-[140px] 3xl:py-[150px] w-full">
         <SectionTitle
-          text={WhyChooseData.title}
+          text={data.title}
           className="section-heading-90 text-white uppercase mb-50 3xl:mb-[70px] max-w-[27ch]"
         />
 
         <div className="lg:pl-[25.3%] w-full mb-100 3xl:mb-[109px]">
          
-          <SectionDescription text={WhyChooseData.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] xl:max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
+          <SectionDescription text={data.description} delay={0.5} className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30  tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] xl:max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0" />
         </div>
         {showPagination && (
           <motion.div
@@ -207,10 +207,10 @@ export default function WhyChooseDosteen() {
           {slideGroups.map((group, slideIndex) => (
             <SwiperSlide key={slideIndex}>
               <div className="flex flex-col gap-20">
-                {group.map((item) => (
+                {group.map((item,index) => (
                   <FeatureCard
-                    key={item.id}
-                    icon={item.icon}
+                    key={index}
+                    icon={item.image}
                     title={item.title}
                     description={item.description}
                     delay={0.5 + slideIndex * 0.1}

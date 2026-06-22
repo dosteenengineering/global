@@ -17,7 +17,21 @@ import { moveUp } from "@/app/components/motionVariants";
 
 const MotionLink = motion.create(Link);
 
-type DownloadItem = (typeof downloadData.sections)[0];
+// type DownloadItem = (typeof downloadData.sections)[0];
+
+interface DownloadItem {
+  id: number;
+  title: string;
+  division: string;
+  section: string;
+  icon: string;
+  link: string;
+}
+
+interface DownloadData {
+  sectionTitle: string;
+  sections: DownloadItem[];
+}
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const out: T[][] = [];
@@ -75,7 +89,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
   );
 }
 
-export default function DownloadSection() {
+export default function DownloadSection({downloadData}:{downloadData:DownloadData}) {
   const pairs = chunk(downloadData.sections, 2) as [
     DownloadItem,
     DownloadItem | undefined,

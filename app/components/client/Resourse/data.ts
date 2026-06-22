@@ -1,3 +1,143 @@
+export interface Resource {
+  _id: string;
+  metaTitle: string;
+  metaDescription: string;
+
+  bannerSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    items: SecondSectionItem[];
+  };
+
+  thirdSection: {
+    title: string;
+    buttonText: string;
+    buttonLink: string;
+    items: {
+      image: string;
+      imageAlt: string;
+      title: string;
+      subTitle: string;
+      pillText: string;
+    }[];
+  };
+
+  fourthSection: {
+    title: string;
+    items: {
+      title: string;
+      description: string;
+      buttonText: string;
+      buttonLink: string;
+    }[];
+  };
+
+  fifthSection: {
+    title: string;
+    description: string;
+    buttonText: string;
+  };
+
+  lastSection: {
+    title: string;
+    description: string;
+    items: {
+      buttonText: string;
+      buttonLink: string;
+    }[];
+  };
+
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SecondSectionItem {
+  _id: string;
+
+  type:
+    | "technicalDocuments"
+    | "bimCadFiles"
+    | "videosDemos"
+    | "brochures"
+    | "certifications"
+    | "installationMaintenance";
+
+  title: string;
+  image: string;
+  imageAlt: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+
+  columnItems: {
+    _id: string;
+    title: string;
+    subItems: {
+      _id: string;
+      title: string;
+      subTitle: string;
+      tags: string[];
+      file: string;
+    }[];
+  }[];
+
+  videoItems: {
+    _id: string;
+    image: string;
+    imageAlt: string;
+    title: string;
+    tags: string;
+    videoUrl: string;
+    duration:string;
+  }[];
+
+  brochureItems: {
+    _id: string;
+    title: string;
+    file: string;
+    tags:string[]
+  }[];
+
+  certificationItems: {
+    _id: string;
+    badgeText: string;
+    title: string;
+    description: string;
+    file: string;
+  }[];
+
+  installItems: {
+    _id: string;
+    fileType: string;
+    title: string;
+    description: string;
+    file: string;
+  }[];
+}
+
+// Loose type for dynamically transformed data
+export type DynamicResourceHubData = {
+  sectionTitle: string;
+  sectionDesc: string;
+  tabs: {
+    id: string;
+    label: string;
+    icon: string;
+    title: string;
+    description?: string;
+    button?: { text: string; link: string };
+    filters?: string[];
+    items?: Record<string, any[]> | any[];
+  }[];
+};
+
+
 export const banner = {
   title: "Resource",
   image: "/assets/images/projects/banner.jpg",

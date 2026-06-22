@@ -1,3 +1,115 @@
+export type Capability = {
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+  };
+
+  thirdSection: {
+    title: string;
+    description: string;
+  };
+
+  fourthSection: {
+    title: string;
+    items: {
+      _id?: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  fifthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id?: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  sixthSection: {
+    title: string;
+    description:string;
+    items: {
+      _id: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  seventhSection: {
+    title: string;
+    items: {
+      _id: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  eighthSection: {
+    title: string;
+    description: string;
+    items: {
+      _id?: string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  ninethSection: {
+    title: string;
+    items: {
+      _id?: string;
+      number: string;
+      value: string;
+    }[];
+  };
+
+  tenthSection: {
+    title: string;
+    items: {
+      _id?: string;
+      question: string;
+      answer: string;
+    }[];
+  };
+
+  lastSection: {
+    title: string;
+    description: string;
+    items: {
+      _id?: string;
+      buttonText: string;
+      buttonLink: string;
+    }[];
+  };
+
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
+
 export const banner = {
   title: "BIM-Integrated Building Systems Engineering — UAE & Oman",
   description:
@@ -111,7 +223,6 @@ export const softwareToolsSection = {
 export interface BenefitItem {
   id: string;
   label: string;
-  description: string;
   image: string;
 }
 
@@ -139,7 +250,7 @@ export const whoBenefitsSection = {
         "As-built BIM models delivered at handover support FM operations, COBie data obligations, and Civil Defence record submissions — reducing the cost and effort of post-handover documentation.",
       image: "/assets/images/project-details/solutions/1.jpg",
     },
-  ] satisfies BenefitItem[],
+  ],
 };
 
 

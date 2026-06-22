@@ -1,3 +1,114 @@
+export type Csi = {
+  metaTitle: string;
+  metaDescription: string;
+
+  firstSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+  };
+
+  secondSection: {
+    title: string;
+    items: {
+      title: string;
+    }[];
+  };
+
+  thirdSection: {
+    title: string;
+    description: string;
+    itemTitle: string;
+    items: {
+      title: string;
+      description: string;
+    }[];
+  };
+
+  fourthSection: {
+    title: string;
+    items: {
+      title: string;
+      subTitle: string;
+      description: string;
+    }[];
+  };
+
+  fifthSection: {
+    title: string;
+    items: {
+      title: string;
+      subItems: {
+        title: string;
+        subTitle:string;
+      }[];
+    }[];
+  };
+
+  sixthSection: {
+    title: string;
+    items: {
+      image: string;
+      imageAlt: string;
+      file: string;
+      title: string;
+      division: string;
+      section: string;
+    }[];
+  };
+
+  seventhSection: {
+    title: string;
+    description: string;
+    items: {
+      _id:string;
+      image: string;
+      imageAlt: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  eighthSection: {
+    title: string;
+    description: string;
+    image: string;
+    imageAlt: string;
+  };
+
+  ninethSection: {
+    title: string;
+    items: {
+      number: string;
+      value: string;
+    }[];
+  };
+
+  tenthSection: {
+    title: string;
+    items: {
+      _id:string;
+      question: string;
+      answer: string;
+    }[];
+  };
+
+  lastSection: {
+    title: string;
+    description: string;
+    items: {
+      buttonText: string;
+      buttonLink: string;
+    }[];
+  };
+
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+};
+
 
 export const banner = {
   title: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
@@ -65,7 +176,7 @@ export const threePartSpecData = {
 };
 
 export const systemsData = {
-  title: "Dosteen Systems — CSI Master Format Division Reference",
+  title: "sectiond",
 
   tableData: [
     {
