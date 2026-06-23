@@ -14,6 +14,7 @@ import { Home } from "./data";
 import { IndustriesPageData } from "../Services/data";
 import { AllProjectData } from "../ProjectDetails/data";
 import { AllBlogData } from "../Blog/data";
+import { ClientPageData } from "../Partners/data";
 
 
 function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
@@ -49,7 +50,7 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
   };
 }
 
-const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw }: { data: Home, solutionsRaw: IndustriesPageData, projectsData: AllProjectData, blogsDataRaw: AllBlogData }) => {
+const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: { data: Home, solutionsRaw: IndustriesPageData, projectsData: AllProjectData, blogsDataRaw: AllBlogData, clientsData:ClientPageData }) => {
 
   const solutionsData = transformToSolutionsData(solutionsRaw, data);
 
@@ -102,6 +103,8 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw }: { data: Home,
     })),
   }
 
+  console.log(clientsData)
+
   return (
     <>
       <HeroSection data={data.bannerSection} />
@@ -114,7 +117,7 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw }: { data: Home,
       <FeaturedProjects featuredProjectsData={featuredProjects} />
       <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} />
       <BlogsSection blogsData={blogsData}/>
-      <TrustedClients data={data.twelthSection} />
+      <TrustedClients data={data.twelthSection} clientsData={clientsData}/>
       <CtaSection data={data.lastSection} />
     </>
   );
