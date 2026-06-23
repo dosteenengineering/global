@@ -16,19 +16,20 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import Link from "next/link";
 
-import { featuredProjectsData, Project } from "../data";
+import { Project } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import BorderButton from "@/app/components/common/BorderButton";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { AllProjectData } from "../../ProjectDetails/data";
 
 function getInactiveProjects(
-  projects: Project[],
+  projects: AllProjectData['projects'],
   activeIndex: number,
   count: number,
-): Project[] {
+): AllProjectData['projects'] {
   const total = projects.length;
   return Array.from(
     { length: count },
@@ -41,14 +42,14 @@ function InactiveSlot({
   direction,
   changeCount,
 }: {
-  project: Project;
+  project:AllProjectData['projects'][0];
   direction: "left" | "right";
   changeCount: number;
 }) {
-  const prevProjectRef = useRef<Project>(project);
+  const prevProjectRef = useRef<AllProjectData['projects'][0]>(project);
   const [displayed, setDisplayed] = useState<{
-    prev: Project;
-    next: Project;
+    prev: AllProjectData['projects'][0];
+    next: AllProjectData['projects'][0];
     animating: boolean;
   }>({
     prev: project,
@@ -79,14 +80,14 @@ function InactiveSlot({
 
   return (
     <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-      <Link href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
+      <Link href={`/projects/${project.slug}`}>
         <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
           {displayed.animating && (
             <p
               className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
               style={{ ["--exit-to" as string]: exitTo }}
             >
-              {displayed.prev.name}
+              {displayed.prev.firstSection.title}
             </p>
           )}
           <p
@@ -97,11 +98,11 @@ function InactiveSlot({
                 : {}
             }
           >
-            {displayed.next.name}
+            {displayed.next.firstSection.title}
           </p>
         </div>
       </Link>
-      <Link href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}>
+      <Link href={`/projects/${project.slug}`}>
         <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
           {displayed.animating && (
             <div
@@ -109,8 +110,8 @@ function InactiveSlot({
               style={{ ["--exit-to" as string]: exitTo }}
             >
               <Image
-                src={displayed.prev.image}
-                alt={displayed.prev.name}
+                src={displayed.prev.thumbnail}
+                alt={displayed.prev.thumbnailAlt}
                 fill
                 className="object-cover pointer-events-none"
               />
@@ -125,8 +126,8 @@ function InactiveSlot({
             }
           >
             <Image
-              src={displayed.next.image}
-              alt={displayed.next.name}
+              src={displayed.next.thumbnail}
+              alt={displayed.next.thumbnailAlt}
               fill
               className="object-cover pointer-events-none"
               sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
@@ -138,7 +139,7 @@ function InactiveSlot({
   );
 }
 
-export default function FeaturedProjectsSection() {
+export default function FeaturedProjectsSection({featuredProjectsData}:{featuredProjectsData:AllProjectData['projects']}) {
   // ── Desktop swiper state ──
   const activeSwiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -162,7 +163,7 @@ export default function FeaturedProjectsSection() {
   const mobileSwiperRef = useRef<SwiperType | null>(null);
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
 
-  const projects = featuredProjectsData.projects;
+  const projects = featuredProjectsData;
   const inactiveProjects = getInactiveProjects(projects, activeIndex, 2);
 
   // Desktop handlers
@@ -204,7 +205,7 @@ export default function FeaturedProjectsSection() {
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
       <div ref={containerRef} className="container">
         <SectionTitle
-          text={featuredProjectsData.title}
+          text={"Featured Projects"}
           className="section-heading-90 mb-25 md:mb-70  md:text-center xl:ml-[1.8em]"
         />
       </div>
@@ -226,8 +227,8 @@ export default function FeaturedProjectsSection() {
             viewport={{ once: true, amount: 0.5 }}
           >
             <BorderButton
-              href={featuredProjectsData.viewAllHref}
-              text={featuredProjectsData.viewAllLabel}
+              href={"/projects"}
+              text={"All Projects"}
               borderColor="black"
               textColor="black"
               px="md:px-[35px] px-[23px]"
@@ -295,14 +296,14 @@ export default function FeaturedProjectsSection() {
             }}
             className="w-full"
           >
-            {projects.map((project: Project, idx: number) => {
+            {projects.map((project, idx: number) => {
               const isActive = idx === mobileActiveIndex;
               return (
-                <SwiperSlide key={project.key}>
+                <SwiperSlide key={idx}>
                   <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
-                      src={project.image}
-                      alt={project.name}
+                      src={project.thumbnail}
+                      alt={project.thumbnailAlt}
                       fill
                       className="object-cover"
                       priority={idx === 0}
@@ -342,16 +343,16 @@ export default function FeaturedProjectsSection() {
                         }`}
                       >
                         <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
-                          {project.name}
+                          {project.firstSection.title}
                         </p>
 
                         <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
                         <div className="flex items-center gap-3 justify-between">
                           <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
-                            Location: {project.location}
+                            Location: {project.firstSection.location.name}
                           </span>
                           <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
-                            Client: {project.client}
+                            Client: {project.firstSection.client}
                           </span>
                         </div>
                       </div>
@@ -399,15 +400,15 @@ export default function FeaturedProjectsSection() {
             }}
             className="w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer"
           >
-            {projects.map((project: Project) => (
-              <SwiperSlide key={project.key}>
+            {projects.map((project,index) => (
+              <SwiperSlide key={index}>
                 <Link
-                  href={`/projects/${project.name.toLowerCase().replace(" ", "-")}`}
+                  href={`/projects/${project.slug}`}
                 >
                   <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                     <Image
-                      src={project.image}
-                      alt={project.name}
+                      src={project.thumbnail}
+                      alt={project.thumbnailAlt}
                       fill
                       className="object-cover"
                       priority
@@ -430,15 +431,15 @@ export default function FeaturedProjectsSection() {
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 px-50 pb-40 3xl:pb-[43px] z-10">
                       <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px]">
-                        {project.name}
+                        {project.firstSection.title}
                       </p>
                       <div className="h-[1px] bg-white/30 mb-20 2xl:mb-[22px]" />
                       <div className="flex items-center gap-150 3xl:gap-[163px]">
                         <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
-                          Location: {project.location}
+                          Location: {project.firstSection.location.name}
                         </span>
                         <span className="text-white leading-[1.52] text-19 font-poppins font-[300] -tracking-[2%]">
-                          Client: {project.client}
+                          Client: {project.firstSection.client}
                         </span>
                       </div>
                     </div>
@@ -481,7 +482,7 @@ export default function FeaturedProjectsSection() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row gap-30 items-end"
           >
-            {inactiveProjects.map((project: Project, i: number) => (
+            {inactiveProjects.map((project, i: number) => (
               <InactiveSlot
                 key={`slot-${i}`}
                 project={project}
@@ -504,8 +505,8 @@ export default function FeaturedProjectsSection() {
             viewport={{ once: true }}
           >
             <BorderButton
-              href={featuredProjectsData.viewAllHref}
-              text={featuredProjectsData.viewAllLabel}
+              href={"/projects"}
+              text={"All Projects"}
               borderColor="black"
               textColor="black"
               px="px-30 3xl:px-[35px]"

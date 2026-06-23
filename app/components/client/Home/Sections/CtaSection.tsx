@@ -3,13 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Fragment, useState, useEffect } from "react";
-import { ctaData } from "../data";
+import { Home } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
 
-export default function CtaSection() {
+export default function CtaSection({data}:{data:Home['lastSection']}) {
   const [isMobile, setIsMobile] = useState(false);
 
 useEffect(() => {
@@ -39,14 +39,14 @@ useEffect(() => {
       <div className="relative z-10 container py-12.5 md:py-140 3xl:pt-[146px] 3xl:pb-150 flex flex-col gap-[30px] md:gap-10 lg:gap-[50px] items-center justify-center">
         {/* Heading */}
         <SectionTitle
-          title={ctaData.heading}
+          title={data.title}
           className="text-white section-heading-90 text-center max-w-[1492px]"
         />
 
         {/* Actions row */}
         <div className="flex flex-col sm:flex-row items-center h-[80px] md:h-[130px]">
-          {ctaData.actions.map((action, i) => (
-            <Fragment key={action.key}>
+          {data.items.map((action, i) => (
+            <Fragment key={i}>
               {/* Divider between items — animates at delay 0.18 */}
               {i === 1 && (
                 <div className="overflow-hidden self-stretch flex-shrink-0 h-px w-full sm:h-full sm:w-px my-2 sm:my-0">
@@ -74,11 +74,11 @@ useEffect(() => {
                   viewport={{ amount: 0.1, once: true }}
                 >
                   <Link
-                    href={action.href}
-                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px] ${i === 0 ? "sm:pl-0" : ""} ${i === ctaData.actions.length - 1 ? "sm:pr-0" : ""}`}
+                    href={action.link}
+                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px] ${i === 0 ? "sm:pl-0" : ""} ${i === data.items.length - 1 ? "sm:pr-0" : ""}`}
                   >
                     <span className="text-white font-poppins font-light text-30 leading-[1.52] -tracking-[2%] uppercase">
-                      {action.label}
+                      {action.title}
                     </span>
                     <Image
                       src="/assets/icons/button-arrow-top-right.svg"

@@ -8,7 +8,7 @@ import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 
-import { blogsData, BlogPost } from "../data";
+// import { BlogPost } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
@@ -16,9 +16,23 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
 
+type BlogPost = {
+  key: string;
+  title: string;
+  category: string;
+  date: string;
+  image: string;
+  href: string;
+};
+
+type BlogsData = {
+  title: string;
+  posts: BlogPost[];
+};
+
 const SLIDE_GAP = 80;
 
-export default function BlogsSection() {
+export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
   // ── Desktop swiper ──
   const swiperRef = useRef<SwiperType | null>(null);
   const slideRef = useRef<HTMLDivElement | null>(null);

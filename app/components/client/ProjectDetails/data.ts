@@ -82,6 +82,8 @@ export interface ProjectItemProps {
       _id:string;
     }[]
 
+    featured:boolean;
+
     images: string[];
 
     slug: string;

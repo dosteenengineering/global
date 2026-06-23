@@ -11,6 +11,14 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { VideoUploader } from '@/components/ui/video-uploader';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+import { image } from 'framer-motion/client';
 
 export interface HomeFormProps {
     metaTitle: string;
@@ -22,8 +30,8 @@ export interface HomeFormProps {
         title: string;
         buttonText: string;
         buttonLink: string;
-        mobileImage:string;
-        desktopImage:string;
+        mobileImage: string;
+        desktopImage: string;
     };
 
     secondSection: {
@@ -41,6 +49,7 @@ export interface HomeFormProps {
 
     thirdSection: {
         title: string;
+        image:string;
         items: {
             title: string;
             image: string;
@@ -90,7 +99,10 @@ export interface HomeFormProps {
             title: string;
             description: string;
             link: string;
-            video:string;
+            video: string;
+            image: string;
+            imageAlt: string;
+            type: string;
         }[];
     };
 
@@ -422,6 +434,25 @@ const HomePage = () => {
                             })} />
                             {errors.thirdSection?.title && <p className='text-red-500'>{errors.thirdSection?.title.message}</p>}
                         </div>
+
+                        <div className='flex flex-col gap-1'>
+                            <Label className='font-bold'>Image</Label>
+                            <Controller
+                                name="thirdSection.image"
+                                control={control}
+                                rules={{ required: "Image is required" }}
+                                render={({ field }) => (
+                                    <ImageUploader
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        recommendedDimension="Recommended: 637 x 508 (px)"
+                                    />
+                                )}
+                            />
+                            {errors.thirdSection?.image && (
+                                <p className="text-red-500">{errors.thirdSection?.image.message}</p>
+                            )}
+                        </div>
                     </div>
                 </AdminItemContainer>
 
@@ -703,44 +734,98 @@ const HomePage = () => {
                                                     <Input type='text' placeholder='Title' {...register(`eighthSection.items.${index}.title`, {
                                                         required: "Title is required"
                                                     })} />
-                                                    {errors.eighthSection?.items?.[index]?.title && <p className='text-red-500'>{errors.eighthSection?.items?.[index]?.title.message}</p>}
+                                                    {errors.eighthSection?.items?.[index]?.title && (
+                                                        <p className='text-red-500'>{errors.eighthSection?.items?.[index]?.title.message}</p>
+                                                    )}
                                                 </div>
 
                                                 <div className='flex flex-col gap-2'>
                                                     <Label className='font-bold'>Description</Label>
                                                     <Textarea placeholder='Description' {...register(`eighthSection.items.${index}.description`)} />
                                                 </div>
-
                                             </div>
 
-                                            <div>
+                                            <div className='flex flex-col gap-2'>
                                                 <div className='flex flex-col gap-2'>
                                                     <Label className='font-bold'>Link</Label>
                                                     <Input type='text' placeholder='Link' {...register(`eighthSection.items.${index}.link`)} />
                                                 </div>
 
+                                                {/* Media type selector */}
                                                 <div className='flex flex-col gap-2'>
-                                                    <Label className=''>Video</Label>
+                                                    <Label className='font-bold'>Media Type</Label>
                                                     <Controller
-                                                        name={`eighthSection.items.${index}.video`}
+                                                        name={`eighthSection.items.${index}.type`}
                                                         control={control}
-                                                        rules={{ required: "Video is required" }}
+                                                        defaultValue="video"
                                                         render={({ field }) => (
-                                                            <VideoUploader
-                                                                value={field.value}
-                                                                onChange={field.onChange}
-                                                            />
+                                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                                <SelectTrigger className="w-full">
+                                                                    <SelectValue placeholder="Select Media Type" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    <SelectItem value="video">Video</SelectItem>
+                                                                    <SelectItem value="image">Image</SelectItem>
+                                                                </SelectContent>
+                                                            </Select>
                                                         )}
                                                     />
-                                                    {errors?.eighthSection?.items?.[index]?.video && (
-                                                        <p className="text-red-500">{errors.eighthSection.items[index]?.video?.message}</p>
-                                                    )}
                                                 </div>
 
+                                                {/* Conditional media uploader */}
+                                                <Controller
+                                                    name={`eighthSection.items.${index}.type`}
+                                                    control={control}
+                                                    render={({ field: typeField }) => (
+                                                        <>
+                                                            {typeField.value === "video" || !typeField.value ? (
+                                                                <div className='flex flex-col gap-2'>
+                                                                    <Label className='font-bold'>Video</Label>
+                                                                    <Controller
+                                                                        name={`eighthSection.items.${index}.video`}
+                                                                        control={control}
+                                                                        render={({ field }) => (
+                                                                            <VideoUploader
+                                                                                value={field.value}
+                                                                                onChange={field.onChange}
+                                                                            />
+                                                                        )}
+                                                                    />
+                                                                    {errors?.eighthSection?.items?.[index]?.video && (
+                                                                        <p className="text-red-500">{errors.eighthSection.items[index]?.video?.message}</p>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                <div className='flex flex-col gap-2'>
+                                                                    <Label className='font-bold'>Image</Label>
+                                                                    <Controller
+                                                                        name={`eighthSection.items.${index}.image`}
+                                                                        control={control}
+                                                                        render={({ field }) => (
+                                                                            <ImageUploader
+                                                                                value={field.value}
+                                                                                onChange={field.onChange}
+                                                                                recommendedDimension="Recommended: 1280 x 720 (px)"
+                                                                            />
+                                                                        )}
+                                                                    />
+                                                                    {errors?.eighthSection?.items?.[index]?.image && (
+                                                                        <p className="text-red-500">{errors.eighthSection.items[index]?.image?.message}</p>
+                                                                    )}
+                                                                    <Label className='font-bold'>Alt Tag</Label>
+                                                                    <Input
+                                                                        type='text'
+                                                                        placeholder='Alt Tag'
+                                                                        {...register(`eighthSection.items.${index}.imageAlt`)}
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                        </>
+                                                    )}
+                                                />
+
                                             </div>
-
                                         </div>
-
                                     </div>
                                 ))}
 
@@ -748,7 +833,7 @@ const HomePage = () => {
 
                             </div>
                             <div className='flex justify-end mt-2'>
-                                <Button type='button' addItem onClick={() => eighthSectionAppend({ title: "", description: "", link: "", video:"" })}>Add Item</Button>
+                                <Button type='button' addItem onClick={() => eighthSectionAppend({ title: "", description: "", link: "", video: "", type: "", image: "", imageAlt: "" })}>Add Item</Button>
                             </div>
                         </div>
 

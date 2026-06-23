@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useLayoutEffect } from "react";
-import { solutionsData, SolutionTab } from "../data";
 import { FiArrowRight } from "react-icons/fi";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
@@ -9,7 +8,28 @@ import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 import BorderButton from "@/app/components/common/BorderButton";
 import Link from "next/link";
 
-export default function SolutionsSection() {
+type SolutionRightItem = {
+  label: string;
+  link: string;
+};
+
+type SolutionTab = {
+  key: string;
+  label: string;
+  leftTitle: string;
+  rightItems: SolutionRightItem[];
+};
+
+type SolutionsData = {
+  mainTitle: string;
+  secondTitle: string;
+  btnText: string;
+  btnLink: string;
+  backgroundImage: string;
+  tabs: SolutionTab[];
+};
+
+export default function SolutionsSection({solutionsData}:{solutionsData:SolutionsData}) {
   const [activeTab, setActiveTab] = useState<string | null>(
     solutionsData.tabs[0].key,
   );
@@ -121,7 +141,7 @@ export default function SolutionsSection() {
                   className="w-px bg-white/35"
                 />
                 <div className="ml-15 2xl:ml-auto 3xl:mr-15 mt-120 3xl:mt-[203px]">
-                  <div className="grid grid-cols-2 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
+                  <div className="grid grid-cols-1 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
                     {activeData.rightItems.map((item, index) => (
                       <motion.div
                         key={`${activeTab}-${index}`}

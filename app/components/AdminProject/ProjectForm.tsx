@@ -100,6 +100,7 @@ interface ProjectFormProps {
     }[];
 
     featuredServices: string[];
+    featured:boolean;
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -113,7 +114,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
     // Change the state type to match the actual API response shape
     const [availableServices, setAvailableServices] = useState<{
         _id: string;
-         title: string;
+        title: string;
     }[]
     >([]);
 
@@ -190,6 +191,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("metaDescription", data.data.metaDescription);
                 setValue("images", data.data.images);
                 setValue("slug", data.data.slug);
+                setValue("featured", data.data.featured);
                 setValue("featuredServices", data.data.featuredServices?.map((s: any) =>
                     typeof s === "object" ? s._id : s
                 ) ?? []);
@@ -758,6 +760,31 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 </AdminItemContainer>
 
 
+                <AdminItemContainer>
+                    <Label main>Featured Project</Label>
+                    <div className="p-5 flex flex-col gap-3">
+                        <Label className="font-bold">Mark as Featured</Label>
+                        <Controller
+                            control={control}
+                            name="featured"
+                            defaultValue={false}
+                            render={({ field }) => (
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        id="featured"
+                                        checked={field.value}
+                                        onChange={(e) => field.onChange(e.target.checked)}
+                                        className="w-4 h-4 cursor-pointer"
+                                    />
+                                    <label htmlFor="featured" className="cursor-pointer text-sm">
+                                        Show this project in featured sections
+                                    </label>
+                                </div>
+                            )}
+                        />
+                    </div>
+                </AdminItemContainer>
 
                 <AdminItemContainer>
                     <Label main>SEO</Label>

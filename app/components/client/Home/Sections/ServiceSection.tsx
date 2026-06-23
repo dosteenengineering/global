@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { servicesData, ServiceTab } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,8 +12,32 @@ import { moveUp } from "@/app/components/motionVariants";
 import { useInView } from "framer-motion";
 import AnimatedServiceIcon from "./AnimatedServiceIcon";
 
-export default function ServicesSection() {
-  const [activeTab, setActiveTab] = useState<string>(servicesData.tabs[1].key);
+type SvgPath = {
+  d: string;
+  len: number;
+  delay: number;
+};
+
+type ServiceTab = {
+  key: string;
+  label: string;
+  image: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+  svgPaths: SvgPath[];
+};
+
+type ServicesData = {
+  title: string;
+  topRightSvg: string;
+  tabs: ServiceTab[];
+};
+
+export default function ServicesSection({servicesData}:{servicesData:ServicesData}) {
+
+  console.log(servicesData)
+  const [activeTab, setActiveTab] = useState<string>(servicesData.tabs[1] ? servicesData.tabs[1].key : servicesData.tabs[0].key );
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

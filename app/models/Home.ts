@@ -29,6 +29,7 @@ const homeSchema = new mongoose.Schema({
     },
     thirdSection: {
         title: { type: String, required: true },
+        image: { type: String, required: true },
     },
     fourthSection: {
         title: { type: String, required: true },
@@ -69,6 +70,9 @@ const homeSchema = new mongoose.Schema({
             description: { type: String },
             link: { type: String },
             video: { type: String },
+            image: { type: String },
+            imageAlt: { type: String },
+            type: { type: String },
         }]
     },
     ninethSection: {

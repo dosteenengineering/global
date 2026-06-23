@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { locationsData } from "../data";
+import { ContactData, locationsData } from "../data";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { useRef, useState } from "react";
@@ -11,8 +11,13 @@ import Reveal from "@/app/components/common/animations/RevealItemsOneByOne";
 import { moveUpV2 } from "@/app/components/motionVariants";
 import { useParallax } from "@/app/components/common/animations/useParallax";
 
-export default function LocationsSection() {
-  const { image, locations } = locationsData;
+export default function LocationsSection({ data }: { data: ContactData['secondSection'] }) {
+  const { image } = data;
+  const locations = data.items.map((item) => ({
+    country: item.title,
+    locationUrl: item.map,
+    ...item
+  }))
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftInset = useGetContainerSpacing(containerRef);
   const { ref, parallaxY } = useParallax(12);
