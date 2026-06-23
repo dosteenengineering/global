@@ -5,9 +5,15 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Home, trustedClientsData } from "../data";
 import { div } from "framer-motion/client";
+import { ClientPageData } from "../../Partners/data";
 
-const TrustedClients = ({data}:{data:Home['twelthSection']}) => {
-  const logos = data.items
+const TrustedClients = ({data,clientsData}:{data:Home['twelthSection'],clientsData:ClientPageData}) => {
+    const logos = clientsData.fourthSection.items.flatMap((region: any) =>
+    (region.subItems ?? []).map((logo: any) => ({
+      image: logo.image ?? "",
+      imageAlt: logo.imageAlt ?? "",
+    }))
+  ).slice(0,15);
 
   const isDesktopRef = useRef(false);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -78,21 +84,32 @@ const TrustedClients = ({data}:{data:Home['twelthSection']}) => {
             if (isDesktopRef.current) tweenRef.current?.resume();
           }}
         >
-          <div
+          {/* <div
             ref={trackRef}
             className="flex items-center gap-[68px] md:gap-110 3xl:gap-[127px] pointer-events-none"
+          > */}
+          <div
+            ref={trackRef}
+            className="flex items-center gap-10 pointer-events-none"
           >
             {[...logos, ...logos, ...logos].map((logo, i) => (
               <div
                 key={i}
                 className="shrink-0 flex items-center justify-center w-fit h-[30px] md:h-[50px] lg:h-[80px] 2xl:h-[90px]"
               >
+                {/* <Image
+                  src={logo.image}
+                  alt={logo.imageAlt}
+                  height={800}
+                  width={400}
+                  className="object-contain max-w-[100px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] 2xl:h-[90px] w-auto"
+                /> */}
                 <Image
                   src={logo.image}
                   alt={logo.imageAlt}
-                  height={80}
-                  width={0}
-                  className="object-contain max-w-[100 px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] 2xl:h-[90px] w-auto"
+                  height={800}
+                  width={400}
+                  className="object-contain  h-[40px] md:h-[48px] lg:h-[80px] 2xl:h-[90px] w-auto"
                 />
               </div>
             ))}

@@ -21,11 +21,17 @@ const page = async () => {
     });
     const blogsData = await blogResponse.json();
 
-    return <Index 
-    data={data.data} 
-    solutionsRaw={solutionsData.data} 
-    projectsData={projectsData.data} 
-    blogsDataRaw={blogsData.data}
+    const clientsResponse = await fetch(`${process.env.BASE_URL}/api/admin/clients`, {
+        next: { revalidate: 60 },
+    });
+    const clientsData = await clientsResponse.json();
+
+    return <Index
+        data={data.data}
+        solutionsRaw={solutionsData.data}
+        projectsData={projectsData.data}
+        blogsDataRaw={blogsData.data}
+        clientsData={clientsData.data}
     />;
 };
 

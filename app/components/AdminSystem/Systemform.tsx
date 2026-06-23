@@ -283,7 +283,7 @@ fetchSystemData();
                                                         />
                                                     )}
                                                 />
-                                                {errors.firstSection?.image && <p className='text-red-500'>{errors.firstSection?.image.message}</p>}
+                                                {/* {errors.firstSection?.image && <p className='text-red-500'>{errors.firstSection?.image.message}</p>} */}
                                             </div>
                                             <div className='flex flex-col gap-2'>
                                                 <Label className='font-bold'>Alt Tag</Label>
@@ -328,7 +328,7 @@ fetchSystemData();
                                                 <Controller
                                                     name={`secondSection.items.${index}.image`}
                                                     control={control}
-                                                    rules={{ required: "Logo is required" }}
+                                                    
                                                     render={({ field }) => (
                                                         <ImageUploader
                                                             isLogo
@@ -338,7 +338,7 @@ fetchSystemData();
                                                         />
                                                     )}
                                                 />
-                                                {errors.secondSection?.items?.[index]?.image && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.image.message}</p>}
+                                                {/* {errors.secondSection?.items?.[index]?.image && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.image.message}</p>} */}
                                             </div>
                                             <div className='flex flex-col gap-2'>
                                                 <Label className='font-bold'>Alt Tag</Label>
@@ -478,7 +478,7 @@ fetchSystemData();
                                             <Controller
                                                 name={`fourthSection.items.${index}.logo`}
                                                 control={control}
-                                                rules={{ required: "Logo is required" }}
+                                                
                                                 render={({ field }) => (
                                                     <ImageUploader
                                                         value={field.value}
@@ -487,9 +487,9 @@ fetchSystemData();
                                                     />
                                                 )}
                                             />
-                                            {errors.fourthSection?.items?.[index]?.logo && (
+                                            {/* {errors.fourthSection?.items?.[index]?.logo && (
                                                 <p className="text-red-500">{errors.fourthSection?.items?.[index]?.logo.message}</p>
-                                            )}
+                                            )} */}
 
                                             <div className='flex flex-col gap-2'>
                                                 <div className='flex flex-col gap-2'>
@@ -505,7 +505,7 @@ fetchSystemData();
                                             <Controller
                                                 name={`fourthSection.items.${index}.image`}
                                                 control={control}
-                                                rules={{ required: "Image is required" }}
+                                                
                                                 render={({ field }) => (
                                                     <ImageUploader
                                                         value={field.value}
@@ -514,9 +514,9 @@ fetchSystemData();
                                                     />
                                                 )}
                                             />
-                                            {errors.fourthSection?.items?.[index]?.image && (
+                                            {/* {errors.fourthSection?.items?.[index]?.image && (
                                                 <p className="text-red-500">{errors.fourthSection?.items?.[index]?.image.message}</p>
-                                            )}
+                                            )} */}
 
                                             <div className='flex flex-col gap-2'>
                                                 <div className='flex flex-col gap-2'>
