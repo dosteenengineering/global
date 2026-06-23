@@ -161,7 +161,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import { bimData } from "../data";
+import { bimData, Home } from "../data";
 import Link from "next/link";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion, AnimatePresence } from "framer-motion";
@@ -169,7 +169,7 @@ import { moveUp } from "@/app/components/motionVariants";
 
 const SLIDE_DURATION = 6000; // ms
 
-type Slide = (typeof bimData)[number];
+type Slide = Home['eighthSection']['items'][0];
 
 /* ─── Background (video or image) ─────────────────────────────────── */
 function SlideBackground({
@@ -196,17 +196,17 @@ function SlideBackground({
     <AnimatePresence>
       {active && (
         <motion.div
-          key={slide.heading}
+          key={slide.title}
           className="absolute inset-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
         >
-          {slide.background.type === "video" ? (
+          {slide.type === "video" ? (
             <video
               ref={videoRef}
-              src={slide.background.src}
+              src={slide.video}
               muted
               loop
               playsInline
@@ -215,7 +215,7 @@ function SlideBackground({
             />
           ) : (
             <img
-              src={slide.background.src}
+              src={slide.image}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -270,7 +270,7 @@ function ArrowLink({ href }: { href: string }) {
 }
 
 /* ─── Main section ─────────────────────────────────────────────────── */
-export default function BimSection() {
+export default function BimSection({data}:{data:Home['eighthSection']}) {
   const [current, setCurrent] = useState(0);
   const [progress, setProgress] = useState(0); // 0–1
 
@@ -278,7 +278,7 @@ export default function BimSection() {
   const rafRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
 
-  const total = bimData.length;
+  const total = data.items.length;
   const next = (current + 1) % total;
 
   const goTo = useCallback((idx: number) => {
@@ -315,13 +315,13 @@ export default function BimSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
 
-  const slide = bimData[current];
-  const nextSlide = bimData[next];
+  const slide = data.items[current];
+  const nextSlide = data.items[next];
 
   return (
     <section className="relative lg:h-auto lg:min-h-screen w-full overflow-hidden bg-black">
       {/* backgrounds — render all, only active is visible */}
-      {bimData.map((s, i) => (
+      {data.items.map((s, i) => (
         <SlideBackground key={i} slide={s} active={i === current} />
       ))}
 
@@ -345,7 +345,7 @@ export default function BimSection() {
             transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
           >
             <SectionTitle
-              text={slide.heading}
+              text={slide.title}
               className="text-white section-heading-90 max-w-[22ch] mb-[30px] md:mb-40 lg:mb-[28px]"
             />
           </motion.div>
@@ -373,7 +373,7 @@ export default function BimSection() {
             className="text-white/60 text-19 leading-[1.67] md:leading-[1.52] min-w-[321px] font-light font-poppins -tracking-[2%] cursor-pointer hover:text-white/90 transition-colors duration-300"
             onClick={() => goTo(next)}
           >
-            {nextSlide.heading}
+            {nextSlide.title}
           </span>
         </motion.div>
 

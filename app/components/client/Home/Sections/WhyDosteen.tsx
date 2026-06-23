@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { whyDosteenData } from "../data";
+import { Home, whyDosteenData } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
@@ -106,8 +106,13 @@ const useWatermark = (
   return { exitingTitle, enteringTitle, animKey, exitDir };
 };
 
-export default function WhyDosteen() {
-  const { heading, slides } = whyDosteenData;
+export default function WhyDosteen({data}:{data:Home['seventhSection']}) {
+  const heading = data.title
+  const slides = data.items.map((item)=>({
+    icon:item.image,
+    ...item
+  }))
+  
   const n = slides.length;
 
   const [active, setActive] = useState(0);

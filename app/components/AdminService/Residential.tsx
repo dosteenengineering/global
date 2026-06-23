@@ -466,7 +466,7 @@ const IndividualService = () => {
                                                 <Controller
                                                     name={`fourthSection.items.${index}.image`}
                                                     control={control}
-                                                    rules={{ required: "Image is required" }}
+                                                    
                                                     render={({ field }) => (
                                                         <ImageUploader
                                                             value={field.value}
@@ -475,9 +475,7 @@ const IndividualService = () => {
                                                         />
                                                     )}
                                                 />
-                                                {errors.fourthSection?.items?.[index]?.image && (
-                                                    <p className="text-red-500">{errors.fourthSection?.items?.[index]?.image.message}</p>
-                                                )}
+                                                
                                             </div>
 
                                             <div className='flex flex-col gap-2'>

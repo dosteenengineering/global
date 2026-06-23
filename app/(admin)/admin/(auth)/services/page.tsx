@@ -30,6 +30,7 @@ export interface ServiceFormProps {
         title: string;
         items: {
             title: string;
+            homeTitle:string;
             description: string;
             image: string;
             imageAlt: string;
@@ -237,10 +238,15 @@ const ServicePage = () => {
 
                                     </div>
 
-                                    <div>
+                                    <div className='flex flex-col gap-2'>
                                         <div className='flex flex-col gap-2'>
                                             <Label className='font-bold'>Title</Label>
                                             <Input type='text' placeholder='Title' {...register(`thirdSection.items.${index}.title`)} />
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Title For Home (Solutions Section)</Label>
+                                            <Input type='text' placeholder='Title' {...register(`thirdSection.items.${index}.homeTitle`)} />
                                         </div>
 
                                         <div>
@@ -297,7 +303,7 @@ const ServicePage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description: "", buttonLink: "",slug:"" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => thirdSectionAppend({ image: "", imageAlt: "", title: "", description: "", buttonLink: "",slug:"", homeTitle:"" })}>Add Item</Button>
                         </div>
 
 

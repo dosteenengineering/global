@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { trustedClientsData } from "../data";
+import { Home, trustedClientsData } from "../data";
 import { div } from "framer-motion/client";
 
-const TrustedClients = () => {
-  const { logos } = trustedClientsData;
+const TrustedClients = ({data}:{data:Home['twelthSection']}) => {
+  const logos = data.items
 
   const isDesktopRef = useRef(false);
   const viewportRef = useRef<HTMLDivElement | null>(null);
@@ -88,8 +88,8 @@ const TrustedClients = () => {
                 className="shrink-0 flex items-center justify-center w-fit h-[30px] md:h-[50px] lg:h-[80px] 2xl:h-[90px]"
               >
                 <Image
-                  src={logo}
-                  alt=""
+                  src={logo.image}
+                  alt={logo.imageAlt}
                   height={80}
                   width={0}
                   className="object-contain max-w-[100 px] sm:max-w-[160px] h-[40px] md:h-[48px] lg:h-[80px] 2xl:h-[90px] w-auto"

@@ -24,6 +24,7 @@ const serviceSchema = new mongoose.Schema({
                 image: { type: String, required: true },
                 imageAlt: { type: String },
                 title: { type: String, required: true },
+                homeTitle: { type: String },
                 description: { type: String, required: true },
                 buttonLink: { type: String, required: true },
                 slug: { type: String, required: true },

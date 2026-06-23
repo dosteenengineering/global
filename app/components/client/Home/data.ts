@@ -1,3 +1,116 @@
+export interface Home {
+  metaTitle: string;
+  metaDescription: string;
+
+  bannerSection: {
+    desktopImage: string;
+    mobileImage: string;
+    imageAlt: string;
+    title: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+
+  secondSection: {
+    title: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+    items: {
+      number: string;
+      value: string;
+      image?: string;
+      imageAlt?: string;
+    }[];
+  };
+
+  thirdSection: {
+    title: string;
+    image:string;
+  };
+
+  fourthSection: {
+    title: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+
+  fifthSection: {
+    title: string;
+    items: {
+      image: string;
+      imageAlt?: string;
+      title?: string;
+      description?: string;
+      buttonText?: string;
+      buttonLink?: string;
+    }[];
+  };
+
+  sixthSection: {
+    title: string;
+    items: {
+      image: string;
+      imageAlt: string;
+      title: string;
+    }[];
+  };
+
+  seventhSection: {
+    title: string;
+    items: {
+      image: string;
+      imageAlt?: string;
+      title: string;
+      description: string;
+    }[];
+  };
+
+  eighthSection: {
+    items: {
+      title: string;
+      description?: string;
+      link: string;
+      video?: string;
+      image:string;
+      type:string;
+    }[];
+  };
+
+  ninethSection: {
+    title: string;
+  };
+
+  tenthSection: {
+    title: string;
+    items: {
+      name: string;
+      message?: string;
+      designation?: string;
+    }[];
+  };
+
+  eleventhSection: {
+    title: string;
+  };
+
+  twelthSection: {
+    items: {
+      image: string;
+      imageAlt: string;
+    }[];
+  };
+
+  lastSection: {
+    title: string;
+    items: {
+      title: string;
+      link: string;
+    }[];
+  };
+}
+
+
 //second Section
 export interface SlideData {
   id: number;

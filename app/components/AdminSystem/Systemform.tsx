@@ -273,7 +273,7 @@ fetchSystemData();
                                                 <Controller
                                                     name={`firstSection.image`}
                                                     control={control}
-                                                    rules={{ required: "Image is required" }}
+                                                    
                                                     render={({ field }) => (
                                                         <ImageUploader
                                                             isLogo

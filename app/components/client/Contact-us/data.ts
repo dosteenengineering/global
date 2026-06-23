@@ -1,3 +1,27 @@
+export type ContactData = {
+  metaTitle: string;
+  metaDescription: string;
+  firstSection: {
+    title: string;
+    description: string;
+  };
+  secondSection: {
+    image: string;
+    imageAlt: string;
+    items: {
+      title: string;
+      phone: string;
+      branch: string;
+      email: string;
+      address: string;
+      map: string;
+    }[];
+  };
+  thirdSection: {
+    title: string;
+  };
+};
+
 export const banner = {
   title: "Get in Touch with Dosteen Engineering",
   description:

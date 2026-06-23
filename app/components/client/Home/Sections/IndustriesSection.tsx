@@ -8,7 +8,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
 
-import { industriesData, Industry } from "../data";
+import { Home, Industry } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import ContainerAnchor from "@/app/components/layout/ContainerAnchor";
@@ -61,10 +61,10 @@ const applyHeights = (
   });
 };
 
-export default function IndustriesSection() {
+export default function IndustriesSection({data}:{data:Home['sixthSection']}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const leftInset = useGetContainerSpacing(containerRef);
-  const industries = industriesData.industries;
+  const industries = data.items;
   const total = industries.length;
 
   const swiperRef = useRef<SwiperType | null>(null);
@@ -219,8 +219,8 @@ export default function IndustriesSection() {
     </div>
   );
 
-  const slideElements = industries.map((industry: Industry, index: number) => (
-    <SwiperSlide key={industry.key} style={{ width: `${currentSlideWidth}px` }}>
+  const slideElements = industries.map((industry: Home['sixthSection']['items'][0], index: number) => (
+    <SwiperSlide key={index} style={{ width: `${currentSlideWidth}px` }}>
       <div
         data-inner
         className="relative cursor-grab"
@@ -233,7 +233,7 @@ export default function IndustriesSection() {
       >
         <Image
           src={industry.image}
-          alt={industry.label}
+          alt={industry.imageAlt}
           fill
           className="object-cover"
           sizes={showLg ? `${lgSlideWidth}px` : `${smSlideWidth}px`}
@@ -241,7 +241,7 @@ export default function IndustriesSection() {
         />
       </div>
       <div className="mt-[10px] md:mt-20 lg:mt-[22px] md:ml-[15px] lg:ml-[28px] text-30 font-light text-secondary">
-        {industry.label}
+        {industry.title}
       </div>
     </SwiperSlide>
   ));
@@ -255,7 +255,7 @@ export default function IndustriesSection() {
           <div className="grid grid-cols-[150px_1fr] 3xl:grid-cols-[215px_1fr] gap-x-60 3xl:gap-x-70 mb-40 xl:mb-70 text-secondary">
             <div />
             <SectionTitle
-              text={industriesData.title}
+              text={data.title}
               className="section-heading-90 max-w-[1129px]"
             />
           </div>
@@ -328,7 +328,7 @@ export default function IndustriesSection() {
       ) : (
         <div className="py-140 container">
           <SectionTitle
-            text={industriesData.title}
+            text={data.title}
             className="section-heading-90 w-full mb-20 sm:mb-40 text-secondary"
           />
 

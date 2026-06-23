@@ -6,7 +6,7 @@ import { Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { slidesData } from "../data";
+import { Home } from "../data";
 import BorderButton from "@/app/components/common/BorderButton";
 import Image from "next/image";
 import Counter from "@/app/components/common/CounterAnimate";
@@ -16,7 +16,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 const SLIDE_INTERVAL = 5000;
 const DRAG_THRESHOLD = 40;
 
-export default function AboutSlider() {
+export default function AboutSlider({data}:{data:Home['secondSection']}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1); // 1=forward, -1=backward
 
@@ -46,7 +46,7 @@ export default function AboutSlider() {
   const handleRealIndexChange = useCallback(
     (s: SwiperType) => {
       const next = s.realIndex;
-      const total = slidesData.length;
+      const total = data.items.length;
       const prev = prevIndex.current;
 
       // Detect wrap-around: last→first is a forward loop, first→last is backward loop
@@ -106,7 +106,7 @@ export default function AboutSlider() {
     isDragging.current = false;
   }, []);
 
-  const activeSlide = slidesData[activeIndex];
+  const activeSlide = data.items[activeIndex];
 
   return (
     <section
@@ -136,8 +136,8 @@ export default function AboutSlider() {
             onRealIndexChange={handleRealIndexChange}
             style={{ width: "100px", height: "100px" }}
           >
-            {slidesData.map((slide) => (
-              <SwiperSlide key={slide.id}>
+            {data.items.map((slide,index) => (
+              <SwiperSlide key={index}>
                 <div style={{ width: "100px", height: "100px" }} />
               </SwiperSlide>
             ))}
@@ -145,7 +145,7 @@ export default function AboutSlider() {
         </div>
         <div className="lg:ml-[29%] pt-[70px] lg:pt-120 px-[15px] lg:px-0 container">
           <SectionTitle
-            text="DELIVERING EXCELLENCE BEYOND BORDERS"
+            text={data.title}
             className="section-heading-90 max-w-[20ch] md:max-w-[25ch] 3xl:max-w-[23ch] text-secondary uppercase"
           />
         </div>
@@ -183,11 +183,11 @@ export default function AboutSlider() {
                 className="text-description !tracking-[0.02em] text-paragraph font-poppins font-light lg:max-w-[520px] 2xl:max-w-[554px]"
               >
                 <span className="font-[700]">
-                  {slidesData[0].description.split(",")[0]},
+                  {data.description.split(",")[0]},
                 </span>
                <span className="3xl:whitespace-pre-line">
-                  {slidesData[0].description.substring(
-                    slidesData[0].description.indexOf(",") + 1,
+                  {data.description.substring(
+                    data.description.indexOf(",") + 1,
                   )}
                 </span>
               </motion.p>
@@ -199,7 +199,7 @@ export default function AboutSlider() {
                   {String(activeIndex + 1).padStart(2, "0")}
                 </span>
                 <span className="text-[#C2C2C2]">/</span>
-                {String(slidesData.length).padStart(2, "0")}
+                {String(data.items.length).padStart(2, "0")}
               </span>
             </div>
             <div className="hidden lg:block" />
@@ -215,14 +215,14 @@ export default function AboutSlider() {
               </div>
               <div className="lg:flex lg:items-center">
                 <BorderButton
-                  text="Know More Us"
+                  text={data.buttonText}
                   borderColor="black"
                   textColor="black"
                   iconColor="primary"
                   hoverBg="black"
                   className="max-w-[215px]"
                   px="px-[23px] lg:px-[35px]"
-                  href="/about"
+                  href={data.buttonLink}
                 />
               </div>
             </div>
@@ -242,7 +242,7 @@ export default function AboutSlider() {
                   className="pt-[30px] md:pt-8 lg:pt-[45px]"
                 >
                   <Counter
-                    value={activeSlide.stat}
+                    value={activeSlide.number}
                     totalTime={2.5}
                     start={0}
                     className="font-helvetica text-250 leading-[1] text-secondary"
@@ -260,7 +260,7 @@ export default function AboutSlider() {
                     exit="exit"
                     className="text-30 font-poppins font-[300] leading-[1.33] text-paragraph -tracking-[2%]"
                   >
-                    {activeSlide.statLabel}
+                    {activeSlide.value}
                   </motion.p>
                 </AnimatePresence>
               </div>

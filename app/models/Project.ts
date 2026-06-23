@@ -66,6 +66,11 @@ const projectItemSchema = new mongoose.Schema(
             },
         ],
 
+        featured:{
+            type:Boolean,
+            default:false
+        },
+
         images: [{ type: String }],
 
         slug: {
