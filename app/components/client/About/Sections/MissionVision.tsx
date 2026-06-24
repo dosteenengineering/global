@@ -58,9 +58,9 @@ export default function MissionVision({data}:{data:AboutPageData['fifthSection']
           </div>
           <div className="lg:pt-100">
               <Card
-                icon={data.items[0].image}
-                title={data.items[0].title}
-                description={data.items[0].description}
+                icon={data.items[1].image}
+                title={data.items[1].title}
+                description={data.items[1].description}
                 delay={0.8}
               />
           </div>
