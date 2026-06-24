@@ -35,7 +35,8 @@ export default function BimEngineeringData({ data, descMaxWidth }: dataProps) {
             <StatNoise1 />
           </div>
           {/* <div className="relative z-10 flex flex-wrap gap-70 3xl:gap-[76px]"> */}
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-[346px_346px_346px_auto] gap-2.5 lg:gap-2 3xl:gap-[37px]">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 3xl:grid-cols-[346px_346px_346px_auto]
+           gap-x-2.5 gap-y-2.5 lg:gap-x-2 lg:gap-y-5 3xl:gap-[37px] ">
             {stats.map((stat, index) => (
               <motion.div
                 variants={moveUp(index * 0.2 * index)}
