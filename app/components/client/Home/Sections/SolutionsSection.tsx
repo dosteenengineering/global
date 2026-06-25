@@ -168,7 +168,7 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
             <div className="mt-[76px]" />
             {activeData && (
               <div className="flex w-full">
-                <div className="pr-12 2xl:pr-15 mt-120 3xl:mt-[203px] pb-200 3xl:pb-[204px]">
+                <div className="pr-12 2xl:pr-15 mt-120 3xl:mt-[170px] pb-200 3xl:pb-[204px]">
                   <motion.h3
                     key={activeTab}
                     initial="hidden"
@@ -187,8 +187,9 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
                   viewport={{ once: true }}
                   className="w-px bg-white/35"
                 />
-                <div className="ml-15 2xl:ml-auto 3xl:mr-15 mt-120 3xl:mt-[203px]">
-                  <div className="grid grid-cols-1 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] text-white">
+                {/* <div className="ml-15 2xl:ml-auto 3xl:mr-15 mt-120 3xl:mt-[170px]"> */}
+                <div className="ml-15 2xl:ml-150 mt-120 3xl:mt-[170px] pb-5 2xl:pb-10">
+                  <div className="grid grid-cols-1 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] text-19 font-light leading-[2.63] font-poppins -tracking-[2%] text-white">
                     {activeData.rightItems.map((item, index) => (
                       <motion.div
                         key={`${activeTab}-${index}`}
