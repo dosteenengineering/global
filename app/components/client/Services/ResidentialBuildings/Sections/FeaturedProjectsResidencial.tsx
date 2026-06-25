@@ -339,7 +339,7 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                 iconColor="primary"
                 px="px-6 lg:px-[35px]"
                 hoverBg="black"
-                href="/projects"
+                href="/case-studies"
               />
               {enableNavigation && (
                 <div className="flex gap-[15px]">

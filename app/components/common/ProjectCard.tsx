@@ -19,7 +19,7 @@ interface ProjectCardProps {
 //   return (
 //     <motion.div variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }} >
 
-//       <Link href={`/projects/${project.slug}`}>
+//       <Link href={`/case-studies/${project.slug}`}>
 //         <div className="flex flex-col group cursor-pointer">
 //           {/* Image */}
 //           <div className="relative w-full aspect-[11.2/12] lg:aspect-square  overflow-hidden mb-30 3xl:mb-[32px]">
@@ -113,7 +113,7 @@ export default function ProjectCard({
       viewport={{ once: true, amount: 0.3 }}
       className="h-full"
     >
-      <Link href={`/projects/${project.slug}`} className="h-full block">
+      <Link href={`/case-studies/${project.slug}`} className="h-full block">
         <div className="flex flex-col group cursor-pointer h-full">
           {/* Image */}
           <div className="relative w-full aspect-[11.2/12] lg:aspect-square overflow-hidden mb-30 3xl:mb-[32px] flex-shrink-0">

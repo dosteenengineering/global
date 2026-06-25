@@ -81,7 +81,7 @@ function InactiveSlot({
 
   return (
     <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-      <Link href={`/projects/${project?.slug}`}>
+      <Link href={`/case-studies/${project?.slug}`}>
         <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
           {displayed.animating && (
             <p
@@ -103,7 +103,7 @@ function InactiveSlot({
           </p>
         </div>
       </Link>
-      <Link href={`/projects/${project?.slug}`}>
+      <Link href={`/case-studies/${project?.slug}`}>
         <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
           {displayed.animating && (
             <div
@@ -232,7 +232,7 @@ export default function FeaturedProjectsSection({
             viewport={{ once: true, amount: 0.5 }}
           >
             <BorderButton
-              href={"/projects"}
+              href={"/case-studies"}
               text={"All Projects"}
               borderColor="black"
               textColor="black"
@@ -407,7 +407,7 @@ export default function FeaturedProjectsSection({
           >
             {projects.map((project, index) => (
               <SwiperSlide key={index}>
-                <Link href={`/projects/${project.slug}`}>
+                <Link href={`/case-studies/${project.slug}`}>
                   <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                     <Image
                       src={project.thumbnail || PLACEHOLDER}
@@ -508,7 +508,7 @@ export default function FeaturedProjectsSection({
             viewport={{ once: true }}
           >
             <BorderButton
-              href={"/projects"}
+              href={"/case-studies"}
               text={"All Projects"}
               borderColor="black"
               textColor="black"
