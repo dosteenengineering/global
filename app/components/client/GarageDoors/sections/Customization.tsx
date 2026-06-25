@@ -158,7 +158,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
             </div>
             <div className="mt-50" />
             {activeData && (
-              <div className="grid grid-cols-[1.2fr_2.5fr] 3xl:grid-cols-[478px_auto] pb-150">
+              <div className="grid grid-cols-[1.2fr_2.5fr] 2xl:grid-cols-[478px_auto] pb-150">
                 <div className=" pt-50 pb-50 3xl:pb-[126px] border-r border-bdr-gray">
                   <motion.h3
                     key={activeTab}
@@ -166,14 +166,15 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                     whileInView="show"
                     variants={moveUpVariant(1.5)}
                     viewport={{ once: true }}
-                    className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light"
+                    className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light pr-2"
                   >
                     {activeData.title}
                   </motion.h3>
                 </div>
                 {/* <motion.div initial="hidden" whileInView="show" variants={moveUpVariant(0.2)} viewport={{ once: true }} className="w-px bg-bdr-gray" /> */}
                 <div className="ml-15 2xl:ml-100 3xl:ml-[150px] pt-50">
-                  <div dangerouslySetInnerHTML={{__html:activeData.description}} className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system">
+                  <div dangerouslySetInnerHTML={{__html:activeData.description}} 
+                  className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system">
                     {/* {activeData.rightItems.map((item, index) => (
                       <motion.ul
                         key={`${activeTab}-${index}`}

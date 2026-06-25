@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
@@ -29,7 +29,54 @@ type SolutionsData = {
   tabs: SolutionTab[];
 };
 
+type DeviceType = {
+  isMobile: boolean;
+  isTablet: boolean;
+  isLaptop: boolean;
+  isDesktop: boolean;
+};
+
+const defaultDeviceType: DeviceType = {
+  isMobile: false,
+  isTablet: false,
+  isLaptop: false,
+  isDesktop: false,
+};
+
+const getDeviceType = (): DeviceType => {
+  if (typeof window === "undefined") {
+    return defaultDeviceType;
+  }
+
+  const width = window.innerWidth;
+
+  return {
+    isMobile: width < 768,
+    isTablet: width >= 768 && width < 1024,
+    isLaptop: width >= 1024,
+    isDesktop: width >= 1600,
+  };
+};
+
+
 export default function SolutionsSection({solutionsData}:{solutionsData:SolutionsData}) {
+  const [device, setDevice] = useState<DeviceType>(defaultDeviceType);
+  useEffect(() => {
+    const handleResize = () => {
+      setDevice(getDeviceType());
+    };
+
+    handleResize(); // Initial check
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const { isLaptop, isDesktop } = device;
+  
   const [activeTab, setActiveTab] = useState<string | null>(
     solutionsData.tabs[0].key,
   );
@@ -82,7 +129,7 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
           >
             <div className="mt-18 3xl:mt-[109px]">
               <div ref={tabsContainerRef} className="relative">
-                <div className="flex gap-80 text-25 xl:text-30 leading-[1.33] font-[300] font-poppins -tracking-[-0.02em] overflow-hidden">
+                <div className="flex gap-40 3xl:gap-80 text-25 xl:text-30 leading-[1.33] font-light font-poppins -tracking-[-0.02em] overflow-hidden">
                   {solutionsData.tabs.map((tab: SolutionTab, index: number) => (
                     <button
                       key={tab.key}
@@ -110,9 +157,9 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
                 </div>
                 <div className="absolute left-0 right-0 bottom-0 h-px bg-white/35" />
                 <div
-                  className="absolute bottom-0 h-[4px] bg-primary transition-all duration-300"
+                  className={`absolute bottom-0 h-[4px] bg-primary transition-all duration-300 `}
                   style={{
-                    width: indicatorStyle.width + 38,
+                    width: `${indicatorStyle.width + (isDesktop ? 38 : isLaptop ? 10 : 0)}px`,
                     left: indicatorStyle.left,
                   }}
                 />
