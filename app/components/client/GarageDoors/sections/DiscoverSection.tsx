@@ -58,13 +58,17 @@ function DoorContent({ door }: { door: IndividualSystemData['secondSection']['it
           }
         />
       </div>
-      <p className="w-fit rounded-full border border-white/80 px-[16.5px] font-light md:px-6 py-[5px] md:py-1 xl:py-[10px] xl:px-[29px] text-19 leading-[1.526315789473684] font-extralight text-white/80 mb-30">
-        {door.buttonText}
-      </p>
+      {
+        door.buttonText && (
+          <p className="w-fit font-light py-[5px] md:py-1 xl:py-[10px] text-19 leading-[1.526315789473684]  text-white mb-30">
+            <span className="font-medium">Ideal for :</span> {door.buttonText}
+          </p>
+        )
+      }
       {/* <h4 className="text-30 text-white leading-[1.333333333333333] font-light tracking-[-0.02em] mb-30">
         {door.title}
       </h4> */}
-      <div dangerouslySetInnerHTML={{__html:door.description}} className="indi-system-points">
+      <div dangerouslySetInnerHTML={{ __html: door.description }} className="indi-system-points">
 
       </div>
       {/* <ul className="space-y-2 xl:space-y-6 xl:pb-50 3xl:pb-[97px]">
@@ -82,7 +86,7 @@ function DoorContent({ door }: { door: IndividualSystemData['secondSection']['it
   );
 }
 
-const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']}) => {
+const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection'] }) => {
   const [activeId, setActiveId] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const { scrollTo } = useLenis();
@@ -91,7 +95,7 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(0);
 
   const activeDoor =
-    data.items.find((_,index) => index === activeId) ?? data.items[0];
+    data.items.find((_, index) => index === activeId) ?? data.items[0];
 
   const toggleAccordion = (id: number) => {
     setOpenAccordionId((prev) => (prev === id ? null : id));
@@ -121,7 +125,7 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
         <div className="border-t border-bdr-blue xl:pt-40 lg:pt-50">
           {/* ── Mobile: Accordion ── */}
           <div className="xl:hidden space-y-0">
-            {data.items.map((door,index) => {
+            {data.items.map((door, index) => {
               const isOpen = openAccordionId === index;
               return (
                 <div key={index} className="border-b border-bdr-blue">
@@ -132,9 +136,8 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
                     className="w-full flex items-center justify-between gap-4 py-[18px] text-left"
                   >
                     <span
-                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${
-                        isOpen ? "font-[500]" : "font-light"
-                      }`}
+                      className={`text-[18px] leading-[1.58] xl:text-19 tracking-[-0.02em] text-white transition-all duration-300 ${isOpen ? "font-[500]" : "font-light"
+                        }`}
                     >
                       {door.title}
                     </span>
@@ -147,9 +150,8 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
                         viewBox="0 0 20 20"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`transition-transform duration-300 ${
-                          isOpen ? "rotate-180" : "rotate-0"
-                        }`}
+                        className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
+                          }`}
                       >
                         <path
                           d="M16.5999 7.45825L11.1666 12.8916C10.5249 13.5333 9.4749 13.5333 8.83324 12.8916L3.3999 7.45825"
@@ -190,7 +192,7 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
             <aside className="xl:sticky xl:top-5 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
-                  {data.items.map((door,index) => {
+                  {data.items.map((door, index) => {
                     const isActive = activeId === index;
                     return (
                       <motion.div
@@ -217,31 +219,28 @@ const DiscoverSection = ({ data }: {data:IndividualSystemData['secondSection']})
                           <span
                             aria-hidden="true"
                             className={`pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-[clip-path] duration-500 ease-out
-                            ${
-                              isActive
+                            ${isActive
                                 ? "[clip-path:inset(0_0%_0_0)]"
                                 : "[clip-path:inset(0_100%_0_0)]"
-                            }`}
+                              }`}
                           />
 
                           {/* ── Label ── */}
                           <span
-                            className={`relative text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-all duration-300 ${
-                              isActive
+                            className={`relative text-19 text-white 2xl:pr-4 tracking-[-0.02em] transition-all duration-300 ${isActive
                                 ? "font-light pl-3 3xl:pl-5 leading-[1.2] 3xl:pr-[75px]"
                                 : "font-light leading-[1.2]"
-                            }`}
+                              }`}
                           >
                             {door.title}
                           </span>
 
                           {/* ── Arrow ── */}
                           <span
-                            className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${
-                              isActive
+                            className={`relative h-5 w-5 xl:w-[50.42px] xl:h-[50.42px] shrink-0 flex items-center justify-center rounded-full bg-white transition-all duration-300 ${isActive
                                 ? "opacity-100 translate-x-0 flex"
                                 : "opacity-0 -translate-x-3 pointer-events-none hidden"
-                            }`}
+                              }`}
                           >
                             <Image
                               src="/assets/icons/arrow-right-primary.svg"
