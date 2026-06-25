@@ -4,11 +4,99 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { Project } from "../client/Projects/data";
 interface ProjectCardProps {
-  project: Project
+  project: Project;
   variant?: "dark" | "light";
   delay?: number;
 }
 
+// export default function ProjectCard({
+//   project,
+//   variant = "light",
+//   delay,
+// }: ProjectCardProps) {
+//   const isDark = variant === "dark";
+
+//   return (
+//     <motion.div variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }} >
+
+//       <Link href={`/projects/${project.slug}`}>
+//         <div className="flex flex-col group cursor-pointer">
+//           {/* Image */}
+//           <div className="relative w-full aspect-[11.2/12] lg:aspect-square  overflow-hidden mb-30 3xl:mb-[32px]">
+//             <Image
+//               src={project.thumbnail}
+//               alt={project.thumbnailAlt}
+//               fill
+//               className="object-cover"
+//             />
+//             {/* Hover overlay */}
+//             <div className="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+//             {/* Arrow */}
+//             <div className="absolute top-40 right-40 -translate-x-30 translate-y-30 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+//               <Image
+//                 src="/assets/icons/arrow-right-top-71.svg"
+//                 alt="Arrow"
+//                 width={80}
+//                 height={80}
+//                 className="w-auto h-[60px] 3xl:w-[71px] 3xl:h-[71px]"
+//               />
+//             </div>
+//           </div>
+//           {/* Title */}
+//           <h3
+//             className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] line-clamp-2 ${isDark ? "text-secondary" : "text-white"
+//               }`}
+//           >
+//             {project.firstSection.title}
+//           </h3>
+//           {/* Location + Category */}
+//           <div
+//             className={`flex items-center justify-between mb-[10px] md:mb-[15px] pr-70 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"
+//               }`}
+//           >
+//             <div className="flex items-center gap-[10px]">
+//               <Image
+//                 src={
+//                   isDark
+//                     ? "/assets/icons/location-pin-gray.svg"
+//                     : "/assets/icons/location-pin.svg"
+//                 }
+//                 alt="location"
+//                 width={20}
+//                 height={20}
+//                 className="object-contain w-[11px] h-[14px] -mt-1"
+//               />
+//               <span className="text-description">{project.firstSection.location.name}</span>
+//             </div>
+//             <span className="text-description">{project.firstSection.sector.name}</span>
+//           </div>
+//           {/* Divider */}
+//           {isDark ? (
+//             // Animated fill on hover
+//             <>
+//               <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
+//                 <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+//               </div>
+//               <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
+//                 <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+//               </div>
+//             </>
+//           ) : (
+//             // Animated fill on hover
+//             <>
+//               <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
+//                 <span className="absolute left-0 top-0 h-full w-full bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+//               </div>
+//               <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
+//                 <span className="absolute left-0 top-0 h-full w-full bg-[#C2C2C2] lg:bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
+//               </div>
+//             </>
+//           )}
+//         </div>
+//       </Link>
+//     </motion.div>
+//   );
+// }
 
 export default function ProjectCard({
   project,
@@ -18,21 +106,24 @@ export default function ProjectCard({
   const isDark = variant === "dark";
 
   return (
-    <motion.div variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{ once: true, amount: 0.3 }} >
-
-      <Link href={`/projects/${project.slug}`}>
-        <div className="flex flex-col group cursor-pointer">
+    <motion.div
+      variants={moveUp(delay)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 0.3 }}
+      className="h-full"
+    >
+      <Link href={`/projects/${project.slug}`} className="h-full block">
+        <div className="flex flex-col group cursor-pointer h-full">
           {/* Image */}
-          <div className="relative w-full aspect-[11.2/12] lg:aspect-square  overflow-hidden mb-30 3xl:mb-[32px]">
+          <div className="relative w-full aspect-[11.2/12] lg:aspect-square overflow-hidden mb-30 3xl:mb-[32px] flex-shrink-0">
             <Image
               src={project.thumbnail}
               alt={project.thumbnailAlt}
               fill
               className="object-cover"
             />
-            {/* Hover overlay */}
             <div className="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            {/* Arrow */}
             <div className="absolute top-40 right-40 -translate-x-30 translate-y-30 opacity-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
               <Image
                 src="/assets/icons/arrow-right-top-71.svg"
@@ -43,56 +134,46 @@ export default function ProjectCard({
               />
             </div>
           </div>
-          {/* Title */}
-          <h3
-            className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] ${isDark ? "text-secondary" : "text-white"
-              }`}
-          >
-            {project.firstSection.title}
-          </h3>
-          {/* Location + Category */}
-          <div
-            className={`flex items-center justify-between mb-[10px] md:mb-[15px] pr-70 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"
-              }`}
-          >
-            <div className="flex items-center gap-[10px]">
-              <Image
-                src={
-                  isDark
-                    ? "/assets/icons/location-pin-gray.svg"
-                    : "/assets/icons/location-pin.svg"
-                }
-                alt="location"
-                width={20}
-                height={20}
-                className="object-contain w-[11px] h-[14px] -mt-1"
-              />
-              <span className="text-description">{project.firstSection.location.name}</span>
+
+          {/* Bottom content */}
+          <div className="flex flex-col flex-1">
+            {/* Title */}
+            <h3
+              className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] line-clamp-2 ${isDark ? "text-secondary" : "text-white"}`}
+            >
+              {project.firstSection.title}
+            </h3>
+            {/* Location + Category */}
+            <div
+              className={`mt-auto flex items-center justify-between mb-[10px] md:mb-[15px] pr-70 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"}`}
+            >
+              <div className="flex items-center gap-[10px]">
+                <Image
+                  src={
+                    isDark
+                      ? "/assets/icons/location-pin-gray.svg"
+                      : "/assets/icons/location-pin.svg"
+                  }
+                  alt="location"
+                  width={20}
+                  height={20}
+                  className="object-contain w-[11px] h-[14px] -mt-1"
+                />
+                <span className="text-description">
+                  {project.firstSection.location.name}
+                </span>
+              </div>
+              <span className="text-description">
+                {project.firstSection.sector.name}
+              </span>
             </div>
-            <span className="text-description">{project.firstSection.sector.name}</span>
+            {/* Divider — pushed to bottom */}
+            <div className={`relative w-full h-[1px] lg:h-[2px] bg-[#c2c2c2]`}>
+              <span
+                className={`absolute left-0 top-0 h-full w-full scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 ${isDark ? "bg-primary" : "bg-white"}`}
+              />
+            </div>
           </div>
-          {/* Divider */}
-          {isDark ? (
-            // Animated fill on hover
-            <>
-              <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
-                <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
-              </div>
-              <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
-                <span className="absolute left-0 top-0 h-full w-full bg-primary scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
-              </div>
-            </>
-          ) : (
-            // Animated fill on hover
-            <>
-              <div className="relative w-full h-[2px] bg-[#c2c2c2] overflow-hidden hidden lg:block">
-                <span className="absolute left-0 top-0 h-full w-full bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
-              </div>
-              <div className="relative w-full h-[1px] bg-[#c2c2c2] overflow-hidden lg:hidden">
-                <span className="absolute left-0 top-0 h-full w-full bg-[#C2C2C2] lg:bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100" />
-              </div>
-            </>
-          )}
         </div>
       </Link>
     </motion.div>

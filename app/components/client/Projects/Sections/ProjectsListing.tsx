@@ -294,7 +294,7 @@ export default function ProjectsListing({data}:{data:Project[]}) {
             row.type === "grid" ? (
               <div
                 key={`grid-${ri}`}
-                className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-y-0 gap-x-30 divide-y divide-bdr-gray"
+                className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-y-0 gap-x-30"
               >
                 {row.projects.map((p, i) => (
                   <Reveal key={i} variants={moveUpV2} delayRange={i * 0.12}>
