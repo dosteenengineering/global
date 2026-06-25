@@ -475,7 +475,7 @@ export interface FeaturedProjectsData {
 export const featuredProjectsData: FeaturedProjectsData = {
   title: "Featured Projects",
   viewAllLabel: "All Projects",
-  viewAllHref: "/projects",
+  viewAllHref: "/case-studies",
   projects: [
     {
       key: "project-1",

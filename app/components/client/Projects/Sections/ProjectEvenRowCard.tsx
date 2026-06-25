@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ProjectEvenRowCard({ project }: { project: Project }) {
   return (
-    <Link href={`/projects/${project.slug}`} className="group flex items-stretch w-full">
+    <Link href={`/case-studies/${project.slug}`} className="group flex items-stretch w-full">
       {/* Left: text content */}
       <div className="flex flex-col justify-between pt-100 flex-1 min-w-0">
         <div>

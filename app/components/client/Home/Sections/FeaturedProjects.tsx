@@ -24,12 +24,13 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { AllProjectData } from "../../ProjectDetails/data";
+const PLACEHOLDER = "/assets/images/placeholder.png";
 
 function getInactiveProjects(
-  projects: AllProjectData['projects'],
+  projects: AllProjectData["projects"],
   activeIndex: number,
   count: number,
-): AllProjectData['projects'] {
+): AllProjectData["projects"] {
   const total = projects.length;
   return Array.from(
     { length: count },
@@ -42,14 +43,14 @@ function InactiveSlot({
   direction,
   changeCount,
 }: {
-  project:AllProjectData['projects'][0];
+  project: AllProjectData["projects"][0];
   direction: "left" | "right";
   changeCount: number;
 }) {
-  const prevProjectRef = useRef<AllProjectData['projects'][0]>(project);
+  const prevProjectRef = useRef<AllProjectData["projects"][0]>(project);
   const [displayed, setDisplayed] = useState<{
-    prev: AllProjectData['projects'][0];
-    next: AllProjectData['projects'][0];
+    prev: AllProjectData["projects"][0];
+    next: AllProjectData["projects"][0];
     animating: boolean;
   }>({
     prev: project,
@@ -80,14 +81,14 @@ function InactiveSlot({
 
   return (
     <div className="w-full sm:w-[calc(50%-8px)] 3xl:w-[369px] flex-shrink-0 cursor-pointer">
-      <Link href={`/projects/${project.slug}`}>
+      <Link href={`/case-studies/${project?.slug}`}>
         <div className="relative min-h-[44px] mb-[31px] overflow-hidden">
           {displayed.animating && (
             <p
               className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
               style={{ ["--exit-to" as string]: exitTo }}
             >
-              {displayed.prev.firstSection.title}
+              {displayed.prev?.firstSection.title}
             </p>
           )}
           <p
@@ -98,11 +99,11 @@ function InactiveSlot({
                 : {}
             }
           >
-            {displayed.next.firstSection.title}
+            {displayed.next?.firstSection.title}
           </p>
         </div>
       </Link>
-      <Link href={`/projects/${project.slug}`}>
+      <Link href={`/case-studies/${project?.slug}`}>
         <div className="relative w-full h-[160px] md:h-[214px] 3xl:h-[313px] overflow-hidden">
           {displayed.animating && (
             <div
@@ -110,8 +111,8 @@ function InactiveSlot({
               style={{ ["--exit-to" as string]: exitTo }}
             >
               <Image
-                src={displayed.prev.thumbnail}
-                alt={displayed.prev.thumbnailAlt}
+                src={displayed.prev?.thumbnail || PLACEHOLDER}
+                alt={displayed.prev?.thumbnailAlt}
                 fill
                 className="object-cover pointer-events-none"
               />
@@ -126,8 +127,8 @@ function InactiveSlot({
             }
           >
             <Image
-              src={displayed.next.thumbnail}
-              alt={displayed.next.thumbnailAlt}
+              src={displayed.next?.thumbnail || PLACEHOLDER}
+              alt={displayed.next?.thumbnailAlt}
               fill
               className="object-cover pointer-events-none"
               sizes="(min-width: 1920px) 369px, (min-width: 640px) calc(50vw - 8px), 100vw"
@@ -139,7 +140,11 @@ function InactiveSlot({
   );
 }
 
-export default function FeaturedProjectsSection({featuredProjectsData}:{featuredProjectsData:AllProjectData['projects']}) {
+export default function FeaturedProjectsSection({
+  featuredProjectsData,
+}: {
+  featuredProjectsData: AllProjectData["projects"];
+}) {
   // ── Desktop swiper state ──
   const activeSwiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -227,7 +232,7 @@ export default function FeaturedProjectsSection({featuredProjectsData}:{featured
             viewport={{ once: true, amount: 0.5 }}
           >
             <BorderButton
-              href={"/projects"}
+              href={"/case-studies"}
               text={"All Projects"}
               borderColor="black"
               textColor="black"
@@ -302,7 +307,7 @@ export default function FeaturedProjectsSection({featuredProjectsData}:{featured
                 <SwiperSlide key={idx}>
                   <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
-                      src={project.thumbnail}
+                      src={project.thumbnail || PLACEHOLDER}
                       alt={project.thumbnailAlt}
                       fill
                       className="object-cover"
@@ -400,14 +405,12 @@ export default function FeaturedProjectsSection({featuredProjectsData}:{featured
             }}
             className="w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer"
           >
-            {projects.map((project,index) => (
+            {projects.map((project, index) => (
               <SwiperSlide key={index}>
-                <Link
-                  href={`/projects/${project.slug}`}
-                >
+                <Link href={`/case-studies/${project.slug}`}>
                   <div className="relative w-full h-[320px] md:h-[420px] xl:h-[549px] 3xl:h-[649px] max-w-[713px] cursor-pointer group">
                     <Image
-                      src={project.thumbnail}
+                      src={project.thumbnail || PLACEHOLDER}
                       alt={project.thumbnailAlt}
                       fill
                       className="object-cover"
@@ -505,7 +508,7 @@ export default function FeaturedProjectsSection({featuredProjectsData}:{featured
             viewport={{ once: true }}
           >
             <BorderButton
-              href={"/projects"}
+              href={"/case-studies"}
               text={"All Projects"}
               borderColor="black"
               textColor="black"
