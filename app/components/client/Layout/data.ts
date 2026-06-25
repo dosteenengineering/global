@@ -25,7 +25,7 @@ export const footerData = {
                 { label: "Blog", href: "/blog" },
                 { label: "Contact", href: "/contact-us" },
                 { label: "Request a Quote", href: "/contact-us#contact-form" },
-                { label: "Careers", href: "#" },
+                // { label: "Careers", href: "#" },
             ],
         },
         {
@@ -104,7 +104,7 @@ export const navItems = [
     hasDropdown: true,
     href: "#",
     subItems: [
-      { label: "Why Dosteen", href: "/about" },
+      { label: "Overview", href: "/about" },
       { label: "Partners & Clients", href: "/about/partners" },
       { label: "Awards & Certifications", href: "/about/recognitions" },
       { label: "FAQs", href: "/about/faq" },
@@ -131,7 +131,7 @@ export const navItems = [
     ],
   },
   { label: "RESOURCE HUB", hasDropdown: false, href: "/resource" },
-  { label: "PROJECTS", hasDropdown: false, href: "/projects" },
+  { label: "CASE STUDIES", hasDropdown: false, href: "/projects" },
 ];
 
  export const menuItems = [

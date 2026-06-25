@@ -82,7 +82,7 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
     })),
   }
 
-  const featuredProjects = projectsData.projects.filter((item) => (item.featured))
+  const featuredProjects = projectsData?.projects?.filter((item) => (item.featured))
 
 
   const blogsData = {
