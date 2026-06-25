@@ -60,7 +60,6 @@ const systemSchema = new mongoose.Schema(
                 {
                     image: {
                         type: String,
-                        required: true,
                     },
 
                     imageAlt: {
@@ -69,17 +68,14 @@ const systemSchema = new mongoose.Schema(
 
                     title: {
                         type: String,
-                        required: true,
                     },
 
                     buttonText: {
                         type: String,
-                        required: true,
                     },
 
                     description: {
                         type: String,
-                        required: true,
                     },
                 },
             ],
@@ -100,12 +96,10 @@ const systemSchema = new mongoose.Schema(
                 {
                     title: {
                         type: String,
-                        required: true,
                     },
 
                     link: {
                         type: String,
-                        required: true,
                     },
                 },
             ],
@@ -126,7 +120,6 @@ const systemSchema = new mongoose.Schema(
                 {
                     logo: {
                         type: String,
-                        required: true,
                     },
 
                     logoAlt: {
@@ -135,7 +128,6 @@ const systemSchema = new mongoose.Schema(
 
                     image: {
                         type: String,
-                        required: true,
                     },
 
                     imageAlt: {
@@ -144,7 +136,6 @@ const systemSchema = new mongoose.Schema(
 
                     title: {
                         type: String,
-                        required: true,
                     },
                 },
             ],
@@ -165,12 +156,10 @@ const systemSchema = new mongoose.Schema(
                 {
                     title: {
                         type: String,
-                        required: true,
                     },
 
                     description: {
                         type: String,
-                        required: true,
                     },
 
                     image: {
@@ -194,17 +183,14 @@ const systemSchema = new mongoose.Schema(
                 {
                     clientName: {
                         type: String,
-                        required: true,
                     },
 
                     designation: {
                         type: String,
-                        required: true,
                     },
 
                     description: {
                         type: String,
-                        required: true,
                     },
                 },
             ],
@@ -220,12 +206,10 @@ const systemSchema = new mongoose.Schema(
                 {
                     question: {
                         type: String,
-                        required: true,
                     },
 
                     answer: {
                         type: String,
-                        required: true,
                     },
                 },
             ],
