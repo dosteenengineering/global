@@ -642,8 +642,8 @@ input:-webkit-autofill:active {
 
 .customization-section-system ul {
     cursor: pointer;
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
     width: fit-content;
 }
 
