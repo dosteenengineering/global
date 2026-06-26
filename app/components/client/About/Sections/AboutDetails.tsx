@@ -60,21 +60,18 @@ function StatCard({
 
   return (
     <div className="flex items-center py-[15px] md:py-25 px-[40px] md:px-50 gap-[55px]  lg:gap-200 3xl:gap-[296px]  relative flex-1 min-w-0 max-h-[148px]">
-
       {/* {noiseVariant === 1 ? <StatNoise1 /> : <StatNoise1 />} */}
       {isMobile ? <StatNoise1 /> : (noiseVariant === 1 ? <StatNoise1 /> : <StatNoise2 />)
       }
-
       {/* Icon */}
       <div className="relative shrink-0 h-[40px] w-[40px] md:h-[60px] md:w-[60px] 2xl:w-[70px] 2xl:h-[70px]">
         <Image src={icon} alt={label} fill className="object-contain" />
       </div>
-
       {/* Text */}
       <div>
         <div className="flex items-baseline gap-x-[5px] md:gap-x-[14px]">
           <div ref={ref} className="flex flex-row items-start">
-            <span className="xl:min-w-[63px]  text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
+            <span className="text-55 font-light text-black leading-[1.1818] tracking-[-0.02em]">
               {display}
             </span>
             {hasPlus && (
