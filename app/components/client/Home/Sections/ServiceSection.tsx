@@ -129,12 +129,12 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
               viewport={{ once: true }}
               className="w-fit mt-50 xl:mb-70 3xl:mb-[71px]"
             >
-              <BorderButton
+              {/* <BorderButton
                 text="Read More"
                 iconColor="white"
                 px="px-30 3xl:px-[35px]"
                 hoverBg="white"
-              />
+              /> */}
             </motion.div>
           </div>
         </motion.div>
