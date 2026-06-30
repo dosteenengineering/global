@@ -20,11 +20,11 @@ function ValueCard({
     initial="hidden"
     whileInView="show"
     viewport={{once:true}}
-    className="flex flex-col gap-[10px] md:gap-4 2xl:gap-30 border-b border-bdr-gray last:border-b-0 pb-5 last:pb-0 md:border-b-0 md:pb-0">
-      <h3 className="text-55 xl:text-[32px] 3xl:text-55 font-light leading-[1.334] md:leading-[1.1818] text-secondary ">
+    className="flex flex-col gap-[10px] md:gap-4 3xl:gap-30 border-b border-bdr-gray last:border-b-0 pb-5 last:pb-0 md:border-b-0 md:pb-0">
+      <h3 className="text-55 md:text-[26px] xl:text-[32px] 3xl:text-55 font-light leading-[1.334] md:leading-[1.1818] text-secondary tracking-[-0.02em]">
         {title}
       </h3>
-      <p className="text-description !leading-[1.68] md:!leading-[1.54] text-paragraph max-w-[540px]">
+      <p className="text-description leading-[1.68] md:leading-[1.54] text-paragraph max-w-[540px]">
         {description}
       </p>
     </motion.div>
@@ -44,17 +44,14 @@ export default function OurValues({data}:{data:AboutPageData['sixthSection']}) {
         />
       </div>
       <div className="container pt-[70px] md:pt-100 pb-140 3xl:pb-200 w-full">
-        <div className="flex flex-col lg:flex-row gap-[30px] md:gap-80 3xl:gap-120">
+        <div className="flex flex-col lg:flex-row xl:grid xl:grid-cols-[300px_auto] 3xl:grid-cols-[356px_auto] gap-y-5 gap-x-[30px] md:gap-x-80 3xl:gap-x-120">
           {/* Left — sticky title */}
           <div className="shrink-0">
-            <SectionTitle
-              text={data.title}
-              className="section-heading-90 text-secondary uppercase"
-            />
+            <SectionTitle text={data.title} className="section-heading-90 text-secondary uppercase xl:max-w-[6ch]"  />
           </div>
 
           {/* Right — 2-col grid of value cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto] gap-x-60 xl:gap-x-[40px] 3xl:gap-x-[125px] gap-y-5 md:gap-y-40 3xl:gap-y-80">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto] 3xl:grid-cols-[1fr_1fr] gap-x-60 xl:gap-x-[40px] 3xl:gap-x-[125px] gap-y-5 md:gap-y-40 3xl:gap-y-80">
             {data.items.map((item, index) => (
               <ValueCard
                 key={index}
