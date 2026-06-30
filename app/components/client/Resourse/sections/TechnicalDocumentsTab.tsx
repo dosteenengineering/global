@@ -2,10 +2,10 @@
 
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import type { ResourceHubTab } from "../data";
-import { Download } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { useDownloadGate } from "../sections/DownloadGate";
 
 type TechnicalDocumentsTabProps = {
   tab: ResourceHubTab;
@@ -31,6 +31,7 @@ const getItemsByFilter = (
 };
 
 const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
+  const { openGate, gateElement } = useDownloadGate();
   const filters = Array.isArray(tab.filters) ? tab.filters : [];
   const [activeFilter, setActiveFilter] = useState(filters[0] ?? "ALL");
   const itemsByFilter = getItemsByFilter(tab.items);
@@ -81,9 +82,11 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
             key={item.id}
             item={item}
             delay={0.06}
+            onDownload={openGate}
           />
         ))}
       </div>
+      {gateElement}
     </div>
   );
 };
@@ -91,9 +94,11 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
 const ResourceDownloadCard = ({
   item,
   delay,
+  onDownload,
 }: {
   item: TechnicalDocumentItem;
   delay: number;
+  onDownload: (url: string, title: string) => void;
 }) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
@@ -131,9 +136,10 @@ const ResourceDownloadCard = ({
             ))}
           </div>
 
-          <a
-            href={item.download}
-            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary"
+          <button
+            type="button"
+            onClick={() => onDownload(item.download, item.title)}
+            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary cursor-pointer"
           >
             <span className="uppercase font-normal leading-[1.67]">
               Download
@@ -145,7 +151,7 @@ const ResourceDownloadCard = ({
               alt="Download"
               className="object-contain w-[16px] h-auto xl:w-auto xl:h-auto transition-transform duration-300 group-hover:translate-y-1"
             />
-          </a>
+          </button>
         </div>
       </div>
     </motion.article>

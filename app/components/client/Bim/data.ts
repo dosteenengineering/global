@@ -72,6 +72,7 @@ export type Capability = {
       imageAlt: string;
       title: string;
       description: string;
+      slug: string;
     }[];
   };
 

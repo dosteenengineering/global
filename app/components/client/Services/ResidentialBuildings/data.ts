@@ -57,11 +57,14 @@ export interface SystemItem {
 
   firstSection: {
     title: string;
+    shortTitle: string;
     subTitle: string;
     firstDescription: string;
     secondDescription: string;
     image: string;
     imageAlt: string;
+    thumbnailImage: string;
+    thumbnailImageAlt: string;
   };
 
   secondSection: {

@@ -1,188 +1,182 @@
-"use client"
+"use client";
 
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import React, { useEffect } from 'react'
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import React, { useEffect } from "react";
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
-import { Button } from '@/components/ui/button'
-import { ImageUploader } from '@/components/ui/image-uploader'
+import { Button } from "@/components/ui/button";
+import { ImageUploader } from "@/components/ui/image-uploader";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { Textarea } from '@/components/ui/textarea'
-import AdminItemContainer from '@/app/components/common/AdminItemContainer';
+import { Textarea } from "@/components/ui/textarea";
+import AdminItemContainer from "@/app/components/common/AdminItemContainer";
+import { GalleryItemRow } from "@/app/components/AdminGallery/GalleryItemRow";
 
 export interface GalleryFormProps {
-
-    metaTitle: string;
-    metaDescription: string;
-    firstSection: {
-        image: string;
-        imageAlt: string;
-        title: string;
-        description: string;
-    };
-    secondSection: {
-        items: {
-            title: string;
-            image: string;
-            imageAlt: string;
-            date: string;
-        }[]
-    };
+  metaTitle: string;
+  metaDescription: string;
+  firstSection: {
+    image: string;
+    imageAlt: string;
+    title: string;
+    description: string;
+  };
+  secondSection: {
+    items: {
+      title: string;
+      image: string;
+      imageAlt: string;
+      date: string;
+      images: {
+        src: string;
+        alt: string;
+      }[];
+    }[];
+  };
 }
 
 const GalleryPage = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    control,
+    formState: { errors },
+  } = useForm<GalleryFormProps>();
 
+  const {
+    fields: secondSectionItems,
+    append: secondSectionAppend,
+    remove: secondSectionRemove,
+  } = useFieldArray({
+    control,
+    name: "secondSection.items",
+  });
 
-    const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<GalleryFormProps>();
-
-    const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove } = useFieldArray({
-        control,
-        name: "secondSection.items"
-    });
-
-
-
-    const handleAddGallery = async (data: GalleryFormProps) => {
-        try {
-            const response = await fetch(`/api/admin/gallery`, {
-                method: "PATCH",
-                body: JSON.stringify(data),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                alert(data.message);
-                // router.push("/admin/commitment");
-            }
-        } catch (error) {
-            console.log("Error in adding Gallery", error);
-        }
+  const handleAddGallery = async (data: GalleryFormProps) => {
+    try {
+      const response = await fetch(`/api/admin/gallery`, {
+        method: "PATCH",
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+        // router.push("/admin/commitment");
+      }
+    } catch (error) {
+      console.log("Error in adding Gallery", error);
     }
+  };
 
-    const fetchGalleryData = async () => {
-        try {
-            const response = await fetch(`/api/admin/gallery`);
-            if (response.ok) {
-                const data = await response.json();
-                setValue("metaTitle", data.data.metaTitle);
-                setValue("metaDescription", data.data.metaDescription);
-                setValue("firstSection", data.data.firstSection);
-                setValue("secondSection", data.data.secondSection);
-                setValue("secondSection.items", data.data.secondSection.items);
-            } else {
-                const data = await response.json();
-                alert(data.message);
-            }
-        } catch (error) {
-            console.log("Error in fetching Gallery data", error);
-        }
+  const fetchGalleryData = async () => {
+    try {
+      const response = await fetch(`/api/admin/gallery`);
+      if (response.ok) {
+        const data = await response.json();
+        setValue("metaTitle", data.data.metaTitle);
+        setValue("metaDescription", data.data.metaDescription);
+        setValue("firstSection", data.data.firstSection);
+        // setValue("secondSection", data.data.secondSection);
+        setValue("secondSection.items", data.data.secondSection.items);
+      } else {
+        const data = await response.json();
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log("Error in fetching Gallery data", error);
     }
+  };
 
+  console.log("secondSectionItems", secondSectionItems);
 
+  useEffect(() => {
+    fetchGalleryData();
+  }, []);
 
-    useEffect(() => {
-        fetchGalleryData();
-    }, []);
+  return (
+    <div className="flex flex-col gap-5">
+      <form
+        className="flex flex-col gap-5"
+        onSubmit={handleSubmit(handleAddGallery)}
+      >
+        <AdminItemContainer>
+          <Label main>First Section</Label>
+          <div className="p-5 rounded-md flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <Label className="font-bold">Title</Label>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  {...register("firstSection.title", {
+                    required: "Title is required",
+                  })}
+                />
+                {errors.firstSection?.title && (
+                  <p className="text-red-500">
+                    {errors.firstSection?.title.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </AdminItemContainer>
 
+        <AdminItemContainer>
+          <Label main>Second Section</Label>
 
-    return (
-        <div className='flex flex-col gap-5'>
-            <form className='flex flex-col gap-5' onSubmit={handleSubmit(handleAddGallery)}>
+          <div className="p-5 rounded-md flex flex-col gap-5">
+            <Label>Items</Label>
+            <div className="border border-black/20 p-2 rounded-md flex flex-col gap-2">
+              {secondSectionItems.map((field, index) => (
+                <GalleryItemRow
+                  key={field.id}
+                  index={index}
+                  control={control}
+                  register={register}
+                  errors={errors}
+                  onRemove={() => secondSectionRemove(index)}
+                />
+              ))}
+            </div>
+            <div className="flex justify-end mt-2">
+              <Button
+                type="button"
+                addItem
+                onClick={() =>
+                  secondSectionAppend({
+                    image: "",
+                    imageAlt: "",
+                    title: "",
+                    date: "",
+                    images: [],
+                  })
+                }
+              >
+                Add Item
+              </Button>
+            </div>
+          </div>
+        </AdminItemContainer>
 
-                <AdminItemContainer>
-                    <Label main>First Section</Label>
-                    <div className='p-5 rounded-md flex flex-col gap-2'>
-                        <div className='flex flex-col gap-2'>
-                            <div className='flex flex-col gap-1'>
-                                <Label className='font-bold'>Title</Label>
-                                <Input type='text' placeholder='Title' {...register("firstSection.title", {
-                                    required: "Title is required"
-                                })} />
-                                {errors.firstSection?.title && <p className='text-red-500'>{errors.firstSection?.title.message}</p>}
-                            </div>
+        <AdminItemContainer>
+          <Label main>SEO</Label>
+          <div className="p-5 rounded-md flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Title</Label>
+              <Input type="text" placeholder="" {...register("metaTitle")} />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Description</Label>
+              <Input
+                type="text"
+                placeholder=""
+                {...register("metaDescription")}
+              />
+            </div>
 
-                        </div>
-
-                    </div>
-                </AdminItemContainer>
-
-
-                <AdminItemContainer>
-                    <Label main>Second Section</Label>
-
-                    <div className='p-5 rounded-md flex flex-col gap-5'>
-
-                        <Label>Items</Label>
-                        <div className='border border-black/20 p-2 rounded-md flex flex-col gap-2'>
-                            {secondSectionItems.map((field, index) => (
-                                <div key={field.id} className='grid grid-cols-2 gap-2 relative border-b border-black/20 pb-4 last:border-b-0'>
-                                    <div className='absolute top-2 right-2'>
-                                        <RiDeleteBinLine onClick={() => secondSectionRemove(index)} className='cursor-pointer text-red-600' />
-                                    </div>
-                                    <div className='flex flex-col gap-2'>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Image</Label>
-                                            <Controller
-                                                name={`secondSection.items.${index}.image`}
-                                                control={control}
-                                                rules={{ required: "Image is required" }}
-                                                render={({ field }) => (
-                                                    <ImageUploader
-                                                        value={field.value}
-                                                        onChange={field.onChange}
-                                                        recommendedDimension="Recommended: 60 x 50 (px)"
-                                                    />
-                                                )}
-                                            />
-                                            {errors.secondSection?.items?.[index]?.image && <p className='text-red-500'>{errors.secondSection?.items?.[index]?.image.message}</p>}
-                                        </div>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Alt Tag</Label>
-                                            <Input type='text' placeholder='Alt Tag' {...register(`secondSection.items.${index}.imageAlt`)} />
-                                        </div>
-
-                                    </div>
-
-                                    <div>
-                                        <div className='flex flex-col gap-2'>
-                                            <Label className='font-bold'>Title</Label>
-                                            <Input type='text' placeholder='Title' {...register(`secondSection.items.${index}.title`)} />
-                                        </div>
-
-                                        <div>
-                                            <Label className=''>Date</Label>
-                                            <Input type='date' placeholder='Date' max={new Date().toISOString().split("T")[0]} {...register(`secondSection.items.${index}.date`)} />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            ))}
-
-                        </div>
-                        <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => secondSectionAppend({ image: "", imageAlt: "", title: "", date: "" })}>Add Item</Button>
-                        </div>
-
-
-                    </div>
-                </AdminItemContainer>
-
-
-                <AdminItemContainer>
-                    <Label main>SEO</Label>
-                    <div className='p-5 rounded-md flex flex-col gap-2'>
-
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='' {...register("metaTitle")} />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Description</Label>
-                            <Input type='text' placeholder='' {...register("metaDescription")} />
-                        </div>
-
-                        {/* <div className='flex flex-col gap-2 w-1/2'>
+            {/* <div className='flex flex-col gap-2 w-1/2'>
                             <Label className='font-bold'>Og Type</Label>
                             <Controller
                                 name={`ogType`}
@@ -211,8 +205,7 @@ const GalleryPage = () => {
 
                         </div> */}
 
-
-                        {/* <div className='flex flex-col gap-2 w-1/2'>
+            {/* <div className='flex flex-col gap-2 w-1/2'>
                             <Label className='font-bold'>Og Image</Label>
                             <Controller
                                 name={`ogImage`}
@@ -227,18 +220,20 @@ const GalleryPage = () => {
                                 )}
                             />
                         </div> */}
+          </div>
+        </AdminItemContainer>
 
-                    </div>
-
-                </AdminItemContainer>
-
-                <div className='flex'>
-                    <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>
-                </div>
-
-            </form>
+        <div className="flex">
+          <Button
+            type="submit"
+            className="cursor-pointer text-white text-[16px] w-full"
+          >
+            Submit
+          </Button>
         </div>
-    )
-}
+      </form>
+    </div>
+  );
+};
 
-export default GalleryPage
+export default GalleryPage;

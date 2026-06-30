@@ -32,13 +32,20 @@ export const metadata: Metadata = {
   description: "Engineering peace of mind",
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const solutionsResponse = await fetch(
+    `${process.env.BASE_URL}/api/admin/service`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
+  const solutionsData = await solutionsResponse.json();
   return (
     <html lang="en">
       <head>
@@ -55,7 +62,7 @@ export default function RootLayout({
       >
         {/* <div id="intro-overlay" /> */}
         <LenisProvider>
-          <UserChrome>{children}</UserChrome>
+          <UserChrome solutionsRaw={solutionsData.data}>{children}</UserChrome>
         </LenisProvider>
       </body>
     </html>

@@ -3,6 +3,7 @@ import { Download } from "lucide-react";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { useDownloadGate } from "../sections/DownloadGate";
 
 type BrochuresCataloguesTabProps = {
   tab: ResourceHubTab;
@@ -22,6 +23,7 @@ const getBrochureItems = (items: ResourceHubTab["items"]): BrochuresCataloguesIt
 
 const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
   const items = getBrochureItems(tab.items);
+  const { openGate, gateElement } = useDownloadGate();
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
@@ -32,14 +34,15 @@ const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
       className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
         {items.map((item, index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
+          <ResourceDownloadCard key={item.id} item={item} delay={0.06} onDownload={openGate} />
         ))}
       </div>
+      {gateElement}
     </div>
   );
 };
 
-const ResourceDownloadCard = ({ item, delay }: { item: BrochuresCataloguesItem, delay: number }) => {
+const ResourceDownloadCard = ({ item, delay, onDownload }: { item: BrochuresCataloguesItem, delay: number, onDownload: (fileUrl: string, fileName: string) => void }) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
@@ -63,11 +66,24 @@ const ResourceDownloadCard = ({ item, delay }: { item: BrochuresCataloguesItem, 
             ))}
           </div>
 
-          <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
+          {/* <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
             <span className="uppercase font-normal leading-[1.67]">Download</span>
-            {/* <Download className="w-[16px] h-[15px] lg:w-[22px] lg:h-[20px] xl:w-auto xl:h-auto transition-transform duration-300 group-hover:translate-y-1" strokeWidth={1.8} />  */}
             <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
-         </a>
+         </a> */}
+
+         <button
+            onClick={() => onDownload(item.download, item.title)}
+            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary"
+          >
+            <span className="uppercase font-normal leading-[1.67]">Download</span>
+            <img
+              src="/assets/icons/download.svg"
+              width={"22px"}
+              height={"20px"}
+              alt="Download"
+              className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1"
+            />
+          </button>
         </div>
       </div>
     </motion.article>

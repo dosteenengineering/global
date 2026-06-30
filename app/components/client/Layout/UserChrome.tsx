@@ -44,12 +44,13 @@ import { IntroContext } from "../../../context/IntroContext";
 
 type UserChromeProps = {
   children: React.ReactNode;
+  solutionsRaw: any;
 };
 
-const ROUTES_WITHOUT_CHROME = ["/become-a-partner", "/partner-registration"];
+const ROUTES_WITHOUT_CHROME = ["/vendor-registration", "/partner-registration"];
 let introPlayedThisLoad = false;
 
-const UserChrome = ({ children }: UserChromeProps) => {
+const UserChrome = ({ children, solutionsRaw }: UserChromeProps) => {
   const pathname = usePathname();
   const hideChrome = ROUTES_WITHOUT_CHROME.includes(pathname);
 
@@ -81,7 +82,7 @@ const UserChrome = ({ children }: UserChromeProps) => {
         <>
           <Navbar />
           {children}
-          <Footer />
+          <Footer solutionsRaw={solutionsRaw} />
         </>
       )}
     </IntroContext.Provider>

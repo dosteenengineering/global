@@ -5,7 +5,16 @@ export interface GalleryData {
     title: string;
   };
   secondSection: {
-    items: GalleryItem[];
+    items: {
+      title: string;
+      image: string;        // thumbnail
+      imageAlt: string;
+      date: string;
+      images: {             // ← add
+        src: string;
+        alt: string;
+      }[];
+    }[];
   };
 }
 
@@ -14,6 +23,10 @@ export interface GalleryItem {
   image: string;
   imageAlt: string;
   date: string; // YYYY-MM-DD
+  images: {
+    src: string;
+    alt: string;
+  }[];
 }
 
 

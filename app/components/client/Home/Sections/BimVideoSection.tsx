@@ -385,7 +385,7 @@ export default function BimSection({data}:{data:Home['eighthSection']}) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
-            className="text-white text-30 leading-[1.33] font-poppins font-light-tracking-[2%] sm:ml-[calc(50%_-_100px)] md:ml-[calc(50%_-_130px)] max-w-[540px] mb-[66px] md:mb-80 2xl:mb-[82px]"
+            className="text-white text-30 leading-[1.33] font-poppins font-light-tracking-[2%] sm:ml-[calc(50%_-_100px)] md:ml-[calc(40%_-_130px)] max-w-[700px] mb-[66px] md:mb-80 2xl:mb-[82px]"
           >
             {slide.description}
           </motion.p>

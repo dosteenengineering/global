@@ -4,6 +4,8 @@ import { Download } from "lucide-react";
 import index from "../../BecomePartner";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { useDownloadGate } from "../sections/DownloadGate";
+
 type InstallationMaintenanceTabProps = {
   tab: ResourceHubTab;
 };
@@ -16,38 +18,65 @@ type InstallationMaintenanceItem = {
   download: string;
 };
 
-const getInstallationMaintenanceItems = (items: ResourceHubTab["items"]): InstallationMaintenanceItem[] => {
+const getInstallationMaintenanceItems = (
+  items: ResourceHubTab["items"],
+): InstallationMaintenanceItem[] => {
   return Array.isArray(items) ? (items as InstallationMaintenanceItem[]) : [];
 };
 
-const InstallationMaintenanceTab = ({ tab }: InstallationMaintenanceTabProps) => {
+const InstallationMaintenanceTab = ({
+  tab,
+}: InstallationMaintenanceTabProps) => {
   const items = getInstallationMaintenanceItems(tab.items);
+
+  const { openGate, gateElement } = useDownloadGate();
 
   return (
     <div className="pt-[30px] md:pt-70 md:pt-100">
       {/* <h2 className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] max-w-[35ch] text-secondary mb-50">
         {tab.title}
       </h2> */}
-      <SectionTitle title={tab.title}
-        className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50" />
+      <SectionTitle
+        title={tab.title}
+        className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50"
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-2.5 md:gap-30">
         {items.map((item, index) => (
-          <ResourceDownloadCard key={item.id} item={item} delay={0.06} />
+          <ResourceDownloadCard
+            key={item.id}
+            item={item}
+            delay={0.06}
+            onDownload={openGate}
+          />
         ))}
       </div>
-
+      {gateElement}
     </div>
   );
 };
 
-const ResourceDownloadCard = ({ item, delay }: { item: InstallationMaintenanceItem, delay: number }) => {
+const ResourceDownloadCard = ({
+  item,
+  delay,
+  onDownload,
+}: {
+  item: InstallationMaintenanceItem;
+  delay: number;
+  onDownload: (fileUrl: string, fileName: string) => void;
+}) => {
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
     <motion.article
-      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 3xl:min-h-[245px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 ">
-      <div className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-[600] 
+      variants={moveUp(delay)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 3xl:min-h-[245px] grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 "
+    >
+      <div
+        className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-[600] 
       ${isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]"}`}
       >
         {item.type}
@@ -60,11 +89,41 @@ const ResourceDownloadCard = ({ item, delay }: { item: InstallationMaintenanceIt
           </h3>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap md:items-center justify-between gap-2.5 md:gap-20 h-fit mt-auto">
-          <p className="text-[12px] md:text-19 leading-[1.526315789473684] font-poppins font-light text-paragraph line-clamp-1">{item.desc}</p>
-          <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
-            <span className="uppercase font-normal leading-[1.67]">Download</span>     
-            <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
-          </a>
+          <p className="text-[12px] md:text-19 leading-[1.526315789473684] font-poppins font-light text-paragraph line-clamp-1">
+            {item.desc}
+          </p>
+          {/* <a
+            href={item.download}
+            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary"
+          >
+            <span className="uppercase font-normal leading-[1.67]">
+              Download
+            </span>
+            <img
+              src="/assets/icons/download.svg"
+              width={"22px"}
+              height={"20px"}
+              alt="Download"
+              className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1"
+            />
+          </a> */}
+
+          <button
+            type="button"
+            onClick={() => onDownload(item.download, item.title)}
+            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary cursor-pointer"
+          >
+            <span className="uppercase font-normal leading-[1.67]">
+              Download
+            </span>
+            <img
+              src="/assets/icons/download.svg"
+              width={"22px"}
+              height={"20px"}
+              alt="Download"
+              className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1"
+            />
+          </button>
         </div>
       </div>
     </motion.article>

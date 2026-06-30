@@ -11,20 +11,24 @@ import { moveRight, moveUp } from "@/app/components/motionVariants";
 import { useRef } from "react";
 
 interface DosteenSystemsProps {
+  title: string;
+  systems: {
+    id: number;
     title: string;
-    systems: {
-      id: number;
-      title: string;
-      image: string;
-      description: string;
-      slug: string;
-    }[];
+    image: string;
+    description: string;
+    slug: string;
+  }[];
 }
 
 const activeGradient =
   "linear-gradient(90deg, rgba(41, 69, 150, 0.2) 0%, rgba(41, 69, 150, 0) 100%)";
 
-export default function DosteenSystems({data}:{data:DosteenSystemsProps}) {
+export default function DosteenSystems({
+  data,
+}: {
+  data: DosteenSystemsProps;
+}) {
   const { title, systems } = data;
   const [activeId, setActiveId] = useState(systems[0].id);
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(
@@ -196,7 +200,8 @@ export default function DosteenSystems({data}:{data:DosteenSystemsProps}) {
         </div>
 
         {/* ── Desktop: Original two-col layout ── */}
-        <div className="hidden md:flex gap-60 3xl:gap-[68px]">
+        {/* <div className="hidden md:flex gap-60 3xl:gap-[68px]"> */}
+        <div className="hidden md:flex gap-60 3xl:gap-[68px] items-start">
           {/* Left col */}
           <div
             className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative pb-100"
@@ -252,7 +257,8 @@ export default function DosteenSystems({data}:{data:DosteenSystemsProps}) {
           </div>
 
           {/* Right col */}
-          <div className="flex-1 min-w-0 relative">
+          {/* <div className="flex-1 min-w-0 relative"> */}
+          <div className="flex-1 min-w-0 relative self-start sticky top-30">
             <div key={activeSystem.id} className="flex flex-col h-full">
               {/* Title */}
               <motion.h3

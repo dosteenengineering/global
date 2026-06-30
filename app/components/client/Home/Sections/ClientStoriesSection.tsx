@@ -32,7 +32,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
   const [activeIndex, setActiveIndex] = useState(0);
   const [progressKey, setProgressKey] = useState(0);
   const total = clientStoriesDataFromApi ? clientStoriesDataFromApi.stories.length : clientStoriesData?.stories.length;
-  const activeStory = clientStoriesData?.stories[activeIndex]
+  const activeStory = clientStoriesDataFromApi ? clientStoriesDataFromApi.stories[activeIndex] : clientStoriesData?.stories[activeIndex]
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -68,7 +68,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
       ════════════════════════════════════════════════════════ */}
       <div className="hidden lg:flex relative z-10 container min-h-screen flex-col pt-140 2xl:pt-[148px]">
         <SectionTitle
-          title={clientStoriesData.title}
+          title={clientStoriesDataFromApi?.title}
           className="text-white section-heading-90 uppercase mb-80 3xl:mb-[82px]"
         />
 
@@ -125,7 +125,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
               <div className="flex-1 flex flex-col min-w-0">
                 {/* Progress lines */}
                 <div className="flex items-center flex-shrink-0 gap-30 3xl:gap-[38px] mb-120 3xl:mb-[126px] relative z-20">
-                  {clientStoriesData.stories.map((_, i) => (
+                  {clientStoriesDataFromApi?.stories.map((_, i) => (
                     <motion.button
                       variants={moveUp(i * 0.18)}
                       initial="hidden"
@@ -172,7 +172,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
                       allowTouchMove={true}
                       style={{ width: "100%", height: "100%" }}
                     >
-                      {clientStoriesData.stories.map((story: ClientStory) => (
+                      {clientStoriesDataFromApi?.stories.map((story: ClientStory) => (
                         <SwiperSlide key={story.key}>
                           <div className="w-full h-full" />
                         </SwiperSlide>
@@ -195,7 +195,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
                             y: -24,
                             transition: { duration: 0.2, ease: "easeIn" },
                           }}
-                          className="text-white text-55 leading-[1.18] -tracking-[2%] max-w-[998px] font-poppins font-light min-h-[238px] 3xl:min-h-[208px]"
+                          className="text-white text-55 leading-[1.18] -tracking-[2%] max-w-[998px] font-poppins font-light min-h-[238px] 3xl:min-h-[200px]"
                         >
                           {activeStory.quote}
                         </motion.p>
@@ -257,14 +257,14 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
       ════════════════════════════════════════════════════════ */}
       <div className="lg:hidden relative z-10 container pt-140 pb-[82px]">
         <SectionTitle
-          title={clientStoriesData.title}
+          title={clientStoriesDataFromApi?.title}
           className="text-white section-heading-90 uppercase mb-[30px] md:mb-40"
         />
 
         {/* Progress bars — full width */}
         <div className="flex flex-row mb-[50px] relative z-20 gap-[10px]">
           <div className="flex items-center gap-[15px] w-full">
-            {clientStoriesData.stories.map((_, i) => (
+            {clientStoriesDataFromApi?.stories.map((_, i) => (
               <motion.button
                 variants={moveUp(i * 0.11)}
                 initial="hidden"
@@ -328,7 +328,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
             allowTouchMove={true}
             style={{ width: "100%", height: "100%" }}
           >
-            {clientStoriesData.stories.map((story: ClientStory) => (
+            {clientStoriesDataFromApi?.stories.map((story: ClientStory) => (
               <SwiperSlide key={story.key}>
                 <div className="w-full h-full" />
               </SwiperSlide>

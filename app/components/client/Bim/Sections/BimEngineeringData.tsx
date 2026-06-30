@@ -39,7 +39,7 @@ export default function BimEngineeringData({ data, descMaxWidth }: dataProps) {
            gap-x-2.5 gap-y-2.5 lg:gap-x-2 lg:gap-y-5 3xl:gap-[37px] ">
             {stats.map((stat, index) => (
               <motion.div
-                variants={moveUp(index * 0.2 * index)}
+                variants={moveUp(index * 0.1)}
                 initial="hidden"
                 whileInView={"show"}
                 viewport={{ once: true }}

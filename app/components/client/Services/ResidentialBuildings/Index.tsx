@@ -20,7 +20,7 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
     systems: data.systemSection.items.map((item, index) => ({
       id: index + 1,
       title: item.firstSection.title,
-      image: item.firstSection.image,
+      image: item.firstSection.thumbnailImage || item.firstSection.image,
       description: item.firstSection.firstDescription,
       slug: `/solutions/residential-developments/${item.slug}`,
     })),

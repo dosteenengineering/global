@@ -83,6 +83,10 @@ export default function IndustriesSection({data}:{data:Home['sixthSection']}) {
   const [isXs, setIsXs] = useState(false);
   const isXsRef = useRef(false);
 
+  const loopedIndustries = industries.length < 6
+  ? [...industries, ...industries]
+  : industries;
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -157,16 +161,17 @@ export default function IndustriesSection({data}:{data:Home['sixthSection']}) {
     if (!swiper.autoplay?.running) swiper.autoplay?.start();
   }, []);
 
-  const handleSwiper = useCallback((swiper: SwiperType) => {
-    swiperRef.current = swiper;
-    swiperReadyRef.current = true;
-    applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
-  }, []);
+const handleSwiper = useCallback((swiper: SwiperType) => {
+  swiperRef.current = swiper;
+  swiperReadyRef.current = true;
+  setActiveIndex(swiper.realIndex % total);  // add this
+  applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
+}, [total]);
 
-  const handleSlideChange = useCallback((swiper: SwiperType) => {
-    setActiveIndex(swiper.realIndex);
-    applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
-  }, []);
+const handleSlideChange = useCallback((swiper: SwiperType) => {
+  setActiveIndex(swiper.realIndex % total);
+  applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
+}, [total]);
 
   const handleTransitionStart = useCallback((swiper: SwiperType) => {
     applyHeights(swiper, isLgRef.current, lgScaleRef.current, isXsRef.current);
@@ -219,7 +224,7 @@ export default function IndustriesSection({data}:{data:Home['sixthSection']}) {
     </div>
   );
 
-  const slideElements = industries.map((industry: Home['sixthSection']['items'][0], index: number) => (
+  const slideElements = loopedIndustries.map((industry: Home['sixthSection']['items'][0], index: number) => (
     <SwiperSlide key={index} style={{ width: `${currentSlideWidth}px` }}>
       <div
         data-inner

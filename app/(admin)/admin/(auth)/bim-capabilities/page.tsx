@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { Button } from '@/components/ui/button'
@@ -79,6 +79,7 @@ export interface CapabilitiesFormProps {
       imageAlt: string;
       title: string;
       description: string;
+      slug: string;
     }[];
   };
 
@@ -152,6 +153,9 @@ const CapabilitiesPage = () => {
         name: "lastSection.items"
     });
 
+    const [systems, setSystems] = useState<{ _id: string; slug: string; firstSection: { title: string } }[]>([]);
+
+
 
     const handleAddCapabilities = async (data: CapabilitiesFormProps) => {
         try {
@@ -204,10 +208,19 @@ const CapabilitiesPage = () => {
         }
     }
 
+    const fetchSystems = async () => {
+  const res = await fetch("/api/admin/system");
+  if (res.ok) {
+    const data = await res.json();
+    setSystems(data.data);
+  }
+};
+
 
 
     useEffect(() => {
         fetchCapabilitiesData();
+        fetchSystems();
     }, []);
 
 
@@ -831,6 +844,28 @@ const CapabilitiesPage = () => {
                                             <Textarea placeholder='Description' {...register(`eighthSection.items.${index}.description`)} />
                                         </div>
 
+                                        <div className='flex flex-col gap-2 mt-2'>
+  <Label className='font-bold'>Slug (System)</Label>
+  <Controller
+    name={`eighthSection.items.${index}.slug`}
+    control={control}
+    render={({ field }) => (
+      <select
+        value={field.value}
+        onChange={field.onChange}
+        className='border border-black/20 rounded-md px-3 py-2 text-sm w-full'
+      >
+        <option value="">Select a system</option>
+        {systems.map((system) => (
+          <option key={system._id} value={system.slug}>
+            {system.firstSection.title} - {system.slug}
+          </option>
+        ))}
+      </select>
+    )}
+  />
+</div>
+
                                     </div>
 
                                 </div>
@@ -838,7 +873,7 @@ const CapabilitiesPage = () => {
 
                         </div>
                         <div className='flex justify-end mt-2'>
-                            <Button type='button' addItem onClick={() => eighthSectionAppend({ image: "", imageAlt: "", title: "", description: "" })}>Add Item</Button>
+                            <Button type='button' addItem onClick={() => eighthSectionAppend({ image: "", imageAlt: "", title: "", description: "", slug: "" })}>Add Item</Button>
                         </div>
 
 

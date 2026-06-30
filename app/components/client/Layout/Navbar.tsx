@@ -228,7 +228,7 @@ export default function Navbar() {
             {/* Logo */}
             <div
               ref={logoRef}
-              className={`shrink-0 pl-[17px] transition-all duration-500 ease-out  ${isMenuOpen ? "pr-0 3xl:pl-0" : "sm:pl-30 3xl:pl-[31px] pr-100"}`}
+              className={`shrink-0 pl-[17px] transition-all duration-500 ease-out  ${isMenuOpen ? "pr-0 3xl:pl-0" : "sm:pl-30 3xl:pl-[31px] pr-50 3xl:pr-100"}`}
               style={{ opacity: 0 }}
             >
               <Link href="/" className="flex items-center shrink-0">
@@ -244,7 +244,7 @@ export default function Navbar() {
 
             {/* Nav items */}
             <div
-              className={`hidden min-[1200px]:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
+              className={`hidden min-[1300px]:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
     ${
       isMenuOpen
         ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
@@ -446,7 +446,7 @@ export default function Navbar() {
             <Link
               ref={contactRef}
               href="/contact-us"
-              className={`${isMenuOpen ? "flex" : "hidden min-[1400px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
+              className={`${isMenuOpen ? "flex" : "hidden min-[1460px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}

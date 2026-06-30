@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
-import { motion } from "framer-motion";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 import BorderButton from "@/app/components/common/BorderButton";
 import Link from "next/link";
@@ -18,6 +18,7 @@ type SolutionTab = {
   label: string;
   leftTitle: string;
   rightItems: SolutionRightItem[];
+  image: string;
 };
 
 type SolutionsData = {
@@ -58,8 +59,11 @@ const getDeviceType = (): DeviceType => {
   };
 };
 
-
-export default function SolutionsSection({solutionsData}:{solutionsData:SolutionsData}) {
+export default function SolutionsSection({
+  solutionsData,
+}: {
+  solutionsData: SolutionsData;
+}) {
   const [device, setDevice] = useState<DeviceType>(defaultDeviceType);
   useEffect(() => {
     const handleResize = () => {
@@ -76,7 +80,7 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
   }, []);
 
   const { isLaptop, isDesktop } = device;
-  
+
   const [activeTab, setActiveTab] = useState<string | null>(
     solutionsData.tabs[0].key,
   );
@@ -106,12 +110,19 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
-    <section className="relative w-full lg:min-h-screen text-white overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${solutionsData.backgroundImage})` }}
-      />
-      <div className="absolute inset-0 bg-black/70" />
+<section className="relative w-full lg:min-h-screen text-white overflow-hidden">
+  <AnimatePresence>
+    <motion.div
+      key={activeData?.image}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${activeData?.image})` }}
+    />
+  </AnimatePresence>
+  <div className="absolute inset-0 bg-black/70" />
 
       <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
@@ -189,18 +200,18 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
                 />
                 {/* <div className="ml-15 2xl:ml-auto 3xl:mr-15 mt-120 3xl:mt-[170px]"> */}
                 <div className="ml-15 2xl:ml-150 mt-120 3xl:mt-[170px] pb-5 2xl:pb-10">
-                  <div className="grid grid-cols-1 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] text-19 font-light leading-[2.63] font-poppins -tracking-[2%] text-white">
+                  <div className="grid grid-cols-2 gap-x-6 2xl:gap-x-20 3xl:gap-x-[100px] place-items-start text-19 font-light gap-y-[18px] 3xl:gap-y-0 3xl:leading-[2.63] font-poppins -tracking-[2%] text-white">
                     {activeData.rightItems.map((item, index) => (
                       <motion.div
                         key={`${activeTab}-${index}`}
                         initial="hidden"
                         whileInView="show"
-                        variants={moveUp(index * 0.15)}
+                        variants={moveUp(index * 0.07)}
                         viewport={{ once: true }}
                         className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
                       >
                         <Link href={item.link}>
-                          <span className="transition-all duration-300 group-hover:[-webkit-text-stroke:.6px_white]">
+                          <span className="transition-all duration-300 group-hover:[-webkit-text-stroke:.6px_white] leading-[1.5]">
                             {item.label}
                           </span>
                         </Link>
@@ -289,39 +300,44 @@ export default function SolutionsSection({solutionsData}:{solutionsData:Solution
                       </h3>
 
                       {/* Right items */}
-                      <div className="grid grid-cols-2 gap-y-2 text-19 font-[300] leading-[2.63] font-poppins -tracking-[2%] pb-8">
-                        {tab.rightItems.map((item: {label: string, link: string}, index: number) => (
-                          <motion.div
-                            key={`${activeTab}-${index}`}
-                            initial="hidden"
-                            whileInView="show"
-                            variants={moveUp(index * 0.06)}
-                            viewport={{ once: true }}
-                            className="flex items-center"
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            onTouchStart={() => setHoveredIndex(index)}
-                            onTouchEnd={() => setHoveredIndex(null)}
-                          >
-                            <Link href={item.link}>
-                              <span
-                                className={`transition-all duration-300   ${
-                                  hoveredIndex === index ? "font-[700]" : ""
+                      <div className="grid grid-cols-2 gap-y-2 place-items-start text-19 font-[300] leading-[1.6] font-poppins -tracking-[2%] pb-8">
+                        {tab.rightItems.map(
+                          (
+                            item: { label: string; link: string },
+                            index: number,
+                          ) => (
+                            <motion.div
+                              key={`${activeTab}-${index}`}
+                              initial="hidden"
+                              whileInView="show"
+                              variants={moveUp(index * 0.06)}
+                              viewport={{ once: true }}
+                              className="flex items-center"
+                              onMouseEnter={() => setHoveredIndex(index)}
+                              onMouseLeave={() => setHoveredIndex(null)}
+                              onTouchStart={() => setHoveredIndex(index)}
+                              onTouchEnd={() => setHoveredIndex(null)}
+                            >
+                              <Link href={item.link}>
+                                <span
+                                  className={`transition-all duration-300   ${
+                                    hoveredIndex === index ? "font-[700]" : ""
+                                  }`}
+                                >
+                                  {item.label}
+                                </span>
+                              </Link>
+                              <FiArrowRight
+                                size={20}
+                                className={` transition-all duration-300 ${
+                                  hoveredIndex === index
+                                    ? "opacity-100 translate-x-1"
+                                    : "opacity-0 -translate-x-1"
                                 }`}
-                              >
-                                {item.label}
-                              </span>
-                            </Link>
-                            <FiArrowRight
-                              size={20}
-                              className={` transition-all duration-300 ${
-                                hoveredIndex === index
-                                  ? "opacity-100 translate-x-1"
-                                  : "opacity-0 -translate-x-1"
-                              }`}
-                            />
-                          </motion.div>
-                        ))}
+                              />
+                            </motion.div>
+                          ),
+                        )}
                       </div>
                     </div>
                   </div>

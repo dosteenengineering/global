@@ -61,14 +61,6 @@ export const footerData = {
                 { label: "Space Frame Structures", href: "/solutions/commercial-developments/space-frame-structures" },
             ],
         },
-        // {
-        //     title: "Services",
-        //     links: [
-        //         { label: "AMC", href: "#" },
-        //         { label: "Instant Call Service", href: "#" },
-        //         { label: "Export", href: "#" },
-        //     ],
-        // },
     ],
     solutionTypes: [
         "Garage Solutions",
@@ -127,11 +119,12 @@ export const navItems = [
     subItems: [
       { label: "Overview", href: "/solutions" },
       { label: "Residential Solutions", href: "/solutions/residential-developments" },
-      { label: "Industrial & Commercial Solution", href: "/solutions/commercial-developments" },
+      { label: "Industrial & Commercial Solution", href: "/solutions/commercial-buildings" },
     ],
   },
   { label: "RESOURCE HUB", hasDropdown: false, href: "/resource" },
   { label: "CASE STUDIES", hasDropdown: false, href: "/case-studies" },
+  { label: "VENDOR REGISTRATION", hasDropdown: false, href: "/vendor-registration" },
 ];
 
  export const menuItems = [
