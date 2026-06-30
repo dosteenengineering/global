@@ -13,12 +13,12 @@ import Counter from "@/app/components/common/CounterAnimate";
 import { moveUp, slideVariant } from "@/app/components/motionVariants";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 
-const SLIDE_INTERVAL = 5000;
+const SLIDE_INTERVAL = 3000;
 const DRAG_THRESHOLD = 40;
 
 export default function AboutSlider({data}:{data:Home['secondSection']}) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(1); // 1=forward, -1=backward
+  const [direction, setDirection] = useState(1);
 
   const swiperRef = useRef<SwiperType | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
@@ -243,7 +243,7 @@ export default function AboutSlider({data}:{data:Home['secondSection']}) {
                 >
                   <Counter
                     value={activeSlide.number}
-                    totalTime={2.5}
+                    totalTime={1.8}
                     start={0}
                     className="font-helvetica text-250 leading-[1] text-secondary"
                   />

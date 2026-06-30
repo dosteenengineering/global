@@ -18,6 +18,7 @@ import { ClientPageData } from "../Partners/data";
 
 
 function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
+  console.log(apiData,"solutionsData")
 
   const industries = apiData?.thirdSection?.items ?? [];
 
@@ -26,7 +27,7 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
 
 
     const rightItems = systems.map((system: any) => ({
-      label: system.firstSection?.title ?? "",
+      label: system.firstSection?.shortTitle || system.firstSection?.title || "",
       link: `/solutions/${industry.slug}/${system.slug}`,
     }));
 
@@ -35,6 +36,7 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
       label: industry.title,
       leftTitle:
         industry.homeTitle,
+      image: industry.firstSection?.homeImage ?? "",
       rightItems,
     };
   });
@@ -60,8 +62,8 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
       const [company, designation] = item.designation.split(" - ");
       return {
         key: `story-${index + 1}`,
-        quote: item.description,
-        name: item.clientName,
+        quote: item.message,
+        name: item.name,
         company: company?.trim() ?? "",
         designation: designation?.trim() ?? "",
       };
@@ -103,7 +105,7 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
     })),
   }
 
-  console.log(clientsData)
+  // console.log(clientsData)
 
   return (
     <>

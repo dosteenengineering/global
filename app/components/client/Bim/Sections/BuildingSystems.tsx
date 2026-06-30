@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import type { Swiper as SwiperType } from "swiper";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import Link from "next/link";
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const out: T[][] = [];
@@ -57,14 +58,16 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
             height={100}
             className="object-contain w-10 h-10 2xl:w-12 2xl:h-12 3xl:w-15 3xl:h-15 group-hover:scale-110 transition-all duration-300"
           />
-          <div className="  lg:hidden">
-            <Image
-              src="/assets/icons/arrow-right-top-primary-26.svg"
-              alt={`Go to ${item.title}`}
-              width={40}
-              height={40}
-              className="object-contain w-5 h-5 lg:w-[26px] lg:h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
-            />
+          <div className="lg:hidden">
+            <Link href={`/solutions/systems/${item.slug}`}>
+              <Image
+                src="/assets/icons/arrow-right-top-primary-26.svg"
+                alt={`Go to ${item.title}`}
+                width={40}
+                height={40}
+                className="object-contain w-5 h-5 lg:w-[26px] lg:h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
+              />
+            </Link>
           </div>
         </div>
       </div>
@@ -78,13 +81,15 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
       </p>
 
       <div className=" hidden lg:block">
-        <Image
-          src="/assets/icons/arrow-right-top-primary-26.svg"
-          alt={`Go to ${item.title}`}
-          width={40}
-          height={40}
-          className="object-contain w-[26px] h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
-        />
+        <Link href={`/solutions/systems/${item.slug}`}>
+          <Image
+            src="/assets/icons/arrow-right-top-primary-26.svg"
+            alt={`Go to ${item.title}`}
+            width={40}
+            height={40}
+            className="object-contain w-[26px] h-[26px] translate-x-0 translate-y-0 group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300"
+          />
+        </Link>
       </div>
     </motion.div>
   );

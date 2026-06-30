@@ -38,6 +38,8 @@ interface IndividualServiceFormProps {
         title: string;
         image: string;
         imageAlt: string;
+        homeImage: string;
+        homeImageAlt: string;
         description: string;
     };
 
@@ -135,6 +137,8 @@ const IndividualService = () => {
                     firstSection: {
                         title: data.firstSection?.title || "",
                         image: data.firstSection?.image || "",
+                        homeImage: data.firstSection?.homeImage || "",
+                        homeImageAlt: data.firstSection?.homeImageAlt || "",
                         imageAlt: data.firstSection?.imageAlt || "",
                         description: data.firstSection?.description || "",
                     },
@@ -227,6 +231,26 @@ const IndividualService = () => {
                                     <Input type='text' placeholder='Alt Tag' {...register("firstSection.imageAlt")} />
                                 </div>
                             </div>
+
+                            <div className='grid grid-cols-1 gap-2'>
+                                <div className='flex flex-col gap-1'>
+                                    <Label className='font-bold'>Home Image</Label>
+                                    <Controller
+                                        name="firstSection.homeImage"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <ImageUploader
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                recommendedDimension="Recommended: 637 x 508 (px)"
+                                            />
+                                        )}
+                                    />
+                                    <Label className='font-bold'>Home Alt Tag</Label>
+                                    <Input type='text' placeholder='Home Alt Tag' {...register("firstSection.homeImageAlt")} />
+                                </div>
+                            </div>
+
                             <div className='flex flex-col gap-1'>
                                 <Label className='font-bold'>Title</Label>
                                 <Input type='text' placeholder='Title' {...register("firstSection.title", {

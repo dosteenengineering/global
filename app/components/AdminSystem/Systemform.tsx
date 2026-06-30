@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -22,12 +22,15 @@ import dynamic from "next/dynamic";
 interface SystemFormProps {
   firstSection: {
     title: string;
+    shortTitle: string;
     subTitle: string;
     firstDescription: string;
     secondDescription: string;
     shortDescription: string;
     image: string;
     imageAlt: string;
+    thumbnailImage: string;
+    thumbnailImageAlt: string;
   };
 
   secondSection: {
@@ -215,6 +218,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
         setValue("firstSection", {
           ...data.data.firstSection,
         });
+        shortTitleTouched.current = !!data.data.firstSection?.shortTitle;
         setValue("secondSection", data.data.secondSection);
         setValue("secondSection.items", data.data.secondSection.items);
         setValue("thirdSection", data.data.thirdSection);
@@ -263,6 +267,15 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
     setValue("slug", slug);
   };
 
+  const shortTitleTouched = useRef(false);
+  const titleValue = watch("firstSection.title");
+
+  useEffect(() => {
+    if (!shortTitleTouched.current) {
+      setValue("firstSection.shortTitle", titleValue);
+    }
+  }, [titleValue]);
+
   return (
     <div className="flex flex-col gap-5">
       <form
@@ -304,6 +317,19 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                   {errors.firstSection.subTitle.message}
                 </p>
               )}
+            </div>
+
+            <div>
+              <Label className="">Short Title</Label>
+              <Input
+                type="text"
+                placeholder="Short Title"
+                {...register("firstSection.shortTitle")}
+                onChange={(e) => {
+                  shortTitleTouched.current = true;
+                  setValue("firstSection.shortTitle", e.target.value);
+                }}
+              />
             </div>
 
             <div>
@@ -400,6 +426,33 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                   type="text"
                   placeholder="Alt Tag"
                   {...register(`firstSection.imageAlt`)}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Thumbnail Image</Label>
+                <Controller
+                  name={`firstSection.thumbnailImage`}
+                  control={control}
+                  render={({ field }) => (
+                    <ImageUploader
+                      isLogo
+                      value={field.value}
+                      onChange={field.onChange}
+                      recommendedDimension="Recommended: 30 x 35 (px)"
+                    />
+                  )}
+                />
+                {/* {errors.firstSection?.image && <p className='text-red-500'>{errors.firstSection?.image.message}</p>} */}
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="font-bold">Thumbnail Alt Tag</Label>
+                <Input
+                  type="text"
+                  placeholder="Alt Tag"
+                  {...register(`firstSection.thumbnailImageAlt`)}
                 />
               </div>
             </div>

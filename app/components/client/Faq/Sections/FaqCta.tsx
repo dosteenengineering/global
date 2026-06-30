@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import StatNoise4 from "@/app/components/common/noise/StatNoise4";
 
-const FaqCta = () => {
+const FaqCta = ({subTitle, btnText, btnLink}: {subTitle: string, btnText: string, btnLink: string}) => {
   return (
     <section>
       <div className="w-fit">
@@ -16,7 +16,7 @@ const FaqCta = () => {
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             className="text-30 leading-[1.33] tracking-[-0.02em] text-paragraph max-w-[804px] font-light"
-            dangerouslySetInnerHTML={{ __html: faqData.contactText }}
+            dangerouslySetInnerHTML={{ __html: subTitle }}
           />
           <motion.div
             variants={moveUp(0.2)}
@@ -26,12 +26,12 @@ const FaqCta = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <BorderButton
-              text={faqData.contactLabel}
+              text={btnText}
               borderColor="black"
               textColor="black"
               iconColor="primary"
               hoverBg="black"
-              href={faqData.contactHref}
+              href={btnLink}
               className="3xl:px-[35px]"
             />
           </motion.div>

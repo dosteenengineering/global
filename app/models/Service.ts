@@ -35,6 +35,8 @@ const serviceSchema = new mongoose.Schema({
                     title: String,
                     image: String,
                     imageAlt: String,
+                    homeImage: String,
+                    homeImageAlt: String,
                     firstDescription: String,
                     secondDescription: String,
                     description: String

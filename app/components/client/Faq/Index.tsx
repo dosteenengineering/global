@@ -1,14 +1,15 @@
 import InnerPageBanner2 from "@/app/components/common/InnerPageBanner2";
-import { banner } from "./data";
+// import { banner } from "./data";
 import FaqSection from "./Sections/Main";
 import { Suspense } from "react";
+import { FaqData } from "./type";
 
-const Index = () => {
+const Index = ({data}: {data: FaqData}) => {
   return (
     <>
-      <InnerPageBanner2 {...banner} />
+      <InnerPageBanner2 {...data.bannerSection} />
       <Suspense fallback={<div className="h-screen bg-white" />}>
-        <FaqSection />  
+        <FaqSection data={data} />  
       </Suspense>
     </>
   );

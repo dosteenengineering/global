@@ -138,6 +138,7 @@ const AdminNavbar = () => {
     //   ]
     // },
     // { name: "Sustainability", href: "/admin/sustainability", icon: LeafIcon },
+    { name: "Faq", href: "/admin/faq", icon: LeafIcon },
     { name: "Settings", href: "/admin/settings", icon: Settings },
   ];
 

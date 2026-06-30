@@ -34,37 +34,28 @@ const GallerySchema = new Schema(
       },
     },
 
-    secondSection: {
-      items: [
+secondSection: {
+  items: [
+    {
+      _id: false,
+      title: { type: String, default: "" },
+      image: { type: String, default: "" },
+      imageAlt: { type: String, default: "" },
+      date: { type: String, default: "" },
+      images: [
         {
           _id: false,
-
-          title: {
-            type: String,
-            default: "",
-          },
-
-          image: {
-            type: String,
-            default: "",
-          },
-
-          imageAlt: {
-            type: String,
-            default: "",
-          },
-
-          date: {
-            type: String,
-            default: "",
-          },
+          src: { type: String, default: "" },
+          alt: { type: String, default: "" },
         },
       ],
     },
+  ],
+},
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default mongoose.models.Gallery ||

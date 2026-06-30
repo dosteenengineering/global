@@ -4,7 +4,7 @@ import Lenis from "lenis";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, createContext, useContext } from "react";
 
-const ROUTES_WITHOUT_LENIS = ["/become-a-partner", "/partner-registration"];
+const ROUTES_WITHOUT_LENIS = ["/vendor-registration", "/partner-registration"];
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
