@@ -30,6 +30,12 @@ function ClientSideLink({
 }: ClientSideLinkProps) {
   const pathname = usePathname();
   const isActive = pathname === `${href}` || pathname?.startsWith(`${href}/`);
+  const isChildActive = children?.some(
+    (child) =>
+      pathname === child.href || pathname?.startsWith(child.href + "/"),
+  );
+
+  const shouldBeOpen = isOpen || !!isChildActive;
 
   const handleLogout = async () => {
     try {
@@ -43,14 +49,14 @@ function ClientSideLink({
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
     <>
       <Link
         href={href == "/admin/logout" ? "#" : href}
-        onClick={() => {  // Prevent navigation on click
+        onClick={() => {
+          // Prevent navigation on click
           setOpenLink?.(isOpen ? null : href);
           if (href === "/admin/logout") {
             handleLogout();
@@ -60,27 +66,39 @@ function ClientSideLink({
         className={cn(
           "flex items-center px-4 py-2 text-[14px] font-medium rounded-md transition-colors justify-between",
           "hover:bg-gray-50 hover:text-primary",
-          isActive ? "bg-gray-50 text-primary" : "text-gray-700",
-          className
+          isActive || isChildActive
+            ? "bg-gray-50 text-primary"
+            : "text-gray-700",
+          className,
         )}
       >
         <div className="flex items-center">
-        <span className="mr-3">{icon}</span>
-        {name}
+          <span className="mr-3">{icon}</span>
+          {name}
         </div>
-        {hasChild && (!isOpen ? <MdExpandCircleDown className="ml-1 mt-1" /> : <MdExpandCircleDown className="ml-1 mt-1 rotate-180" />)}
+        {hasChild && (
+          <MdExpandCircleDown
+            className={`ml-1 mt-1 transition-transform duration-200 ${shouldBeOpen ? "rotate-180" : ""}`}
+          />
+        )}
       </Link>
-      {isOpen && children && (
+      {shouldBeOpen && children && (
         <div className="flex pl-14 flex-col items-start gap-2">
           {children.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
-            <div>-</div>
-            <Link
-              href={item.href}
-              className="w-full rounded-md cursor-pointer hover:bg-gray-50 hover:text-primary text-[14px] font-medium"
-            >
-              {item.name}
-            </Link>
+              <div>-</div>
+              <Link
+                href={item.href}
+                className={cn(
+                  "w-full rounded-md cursor-pointer text-[14px] font-medium",
+                  pathname === item.href ||
+                    pathname?.startsWith(item.href + "/")
+                    ? "text-primary font-semibold"
+                    : "hover:bg-gray-50 hover:text-primary",
+                )}
+              >
+                {item.name}
+              </Link>
             </div>
           ))}
         </div>
@@ -89,5 +107,4 @@ function ClientSideLink({
   );
 }
 
-
-export default memo(ClientSideLink)
+export default memo(ClientSideLink);

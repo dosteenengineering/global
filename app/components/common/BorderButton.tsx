@@ -17,6 +17,7 @@ type BorderButtonProps = {
   onClick?: () => void;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
+  disabled?: boolean;
 };
 
 export default function BorderButton({
@@ -32,16 +33,21 @@ export default function BorderButton({
   onClick,
   icon,
   iconPosition = "right",
+  disabled = false,
 }: BorderButtonProps) {
   const [hovered, setHovered] = useState(false);
 
-  const borderClass = borderColor === "white" ? "border-white" : "border-[#454545]";
+  const borderClass =
+    borderColor === "white" ? "border-white" : "border-[#454545]";
   const textClass = textColor === "white" ? "text-white" : "text-secondary";
   const iconClass = iconColor === "white" ? "invert brightness-0" : "";
 
   const fillBg =
-    hoverBg === "white" ? "bg-white" :
-      hoverBg === "black" ? "bg-[#161616]" : "";
+    hoverBg === "white"
+      ? "bg-white"
+      : hoverBg === "black"
+        ? "bg-[#161616]"
+        : "";
 
   const sharedClass = `
     group relative overflow-hidden flex items-center justify-center gap-3
@@ -59,22 +65,32 @@ export default function BorderButton({
       : "/assets/icons/button-arrow-top-right.svg";
 
   const imgClass =
-    hoverBg === "white" && hovered ? "" :
-      hoverBg === "black" && hovered ? "invert brightness-0" :
-        iconClass;
+    hoverBg === "white" && hovered
+      ? ""
+      : hoverBg === "black" && hovered
+        ? "invert brightness-0"
+        : iconClass;
 
   const textHoverClass =
-    hoverBg === "white" && hovered ? "!text-[#161616]" :
-      hoverBg === "black" && hovered ? "!text-white" : "";
+    hoverBg === "white" && hovered
+      ? "!text-[#161616]"
+      : hoverBg === "black" && hovered
+        ? "!text-white"
+        : "";
 
   const renderedIcon = icon ? (
-    <span className={`relative z-10 text-primary transition-colors duration-300 ${textHoverClass}`}>
+    <span
+      className={`relative z-10 text-primary transition-colors duration-300 ${textHoverClass}`}
+    >
       {icon}
     </span>
   ) : (
     <Image
-      src={arrowSrc} alt="" aria-hidden="true"
-      width={18} height={18}
+      src={arrowSrc}
+      alt=""
+      aria-hidden="true"
+      width={18}
+      height={18}
       className={`relative ${imgClass} transition-all duration-300 group-hover:rotate-45 w-[18px] h-[18px] sm:w-[16px] sm:h-[16px] pointer-events-none`}
     />
   );
@@ -88,7 +104,9 @@ export default function BorderButton({
         />
       )}
       {iconPosition === "left" && renderedIcon}
-      <span className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300 ${textHoverClass}`}>
+      <span
+        className={`relative text-[14px] md:text-15 leading-[1] py-[4px] transition-colors duration-300 ${textHoverClass}`}
+      >
         {text}
       </span>
       {iconPosition === "right" && renderedIcon}
@@ -103,7 +121,13 @@ export default function BorderButton({
 
   if (type || onClick) {
     return (
-      <button type={type ?? "button"} onClick={onClick} className={sharedClass} {...events}>
+      <button
+        disabled={disabled}
+        type={type ?? "button"}
+        onClick={onClick}
+        className={sharedClass}
+        {...events}
+      >
         {content}
       </button>
     );
