@@ -8,23 +8,16 @@ import BorderButton from "@/app/components/common/BorderButton";
 import { TextAreaField } from "@/app/components/common/Textarea";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { moveUp } from "@/app/components/motionVariants";
 import { useLenis } from "@/app/components/LenisProvider";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  companyName: string;
-  yourRole: string;
-  email: string;
-  phone: string;
-  projectLocation: string;
-  systemOfInterest: string;
-  projectBrief: string;
-};
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactEnquirySchema,
+  ContactEnquiryFormValues,
+} from "@/lib/validations/contactScheme";
+import { sendContactEnquiryAction } from "@/lib/mail/actions/sendContactEnquiryAction";
+import { toast } from "sonner";
 
 const SYSTEM_OPTIONS = [
   "HVAC Systems",
@@ -39,18 +32,24 @@ const SYSTEM_OPTIONS = [
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
 export default function ContactForm() {
+  const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
+
   const {
     register,
     handleSubmit,
     control,
     watch,
-    formState: { errors },
-  } = useForm<FormValues>({
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactEnquiryFormValues>({
+    resolver: zodResolver(contactEnquirySchema),
     defaultValues: {
       firstName: "",
       lastName: "",
       companyName: "",
-      yourRole: "",
+      role: "",
       email: "",
       phone: "",
       projectLocation: "",
@@ -59,8 +58,17 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data: ContactEnquiryFormValues) => {
+    setFormStatus("idle");
+    const result = await sendContactEnquiryAction(data);
+    if (result.success) {
+      setFormStatus("success");
+      toast.success("Enquiry submitted successfully");
+      reset();
+    } else {
+      setFormStatus("error");
+      toast.error("Something went wrong");
+    }
   };
 
   // Watch all fields so InputField re-renders on value change
@@ -137,7 +145,7 @@ export default function ContactForm() {
             render={({ field }) => (
               <InputField
                 label="Company Name"
-                value={field.value}
+                value={field.value ?? ""}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
               />
@@ -154,12 +162,12 @@ export default function ContactForm() {
           className="grid grid-cols-1 sm:grid-cols-3 gap-x-30 gap-y-80 mb-80"
         >
           <Controller
-            name="yourRole"
+            name="role"
             control={control}
             render={({ field }) => (
               <InputField
                 label="Your Role"
-                value={field.value}
+                value={field.value ?? ""}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
               />
@@ -209,7 +217,7 @@ export default function ContactForm() {
             render={({ field }) => (
               <InputField
                 label="Project Location"
-                value={field.value}
+                value={field.value ?? ""}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
               />
@@ -222,7 +230,7 @@ export default function ContactForm() {
             render={({ field }) => (
               <SelectField
                 label="System of Interest"
-                value={field.value}
+                value={field.value ?? ""}
                 onChange={field.onChange}
                 options={SYSTEM_OPTIONS}
                 error={errors.systemOfInterest?.message}
@@ -245,7 +253,7 @@ export default function ContactForm() {
             render={({ field }) => (
               <TextAreaField
                 label="Project Brief"
-                value={field.value}
+                value={field.value ?? ""}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
                 error={errors.projectBrief?.message}
@@ -262,7 +270,8 @@ export default function ContactForm() {
           viewport={{ once: true }}
         >
           <BorderButton
-            text="Submit"
+            text={isSubmitting ? "Submitting..." : "Submit"}
+            disabled={isSubmitting}
             borderColor="black"
             textColor="black"
             hoverBg="black"

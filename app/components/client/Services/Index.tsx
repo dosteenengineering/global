@@ -5,7 +5,7 @@ import IndustriesWeServe from "./Sections/IndustriesWeServe";
 
 const Index = ({data}:{data:IndustriesPageData}) => {
 
-  console.log(data)
+  console.log(data.thirdSection)
   return (
     <>
       <InnerPageBanner

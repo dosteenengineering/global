@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
@@ -10,8 +10,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { navItems, menuItems } from "./data";
 import { useIntroComplete } from "../../../context/IntroContext";
 
-export default function Navbar() {
+export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
   const introComplete = useIntroComplete();
+
+  const dynamicNavItems = useMemo(() => {
+    return navItems.map((item) => {
+      if (item.label !== "SOLUTIONS") return item;
+
+      const apiSubItems =
+        solutionsRaw?.thirdSection?.items?.map((s: any) => ({
+          label: s.homeTitle?.trim(),
+          href: s.buttonLink || `/solutions/${s.slug}`,
+        })) ?? [];
+
+      return {
+        ...item,
+        subItems: [{ label: "Overview", href: "/solutions" }, ...apiSubItems],
+      };
+    });
+  }, [solutionsRaw]);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
@@ -251,7 +268,90 @@ export default function Navbar() {
         : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
     }`}
             >
-              {navItems.map((item, i) => (
+              {/* {navItems.map((item, i) => (
+                <div
+                  key={item.label}
+                  ref={(el) => {
+                    navItemRefs.current[i] = el;
+                  }}
+                  className="relative group"
+                  style={{ opacity: 0 }}
+                  onMouseEnter={() =>
+                    item.hasDropdown && setOpenDropdown(item.label)
+                  }
+                  onMouseLeave={() => setOpenDropdown(null)}
+                >
+                  <Link
+                    href={item.href}
+                    className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
+                  >
+                    <span className="text-15 leading-[1.733] uppercase">
+                      {item.label}
+                    </span>
+                    {item.hasDropdown && (
+                      <Image
+                        src="/assets/icons/arrow-down-tip.svg"
+                        alt=""
+                        width={15}
+                        height={10}
+                        className={`w-auto h-[7px] pointer-events-none transition-transform duration-300 ease-out ${
+                          openDropdown === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </Link>
+
+                  {item.hasDropdown && (
+                    <div className="absolute top-full left-0 w-full h-[25px]" />
+                  )}
+
+                  {item.hasDropdown && item.subItems && (
+                    <AnimatePresence>
+                      {openDropdown === item.label && (
+                        <motion.div
+                          initial={{
+                            clipPath: "inset(0% 0% 100% 0% round 16px)",
+                          }}
+                          animate={{
+                            clipPath: "inset(0% 0% 0% 0% round 16px)",
+                          }}
+                          exit={{ opacity: 0, y: -8, scaleY: 0.95 }}
+                          transition={{
+                            duration: 0.38,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                          className="absolute top-[calc(100%+25px)] left-0 z-50 rounded-[16px] border border-white/15 bg-black/80 overflow-hidden"
+                        >
+                          <ul className="py-[10px] min-w-[280px]">
+                            {item.subItems.map((sub, si) => (
+                              <motion.li
+                                key={sub.label}
+                                initial={{ opacity: 0, y: -10, x: -2 }}
+                                animate={{ opacity: 1, y: 0, x: 0 }}
+                                exit={{ opacity: 0, y: -10, x: -2 }}
+                                transition={{
+                                  duration: 0.2,
+                                  ease: "easeOut",
+                                  delay: si * 0.065,
+                                }}
+                              >
+                                <Link
+                                  href={sub.href}
+                                  className="flex items-center px-[20px] py-[11px] text-white text-[14px] uppercase tracking-wide hover:bg-white/8 hover:translate-x-1 transition-all duration-300"
+                                >
+                                  {sub.label}
+                                </Link>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  )}
+                </div>
+              ))} */}
+
+              {dynamicNavItems.map((item, i) => (
                 <div
                   key={item.label}
                   ref={(el) => {
@@ -336,7 +436,6 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Search — single pill expands leftward */}
             <motion.div
               className="relative hidden md:flex items-center mr-[20.39px] h-[45.61px] rounded-full border border-white/20 bg-white/8 backdrop-blur-[10px] overflow-hidden"
               initial={{ width: 45.61 }}
@@ -347,7 +446,6 @@ export default function Navbar() {
                   : { duration: 0.35, ease: [0.76, 0, 0.24, 1] },
               }}
             >
-              {/* Input — sits on the left, only visible when expanded */}
               <input
                 ref={searchInputRef}
                 value={searchQuery}
@@ -360,7 +458,6 @@ export default function Navbar() {
                 }`}
               />
 
-              {/* Button — always on the right, fixed size */}
               <button
                 ref={searchRef}
                 className="shrink-0 cursor-pointer flex items-center justify-center w-[45.61px] h-[45.61px] rounded-full"

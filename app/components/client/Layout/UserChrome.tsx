@@ -31,8 +31,6 @@
 
 
 
-
-
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -41,6 +39,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import IntroAnimation from "../../common/animations/IntroAnimation";
 import { IntroContext } from "../../../context/IntroContext";
+import { Toaster } from "sonner";
 
 type UserChromeProps = {
   children: React.ReactNode;
@@ -80,7 +79,8 @@ const UserChrome = ({ children, solutionsRaw }: UserChromeProps) => {
       )}
       {introState !== "pending" && (
         <>
-          <Navbar />
+          <Toaster />
+          <Navbar solutionsRaw={solutionsRaw} />
           {children}
           <Footer solutionsRaw={solutionsRaw} />
         </>
