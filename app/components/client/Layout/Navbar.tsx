@@ -606,7 +606,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
         startInSearch={false}
         searchQuery={searchQuery}
         menuItems={menuItems}
-        navItems={navItems.map((item) => ({
+        navItems={dynamicNavItems.map((item) => ({
           label: item.label,
           href: item.href,
           subItems: item.subItems ?? [],
