@@ -68,7 +68,7 @@ export default function ProjectEvenRowCard({ project }: { project: Project }) {
           alt={project.thumbnailAlt}
           width={855}
           height={855}
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.05] pointer-events-none"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.05] pointer-events-none h-full"
         />
       </div>
     </Link>
