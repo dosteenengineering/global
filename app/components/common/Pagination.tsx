@@ -16,7 +16,8 @@ export default function Pagination({
   const { scrollTo } = useLenis();
 
   const goToPage = (page: number) => {
-    scrollTo(document.documentElement, { duration: 1.5, offset: 0 });
+    const target = document.getElementById("projects-top");
+    scrollTo(target || document.documentElement, { duration: 1.5, offset: 0 });
     setTimeout(() => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", String(page));

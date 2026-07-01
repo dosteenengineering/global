@@ -210,9 +210,9 @@ export default function ProjectsListing({data}:{data:Project[]}) {
   }
 
   return (
-    <section className="container pt-17.5 md:pt-120 pb-140 3xl:pb-200">
+    <section className="container pt-17.5 md:pt-120 pb-140 3xl:pb-200" id="projects-top">
       <div className="relative z-50 flex flex-col mb-7.5 md:mb-50">
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center justify-between" >
           <div className="flex items-center gap-2.5 md:gap-30 3xl:gap-[36px] mb-5 md:mb-0">
             <span className="text-secondary md:text-paragraph text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
               {projectsHeading}

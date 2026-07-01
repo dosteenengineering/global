@@ -41,7 +41,7 @@ function StatCard({
   return (
     <div
       ref={cardRef}
-      className="relative h-[430px] 3xl:h-[514px] overflow-hidden cursor-pointer group"
+      className="relative h-[430px] 3xl:h-[514px] overflow-hidden group"
     >
       <Image
         src={card.image}

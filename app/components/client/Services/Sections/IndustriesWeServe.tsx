@@ -10,6 +10,7 @@ import { moveUp } from "@/app/components/motionVariants";
 
 export default function IndustriesWeServe({data}:{data:IndustriesPageData['thirdSection']}) {
 
+
   const [activeId, setActiveId] = useState(1);
   // Mobile accordion: track which item is open (null = all closed) 
   const [openId, setOpenId] = useState<number | null>(1);
@@ -19,7 +20,7 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
     setOpenId((prev) => (prev === id ? null : id));
   };
   return (
-    <section className="relative w-full select-none overflow-hidden">
+    <section className="relative w-full select-none ">
       <PrimaryNoise2 />
 
       {/* Decorative lines */}
@@ -86,7 +87,7 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
 
           {/* ── DESKTOP: Original side-by-side layout ── */}
           {/* Left — industry list */}
-          <div className="shrink-0 hidden lg:flex flex-col w-[334px] relative border-t border-bdr-blue ">
+          <div className="shrink-0 hidden lg:flex flex-col w-[334px] border-t border-bdr-blue sticky top-10 self-start max-h-screen">
             {data.items.map((item, index) => {
               const isActive = index === activeId;
               return (
