@@ -21,10 +21,10 @@ const Main = () => {
         />
       </div>
       <ContainerAnchor ref={containerRef} />
-      <div className="grid h-full min-h-0 xl:grid-cols-[1.2fr_2fr] 2xl:grid-cols-[1.5fr_2fr] 3xl:grid-cols-[841px_auto]">
+      <div className="grid h-full min-h-0 xl:grid-cols-[1.2fr_2fr] 2xl:grid-cols-[1.7fr_2fr] 3xl:grid-cols-[841px_auto]">
         <div
           style={{ paddingLeft: containerInset }}
-          className="relative h-full min-h-0 overflow-hidden py-80 pr-5 md:pr-100 3xl:pr-[110px]"
+          className="relative h-full min-h-0 overflow-hidden py-80 pr-5 md:pr-50 xl:pr-80 3xl:pr-[110px]"
         >
           <PrimaryNoise />
           <div className="relative z-2 h-full">
@@ -35,7 +35,7 @@ const Main = () => {
               alt="logo"
               className="h-[61px] w-auto"
             />
-            <div className="mt-140 mb-50">
+            <div className="mt-50 mb-30 3xl:mt-140 3xl:mb-50">
               <h1 className="text-55 leading-[1.181818181818182] text-white font-light mb-20 -tracking-[0.02em]">
                 Become a Dosteen Partner
               </h1>

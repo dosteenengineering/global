@@ -254,7 +254,7 @@ export const CheckboxGroup = ({
   return (
     <fieldset className={className}>
       <legend className={`${legendMarginBottom} ${legendFontSize} ${legendLineHeight} font-light ${legendColor} tracking-[-0.02em]`}>{label}</legend>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 xl:gap-[26px] gap-y-4 xl:gap-y-[12px]">
+      <div className="grid grid-cols-2 md:grid-cols-3 3xl:grid-cols-4 gap-x-4 xl:gap-[26px] gap-y-4 xl:gap-y-[12px]">
         {options.map((option) => (
           // <label key={option} className="flex items-center gap-2 text-13 leading-none text-paragraph">
           //   <input
@@ -325,7 +325,7 @@ export const CheckboxGroup = ({
               </svg>
             </span>
 
-            <span className="text-19 leading-none font-light text-secondary peer-checked:font-medium tracking-[-0.02em]">
+            <span className=" 3xl:text-19 leading-none font-light text-secondary peer-checked:font-medium tracking-[-0.02em]">
               {option}
             </span>
           </label>

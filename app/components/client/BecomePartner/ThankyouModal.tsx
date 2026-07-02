@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+// import { Check } from "lucide-react";
 import PrimaryNoise from "../../common/noise/PrimaryNoise";
 import BorderButton from "../../common/BorderButton";
 

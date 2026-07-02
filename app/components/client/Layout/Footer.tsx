@@ -1076,7 +1076,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   };
 
   const commercialCol = {
-    title: "Industrial & Commercial Solutions",
+    title: "Commercial Solutions",
     links: (
       industries.find((i: any) => i.slug === "commercial-buildings")
         ?.systemSection?.items ?? []
@@ -1085,8 +1085,35 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
       href: `/solutions/commercial-buildings/${s.slug}`,
     })),
   };
+  const industrialCol = {
+    title: "Industrial Facilities",
+    links: (
+      industries.find((i: any) => i.slug === "industrial-facilities")
+        ?.systemSection?.items ?? []
+    ).map((s: any) => ({
+      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+      href: `/solutions/industrial-facilities/${s.slug}`,
+    })),
+  };
 
-  const navColumns = [footerData.navColumns[0], residentialCol, commercialCol];
+  // const governmentCol = {
+  //   title: "Government Facilities",
+  //   links: (
+  //     industries.find((i: any) => i.slug === "government-facilities")
+  //       ?.systemSection?.items ?? []
+  //   ).map((s: any) => ({
+  //     label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+  //     href: `/solutions/industrial-facilities/${s.slug}`,
+  //   })),
+  // };
+
+  const navColumns = [
+    footerData.navColumns[0],
+    residentialCol,
+    commercialCol,
+    industrialCol,
+    // governmentCol,
+  ];
 
   // Columns that get merged into one stacked column on lg→2xl
   const MERGED = ["Quick Links", "Services"];
@@ -1104,6 +1131,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
+      {/* <div className="hidden min-[1110px]:flex relative pt-140 3xl:pt-[143px]"> */}
       <div className="hidden min-[1110px]:flex relative pt-140 3xl:pt-[143px]">
         {/* ── LEFT COLUMN ── */}
         <div className="flex flex-col flex-1 justify-between border-r border-[#C2C2C2]">
@@ -1267,9 +1295,9 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
             {/* Nav columns */}
             <div className="pt-40 3xl:pt-60 pb-50 3xl:pb-70 font-poppins -tracking-[2%] 2xl:pr-40 3xl:pr-[57px] relative overflow-hidden">
               {/* <div className="flex gap-70 3xl:gap-80"> */}
-              <div className="flex gap-100 3xl:gap-120">
+              <div className="flex gap-x-60 gap-y-50 xl:gap-x-50 xl:gap-y-50 flex-wrap">
                 {/* ── lg → 2xl: merged column (Services + Quick Links stacked) ── */}
-                <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden">
+                {/* <div className="flex-shrink-0 flex flex-col gap-8 3xl:hidden ">
                   {mergedCols.map((col, i) => (
                     <motion.div
                       variants={moveUp(i * 0.2)}
@@ -1306,7 +1334,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                       </ul>
                     </motion.div>
                   ))}
-                </div>
+                </div> */}
                 {/* ── lg → 2xl: remaining columns separately ── */}
                 {otherCols.map((col, i) => (
                   <motion.div
@@ -1315,7 +1343,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                     whileInView="show"
                     viewport={{ amount: 0.1, once: true }}
                     key={col.title}
-                    className="flex-shrink-0 3xl:hidden"
+                    className=" 3xl:hidden"
                   >
                     <h3 className="text-19 font-medium text-secondary mb-5 leading-[1.52] max-w-[210px] xl:max-w-[220px] 2xl:max-w-none">
                       {col.title}
@@ -1350,7 +1378,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                     whileInView="show"
                     viewport={{ amount: 0.1, once: true }}
                     key={`xl-${col.title}`}
-                    className="flex-shrink-0 hidden 3xl:block"
+                    className="hidden 3xl:block"
                   >
                     <h3 className="text-19 font-medium text-secondary mb-5 leading-[1.52]">
                       {col.title}
@@ -1402,7 +1430,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 </div> */}
               </div>
             </div>
-            <div className="mt-40">
+            <div className="3xl:mt-40 mb-10  3xl:mb-0">
               <div className="flex items-center justify-start gap-20">
                 {certifications.map((cert, index) => (
                   <motion.div
