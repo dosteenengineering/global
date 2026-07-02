@@ -20,4 +20,4 @@ const CompanyDetailsStep = ({ register, control, watch, errors }: StepFormProps)
   );
 };
 
-export default CompanyDetailsStep;
+export default CompanyDetailsStep; 
