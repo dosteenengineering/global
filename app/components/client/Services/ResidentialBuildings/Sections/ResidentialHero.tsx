@@ -268,12 +268,13 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
             </div>
 
             {/* Center — invisible landing slot (244px from top via pt-[243px] on parent) + heading + description */}
-            <div className="flex flex-col items-center justify-center flex-1 px-0 lg:px-3 3xl:px-0">
+            <div className="flex flex-col items-center justify-center flex-1 px-0 lg:px-3 xl:px-4 3xl:px-0">
               <div
                 ref={centerSlotRef}
                 className="w-[120px] h-[120px] lg:w-[200px] lg:h-[200px] shrink-0 mb-40 lg:mb-80"
               />
-              <h2 className="section-heading-90 text-secondary text-center max-w-[18ch] lg:max-w-[12ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
+              {/* <h2 className="section-heading-90 text-secondary text-center max-w-[18ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]"> */}
+              <h2 className="font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-70 3xl:text-90 text-secondary text-center max-w-[18ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
                 {second.heading}
               </h2>
               <p className="text-center text-description text-paragraph max-w-[320px] lg:max-w-[930px] whitespace-pre-line">

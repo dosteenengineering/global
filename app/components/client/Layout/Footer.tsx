@@ -1504,13 +1504,13 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
               <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                 Subscribe to our newsletter
               </p>
-              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
+              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0 min-w-max">
                 <input
                   type="email"
                   placeholder="Enter Your Email"
                   className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
                 />
-                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden">
+                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden min-w-max">
                   <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
                   <span className="relative  group-hover:text-white transition-colors duration-300 ease-in-out">
                     Subscribe
@@ -1654,13 +1654,13 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 <p className="text-[18px] lg:text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                   Subscribe to our newsletter
                 </p>
-                <div className="flex  items-center relative w-full max-w-full md:max-w-[477px] h-auto rounded-full border border-[#454545] overflow-visible pr-0">
+                <div className="flex  items-center relative w-full 2xl:max-w-[477px] h-auto rounded-full border border-[#454545] overflow-visible pr-0 sm:max-w-[70%] md:max-w-[50%]">
                   <input
                     type="email"
                     placeholder="Enter Your Email"
                     className="flex-1 h-full bg-transparent pl-4 pr-0 3xl:pl-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
                   />
-                  <button className="flex flex-shrink-0 items-center gap-1 sm:gap-3 h-full -my-[1px] -mr-[1px] py-4 pl-6 pr-5 sm:px-[29.5px] 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-[12px] sm:text-15 leading-[1.73333] uppercase group sm:shrink-0 overflow-hidden">
+                  <button className="flex flex-shrink-0 items-center gap-1 sm:gap-3 h-full -my-[1px] -mr-[1px] py-4 pl-6 pr-5 sm:px-[29.5px] 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-[12px] sm:text-15 leading-[1.73333] uppercase group sm:shrink-0 overflow-hidden ">
                     {/* <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" /> */}
                     <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
                       Subscribe
