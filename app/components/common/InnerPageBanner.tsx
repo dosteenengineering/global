@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useParallax } from "./animations/useParallax";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "./animations/SectionDescription";
+import { moveUp } from "../motionVariants";
 interface InnerPageBannerProps {
   title: string;
   titleMaxWidth?: string;
@@ -53,10 +54,13 @@ export default function InnerPageBanner({
           as="h1"
         />
         {description && (
-          <SectionDescription
-            text={description}
-            className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333] font-light !text-30 `}
-          />
+          // <SectionDescription
+          //   text={description}
+          //   className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333333333333333] font-light !text-30 `}
+          // />
+          <motion.p variants={moveUp(0)} initial="hidden" whileInView="show" className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333333333333333] font-light !text-30 `}>
+            {description}
+          </motion.p>
         )}
       </div>
 
