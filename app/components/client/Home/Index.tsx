@@ -53,7 +53,7 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
 }
 
 const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: { data: Home, solutionsRaw: IndustriesPageData, projectsData: AllProjectData, blogsDataRaw: AllBlogData, clientsData:ClientPageData }) => {
-
+   console.log(`show data`,data.ninethSection)
   const solutionsData = transformToSolutionsData(solutionsRaw, data);
 
   const clientStoriesData = {
@@ -116,7 +116,7 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
       <IndustriesSection data={data.sixthSection} />
       <WhyDosteen data={data.seventhSection} />
       <BimVideoSection data={data.eighthSection} />
-      <FeaturedProjects featuredProjectsData={featuredProjects} />
+      <FeaturedProjects featuredProjectsData={featuredProjects} sectionTitle={data.ninethSection.title} />
       <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} />
       <BlogsSection blogsData={blogsData}/>
       <TrustedClients data={data.twelthSection} clientsData={clientsData}/>

@@ -9,6 +9,22 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { moveUp } from "@/app/components/motionVariants";
 import { motion } from "framer-motion";
 
+const getActionHref = (link: string) => {
+  const trimmedLink = link.trim();
+
+  if (trimmedLink.startsWith("tel:")) {
+    return trimmedLink;
+  }
+
+  const isPhoneNumber = /^\+?[\d\s().-]+$/.test(trimmedLink);
+
+  if (!isPhoneNumber) {
+    return trimmedLink;
+  }
+
+  return `tel:${trimmedLink.replace(/[^\d+]/g, "")}`;
+};
+
 export default function CtaSection({data}:{data:Home['lastSection']}) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -27,12 +43,7 @@ useEffect(() => {
     <section className="relative w-full overflow-hidden">
       <PrimaryNoise />
       <div className="hidden sm:block absolute left-0 -top-[50%] lg:-top-[60%] w-[70%] lg:w-[50%] h-[165%] pointer-events-none">
-        <Image
-          src="/assets/icons/bg-svg/cta-animated.svg"
-          alt=""
-          fill
-          className="object-contain object-top-left"
-        />
+        <Image src="/assets/icons/bg-svg/cta-animated.svg" alt="" fill className="object-contain object-top-left" />
       </div>
 
       {/* Content */}
@@ -74,8 +85,9 @@ useEffect(() => {
                   viewport={{ amount: 0.1, once: true }}
                 >
                   <Link
-                    href={action.link}
-                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px] ${i === 0 ? "sm:pl-0" : ""} ${i === data.items.length - 1 ? "sm:pr-0" : ""}`}
+                    href={getActionHref(action.link)}
+                    className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px]
+                       ${i === 0 ? "sm:pl-0" : ""} ${i === data.items.length - 1 ? "sm:pr-0" : ""}`}
                   >
                     <span className="text-white font-poppins font-light text-30 leading-[1.52] -tracking-[2%] uppercase">
                       {action.title}

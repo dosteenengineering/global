@@ -16,7 +16,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import Link from "next/link";
 
-import { Project } from "../data";
+// import { Project } from "../data";
 import NavButton from "@/app/components/common/NavigationButton";
 import BorderButton from "@/app/components/common/BorderButton";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
@@ -141,9 +141,10 @@ function InactiveSlot({
 }
 
 export default function FeaturedProjectsSection({
-  featuredProjectsData,
+  featuredProjectsData,sectionTitle
 }: {
   featuredProjectsData: AllProjectData["projects"];
+  sectionTitle: string;
 }) {
   // ── Desktop swiper state ──
   const activeSwiperRef = useRef<SwiperType | null>(null);
@@ -210,7 +211,7 @@ export default function FeaturedProjectsSection({
     <section className="w-full py-140 3xl:py-200 bg-white overflow-hidden">
       <div ref={containerRef} className="container">
         <SectionTitle
-          text={"Featured Projects"}
+          text={sectionTitle}
           className="section-heading-90 mb-25 md:mb-70  md:text-center xl:ml-[1.8em]"
         />
       </div>
@@ -233,7 +234,7 @@ export default function FeaturedProjectsSection({
           >
             <BorderButton
               href={"/case-studies"}
-              text={"All Projects"}
+              text={"VIEW ALL"}
               borderColor="black"
               textColor="black"
               px="md:px-[35px] px-[23px]"
@@ -257,7 +258,7 @@ export default function FeaturedProjectsSection({
               onClick={mobileSlideNext}
               direction="right"
               disabled={false}
-              ariaLabel="Next project"
+              ariaLabel="Next Case Study"
             />
           </motion.div>
         </div>
@@ -509,7 +510,7 @@ export default function FeaturedProjectsSection({
           >
             <BorderButton
               href={"/case-studies"}
-              text={"All Projects"}
+              text={"All Case Studies"}
               borderColor="black"
               textColor="black"
               px="px-30 3xl:px-[35px]"

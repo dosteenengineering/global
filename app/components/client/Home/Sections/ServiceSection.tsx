@@ -11,6 +11,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { moveUp } from "@/app/components/motionVariants";
 import { useInView } from "framer-motion";
 import AnimatedServiceIcon from "./AnimatedServiceIcon";
+import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 
 type SvgPath = {
   d: string;
@@ -116,12 +117,19 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
               />
             </div>
 
-            <SectionTitle
+            {/* <SectionTitle
               key={activeTab}
               text={activeData.description}
               className="text-55 text-white leading-[1.18] font-light font-poppins -tracking-[2%] max-w-[855px]"
+            /> */}
+            {/* <p className="text-40 text-white leading-[1.18] font-light font-poppins -tracking-[2%] max-w-[855px]">
+              {activeData.description}
+            </p> */}
+            <SectionDescription
+              key={activeTab}
+              text={activeData.description}
+              className="!text-40 text-white !leading-[1.2] font-light font-poppins -tracking-[2%] max-w-[855px]"
             />
-
             <motion.div
               initial="hidden"
               whileInView="show"
