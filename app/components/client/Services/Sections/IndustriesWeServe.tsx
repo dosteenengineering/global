@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import {IndustriesPageData } from "../data";
+import { IndustriesPageData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
 import ImageHotspots, { Hotspot } from "@/app/components/common/ImageHotspots";
@@ -26,8 +26,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783075798773",
       "title": "Docking Solution",
       "marker": {
-        "x": 35.78947368421053,
-        "y": 31.611689814814813
+        "x": 38.421052631578945,
+        "y": 31.793142504118617
       },
       "label": {
         "x": 21.49122807017544,
@@ -52,8 +52,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783075850834",
       "title": "Entrance Solutions",
       "marker": {
-        "x": 23.94736842105263,
-        "y": 49.204282407407405
+        "x": 29.122807017543863,
+        "y": 48.92658566721582
       },
       "label": {
         "x": 20,
@@ -66,8 +66,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "title": "Flood Barriers",
       "href": "/solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
-        "x": 23.50877192982456,
-        "y": 58.860367063492056
+        "x": 27.982456140350877,
+        "y": 58.31703047775947
       },
       "label": {
         "x": 16.140350877192983,
@@ -79,8 +79,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783075923358",
       "title": "Gate Systems",
       "marker": {
-        "x": 36.578947368421055,
-        "y": 71.2942294973545
+        "x": 39.21052631578947,
+        "y": 71.4966021416804
       },
       "label": {
         "x": 21.052631578947366,
@@ -93,8 +93,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "title": "Architectural Shades",
       "href": "solutions/residential-developments/innovative-architectural-shading-systems-in-uae-oman",
       "marker": {
-        "x": 62.807017543859644,
-        "y": 67.45825066137566
+        "x": 60.78947368421053,
+        "y": 66.38951812191104
       },
       "label": {
         "x": 79.12280701754386,
@@ -120,8 +120,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783076013438",
       "title": "Fire Protection Solutions",
       "marker": {
-        "x": 61.05263157894737,
-        "y": 44.04555224867725
+        "x": 58.94736842105262,
+        "y": 44.14899093904448
       },
       "label": {
         "x": 81.05263157894737,
@@ -464,7 +464,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     }
   ]
 
-  
+
 
 };
 
@@ -475,13 +475,13 @@ const normalizeHotspotKey = (value: string) =>
     .replace(/[^a-z0-9]+/g, "")
     .trim();
 
-export default function IndustriesWeServe({data}:{data:IndustriesPageData['thirdSection']}) {
+export default function IndustriesWeServe({ data }: { data: IndustriesPageData['thirdSection'] }) {
 
 
   const [activeId, setActiveId] = useState(0);
   // Mobile accordion: track which item is open (null = all closed) 
   const [openId, setOpenId] = useState<number | null>(0);
-  const active = data.items.find((i,idx) => idx === activeId)!;
+  const active = data.items.find((i, idx) => idx === activeId)!;
   const activeHotspots =
     Object.entries(industryHotspotsByTitle).find(([title]) => normalizeHotspotKey(title) === normalizeHotspotKey(active.title))?.[1] ?? [];
 
@@ -508,9 +508,9 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
         <div className="flex flex-col lg:flex-row gap-150  3xl:gap-[206px]">
           {/* ── MOBILE: Accordion ── */}
           <div className="flex flex-col lg:hidden w-full">
-            {data.items.map((item,idx) => {
+            {data.items.map((item, idx) => {
               const isOpen = idx === openId;
-              const detail = data.items.find((i,index) => index === idx)!;
+              const detail = data.items.find((i, index) => index === idx)!;
 
               return (
                 <div key={idx} className="relative first:border-t border-b border-bdr-blue py-5">
@@ -634,14 +634,14 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
             {/* Image */}
             <motion.div
               variants={moveUp(0.3)}
-              className="relative w-full h-[80vh] mb-50"
+              className="relative w-full h-auto mb-50"
             >
               <ImageHotspots
                 image={active.image}
                 alt={active.imageAlt || active.title}
                 hotspots={activeHotspots}
                 editMode={process.env.NEXT_PUBLIC_HOTSPOT_EDITOR === "true"}
-                imageClassName="object-cover transition-all duration-500"
+                imageClassName="object-cover transition-all duration-500 !relative"
               />
             </motion.div>
 
