@@ -58,7 +58,8 @@ export default function InnerPageBanner({
           //   text={description}
           //   className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333333333333333] font-light !text-30 `}
           // />
-          <motion.p variants={moveUp(0)} initial="hidden" whileInView="show" className={`${descriptionMaxWidth} text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333333333333333] font-light !text-30 `}>
+          <motion.p variants={moveUp(0)} initial="hidden" whileInView="show" className={`${descriptionMaxWidth}
+           text-secondary mb-[50px] md:mb-120 tracking-[-0.02em] leading-[2.333]  md:leading-[1.333333333333333] font-light text-30 `}>
             {description}
           </motion.p>
         )}
