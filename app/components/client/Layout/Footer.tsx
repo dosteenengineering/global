@@ -1065,7 +1065,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   const industries: any[] = solutionsRaw?.thirdSection?.items ?? [];
 
   const residentialCol = {
-    title: "Residential Solutions",
+    title: "Residential Developments",
     links: (
       industries.find((i: any) => i.slug === "residential-developments")
         ?.systemSection?.items ?? []
@@ -1076,7 +1076,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   };
 
   const commercialCol = {
-    title: "Commercial Solutions",
+    title: "Commercial Buildings",
     links: (
       industries.find((i: any) => i.slug === "commercial-buildings")
         ?.systemSection?.items ?? []

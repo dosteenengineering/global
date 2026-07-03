@@ -283,10 +283,10 @@ const FullscreenMenu = ({
                 viewport={{ once: true }}
                 className="group flex items-center py-4 text-white transition-colors md:py-5 xl:py-[25px] pl-3 lg:pl-5 xl:pl-10 2xl:pl-100 3xl:pl-[141px] relative group"
               >
-                <span className="mr-3 self-start pt-2 text-[11px] leading-none text-white/80">
+                {/* <span className="mr-3 self-start pt-2 text-[11px] leading-none text-white/80">
                   {" "}
                   {String(index + 1).padStart(2, "0")}{" "}
-                </span>
+                </span> */}
                 <span className="text-[34px] font-light leading-[1.12] tracking-normal md:text-[44px] lg:text-[38px] xl:text-[44px] 3xl:text-[54px] opacity-75 group-hover:opacity-100 transition-all duration-300">
                   {item.label}
                 </span>

@@ -109,7 +109,7 @@ export default function ProjectsListing({data}:{data:Project[]}) {
   const activeLocation = searchParams.get("location") || ALL_FILTER;
   const activeStatus = searchParams.get("status") || ALL_FILTER;
   const projectsHeading =
-    activeCategory === ALL_FILTER ? "All Projects" : `${activeCategory} Projects`;
+    activeCategory === ALL_FILTER ? "All Case Studies" : `${activeCategory} Case Studies`;
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const pageParam = Number(searchParams.get("page") || 1);
   const currentPage = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;

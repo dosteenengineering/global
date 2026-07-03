@@ -96,7 +96,7 @@ export const navItems = [
     hasDropdown: true,
     href: "#",
     subItems: [
-      { label: "Overview", href: "/about" },
+      { label: "Company Overview", href: "/about" },
       { label: "Partners & Clients", href: "/about/partners" },
       { label: "Awards & Certifications", href: "/about/recognitions" },
       { label: "FAQs", href: "/about/faq" },

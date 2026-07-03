@@ -19,7 +19,7 @@ const ServingMap = ({ seventhSection, eighthSection }: { seventhSection: AboutPa
       <SecondaryNoise />
       <div className="container">
         <SectionTitle text={seventhSection.title} className="section-heading-90 text-secondary uppercase mb-7.5 md:mb-50 max-w-[22ch]" />
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_auto] 3xl:grid-cols-[auto_410px] gap-5 relative z-2">
+        <div className="grid grid-cols-1 xl:grid-cols-[auto_1fr] 3xl:grid-cols-[auto_410px] relative z-2">
           <div>
             <div className="flex gap-[7px] md:gap-[15px] mb-80">
               {/* <div className="bg-white/8 relative overflow-hidden z-10 rounded-full px-60 py-[13px]
@@ -58,14 +58,8 @@ const ServingMap = ({ seventhSection, eighthSection }: { seventhSection: AboutPa
                 <p className="text-description !text-paragraph relative z-1 tracking-[2%]">{seventhSection.items[1].value} </p>
               </motion.div>
             </div>
-            <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} className="relative aspect-[1109.98/537] w-full max-w-[1109.98px] overflow-visible">
-              <Image
-                src="/assets/images/about/map-section/map.svg"
-                fill
-                sizes="(max-width: 1279px) 100vw, 1110px"
-                className="object-contain"
-                alt="world map"
-              />
+            <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} className="relative overflow-hidden">
+              <Image src="/assets/images/about/map-section/map.svg" width={1109.98} height={537} alt="world map" />
               {eighthSection.items.map((country) => (
                 <div
                   key={country.title}
