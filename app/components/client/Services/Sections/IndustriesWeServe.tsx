@@ -4,17 +4,486 @@ import Image from "next/image";
 import {IndustriesPageData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BorderButton from "@/app/components/common/BorderButton";
+import ImageHotspots, { Hotspot } from "@/app/components/common/ImageHotspots";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
+const industryHotspotsByTitle: Record<string, Hotspot[]> = {
+  // Paste each copied hotspot JSON array under the exact backend item.title.
+  // Example:
+  // "Residential Developments": [
+  //   {
+  //     id: "entrance-solutions",
+  //     title: "Entrance Solutions",
+  //     marker: { x: 35, y: 42 },
+  //     label: { x: 12, y: 38 },
+  //     side: "left",
+  //   },
+  // ],
+  "Residential Developments": [
+    {
+      "id": "hotspot-1783075798773",
+      "title": "Docking Solution",
+      "marker": {
+        "x": 35.78947368421053,
+        "y": 31.611689814814813
+      },
+      "label": {
+        "x": 21.49122807017544,
+        "y": 10.712218915343916
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783075822707",
+      "title": "Traffic safety Solutions",
+      "marker": {
+        "x": 48.333333333333336,
+        "y": 61.24131944444444
+      },
+      "label": {
+        "x": 18.333333333333332,
+        "y": 22.749255952380953
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783075850834",
+      "title": "Entrance Solutions",
+      "marker": {
+        "x": 23.94736842105263,
+        "y": 49.204282407407405
+      },
+      "label": {
+        "x": 20,
+        "y": 72.22015542328042
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783075867220",
+      "title": "Flood Barriers",
+      "href": "/solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
+      "marker": {
+        "x": 23.50877192982456,
+        "y": 58.860367063492056
+      },
+      "label": {
+        "x": 16.140350877192983,
+        "y": 33.72809193121693
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783075923358",
+      "title": "Gate Systems",
+      "marker": {
+        "x": 36.578947368421055,
+        "y": 71.2942294973545
+      },
+      "label": {
+        "x": 21.052631578947366,
+        "y": 80.95031415343915
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783075972194",
+      "title": "Architectural Shades",
+      "href": "solutions/residential-developments/innovative-architectural-shading-systems-in-uae-oman",
+      "marker": {
+        "x": 62.807017543859644,
+        "y": 67.45825066137566
+      },
+      "label": {
+        "x": 79.12280701754386,
+        "y": 86.63814484126983
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783076000388",
+      "title": "Multi-Parking Solutions",
+      "href": "solutions/residential-developments/space-saving-multi-parking-systems-for-homes-building",
+      "marker": {
+        "x": 71.57894736842105,
+        "y": 56.479414682539684
+      },
+      "label": {
+        "x": 80.35087719298247,
+        "y": 74.33655753968253
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783076013438",
+      "title": "Fire Protection Solutions",
+      "marker": {
+        "x": 61.05263157894737,
+        "y": 44.04555224867725
+      },
+      "label": {
+        "x": 81.05263157894737,
+        "y": 20.632853835978835
+      },
+      "side": "right"
+    }
+  ],
+
+  "Commercial Buildings": [
+    {
+      "id": "hotspot-1783078947137",
+      "title": "Garbage & Linen Chutes",
+      "marker": {
+        "x": 49.122807017543856,
+        "y": 39.41592261904761
+      },
+      "label": {
+        "x": 20.43859649122807,
+        "y": 12.960896164021163
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783078981323",
+      "title": "Garbage Doors",
+      "marker": {
+        "x": 29.210526315789476,
+        "y": 48.14608134920635
+      },
+      "label": {
+        "x": 14.210526315789473,
+        "y": 23.410631613756614
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079001277",
+      "title": "Shutters",
+      "marker": {
+        "x": 30.350877192982455,
+        "y": 51.71750992063492
+      },
+      "label": {
+        "x": 13.333333333333334,
+        "y": 34.654017857142854
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079025580",
+      "title": "Flood Barriers",
+      "marker": {
+        "x": 35.70175438596491,
+        "y": 64.54819775132276
+      },
+      "label": {
+        "x": 14.298245614035087,
+        "y": 79.23073743386243
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079043483",
+      "title": "Retractable Pool Covers",
+      "marker": {
+        "x": 60.08771929824561,
+        "y": 65.87094907407408
+      },
+      "label": {
+        "x": 78.15789473684211,
+        "y": 83.33126653439153
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079055685",
+      "title": "Bespoke Steel Gates",
+      "marker": {
+        "x": 80.35087719298247,
+        "y": 56.479414682539684
+      },
+      "label": {
+        "x": 79.03508771929825,
+        "y": 74.86565806878306
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079069045",
+      "title": "Multi-Parking Solutions",
+      "marker": {
+        "x": 77.54385964912281,
+        "y": 40.73867394179894
+      },
+      "label": {
+        "x": 81.14035087719299,
+        "y": 31.214864417989418
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079083843",
+      "title": "Architectural Shades",
+      "marker": {
+        "x": 56.75438596491228,
+        "y": 60.315393518518526
+      },
+      "label": {
+        "x": 81.9298245614035,
+        "y": 19.839203042328045
+      },
+      "side": "right"
+    }
+  ],
+
+  "Industrial Facilities": [
+    {
+      "id": "hotspot-1783079308586",
+      "title": "Garbage & Linen Chutes",
+      "marker": {
+        "x": 49.29824561403508,
+        "y": 39.151372354497354
+      },
+      "label": {
+        "x": 19.473684210526315,
+        "y": 13.489996693121691
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079325281",
+      "title": "Revolving Doors",
+      "marker": {
+        "x": 44.122807017543856,
+        "y": 53.569361772486765
+      },
+      "label": {
+        "x": 16.140350877192983,
+        "y": 23.01380621693122
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079382964",
+      "title": "Turnstile System",
+      "marker": {
+        "x": 42.01754385964912,
+        "y": 64.01909722222221
+      },
+      "label": {
+        "x": 14.473684210526317,
+        "y": 34.654017857142854
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079400947",
+      "title": "Flood Barriers",
+      "marker": {
+        "x": 29.912280701754383,
+        "y": 71.82333002645503
+      },
+      "label": {
+        "x": 19.210526315789473,
+        "y": 81.87624007936508
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079425540",
+      "title": "Bespoke Steel Gates",
+      "marker": {
+        "x": 60.6140350877193,
+        "y": 74.6011078042328
+      },
+      "label": {
+        "x": 75,
+        "y": 85.71221891534393
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079437604",
+      "title": "Multi-Parking Solutions",
+      "marker": {
+        "x": 77.80701754385964,
+        "y": 44.70692791005291
+      },
+      "label": {
+        "x": 82.45614035087719,
+        "y": 35.579943783068785
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079449936",
+      "title": "Fire and Smoke Curtains",
+      "marker": {
+        "x": 62.01754385964912,
+        "y": 43.913277116402114
+      },
+      "label": {
+        "x": 80.17543859649123,
+        "y": 25.923859126984127
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079470191",
+      "title": "Acoustic Partitions",
+      "marker": {
+        "x": 62.10526315789474,
+        "y": 30.288938492063494
+      },
+      "label": {
+        "x": 80.17543859649123,
+        "y": 13.489996693121691
+      },
+      "side": "right"
+    }
+  ],
+  "Government Facilities": [
+    {
+      "id": "hotspot-1783079773906",
+      "title": "Blast Doors",
+      "marker": {
+        "x": 16.140350877192983,
+        "y": 28.569361772486772
+      },
+      "label": {
+        "x": 23.50877192982456,
+        "y": 10.712218915343916
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079794358",
+      "title": "Mantrap Access Control",
+      "marker": {
+        "x": 36.666666666666664,
+        "y": 64.2836474867725
+      },
+      "label": {
+        "x": 19.385964912280702,
+        "y": 54.495287698412696
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079816727",
+      "title": "Flood Barriers",
+      "marker": {
+        "x": 27.719298245614034,
+        "y": 65.07729828042328
+      },
+      "label": {
+        "x": 15.701754385964911,
+        "y": 69.83920304232805
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079825553",
+      "title": "Bespoke Steel Gates",
+      "marker": {
+        "x": 37.45614035087719,
+        "y": 72.88153108465607
+      },
+      "label": {
+        "x": 16.49122807017544,
+        "y": 81.61168981481481
+      },
+      "side": "left"
+    },
+    {
+      "id": "hotspot-1783079834443",
+      "title": "Architectural Shades",
+      "marker": {
+        "x": 59.122807017543856,
+        "y": 71.82333002645503
+      },
+      "label": {
+        "x": 76.40350877192984,
+        "y": 83.46354166666666
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079843377",
+      "title": "Vault Doors",
+      "marker": {
+        "x": 71.05263157894737,
+        "y": 51.18840939153439
+      },
+      "label": {
+        "x": 87.63157894736841,
+        "y": 37.960896164021165
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079852403",
+      "title": "Fire and Smoke Curtains",
+      "marker": {
+        "x": 64.82456140350877,
+        "y": 39.945023148148145
+      },
+      "label": {
+        "x": 80.43859649122807,
+        "y": 30.024388227513228
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783079949766",
+      "title": "Blast Doors & Windows",
+      "marker": {
+        "x": 46.666666666666664,
+        "y": 40.73867394179894
+      },
+      "label": {
+        "x": 65,
+        "y": 10.902695105820106
+      },
+      "side": "right"
+    },
+    {
+      "id": "hotspot-1783080262162",
+      "title": "Blast Doors & Windows",
+      "marker": {
+        "x": 55.52631578947368,
+        "y": 39.81274801587302
+      },
+      "label": {
+        "x": 80,
+        "y": 19.839203042328045
+      },
+      "side": "right"
+    }
+  ]
+
+  
+
+};
+
+const normalizeHotspotKey = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "")
+    .trim();
+
 export default function IndustriesWeServe({data}:{data:IndustriesPageData['thirdSection']}) {
 
 
-  const [activeId, setActiveId] = useState(1);
+  const [activeId, setActiveId] = useState(0);
   // Mobile accordion: track which item is open (null = all closed) 
-  const [openId, setOpenId] = useState<number | null>(1);
+  const [openId, setOpenId] = useState<number | null>(0);
   const active = data.items.find((i,idx) => idx === activeId)!;
+  const activeHotspots =
+    Object.entries(industryHotspotsByTitle).find(([title]) => normalizeHotspotKey(title) === normalizeHotspotKey(active.title))?.[1] ?? [];
 
   const toggleAccordion = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -91,12 +560,11 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
             {data.items.map((item, index) => {
               const isActive = index === activeId;
               return (
-                <motion.div variants={moveUp(0.1 * index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.1 * index, ease: "easeInOut" }}>
+                <motion.div key={item._id ?? index} variants={moveUp(0.1 * index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.1 * index, ease: "easeInOut" }}>
                   <button
                     type="button"
-                    key={index}
                     onClick={() => setActiveId(index)}
-                    className={`group relative flex items-center justify-between text-left w-full   border-b border-bdr-blue transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
+                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
                       }`}
                     style={
                       isActive
@@ -166,9 +634,15 @@ export default function IndustriesWeServe({data}:{data:IndustriesPageData['third
             {/* Image */}
             <motion.div
               variants={moveUp(0.3)}
-              className="relative w-full h-[482px] mb-50"
+              className="relative w-full h-[80vh] mb-50"
             >
-              <Image src={active.image} alt={active.title} fill className="object-cover transition-all duration-500" />
+              <ImageHotspots
+                image={active.image}
+                alt={active.imageAlt || active.title}
+                hotspots={activeHotspots}
+                editMode={process.env.NEXT_PUBLIC_HOTSPOT_EDITOR === "true"}
+                imageClassName="object-cover transition-all duration-500"
+              />
             </motion.div>
 
             <motion.div variants={moveUp(0.4)}>
