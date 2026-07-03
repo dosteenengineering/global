@@ -18,8 +18,8 @@ const ProjectCta = ({data}:{data:CtaProps}) => {
       <div className="container w-full">
         <div className="flex lg:items-center items-start flex-col lg:flex-row gap-y-5 md:gap-y-[40px] lg:justify-between p-5 md:p-60 relative">
           <StatNoise1 />
-          <div
-            className="text-30 leading-[1.33] tracking-[-0.02em] text-secondary max-w-[908px] font-light"
+          <p
+            className="text-30 leading-[1.33] tracking-[-0.02em] text-secondary max-w-[908px] font-normal"
             dangerouslySetInnerHTML={{ __html: data.description }}
           />
           <BorderButton

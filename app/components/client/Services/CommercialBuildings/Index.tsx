@@ -27,7 +27,7 @@ const DefaultServicePageIndex = ({ data, projectsData }: { data: CommercialBuild
 
   return (
     <>
-      <InnerPageBanner {...data.firstSection} description={data.firstSection.firstDescription} descriptionMaxWidth="max-w-none" />
+      <InnerPageBanner {...data.firstSection} description={data.firstSection.firstDescription} descriptionMaxWidth="max-w-[75ch]" />
       <DosteenSystems data={DosteenSystemsData} />
       <ProjectCta data={data.thirdSection} />
       <FeaturedProjects data={featuredProjects} />
