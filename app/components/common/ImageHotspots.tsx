@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 
+const ANIMATION_DURATION = 1.2;
+
 export interface Hotspot {
   id: string;
   title: string;
@@ -27,6 +29,7 @@ interface ImageHotspotsProps {
   className?: string;
   imageClassName?: string;
   sizes?: string;
+  mobileMode?: boolean;
 }
 
 type DragTarget = {
@@ -69,10 +72,13 @@ export default function ImageHotspots({
   className = "",
   imageClassName = "object-contain",
   sizes = "(max-width: 1024px) 100vw, 70vw",
+  mobileMode = false,
 }: ImageHotspotsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [items, setItems] = useState<Hotspot[]>(hotspots);
   const [dragTarget, setDragTarget] = useState<DragTarget | null>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [expandedLabelId, setExpandedLabelId] = useState<string | null>(null);
 
   const editorEnabled = useMemo(() => {
     return process.env.NODE_ENV === "development" && (editMode || process.env.NEXT_PUBLIC_HOTSPOT_EDITOR === "true");
@@ -100,9 +106,9 @@ export default function ImageHotspots({
         currentItems.map((item) =>
           item.id === dragTarget.id
             ? {
-                ...item,
-                [dragTarget.target]: position,
-              }
+              ...item,
+              [dragTarget.target]: position,
+            }
             : item
         )
       );
@@ -118,6 +124,28 @@ export default function ImageHotspots({
       window.removeEventListener("pointerup", handlePointerUp);
     };
   }, [dragTarget, editorEnabled]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const container = containerRef.current;
+    if (container) {
+      observer.observe(container);
+    }
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, []);
 
   const handleAddHotspot = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!editorEnabled) return;
@@ -161,8 +189,9 @@ export default function ImageHotspots({
         <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} />
 
         <svg className="absolute inset-0 z-10 h-full w-full overflow-visible pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          {items.map((hotspot) => {
+          {items.map((hotspot, index) => {
             const labelDot = getLabelDotPosition(hotspot);
+            const lineDelay = index * ANIMATION_DURATION;
 
             return (
               <polyline
@@ -174,57 +203,130 @@ export default function ImageHotspots({
                 vectorEffect="non-scaling-stroke"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                style={{
+                  strokeDasharray: "1000",
+                  strokeDashoffset: isInView ? "0" : "1000",
+                  transition: `stroke-dashoffset ${ANIMATION_DURATION}s ease-out ${lineDelay}s`,
+                }}
               />
             );
           })}
         </svg>
 
-        {items.map((hotspot) => {
+        {items.map((hotspot, index) => {
           const labelDot = getLabelDotPosition(hotspot);
-          const labelClassName = `absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full cursor-pointer  border
-                 border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-4 py-[10px] text-center text-15 font-light
-                  leading-[1] tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`;
-          const labelStyle = { left: `${hotspot.label.x}%`, top: `${hotspot.label.y}%` };
+          const lineDelay = index * ANIMATION_DURATION;
+          const labelFadeDelay = lineDelay;
+          const isExpanded = mobileMode && expandedLabelId === hotspot.id;
 
           return (
-          <div key={hotspot.id}>
-            <button
-              type="button"
-              aria-label={hotspot.title}
-              className={`absolute z-30 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596] shadow-[0_0_0_3px_rgba(30,87,255,0.16)] ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
-              style={{ left: `${hotspot.marker.x}%`, top: `${hotspot.marker.y}%` }}
-              onPointerDown={(event) => {
-                if (!editorEnabled) return;
-                event.stopPropagation();
-                setDragTarget({ id: hotspot.id, target: "marker" });
-              }}
-            />
-
-            <span
-              className="pointer-events-none absolute z-30 h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596]"
-              style={{ left: `${labelDot.x}%`, top: `${labelDot.y}%` }}
-              aria-hidden="true"
-            />
-
-            {hotspot.href && !editorEnabled ? (
-              <Link href={hotspot.href} className={labelClassName} style={labelStyle}>
-                {hotspot.title}
-              </Link>
-            ) : (
+            <div key={hotspot.id}>
               <button
                 type="button"
-                className={labelClassName}
-                style={labelStyle}
+                aria-label={hotspot.title}
+                className={`absolute z-30 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596]
+                  shadow-[0_0_0_3px_rgba(30,87,255,0.16)] ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
+                style={{
+                  left: `${hotspot.marker.x}%`,
+                  top: `${hotspot.marker.y}%`,
+                  opacity: isInView ? 1 : 0,
+                  transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
+                }}
                 onPointerDown={(event) => {
                   if (!editorEnabled) return;
                   event.stopPropagation();
-                  setDragTarget({ id: hotspot.id, target: "label" });
+                  setDragTarget({ id: hotspot.id, target: "marker" });
                 }}
-              >
-                {hotspot.title}
-              </button>
-            )}
-          </div>
+              />
+
+              <span
+                className="pointer-events-none absolute z-30 h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596]"
+                style={{
+                  left: `${labelDot.x}%`,
+                  top: `${labelDot.y}%`,
+                  opacity: isInView ? 1 : 0,
+                  transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Mobile mode: Expandable circle button */}
+              {mobileMode ? (
+                <div className="absolute z-50" style={{ left: `${labelDot.x}%`, top: `${labelDot.y}%`, transform: "translate(-50%, -50%)" }}>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedLabelId(expandedLabelId === hotspot.id ? null : hotspot.id)}
+                    className={`relative z-50 rounded-full bg-[#294596] shadow-lg flex items-center justify-center transition-all duration-300 active:scale-95 ${isExpanded
+                      ? "w-auto px-4 py-1 hover:scale-105"
+                      : "w-5 h-5 hover:scale-110 p-[2px]"
+                      } ${hotspot.side === "left" ? "origin-right" : "origin-left"}`}
+                    style={{
+                      opacity: isInView ? 1 : 0,
+                      transition: `opacity 0.3s ease-out ${labelFadeDelay}s, width 0.3s ease-in-out, padding 0.3s ease-in-out`,
+                    }}
+                  >
+                    {isExpanded ? (
+                      hotspot.href ? (
+                        <Link href={hotspot.href} className="text-white text-[10px] 2xl:text-15 font-light leading-none tracking-[-0.02em] hover:text-[#76A7FF] transition-colors">
+                          {hotspot.title}
+                        </Link>
+                      ) : (
+                        <span className="text-white text-[10px] 2xl:text-15 font-light leading-none tracking-[-0.02em] relative z-50">
+                          {hotspot.title}
+                        </span>
+                      )
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                      </svg>
+
+
+
+                    )}
+                  </button>
+                </div>
+              ) : (
+                /* Desktop mode: Original label button */
+                <>
+                  {hotspot.href && !editorEnabled ? (
+                    <Link
+                      href={hotspot.href}
+                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full cursor-pointer border
+                 border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] 2xl:text-15 font-light
+                  leading-[1] tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
+                      style={{
+                        left: `${hotspot.label.x}%`,
+                        top: `${hotspot.label.y}%`,
+                        opacity: isInView ? 1 : 0,
+                        transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
+                      }}
+                    >
+                      {hotspot.title}
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full cursor-pointer border
+                 border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] 2xl:text-15 font-light
+                  leading-[1] tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
+                      style={{
+                        left: `${hotspot.label.x}%`,
+                        top: `${hotspot.label.y}%`,
+                        opacity: isInView ? 1 : 0,
+                        transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
+                      }}
+                      onPointerDown={(event) => {
+                        if (!editorEnabled) return;
+                        event.stopPropagation();
+                        setDragTarget({ id: hotspot.id, target: "label" });
+                      }}
+                    >
+                      {hotspot.title}
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
           );
         })}
       </div>
@@ -233,7 +335,7 @@ export default function ImageHotspots({
         <button
           type="button"
           onClick={handleCopyJson}
-          className="absolute right-3 top-3 z-40 rounded-full bg-[#1d2764] px-4 py-2 text-xs font-medium text-white shadow-lg"
+          className="absolute right-3 top-3 z-40 rounded-full bg-[#1d2764] hover:opacity-70 trancition-all duration-300 px-4 py-2 text-xs font-medium text-white shadow-lg"
         >
           Copy JSON
         </button>

@@ -149,8 +149,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783078981323",
       "title": "Garbage Doors",
       "marker": {
-        "x": 29.210526315789476,
-        "y": 48.14608134920635
+        "x": 33.59649122807017,
+        "y": 48.7618410214168
       },
       "label": {
         "x": 14.210526315789473,
@@ -162,8 +162,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079001277",
       "title": "Shutters",
       "marker": {
-        "x": 30.350877192982455,
-        "y": 51.71750992063492
+        "x": 34.29824561403509,
+        "y": 51.23301070840197
       },
       "label": {
         "x": 13.333333333333334,
@@ -175,8 +175,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079025580",
       "title": "Flood Barriers",
       "marker": {
-        "x": 35.70175438596491,
-        "y": 64.54819775132276
+        "x": 38.3,
+        "y": 64.2
       },
       "label": {
         "x": 14.298245614035087,
@@ -188,8 +188,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079043483",
       "title": "Retractable Pool Covers",
       "marker": {
-        "x": 60.08771929824561,
-        "y": 65.87094907407408
+        "x": 58.42105263157895,
+        "y": 65.895284184514
       },
       "label": {
         "x": 78.15789473684211,
@@ -201,8 +201,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079055685",
       "title": "Bespoke Steel Gates",
       "marker": {
-        "x": 80.35087719298247,
-        "y": 56.479414682539684
+        "x": 74.47368421052632,
+        "y": 56.34009472817133
       },
       "label": {
         "x": 79.03508771929825,
@@ -214,8 +214,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079069045",
       "title": "Multi-Parking Solutions",
       "marker": {
-        "x": 77.54385964912281,
-        "y": 40.73867394179894
+        "x": 72.54385964912281,
+        "y": 41.183587314662276
       },
       "label": {
         "x": 81.14035087719299,
@@ -227,8 +227,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079083843",
       "title": "Architectural Shades",
       "marker": {
-        "x": 56.75438596491228,
-        "y": 60.315393518518526
+        "x": 55.17543859649123,
+        "y": 60.2939662273476
       },
       "label": {
         "x": 81.9298245614035,
@@ -256,8 +256,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079325281",
       "title": "Revolving Doors",
       "marker": {
-        "x": 44.122807017543856,
-        "y": 53.569361772486765
+        "x": 45.26315789473684,
+        "y": 53.37469110378913
       },
       "label": {
         "x": 16.140350877192983,
@@ -269,8 +269,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079382964",
       "title": "Turnstile System",
       "marker": {
-        "x": 42.01754385964912,
-        "y": 64.01909722222221
+        "x": 43.59649122807018,
+        "y": 64.08309308072488
       },
       "label": {
         "x": 14.473684210526317,
@@ -282,8 +282,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079400947",
       "title": "Flood Barriers",
       "marker": {
-        "x": 29.912280701754383,
-        "y": 71.82333002645503
+        "x": 33.50877192982456,
+        "y": 71.33185749588138
       },
       "label": {
         "x": 19.210526315789473,
@@ -295,8 +295,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079425540",
       "title": "Bespoke Steel Gates",
       "marker": {
-        "x": 60.6140350877193,
-        "y": 74.6011078042328
+        "x": 58.50877192982457,
+        "y": 75.12098434925865
       },
       "label": {
         "x": 75,
@@ -308,8 +308,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079437604",
       "title": "Multi-Parking Solutions",
       "marker": {
-        "x": 77.80701754385964,
-        "y": 44.70692791005291
+        "x": 72.45614035087719,
+        "y": 44.31373558484349
       },
       "label": {
         "x": 82.45614035087719,
@@ -321,8 +321,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079449936",
       "title": "Fire and Smoke Curtains",
       "marker": {
-        "x": 62.01754385964912,
-        "y": 43.913277116402114
+        "x": 59.64912280701754,
+        "y": 43.490012355848435
       },
       "label": {
         "x": 80.17543859649123,
@@ -334,8 +334,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079470191",
       "title": "Acoustic Partitions",
       "marker": {
-        "x": 62.10526315789474,
-        "y": 30.288938492063494
+        "x": 59.561403508771924,
+        "y": 29.816206754530477
       },
       "label": {
         "x": 80.17543859649123,
@@ -349,8 +349,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079773906",
       "title": "Blast Doors",
       "marker": {
-        "x": 16.140350877192983,
-        "y": 28.569361772486772
+        "x": 21.842105263157897,
+        "y": 28.82773887973641
       },
       "label": {
         "x": 23.50877192982456,
@@ -362,8 +362,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079794358",
       "title": "Mantrap Access Control",
       "marker": {
-        "x": 36.666666666666664,
-        "y": 64.2836474867725
+        "x": 39.473684210526315,
+        "y": 63.91834843492587
       },
       "label": {
         "x": 19.385964912280702,
@@ -375,8 +375,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079816727",
       "title": "Flood Barriers",
       "marker": {
-        "x": 27.719298245614034,
-        "y": 65.07729828042328
+        "x": 32.01754385964912,
+        "y": 64.5773270181219
       },
       "label": {
         "x": 15.701754385964911,
@@ -388,8 +388,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079825553",
       "title": "Bespoke Steel Gates",
       "marker": {
-        "x": 37.45614035087719,
-        "y": 72.88153108465607
+        "x": 40,
+        "y": 72.48507001647447
       },
       "label": {
         "x": 16.49122807017544,
@@ -401,8 +401,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079834443",
       "title": "Architectural Shades",
       "marker": {
-        "x": 59.122807017543856,
-        "y": 71.82333002645503
+        "x": 57.19298245614035,
+        "y": 71.99083607907743
       },
       "label": {
         "x": 76.40350877192984,
@@ -414,8 +414,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079843377",
       "title": "Vault Doors",
       "marker": {
-        "x": 71.05263157894737,
-        "y": 51.18840939153439
+        "x": 66.9298245614035,
+        "y": 51.39775535420099
       },
       "label": {
         "x": 87.63157894736841,
@@ -427,8 +427,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079852403",
       "title": "Fire and Smoke Curtains",
       "marker": {
-        "x": 64.82456140350877,
-        "y": 39.945023148148145
+        "x": 61.66666666666667,
+        "y": 40.03037479406919
       },
       "label": {
         "x": 80.43859649122807,
@@ -440,8 +440,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079949766",
       "title": "Blast Doors & Windows",
       "marker": {
-        "x": 46.666666666666664,
-        "y": 40.73867394179894
+        "x": 47.280701754385966,
+        "y": 40.52460873146623
       },
       "label": {
         "x": 65,
@@ -453,8 +453,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783080262162",
       "title": "Blast Doors & Windows",
       "marker": {
-        "x": 55.52631578947368,
-        "y": 39.81274801587302
+        "x": 54.736842105263165,
+        "y": 40.03037479406919
       },
       "label": {
         "x": 80,
@@ -479,17 +479,22 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
 
 
   const [activeId, setActiveId] = useState(0);
-  // Mobile accordion: track which item is open (null = all closed) 
+  // Mobile accordion: track which item is open (null = all closed)
   const [openId, setOpenId] = useState<number | null>(0);
   const active = data.items.find((i, idx) => idx === activeId)!;
   const activeHotspots =
     Object.entries(industryHotspotsByTitle).find(([title]) => normalizeHotspotKey(title) === normalizeHotspotKey(active.title))?.[1] ?? [];
 
+  // Helper function to get hotspots for mobile items
+  const getHotspotsForItem = (itemTitle: string) => {
+    return Object.entries(industryHotspotsByTitle).find(([title]) => normalizeHotspotKey(title) === normalizeHotspotKey(itemTitle))?.[1] ?? [];
+  };
+
   const toggleAccordion = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
   return (
-    <section className="relative w-full select-none ">
+    <section className="relative w-full select-none overflow-x-hidden lg:overflow-x-visible">
       <PrimaryNoise2 />
 
       {/* Decorative lines */}
@@ -502,15 +507,16 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
         <SectionTitle text={data.title} className="section-heading-90 text-white uppercase mb-7.5 md:mb-30 xl:mb-30 " />
 
         {/* Divider */}
-        <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-80 3xl:mb-80 hidden lg:block" />
+        <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-8 2mb-80 3xl:mb-80 hidden lg:block" />
 
         {/* Body: left list + right detail */}
-        <div className="flex flex-col lg:flex-row gap-150  3xl:gap-[206px]">
+        <div className="flex flex-col lg:flex-row gap-10 2xl:gap-100  3xl:gap-[206px]">
           {/* ── MOBILE: Accordion ── */}
-          <div className="flex flex-col lg:hidden w-full">
+          <div className="flex flex-col lg:hidden w-full ">
             {data.items.map((item, idx) => {
               const isOpen = idx === openId;
               const detail = data.items.find((i, index) => index === idx)!;
+              const itemHotspots = getHotspotsForItem(item.title);
 
               return (
                 <div key={idx} className="relative first:border-t border-b border-bdr-blue py-5">
@@ -543,8 +549,14 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
                     <div className="flex flex-col z-10 text-white pt-5">
                       <p className="text-description text-white mb-30">{detail.description}</p>
-                      <div className="relative w-full h-[269px] mb-30">
-                        <Image src={detail.image} alt={detail.title} fill className="object-cover transition-all duration-500" />
+                      <div className="relative w-full h-[300px] mb-30">
+                        <ImageHotspots
+                          image={detail.image}
+                          alt={detail.title}
+                          hotspots={itemHotspots}
+                          mobileMode={true}
+                          imageClassName="object-contain !relative"
+                        />
                       </div>
                       <BorderButton text={"Read More"} iconColor="white" px="px-[23px] md:px-30" href={detail.buttonLink} hoverBg="white" className="w-fit" />
                     </div>
@@ -556,7 +568,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
 
           {/* ── DESKTOP: Original side-by-side layout ── */}
           {/* Left — industry list */}
-          <div className="shrink-0 hidden lg:flex flex-col w-[334px] border-t border-bdr-blue sticky top-10 self-start max-h-screen">
+          <div className="shrink-0 hidden lg:flex flex-col 2xl:w-[334px] border-t border-bdr-blue sticky top-10 self-start max-h-screen">
             {data.items.map((item, index) => {
               const isActive = index === activeId;
               return (
@@ -564,7 +576,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <button
                     type="button"
                     onClick={() => setActiveId(index)}
-                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-20" : ""
+                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-20" : ""
                       }`}
                     style={
                       isActive
@@ -587,7 +599,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                     )}
 
                     <span
-                      className={`relative z-10 text-19 leading-[2.5263] tracking-[-0.02em] transition-all duration-300 ${isActive
+                      className={`relative z-10 text-base 2xl:text-19 leading-[2.5263] tracking-[-0.02em] transition-all duration-300 ${isActive
                         ? "text-white font-medium"
                         : "text-white font-light"
                         }`}
@@ -620,13 +632,13 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
           >
             <motion.h2
               variants={moveUp(0.1)}
-              className="text-55 leading-[1.1818] mb-30 font-light tracking-[-0.02em]"
+              className="text-55 leading-[1.1818] mb-3 2xl:mb-30 font-light tracking-[-0.02em]"
             >
               {active.title}
             </motion.h2>
             <motion.p
               variants={moveUp(0.2)}
-              className="text-description text-white mb-50"
+              className="text-description text-white mb-5 2xl:mb-50"
             >
               {active.description}
             </motion.p>
