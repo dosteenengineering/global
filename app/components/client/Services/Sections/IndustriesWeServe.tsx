@@ -549,7 +549,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
                     <div className="flex flex-col z-10 text-white pt-5">
                       <p className="text-description text-white mb-30">{detail.description}</p>
-                      <div className="relative w-full h-[300px] mb-30">
+                      <div className="relative w-full h-auto mb-30">
                         <ImageHotspots
                           image={detail.image}
                           alt={detail.title}
