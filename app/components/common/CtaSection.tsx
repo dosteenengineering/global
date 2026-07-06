@@ -6,23 +6,23 @@ import SectionTitle from "./animations/SectionTitle";
 import { SectionDescription } from "./animations/SectionDescription";
 import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-// const getActionHref = (link: string) => {
-//   const trimmedLink = link.trim();
+const getActionHref = (link: string) => {
+  const trimmedLink = link.trim();
 
-//   if (trimmedLink.startsWith("tel:")) {
-//     return trimmedLink;
-//   }
+  if (trimmedLink.startsWith("tel:")) {
+    return trimmedLink;
+  }
 
-//   const isPhoneNumber = /^\+?[\d\s().-]+$/.test(trimmedLink);
+  const isPhoneNumber = /^\+?[\d\s().-]+$/.test(trimmedLink);
 
-//   if (!isPhoneNumber) {
-//     return trimmedLink;
-//   }
+  if (!isPhoneNumber) {
+    return trimmedLink;
+  }
 
-//   return `tel:${trimmedLink.replace(/[^\d+]/g, "")}`;
-// };
+  return `tel:${trimmedLink.replace(/[^\d+]/g, "")}`;
+};
 
 export default function CtaSection({title, titleWidth, description, descriptionWidth, items}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, items: {buttonText: string, buttonLink: string}[]}) {
 
@@ -58,7 +58,8 @@ export default function CtaSection({title, titleWidth, description, descriptionW
           {items.map((btn,index) => (
             <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" key={index}
             viewport={{once:true, amount:0.4}}>
-            <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.buttonLink} hoverBg="white" className="w-fit" />
+            {/* <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.buttonLink} hoverBg="white" className="w-fit" /> */}
+              <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={getActionHref(btn.buttonLink)} hoverBg="white" className="w-fit" />
             </motion.div>
           ))}
         </div>

@@ -531,7 +531,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
         <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-8 2mb-80 3xl:mb-80 hidden lg:block" />
 
         {/* Body: left list + right detail */}
-        <div className="flex flex-col lg:flex-row gap-10 2xl:gap-100  3xl:gap-[206px]">
+        <div className="flex flex-col lg:flex-row gap-10 2xl:gap-50  3xl:gap-[206px]">
           {/* ── MOBILE: Accordion ── */}
           <div className="flex flex-col lg:hidden w-full ">
             {data.items.map((item, idx) => {
@@ -589,7 +589,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
 
           {/* ── DESKTOP: Original side-by-side layout ── */}
           {/* Left — industry list */}
-          <div className="shrink-0 hidden lg:flex flex-col 2xl:w-[334px] border-t border-bdr-blue sticky top-10 self-start max-h-screen">
+          <div className="shrink-0 hidden lg:flex flex-col min-w-max 2xl:w-[300px] 3xl:w-[334px] border-t border-bdr-blue sticky top-10 self-start max-h-screen">
             {data.items.map((item, index) => {
               const isActive = index === activeId;
               return (
@@ -597,7 +597,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <button
                     type="button"
                     onClick={() => setActiveId(index)}
-                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-20" : ""
+                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : ""
                       }`}
                     style={
                       isActive
@@ -657,12 +657,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             >
               {active.title}
             </motion.h2>
-            <motion.p
-              variants={moveUp(0.2)}
-              className="text-description text-white mb-5 2xl:mb-50"
-            >
-              {active.description}
-            </motion.p>
+          
 
             {/* Image */}
             <motion.div
@@ -677,6 +672,12 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                 imageClassName="object-cover transition-all duration-500 !relative"
               />
             </motion.div>
+            <motion.p
+              variants={moveUp(0.2)}
+              className="text-description text-white mb-5 2xl:mb-50"
+            >
+              {active.description}
+            </motion.p>
 
             <motion.div variants={moveUp(0.4)}>
               <BorderButton text={"Read More"} iconColor="white" px="px-30 3xl:px-[35px]" href={active.buttonLink} hoverBg="white" className="w-fit" />
