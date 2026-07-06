@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 
 const ANIMATION_DURATION = 1.2;
-
+const LINE_DELAY = 0.25;
 export interface Hotspot {
   id: string;
   title: string;
@@ -183,7 +183,7 @@ export default function ImageHotspots({
     <div className={`relative h-full w-full overflow-visible ${className}`}>
       <div
         ref={containerRef}
-        className={`relative h-full w-full overflow-visible bg-[#e7e5e9] ${editorEnabled ? "cursor-crosshair" : ""}`}
+        className={`relative h-full w-full overflow-visible bg-[#e7e5e9] py-12 xl:py-0 ${editorEnabled ? "cursor-crosshair" : ""}`}
         onPointerDown={handleAddHotspot}
       >
         <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} />
@@ -191,7 +191,8 @@ export default function ImageHotspots({
         <svg className="absolute inset-0 z-10 h-full w-full overflow-visible pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           {items.map((hotspot, index) => {
             const labelDot = getLabelDotPosition(hotspot);
-            const lineDelay = index * ANIMATION_DURATION;
+            // const lineDelay = index * ANIMATION_DURATION;
+            const lineDelay = index * LINE_DELAY;
 
             return (
               <polyline
@@ -215,7 +216,8 @@ export default function ImageHotspots({
 
         {items.map((hotspot, index) => {
           const labelDot = getLabelDotPosition(hotspot);
-          const lineDelay = index * ANIMATION_DURATION;
+          // const lineDelay = index * ANIMATION_DURATION;
+          const lineDelay = index * 0.25;
           const labelFadeDelay = lineDelay;
           const isExpanded = mobileMode && expandedLabelId === hotspot.id;
 
