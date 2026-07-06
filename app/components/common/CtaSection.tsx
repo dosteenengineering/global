@@ -6,8 +6,28 @@ import SectionTitle from "./animations/SectionTitle";
 import { SectionDescription } from "./animations/SectionDescription";
 import { motion } from "framer-motion";
 import { moveUp } from "../motionVariants";
+// import { useState, useEffect } from "react";
+
+// const getActionHref = (link: string) => {
+//   const trimmedLink = link.trim();
+
+//   if (trimmedLink.startsWith("tel:")) {
+//     return trimmedLink;
+//   }
+
+//   const isPhoneNumber = /^\+?[\d\s().-]+$/.test(trimmedLink);
+
+//   if (!isPhoneNumber) {
+//     return trimmedLink;
+//   }
+
+//   return `tel:${trimmedLink.replace(/[^\d+]/g, "")}`;
+// };
 
 export default function CtaSection({title, titleWidth, description, descriptionWidth, items}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, items: {buttonText: string, buttonLink: string}[]}) {
+
+    
+
   return (
     <section className="relative w-full select-none overflow-hidden">
       <PrimaryNoise2 />
@@ -45,4 +65,4 @@ export default function CtaSection({title, titleWidth, description, descriptionW
       </div>
     </section>
   );
-}
+} 

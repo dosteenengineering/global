@@ -2,7 +2,7 @@ import HeroSection from "./Sections/HeroSection";
 import AboutSlider from "./Sections/AboutSlider";
 import SolutionsSection from "./Sections/SolutionsSection";
 import ServiceSection from "./Sections/ServiceSection";
-import IndustriesSection from "./Sections/IndustriesSection";
+// import IndustriesSection from "./Sections/IndustriesSection";
 import BimVideoSection from "./Sections/BimVideoSection";
 import FeaturedProjects from "./Sections/FeaturedProjects";
 import ClientStoriesSection from "./Sections/ClientStoriesSection";
@@ -113,10 +113,10 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
       <AboutSlider data={data.secondSection} />
       <SolutionsSection solutionsData={solutionsData} />
       <ServiceSection servicesData={servicesData} />
-      <IndustriesSection data={data.sixthSection} />
+      {/* <IndustriesSection data={data.sixthSection} /> */}
+      <FeaturedProjects featuredProjectsData={featuredProjects} sectionTitle={data.ninethSection.title} />
       <WhyDosteen data={data.seventhSection} />
       <BimVideoSection data={data.eighthSection} />
-      <FeaturedProjects featuredProjectsData={featuredProjects} sectionTitle={data.ninethSection.title} />
       <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} />
       <BlogsSection blogsData={blogsData}/>
       <TrustedClients data={data.twelthSection} clientsData={clientsData}/>

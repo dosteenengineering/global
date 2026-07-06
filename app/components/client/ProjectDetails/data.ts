@@ -35,7 +35,7 @@ export interface ProjectItemProps {
 
     firstSection: {
         title: string;
-        sector: {name:string};
+        sector: {name:string; _id:string};
         location: {name:string};
         status: string;
         client: string;

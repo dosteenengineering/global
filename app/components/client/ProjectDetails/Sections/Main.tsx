@@ -36,7 +36,7 @@ export default function Main({
 
   const specifications = [
     { label: "Sector", value: data.firstSection.sector.name },
-    { label: "Activity", value: data.firstSection.location.name },
+    { label: "Location", value: data.firstSection.location.name },
     { label: "Status", value: statusData.find((item)=>item.value.toString() == data.firstSection.status)?.name || "" },
     { label: "Client", value: data.firstSection.client },
     { label: "Architect / Location", value:data.firstSection.consultant },

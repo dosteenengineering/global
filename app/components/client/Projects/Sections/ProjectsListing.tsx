@@ -217,9 +217,9 @@ export default function ProjectsListing({data}:{data:Project[]}) {
             <span className="text-secondary md:text-paragraph text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
               {projectsHeading}
             </span>
-            <span className="text-primary text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
+            {/* <span className="text-primary text-55 leading-[1.1818] md:leading-[1.1818] font-light tracking-[-0.02em]">
               {filteredProjects.length}
-            </span>
+            </span> */}
           </div>
 
           <button
@@ -244,11 +244,11 @@ export default function ProjectsListing({data}:{data:Project[]}) {
           }`}
         >
           <div
-            className={`flex flex-col gap-7.5 lg:flex-row flex-wrap lg:justify-between transition-transform duration-500 ease-in-out 3xl:max-w-[1474px] ${
+            className={`flex flex-col gap-7.5 lg:flex-row flex-wrap lg:justify-between transition-transform duration-500 ease-in-out  ${
               isFilterOpen ? "translate-y-0" : "-translate-y-3"
             }`}
           >
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 md:gap-x-5 3xl:gap-x-[26px]">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 md:gap-x-5 3xl:gap-x-[26px] 3xl:gap-y-8 border-b border-bdr-gray pb-4 xl:pb-8">
               {categories.map((category) => {
                 const isActive = activeCategory === category;
 
@@ -257,7 +257,7 @@ export default function ProjectsListing({data}:{data:Project[]}) {
                     key={category}
                     type="button"
                     onClick={() => updateFilter("category", category)}
-                    className={`text-19 text-paragraph transition-colors duration-200 tracking-[-0.02em]  cursor-pointer ${
+                    className={`text-19 text-paragraph transition-colors duration-200 tracking-[-0.02em] border-r border-bdr-gray pr-5 3xl:pr-[26px] last:border-0 cursor-pointer ${
                       isActive
                         ? "font-bold"
                         : "hover:text-secondary"

@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
@@ -11,13 +10,14 @@ import ProjectCard from "@/app/components/common/ProjectCard";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import NavButton from "@/app/components/common/NavigationButton";
-import { Project } from "../../Projects/data";
+// import { Project } from "../../Projects/data";
 
 
-export default function RelatedProjects({data}:{data:AllProjectData}) {
+export default function RelatedProjects({ data, currentProject, }:{data:AllProjectData, currentProject: ProjectItemProps}) {
   console.log(data)
   const title = "Related Case Studies";
-  const projects = data.projects;
+  // const projects = data.projects;
+  const projects = data.projects.filter((project) => project._id !== currentProject._id && project.firstSection.sector._id === currentProject.firstSection.sector._id);
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dotCount, setDotCount] = useState(0);
