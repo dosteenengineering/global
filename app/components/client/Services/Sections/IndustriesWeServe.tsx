@@ -135,6 +135,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783078947137",
       "title": "Garbage & Linen Chutes",
+      "href":"solutions/commercial-buildings/efficient-garbage-linen-chutes-for-modern-buildings",
       "marker": {
         "x": 49.122807017543856,
         "y": 39.41592261904761
@@ -174,6 +175,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079025580",
       "title": "Flood Barriers",
+      "href":"solutions/commercial-buildings/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 38.3,
         "y": 64.2
@@ -200,6 +202,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079055685",
       "title": "Bespoke Steel Gates",
+      "href": "solutions/commercial-buildings/bespoke-steel-gates-for-youre-homes-in-uae-oman",
       "marker": {
         "x": 74.47368421052632,
         "y": 56.34009472817133
@@ -213,6 +216,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079069045",
       "title": "Multi-Parking Solutions",
+      "href": "solutions/commercial-buildings/space-saving-multi-parking-systems-for-homes-building",
       "marker": {
         "x": 72.54385964912281,
         "y": 41.183587314662276
@@ -226,6 +230,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079083843",
       "title": "Architectural Shades",
+      "href": "solutions/commercial-buildings/architectural-tensile-shades",
       "marker": {
         "x": 55.17543859649123,
         "y": 60.2939662273476
@@ -281,6 +286,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079400947",
       "title": "Flood Barriers",
+      "href": "solutions/industrial-facilities/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 33.50877192982456,
         "y": 71.33185749588138
@@ -307,6 +313,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079437604",
       "title": "Multi-Parking Solutions",
+      "href": "solutions/industrial-facilities/space-saving-multi-parking-systems-for-homes-building",
       "marker": {
         "x": 72.45614035087719,
         "y": 44.31373558484349
