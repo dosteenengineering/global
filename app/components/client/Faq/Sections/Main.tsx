@@ -117,9 +117,9 @@ export default function FaqSection({ data }: { data: FaqData }) {
             <span className="text-secondary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
               All Questions
             </span>
-            <span className="text-primary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
+            {/* <span className="text-primary text-55 leading-[1.1818] font-light tracking-[-0.02em]">
               {secondSection.items.length}
-            </span>
+            </span> */}
           </div>
           <div className="flex items-center gap-80">
             <div className="flex items-center justify-between border border-[#c2c2c2] rounded-full h-[38px] lg:h-[50px] min-w-[237px] lg:min-w-[280px] 3xl:w-[330px] px-[17px]">
