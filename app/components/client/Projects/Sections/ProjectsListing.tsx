@@ -142,8 +142,10 @@ export default function ProjectsListing({data}:{data:Project[]}) {
         activeCategory === ALL_FILTER || project.firstSection.sector.name === activeCategory;
       const locationMatches =
         activeLocation === ALL_FILTER || project.firstSection.location.name === activeLocation;
-      const statusMatches =
-        activeStatus === ALL_FILTER || project.firstSection.status === activeStatus;
+const statusMatches =
+  activeStatus === ALL_FILTER ||
+  Number(project.firstSection.status) ===
+    statusData.find((item) => item.name === activeStatus)?.value;
 
       return categoryMatches && locationMatches && statusMatches;
     });
