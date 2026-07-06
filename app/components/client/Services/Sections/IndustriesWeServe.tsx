@@ -21,10 +21,15 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
   //     side: "left",
   //   },
   // ],
-  "Residential Developments": [
+  // Industrial Facilities
+  // Residential Developments
+  // Commercial Buildings
+  // Government Facilities
+  "Industrial Facilities": [
     {
       "id": "hotspot-1783075798773",
       "title": "Docking Solution",
+      "href": "solutions/industrial-facilities/docking-solutions",
       "marker": {
         "x": 38.421052631578945,
         "y": 31.793142504118617
@@ -38,6 +43,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783075822707",
       "title": "Traffic safety Solutions",
+      "href": "solutions/industrial-facilities/traffic-safety-solutions",
       "marker": {
         "x": 48.333333333333336,
         "y": 61.24131944444444
@@ -51,6 +57,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783075850834",
       "title": "Entrance Solutions",
+      "href": "solutions/industrial-facilities/entrance-systems",
       "marker": {
         "x": 29.122807017543863,
         "y": 48.92658566721582
@@ -64,7 +71,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783075867220",
       "title": "Flood Barriers",
-      "href": "/solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
+      "href": "solutions/industrial-facilities/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 27.982456140350877,
         "y": 58.31703047775947
@@ -78,6 +85,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783075923358",
       "title": "Gate Systems",
+      "href": "solutions/industrial-facilities/automated-gate-systems",
       "marker": {
         "x": 39.21052631578947,
         "y": 71.4966021416804
@@ -91,7 +99,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783075972194",
       "title": "Architectural Shades",
-      "href": "solutions/residential-developments/innovative-architectural-shading-systems-in-uae-oman",
+      "href": "solutions/industrial-facilities/innovative-architectural-shading-systems-in-uae-oman",
       "marker": {
         "x": 60.78947368421053,
         "y": 66.38951812191104
@@ -105,7 +113,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783076000388",
       "title": "Multi-Parking Solutions",
-      "href": "solutions/residential-developments/space-saving-multi-parking-systems-for-homes-building",
+      "href": "solutions/industrial-facilities/space-saving-multi-parking-systems-for-homes-building",
       "marker": {
         "x": 71.57894736842105,
         "y": 56.479414682539684
@@ -119,6 +127,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783076013438",
       "title": "Fire Protection Solutions",
+      "href": "solutions/industrial-facilities/fire-protection-system",
       "marker": {
         "x": 58.94736842105262,
         "y": 44.14899093904448
@@ -131,11 +140,11 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     }
   ],
 
-  "Commercial Buildings": [
+  "Residential Developments": [
     {
       "id": "hotspot-1783078947137",
       "title": "Garbage & Linen Chutes",
-      "href":"solutions/commercial-buildings/efficient-garbage-linen-chutes-for-modern-buildings",
+      "href":"solutions/residential-developments/efficient-garbage-linen-chutes-for-modern-buildings",
       "marker": {
         "x": 49.122807017543856,
         "y": 39.41592261904761
@@ -149,6 +158,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783078981323",
       "title": "Garbage Doors",
+      "href": "solutions/residential-developments/premium-residential-garage-doors-in-uae-oman",
       "marker": {
         "x": 33.59649122807017,
         "y": 48.7618410214168
@@ -162,6 +172,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079001277",
       "title": "Shutters",
+      "href": "solutions/residential-developments/elegant-shutters-for-stylish-secure-living",
       "marker": {
         "x": 34.29824561403509,
         "y": 51.23301070840197
@@ -175,7 +186,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079025580",
       "title": "Flood Barriers",
-      "href":"solutions/commercial-buildings/advanced-flood-barriers-for-homes-in-uae-oman",
+      "href":"solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 38.3,
         "y": 64.2
@@ -202,7 +213,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079055685",
       "title": "Bespoke Steel Gates",
-      "href": "solutions/commercial-buildings/bespoke-steel-gates-for-youre-homes-in-uae-oman",
+      "href": "solutions/residential-developments/bespoke-steel-gates-for-youre-homes-in-uae-oman",
       "marker": {
         "x": 74.47368421052632,
         "y": 56.34009472817133
@@ -216,7 +227,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079069045",
       "title": "Multi-Parking Solutions",
-      "href": "solutions/commercial-buildings/space-saving-multi-parking-systems-for-homes-building",
+      "href": "solutions/residential-developments/space-saving-multi-parking-systems-for-homes-building",
       "marker": {
         "x": 72.54385964912281,
         "y": 41.183587314662276
@@ -230,7 +241,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079083843",
       "title": "Architectural Shades",
-      "href": "solutions/commercial-buildings/architectural-tensile-shades",
+      "href": "solutions/residential-developments/innovative-architectural-shading-systems-in-uae-oman",
       "marker": {
         "x": 55.17543859649123,
         "y": 60.2939662273476
@@ -243,10 +254,11 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     }
   ],
 
-  "Industrial Facilities": [
+  "Commercial Buildings": [
     {
       "id": "hotspot-1783079308586",
       "title": "Garbage & Linen Chutes",
+      "href":"solutions/commercial-buildings/efficient-garbage-linen-chutes-for-modern-buildings",
       "marker": {
         "x": 49.29824561403508,
         "y": 39.151372354497354
@@ -286,7 +298,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079400947",
       "title": "Flood Barriers",
-      "href": "solutions/industrial-facilities/advanced-flood-barriers-for-homes-in-uae-oman",
+      "href": "solutions/commercial-buildings/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 33.50877192982456,
         "y": 71.33185749588138
@@ -300,6 +312,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079425540",
       "title": "Bespoke Steel Gates",
+      "href": "solutions/commercial-buildings/bespoke-steel-gates-for-youre-homes-in-uae-oman",
       "marker": {
         "x": 58.50877192982457,
         "y": 75.12098434925865
@@ -313,7 +326,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079437604",
       "title": "Multi-Parking Solutions",
-      "href": "solutions/industrial-facilities/space-saving-multi-parking-systems-for-homes-building",
+      "href": "solutions/commercial-buildings/space-saving-multi-parking-systems-for-homes-building",
       "marker": {
         "x": 72.45614035087719,
         "y": 44.31373558484349
@@ -327,6 +340,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079449936",
       "title": "Fire and Smoke Curtains",
+      "href": "solutions/commercial-buildings/fire-protection-system",
       "marker": {
         "x": 59.64912280701754,
         "y": 43.490012355848435
@@ -445,7 +459,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     },
     {
       "id": "hotspot-1783079949766",
-      "title": "Blast Doors & Windows",
+      "title": "Security Shutters",
       "marker": {
         "x": 47.280701754385966,
         "y": 40.52460873146623
