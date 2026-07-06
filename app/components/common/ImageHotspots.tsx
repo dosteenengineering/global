@@ -293,9 +293,9 @@ export default function ImageHotspots({
                   {hotspot.href && !editorEnabled ? (
                     <Link
                       href={hotspot.href}
-                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full cursor-pointer border
+                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
                  border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] 2xl:text-15 font-light
-                  leading-[1] tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
+                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
@@ -308,9 +308,9 @@ export default function ImageHotspots({
                   ) : (
                     <button
                       type="button"
-                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full cursor-pointer border
+                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
                  border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] 2xl:text-15 font-light
-                  leading-[1] tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
+                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
