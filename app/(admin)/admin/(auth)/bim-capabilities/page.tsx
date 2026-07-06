@@ -617,7 +617,7 @@ const CapabilitiesPage = () => {
                                             <Controller
                                                 name={`fifthSection.items.${index}.image`}
                                                 control={control}
-                                                rules={{ required: "Logo is required" }}
+                                                // rules={{ required: "Logo is required" }}
                                                 render={({ field }) => (
                                                     <ImageUploader
                                                         isLogo
@@ -627,7 +627,7 @@ const CapabilitiesPage = () => {
                                                     />
                                                 )}
                                             />
-                                            {errors.fifthSection?.items?.[index]?.image && <p className='text-red-500'>{errors.fifthSection?.items?.[index]?.image.message}</p>}
+                                            {/* {errors.fifthSection?.items?.[index]?.image && <p className='text-red-500'>{errors.fifthSection?.items?.[index]?.image.message}</p>} */}
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             <Label className='font-bold'>Alt Tag</Label>

@@ -133,7 +133,7 @@ function GalleryCard({
         <span className="text-30 font-light tracking-[-0.02em] text-secondary leading-[1.33]">
           {item.title}
         </span>
-        <span className="text-description text-paragraph">
+        {item.date && <span className="text-description text-paragraph">
           {new Date(item.date)
             .toLocaleDateString("en-GB", {
               day: "2-digit",
@@ -141,7 +141,7 @@ function GalleryCard({
               year: "numeric",
             })
             .replace(/\//g, "-")}
-        </span>
+        </span>}
       </div>
     </div>
   );

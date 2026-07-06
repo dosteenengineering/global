@@ -502,7 +502,7 @@ export default function Awards() {
                                 </div>
                                 <div className="flex gap-5">
                                     <Dialog>
-                                        <DialogTrigger onClick={() => { setImage(item.image); setImageAlt(item.imageAlt); setTitle(item.title); setSelectedCategory(item.category._id); }}><MdEdit /></DialogTrigger>
+                                        <DialogTrigger onClick={() => { setImage(item.image); setImageAlt(item.imageAlt); setTitle(item.title); setSelectedCategory(item.category?._id ?? ""); }}><MdEdit /></DialogTrigger>
                                         <DialogContent>
                                             <DialogHeader>
                                                 <DialogTitle>Edit Award</DialogTitle>
