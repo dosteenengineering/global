@@ -50,7 +50,7 @@ export default function InnerPageBanner({
 
         <SectionTitle
           text={title}
-          className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth}`}
+          className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth} ${publishedDate && "mb-[20px] md:!mb-7.5"}`}
           as="h1"
         />
         {description && (
@@ -65,7 +65,7 @@ export default function InnerPageBanner({
         )}
       </div>
 
-      {publishedDate && (
+      {/* {publishedDate && (
         <div className="container pt-50 3xl:pt-[65px]">
           <h4 className={`text-paragraph font-light w-fit text-19 mb-10 xl:mb-[33px] tracking-[-0.02em]`} >
             Published &nbsp;&nbsp;
@@ -76,7 +76,7 @@ export default function InnerPageBanner({
         }).replace(/\//g, '-')}</span>
           </h4>
         </div>
-      )}
+      )} */}
       {/* 3. Image */}
       {image && (
         <div ref={ref} className={`relative w-full ${bannerImgHeight} overflow-hidden`}>

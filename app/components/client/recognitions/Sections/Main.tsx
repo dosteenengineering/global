@@ -66,7 +66,7 @@ export default function Main({ data }: { data: Award[] }) {
   }, [selectedAward, filtered.length]);
 
   return (
-    <section className="w-full relative">
+    <section className="w-full relative overflow-hidden">
       <div className="absolute right-[-13%] lg:right-0 top-[-21.7%] lg:top-[-34%] 3xl:top-[-33.2%]">
         <Image
           src="/assets/images/recognitions/bg-lines.svg"

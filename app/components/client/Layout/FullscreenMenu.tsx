@@ -9,7 +9,7 @@ import PrimaryNoise2 from "../../common/noise/PrimaryNoise2";
 import ContainerAnchor from "../../layout/ContainerAnchor";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { moveLeft } from "../../motionVariants";
-
+import { useRouter } from "next/navigation";
 type MenuLink = {
   label: string;
   href: string;
@@ -103,6 +103,8 @@ const FullscreenMenu = ({
     onClose();
   };
 
+  const router = useRouter();
+
   return (
     <motion.div
       className="fixed inset-0 z-[100] bg-primary text-white"
@@ -191,6 +193,7 @@ const FullscreenMenu = ({
                           items: item.subItems,
                         });
                       } else {
+                        router.push(item.href);
                         closeMenu();
                       }
                     }}

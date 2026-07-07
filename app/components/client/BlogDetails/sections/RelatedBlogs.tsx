@@ -48,10 +48,10 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
   return (
     <section className="relative overflow-hidden pt-12.5 pb-12.5 md:pt-120 md:pb-200 ">
       <div className="container">
-        <div className="flex justify-between mb-50 md:mb-60 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
+        <div className="flex flex-wrap gap-y-4 justify-between mb-50 md:mb-60 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
           <SectionTitle
             text={"Explore more in our related Blogs"}
-            className="text-left section-heading-90 uppercase text-secondary max-w-[28ch]"
+            className="text-left section-heading-90 uppercase text-secondary max-w-full xl:max-w-[28ch]"
           />
           {/* <BorderButton
             text="View All"

@@ -30,6 +30,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
     });
   }, [solutionsRaw]);
 
+  console.log(`dynamicNavItems`, dynamicNavItems)
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -214,30 +216,27 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
     <header
       className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
       ${!introComplete ? "invisible" : ""}
-      ${
-        isMenuTransformDisabled
+      ${isMenuTransformDisabled
           ? ""
           : "transition-transform duration-300 ease-out " +
-            (isVisible
-              ? "translate-y-0"
-              : "-translate-y-[150%] pointer-events-none")
-      }`}
+          (isVisible
+            ? "translate-y-0"
+            : "-translate-y-[150%] pointer-events-none")
+        }`}
     >
       <div className="container relative z-[160] flex items-center justify-between gap-4 w-full">
         <div
           ref={navPillRef}
-          className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${
-            isMenuOpen
+          className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${isMenuOpen
               ? "w-full lg:max-w-[57.5%]"
               : "w-full max-w-[1127px] bg-white/8 backdrop-blur-[2px]"
-          }`}
+            }`}
         >
           <div
             className={`flex items-center justify-between w-full transition-all duration-500 ease-out 
-              ${
-                isMenuOpen
-                  ? "rounded-none border border-transparent overflow-visible bg-transparent"
-                  : "rounded-[50px] border border-white/30 glass-effect"
+              ${isMenuOpen
+                ? "rounded-none border border-transparent overflow-visible bg-transparent"
+                : "rounded-[50px] border border-white/30 glass-effect"
               }
               ${isSticky ? "bg-black/50" : "bg-transparent"}
               `}
@@ -262,11 +261,10 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
             {/* Nav items */}
             <div
               className={`hidden min-[1300px]:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
-    ${
-      isMenuOpen
-        ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
-        : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
-    }`}
+    ${isMenuOpen
+                  ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
+                  : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
+                }`}
             >
               {/* {navItems.map((item, i) => (
                 <div
@@ -377,9 +375,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                         alt=""
                         width={15}
                         height={10}
-                        className={`w-auto h-[7px] pointer-events-none transition-transform duration-300 ease-out ${
-                          openDropdown === item.label ? "rotate-180" : ""
-                        }`}
+                        className={`w-auto h-[7px] pointer-events-none transition-transform duration-300 ease-out ${openDropdown === item.label ? "rotate-180" : ""
+                          }`}
                       />
                     )}
                   </Link>
@@ -451,11 +448,10 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."
-                className={`h-full bg-transparent ${isSearchExpanded ? "pl-5" : ""}  text-15 text-white outline-none placeholder:text-white/50 transition-all duration-300 ${
-                  isSearchExpanded
+                className={`h-full bg-transparent ${isSearchExpanded ? "pl-5" : ""}  text-15 text-white outline-none placeholder:text-white/50 transition-all duration-300 ${isSearchExpanded
                     ? "w-full opacity-100"
                     : "w-0 opacity-0 pointer-events-none"
-                }`}
+                  }`}
               />
 
               <button
@@ -539,14 +535,15 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
           className={`${isMenuOpen ? "flex" : "hidden md:flex"} items-center gap-[10px] md:gap-[18.8px] shrink-0`}
         >
           {/* Contact pill */}
-          <div className="rounded-[50px] backdrop-blur-[2px] h-[62px] md:h-auto w-[122px] md:w-auto">
+          <div className="rounded-[50px] backdrop-blur-[2px] xl:h-[62px] md:h-auto w-[122px] md:w-auto">
             <Link
               ref={contactRef}
               href="/contact-us"
-              className={`${isMenuOpen ? "flex" : "hidden min-[1460px]:flex"} group items-center gap-3 justify-center h-[62px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
+              className={`${isMenuOpen ? "flex" : "hidden min-[1460px]:flex"} group items-center gap-3 justify-center h-[40px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}
+              onClick={closeMenu}
             >
               <span className="text-white text-15 leading-[1.733] uppercase">
                 CONTACT
@@ -567,7 +564,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
           <div className="rounded-full backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
-              className={`cursor-pointer flex items-center justify-center group w-[62px] h-[62px] md:w-[70px] md:h-[70px] rounded-full
+              className={`cursor-pointer flex items-center justify-center group w-[40px] h-[40px] md:w-[70px] md:h-[70px] rounded-full
                border border-white/30 glass-effect ${isMenuOpen && "bg-white/8"}
                 ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -575,26 +572,23 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
               onClick={isMenuOpen ? closeMenu : openMenu}
               style={{ opacity: 0 }}
             >
-              <span className="relative block h-[21px] w-[31px] group-hover:scale-[1.08] transition-transform duration-300 ease-in-out">
+              <span className="relative block w-6 h-5 md:h-[21px] md:w-[31px] group-hover:scale-[1.08] transition-transform duration-300 ease-in-out">
                 {/* Top line */}
                 <span
-                  className={`absolute left-0 top-0 h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? "translate-y-[10px] rotate-45" : ""
-                  }`}
+                  className={`absolute left-0 top-0 h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-y-[10px] rotate-45" : ""
+                    }`}
                 />
 
                 {/* Middle line */}
                 <span
-                  className={`absolute left-0 top-[10px] h-[1.5px] w-full bg-white transition-all duration-200 ease-in-out ${
-                    isMenuOpen ? "opacity-0" : "opacity-100"
-                  }`}
+                  className={`absolute left-0 top-[10px] h-[1.5px] w-full bg-white transition-all duration-200 ease-in-out ${isMenuOpen ? "opacity-0" : "opacity-100"
+                    }`}
                 />
 
                 {/* Bottom line */}
                 <span
-                  className={`absolute left-0 top-[20px] h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""
-                  }`}
+                  className={`absolute left-0 top-[20px] h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${isMenuOpen ? "-translate-y-[10px] -rotate-45" : ""
+                    }`}
                 />
               </span>
             </button>
