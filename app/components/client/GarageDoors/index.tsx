@@ -10,7 +10,7 @@ import BannerBottom from "./sections/BannerBottom";
 import DiscoverSection from "./sections/DiscoverSection";
 import WhyChoose from "./sections/WhyChoose";
 import Customization from "./sections/Customization";
-import ClientStoriesSection from "../Home/Sections/ClientStoriesSection";
+// import ClientStoriesSection from "../Home/Sections/ClientStoriesSection";
 import Faq from "../../common/Faq";
 const Index = ({ data }: { data: IndividualSystemData }) => {
   const clientStoriesData = {
@@ -51,7 +51,7 @@ const Index = ({ data }: { data: IndividualSystemData }) => {
       <DiscoverSection data={data?.secondSection} />
       <WhyChoose data={data?.fourthSection} />
       <Customization data={data?.fifthSection} />
-      <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} />
+      {/* <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} /> */}
       <Faq faqData={garageDoorFaqData} />
     </>
   );
