@@ -89,8 +89,9 @@ const IndividualService = () => {
 
     const [systemData, setSystemData] = useState<{ _id: string, image: string, imageAlt: string, title: string, description: string, checked: boolean }[] | null>(null);
 
+    const [systemSheetItems, setSystemSheetItems] = useState<{ _id: string, title: string }[]>([]);
 
-    const { register, handleSubmit, setValue, control, formState: { errors }, getValues, watch,reset } = useForm<IndividualServiceFormProps>();
+    const { register, handleSubmit, setValue, control, formState: { errors }, getValues, watch, reset } = useForm<IndividualServiceFormProps>();
 
     const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove } = useFieldArray({
         control,
@@ -192,6 +193,49 @@ const IndividualService = () => {
         } catch (error) {
             console.log("Error fetching systems", error);
         }
+    };
+
+
+    const setCheckedSystemInSheet = () => {
+        const currentItems = getValues("systemSection.items") || [];
+
+        const orderedSystems = currentItems
+            .map((id: string) => availableSystems.find((sys) => sys._id === id))
+            .filter(
+                (sys): sys is { _id: string; firstSection: { title: string } } => Boolean(sys)
+            );
+
+        setSystemSheetItems(
+            orderedSystems.map((sys) => ({
+                _id: sys._id,
+                title: sys.firstSection?.title || "",
+            }))
+        );
+    };
+
+
+    const handleSystemDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+        if (!over || active.id === over.id) return;
+
+        const currentItems = getValues("systemSection.items") || [];
+
+        const oldIndex = currentItems.findIndex((id: string) => id === active.id);
+        const newIndex = currentItems.findIndex((id: string) => id === over.id);
+
+        if (oldIndex === -1 || newIndex === -1) return;
+
+        const newOrder = arrayMove(currentItems, oldIndex, newIndex);
+
+        // Update the form value (array of ids)
+        setValue("systemSection.items", newOrder);
+
+        // Update the sheet UI state immediately
+        setSystemSheetItems((prev) => {
+            const oldPos = prev.findIndex((p) => p._id === active.id);
+            const newPos = prev.findIndex((p) => p._id === over.id);
+            return arrayMove(prev, oldPos, newPos);
+        });
     };
 
 
@@ -414,6 +458,38 @@ const IndividualService = () => {
                                     </div>
                                 )}
                             />
+
+                            <div className="flex justify-start">
+                                <Sheet>
+                                    <SheetTrigger
+                                        onClick={() => setCheckedSystemInSheet()}
+                                        className='bg-green-400 p-2 rounded-xl'
+                                    >
+                                        Reorder
+                                    </SheetTrigger>
+                                    <SheetContent>
+                                        <SheetHeader>
+                                            <SheetTitle>Reorder Systems</SheetTitle>
+                                            <SheetDescription className="flex flex-col gap-2 h-[80vh] overflow-y-auto">
+                                                <DndContext
+                                                    collisionDetection={closestCorners}
+                                                    onDragEnd={handleSystemDragEnd}
+                                                >
+                                                    <SortableContext
+                                                        items={systemSheetItems.map((item) => item._id)}
+                                                        strategy={verticalListSortingStrategy}
+                                                    >
+                                                        {systemSheetItems.map((item) => (
+                                                            <ProductCard key={item._id} title={item.title} id={item._id} />
+                                                        ))}
+                                                    </SortableContext>
+                                                </DndContext>
+                                            </SheetDescription>
+                                        </SheetHeader>
+                                    </SheetContent>
+                                </Sheet>
+                            </div>
+
                         </div>
                     </div>
                 </AdminItemContainer>
@@ -490,7 +566,7 @@ const IndividualService = () => {
                                                 <Controller
                                                     name={`fourthSection.items.${index}.image`}
                                                     control={control}
-                                                    
+
                                                     render={({ field }) => (
                                                         <ImageUploader
                                                             value={field.value}
@@ -499,7 +575,7 @@ const IndividualService = () => {
                                                         />
                                                     )}
                                                 />
-                                                
+
                                             </div>
 
                                             <div className='flex flex-col gap-2'>
