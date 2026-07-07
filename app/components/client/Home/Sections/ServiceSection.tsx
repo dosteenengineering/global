@@ -182,7 +182,7 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
 
           <div className="h-[1px] bg-[#76A7FF] mb-[30px] md:mb-6 md:mb-14 relative bottom-[1px]" />
           <div>
-            <div className="relative w-auto h-[120px] sm:h-[180px] mb-[30px] md:mb-12">
+            <div className="relative w-auto h-[120px] sm:h-[180px] mb-30 md:mb-12">
         
            
               <AnimatedServiceIcon
@@ -205,7 +205,7 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
               viewport={{ once: true }}
               className="w-fit mt-20 md:mt-12"
             >
-              <BorderButton text="Read More" iconColor="white" hoverBg="white" px="px-[23px] lg:px-[35px]" />
+              {/* <BorderButton text="Read More" iconColor="white" hoverBg="white" px="px-[23px] lg:px-[35px]" /> */}
             </motion.div>
           </div>
         </div>

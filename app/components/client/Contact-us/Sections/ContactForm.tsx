@@ -19,19 +19,21 @@ import {
 import { sendContactEnquiryAction } from "@/lib/mail/actions/sendContactEnquiryAction";
 import { toast } from "sonner";
 
-const SYSTEM_OPTIONS = [
-  "HVAC Systems",
-  "Fire Protection",
-  "Electrical Systems",
-  "Plumbing",
-  "Building Automation",
-  "MEP Design",
-  "Other",
-];
+// const SYSTEM_OPTIONS = [
+//   "HVAC Systems",
+//   "Fire Protection",
+//   "Electrical Systems",
+//   "Plumbing",
+//   "Building Automation",
+//   "MEP Design",
+//   "Other",
+// ];
+
+
 
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
-export default function ContactForm() {
+export default function ContactForm({systemData}: {systemData: string[]}) {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
@@ -87,7 +89,7 @@ export default function ContactForm() {
   }, []);
 
   return (
-    <section id="contact-form" className="container py-140 3xl:py-200 relative">
+    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden">
       <div className="absolute bottom-[-35.3%] right-[-15%] 3xl:right-[-3.5%]">
         <Image
           src="/assets/images/contact-us/form-bg-svg.svg"
@@ -232,7 +234,7 @@ export default function ContactForm() {
                 label="System of Interest"
                 value={field.value ?? ""}
                 onChange={field.onChange}
-                options={SYSTEM_OPTIONS}
+                options={systemData}
                 error={errors.systemOfInterest?.message}
               />
             )}
