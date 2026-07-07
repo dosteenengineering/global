@@ -158,6 +158,7 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
               <Card key={index} item={item} />
             </motion.div>
           ))}
+          
         </div>
       </div>
     </section>
