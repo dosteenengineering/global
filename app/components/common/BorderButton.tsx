@@ -14,7 +14,7 @@ type BorderButtonProps = {
   px?: string;
   className?: string;
   type?: "button" | "submit" | "reset";
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   disabled?: boolean;
