@@ -32,13 +32,17 @@ function ToolRow({
       {/* Left col — icons + label */}
       <div className="flex flex-col justify-center md:pl-30">
         <div>
-          <Image
-            src={tool.image}
-            alt={tool.imageAlt}
-            width={150}
-            height={150}
-            className={`object-contain w-auto ${index === 2 ? "h-[74px] md:h-[129px]" : "h-[29px] md:h-[50px]"}`}
-          />
+         {
+          tool.image && (
+              <Image
+                src={tool.image}
+                alt={tool.imageAlt}
+                width={150}
+                height={150}
+                className={`object-contain w-auto ${index === 2 ? "h-[74px] md:h-[129px]" : "h-[29px] md:h-[50px]"}`}
+              />
+          )
+         }
         </div>
       </div>
 

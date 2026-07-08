@@ -183,7 +183,7 @@ export default function ImageHotspots({
     <div className={`relative h-full w-full overflow-visible ${className}`}>
       <div
         ref={containerRef}
-        className={`relative h-full w-full overflow-visible bg-[#e7e5e9] py-12 xl:py-0 ${editorEnabled ? "cursor-crosshair" : ""}`}
+        className={`relative h-full w-full overflow-visible bg-[#e7e5e9] ${editorEnabled ? "cursor-crosshair" : ""}`}
         onPointerDown={handleAddHotspot}
       >
         <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} />

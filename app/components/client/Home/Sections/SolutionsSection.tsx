@@ -295,12 +295,12 @@ export default function SolutionsSection({
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3 className="text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
+                      {/* <h3 className="text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20">
                         {tab.leftTitle}
-                      </h3>
+                      </h3> */}
 
                       {/* Right items */}
-                      <div className="grid grid-cols-2 gap-y-2 place-items-start text-19 font-[300] leading-[1.6] font-poppins -tracking-[2%] pb-8">
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-2 place-items-start text-19 font-light leading-[1.6] font-poppins -tracking-[2%] pb-8">
                         {tab.rightItems.map(
                           (
                             item: { label: string; link: string },
@@ -327,14 +327,14 @@ export default function SolutionsSection({
                                   {item.label}
                                 </span>
                               </Link>
-                              <FiArrowRight
+                              {/* <FiArrowRight
                                 size={20}
                                 className={` transition-all duration-300 ${
                                   hoveredIndex === index
                                     ? "opacity-100 translate-x-1"
                                     : "opacity-0 -translate-x-1"
                                 }`}
-                              />
+                              /> */}
                             </motion.div>
                           ),
                         )}

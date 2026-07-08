@@ -306,6 +306,7 @@ export default function FeaturedProjectsSection({
               const isActive = idx === mobileActiveIndex;
               return (
                 <SwiperSlide key={idx}>
+                  <Link href={`/case-studies/${project.slug}`}>
                   <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
                     <Image
                       src={project.thumbnail || PLACEHOLDER}
@@ -364,6 +365,7 @@ export default function FeaturedProjectsSection({
                       </div>
                     </>
                   </div>
+                  </Link>
                 </SwiperSlide>
               );
             })}

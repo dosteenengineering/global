@@ -31,37 +31,32 @@ function Card({ item }: { item: IndividualSystemData["fourthSection"]["items"][0
     <div className="group bg-white/10 relative overflow-hidden h-[300px] 2xl:h-[416px] p-5 md:p-40 3xl:p-50 cursor-pointer">
       <div className="relative z-[5] w-full h-full flex flex-col justify-between">
         <div className="w-100 h-100 rounded-full bg-transparent group-hover:bg-gradient-to-r group-hover:from-white/2 group-hover:to-white/20 flex items-center justify-center mb-6 group-hover:backdrop-blur-[20px] transition-all duration-300 ease-in-out">
-          <img
-            src="/assets/images/garage-doors/grd-stroke.svg"
-            className="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100"
-            alt=""
-          />
-          <img
-            src={item.logo}
-            alt={item.logoAlt}
-            width="64px"
-            height="64px"
+          <img src="/assets/images/garage-doors/grd-stroke.svg" className="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100" alt="" />
+          {/* <img src={item.logo} alt={item.logoAlt} width="64px" height="64px"
             className="w-16 h-16 group-hover:invert-1 group-hover:brightness-1000 transition-all duration-300 ease-in-out"
+          /> */}
+          <img src={item.logo} alt={item.logoAlt} width="64px" height="64px"
+            className="w-16 h-16 group-hover:scale-105 transition-all duration-300 ease-in-out"
           />
         </div>
         <h3 className="text-30 leading-[1.333333333333333] text-[#161616] group-hover:text-white font-light">
           {item.title}
         </h3>
       </div>
-      <Image
-        src={item.image}
-        alt={item.imageAlt}
-        width={1000}
-        height={1000}
-        className="absolute bottom-0 left-0 translate-y-full group-hover:translate-0 w-full h-full object-cover z-[-1] transition-all duration-700 ease-in-out"
-      />
+      {/* {
+        item.image&&(
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            width={1000}
+            height={1000}
+            className="absolute bottom-0 left-0 translate-y-full group-hover:translate-0 w-full h-full object-cover z-[-1] transition-all duration-700 ease-in-out"
+          />
+        )
+      } */}
       <div
         className="absolute bottom-0 left-0 z-2 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
-        style={{
-          backgroundImage: "url(/assets/noise/mono-2.png)",
-          backgroundRepeat: "repeat-x",
-          backgroundSize: "contain",
-        }}
+        style={{ backgroundImage: "url(/assets/noise/mono-2.png)", backgroundRepeat: "repeat-x", backgroundSize: "contain" }}
       />
       <div className="absolute inset-0 h-full w-full z-1">
         <StatNoise3 />
@@ -163,6 +158,7 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
               <Card key={index} item={item} />
             </motion.div>
           ))}
+          
         </div>
       </div>
     </section>

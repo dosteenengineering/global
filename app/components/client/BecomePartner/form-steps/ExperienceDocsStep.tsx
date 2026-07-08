@@ -28,21 +28,14 @@ const TermsCheckbox = ({ register, errors }: Pick<StepFormProps, "register" | "e
       <input
         type="checkbox"
         {...register("termsAccepted", { required: "Required" })}
+        // onClick={(event) => {
+        //   event.preventDefault();
+        // }}
         className="peer sr-only"
       />
       <span className="relative mt-[5px] flex h-[20px] w-[20px] shrink-0 items-center justify-center border border-primary rounded-[1px] peer-checked:bg-primary">
-        <svg
-          className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-0"
-          viewBox="0 0 10 10"
-          fill="none"
-        >
-          <path
-            d="M2 5.2L4.2 7.3L8 3"
-            stroke="white"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg className="absolute h-[15px] w-[15px] opacity-0 group-has-[input:checked]:opacity-100 z-0" viewBox="0 0 10 10" fill="none" >
+          <path d="M2 5.2L4.2 7.3L8 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </span>
       <span className="text-19 leading-[1.684210526315789] text-secondary font-medium">

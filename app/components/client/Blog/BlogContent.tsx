@@ -128,7 +128,7 @@ const BlogContent = ({ data }: BlogContentProps) => {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-[auto_1.5fr] 3xl:grid-cols-[auto_1395px]">
           <div ref={anchorRef} className="md:col-start-1 relative self-stretch md:w-[150px] 3xl:w-[176px] " >
-            <div ref={panelRef} className="flex flex-col gap-y-1 text-left pt-100 pb-50">
+            <div ref={panelRef} className="flex flex-col gap-y-1 text-left pb-5 xl:pt-100 xl:pb-50">
               {categories.map((category,index) => {
                 const isActive = selectedCategory === category;
                 return (

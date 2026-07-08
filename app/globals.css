@@ -2,14 +2,14 @@
 @import 'flag-icons/css/flag-icons.min.css';
 
 @font-face {
-  font-family: "HelveticaNeueBd";
-  src: url("/fonts/HelveticaNeueLTProBd.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  ascent-override: 71.4%;
-  descent-override: 28.6%;
-  line-gap-override: 0%;
+    font-family: "HelveticaNeueBd";
+    src: url("/fonts/HelveticaNeueLTProBd.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    ascent-override: 71.4%;
+    descent-override: 28.6%;
+    line-gap-override: 0%;
 }
 
 
@@ -133,8 +133,8 @@ body::-webkit-scrollbar {
     --secondary: #161616;
     --paragraph: #626262;
     --bdr-gray: #C2C2C2;
-    --md-gray:#454545;
-    --bdr-blue: #76A7FF; 
+    --md-gray: #454545;
+    --bdr-blue: #76A7FF;
     --font-helvetica-neue: "HelveticaNeueBd", sans-serif;
 
     /* small */
@@ -152,13 +152,13 @@ body::-webkit-scrollbar {
     /* --text-70: clamp(34px, 5.239vw + 16.35px, 70px); */
     --text-70: clamp(34px, 4vw + 0.2em, 70px);
     --text-90: clamp(32px, 8.57vw - 60px, 90px);
-    --text-95: clamp(42px, 3.8vw + 26px, 95px);
+    --text-95: clamp(35px, 3.8vw + 26px, 95px);
     --text-250: clamp(70px, 13.1vw, 250px);
     --text-300: clamp(120px, 17vw, 300px);
     --text-400: clamp(140px, 22vw, 400px);
 
 
-    
+
     --space-20: clamp(18px, 1.2vw + 7px, 20px);
     --space-25: clamp(21px, 1.4vw + 9px, 25px);
     --space-30: clamp(20px, 1.8vw + 11px, 30px);
@@ -179,7 +179,7 @@ body::-webkit-scrollbar {
 
 
 
-     --glass-surface-padding-inline: 0;
+    --glass-surface-padding-inline: 0;
     --glass-content-padding-inline: 1.75em;
     --glass-border-width: clamp(1px, .0625em, 4px);
     --glass-shadow-cutoff-fix: 2em;
@@ -193,10 +193,9 @@ body::-webkit-scrollbar {
     --glass-content-text-shadow: 0 .05em .05em #0000000d;
     --glass-content-shine-display: block;
     /* --glass-surface-background: linear-gradient(-75deg, #ffffff0d, #fff3, #ffffff0d); */
-    --glass-surface-shadow:   inset 1px 0px 5px #ffffff52, inset 4px 0px 1px #0000000d, 0 -0.75em 1px -1px #0000
-    --glass-surface-shadow-hover: inset 0 1px 1px #0000000d, inset 0 -1px 1px #ffffff80, 0 .15em .05em -.1em #00000040, 0 0 .05em .1em inset #ffffff80, 0 0 0 0 #fff;
+    --glass-surface-shadow: inset 1px 0px 5px #ffffff52, inset 4px 0px 1px #0000000d, 0 -0.75em 1px -1px #0000 --glass-surface-shadow-hover: inset 0 1px 1px #0000000d, inset 0 -1px 1px #ffffff80, 0 .15em .05em -.1em #00000040, 0 0 .05em .1em inset #ffffff80, 0 0 0 0 #fff;
     --glass-surface-shadow-active: inset 0 1px 1px #0000000d, inset 0 -1px 1px #ffffff80, 0 1px 1px -1px #0003, 0 0 .1em .25em inset #fff3, 0 .225em .05em 0 #0000000d, 0 .25em 0 0 #ffffffbf, inset 0 .25em .05em 0 #00000026;
-    
+
 
 
 
@@ -272,26 +271,32 @@ body::-webkit-scrollbar {
 @utility text-95 {
     font-size: var(--text-95);
 }
- 
+
 @utility text-250 {
     font-size: var(--text-250);
 }
 
 .section-heading {
-    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95 ;
+    @apply font-helvetica uppercase leading-[1.165] md:leading-[1.0527] text-95;
 }
-.section-heading-90 {   
-    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-90 ;
+
+.section-heading-90 {
+    @apply font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-90;
 }
 
 .hero-heading {
-    @apply text-[32px] md:text-95 font-helvetica uppercase  leading-[1];
+    @apply text-[32px] md:text-95 font-helvetica uppercase leading-[1];
 }
-.banner-heading { 
+
+.banner-heading {
     @apply text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 font-helvetica uppercase;
 }
 
 .text-description {
+    @apply text-19 font-poppins font-light leading-[1.66] md:leading-[1.526] tracking-[2%] lg:tracking-[-0.02em];
+}
+
+@utility text-description {
     @apply text-19 font-poppins font-light leading-[1.66] md:leading-[1.526] tracking-[2%] lg:tracking-[-0.02em];
 }
 
@@ -300,21 +305,22 @@ body::-webkit-scrollbar {
 }
 
 .glass-effect {
-  position: relative;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  /* background: rgba(255, 255, 255, 0.08); */
-  box-shadow:inset 1px 1px #ffffff63, inset -1px -1px #ffffff63, inset 0 0 20px #ffffff00, 0 8px 32px #00000000;
-  border: none !important; /* let box-shadow handle the border */
+    position: relative;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    /* background: rgba(255, 255, 255, 0.08); */
+    box-shadow: inset 1px 1px #ffffff63, inset -1px -1px #ffffff63, inset 0 0 20px #ffffff00, 0 8px 32px #00000000;
+    border: none !important;
+    /* let box-shadow handle the border */
 }
 
 .glass-effect::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  /* background: linear-gradient( 
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    /* background: linear-gradient( 
     135deg,
     #ffffff60 0%,    top-left bright  
     #ffffff10 40%,     fade to transparent 
@@ -322,17 +328,16 @@ body::-webkit-scrollbar {
     #ffffff10 60%,     fade in  
     #ffffff40 100%    bottom-right subtle  
   );*/
-  background: linear-gradient(
-358deg, #ffffffa8 0%, #e4d8d81f 40%, #edebeb0d 50%, #e3e3e326 60%, #ffffffa8 100%);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+    background: linear-gradient(358deg, #ffffffa8 0%, #e4d8d81f 40%, #edebeb0d 50%, #e3e3e326 60%, #ffffffa8 100%);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
 /* ─── Featured Projects ─── */
@@ -381,15 +386,16 @@ body::-webkit-scrollbar {
     filter: brightness(0) invert(1);
 }
 
-.spec-card{
+.spec-card {
     isolation: isolate;
     /* z-index: 1; */
 }
+
 .spec-card::before {
     content: "";
     position: absolute;
     top: 0;
-    left:0;
+    left: 0;
     width: 0;
     height: 100%;
     /* border-radius: 50%; */
@@ -566,32 +572,36 @@ body::-webkit-scrollbar {
         animation: none !important;
     }
 }
+
 @keyframes dropdown-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes item-in {
-  from {
-    opacity: 0;
-    transform: translateX(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateX(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @theme {
-  --animate-dropdown-in: dropdown-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  --animate-item-in: item-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-} 
+    --animate-dropdown-in: dropdown-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    --animate-item-in: item-in 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -601,22 +611,25 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #626262 !important;
     transition: background-color 5000s ease-in-out 0s !important;
 }
+
 @media (min-width: 1024px) {
-  .gridlst:nth-last-child(1) .last-st{
-    padding-bottom: 0px !important;
-  }
+    .gridlst:nth-last-child(1) .last-st {
+        padding-bottom: 0px !important;
+    }
 }
+
 @media (max-width: 1023px) {
-  .gridlst:nth-last-child(1) .border-bdr-blue:nth-last-child(1) .last-st{
-    padding-bottom: 0px !important;
-  }
+    .gridlst:nth-last-child(1) .border-bdr-blue:nth-last-child(1) .last-st {
+        padding-bottom: 0px !important;
+    }
 }
 
 
-.blog-content-ul li::marker{
-    font-size: 13px!important;
+.blog-content-ul li::marker {
+    font-size: 13px !important;
 }
-.blog-content-ul{
+
+.blog-content-ul {
     @apply ml-[10px];
 }
 
@@ -652,10 +665,11 @@ input:-webkit-autofill:active {
 }
 
 .customization-section-system ul li {
-    color: var(--color-paragraph); 
+    color: var(--color-paragraph);
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* gap-x-2 */
+    gap: 0.5rem;
+    /* gap-x-2 */
     transition: color 0.3s ease;
     list-style: none;
 }
@@ -677,10 +691,11 @@ input:-webkit-autofill:active {
 
 .customization-section-system-mobile ul {
     cursor: pointer;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     width: fit-content;
     transition: color 0.3s ease;
+    margin-bottom: 1.5em;
 }
 
 .customization-section-system-mobile ul li {
@@ -704,4 +719,33 @@ input:-webkit-autofill:active {
 
 .customization-section-system-mobile ul:hover li {
     color: var(--color-secondary);
+}
+
+.blog-content-wrapper h2 {
+    @apply text-55 leading-[1.181818181818182] font-light text-secondary mb-30 tracking-[-0.02em];
+}
+.blog-content-wrapper h6{
+    @apply text-30 leading-[1.333333333333333] font-light mb-40;
+}
+.blog-content-wrapper p {
+    @apply text-description text-paragraph;
+}
+
+.blog-content-wrapper h3{
+    @apply text-30 leading-[1.333333333333333] font-light text-secondary mb-2;
+}
+
+.blog-content-wrapper ul{
+    @apply text-description text-paragraph list-disc pl-[1em] py-30 ml-[10px];
+}
+.blog-content-wrapper ol{
+    @apply text-description text-paragraph pl-[1em] mb-5  ml-[10px];
+}
+
+.blog-content-wrapper ul li::marker{
+    @apply text-[13px];
+}
+
+.blog-content-wrapper ol li h4{
+    @apply text-25 leading-[1.333333333333333] font-light text-secondary mb-[0.2em];
 }
