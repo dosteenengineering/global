@@ -114,7 +114,7 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
                 viewport={{ once: true, margin: "-100px" }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[129px] md:min-h-[284px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
+                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[200px] md:min-h-[284px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
               >
                 <div className={`absolute inset-0 transition-opacity duration-700 ease-out will-change-[opacity] ${isActive ? "opacity-100" : "opacity-0" }`} >
                   <PrimaryNoise2 />
@@ -122,10 +122,11 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
                 {/* CENTER: logo + title stacked, always centered as a group */}
                 <div className="absolute 3xl:top-[-31px] inset-0 flex md:items-center justify-center">
                   <div className="relative mt-[27px] md:mt-0 flex flex-col items-center">
-                    <div className={`relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px] transition-transform duration-700 ease-out will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
+                    <div className={`relative w-auto 3xl:w-[258px] h-[55px] md:h-[70px] 3xl:h-[98px] transition-transform duration-700 ease-out
+                       will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
                       <Image src={slide.image} alt={slide.imageAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
                     </div>
-                    <p className={`absolute top-full mt-0 text-description text-white transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]
+                    <p className={`text-center max-[768px]:pt-4 max-[768px]:max-w-[80%] xl:absolute top-full mt-0 text-description text-white transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]
                     ${isActive
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-2 pointer-events-none"

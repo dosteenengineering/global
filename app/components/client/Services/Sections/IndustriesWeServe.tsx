@@ -515,7 +515,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
     setOpenId((prev) => (prev === id ? null : id));
   };
   return (
-    <section className="relative w-full select-none overflow-x-hidden lg:overflow-x-visible">
+    <section className="relative w-full select-none  overflow-hidden lg:overflow-visible">
       <PrimaryNoise2 />
 
       {/* Decorative lines */}
@@ -542,7 +542,8 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
               return (
                 <div key={idx} className="relative first:border-t border-b border-bdr-blue py-5">
                   {/* Accordion header */}
-                  <button type="button" onClick={() => toggleAccordion(idx)} className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
+                  <button type="button" onClick={() => toggleAccordion(idx)} 
+                  className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
                     {/* Hover bg */}
                     {!isOpen && (
                       <span

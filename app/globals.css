@@ -691,10 +691,11 @@ input:-webkit-autofill:active {
 
 .customization-section-system-mobile ul {
     cursor: pointer;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     width: fit-content;
     transition: color 0.3s ease;
+    margin-bottom: 1.5em;
 }
 
 .customization-section-system-mobile ul li {
@@ -723,7 +724,9 @@ input:-webkit-autofill:active {
 .blog-content-wrapper h2 {
     @apply text-55 leading-[1.181818181818182] font-light text-secondary mb-30 tracking-[-0.02em];
 }
-
+.blog-content-wrapper h6{
+    @apply text-30 leading-[1.333333333333333] font-light mb-40;
+}
 .blog-content-wrapper p {
     @apply text-description text-paragraph;
 }
@@ -735,7 +738,14 @@ input:-webkit-autofill:active {
 .blog-content-wrapper ul{
     @apply text-description text-paragraph list-disc pl-[1em] py-30 ml-[10px];
 }
+.blog-content-wrapper ol{
+    @apply text-description text-paragraph pl-[1em] mb-5  ml-[10px];
+}
 
 .blog-content-wrapper ul li::marker{
     @apply text-[13px];
+}
+
+.blog-content-wrapper ol li h4{
+    @apply text-25 leading-[1.333333333333333] font-light text-secondary mb-[0.2em];
 }

@@ -34,38 +34,27 @@ function SystemCard({
 }) {
   return (
     <Link href={`${system.slug}`} className="group block">
-      <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden">
-        {/* Image */}
-        <Image
-          src={system.image}
-          alt={system.title}
-          fill
-          className="object-cover"
-        />
+      <div className="flex flex-col">
+        <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden order-2 xl:order-1">
+          {/* Image */}
+          <Image src={system.image} alt={system.title} fill className="object-cover " />
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-primary/50 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            {/* Arrow — top right, visible on hover */}
+            <div className="absolute top-30 right-30 xl:opacity-0 -translate-x-20 translate-y-20 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-20">
+              <Image src="/assets/icons/arrow-right-top-small.svg" alt="arrow" width={100} height={100} className="w-10 h-10 xl:w-15 xl:h-15 object-contain" />
+            </div>
+          </div>
 
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-primary/50 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Title */}
+        <h3 className="mb-4 xl:mb-0 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 xl:order-2">
+          {system.title}
+        </h3>
 
-        {/* Arrow — top right, visible on hover */}
-        <div className="absolute top-30 right-30 opacity-0 -translate-x-20 translate-y-20 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] z-20">
-          <Image
-            src="/assets/icons/arrow-right-top-small.svg"
-            alt="arrow"
-            width={100}
-            height={100}
-            className="w-15 h-15 object-contain"
-          />
+        <div className="relative w-full h-[2px] mt-30 hidden lg:block">
+          <div className="absolute inset-0 bg-[#C2C2C2] h-px" />
+          <div className="absolute inset-0 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out h-[2px]" />
         </div>
-      </div>
-
-      {/* Title */}
-      <p className="mt-[10px] lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300">
-        {system.title}
-      </p>
-
-      <div className="relative w-full h-[2px] mt-30 hidden lg:block">
-        <div className="absolute inset-0 bg-[#C2C2C2] h-px" />
-        <div className="absolute inset-0 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out h-[2px]" />
       </div>
     </Link>
   );

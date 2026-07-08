@@ -272,7 +272,8 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
 
                       {/* Right items */}
 
-                      <div dangerouslySetInnerHTML={{__html:tab.description}} className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system-mobile">
+                      <div dangerouslySetInnerHTML={{__html:tab.description}} 
+                      className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system-mobile">
                         {/* {tab.rightItems.map((item, index) => (
                           <motion.ul
                             key={`${activeTab}-${index}`}
