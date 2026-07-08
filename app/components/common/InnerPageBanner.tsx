@@ -50,7 +50,7 @@ export default function InnerPageBanner({
 
         <SectionTitle
           text={title}
-          className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5" : "mb-0"} hero-heading  ${titleMaxWidth} ${publishedDate && "mb-[20px] md:!mb-7.5"}`}
+          className={`text-secondary ${description ? "mb-[20px] md:!mb-7.5 xl:mb-30" : "mb-0"} hero-heading  ${titleMaxWidth} ${publishedDate && "mb-[20px] md:!mb-7.5"}`}
           as="h1"
         />
         {description && (

@@ -29,7 +29,7 @@ const ComplianceSection = ({data}:{data:Csi['eighthSection']}) => {
       >
         <SectionTitle
           title={data.title}
-          className="section-heading-90 text-white mb-5 md:mb-50 leading-[1.111111111111111] max-w-[26ch]"
+          className="section-heading-90 text-white mb-5 2xl:mb-50 leading-[1.111111111111111] max-w-[26ch]"
         />
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-20 3xl:mb-[26px] max-w-[26ch]`}>
           UAE & Oman Compliance — Built Into Every Specification

@@ -54,7 +54,8 @@ const AccordionItemComponent = ({
         aria-expanded={isOpen}
         aria-controls={`accordion-body-${item.id}`}
         id={`accordion-trigger-${item.id}`}
-        className={`flex w-full items-center cursor-pointer justify-between gap-4 text-left transition-all duration-300 ${isOpen ? "pt-5 lg:pt-50 3xl:pt-60 pb-2.5 md:pb-30 lg:pl-50" : "py-5 lg:py-40 3xl:pt-50 3xl:pb-[45px]"}`}
+        className={`flex w-full items-center cursor-pointer justify-between gap-4 text-left transition-all duration-300
+           ${isOpen ? "pt-5 lg:pt-50 3xl:pt-60 pb-2.5 md:pb-30 lg:pl-50" : "py-5 lg:py-40 3xl:pt-50 3xl:pb-50"}`}
       >
         <span
           className={`text-30 leading-[1.33] font-light tracking-[-0.02em] max-w-[90%] 3xl:max-w-none ${isOpen ? "text-secondary" : "text-paragraph"}`}

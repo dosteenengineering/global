@@ -46,7 +46,7 @@ function DoorContent({ door }: { door: IndividualSystemData['secondSection']['it
         {door.title}
       </h3>
       {/* <div className="relative w-full aspect-[8/6] xl:aspect-[2.08/1] mb-5 xl:mb-40 overflow-hidden bg-white/10"> */}
-      <div className="relative w-full h-[300px] max-h-[482px] 2xl:h-[482px] mb-5 xl:mb-40 2xl:mb-50 overflow-hidden bg-white/10">
+      <div className="relative w-full h-[300px] max-h-[482px] 2xl:h-[482px] mb-5 xl:mb-40 2xl:mb-50 overflow-hidden bg-white/10 max-w-[1002px]">
         <Image
           src={imageSrc}
           alt={door.title}
@@ -188,7 +188,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
           </div>
 
           {/* ── Desktop: Original sidebar + content ── */}
-          <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[480px_minmax(0,1fr)]">
+          <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[484px_minmax(0,1fr)]">
             <aside className="xl:sticky xl:top-5 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">

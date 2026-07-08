@@ -34,14 +34,14 @@ const Masterformat = ({ data }: Props) => {
     <section className="bg-white w-full relative select-none  pb-140 3xl:pb-200 pt-0 md:pt-50 xl:pt-0">
       <ContainerAnchor ref={containerRef} />
 
-      <div className="absolute top-2 xl:top-[-3%] -left-[23%] pointer-events-none hidden 3xl:block">
+      <div className="absolute top-2 xl:top-[-3%] -left-[23%] pointer-events-none hidden 2xl:block">
         <Image src="/assets/images/csi-specifications/shape-1.svg"
-          alt="decorative lines" width={1000} height={1000} className="object-contain 2xl:w-[897px] 2xl:w-[896px]" />
+          alt="decorative lines" width={1000} height={1000} className="object-contain 2xl:w-[650px] 2xl:h-auto 3xl:w-[897px] 3xl:w-[896px]" />
       </div>
 
       {/* <div className="max-w-[1252px] ml-auto px-[15px] 2xl:px-0 w-full" style={{ marginRight: rightInset }} > */}
       <div
-        className="container xl:max-w-[1252px] xl:ml-auto lg:px-[15px] 2xl:px-0 lg:w-full"
+        className="container xl:max-w-[70%] 3xl:max-w-[1252px] xl:ml-auto lg:px-[15px] 2xl:px-0 lg:w-full"
         style={{ marginRight: isLg ? rightInset : undefined }}
 
       >

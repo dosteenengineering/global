@@ -23,7 +23,7 @@ const PartCard = ({ part, title, shortDesc, description, isEven, index, delay }:
           <p className="text-19 leading-[1.526315789473684] tracking-[0.02em] font-light">{part}</p>
         </div>
         <div className="relative z-10">
-          <h3 className="text-55 leading-[1.181818181818182] text-white font-light mt-7.5 3xl:mt-60 mb-2.5 md:mb-2 lg:mb-3 xl:mb-5">{title}</h3>
+          <h3 className="text-55 leading-[1.181818181818182] text-white font-light mt-7.5 xl:mt-5 3xl:mt-60 mb-2.5 md:mb-2 lg:mb-3 2xl:mb-5">{title}</h3>
           <h4 className="text-30 text-white font-light">{shortDesc}</h4>
         </div>
 

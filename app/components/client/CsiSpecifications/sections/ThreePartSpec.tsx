@@ -33,7 +33,7 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
     <section className="w-full relative overflow-hidden">
       <PrimaryNoise2 />
       <div className="relative container py-12.5 md:py-140 3xl:py-150 ">
-        <SectionTitle title={title} className="text-white uppercase mb-5 md:mb-80 3xl:mb-[102px] section-heading-90 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0" />
+        <SectionTitle title={title} className="text-white uppercase mb-5 xl:mb-50 2xl:mb-80 3xl:mb-[102px] section-heading-90 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0" />
 
         {/* ── Mobile: Swiper ── */}
         <div className="md:hidden">

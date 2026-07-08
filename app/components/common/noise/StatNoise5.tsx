@@ -1,7 +1,7 @@
 export default function StatNoise5() {
   return (
     <>
-      <div className="absolute inset-0 z-1"
+      <div className="absolute inset-0 z-1 opacity-90"
         style={{
           background: "linear-gradient(0deg, rgb(24 83 214 / 21%) 7.21%, rgba(24, 83, 214, 0.16) 29.81%, rgba(2, 46, 158, 0.05) 76.92%)",
         }}
