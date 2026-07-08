@@ -85,13 +85,13 @@ const whoUsesData = {
         titleMaxWidth="max-w-[30ch] 3xl:max-w-[1629px]"
         descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]"
         {...data.firstSection}
-      />``
+      />
       <FeaturesList items={data.secondSection.items} />
       <MasterFormat data={MasterFormatData} />
       <ThreePartSpec threePartSpecData={threePartSpecData}/>
       <Systems data={systemsData} />
       <DownloadSection downloadData={downloadData}/>
-      <Benefits data={whoUsesData} showSecondaryNoise={false} />
+      <Benefits data={whoUsesData} showSecondaryNoise={false} imgMaxHeight="3xl:max-h-[720]" />
       <ComplianceSection data={data.eighthSection}/>
       <BimEngineeringData data={data.ninethSection} descMaxWidth="max-w-[26ch]" />
       <Faq faqData={{

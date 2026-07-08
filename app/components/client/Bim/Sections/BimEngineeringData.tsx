@@ -50,11 +50,11 @@ export default function BimEngineeringData({ data, descMaxWidth }: dataProps) {
                   <StatNoise1 />
                 </div>
                 <div key={stat.id} className="flex flex-col w-full p-5 lg:p-0">
-                  <span className="text-55 xl:text-[32px] 3xl:text-55 leading-[1.1818] text-primary mb-[5px] font-light tracking-[-0.02em]">
+                  <span className="text-55 leading-[1.1818] text-primary mb-[5px] font-light tracking-[-0.02em]">
                     {stat.value}
                   </span>
                   <span
-                    className={`text-paragraph text-description lg:!text-[16px] 3xl:!text-[19px] ${descMaxWidth} `}
+                    className={`text-paragraph text-description lg:text-[16px] 3xl:text-[19px] ${descMaxWidth} `}
                   >
                     {stat.label}
                   </span>

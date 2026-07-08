@@ -23,6 +23,7 @@ type BenefitsProps = {
       imageAlt: string;
     }[];
   };
+  imgMaxHeight?: string;
   showSecondaryNoise?: boolean;
 };
 
@@ -93,6 +94,7 @@ function AccordionItem({
 export default function Benefits({
   data,
   showSecondaryNoise = true,
+  imgMaxHeight,
 }: BenefitsProps) {
   // const { title, description, items } = data;
   const title = data?.title
@@ -104,7 +106,7 @@ export default function Benefits({
   // const [titleParts] = useState<string[]>(title.split('\n')); 
 
   return (
-    <section className="relative w-full py-12.5  md:py-140 3xl:py-200">
+    <section className="relative w-full py-12.5  md:py-100 3xl:py-150">
       {showSecondaryNoise && <SecondaryNoise />}
       <div className="container relative">
         <SectionTitle className={`section-heading-90 max-w-[70ch] whitespace-pre-line mb-5 lg:mb-50 `}
@@ -137,7 +139,8 @@ export default function Benefits({
           </div>
 
           <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="hidden lg:flex flex-1 min-w-0">
-            <div className="relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full 3xl:max-h-[650px] overflow-hidden">
+            {/* <div className="relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full 3xl:max-h-[650px] overflow-hidden"> */}
+            <div className={`relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full ${imgMaxHeight ? imgMaxHeight : "3xl:max-h-[650px]"} overflow-hidden`}>
               {items.map((item) => (
                 <div
                   key={item._id}
