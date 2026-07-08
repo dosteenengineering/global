@@ -95,11 +95,11 @@ const PartnerForm = () => {
   } = useForm<PartnerFormValues>({ defaultValues });
 
   const goToNextStep = async () => {
-    const isValid = await trigger(stepFields[currentStep.id]);
+    // const isValid = await trigger(stepFields[currentStep.id]);
 
-    if (isValid) {
-      setActiveStep((step) => Math.min(step + 1, steps.length - 1));
-    }
+    // if (isValid) {
+    // }
+    setActiveStep((step) => Math.min(step + 1, steps.length - 1));
   };
 
   const onSubmit = (values: PartnerFormValues) => {
