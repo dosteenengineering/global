@@ -62,16 +62,13 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
 
       <div className="relative z-10 w-full pt-12.5 md:pt-140 3xl:pt-150 overflow-hidden">
         <div className="container">
-          <SectionTitle
-            text={data.title}
-            className="text-left section-heading-90 uppercase max-w-[23ch] "
-          />
+          <SectionTitle text={data.title} className="text-left section-heading-90 uppercase max-w-[23ch]" />
           {/* <p className="text-30 font-light leading-[1.333] font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6">
             {solutionsData.mainDescription}
           </p> */}
           <SectionDescription
             text={data.description}
-            className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-6 !leading-[1.333333333333333]"
+            className="!text-30 font-light leading-none font-poppins -tracking-[2%] max-w-[65ch] mt-5 md:mt-20 !leading-[1.333333333333333]"
           />
           {/* ================= DESKTOP ================= */}
           <motion.div
@@ -81,7 +78,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
             viewport={{ once: true }}
             className="hidden lg:block"
           >
-            <div className="mt-18 3xl:mt-[109px]">
+            <div className="mt-18 3xl:mt-[68px]">
               <div ref={tabsContainerRef} className="relative overflow-hidden">
                 <Swiper
                   modules={[FreeMode]}
@@ -131,7 +128,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                             swiper.updateProgress();
                           }
                         }}
-                        className={`px-0 pb-[13px] mr-10 lg:mr-60 3xl:mr-80 text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
+                        className={`px-0 pb-[13px] mr-10 lg:mr-60 2xl:mr-80 2xl:mr-[144px] text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
                       >
                         <span className="block font-semibold invisible h-0 overflow-hidden">
                           {tab.title}

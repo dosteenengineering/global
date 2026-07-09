@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { threePartSpecData } from "../data";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import PartCard from "./PartCard";
@@ -27,7 +26,15 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
   const { title } = threePartSpecData;
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const total = threePartSpecData.items.length;
+
+  const updateSliderState = (swiper: SwiperType) => {
+    setActiveIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
 
   return (
     <section className="w-full relative overflow-hidden">
@@ -70,7 +77,7 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
               <NavButton
                 onClick={() => swiperRef.current?.slidePrev()}
                 direction="left"
-                disabled={false}
+                disabled={isBeginning}
                 ariaLabel="Previous"
                 borderColor="border-white"
                 className="icon-invert"
@@ -78,7 +85,7 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
               <NavButton
                 onClick={() => swiperRef.current?.slideNext()}
                 direction="right"
-                disabled={false}
+                disabled={isEnd}
                 ariaLabel="Next"
                 borderColor="border-white"
                 className="icon-invert"
@@ -91,9 +98,12 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
             slidesPerView={1}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
-              setActiveIndex(swiper.activeIndex);
+              updateSliderState(swiper);
             }}
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            onSlideChange={(swiper) => updateSliderState(swiper)}
+            onReachBeginning={(swiper) => updateSliderState(swiper)}
+            onReachEnd={(swiper) => updateSliderState(swiper)}
+            onFromEdge={(swiper) => updateSliderState(swiper)}
             className="!overflow-visible"
           >
             {threePartSpecData.items.map((item, index) => (
