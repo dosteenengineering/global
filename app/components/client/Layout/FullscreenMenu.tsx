@@ -10,10 +10,18 @@ import ContainerAnchor from "../../layout/ContainerAnchor";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { moveLeft } from "../../motionVariants";
 import { useRouter } from "next/navigation";
+
 type MenuLink = {
   label: string;
   href: string;
   subItems?: MenuLink[];
+};
+
+type SearchResultItem = {
+  type: string;
+  item?: { title: string; slug: string };
+  title?: string;
+  slug?: string;
 };
 
 type FullscreenMenuProps = {
@@ -23,6 +31,10 @@ type FullscreenMenuProps = {
   menuItems: MenuLink[];
   navItems: MenuLink[];
   onClose: () => void;
+  searchResults?: SearchResultItem[];
+  isSearching?: boolean;
+  onSearchQueryChange?: (value: string) => void;
+  setSearchQuery:(value: string) => void;
 };
 
 const MotionLink = motion.create(Link);
@@ -68,13 +80,34 @@ const navLinkVariants: Variants = {
   },
 };
 
+
+const ROUTE_MAP: Record<string, (item: SearchResultItem) => string> = {
+  service: (r) => `/${r.item?.slug ?? "services"}`,
+  "service-item": (r) => `/services/${r.item?.slug}`,
+  system: (r) => `/${r.item?.slug}`,
+  resource: (r) => `/${r.item?.slug}`,
+  project: (r) => `/projects/${r.item?.slug}`,
+  blog: (r) => `/blog/${r.item?.slug}`,
+  gallery: (r) => `/${r.item?.slug}`, // always "gallery"
+  bimcapability: (r) => `/${r.item?.slug}`, // always "gallery"
+  csi: (r) => `/${r.item?.slug}`, // always "gallery"
+  award: (r) => `/${r.item?.slug}`, // always "gallery"
+  contact: (r) => `/${r.item?.slug}`, // always "gallery"
+  about: (r) => `/${r.item?.slug}`, // always "gallery"
+  faq: (r) => `/${r.item?.slug}`, // always "gallery"
+};
+
 const FullscreenMenu = ({
   isOpen,
   startInSearch,
   searchQuery = "",
   menuItems,
   navItems,
+  searchResults = [],
+  isSearching = false,
   onClose,
+  onSearchQueryChange,
+  setSearchQuery
 }: FullscreenMenuProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [activeSubMenu, setActiveSubMenu] = useState<{
@@ -92,11 +125,42 @@ const FullscreenMenu = ({
     { label: "Contact", href: "/contact-us" },
   ].filter((item) => item.href !== "#");
 
-  const filteredSearchItems = trimmedSearchQuery
+  // Local label matches (existing behavior, kept as-is)
+  const localMatches: MenuLink[] = trimmedSearchQuery
     ? searchableItems.filter((item) =>
-        item.label.toLowerCase().includes(trimmedSearchQuery.toLowerCase()),
-      )
+      item.label.toLowerCase().includes(trimmedSearchQuery.toLowerCase()),
+    )
     : [];
+
+  // API results converted into the same { label, href } shape
+  const apiMatches: MenuLink[] = searchResults
+    .map((result) => {
+      const getRoute = ROUTE_MAP[result.type];
+      const label = result.item?.title ?? result.title ?? "Untitled";
+      const href = getRoute ? getRoute(result) : result.slug ? `/${result.slug}` : null;
+
+      return href ? { label, href } : null;
+    })
+    .filter((item): item is MenuLink => item !== null);
+
+  // console.log("Api matches", apiMatches)
+
+  const filteredSearchItems: MenuLink[] = trimmedSearchQuery
+    ? [
+      ...localMatches,
+      ...apiMatches.filter(
+        (apiItem) => !localMatches.some((local) => local.href === apiItem.href),
+      ),
+    ]
+    : [];
+
+  console.log("FullscreenMenu render:", {
+    trimmedSearchQuery,
+    searchResults,   // what actually arrived as a prop
+    apiMatches,      // what it mapped to
+    localMatches,
+    filteredSearchItems,
+  });
 
   const closeMenu = () => {
     // setHasExpandedSearch(false);
@@ -112,15 +176,15 @@ const FullscreenMenu = ({
       animate={
         isOpen
           ? {
-              y: 0,
-              visibility: "visible" as const,
-              transition: { duration: 0.55, ease: [0.76, 0, 0.24, 1] },
-            }
+            y: 0,
+            visibility: "visible" as const,
+            transition: { duration: 0.55, ease: [0.76, 0, 0.24, 1] },
+          }
           : {
-              y: "-100%",
-              transition: { duration: 0.45, ease: [0.76, 0, 0.24, 1] },
-              transitionEnd: { visibility: "hidden" as const },
-            }
+            y: "-100%",
+            transition: { duration: 0.45, ease: [0.76, 0, 0.24, 1] },
+            transitionEnd: { visibility: "hidden" as const },
+          }
       }
       style={{ pointerEvents: isOpen ? "auto" : "none" }}
       aria-hidden={!isOpen}
@@ -151,24 +215,71 @@ const FullscreenMenu = ({
           </div>
 
           {/* Mobile nav — shown only below lg */}
-          <div className="lg:hidden relative" style={{ minHeight: "60vh" }}>
-            <div
-              className="overflow-hidden relative"
-              style={{ minHeight: "60vh" }}
-            >
-              {/* Main list */}
-              <motion.div
-                initial={false}
-                animate={
-                  activeSubMenu
-                    ? { x: "-100%", opacity: 0 }
-                    : { x: 0, opacity: 1 }
-                }
-                transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
-              >
-                {(trimmedSearchQuery
-                  ? filteredSearchItems
-                  : [
+          <div className="xl:hidden relative" style={{ minHeight: "60vh" }}>
+            {startInSearch ? (
+              <div>
+                <div className="flex items-center gap-3 border-b border-white/25 py-3">
+                  <input
+                    autoFocus
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => onSearchQueryChange?.(e.target.value)}
+                    placeholder="Search..."
+                    className="w-full bg-transparent text-[18px] font-light text-white outline-none placeholder:text-white/50"
+                  />
+                  <button
+                    type="button"
+                    aria-label="Close search"
+                    onClick={()=>setSearchQuery("")}
+                    className="shrink-0 text-white/70 hover:text-white transition-colors"
+                  >
+                    <Image
+                      src="/assets/icons/close-icon.svg"
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="h-4 w-4 brightness-0 invert"
+                    />
+                  </button>
+                </div>
+
+                <ul data-lenis-prevent className="max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 py-4 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
+                  {trimmedSearchQuery ? (
+                    isSearching ? (
+                      <li className="list-none text-[16px] font-light text-white/60">Searching…</li>
+                    ) : filteredSearchItems.length > 0 ? (
+                      filteredSearchItems.map((item, index) => (
+                        <li key={`${item.label}-${item.href}-${index}`}>
+                          <Link
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="text-[18px] font-light text-white/80 transition-colors duration-300 hover:text-white"
+                          >
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))
+                    ) : (
+                      <li className="list-none text-[16px] font-light text-white/60">No results found</li>
+                    )
+                  ) : null}
+                </ul>
+              </div>
+            ) : (
+              <div data-lenis-prevent className="overflow-hidden relative max-h-[75vh] overflow-y-auto marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50" style={{ minHeight: "60vh" }}>
+                {/* Main list */}
+                <motion.div
+                  initial={false}
+                  animate={
+                    activeSubMenu
+                      ? { x: "-100%", opacity: 0 }
+                      : { x: 0, opacity: 1 }
+                  }
+                  transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+                >
+                  {(trimmedSearchQuery
+                    ? filteredSearchItems
+                    : [
                       ...navItems.map((item) => ({
                         ...item,
                         hasSub:
@@ -181,137 +292,144 @@ const FullscreenMenu = ({
                         subItems: [] as MenuLink[],
                       })),
                     ]
-                ).map((item: any) => (
+                  ).map((item: any) => (
+                    <button
+                      key={item.label}
+                      className="w-full flex items-center justify-between py-3 text-white relative text-left group"
+                      onClick={() => {
+                        if (item.hasSub && item.subItems?.length > 0) {
+                          setActiveSubMenu({
+                            label: item.label,
+                            href: item.href,
+                            items: item.subItems,
+                          });
+                        } else {
+                          router.push(item.href);
+                          closeMenu();
+                        }
+                      }}
+                    >
+                      <span className="text-[18px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
+                        {item.label}
+                      </span>
+                      {item.hasSub && (
+                        <Image
+                          src="/assets/icons/menu-arow.svg"
+                          alt=""
+                          width={16}
+                          height={16}
+                          className="h-4 w-4 brightness-0 invert"
+                        />
+                      )}
+                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
+                    </button>
+                  ))}
+                </motion.div>
+
+                {/* Sub-menu panel */}
+                <motion.div
+                  initial={{ x: "100%" }}
+                  animate={activeSubMenu ? { x: 0 } : { x: "100%" }}
+                  transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+                  className="absolute inset-x-0 top-0"
+                >
                   <button
-                    key={item.label}
-                    className="w-full flex items-center justify-between py-3 text-white relative text-left group"
-                    onClick={() => {
-                      if (item.hasSub && item.subItems?.length > 0) {
-                        setActiveSubMenu({
-                          label: item.label,
-                          href: item.href,
-                          items: item.subItems,
-                        });
-                      } else {
-                        router.push(item.href);
-                        closeMenu();
-                      }
-                    }}
+                    className="flex items-center gap-3 py-3 mb-1 text-white relative w-full"
+                    onClick={() => setActiveSubMenu(null)}
                   >
-                    <span className="text-[18px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
-                      {item.label}
+                    <Image
+                      src="/assets/icons/menu-arow.svg"
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="h-4 w-4 rotate-180 brightness-0 invert"
+                    />
+                    <span className="text-[20px] leading-[1.4] font-light text-white">
+                      {activeSubMenu?.label}
                     </span>
-                    {item.hasSub && (
-                      <Image
-                        src="/assets/icons/menu-arow.svg"
-                        alt=""
-                        width={16}
-                        height={16}
-                        className="h-4 w-4 brightness-0 invert"
-                      />
-                    )}
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
                   </button>
-                ))}
-              </motion.div>
 
-              {/* Sub-menu panel */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={activeSubMenu ? { x: 0 } : { x: "100%" }}
-                transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
-                className="absolute inset-x-0 top-0"
-              >
-                {/* Back button / title */}
-                <button
-                  className="flex items-center gap-3 py-3 mb-1 text-white relative w-full"
-                  onClick={() => setActiveSubMenu(null)}
+                  <motion.div
+                    key={activeSubMenu?.label ?? "empty"}
+                    initial="closed"
+                    animate={activeSubMenu ? "open" : "closed"}
+                    variants={navListVariants}
+                  >
+                    {activeSubMenu?.items.map((item) => (
+                      <motion.div key={item.label} variants={navLinkVariants}>
+                        <Link
+                          href={item.href}
+                          onClick={closeMenu}
+                          className="group flex items-center justify-between py-3 text-white relative pl-7"
+                        >
+                          <span className="text-[17px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
+                            {item.label}
+                          </span>
+                          <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </div>
+            )}
+          </div>
+
+          {isSearchOpen && trimmedSearchQuery ? (
+            <ul data-lenis-prevent className="relative z-1 hidden xl:block max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
+              {filteredSearchItems.length > 0 ? (
+                filteredSearchItems.map((item, index) => (
+                  <li key={`${item.label}-${item.href}-${index}`}>
+                    <Link
+                      href={item.href}
+                      onClick={closeMenu}
+                      className="text-[20px] font-light text-white/80 transition-colors duration-300 hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="list-none text-[20px] font-light text-white/70">
+                  No results found
+                </li>
+              )}
+            </ul>
+          ) : (
+            <motion.nav
+              key="menu"
+              initial="closed"
+              animate={isOpen ? "open" : "closed"}
+              variants={navListVariants}
+              className="relative z-1 hidden xl:block max-h-[75vh] overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              data-lenis-prevent
+            >
+              {menuItems.map((item, index) => (
+                <MotionLink
+                  key={item.label}
+                  href={item.href}
+                  onClick={closeMenu}
+                  variants={navLinkVariants}
+                  viewport={{ once: true }}
+                  className="group flex items-center py-4 text-white transition-colors md:py-5 xl:py-[25px] pl-3 lg:pl-5 xl:pl-10 2xl:pl-100 3xl:pl-[141px] relative group"
                 >
+                  <span className="text-[34px] font-light leading-[1.12] tracking-normal md:text-[44px] lg:text-[38px] xl:text-[44px] 3xl:text-[54px] opacity-75 group-hover:opacity-100 transition-all duration-300">
+                    {item.label}
+                  </span>
                   <Image
                     src="/assets/icons/menu-arow.svg"
                     alt=""
-                    width={16}
-                    height={16}
-                    className="h-4 w-4 rotate-180 brightness-0 invert"
+                    width={22.47}
+                    height={22.47}
+                    className="ml-50 h-5 w-5 xl:w-auto xl:h-auto opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
                   />
-                  <span className="text-[20px] leading-[1.4] font-light text-white">
-                    {activeSubMenu?.label}
-                  </span>
                   <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
-                </button>
-
-                {/* Sub items */}
-                <motion.div
-                  key={activeSubMenu?.label ?? "empty"}
-                  initial="closed"
-                  animate={activeSubMenu ? "open" : "closed"}
-                  variants={navListVariants}
-                >
-                  {activeSubMenu?.items.map((item) => (
-                    <motion.div key={item.label} variants={navLinkVariants}>
-                      <Link
-                        href={item.href}
-                        onClick={closeMenu}
-                        className="group flex items-center justify-between py-3 text-white relative pl-7"
-                      >
-                        <span className="text-[17px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
-                          {item.label}
-                        </span>
-                        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-
-          <motion.nav
-            key={trimmedSearchQuery ? "search" : "menu"}
-            initial="closed"
-            animate={isOpen ? "open" : "closed"}
-            variants={navListVariants}
-            className="relative z-1 hidden lg:block max-h-[75vh] overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            data-lenis-prevent
-          >
-            {(isSearchOpen && trimmedSearchQuery
-              ? filteredSearchItems
-              : menuItems
-            ).map((item, index) => (
-              <MotionLink
-                key={item.label}
-                href={item.href}
-                onClick={closeMenu}
-                variants={navLinkVariants}
-                viewport={{ once: true }}
-                className="group flex items-center py-4 text-white transition-colors md:py-5 xl:py-[25px] pl-3 lg:pl-5 xl:pl-10 2xl:pl-100 3xl:pl-[141px] relative group"
-              >
-                {/* <span className="mr-3 self-start pt-2 text-[11px] leading-none text-white/80">
-                  {" "}
-                  {String(index + 1).padStart(2, "0")}{" "}
-                </span> */}
-                <span className="text-[34px] font-light leading-[1.12] tracking-normal md:text-[44px] lg:text-[38px] xl:text-[44px] 3xl:text-[54px] opacity-75 group-hover:opacity-100 transition-all duration-300">
-                  {item.label}
-                </span>
-                <Image
-                  src="/assets/icons/menu-arow.svg"
-                  alt=""
-                  width={22.47}
-                  height={22.47}
-                  className="ml-50 h-5 w-5 xl:w-auto xl:h-auto opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
-                />
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
-                <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00] group-hover:from-white group-hover:w-full transition-all duration-300" />
-              </MotionLink>
-            ))}
-            {isSearchOpen &&
-              trimmedSearchQuery &&
-              filteredSearchItems.length === 0 && (
-                <p className="border-b border-white/25 py-5 text-[28px] font-light text-white/70 md:text-[38px]">
-                  No results found
-                </p>
-              )}
-          </motion.nav>
+                  <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00] group-hover:from-white group-hover:w-full transition-all duration-300" />
+                </MotionLink>
+              ))}
+            </motion.nav>
+          )}
         </div>
 
         <div

@@ -45,6 +45,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -211,6 +213,51 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
     };
   }, [isMenuOpen]);
 
+
+  // Debounced API search
+  useEffect(() => {
+    const trimmed = searchQuery.trim();
+
+    if (!trimmed) {
+      setSearchResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    const controller = new AbortController();
+
+    const timeoutId = setTimeout(async () => {
+      try {
+        console.log("trimmed", trimmed)
+        const res = await fetch("/api/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ searchQuery: trimmed }),
+          signal: controller.signal,
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          console.log("result", data.data)
+          setSearchResults(data.data);
+        }
+      } catch (error) {
+        if ((error as Error).name !== "AbortError") {
+          console.error("Search error:", error);
+        }
+      } finally {
+        setIsSearching(false);
+      }
+    }, 300); // debounce delay
+
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
+  }, [searchQuery]);
+
   return (
     // <header className="absolute top-[30px] md:top-[23px] left-0 w-full z-[150]">
     <header
@@ -228,8 +275,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
         <div
           ref={navPillRef}
           className={`flex h-[62px] rounded-[50px] transition-all duration-500 ease-out md:h-[70px] ${isMenuOpen
-              ? "w-full lg:max-w-[57.5%]"
-              : "w-full max-w-[1127px] bg-white/8 backdrop-blur-[2px]"
+            ? "w-full lg:max-w-[57.5%]"
+            : "w-full max-w-[1127px] bg-white/8 backdrop-blur-[2px]"
             }`}
         >
           <div
@@ -260,7 +307,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
 
             {/* Nav items */}
             <div
-              className={`hidden min-[1300px]:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
+              className={`hidden xl:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
     ${isMenuOpen
                   ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
                   : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
@@ -437,7 +484,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
               className="relative hidden md:flex items-center mr-[20.39px] h-[45.61px] rounded-full border border-white/20 bg-white/8 backdrop-blur-[10px] overflow-hidden"
               initial={{ width: 45.61 }}
               animate={{
-                width: isSearchExpanded ? 300 : 45.61,
+                width: isSearchExpanded ? 250 : 45.61,
                 transition: isSearchExpanded
                   ? { duration: 0.45, ease: [0.76, 0, 0.24, 1] }
                   : { duration: 0.35, ease: [0.76, 0, 0.24, 1] },
@@ -449,8 +496,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search..."
                 className={`h-full bg-transparent ${isSearchExpanded ? "pl-5" : ""}  text-15 text-white outline-none placeholder:text-white/50 transition-all duration-300 ${isSearchExpanded
-                    ? "w-full opacity-100"
-                    : "w-0 opacity-0 pointer-events-none"
+                  ? "w-full opacity-100"
+                  : "w-0 opacity-0 pointer-events-none"
                   }`}
               />
 
@@ -489,8 +536,22 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
             </motion.div>
 
             <div
-              className={`${isMenuOpen ? "hidden" : ""} md:hidden rounded-full shrink-0 pr-[15px]`}
+              className={`${isMenuOpen ? "hidden" : ""} md:hidden flex items-center gap-[14px] shrink-0 pr-[15px]`}
             >
+
+              <button
+                className="cursor-pointer flex items-center justify-center shrink-0"
+                aria-label="Open search"
+                onClick={openMenuSearch}
+              >
+                <Image
+                  src="/assets/icons/search.svg"
+                  alt="Search"
+                  width={20}
+                  height={20}
+                  className="w-auto h-[15px] pointer-events-none"
+                />
+              </button>
               <button
                 className="cursor-pointer flex items-center justify-center group shrink-0"
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -597,8 +658,12 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
       </div>
       <FullscreenMenu
         isOpen={isMenuOpen}
-        startInSearch={false}
+        startInSearch={shouldStartMenuInSearch}
+        onSearchQueryChange={setSearchQuery}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        searchResults={searchResults}
+        isSearching={isSearching}
         menuItems={menuItems}
         navItems={dynamicNavItems.map((item) => ({
           label: item.label,

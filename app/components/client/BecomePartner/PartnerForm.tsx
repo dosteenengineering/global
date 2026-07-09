@@ -10,6 +10,7 @@ import ExperienceDocsStep from "./form-steps/ExperienceDocsStep";
 import PersonalInfoStep from "./form-steps/PersonalInfoStep";
 import type { PartnerFormValues, Step } from "./form-steps/types";
 import ThankYouModal from "./ThankyouModal";
+import { submitPartnerAction } from "@/lib/saveVendor";
 
 const steps: Step[] = [
   {
@@ -54,6 +55,7 @@ const defaultValues: PartnerFormValues = {
   annualCapacity: "",
   marketsServed: ["UAE"],
   minimumOrderQuantity: "Yes (specify):",
+  minimumOrderQuantitySpecify: "",
   relevantExperience: "",
   keyCertifications: "",
   pastProjects: "",
@@ -75,8 +77,17 @@ const stepFields: Record<string, (keyof PartnerFormValues)[]> = {
     "companyEmail",
     "companyPhone",
   ],
-  business: ["businessType", "productServices", "marketsServed"],
-  docs: ["termsAccepted"],
+  business: ["businessType", "productServices", "marketsServed", "annualCapacity"],
+  docs: [
+    "relevantExperience",
+    "keyCertifications",
+    "pastProjects",
+    "brochure",
+    "technicalSpecSheet",
+    "uploadedDocuments",
+    "paymentTermsPreference",
+    "termsAccepted",
+  ],
 };
 
 const PartnerForm = () => {
@@ -93,19 +104,61 @@ const PartnerForm = () => {
     trigger,
     formState: { errors },
   } = useForm<PartnerFormValues>({ defaultValues });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const goToNextStep = async () => {
-    const isValid = await trigger(stepFields[currentStep.id]);
+  const goToNextStep = async (e: any) => {
+    e.preventDefault();
+
+    const fieldsToValidate = [...stepFields[currentStep.id]];
+
+    if (
+      currentStep.id === "business" &&
+      watch("minimumOrderQuantity") === "Yes (specify):"
+    ) {
+      fieldsToValidate.push("minimumOrderQuantitySpecify");
+    }
+
+    const isValid = await trigger(fieldsToValidate);
 
     if (isValid) {
       setActiveStep((step) => Math.min(step + 1, steps.length - 1));
     }
   };
 
-  const onSubmit = (values: PartnerFormValues) => {
-    console.log("Partner form:", values);
-    setIsSubmitted(true);
+  const onSubmit = async (values: PartnerFormValues) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const formData = new FormData();
+
+      Object.entries(values).forEach(([key, value]) => {
+        if (value instanceof FileList) {
+          Array.from(value).forEach((file) => formData.append(key, file));
+        } else if (Array.isArray(value)) {
+          value.forEach((item) => formData.append(key, item));
+        } else if (value !== null && value !== undefined) {
+          formData.append(key, String(value));
+        }
+      });
+
+      const result = await submitPartnerAction(formData);
+
+      if (!result?.success) {
+        setSubmitError(result?.message || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Partner form submit error:", error);
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
 
   const renderStep = () => {
     const stepProps = { register, control, watch, errors };
@@ -155,13 +208,14 @@ const PartnerForm = () => {
 
                 <BorderButton
                   type={isLastStep ? "submit" : "button"}
-                  text={isLastStep ? "Submit Vendor Registration" : "Next"}
+                  text={isLastStep ? (isSubmitting ? "Submitting..." : "Submit Vendor Registration") : "Next"}
                   borderColor="black"
                   textColor="black"
                   hoverBg="black"
                   px="px-6 2xl:px-[35px]"
                   onClick={isLastStep ? undefined : goToNextStep}
                   className="!items-start !max-w-full [&_span]:!max-w-full !leading-none"
+                  disabled={isLastStep && isSubmitting}
                 />
               </div>
             </div>
