@@ -1064,6 +1064,40 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   const [callbackOpen, setCallbackOpen] = useState(false);
   const industries: any[] = solutionsRaw?.thirdSection?.items ?? [];
 
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [newsletterMessage, setNewsletterMessage] = useState("");
+
+  const handleNewsletterSubmit = async () => {
+    const trimmed = newsletterEmail.trim();
+    if (!trimmed) return;
+
+    setNewsletterStatus("loading");
+    setNewsletterMessage("");
+
+    try {
+      const res = await fetch("/api/admin/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setNewsletterStatus("success");
+        setNewsletterMessage(data.message);
+        setNewsletterEmail("");
+      } else {
+        setNewsletterStatus("error");
+        setNewsletterMessage(data.message);
+      }
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Something went wrong. Please try again.");
+    }
+  };
+
+
   const residentialCol = {
     title: "Residential Developments",
     links: (
@@ -1439,11 +1473,10 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                     whileInView="show"
                     viewport={{ amount: 0.1, once: true }}
                     key={cert.alt}
-                    className={`relative h-[50px] 2xl:h-[68px] shrink-0 ${
-                      index === certifications.length - 1
-                        ? "w-[70px] 2xl:w-[104px]"
-                        : "w-[50px] 2xl:w-[68px]"
-                    }`}
+                    className={`relative h-[50px] 2xl:h-[68px] shrink-0 ${index === certifications.length - 1
+                      ? "w-[70px] 2xl:w-[104px]"
+                      : "w-[50px] 2xl:w-[68px]"
+                      }`}
                   >
                     <Image
                       src={cert.src}
@@ -1507,23 +1540,42 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
               <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0 min-w-max">
                 <input
                   type="email"
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter Your Email"
                   className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
                 />
-                <button className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden min-w-max">
-                  <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
-                  <span className="relative  group-hover:text-white transition-colors duration-300 ease-in-out">
-                    Subscribe
-                  </span>
-                  <Image
-                    src="/assets/icons/button-arrow-top-right.svg"
-                    alt=""
-                    width={25}
-                    height={25}
-                    className="relative  w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
-                  />
-                </button>
+                <button
+  onClick={handleNewsletterSubmit}
+  type="button"
+  disabled={newsletterStatus === "loading"}
+  className="relative flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden"
+>
+  <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
+  <span className="relative grid group-hover:text-white transition-colors duration-300 ease-in-out">
+    <span className={`col-start-1 row-start-1 ${newsletterStatus === "loading" ? "invisible" : "visible"}`}>
+      Subscribe
+    </span>
+    <span className={`col-start-1 row-start-1 ${newsletterStatus === "loading" ? "visible" : "invisible"}`}>
+      Subscribing...
+    </span>
+  </span>
+  <Image
+    src="/assets/icons/button-arrow-top-right.svg"
+    alt=""
+    width={25}
+    height={25}
+    className="relative w-auto h-[18px] pointer-events-none group-hover:rotate-45 group-hover:invert group-hover:brightness-0 transition-transform duration-300 ease-in-out"
+  />
+</button>
               </div>
+              {newsletterMessage && (
+                <p
+                  className={`mt-3 text-13 font-poppins ${newsletterStatus === "success" ? "text-green-600" : "text-red-500"
+                    }`}
+                >
+                  {newsletterMessage}
+                </p>
+              )}
             </div>
           </div>
         </motion.div>
@@ -1658,12 +1710,14 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                   <input
                     type="email"
                     placeholder="Enter Your Email"
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
                     className="flex-1 h-full bg-transparent pl-4 pr-0 3xl:pl-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
                   />
-                  <button className="flex flex-shrink-0 items-center gap-1 sm:gap-3 h-full -my-[1px] -mr-[1px] py-4 pl-6 pr-5 sm:px-[29.5px] 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-[12px] sm:text-15 leading-[1.73333] uppercase group sm:shrink-0 overflow-hidden ">
+                  <button onClick={handleNewsletterSubmit}
+                    disabled={newsletterStatus === "loading"} className="flex flex-shrink-0 items-center gap-1 sm:gap-3 h-full -my-[1px] -mr-[1px] py-4 pl-6 pr-5 sm:px-[29.5px] 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-[12px] sm:text-15 leading-[1.73333] uppercase group sm:shrink-0 overflow-hidden ">
                     {/* <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" /> */}
                     <span className="relative z-10 group-hover:text-white transition-colors duration-300 ease-in-out">
-                      Subscribe
+                      {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
                     </span>
                     <Image
                       src="/assets/icons/button-arrow-top-right.svg"
@@ -1674,6 +1728,14 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                     />
                   </button>
                 </div>
+                {newsletterMessage && (
+                  <p
+                    className={`mt-3 text-13 font-poppins ${newsletterStatus === "success" ? "text-green-600" : "text-red-500"
+                      }`}
+                  >
+                    {newsletterMessage}
+                  </p>
+                )}
               </div>
             </div>
           </motion.div>

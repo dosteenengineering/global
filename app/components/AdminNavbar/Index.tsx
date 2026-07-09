@@ -144,6 +144,10 @@ const AdminNavbar = () => {
           name: "Vendor Registrations",
           href: "/admin/forms/vendor-registrations",
         },
+        {
+          name: "Newsletter",
+          href: "/admin/forms/news-letter",
+        },
       ],
     },
     { name: "Settings", href: "/admin/settings", icon: Settings },
