@@ -94,7 +94,7 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
 
       {/* HEADER */}
       <div ref={containerRef} className="relative container mb-50">
-        <SectionTitle title={title} className="mb-50 section-heading " />
+        <SectionTitle title={title} className="mb-50 section-heading-90 " />
         <SectionDescription text={subtitle} className="!text-30 !leading-[1.334] -tracking-[0.02em] font-light mb-2.5 md:mb-30" />
         <SectionDescription text={description} className="text-description text-paragraph max-w-[90ch]" />
       </div>
@@ -126,7 +126,8 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
                        will-change-transform ${isActive ? "md:-translate-y-4" : "translate-y-0"}`}>
                       <Image src={slide.image} alt={slide.imageAlt} width={258} height={98} className={`object-cover h-full ${isActive ? "" : ""}`} />
                     </div>
-                    <p className={`text-center max-[768px]:pt-4 max-[768px]:max-w-[80%] xl:absolute top-full mt-0 text-description text-white transition-[opacity,transform] duration-700 ease-out will-change-[opacity,transform]
+                    <p className={`text-center max-[768px]:pt-4 max-[768px]:max-w-[80%] xl:absolute top-full mt-0 text-description text-white transition-[opacity,transform] 
+                    duration-700 ease-out will-change-[opacity,transform]
                     ${isActive
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-2 pointer-events-none"
@@ -139,7 +140,7 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
 
                 {/* BOTTOM-LEFT: country — always visible, bordered box */}
                 <div className="absolute bottom-0 left-0">
-                  <p className={`text-[12px] md:text-15 xl:text-19 font-light text-center capitalize min-w-[113px] h-[23px] md:h-[35px] flex items-center justify-center tracking-widest px-[17.5px] border-t border-r transition-colors duration-700 ease-out 
+                  <p className={`text-[12px] md:text-15 xl:text-19 font-light text-center capitalize min-w-[113px] h-[23px] md:h-[35px] flex items-center justify-center tracking-[-0.02em] px-[17.5px] border-t border-r transition-colors duration-700 ease-out 
                   ${isActive
                         ? "text-white border-white"
                         : "text-paragraph border-[#c2c2c2]"

@@ -22,7 +22,7 @@ const Index = ({ data }: { data: Capability }) => {
       <AboutBim secondSection={data.secondSection} thirdSection={data.thirdSection} />
       <BimCapabilitiesStats data={data.fourthSection} />
       <SoftwareTools data={data.fifthSection} />
-      <Benefits data={data.sixthSection} />
+      <Benefits data={data.sixthSection}/>
       <BimProcess data={data.seventhSection} />
       <BuildingSystems data={data.eighthSection} />
       <BimEngineeringData data={data.ninethSection} />
