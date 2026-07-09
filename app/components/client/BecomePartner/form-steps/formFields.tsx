@@ -12,6 +12,7 @@ type BaseFieldProps = {
   errors: FieldErrors<PartnerFormValues>;
   required?: boolean;
   className?: string;
+  multiple?: boolean;
 };
 
 
@@ -265,42 +266,42 @@ export const CheckboxGroup = ({
           //   />
           //   {option}
           // </label>
-    //       <label key={option} className="flex items-center gap-2 xl:gap-[10px] text-13 leading-none text-paragraph cursor-pointer">
-    //         <input
-    //           type="checkbox"
-    //           value={option}
-    //           {...register(name, required ? { required: "Required" } : undefined)}
-    //           className="
-    //   peer appearance-none
-    //   h-[14px] w-[14px] xl:h-[20px] xl:w-[20px]
-    //   border border-primary
-    //   rounded-[1px]
-    //   relative
-    //   checked:bg-primary
-    //   transition-all duration-200
-    //   after:content-['']
-    //   after:absolute
-    //   after:left-1/2
-    //   after:top-1/2
-    //   after:w-[5px]
-    //   after:h-[10px]
-    //   after:border-r-[2px]
-    //   after:border-b-[2px]
-    //   after:border-white
-    //   after:-translate-x-1/2
-    //   after:-translate-y-[58%]
-    //   after:rotate-45
-    //   after:scale-0
-    //   checked:after:scale-100
-    //   after:transition-transform
-    // "
-    //         />
+          //       <label key={option} className="flex items-center gap-2 xl:gap-[10px] text-13 leading-none text-paragraph cursor-pointer">
+          //         <input
+          //           type="checkbox"
+          //           value={option}
+          //           {...register(name, required ? { required: "Required" } : undefined)}
+          //           className="
+          //   peer appearance-none
+          //   h-[14px] w-[14px] xl:h-[20px] xl:w-[20px]
+          //   border border-primary
+          //   rounded-[1px]
+          //   relative
+          //   checked:bg-primary
+          //   transition-all duration-200
+          //   after:content-['']
+          //   after:absolute
+          //   after:left-1/2
+          //   after:top-1/2
+          //   after:w-[5px]
+          //   after:h-[10px]
+          //   after:border-r-[2px]
+          //   after:border-b-[2px]
+          //   after:border-white
+          //   after:-translate-x-1/2
+          //   after:-translate-y-[58%]
+          //   after:rotate-45
+          //   after:scale-0
+          //   checked:after:scale-100
+          //   after:transition-transform
+          // "
+          //         />
 
-    //         <span className="text-19 leading-none font-light text-secondary transition-all duration-300 peer-checked:font-medium tracking-[-0.02em]">
-    //           {option}
-    //         </span>
-    //       </label>
-          <label key={option} className="group flex items-center gap-2 xl:gap-[10px] cursor-pointer">
+          //         <span className="text-19 leading-none font-light text-secondary transition-all duration-300 peer-checked:font-medium tracking-[-0.02em]">
+          //           {option}
+          //         </span>
+          //       </label>
+          <label key={option} className="group flex items-center gap-2 xl:gap-[10px] cursor-pointer relative">
             <input
               type="checkbox"
               value={option}
@@ -343,6 +344,8 @@ export const FileInput = ({
   register,
   errors,
   className = "",
+  multiple,
+  required = false
 }: BaseFieldProps & { helper: string }) => {
   const error = errors[name]?.message;
 
@@ -353,7 +356,16 @@ export const FileInput = ({
         <Paperclip size={24} strokeWidth={1.5} className="shrink-0 text-paragraph" />
       </div>
       <div className=" flex h-8 items-center border-b border-[#CFCFCF]">
-        <input type="file" {...register(name)} className="min-w-0 flex-1 text-12 text-paragraph file:hidden" />
+        <input type="file" multiple={multiple} {...register(
+          name,
+          required
+            ? {
+              validate: (value) =>
+                (value instanceof FileList && value.length > 0) ||
+                "Required",
+            }
+            : undefined,
+        )} className="min-w-0 flex-1 text-12 text-paragraph file:hidden" />
       </div>
       <span className="mt-1 block text-11 leading-[1.45] text-paragraph">{helper}</span>
       {error && <span className="mt-2 block text-12 text-red-500">{error}</span>}
