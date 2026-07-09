@@ -296,7 +296,7 @@ body::-webkit-scrollbar {
 }
 
 .text-30 {
-    @apply font-poppins leading-[1.556] md:leading-[1.333333333333333] tracking-[-0.02em];
+    @apply font-poppins leading-[1.556] md:leading-[1.333333333333333] tracking-[-0.02em] text-30;
 }
 
 .glass-effect {
