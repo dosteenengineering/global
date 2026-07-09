@@ -57,7 +57,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
             className="object-contain w-10 h-10 2xl:w-12 2xl:h-12 3xl:w-15 3xl:h-15 group-hover:scale-110 transition-all duration-300"
           />
           <div className="lg:hidden">
-            <Link href={`/solutions/systems/${item.slug}`}>
+            <Link href={item.slug ? `/solutions/systems/${item.slug}` : "#"}>
               <Image
                 src="/assets/icons/arrow-right-top-primary-26.svg"
                 alt={`Go to ${item.title}`}
@@ -79,7 +79,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
       </p>
 
       <div className=" hidden lg:block">
-        <Link href={`/solutions/systems/${item.slug}`}>
+        <Link href={item.slug ? `/solutions/systems/${item.slug}` : "#"}>
           <Image
             src="/assets/icons/arrow-right-top-primary-26.svg"
             alt={`Go to ${item.title}`}

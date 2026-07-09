@@ -26,6 +26,7 @@ export type PartnerFormValues = {
   annualCapacity: string;
   marketsServed: string[];
   minimumOrderQuantity: string;
+  minimumOrderQuantitySpecify: string;
   relevantExperience: string;
   keyCertifications: string;
   pastProjects: string;
