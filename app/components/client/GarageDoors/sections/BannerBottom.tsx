@@ -10,12 +10,12 @@ const BannerBottom = ({firstDescription,secondDescription}:{firstDescription:str
   const rightInset = useGetContainerSpacing(containerRef);
 
   return (
-    <section className="relative pt-12.5 md:pt-120 pb-[70px] md:pb-200 overflow-hidden">
+    <section className="relative pt-12.5 lg:pt-100 2xl:pt-120 pb-[70px] lg:pb-120 2xl:pb-200 overflow-hidden">
       <div ref={containerRef} className="container" />
 
       <div
-        className="ml-auto xl:max-w-[70%]  3xl:max-w-[1252px] px-[16px] 2xl:px-0"
-        style={{ marginRight: rightInset }}
+        className="ml-auto lg:max-w-[85%] 3xl:max-w-[1252px] 2xl:px-0"
+        style={{ paddingInline: rightInset }}
       >
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} 
          className="text-30 leading-[1.33] font-light tracking-[-0.02em] mb-5 md:mb-40 3xl:pr-5">

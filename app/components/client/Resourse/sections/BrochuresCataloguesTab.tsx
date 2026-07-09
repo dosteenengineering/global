@@ -1,5 +1,4 @@
 import type { ResourceHubTab } from "../data";
-import { Download } from "lucide-react";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
@@ -33,7 +32,7 @@ const BrochuresCataloguesTab = ({ tab }: BrochuresCataloguesTabProps) => {
       <SectionTitle title={tab.title} 
       className="text-[24px] md:text-55 tracking-[-2%] md:tracking-normal   leading-[1.34] md:leading-[1.181818181818182] font-light -tracking-[0.02em] text-secondary mb-7.5 md:mb-50" />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-30">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <ResourceDownloadCard key={item.id} item={item} delay={0.06} onDownload={openGate} />
         ))}
       </div>
@@ -47,8 +46,8 @@ const ResourceDownloadCard = ({ item, delay, onDownload }: { item: BrochuresCata
 
   return (
     <motion.article
-      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 md:px-25 3xl:px-40 py-[15px] md:py-6 xl:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] 2xl:grid-cols-[101px_1fr] 
-      gap-[15px] 2xl:gap-5 3xl:gap-10">
+      variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} 
+      className="h-auto  bg-[#F4F4F4] min-h-[116px] px-2.5 xl:px-5 2xl:px-25 3xl:px-40 py-[15px] md:py-6 3xl:py-35 grid grid-cols-[50px_1fr] items-center sm:grid-cols-[78px_1fr] xl:grid-cols-[101px_1fr] gap-[15px] md:gap-2 xl:gap-3 3xl:gap-10">
       <div className={`w-12.5 sm:w-[78px] 2xl:w-[101px] h-12.5 sm:h-[78px] 2xl:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-semibold 
       ${ isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]" }`}
       >
@@ -66,23 +65,11 @@ const ResourceDownloadCard = ({ item, delay, onDownload }: { item: BrochuresCata
             ))}
           </div>
 
-          {/* <a href={item.download} className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary" >
-            <span className="uppercase font-normal leading-[1.67]">Download</span>
-            <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
-         </a> */}
-
-         <button
-            onClick={() => onDownload(item.download, item.title)}
+         <button onClick={() => onDownload(item.download, item.title)}
             className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary"
           >
             <span className="uppercase font-normal leading-[1.67]">Download</span>
-            <img
-              src="/assets/icons/download.svg"
-              width={"22px"}
-              height={"20px"}
-              alt="Download"
-              className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1"
-            />
+            <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
           </button>
         </div>
       </div>

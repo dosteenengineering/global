@@ -74,7 +74,7 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
             <motion.div variants={moveUp(0.06)} initial="hidden" animate="show" viewport={{ once: false }}>
             <button key={item.id} type="button" onClick={() => setActiveVideo(item)} className="group text-left" >
               {/* IMAGE */}
-              <div className="relative aspect-[18.7/10] md:aspect-[16/10] overflow-hidden">
+              <div className="relative aspect-[18.7/10] md:aspect-[16/10] 3xl:min-h-[346px] overflow-hidden">
                 <Image src={item.image} alt={item.title} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
 
                 {/* DARK OVERLAY */}
@@ -103,7 +103,8 @@ const VideosDemosTab = ({ tab }: VideosDemosTabProps) => {
                     </span>
                   )}
 
-                  <div className="flex items-center gap-1 rounded-full bg-primary/5 px-2.5 md:px-[22.5px] md:py-[5px] flex items-center justify-center text-15 leading-[1.733333333333333] font-[400] text-secondary">
+                  <div className="flex items-center gap-1 rounded-full bg-primary/5 px-2.5 md:px-[22.5px] md:py-[5px] flex items-center justify-center text-15 leading-[1.733333333333333] 
+                  font-[400] text-secondary">
                     <span>{item.duration}</span>
                   </div>
                 </div>
