@@ -9,16 +9,6 @@ import type { Swiper as SwiperType } from "swiper";
 import NavButton from "@/app/components/common/NavigationButton";
 import "swiper/css";
 
-
-type SystemRow = {
-  id: number;
-  division: string;
-  category: string;
-  sectionNumber: string;
-  sectionTitle: string;
-  system: string;
-};
-
 type Column = {
   title: string;
   items: {
@@ -39,7 +29,15 @@ const Systems = ({ data }: Props) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [rightSpace, setRightSpace] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const total = Math.max(...data.columns.map((c) => c.items.length));
+
+  const updateSliderState = (swiper: SwiperType) => {
+    setActiveIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
 
   useEffect(() => {
     const updateSpacing = () => {
@@ -112,16 +110,16 @@ const Systems = ({ data }: Props) => {
               <NavButton
                 onClick={() => swiperRef.current?.slidePrev()}
                 direction="left"
-                disabled={false}
+                disabled={isBeginning}
                 ariaLabel="Previous"
-                borderColor="border-[#161616]"
+                borderColor="border-[#161616]" disableMode="dark"
               />
               <NavButton
                 onClick={() => swiperRef.current?.slideNext()}
                 direction="right"
-                disabled={false}
+                disabled={isEnd}
                 ariaLabel="Next"
-                borderColor="border-[#161616]"
+                borderColor="border-[#161616]" disableMode="dark"
               />
             </motion.div>
           </motion.div>
@@ -131,9 +129,12 @@ const Systems = ({ data }: Props) => {
             slidesPerView={1}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
-              setActiveIndex(swiper.activeIndex);
+              updateSliderState(swiper);
             }}
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            onSlideChange={(swiper) => updateSliderState(swiper)}
+            onReachBeginning={(swiper) => updateSliderState(swiper)}
+            onReachEnd={(swiper) => updateSliderState(swiper)}
+            onFromEdge={(swiper) => updateSliderState(swiper)}
           >
             {Array.from({ length: Math.max(...data.columns.map((c) => c.items.length)) }).map((_, rowIndex) => (
               <SwiperSlide key={rowIndex}>

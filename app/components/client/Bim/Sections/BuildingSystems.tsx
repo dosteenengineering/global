@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { buildingSystemsData, Capability } from "../data";
+import { Capability } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import Image from "next/image";
 import NavButton from "@/app/components/common/NavigationButton";
@@ -18,8 +18,6 @@ function chunk<T>(arr: T[], size: number): T[][] {
   for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
   return out;
 }
-
-type Item = (typeof buildingSystemsData.items)[0];
 
 interface CellProps {
   item: Capability['eighthSection']['items'][0];
@@ -106,6 +104,10 @@ export default function BuildingSystems({data}:{data:Capability['eighthSection']
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [isDesktopBeginning, setIsDesktopBeginning] = useState(true);
+  const [isDesktopEnd, setIsDesktopEnd] = useState(false);
+  const [showDesktopNav, setShowDesktopNav] = useState(false);
+  const [desktopActiveIndex, setDesktopActiveIndex] = useState(0);
 
   useEffect(() => {
     function measure() {
@@ -138,25 +140,34 @@ export default function BuildingSystems({data}:{data:Capability['eighthSection']
       window.removeEventListener("resize", measure);
     };
   }, []);
+  const desktopSwiperRef = useRef<SwiperType | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slidesPerView, setSlidesPerView] = useState(1);
 
   const total = items.length;
-  const counterPill = (
+  const renderCounterPill = (current: number, count: number) => (
     <div className="flex items-center justify-center border   text-paragraph font-poppins font-[300] leading-[0.5] border-primary rounded-full px-[16px] text-15 w-[55px] md:w-[78px] h-[26px] md:h-[31px] py-[3px]">
       <span className="font-[600]">
-        {String(activeIndex + 1).padStart(2, "0")}
+        {String(current + 1).padStart(2, "0")}
       </span>
       <span>/</span>
-      <span>{String(total).padStart(2, "0")}</span>
+      <span>{String(count).padStart(2, "0")}</span>
     </div>
   );
+
+  const counterPill = renderCounterPill(activeIndex, total);
 
   const updateState = (swiper: SwiperType) => {
     setActiveIndex(swiper.activeIndex);
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
+  };
+
+  const updateDesktopState = (swiper: SwiperType) => {
+    setDesktopActiveIndex(swiper.activeIndex);
+    setIsDesktopBeginning(swiper.isBeginning);
+    setIsDesktopEnd(swiper.isEnd);
+    setShowDesktopNav(!swiper.isLocked);
   };
   return (
     <section className="w-full bg-white">
@@ -175,9 +186,55 @@ export default function BuildingSystems({data}:{data:Capability['eighthSection']
         <div className="w-full">
           {/* ── Desktop: paired rows ── */}
           <div className="hidden md:block">
+            {showDesktopNav && (
+              <motion.div
+                variants={moveUp(0.5)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="mb-[30px] flex items-center justify-between gap-[15px]"
+              >
+                {renderCounterPill(desktopActiveIndex, pairs.length)}
+                <div className="flex items-center gap-[15px]">
+                  <NavButton
+                    onClick={() => {
+                      const s = desktopSwiperRef.current;
+                      if (s && !s.destroyed) s.slidePrev();
+                    }}
+                    direction="left"
+                    disabled={isDesktopBeginning}
+                    ariaLabel="Previous"
+                    borderColor="border-[#161616]"
+                    disableMode="dark"
+                  />
+                  <NavButton
+                    onClick={() => {
+                      const s = desktopSwiperRef.current;
+                      if (s && !s.destroyed) s.slideNext();
+                    }}
+                    direction="right"
+                    disabled={isDesktopEnd}
+                    ariaLabel="Next"
+                    borderColor="border-[#161616]"
+                    disableMode="dark"
+                  />
+                </div>
+              </motion.div>
+            )}
             <Swiper
               spaceBetween={0}
               slidesPerView={2}
+              watchOverflow
+              onSwiper={(swiper) => {
+                desktopSwiperRef.current = swiper;
+                updateDesktopState(swiper);
+              }}
+              onSlideChange={(swiper) => updateDesktopState(swiper)}
+              onReachBeginning={(swiper) => updateDesktopState(swiper)}
+              onReachEnd={(swiper) => updateDesktopState(swiper)}
+              onFromEdge={(swiper) => updateDesktopState(swiper)}
+              onBreakpoint={(swiper) => updateDesktopState(swiper)}
+              onResize={(swiper) => updateDesktopState(swiper)}
               breakpoints={{
                 1400: { slidesPerView: 3 },
                 1536: { slidesPerView: 4 },

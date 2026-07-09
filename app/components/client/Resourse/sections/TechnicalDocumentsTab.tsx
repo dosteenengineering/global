@@ -52,7 +52,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
         className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5 translate-y-[2px]"
       />
 
-      <div className="flex flex-wrap gap-[10px] mb-50">
+      <div className="flex flex-wrap gap-[10px] mb-[30px] sm:mb-50">
         {filters.map((filter, index) => {
           const isActive = activeFilter === filter;
 
@@ -67,7 +67,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
               <button
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={` rounded-full border py-[14px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-0.02em] cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-md-gray text-paragraph hover:border-primary hover:text-primary font-light"}`}
+                className={` rounded-full border py-[5px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-0.02em] cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-md-gray text-paragraph hover:border-primary hover:text-primary font-light"}`}
               >
                 {filter}
               </button>
@@ -103,34 +103,30 @@ const ResourceDownloadCard = ({
   const isDwg = item.type.toUpperCase() === "DWG";
 
   return (
-    <motion.article
-      variants={moveUp(delay)}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.2 }}
-      className="h-[141px] md:h-auto bg-[#F4F4F4] px-2.5 md:px-25 md:px-40 py-[15px] md:py-6 md:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr] lg:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-10 "
-    >
-      <div
-        className={`w-12.5 sm:w-[78px] lg:w-[101px] h-12.5 sm:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-[600] 
-      ${isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]"}`}
-      >
+    <motion.article variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+      className="h-auto bg-[#F4F4F4] px-2.5 xl:px-5 2xl:px-25 3xl:px-40 py-[15px] md:py-6 2xl:py-35 grid grid-cols-[50px_1fr] items-center  sm:grid-cols-[78px_1fr]
+       2xl:grid-cols-[101px_1fr] gap-[14px] md:gap-5 xl:gap-6 3xl:gap-10">
+      {/* <div className={`w-12.5 sm:w-[78px] 2xl:w-[101px] h-12.5 xl:h-[78px] lg:h-[101px] flex items-center justify-center text-24 xl:text-30 font-poppins font-semibold 
+      ${isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]"}`} >
+        {item.type}
+      </div> */}
+      <div className={`w-12.5 sm:w-[78px] 2xl:w-[101px] aspect-square flex items-center justify-center text-24 xl:text-30 font-poppins font-semibold 
+      ${isDwg ? "bg-[#1E702D1A] text-[#147C39]" : "bg-[#2563EB1A] text-[#2563EB]"}`} >
         {item.type}
       </div>
 
-      <div className="flex min-w-0 flex-col gap-y-[5px] md:gap-y-2 xl:gap-y-[15px]">
-        <h3 className="text-[18px] md:text-30 leading-[1.56] tracking-[-2%]  md:leading-[1.333333333333333] font-poppins font-light text-secondary line-clamp-2">
+      <div className="flex min-w-0 flex-col gap-y-[5px] md:gap-y-2 lg:gap-y-3 2xl:gap-y-[15px]">
+        <h3 className="text-[18px] md:text-30 leading-[1.56] tracking-[-2%]  md:leading-[1.333333333333333] font-poppins font-light text-secondary line-clamp-2 max-w-[80%] xl:max-w-full">
           {item.title}
         </h3>
         <p className="text-[12px] md:text-19 leading-[1.67] md:leading-[1.526315789473684] font-poppins font-light text-paragraph line-clamp-1">
           {item.desc}
         </p>
-        <div className="mt-[6px] md:mt-auto flex flex-wrap items-center justify-between gap-2 lg:gap-20">
+        <div className="mt-[11px] md:mt-auto flex flex-wrap items-center justify-between gap-2 lg:gap-20">
           <div className="flex flex-wrap gap-[5px] md:gap-[10px] ">
             {item.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-primary/5 px-2.5 min-w-[51px] md:min-w-[82px] md:px-[15.5px] py-[3.5px] md:py-[10px] flex items-center justify-center text-[12px] md:text-[15px] leading-none font-poppins font-normal text-secondary"
-              >
+              <span key={tag} className="rounded-full bg-primary/5 px-2.5 min-w-[51px] md:min-w-[82px] md:px-[15.5px] py-[3.5px] md:py-[10px] flex items-center 
+                justify-center text-[12px] md:text-[15px] leading-none font-poppins font-normal text-secondary" >
                 {tag}
               </span>
             ))}
