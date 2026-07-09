@@ -215,7 +215,7 @@ const FullscreenMenu = ({
           </div>
 
           {/* Mobile nav — shown only below lg */}
-          <div className="lg:hidden relative" style={{ minHeight: "60vh" }}>
+          <div className="xl:hidden relative" style={{ minHeight: "60vh" }}>
             {startInSearch ? (
               <div>
                 <div className="flex items-center gap-3 border-b border-white/25 py-3">
@@ -266,7 +266,7 @@ const FullscreenMenu = ({
                 </ul>
               </div>
             ) : (
-              <div className="overflow-hidden relative" style={{ minHeight: "60vh" }}>
+              <div data-lenis-prevent className="overflow-hidden relative max-h-[75vh] overflow-y-auto marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50" style={{ minHeight: "60vh" }}>
                 {/* Main list */}
                 <motion.div
                   initial={false}
@@ -377,7 +377,7 @@ const FullscreenMenu = ({
           </div>
 
           {isSearchOpen && trimmedSearchQuery ? (
-            <ul data-lenis-prevent className="relative z-1 hidden lg:block max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
+            <ul data-lenis-prevent className="relative z-1 hidden xl:block max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
               {filteredSearchItems.length > 0 ? (
                 filteredSearchItems.map((item, index) => (
                   <li key={`${item.label}-${item.href}-${index}`}>
@@ -402,7 +402,7 @@ const FullscreenMenu = ({
               initial="closed"
               animate={isOpen ? "open" : "closed"}
               variants={navListVariants}
-              className="relative z-1 hidden lg:block max-h-[75vh] overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="relative z-1 hidden xl:block max-h-[75vh] overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               data-lenis-prevent
             >
               {menuItems.map((item, index) => (
