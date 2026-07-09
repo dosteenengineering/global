@@ -117,7 +117,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
           </p> */}
           <SectionDescription
             text={data.description}
-            className="text-24 lg:!text-30 text-white
+            className="text-30 text-white
            !leading-[1.33] font-light tracking-[-0.02em] mb-7.5 md:mb-50  whitespace-pre-line"
           />
         </div>
