@@ -7,15 +7,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
-import { downloadData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import BorderButton from "@/app/components/common/BorderButton";
-import Link from "next/link";
-import { create } from "domain";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-
-const MotionLink = motion.create(Link);
 
 // type DownloadItem = (typeof downloadData.sections)[0];
 
@@ -44,18 +39,18 @@ interface CellProps {
   isTopRow: boolean;
   isFirstSlide: boolean;
   fixedHeight?: number;
-  onRef: (el: HTMLAnchorElement | null) => void;
+  onRef: (el: HTMLDivElement | null) => void;
   delay?: number;
 }
 
 function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: CellProps) {
   return (
-    <MotionLink variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{once:true}} ref={onRef} href={item.link} 
+    <motion.div variants={moveUp(delay)} initial="hidden" whileInView={"show"} viewport={{once:true}} ref={onRef}
     style={fixedHeight != null ? { height: fixedHeight } : undefined}
 
-      className={[ "group flex flex-col p-6 transition-colors duration-300 bg-white/30 hover:bg-[#F3F5FB] p-50 2xl:pr-30", "border-r border-b border-[#c2c2c2]",
-        isTopRow ? "border-t border-[#c2c2c2]" : "",
-        isFirstSlide ? "border-l border-[#c2c2c2]" : "",
+      className={[ "group flex flex-col lg:p-6 transition-colors duration-300  hover:bg-[#F3F5FB] 2xl:p-50 2xl:pr-30", "lg:border-r lg:border-b border-[#c2c2c2]",
+        isTopRow ? "lg:border-t border-[#c2c2c2]" : "",
+        isFirstSlide ? "lg:border-l border-[#c2c2c2]" : "",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -73,7 +68,7 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
         <h3 className="mb-5 text-30 font-light leading-[1.333] -tracking-[0.02em] text-secondary">
           {item.title}
         </h3>
-        <p className=" text-19 text-paragraph leading-[1.526315789473684] ">
+        <p className=" text-19 text-paragraph leading-[1.526315789473684] mb-1">
           <span className="font-semibold">Division: </span><span className="">{item.division}</span>
         </p>
         <p className="text-paragraph text-description   ">
@@ -83,9 +78,9 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
 
       <div className="mt-30 flex items-center justify-between gap-4">
         {/* CTA Button */}
-        <BorderButton text="Download Specification" px="px-[21px] 3xl:px-9" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
+        <BorderButton text="Download Specification" href={item.link} px="px-[21px] 3xl:px-9" borderColor="black" textColor="black" iconColor="primary" hoverBg="black" className="w-fit" />
       </div>
-    </MotionLink>
+    </motion.div>
   );
 }
 
@@ -97,8 +92,8 @@ export default function DownloadSection({downloadData}:{downloadData:DownloadDat
 
   const [rowHeights, setRowHeights] = useState<[number, number] | null>(null);
 
-  const topRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const bottomRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const topRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const bottomRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     function measure() {
@@ -135,7 +130,7 @@ export default function DownloadSection({downloadData}:{downloadData:DownloadDat
   return (
     <section className="relative w-full bg-white">
       <SecondaryNoise />
-      <div className="container relative z-10 py-140 3xl:py-150">
+      <div className="container relative z-10 py-[50px] md:py-50 xl:py-140 3xl:py-150">
         <SectionTitle text={downloadData.sectionTitle} className="section-heading-90 mb-50 text-secondary uppercase" />
         <div className="w-full">
           <Swiper

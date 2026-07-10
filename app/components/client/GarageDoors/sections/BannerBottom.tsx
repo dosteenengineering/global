@@ -18,7 +18,7 @@ const BannerBottom = ({firstDescription,secondDescription}:{firstDescription:str
         style={{ paddingInline: rightInset }}
       >
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} 
-         className="text-30 leading-[1.33] font-light tracking-[-0.02em] mb-5 md:mb-40 3xl:pr-5">
+         className="text-30 leading-[1.33] font-light tracking-[-0.02em] mb-5 md:mb-40 3xl:pr-5 text-secondary">
           {firstDescription}
         </motion.p>
         <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true }}

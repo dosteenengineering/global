@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import StatNoise3 from "@/app/components/common/noise/StatNoise3";
 import NavButton from "@/app/components/common/NavigationButton";
-import Image from "next/image";
+// import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
@@ -13,24 +13,26 @@ import "swiper/css";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { IndividualSystemData } from "../data";
 
-interface WhyChooseProps {
-  data: {
-    sectionTitle: string;
-    sectionDesc: string;
-    items: {
-      id: number;
-      title: string;
-      icon: string;
-      image: string;
-    }[];
-  };
-}
+// interface WhyChooseProps {
+//   data: {
+//     sectionTitle: string;
+//     sectionDesc: string;
+//     items: {
+//       id: number;
+//       title: string;
+//       icon: string;
+//       image: string;
+//     }[];
+//   };
+// }
 
-function Card({ item }: { item: IndividualSystemData["fourthSection"]["items"][0] }) {
+function Card({ item,isActive }: { item: IndividualSystemData["fourthSection"]["items"][0],isActive:boolean }) {
   return (
     <div className="group bg-white/10 relative overflow-hidden h-[300px] 2xl:h-[416px] p-5 md:p-40 3xl:p-50 cursor-pointer">
       <div className="relative z-[5] w-full h-full flex flex-col justify-between">
-        <div className="w-100 h-100 rounded-full bg-transparent group-hover:bg-gradient-to-r group-hover:from-white/2 group-hover:to-white/20 flex items-center justify-center mb-6 group-hover:backdrop-blur-[20px] transition-all duration-300 ease-in-out">
+        <div className="w-100 h-100 rounded-full bg-transparent
+         group-hover:bg-gradient-to-r group-hover:from-white/2 group-hover:to-white/20 
+         flex items-center justify-center mb-6 group-hover:backdrop-blur-[20px] transition-all duration-300 ease-in-out">
           <img src="/assets/images/garage-doors/grd-stroke.svg" className="w-full h-full absolute inset-0 opacity-0 group-hover:opacity-100" alt="" />
           {/* <img src={item.logo} alt={item.logoAlt} width="64px" height="64px"
             className="w-16 h-16 group-hover:invert-1 group-hover:brightness-1000 transition-all duration-300 ease-in-out"
@@ -39,7 +41,7 @@ function Card({ item }: { item: IndividualSystemData["fourthSection"]["items"][0
             className="w-16 h-16 group-hover:scale-105 transition-all duration-300 ease-in-out"
           />
         </div>
-        <h3 className="text-30 leading-[1.333333333333333] text-[#161616] group-hover:text-white font-light">
+        <h3 className={`text-30 leading-[1.333333333333333] text-[#161616] group-hover:text-white transition-colors duration-300 ease-in-out font-light ${isActive ? 'text-white' : ''}`}>
           {item.title}
         </h3>
       </div>
@@ -55,7 +57,7 @@ function Card({ item }: { item: IndividualSystemData["fourthSection"]["items"][0
         )
       } */}
       <div
-        className="absolute bottom-0 left-0 z-2 w-full h-full opacity-0 group-hover:opacity-100 transition-all duration-700 ease-in-out"
+        className={`absolute bottom-0 left-0 z-2 w-full h-full opacity-0 transition-all duration-700 ease-in-out ${isActive ? 'opacity-100' : ''}  group-hover:opacity-100 `}
         style={{ backgroundImage: "url(/assets/noise/mono-2.png)", backgroundRepeat: "repeat-x", backgroundSize: "contain" }}
       />
       <div className="absolute inset-0 h-full w-full z-1">
@@ -69,6 +71,14 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const total = data.items.length;
+   const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
+    const updateSliderState = (swiper: SwiperType) => {
+      setActiveIndex(swiper.activeIndex);
+      setIsBeginning(swiper.isBeginning);
+      setIsEnd(swiper.isEnd);
+    };
 
   return (
     <section className="relative py-[70px] md:py-100 lg:py-150 3xl:py-200 overflow-hidden">
@@ -119,16 +129,19 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
               <NavButton
                 onClick={() => swiperRef.current?.slidePrev()}
                 direction="left"
-                disabled={false}
+               
                 ariaLabel="Previous"
                 borderColor="border-[#161616]"
+                disableMode="dark"
+                disabled={isBeginning}
               />
               <NavButton
                 onClick={() => swiperRef.current?.slideNext()}
                 direction="right"
-                disabled={false}
                 ariaLabel="Next"
                 borderColor="border-[#161616]"
+                disabled={isEnd}
+                disableMode="dark"
               />
             </motion.div>
           </motion.div>
@@ -140,12 +153,17 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
               swiperRef.current = swiper;
               setActiveIndex(swiper.activeIndex);
             }}
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            onSlideChange={
+              (swiper) => {
+                setActiveIndex(swiper.activeIndex);
+                updateSliderState(swiper);
+              }
+            }
             className="!overflow-visible"
           >
             {data.items.map((item,index) => (
               <SwiperSlide key={index}>
-                <Card item={item} />
+                <Card item={item} isActive={activeIndex === index} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -155,7 +173,7 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
         <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-30">
           {data.items.map((item,index) => (
             <motion.div variants={moveUp(index * 0.2)} initial="hidden" whileInView="show" viewport={{ once: true }} key={index} >
-              <Card key={index} item={item} />
+              <Card key={index} isActive={false} item={item} />
             </motion.div>
           ))}
           
