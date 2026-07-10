@@ -177,7 +177,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
   const descWords = banner.description.split(" ");
 
   return (
-    <div className="relative">
+    <section className="relative max-[768px]:pb-[70px]">
       <div ref={containerRef} className="relative w-full h-screen overflow-hidden">
         {/* Banner image — shrinks and flies to center slot */}
         <div
@@ -206,11 +206,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
         <div className="flex flex-col md:flex-row justify-end md:justify-between w-full container h-full items-start md:items-end pb-[90px] md:pb-120 z-10">
           <div className="z-10 mb-5 md:mb-0">
             {banner.title.split(" ").map((line, i) => (
-              <h1
-                key={i}
-                ref={i === 0 ? titleLine0Ref : titleLine1Ref}
-                className="text-white section-heading-90 will-change-transform"
-              >
+              <h1 key={i} ref={i === 0 ? titleLine0Ref : titleLine1Ref} className="text-white section-heading-90 will-change-transform" >
                 {line}
               </h1>
             ))}
@@ -311,6 +307,6 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

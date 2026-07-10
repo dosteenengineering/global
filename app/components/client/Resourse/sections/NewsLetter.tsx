@@ -24,7 +24,7 @@ const NewsLetter = ({ data }: Props) => {
         {/* <p className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50">{data.desc}</p> */}
         <SectionDescription
           text={data.description}
-          className="text-description text-paragraph max-w-[60ch] mb-7.5 md:mb-50"
+          className="text-description text-paragraph xl:max-w-[60ch] mb-7.5 md:mb-50"
         />
               <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] overflow-visible pr-0">
                 <input

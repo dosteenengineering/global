@@ -23,6 +23,30 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
 
   const swiperRef = useRef<SwiperType | null>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
+
+  // --- mobile accordion direction logic ---
+  const accordionItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const accordionGridRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const handleAccordionToggle = (title: string, index: number) => {
+    const isOpen = activeTab === title;
+    setActiveTab(isOpen ? null : title);
+
+    if (!isOpen) {
+      const gridEl = accordionGridRefs.current[index];
+      const onTransitionEnd = () => {
+        accordionItemRefs.current[index]?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+        gridEl?.removeEventListener("transitionend", onTransitionEnd);
+      };
+      gridEl?.addEventListener("transitionend", onTransitionEnd);
+    }
+  };
+  // --- end accordion direction logic ---
+
+
   const updateIndicator = () => {
     const swiper = swiperRef.current;
     if (!swiper) return;
@@ -56,6 +80,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
 
   const activeData = data.items.find((tab) => tab.title === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
   return (
     <section className="relative w-full lg:min-h-screen overflow-hidden">
       <SecondaryNoise />
@@ -193,27 +218,19 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
             )}
           </motion.div>
           {/* ================= MOBILE ACCORDION ================= */}
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            variants={moveUp(0.2)}
-            viewport={{ once: true }}
-            className="lg:hidden mb-12 mt-[30px] md:mt-12"
-          >
+          <motion.div initial="hidden" whileInView="show" variants={moveUp(0.2)} viewport={{ once: true }} className="lg:hidden mb-12 mt-[30px] md:mt-12" >
             {data.items.map((tab, index: number) => {
               const isOpen = activeTab === tab.title;
               return (
-                <motion.div
-                  initial="hidden"
-                  whileInView="show"
-                  variants={moveUp(index * 0.14)}
-                  viewport={{ once: true }}
-                  key={index}
-                  className="border-b first:border-t border-bdr-gray"
-                >
+                <motion.div initial="hidden" whileInView="show" variants={moveUp(index * 0.14)} viewport={{ once: true }} key={index} 
+                  ref={(el) => {
+                    accordionItemRefs.current[index] = el;
+                  }}
+                className="border-b first:border-t border-bdr-gray" >
                   {/* Accordion trigger */}
                   <button
-                    onClick={() => setActiveTab(isOpen ? null : tab.title)}
+                    // onClick={() => setActiveTab(isOpen ? null : tab.title)}
+                    onClick={() => handleAccordionToggle(tab.title, index)}
                     className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-5 md:py-[10px]"
                   >
                     <motion.div
@@ -257,13 +274,14 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                   </button>
                   {/* Accordion body */}
                   <div
+                    ref={(el) => {
+                      accordionGridRefs.current[index] = el;
+                    }}
                     className={`grid transition-all duration-500 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 " : "grid-rows-[0fr] opacity-0"} overflow-hidden `}
                   >
                     <div className="overflow-hidden">
                       {/* Left title */}
-                      <h3
-                        className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`}
-                      >
+                      <h3 className={`text-55 leading-[1.456] md:leading-[1.33] font-poppins -tracking-[2%] font-light mb-20 ${isOpen ? "hidden " : "block"}`} >
                         {tab.title}
                       </h3>
 
