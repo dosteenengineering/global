@@ -427,11 +427,7 @@ export default function FeaturedProjectsSection({
                       }}
                     />
                     <div className="absolute top-9 right-9 z-10">
-                      <Image
-                        src="/assets/icons/arrow-right-top-big-thick.svg"
-                        alt="arrow"
-                        width={71}
-                        height={48}
+                      <Image src="/assets/icons/arrow-right-top-big-thick.svg" alt="arrow" width={71} height={48}
                         className="-translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300"
                       />
                     </div>
@@ -471,12 +467,14 @@ export default function FeaturedProjectsSection({
               direction="left"
               disabled={false}
               ariaLabel="Previous project"
+              disableMode="dark"
             />
             <NavButton
               onClick={slideNext}
               direction="right"
               disabled={false}
               ariaLabel="Next project"
+              disableMode="dark"
             />
           </motion.div>
 
@@ -512,7 +510,7 @@ export default function FeaturedProjectsSection({
           >
             <BorderButton
               href={"/case-studies"}
-              text={"All Case Studies"}
+              text={"VIEW ALL "}
               borderColor="black"
               textColor="black"
               px="px-30 3xl:px-[35px]"

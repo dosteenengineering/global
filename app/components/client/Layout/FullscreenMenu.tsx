@@ -154,13 +154,13 @@ const FullscreenMenu = ({
     ]
     : [];
 
-  console.log("FullscreenMenu render:", {
-    trimmedSearchQuery,
-    searchResults,   // what actually arrived as a prop
-    apiMatches,      // what it mapped to
-    localMatches,
-    filteredSearchItems,
-  });
+  // console.log("FullscreenMenu render:", {
+  //   trimmedSearchQuery,
+  //   searchResults,   
+  //   apiMatches,      
+  //   localMatches,
+  //   filteredSearchItems,
+  // });
 
   const closeMenu = () => {
     // setHasExpandedSearch(false);

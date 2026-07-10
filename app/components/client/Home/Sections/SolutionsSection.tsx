@@ -110,7 +110,7 @@ export default function SolutionsSection({
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
-<section className="relative w-full lg:min-h-screen text-white overflow-hidden">
+<section className="relative w-full h-full lg:min-h-screen text-white overflow-hidden">
   <AnimatePresence>
     <motion.div
       key={activeData?.image}
@@ -124,8 +124,8 @@ export default function SolutionsSection({
   </AnimatePresence>
   <div className="absolute inset-0 bg-black/70" />
 
-      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden">
-        <div className="container">
+      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden min-h-screen flex flex-col">
+        <div className="container h-full">
           <SectionTitle
             text={solutionsData.mainTitle}
             className="text-left lg:text-center section-heading-90 uppercase"
@@ -346,10 +346,10 @@ export default function SolutionsSection({
             })}
           </motion.div>
         </div>
-        <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-40 lg:mt-0">
+        <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-auto">
           <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px] text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
             <span
-              className="max-w-[997px]"
+              className="max-w-[48ch]"
               dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }}
             />
             <BorderButton
@@ -357,7 +357,7 @@ export default function SolutionsSection({
               iconColor="white"
               href={solutionsData.btnLink}
               hoverBg="white"
-              className="w-fit px-[27px] lg:px-[35px]"
+              className="w-fit min-w-max px-[27px] lg:px-[35px]"
             />
           </div>
         </div>

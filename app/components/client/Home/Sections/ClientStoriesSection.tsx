@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-
+import { useMediaQuery } from "react-responsive";
 import {clientStoriesData, ClientStory } from "../data";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
 import { moveLeft, moveRight, moveUp } from "@/app/components/motionVariants";
@@ -38,6 +38,9 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
     const id = setTimeout(() => {
       const next = (activeIndex + 1) % total;
       swiperRef.current?.slideToLoop(next);
+      // console.log("activeIndex",swiperRef.current?.activeIndex);
+      // console.log("realIndex",swiperRef.current?.realIndex);
+      // console.log("next",next)
       setActiveIndex(next);
       setProgressKey((k) => k + 1);
     }, SLIDE_DELAY);
@@ -45,10 +48,14 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
   }, [activeIndex, progressKey]);
 
   const handleSwiper = useCallback((s: SwiperType) => {
+    // console.log("swiper mounted", s.el);
+    console.log("slide changed", s.el);
+    console.log("realIndex", s.realIndex);
     swiperRef.current = s;
   }, []);
 
   const handleSlideChange = useCallback((s: SwiperType) => {
+    console.log("slide changed", s.realIndex);
     setActiveIndex(s.realIndex);
     setProgressKey((k) => k + 1);
   }, []);
@@ -59,10 +66,16 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
     setProgressKey((k) => k + 1);
   }, []);
 
+  const isDesktop = useMediaQuery({
+    minWidth: 1024,
+  });
+
+
   return (
     <section className="w-full overflow-hidden relative">
       <PrimaryNoise />
-
+      {isDesktop ? (
+        <>
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
@@ -182,6 +195,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
 
                   {/* Visible content */}
                   <div className="flex flex-col justify-between h-full">
+                    
                     {/* Quote */}
                     <div className="overflow-hidden mb-200 3xl:mb-[215px]">
                       <AnimatePresence mode="wait" initial={false}>
@@ -250,8 +264,9 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
             </div>
           </div>
         </div>
-      </div>
-
+      </div></>
+      ):(
+        <>
       {/* ═══════════════════════════════════════════════════════
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
@@ -399,6 +414,9 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
           </motion.div>
         </div>
       </div>
+        </>
+        )}
+      
     </section>
   );
 }
