@@ -2,6 +2,7 @@
 
 import Vendor from "@/app/models/Vendor";
 import { uploadToDropbox } from "@/lib/connectDropbox";
+import connectDB from "./mongodb";
 
 export async function submitPartnerAction(formData: FormData) {
   try {
@@ -59,6 +60,8 @@ export async function submitPartnerAction(formData: FormData) {
         uploadFiles(technicalSpecSheet, "partner-tech-specs"),
         uploadFiles(uploadedDocuments, "partner-docs"),
       ]);
+
+    await connectDB()
 
     await Vendor.create({
       ...fields,
