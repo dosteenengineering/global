@@ -192,7 +192,7 @@ export async function POST(req: NextRequest) {
           type: { $literal: "resource" },
           item: {
             title: "$secondSection.items.title",
-            slug: { $concat: ["resources"] },
+            slug: { $concat: ["resource"] },
           },
         },
       },
