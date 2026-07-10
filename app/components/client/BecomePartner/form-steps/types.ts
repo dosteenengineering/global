@@ -13,8 +13,6 @@ export type PartnerFormValues = {
   phone: string;
   whatsapp: string;
   companyLegalName: string;
-  tradeLicense: string;
-  vatNumber: string;
   yearOfEstablishment: string;
   companyAddress: string;
   countryCity: string;
@@ -22,7 +20,7 @@ export type PartnerFormValues = {
   companyPhone: string;
   website: string;
   businessType: string;
-  productServices: string[];
+  productServices: string;
   annualCapacity: string;
   marketsServed: string[];
   minimumOrderQuantity: string;
