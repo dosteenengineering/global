@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       type: "service",
       item: {
         title: item.firstSection?.title || item.thirdSection?.title || "Service",
-        slug: "services", // adjust if you have a dedicated top-level services page slug
+        slug: "solutions", // adjust if you have a dedicated top-level services page slug
       },
     }));
 

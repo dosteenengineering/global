@@ -82,7 +82,7 @@ const navLinkVariants: Variants = {
 
 
 const ROUTE_MAP: Record<string, (item: SearchResultItem) => string> = {
-  service: (r) => `/${r.item?.slug ?? "services"}`,
+  service: (r) => `/${r.item?.slug ?? "solutions"}`,
   "service-item": (r) => `/services/${r.item?.slug}`,
   system: (r) => `/${r.item?.slug}`,
   resource: (r) => `/${r.item?.slug}`,
