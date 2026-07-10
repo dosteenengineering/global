@@ -49,7 +49,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
       </h2> */}
       <SectionTitle
         title={tab.title}
-        className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5 translate-y-[2px]"
+        className="text-[24px] md:text-55 tracking-[-0.02em] leading-[1.34] md:leading-[1.1] font-light text-secondary max-w-[30ch] mb-5 translate-y-[2px] 2xl:mb-20"
       />
 
       <div className="flex flex-wrap gap-[10px] mb-[30px] sm:mb-50">
@@ -67,7 +67,7 @@ const TechnicalDocumentsTab = ({ tab }: TechnicalDocumentsTabProps) => {
               <button
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={` rounded-full border py-[5px] px-[9px] md:px-25 xl:px-35 text-15 leading-none xl:leading-[1.733333333333333] tracking-[-0.02em] cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-md-gray text-paragraph hover:border-primary hover:text-primary font-light"}`}
+                className={` rounded-full border py-[5px] px-[10px] md:px-25 2xl:px-35 2xl:py-[14.5px] text-15 leading-[1.666666666666667] tracking-[-0.02em] cursor-pointer font-poppins  uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary font-normal" : "border-md-gray text-paragraph hover:border-primary hover:text-primary font-light"}`}
               >
                 {filter}
               </button>

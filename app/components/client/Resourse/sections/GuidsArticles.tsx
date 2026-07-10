@@ -33,13 +33,18 @@ const imageHeightClasses = [
   "2xl:h-[250px] 3xl:h-[297px]",
 ];
 
+
 const GuidesArticles = ({ data }: GuidesArticlesProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const links = "#"
   const swiperRef = useRef<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
   function updateState(swiper: SwiperType) {
     setActiveIndex(swiper.activeIndex);
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
     setSlidesPerView(
       typeof swiper.params.slidesPerView === "number"
         ? swiper.params.slidesPerView
@@ -93,28 +98,34 @@ const GuidesArticles = ({ data }: GuidesArticlesProps) => {
               viewport={{ once: true }}
               className="flex items-center gap-[10px] md:gap-[15px]"
             >
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slidePrev();
-                }}
-                direction="left"
-                disabled={false}
-                ariaLabel="Previous"
-                borderColor="border-white"
-                className=" icon-invert"
-              />
-              <NavButton
-                onClick={() => {
-                  const s = swiperRef.current;
-                  if (s && !s.destroyed) s.slideNext();
-                }}
-                direction="right"
-                disabled={false}
-                ariaLabel="Next"
-                borderColor="border-white"
-                className=" icon-invert"
-              />
+              {
+                activeIndex > 0 && (
+                  <>
+                  <NavButton
+                    onClick={() => {
+                      const s = swiperRef.current;
+                      if (s && !s.destroyed) s.slidePrev();
+                    }}
+                    direction="left"
+                    disabled={isBeginning}
+                    ariaLabel="Previous"
+                    borderColor="border-white"
+                    className=" icon-invert"
+                  />
+                  <NavButton
+                    onClick={() => {
+                      const s = swiperRef.current;
+                      if (s && !s.destroyed) s.slideNext();
+                    }}
+                    direction="right"
+                    disabled={isEnd}
+                    ariaLabel="Next"
+                    borderColor="border-white"
+                    className="icon-invert"
+                  />
+                  </>
+                )
+              }
             </motion.div>
           </motion.div>
           <Swiper

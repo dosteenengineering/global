@@ -80,7 +80,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
           </p> */}
           <SectionDescription
             text={tab.description}
-            className="pt-2.5 md:pt-0 text-16 md:text-19 leading-[1.526315789473684] font-poppins font-light text-paragraph mb-40 max-w-[88ch]"
+            className="pt-0 text-16 md:text-19 leading-[1.526315789473684] font-poppins font-light text-paragraph mb-40 max-w-[88ch]"
           />
         </div>
         <div className="hidden lg:block">
@@ -118,7 +118,7 @@ const BimCadFilesTab = ({ tab }: BimCadFilesTabProps) => {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={` md:h-50 rounded-full border py-[5px] px-[9px] md:px-25 2xl:px-[35px] text-15 leading-[1] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-md-gray text-paragraph hover:border-primary hover:text-primary"}`}
+                className={` md:h-50 rounded-full border py-[5px] px-[10px] md:px-25 2xl:px-[35px] text-15 leading-[1.666666666666667] tracking-[-2%] md:tracking-normal cursor-pointer font-poppins font-light uppercase transition-all duration-300 ${isActive ? "border-primary bg-primary/10 text-secondary" : "border-md-gray text-paragraph hover:border-primary hover:text-primary"}`}
               >
                 {filter}
               </button>
