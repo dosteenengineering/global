@@ -4,8 +4,8 @@ export const footerData = {
     alt: "Dosteen – Engineering Peace of Mind",
   },
   contact: {
-    email: "info.mct@dosteen.com",
-    phone: "+971 4 2582321",
+    email: "Info.dxb@dosteen.com",
+    phone: "+968 24 876 600",
   },
   socials: [
     { name: "instagram", href: "https://www.instagram.com/dosteen.engineering/", icon: "/assets/icons/footer/social/instagram.svg" },
