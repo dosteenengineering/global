@@ -110,7 +110,7 @@ export default function AboutSlider({data}:{data:Home['secondSection']}) {
 
   return (
     <section
-      className="bg-white w-full relative select-none"
+      className="bg-white w-full relative select-none relative overflow-hidden"
       style={{ cursor: "grab" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}

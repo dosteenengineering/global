@@ -110,6 +110,7 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
                 direction="up"
                 disabled={false}
                 ariaLabel="Previous blog"
+                disableMode="dark"
               />
             </motion.div>
             <motion.div
@@ -123,6 +124,7 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
                 direction="down"
                 disabled={false}
                 ariaLabel="Next blog"
+                disableMode="dark"
               />
             </motion.div>
           </div>
@@ -225,12 +227,14 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
               direction="left"
               disabled={false}
               ariaLabel="Previous blog"
+              disableMode="dark"
             />
             <NavButton
               onClick={mobileSlideNext}
               direction="right"
               disabled={false}
               ariaLabel="Next blog"
+              disableMode="dark"
             />
           </div>
         </div>

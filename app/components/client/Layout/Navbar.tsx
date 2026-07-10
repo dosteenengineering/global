@@ -30,7 +30,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
     });
   }, [solutionsRaw]);
 
-  console.log(`dynamicNavItems`, dynamicNavItems)
+  // console.log(`dynamicNavItems`, dynamicNavItems)
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [shouldStartMenuInSearch, setShouldStartMenuInSearch] = useState(false);
@@ -240,7 +240,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
         const data = await res.json();
 
         if (data.success) {
-          console.log("result", data.data)
+          // console.log("result", data.data)
           setSearchResults(data.data);
         }
       } catch (error) {

@@ -1186,7 +1186,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
-                className="flex items-center justify-between mb-30"
+                className="flex items-center justify-between  mb-30"
               >
                 <div className="shrink-0 w-[222px] h-[55px]">
                   <Image
@@ -1247,7 +1247,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
             </div>
 
             {/* 2xl+ — original single row */}
-            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-[62px] 2xl:pr-40 3xl:pr-[57px]">
+            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-[62px] 2xl:pr-40 3xl:pr-[57px] gap-x-2">
               <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
