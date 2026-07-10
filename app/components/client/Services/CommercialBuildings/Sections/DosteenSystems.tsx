@@ -35,7 +35,7 @@ function SystemCard({
   return (
     <Link href={`${system.slug}`} className="group block">
       <div className="flex flex-col">
-        <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden order-2 xl:order-1">
+        <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden order-2 md:order-1">
           {/* Image */}
           <Image src={system.image} alt={system.title} fill className="object-cover " />
           {/* Hover overlay */}
@@ -47,11 +47,11 @@ function SystemCard({
           </div>
 
         {/* Title */}
-        <h3 className="mb-4 xl:mb-0 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 xl:order-2">
+        <h3 className="mb-4 xl:mb-0 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 md:order-3">
           {system.title}
         </h3>
 
-        <div className="relative w-full h-[2px] mt-30 hidden lg:block">
+        <div className="relative w-full h-[2px] mt-2 xl:mt-30 hidden lg:block order-4">
           <div className="absolute inset-0 bg-[#C2C2C2] h-px" />
           <div className="absolute inset-0 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out h-[2px]" />
         </div>
@@ -179,6 +179,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                 disabled={false}
                 ariaLabel="Previous"
                 borderColor="border-[#161616]"
+                disableMode="dark"
               />
               <NavButton
                 onClick={() => {
@@ -189,6 +190,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                 disabled={false}
                 ariaLabel="Next"
                 borderColor="border-[#161616]"
+                disableMode="dark"
               />
             </motion.div>
           </motion.div>

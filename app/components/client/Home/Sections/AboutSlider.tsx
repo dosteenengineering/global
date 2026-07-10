@@ -117,9 +117,9 @@ export default function AboutSlider({data}:{data:Home['secondSection']}) {
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 lg:left-[-100px] 3xl:left-0 pointer-events-none">
-        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500}
-          className="object-contain min-w-[280px] w-[53.14%] sm:w-[60%] lg:w-full h-full"
+      <div className="absolute top-[-41%] md:-top-88 lg:-top-73 left-[-97px] md:left-0 lg:left-[-100px] xl:top-[-10%] xl:left-0 2xl:top-[-30%] 3xl:-top-73 3xl:left-0 pointer-events-none">
+        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={897} height={896}
+          className="object-contain min-w-[280px] w-[53.14%] sm:w-[250px] xl:w-[300px] 2xl:w-[500px] 3xl:w-full h-full "
         />
       </div>
 
