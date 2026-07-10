@@ -11,8 +11,8 @@ const PartnerSchema = new Schema(
 
     // Company Details
     companyLegalName: { type: String, required: true, trim: true },
-    tradeLicense: { type: String, required: true, trim: true },
-    vatNumber: { type: String, trim: true },
+    // tradeLicense: { type: String, required: true, trim: true },
+    // vatNumber: { type: String, trim: true },
     yearOfEstablishment: { type: String, trim: true },
     companyAddress: { type: String, trim: true },
     countryCity: { type: String, trim: true },
@@ -26,7 +26,7 @@ const PartnerSchema = new Schema(
       enum: ["Manufacturer", "Distributor", "Subcontractor", "Importer"], // adjust to match your actual RadioGroup options
       default: "Manufacturer",
     },
-    productServices: { type: [String], default: [] },
+    productServices: { type: String, default: "", trim:true },
     annualCapacity: { type: String, trim: true },
     marketsServed: { type: [String], default: [] },
     minimumOrderQuantity: { type: String, trim: true },

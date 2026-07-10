@@ -21,7 +21,7 @@ type PartnerEntry = {
     companyPhone?: string;
     website?: string;
     businessType: string;
-    productServices: string[];
+    productServices: string;
     annualCapacity?: string;
     marketsServed: string[];
     minimumOrderQuantity?: string;
@@ -402,7 +402,7 @@ const PartnerRegistrationsPage = () => {
                                     <Field label="Annual Capacity" value={viewEntry.annualCapacity} />
                                     <Field
                                         label="Products/Services"
-                                        value={viewEntry.productServices?.join(", ")}
+                                        value={viewEntry.productServices}
                                     />
                                     <Field
                                         label="Markets Served"
