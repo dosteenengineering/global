@@ -9,7 +9,8 @@ import { moveUp } from "@/app/components/motionVariants";
 
 function CapabilityCard({ item, delay }: { item: Capability['fourthSection']['items'][0]; delay: number }) {
   return (
-    <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="last-st flex gap-5 md:gap-40 3xl:gap-[43px] pt-7.5 pb-7.5 md:pt-50 md:pb-80 3xl:pb-100 ">
+    <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} 
+    className="last-st flex gap-5 md:gap-40 3xl:gap-[43px] pt-7.5 pb-7.5 md:pt-50 md:pb-80 3xl:pb-100 ">
     <div className="relative flex-shrink-0 w-12.5 h-12.5 md:w-[90px] md:h-[90px] 3xl:w-[100px] 3xl:h-[100px] backdrop-blur-sm rounded-full">
       <Image
         src="/assets/images/about/why-choose/card-bg-cricle.svg"

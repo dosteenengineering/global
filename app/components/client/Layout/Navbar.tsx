@@ -600,7 +600,8 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
             <Link
               ref={contactRef}
               href="/contact-us"
-              className={`${isMenuOpen ? "flex" : "hidden min-[1460px]:flex"} group items-center gap-3 justify-center h-[40px] md:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
+              className={`${isMenuOpen ? "flex" : "hidden min-[1460px]:flex"} group items-center gap-3 justify-center
+               h-[40px] xl:h-[70px] md:pr-[14.2px] md:pl-[21px] rounded-[50px]  border border-white/30 glass-effect group
                 ${isMenuOpen && "bg-white/8"}
                  ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               style={{ opacity: 0 }}
@@ -625,7 +626,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
           <div className="rounded-full backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
-              className={`cursor-pointer flex items-center justify-center group w-[40px] h-[40px] md:w-[70px] md:h-[70px] rounded-full
+              className={`cursor-pointer flex items-center justify-center group ${isMenuOpen ? "w-[40px] h-[40px] xl:w-[70px] xl:h-[70px]" :"w-[40px] h-[40px] md:w-[70px] md:h-[70px]"} rounded-full
                border border-white/30 glass-effect ${isMenuOpen && "bg-white/8"}
                 ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -633,7 +634,9 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
               onClick={isMenuOpen ? closeMenu : openMenu}
               style={{ opacity: 0 }}
             >
-              <span className="relative block w-6 h-5 md:h-[21px] md:w-[31px] group-hover:scale-[1.08] transition-transform duration-300 ease-in-out">
+              <span className={`
+                relative block ${isMenuOpen ? " w-6 h-5 xl:h-[21px] xl:w-[31px]" :" w-6 h-5 md:h-[21px] md:w-[31px]"} group-hover:scale-[1.08] transition-transform duration-300 ease-in-out
+                `}>
                 {/* Top line */}
                 <span
                   className={`absolute left-0 top-0 h-[1.5px] w-full bg-white origin-center transition-all duration-300 ease-in-out ${isMenuOpen ? "translate-y-[10px] rotate-45" : ""
