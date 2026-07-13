@@ -309,7 +309,7 @@ const FullscreenMenu = ({
                         }
                       }}
                     >
-                      <span className="text-[18px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
+                      <span className="text-[16px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
                         {item.label}
                       </span>
                       {item.hasSub && (
@@ -344,7 +344,7 @@ const FullscreenMenu = ({
                       height={16}
                       className="h-4 w-4 rotate-180 brightness-0 invert"
                     />
-                    <span className="text-[20px] leading-[1.4] font-light text-white">
+                    <span className="text-[16px] leading-[1.4] font-light text-white">
                       {activeSubMenu?.label}
                     </span>
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
@@ -363,7 +363,7 @@ const FullscreenMenu = ({
                           onClick={closeMenu}
                           className="group flex items-center justify-between py-3 text-white relative pl-7"
                         >
-                          <span className="text-[17px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
+                          <span className="text-[14px] leading-[1.555] font-light text-white group-hover:opacity-80 transition-opacity duration-300">
                             {item.label}
                           </span>
                           <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />

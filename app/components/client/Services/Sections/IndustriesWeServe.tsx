@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { IndustriesPageData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
@@ -9,7 +9,12 @@ import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 
+
+
 const industryHotspotsByTitle: Record<string, Hotspot[]> = {
+  
+
+
   // Paste each copied hotspot JSON array under the exact backend item.title.
   // Example:
   // "Residential Developments": [
@@ -498,8 +503,16 @@ const normalizeHotspotKey = (value: string) =>
 
 export default function IndustriesWeServe({ data }: { data: IndustriesPageData['thirdSection'] }) {
 
-
   const [activeId, setActiveId] = useState(0);
+  const detailRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    detailRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      
+    });
+  }, [activeId]);
+
   // Mobile accordion: track which item is open (null = all closed)
   const [openId, setOpenId] = useState<number | null>(0);
   const active = data.items.find((i, idx) => idx === activeId)!;
@@ -531,7 +544,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
         <div className="relative z-10 w-full h-px bg-[#76A7FF] mb-8 2mb-80 3xl:mb-80 hidden lg:block" />
 
         {/* Body: left list + right detail */}
-        <div className="flex flex-col lg:flex-row gap-10 2xl:gap-50  3xl:gap-[206px]">
+        <div className="flex flex-col lg:flex-row gap-10 2xl:gap-50  3xl:gap-100">
           {/* ── MOBILE: Accordion ── */}
           <div className="flex flex-col lg:hidden w-full ">
             {data.items.map((item, idx) => {
@@ -598,8 +611,8 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <button
                     type="button"
                     onClick={() => setActiveId(index)}
-                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : ""
-                      }`}
+                    className={`group relative flex items-center justify-between text-left w-full border-b
+                       border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : "" }`}
                     style={
                       isActive
                         ? {
@@ -650,6 +663,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
+            ref={detailRef}
             className="flex-1 hidden lg:flex flex-col z-10 text-white"
           >
             <motion.h2
@@ -663,7 +677,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             {/* Image */}
             <motion.div
               variants={moveUp(0.3)}
-              className="relative w-full h-auto mb-50"
+              className="relative w-full h-auto mb-50 px-4 bg-[#e9e7ee]"
             >
               <ImageHotspots
                 image={active.image}

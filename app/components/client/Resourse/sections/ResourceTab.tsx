@@ -152,10 +152,47 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
           {/* <p className="text-description text-paragraph max-w-[75ch] font-light mb-50">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription
-            text={data.sectionDesc}
-            className="text-description text-paragraph max-w-[70ch] font-light mb-50"
-          />
+          <div className="flex flex-wrap items-end-safe">
+            <SectionDescription
+              text={data.sectionDesc}
+              className="text-description text-paragraph max-w-[70ch] font-light mb-4 md:mb-0"
+            />
+            <div className="flex gap-3 flex-wrap w-fit ml-auto ">
+              <button
+                type="button"
+                aria-label="Previous resource tabs"
+                disabled={isAtFirstTab}
+                onClick={() => {
+                  const prevIndex = Math.max(activeTabIndex - 1, 0);
+                  setActiveTab(data.tabs[prevIndex].id);
+                }}
+                className={` z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtFirstTab
+                  ? "cursor-not-allowed opacity-35"
+                  : "hover:border-primary hover:text-primary"
+                  }`}
+              >
+                <ChevronLeft size={20} strokeWidth={1.8} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next resource tabs"
+                disabled={isAtLastTab}
+                onClick={() => {
+                  const nextIndex = Math.min(
+                    activeTabIndex + 1,
+                    data.tabs.length - 1,
+                  );
+                  setActiveTab(data.tabs[nextIndex].id);
+                }}
+                className={`z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtLastTab
+                  ? "cursor-not-allowed opacity-35"
+                  : "hover:border-primary hover:text-primary"
+                  }`}
+              >
+                <ChevronRight size={20} strokeWidth={1.8} />
+              </button>
+            </div>
+        </div>
         </div>
 
         {/* ── Mobile: Custom Select ── */}
@@ -185,9 +222,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
               viewBox="0 0 17 9"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`transition-transform duration-300 ${
-                isDropdownOpen ? "rotate-180" : "rotate-0"
-              }`}
+              className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : "rotate-0"
+                }`}
             >
               <path
                 d="M15.9858 0.5L8.22743 8.10624L0.5 0.525901"
@@ -209,11 +245,10 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                     type="button"
                     onClick={() => handleTabChange(tab)}
                     style={{ animationDelay: `${idx * 30}ms` }}
-                    className={`[animation:var(--animate-item-in)] w-full flex items-center gap-[10px] px-[16px] py-[12px] text-left transition-colors duration-200 border-b border-bdr-gray last:border-b-0 opacity-0 animate-[item-in_0.2s_cubic-bezier(0.25,1,0.5,1)_forwards] ${
-                      isActive
+                    className={`[animation:var(--animate-item-in)] w-full flex items-center gap-[10px] px-[16px] py-[12px] text-left transition-colors duration-200 border-b border-bdr-gray last:border-b-0 opacity-0 animate-[item-in_0.2s_cubic-bezier(0.25,1,0.5,1)_forwards] ${isActive
                         ? "bg-primary/5 text-primary"
                         : "bg-white text-secondary hover:bg-gray-50"
-                    }`}
+                      }`}
                   >
                     <Image
                       src={tab.icon}
@@ -239,22 +274,41 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
 
         {/* ── Desktop: Scroll tabs ── */}
         <div className="relative hidden md:block">
-          <button
-            type="button"
-            aria-label="Previous resource tabs"
-            disabled={isAtFirstTab}
-            onClick={() => {
-              const prevIndex = Math.max(activeTabIndex - 1, 0);
-              setActiveTab(data.tabs[prevIndex].id);
-            }}
-            className={`absolute -left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${
-              isAtFirstTab
+          {/* <div className="flex gap-3 w-fit ml-auto">
+            <button
+              type="button"
+              aria-label="Previous resource tabs"
+              disabled={isAtFirstTab}
+              onClick={() => {
+                const prevIndex = Math.max(activeTabIndex - 1, 0);
+                setActiveTab(data.tabs[prevIndex].id);
+              }}
+              className={` z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtFirstTab
                 ? "cursor-not-allowed opacity-35"
                 : "hover:border-primary hover:text-primary"
-            }`}
-          >
-            <ChevronLeft size={20} strokeWidth={1.8} />
-          </button>
+                }`}
+            >
+              <ChevronLeft size={20} strokeWidth={1.8} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next resource tabs"
+              disabled={isAtLastTab}
+              onClick={() => {
+                const nextIndex = Math.min(
+                  activeTabIndex + 1,
+                  data.tabs.length - 1,
+                );
+                setActiveTab(data.tabs[nextIndex].id);
+              }}
+              className={`z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtLastTab
+                ? "cursor-not-allowed opacity-35"
+                : "hover:border-primary hover:text-primary"
+                }`}
+            >
+              <ChevronRight size={20} strokeWidth={1.8} />
+            </button>
+          </div> */}
 
           <div
             ref={tabsScrollerRef}
@@ -291,9 +345,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                         className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
                       />
                       <span
-                        className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${
-                          isActive ? "font-medium" : "font-light"
-                        }`}
+                        className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
+                          }`}
                       >
                         {tab.label}
                       </span>
@@ -313,7 +366,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             </div>
           </div>
 
-          <button
+          {/* <button
             type="button"
             aria-label="Next resource tabs"
             disabled={isAtLastTab}
@@ -331,7 +384,7 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
             }`}
           >
             <ChevronRight size={20} strokeWidth={1.8} />
-          </button>
+          </button> */}
         </div>
 
         {renderTabContent(activeTabData)}

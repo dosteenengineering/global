@@ -108,7 +108,7 @@ export default function FeaturedProjects({data}:{data:Project[]}) {
           className="w-full"
         >
           {projects.map((project, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="!h-auto flex flex-col ">
               {/* @ts-ignore */}
               <ProjectCard project={project} delay={0.2 + index * 0.3} />
             </SwiperSlide>

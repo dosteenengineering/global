@@ -87,13 +87,19 @@ export default function Main({ data }: { data: Award[] }) {
                   closeLightbox();
                 }}
                 className={`cursor-pointer tracking-[-2%] md:tracking-normal py-[4px] px-2.5 md:py-[14px] md:px-[35px] 2xl:h-[54px] rounded-[50px] border text-15 
-                  leading-[1.733333333333333] text-secondary font-normal uppercase transition-all duration-200
+                  leading-[1.733333333333333] text-secondary font-normal uppercase transition-all duration-200 relative overflow-hidden group
                   ${active === cat.value
                     ? "border-primary bg-primary/10"
                     : "border-[#454545]"
                   }`}
               >
-                <span className="pb-1">{cat.label}</span>
+                  {/* Hover overlay */}
+  <span className="absolute inset-0 -translate-x-full bg-secondary transition-transform duration-500 ease-in-out group-hover:translate-x-0" />
+
+  {/* Content */}
+  <span className="relative z-10 pb-1 group-hover:text-white transition-colors duration-300">
+    {cat.label}
+  </span>
               </button>
             </motion.div>
           ))}

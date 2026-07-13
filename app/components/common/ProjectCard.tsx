@@ -116,7 +116,7 @@ export default function ProjectCard({
       <Link href={`/case-studies/${project.slug}`} className="h-full block">
         <div className="flex flex-col group cursor-pointer h-full">
           {/* Image */}
-          <div className="relative w-full aspect-[11.2/12] lg:aspect-square overflow-hidden mb-30 3xl:mb-[32px] flex-shrink-0">
+          <div className="relative w-full  aspect-[11.2/12] lg:aspect-square h-[300px] lg:h-[400px] 3xl:h-[540px] overflow-hidden mb-30 3xl:mb-[32px] flex-shrink-0">
             <Image
               src={project.thumbnail}
               alt={project.thumbnailAlt}
@@ -136,7 +136,7 @@ export default function ProjectCard({
           </div>
 
           {/* Bottom content */}
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 mt-auto">
             {/* Title */}
             <h3
               className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] line-clamp-2 ${isDark ? "text-secondary" : "text-white"}`}
@@ -145,7 +145,7 @@ export default function ProjectCard({
             </h3>
             {/* Location + Category */}
             <div
-              className={`mt-auto flex items-center justify-between mb-[10px] md:mb-[15px] pr-70 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"}`}
+              className={`mt-auto flex items-center justify-between mb-[10px] md:mb-[15px] pr-0 2xl:pr-8 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"}`}
             >
               <div className="flex items-center gap-[10px]">
                 <Image
@@ -167,12 +167,12 @@ export default function ProjectCard({
                 {project.firstSection.sector.name}
               </span>
             </div>
-            {/* Divider — pushed to bottom */}
-            <div className={`relative w-full h-[1px] lg:h-[2px] bg-[#c2c2c2]`}>
-              <span
-                className={`absolute left-0 top-0 h-full w-full scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 ${isDark ? "bg-primary" : "bg-white"}`}
-              />
-            </div>
+          </div>
+          {/* Divider — pushed to bottom */}
+          <div className={`relative w-full h-[1px] lg:h-[2px] bg-[#c2c2c2] mt-auto`}>
+            <span
+              className={`absolute left-0 top-0 h-full w-full scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 ${isDark ? "bg-primary" : "bg-white"}`}
+            />
           </div>
         </div>
       </Link>

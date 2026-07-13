@@ -32,8 +32,8 @@ function ToolRow({
       {/* Left col — icons + label */}
       <div className="flex flex-col justify-center md:pl-30">
         <div>
-         {
-          tool.image && (
+          {
+            tool.image && (
               <Image
                 src={tool.image}
                 alt={tool.imageAlt}
@@ -41,8 +41,8 @@ function ToolRow({
                 height={150}
                 className={`object-contain w-auto ${index === 2 ? "h-[74px] md:h-[129px]" : "h-[29px] md:h-[50px]"}`}
               />
-          )
-         }
+            )
+          }
         </div>
       </div>
 
@@ -62,44 +62,34 @@ function ToolRow({
 
 // ── Section ───────────────────────────────────────────────────────────────────
 
-export default function SoftwareTools({data}:{data:Capability['fifthSection']}) {
+export default function SoftwareTools({ data }: { data: Capability['fifthSection'] }) {
   // const { title, description, tools } = softwareToolsSection;
 
-const tools = data.items.map((item) => ({
-  _id: item._id,
-  image: item.image,
-  imageAlt: item.imageAlt,
-  title: item.title,
-  description: item.description,
-}));
+  const tools = data.items.map((item) => ({
+    _id: item._id,
+    image: item.image,
+    imageAlt: item.imageAlt,
+    title: item.title,
+    description: item.description,
+  }));
 
   return (
-    <section className="w-full py-140 3xl:py-200 relative ">
-      <div className="absolute bottom-[-30.4%] left-0 pointer-events-none h-full hidden lg:block">
-        <Image
-          src="/assets/images/bim/tools/bg-lines.svg"
-          alt="decorative lines"
-          width={1200}
-          height={1200}
-          className="object-cover w-full h-full 3xl:w-[640px]"
-        />
-      </div>
-      <div className="absolute w-[436px] lg:w-full top-[-24%] lg:-top-61 left-[-21%] lg:left-0 pointer-events-none lg:hidden">
-        <Image src="/assets/icons/bg-svg/top-left-animated.svg" alt="decorative lines" width={600} height={500} className="object-contain w-[250px] 2xl:w-[500px] 3xl:w-[600px]" />
-      </div>
-      <div className="container">
-        <div className="flex flex-col lg:flex-row gap-7.5 lg:gap-140 3xl:gap-[142px] items-start">
+    <section className="w-full py-140 3xl:py-200 relative overflow-hidden">
+      <div className="container h-full">
+        <div className="absolute top-[-10%] left-[-38%] lg:top-[-10%] lg:left-auto lg:right-[-20%] xl:right-[-20%] xl:left-auto lg:top-unset lg:bottom-0 xl:top-[-5%] 2xl:top-auto 3xl:bottom-[-5%] left-[-10%] 2xl:left-[-10%] pointer-events-none z-50 w-auto h-[400px] lg:h-[600px] xl:w-[650px] aspect-square 2xl:h-[780px] 3xl:scale-150 pointer-events-none">
+          <Image src="/assets/shapes/bim-shape-2.svg" alt="decorative lines" width={1200} height={1200}
+            className="object-cover w-full h-full"
+          />
+        </div>
+        <div className="flex flex-wrap gap-7.5 lg:gap-140 3xl:gap-[142px] items-start h-full">
           {/* Left — title + description */}
-          <div className="shrink-0 lg:w-[40.65%]">
-            <SectionTitle title={data.title} className="mb-50 lg:max-w-[14ch] section-heading-90" />
-            {/* <p className="text-secondary text-30 leading-[1.333] font-light max-w-[40ch]">
-              {description}
-            </p> */}
+          <div className="2xl:shrink-0 w-full 2xl:w-[40.65%] relative h-full ">
+            <SectionTitle title={data.title} className="mb-[20px] sm:mb-5 2xl:mb-50 lg:max-w-[14ch] section-heading-90" />
             <SectionDescription text={data.description} className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]" />
           </div>
 
           {/* Right — tools table */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 w-full 2xl:min-w-0">
             {tools.map((tool, i) => (
               <ToolRow
                 index={i}

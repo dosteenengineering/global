@@ -614,7 +614,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                 alt=""
                 width={14}
                 height={14}
-                className={`pointer-events-none w-auto h-[18px] group-hover:rotate-45 transition-all duration-300 ease-in-out
+                className={`pointer-events-none w-auto h-3 md:h-[18px] group-hover:rotate-45 transition-all duration-300 ease-in-out
                   ${isSticky && "brightness-0 invert"}
                    ${isMenuOpen && "brightness-0 invert"}`}
               />
