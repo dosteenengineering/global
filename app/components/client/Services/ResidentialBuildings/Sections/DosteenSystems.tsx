@@ -214,7 +214,7 @@ export default function DosteenSystems({
                   key={system.id}
                   onClick={() => setActiveId(system.id)}
                   className={`group hover:pl-2 md:pe-3 3xl:pe-0 hover:3xl:pl-20 relative flex items-center gap-20 cursor-pointer transition-all duration-300 border-t-2 first:border-t-2 hover:first:border-t-transparent  border-[#c2c2c2] last:border-b-2 group transition-all duration-300 
-                    ${isActive ? "pl-2 3xl:pl-20 first:border-t-transparent" : ""}`}
+                    ${isActive ? "pl-2 xl:pl-6 3xl:pl-20 first:border-t-transparent" : ""}`}
                   style={{
                     background: isActive ? activeGradient : "transparent",
                   }}

@@ -89,13 +89,13 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
   );
   return (
     <section className="bg-white w-full relative select-none overflow-hidden">
-      <div className="absolute -top-49 md:top-[-40%] 3xl:top-[-36%] left-[-131px] md:left-[-3%] 3xl:left-[-0.9%] pointer-events-none h-full">
+      <div className="absolute -top-49 md:top-[-40%] xl:top-[-45%] 3xl:top-[-36%] left-[-131px] md:left-[-3%] 3xl:left-[-0.9%] pointer-events-none h-full">
         <Image
           src="/assets/images/services/bg-common-service.svg"
           alt="decorative lines"
           width={600}
           height={500}
-          className="object-contain 2xl:w-[430px] 3xl:w-[650px] h-full hidden lg:block"
+          className="object-contain xl:w-[350px] 2xl:w-[400px] 3xl:w-[650px] h-full hidden lg:block"
         />
         <Image
           src="/assets/icons/bg-svg/top-left-animated.svg"

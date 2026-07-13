@@ -121,10 +121,10 @@ export default function Benefits({
         )}
 
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[624px_auto] gap-80 3xl:gap-[89px] items-start ${description ? "" : "mt-7.5 md:mt-50"
+          className={`grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1fr_1.2fr] 2xl:xl:grid-cols-[624px_auto] gap-80 3xl:gap-[89px] items-start ${description ? "" : "mt-7.5 md:mt-50"
             }`}
         >
-          <div className="  shrink-0 xl:mt-[10px] border-t lg:border-0 border-bdr-gray">
+          <div className="shrink-0 xl:mt-[10px] border-t lg:border-0 border-bdr-gray">
             <div className="flex flex-col divide-y divide-[#c2c2c2]">
               {items.map((item, index) => (
                 <AccordionItem
@@ -138,7 +138,7 @@ export default function Benefits({
             </div>
           </div>
 
-          <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="hidden lg:flex flex-1 min-w-0">
+          <motion.div variants={moveUp(0.3)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="hidden lg:flex flex-1 min-w-0 h-full">
             {/* <div className="relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full 3xl:max-h-[650px] overflow-hidden"> */}
             <div className={`relative w-full aspect-[4/3] lg:aspect-[3/3] 3xl:aspect-[4/3] max-h-[650px] lg:max-h-full ${imgMaxHeight ? imgMaxHeight : "3xl:max-h-[650px]"} overflow-hidden`}>
               {items.map((item) => (

@@ -111,12 +111,13 @@ export default function AboutDetails({ data }: { data: AboutPageData['secondSect
     <section className="bg-white w-full relative select-none overflow-hidden pb-140 3xl:pb-200">
       <ContainerAnchor ref={containerRef} />
 
-      <div className="absolute -top-10 lg:-top-[-10%] xl:top-[-1.5%] 3xl:top-[-9.5%] left-[-131px] lg:left-[-3%] xl:left-[-22%] 3xl:left-[-19.2%] pointer-events-none">
-        <Image src="/assets/icons/bg-svg/top-left-about-1.svg" alt="decorative lines" width={897} height={896} className="object-contain w-[280px] 2xl:w-[500px] 3xl:w-[897px] 3xl:h-[896px] 3xl:scale-120" />
+      <div className="absolute -top-10 lg:-top-[-10%] xl:top-[-8.5%] 2xl:top-[-15%] 3xl:top-[-11.5%] left-[-131px] lg:left-[-3%] xl:left-[-18%] 2xl:left-[-15%] 3xl:left-[-19.2%] pointer-events-none">
+        <Image src="/assets/icons/bg-svg/top-left-about-1.svg" alt="decorative lines" width={897} height={896} className="object-contain w-[280px] md:w-[350px] xl:w-[600px]
+         3xl:w-[897px] 3xl:h-[896px] 3xl:scale-120" />
       </div>
 
       <div
-        className="ml-auto max-w-[1256px] pt-70 md:pt-120 3xl:pt-100 px-[15px] 2xl:px-0 w-full"
+        className="ml-auto md:max-w-[70%] 2xl:max-w-[70%] 3xl:max-w-[1256px] pt-70 md:pt-120 3xl:pt-100 px-[15px] 2xl:px-0 w-full"
         style={{ marginRight: rightInset }}
       >
         {/* <SectionTitle text={AboutData.title} className="section-heading text-secondary uppercase mb-20px md:mb-50" /> */}
@@ -143,7 +144,8 @@ export default function AboutDetails({ data }: { data: AboutPageData['secondSect
           {slideGroups.map((group, slideIndex) => (
             <SwiperSlide key={slideIndex}>
               {/* 1 column, 2 stacked cards, 10px gap */}
-              <motion.div variants={moveUp(0.5 + 0.1 * slideIndex)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} className="flex flex-col gap-[5px] md:gap-[10px]">
+              <motion.div variants={moveUp(0.5 + 0.1 * slideIndex)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} 
+              className="flex flex-col gap-[5px] md:gap-[10px]">
                 {group.map((stat, cardIndex) => (
                   <StatCard
                     key={cardIndex}
