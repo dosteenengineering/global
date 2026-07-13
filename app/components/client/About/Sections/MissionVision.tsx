@@ -22,10 +22,10 @@ function Card({
     initial="hidden"
     whileInView="show"
     viewport={{once:true}}
-    className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full">
+    className="relative flex flex-col gap-8 p-5 md:p-60 3xl:pb-[63px] w-full h-full lg:h-fit">
       <SecondaryNoise />
       <div className="relative z-10 flex flex-col ">
-        <div className="w-[50px] h-[50px] lg:w-[100px] lg:h-[100px] relative mb-7.5 lg:mb-100">
+        <div className="w-[50px] h-[50px] lg:w-[100px] lg:h-[100px] relative mb-7.5 xl:mb-100">
           <Image src={icon} alt={title} fill className="object-contain" />
         </div>
         <div className="flex flex-col gap-[10px] md:gap-20">
@@ -47,8 +47,8 @@ export default function MissionVision({data}:{data:AboutPageData['fifthSection']
   return (
     <section className="bg-white w-full select-none">
       <div className="container w-fullborder-[#c2c2c2]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[10px] md:gap-30 border-b border-[#c2c2c2] py-140 3xl:py-200 ">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-30 border-b border-[#c2c2c2] py-140 3xl:py-200 ">
+          <div className="h-full">
               <Card
                 icon={data.items[0].image}
                 title={data.items[0].title}

@@ -15,7 +15,7 @@ import { SectionDescription } from "@/app/components/common/animations/SectionDe
 
 function IconWrapper({ icon, label }: { icon: string; label: string }) {
   return (
-    <div className="relative flex-shrink-0 w-[50px] h-[50px] md:w-[100px] md:h-[100px]">
+    <div className="relative flex-shrink-0 w-[50px] h-[50px] xl:w-[100px] xl:h-[100px]">
       <Image
         src="/assets/images/about/why-choose/card-bg-cricle.svg"
         alt=""
@@ -23,7 +23,7 @@ function IconWrapper({ icon, label }: { icon: string; label: string }) {
         className="object-contain"
       />
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-[30px] h-[30px] md:w-[60px] md:h-[60px] relative">
+        <div className="w-[30px] h-[30px] xl:w-[60px] xl:h-[60px] relative">
           <Image src={icon} alt={label} fill className="object-contain" />
         </div>
       </div>
@@ -48,14 +48,14 @@ function FeatureCard({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="flex flex-col p-5 md:p-50 backdrop-blur-[20px] h-full"
+      className="flex flex-col p-5 xl:p-50 backdrop-blur-[20px] h-full"
       style={{
         background:
           "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.2) 100%)",
       }}
     >
       <IconWrapper icon={icon} label={title} />
-      <h3 className="text-white text-30 font-light leading-[1.333] tracking-[-0.02em] mt-5 md:mt-30 mb-[10px] md:mb-20">
+      <h3 className="text-white text-30 font-light leading-[1.333] tracking-[-0.02em] mt-5 xl:mt-30 mb-[10px] xl:mb-20">
         {title}
       </h3>
       <p className="text-white text-description !leading-[1.68] md:!leading-[1.54] !tracking-[2%]">
@@ -124,17 +124,17 @@ export default function WhyChooseDosteen({
         />
       </div>
 
-      <div className="relative z-10 container py-12.5 md:py-[140px] 3xl:py-[150px] w-full">
+      <div className="relative z-10 container py-12.5 2xl:py-[140px] 3xl:py-[150px] w-full">
         <SectionTitle
           text={data.title}
-          className="section-heading-90 text-white uppercase mb-50 3xl:mb-[70px] max-w-[27ch]"
+          className="section-heading-90 text-white uppercase mb-4 2xl:mb-50 3xl:mb-[70px] max-w-[27ch]"
         />
 
-        <div className="lg:pl-[25.3%] w-full mb-100 3xl:mb-[109px]">
+        <div className="lg:pl-[25.3%] w-full mb-50 xl:mb-100 3xl:mb-[109px]">
           <SectionDescription
             text={data.description}
             delay={0.5}
-            className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30 tracking-[-0.02em] mb-5 md:mb-100 3xl:mb-[109px] xl:max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0"
+            className="!leading-[1.555] md:!leading-[1.35] text-white font-light !text-30 tracking-[-0.02em] mb-4 xl:mb-100 3xl:mb-[109px] xl:max-w-[967px] border-b border-white/20 md:border-0 pb-5 md:pb-0"
           />
         </div>
 

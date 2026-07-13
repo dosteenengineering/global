@@ -206,7 +206,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
         <div className="flex flex-col md:flex-row justify-end md:justify-between w-full container h-full items-start md:items-end pb-[90px] md:pb-120 z-10">
           <div className="z-10 mb-5 md:mb-0">
             {banner.title.split(" ").map((line, i) => (
-              <h1 key={i} ref={i === 0 ? titleLine0Ref : titleLine1Ref} className="text-white section-heading-90 will-change-transform" >
+              <h1 key={i} ref={i === 0 ? titleLine0Ref : titleLine1Ref} className="text-white max-sm:!text-[36px] max-xl:!text-[50px]  section-heading-90 will-change-transform" >
                 {line}
               </h1>
             ))}
@@ -244,7 +244,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
               {second.leftImages.map((src, i) => (
                 <div
                   key={i}
-                  className={`relative overflow-hidden  w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
+                  className={`relative overflow-hidden  w-[120px] h-[120px]  md:w-[180px] md:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
                 >
                   <Image
                     src={src}
@@ -267,13 +267,13 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
             <div className="flex flex-col items-center justify-center flex-1 px-0 lg:px-3 xl:px-4 3xl:px-0">
               <div
                 ref={centerSlotRef}
-                className="w-[120px] h-[120px] lg:w-[200px] lg:h-[200px] shrink-0 mb-40 lg:mb-80"
+                className="w-[120px] h-[120px]  lg:w-[200px] lg:h-[200px] shrink-0 mb-40 lg:mb-80"
               />
               {/* <h2 className="section-heading-90 text-secondary text-center max-w-[18ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]"> */}
-              <h2 className="font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-70 3xl:text-90 text-secondary text-center max-w-[18ch] lg:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%]">
+              <h2 className="font-helvetica uppercase leading-[1.126] md:leading-[1.111111111111111] text-70 3xl:text-90 text-secondary text-center max-w-full xl:max-w-[40ch] mb-5 md:mb-20 xl:tracking-[-2.7%] max-xl:mt-150">
                 {second.heading}
               </h2>
-              <p className="text-center text-description text-paragraph max-w-[320px] lg:max-w-[930px] whitespace-pre-line">
+              <p className="text-center text-description text-paragraph max-w-[320px] sm:max-w-[60ch] xl:max-w-[930px] whitespace-pre-line">
                 {second.description}
               </p>
             </div>
@@ -286,7 +286,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
               {second.rightImages.map((src, i) => (
                 <div
                   key={i}
-                  className={`relative overflow-hidden w-[120px] h-[120px] lg:w-[180px] lg:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
+                  className={`relative overflow-hidden w-[120px] h-[120px] md:w-[180px] md:h-[180px] 3xl:w-[200px] 3xl:h-[200px] ${i > 0 ? "hidden lg:block" : "block"}`}
                 >
                   <Image
                     src={src}

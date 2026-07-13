@@ -54,8 +54,8 @@ const ServingMap = ({ seventhSection, eighthSection }: { seventhSection: AboutPa
                 <div className="absolute top-0 left-0 w-[101%] h-[101%] z-1">
                   <img src="./assets/images/about/map-section/glass-2-new.png" alt="" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10">{seventhSection.items[1].number.replace("+", "")}{seventhSection.items[1].number.includes("+") && <span className="text-primary">+</span>}</h3>
-                <p className="text-description !text-paragraph relative z-1 tracking-[2%]">{seventhSection.items[1].value} </p>
+                <h3 className="text-55 leading-[1.181818181818182] font-light relative z-10 max-xl:px-3">{seventhSection.items[1].number.replace("+", "")}{seventhSection.items[1].number.includes("+") && <span className="text-primary">+</span>}</h3>
+                <p className="text-description !text-paragraph relative z-1 tracking-[2%] max-xl:px-3 max-xl:max-w-[25ch]">{seventhSection.items[1].value} </p>
               </motion.div>
             </div>
             <motion.div variants={fadeIn(0.5)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} className="relative aspect-[1109.98/537] w-full max-w-[1109.98px] overflow-visible">
@@ -135,7 +135,7 @@ const ServingMap = ({ seventhSection, eighthSection }: { seventhSection: AboutPa
                   className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]"
                 />
               </div>
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-2 max-lg:max-w-[50%]">
                 {eighthSection.items.map((item, index) => (
                   <motion.div variants={moveUp(0.2 + index * 0.1)} initial="hidden" whileInView="show" viewport={{ once: true }} key={item.title}>
                     <p className="text-19 tracking-[-0.02em] font-light text-paragraph leading-[1.65] md:leading-[2.105263157894737]">{item.title}</p>

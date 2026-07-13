@@ -78,7 +78,7 @@ export default function DosteenSystems({
         />
 
         {/* ── Mobile: Accordion ── */}
-        <div className="md:hidden relative">
+        <div className="lg:hidden relative">
           {systems.map((system) => {
             const isOpen = openAccordionId === system.id;
 
@@ -98,7 +98,7 @@ export default function DosteenSystems({
                 >
                   <span
                     className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${
-                      isOpen ? "  font-[500]" : "font-light"
+                      isOpen ? "font-[500]" : "font-light"
                     }`}
                   >
                     {system.title}
@@ -160,7 +160,7 @@ export default function DosteenSystems({
                       className="overflow-hidden"
                     >
                       <div className="pb-5">
-                        <div className="relative mb-5 overflow-hidden w-full h-[225px]">
+                        <div className="relative mb-5 overflow-hidden w-full h-[225px] md:h-[350px]">
                           <Image
                             src={system.image}
                             alt={system.title}
@@ -201,7 +201,7 @@ export default function DosteenSystems({
 
         {/* ── Desktop: Original two-col layout ── */}
         {/* <div className="hidden md:flex gap-60 3xl:gap-[68px]"> */}
-        <div className="hidden md:flex gap-60 3xl:gap-[68px] items-start">
+        <div className="hidden lg:flex gap-60 3xl:gap-[68px] items-start">
           {/* Left col */}
           <div
             className="shrink-0 border-r-2 border-[#c2c2c2] self-stretch relative pb-100"

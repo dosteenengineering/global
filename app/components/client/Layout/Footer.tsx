@@ -648,9 +648,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
           </motion.div>
 
           {/* ── BOTTOM BAR ── */}
-          <div
-            style={{ paddingLeft: leftPadding }}
-            className="relative pr-50 3xl:pr-[57px]"
+          <div style={{ paddingLeft: leftPadding }} className="relative pr-50 3xl:pr-[57px]"
           >
             <FooterNoise />
             <div className="relative flex flex-wrap gap-x-[30px] items-center justify-between py-[14px] -tracking-[2%]">
