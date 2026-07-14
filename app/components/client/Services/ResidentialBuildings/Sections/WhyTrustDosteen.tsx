@@ -80,7 +80,7 @@ export default function WhyTrustDosteen({data}:{data:WhyTrustData}) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (window.innerWidth < 768) return;
+    if (window.innerWidth < 1024) return;
 
     const section = sectionRef.current;
     const spacer = spacerRef.current;

@@ -375,8 +375,8 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "id": "hotspot-1783079773906",
       "title": "Blast Doors",
       "marker": {
-        "x": 21.842105263157897,
-        "y": 28.82773887973641
+        "x": 22.6,
+        "y": 28
       },
       "label": {
         "x": 23.50877192982456,
@@ -677,7 +677,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             {/* Image */}
             <motion.div
               variants={moveUp(0.3)}
-              className="relative w-full h-auto mb-50 px-4 bg-[#e9e7ee]"
+              className="relative w-full h-auto mb-50 px-4"
             >
               <ImageHotspots
                 image={active.image}
