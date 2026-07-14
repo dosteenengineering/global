@@ -34,7 +34,7 @@ const ComplianceSection = ({data}:{data:Csi['eighthSection']}) => {
         {/* <h2 className={`section-heading text-white uppercase whitespace-pre-line mb-20 3xl:mb-[26px] max-w-[26ch]`}>
           UAE & Oman Compliance — Built Into Every Specification
         </h2> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[1.5fr_1fr] 3xl:grid-cols-[967px_auto] gap-5 md:gap-80 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-[1.5fr_1fr] 3xl:grid-cols-[967px_auto] gap-5 md:gap-80 items-center">
           <div>
             <Image
               src={data.image}

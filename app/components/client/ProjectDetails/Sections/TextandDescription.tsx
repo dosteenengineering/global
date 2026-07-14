@@ -15,7 +15,7 @@ const TextandDescription = ({
   return (
     <div>
       <SectionTitle
-        className="text-55 leading-[1.1818] text-secondary font-light tracking-[-0.02em] mb-2.5 md:mb-40"
+        className="text-55 leading-[1.1818] text-secondary font-light tracking-[-0.02em] mb-2.5 xl:mb-40"
         title={title}
       />
       <motion.div variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>

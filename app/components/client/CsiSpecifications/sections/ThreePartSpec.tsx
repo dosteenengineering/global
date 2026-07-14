@@ -43,7 +43,7 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
         <SectionTitle title={title} className="text-white uppercase mb-5 xl:mb-50 2xl:mb-80 3xl:mb-[102px] section-heading-90 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0" />
 
         {/* ── Mobile: Swiper ── */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           {/* Counter + Nav */}
           <motion.div
             variants={moveUp(0.5)}
@@ -122,7 +122,7 @@ export default function ThreePartSpec({threePartSpecData}:{threePartSpecData:Thr
         </div>
 
         {/* ── Desktop: Original grid ── */}
-        <div className="hidden md:grid md:grid-cols-3 gap-30">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-30">
           {threePartSpecData.items.map((item, index) => (
             <PartCard
               key={item.id}
