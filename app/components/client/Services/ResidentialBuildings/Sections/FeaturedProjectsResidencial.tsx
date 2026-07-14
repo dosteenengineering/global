@@ -14,6 +14,7 @@ import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { Project } from "../../../Projects/data";
+import Link from "next/link";
 
 // function getInactiveProjects(
 //   projects: Project[],
@@ -81,6 +82,8 @@ function InactiveSlot({
   return (
     <motion.div className="flex flex-col flex-1 min-w-0 cursor-pointer" onClick={onClick} variants={moveUp(delay)} initial="hidden" whileInView="show" viewport={{ once: true }}  >
       {/* Image — fixed h-[313px], content animates */}
+      <Link href={`/case-studies/${displayed.prev.slug}`}>
+
       <div className="relative w-full h-[280px] 3xl:h-[313px] overflow-hidden mb-20">
         {displayed.animating && (
           <div className="absolute inset-0 slot-exit" style={{ ["--exit-to" as string]: exitTo }} >
@@ -94,14 +97,18 @@ function InactiveSlot({
 
       <div className="relative min-h-[36px] mb-[15px] overflow-hidden">
         {displayed.animating && (
-          <p className="absolute inset-x-0 top-0 text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] slot-exit" style={{ ["--exit-to" as string]: exitTo }}>
-            {displayed.prev.firstSection.title}
-          </p>
+          // <Link href={`/case-studies/${displayed.prev.slug}`}>
+            <h3 className="absolute inset-x-0 top-0 text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] slot-exit " style={{ ["--exit-to" as string]: exitTo }}>
+              {displayed.prev.firstSection.title}
+            </h3>
+          // </Link>
         )}
-        <p className={`text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em]${displayed.animating ? " slot-enter" : ""}`}
-          style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
-          {displayed.next.firstSection.title}
-        </p>
+        {/* <Link href={`/case-studies/${displayed.next.slug}`}> */}
+          <h3 className={`text-secondary text-30 font-light leading-[1.33] tracking-[-0.02em] line-clamp-2 ${displayed.animating ? " slot-enter" : ""}`}
+            style={displayed.animating ? { ["--enter-from" as string]: enterFrom } : {}}>
+            {displayed.next.firstSection.title}
+          </h3>
+        {/* </Link> */}
       </div>
 
       <div className="flex items-center justify-between mb-[15px] pr-40">
@@ -112,6 +119,7 @@ function InactiveSlot({
         <span className="text-description text-paragraph font-light">{displayed.next.firstSection.sector.name}</span>
       </div>
       <div className="w-full h-[2px] bg-[#c2c2c2]" />
+      </Link>
     </motion.div>
   );
 }
@@ -156,10 +164,10 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
   return (
     <section className="w-full bg-white py-[70px] md:py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
       <div className="container">
-        <SectionTitle text={"FEATURED PROJECTS"} className="section-heading-90 text-secondary mb-50" />
+        <SectionTitle text={"FEATURED PROJECTS"} className="section-heading-90 text-secondary mb-[20px] md:mb-5 lg:mb-50" />
 
         {/* ── Mobile layout ── */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           {/* Top row: All Projects + Nav buttons */}
           <div className="flex items-center justify-between mb-5 pb-5 border-b border-bdr-gray">
             <BorderButton
@@ -175,12 +183,14 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                 direction="left"
                 disabled={false}
                 ariaLabel="Previous project"
+                disableMode="dark"
               />
               <NavButton
                 onClick={() => mobileSwiperRef.current?.slideNext()}
                 direction="right"
                 disabled={false}
                 ariaLabel="Next project"
+                disableMode="dark"
               />
             </div>
           </div>
@@ -198,11 +208,12 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
             spaceBetween={0}
             speed={600}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
-            className="w-full h-[383px] md:h-[280px] mb-5"
+            className="w-full h-[383px] lg:h-[480px] mb-5"
           >
             {projects.map((project,index) => (
               <SwiperSlide key={index}>
-                <div className="relative w-full h-[383px] md:h-[280px]">
+                <Link href={`/case-studies/${project.slug}`}>
+                <div className="relative w-full h-[383px] md:h-[480px]">
                   <Image
                     src={project.thumbnail}
                     alt={project.thumbnailAlt}
@@ -217,35 +228,33 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                     }}
                   />
                 </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
 
           {/* Project info below image */}
           <div className="">
-            <p className="text-secondary text-[22px] font-light leading-[1.3] tracking-[-0.02em] mb-2.5">
+            <Link href={`/case-studies/${mobileActiveProject?.slug}`}>
+            <h3 className="text-secondary text-[22px] md:text-[30px] font-light leading-[1.3] tracking-[-0.02em] mb-2.5  md:line-clamp-2 md:min-h-[91px] xl:line-clamp-none xl:min-h-0 line-clamp-2">
               {mobileActiveProject?.firstSection.title}
-            </p>
+            </h3>
+            
             <div className="flex items-center justify-between border-b pb-2.5 border-bdr-gray">
-              <span className="flex items-center gap-[8px] text-paragraph font-light text-[13px]">
-                <Image
-                  src="/assets/icons/location-pin-gray.svg"
-                  alt="location"
-                  width={11}
-                  height={14}
-                  className="object-contain w-[11px] h-[14px] -mt-[2px]"
-                />
+              <span className="flex items-center gap-[8px] text-paragraph font-light text-[13px] md:text-[16px]">
+                <Image src="/assets/icons/location-pin-gray.svg" alt="location" width={11} height={14} className="object-contain w-[11px] h-[14px] -mt-[2px]" />
                 Location: {mobileActiveProject?.firstSection.location.name}
               </span>
-              <span className="text-paragraph font-light text-[13px]">
+              <span className="text-paragraph font-light text-[13px] md:text-[16px]">
                 {mobileActiveProject?.firstSection.sector.name}
               </span>
             </div>
+            </Link>
           </div>
         </div>
 
         {/* ── Desktop layout (unchanged) ── */}
-        <div className="hidden md:flex gap-40 3xl:gap-50 items-stretch">
+        <div className="hidden lg:flex gap-40 3xl:gap-50 items-stretch">
           {/* Left: big active swiper */}
           <div className="shrink-0 w-[45%]">
             {projects.length === 1 ? (
@@ -255,7 +264,9 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                 <Image src={projects[0].thumbnail} alt={projects[0].thumbnailAlt} fill className="object-cover pointer-events-none" priority />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
                 <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
-                  <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{projects[0].firstSection.title}</p>
+                  <Link href={`/case-studies/${projects[0].slug}`}>
+                    <h3 className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{projects[0].firstSection.title}</h3>
+                  </Link>
                   <div className="h-[1px] bg-white/30 mb-20" />
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-[10px] text-white font-light">
@@ -291,10 +302,14 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     >
-                      <Image src={project.thumbnail} alt={project.thumbnailAlt} fill className="object-cover pointer-events-none" priority />
+                      <Link href={`/case-studies/${project.slug}`}>
+                        <Image src={project.thumbnail} alt={project.thumbnailAlt} fill className="object-cover pointer-events-none" priority />
+                      {/* </Link> */}
                       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
                       <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
-                        <p className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20">{project.firstSection.title}</p>
+                        {/* <Link href={`/case-studies/${project.slug}`}> */}
+                        <h3 className="text-white text-30 font-light leading-[1.33] tracking-[-0.02em] mb-20 line-clamp-2">{project.firstSection.title}</h3>
+                        {/* </Link> */}
                         <div className="h-[1px] bg-white/30 mb-20" />
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-[10px] text-white font-light">
@@ -304,6 +319,7 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                           <span className="text-white text-paragraph font-light">{project.firstSection.sector.name}</span>
                         </div>
                       </div>
+                      </Link>
                     </motion.div>
                   </SwiperSlide>
                 ))}
@@ -314,7 +330,7 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
           {/* Right: nav + inactive slots + all projects btn */}
           <div className="flex-1 min-w-0 flex flex-col justify-between">
             <div className="flex gap-40 3xl:gap-50 items-start flex-1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              {inactiveProjects.map((project, i) => {
+              {[...inactiveProjects, ...inactiveProjects].map((project, i) => {
                 const projectIndex = projects.indexOf(project);
                 return (
                   <InactiveSlot

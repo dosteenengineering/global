@@ -196,6 +196,12 @@ body::-webkit-scrollbar {
 
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --text-90: 52px;
+        /* Tablet-specific */
+    }
+}
 
 @theme inline {
     --color-background: var(--background);

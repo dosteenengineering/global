@@ -52,7 +52,7 @@ export default function BorderButton({
   const sharedClass = `
     group relative overflow-hidden flex items-center justify-center gap-3
     border rounded-[50px] ${px} md:py-[18px] py-[8px]
-    uppercase text-[14px] md:text-15 leading-[1.73] font-[400]
+    uppercase text-[14px] md:text-[15px] lg:text-15 leading-[1.73] font-[400]
     cursor-pointer active:scale-95 transition-all duration-300
     touch-action-manipulation [-webkit-tap-highlight-color:transparent]
     select-none

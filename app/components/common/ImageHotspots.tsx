@@ -183,7 +183,7 @@ export default function ImageHotspots({
     <div className={`relative h-full w-full overflow-visible ${className}`}>
       <div
         ref={containerRef}
-        className={`relative h-full w-full overflow-visible bg-[#e7e5e9] ${editorEnabled ? "cursor-crosshair" : ""}`}
+        className={`relative h-full w-full overflow-visible ${editorEnabled ? "cursor-crosshair" : ""}`}
         onPointerDown={handleAddHotspot}
       >
         <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} />
@@ -199,7 +199,7 @@ export default function ImageHotspots({
                 key={hotspot.id}
                 points={`${hotspot.marker.x},${hotspot.marker.y} ${getElbowX(hotspot, labelDot.x)},${labelDot.y} ${labelDot.x},${labelDot.y}`}
                 fill="none"
-                stroke="#4c4c4c"
+                stroke="#ffffff"
                 strokeWidth="1"
                 vectorEffect="non-scaling-stroke"
                 strokeLinecap="round"
@@ -226,7 +226,7 @@ export default function ImageHotspots({
               <button
                 type="button"
                 aria-label={hotspot.title}
-                className={`absolute z-30 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596]
+                className={`absolute z-30 h-[4px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white
                   shadow-[0_0_0_3px_rgba(30,87,255,0.16)] ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
                 style={{
                   left: `${hotspot.marker.x}%`,
@@ -242,7 +242,7 @@ export default function ImageHotspots({
               />
 
               <span
-                className="pointer-events-none absolute z-30 h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#294596]"
+                className="pointer-events-none absolute z-30 h-[6px] w-[6px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
                 style={{
                   left: `${labelDot.x}%`,
                   top: `${labelDot.y}%`,
@@ -294,7 +294,7 @@ export default function ImageHotspots({
                     <Link
                       href={hotspot.href}
                       className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
-                 border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px]
+                 border-white bg-transparent hover:bg-white text-white hover:text-[#294596] transition-all duration-300 px-[8px]
                   2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] xl:text-[12px] 3xl:text-15 font-light
                   leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
                       style={{
@@ -310,7 +310,7 @@ export default function ImageHotspots({
                     <button
                       type="button"
                       className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
-                 border-[#1d2764]/70 bg-gradient-to-r from-[rgba(41,69,150,0.2)] to-[rgba(41,69,150,0.05)] hover:bg-[#294596] hover:text-white transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] xl:text-[12px] 3xl:text-15 font-light
+                 border-white bg-transparent hover:bg-white text-white hover:text-[#294596] transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] xl:text-[12px] 3xl:text-15 font-light
                   leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
                       style={{
                         left: `${hotspot.label.x}%`,
