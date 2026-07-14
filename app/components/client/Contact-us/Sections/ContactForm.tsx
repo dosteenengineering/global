@@ -200,6 +200,7 @@ export default function ContactForm({systemData}: {systemData: string[]}) {
                 value={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
+                error={errors.phone?.message}
               />
             )}
           />
@@ -277,6 +278,7 @@ export default function ContactForm({systemData}: {systemData: string[]}) {
             borderColor="black"
             textColor="black"
             hoverBg="black"
+            className="2xl:px-35"
             onClick={() => handleSubmit(onSubmit)()}
           />
         </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
+import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import BannerNoise from "@/app/components/common/noise/BannerNoise";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -46,9 +47,10 @@ export default function ContactBanner({
           />
         </div>
 
-        <h1 className={`text-secondary mb-0 md:mb-20 hero-heading !leading-none translate-y-[-15px] ${titleMaxWidth}`} >
+        {/* <h1 className={`text-secondary mb-0 md:mb-20 hero-heading !leading-none translate-y-[-15px] ${titleMaxWidth}`} >
           {title}
-        </h1>
+        </h1> */}
+        <SectionTitle text={title} className={`text-secondary mb-[20px] md:mb-20 2xl:mb-[22px] hero-heading ${titleMaxWidth}`} />
 
         {description && (
           // <p

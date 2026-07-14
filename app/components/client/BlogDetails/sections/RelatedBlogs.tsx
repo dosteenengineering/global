@@ -33,11 +33,16 @@ const imageHeightClasses = [
 ];
 
 const GuidesArticles = ({ data }: { data: AllBlogData }) => {
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
   const links = "#"
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
+  const showNavigation = data.blogs.length > slidesPerView;
   function updateState(swiper: SwiperType) {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
     setActiveIndex(swiper.activeIndex);
     setSlidesPerView(
       typeof swiper.params.slidesPerView === "number"
@@ -48,7 +53,7 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
   return (
     <section className="relative overflow-hidden pt-12.5 pb-12.5 md:pt-120 md:pb-200 ">
       <div className="container">
-        <div className="flex flex-wrap gap-y-4 justify-between mb-50 md:mb-60 border-b border-bdr-blue pb-5 md:pb-0 md:border-b-0 relative z-[1]">
+        <div className={`flex flex-wrap gap-y-4 justify-between ${showNavigation ? 'mb-50 md:mb-60' : ''} border-b border-bdr-gray pb-5 md:pb-0 md:border-b-0 relative z-[1]`}>
           <SectionTitle
             text={"Explore more in our related Blogs"}
             className="text-left section-heading-90 uppercase text-secondary max-w-full xl:max-w-[28ch]"
@@ -94,6 +99,8 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
                 hoverBg="white"
               />
             </motion.div>
+            {showNavigation && (
+              
             <motion.div
               variants={moveUp(0.5)}
               initial="hidden"
@@ -107,10 +114,11 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
                   if (s && !s.destroyed) s.slidePrev();
                 }}
                 direction="left"
-                disabled={false}
+                disabled={isBeginning}
                 ariaLabel="Previous"
-                borderColor="border-white"
-                className=" icon-invert"
+                borderColor="border-black"
+                className=""
+                disableMode="dark"
               />
               <NavButton
                 onClick={() => {
@@ -118,12 +126,14 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
                   if (s && !s.destroyed) s.slideNext();
                 }}
                 direction="right"
-                disabled={false}
+                disabled={isEnd}
                 ariaLabel="Next"
-                borderColor="border-white"
-                className=" icon-invert"
+                borderColor="border-blaxk"
+                className=""
+                disableMode="dark"
               />
             </motion.div>
+            )}
           </motion.div>
           <Swiper
             onSwiper={(swiper) => {
@@ -142,7 +152,7 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
           >
             {data.blogs.map((item, index) => (
               <SwiperSlide key={index} className="!h-auto">
-                <div className="border-x  md:border-x-0 px-5 md:px-0 md:border-b md:pb-4 border-bdr-blue flex flex-col h-full text-secondary">
+                <div className="border-x  md:border-x-0 px-5 md:px-0 md:border-b md:pb-4 border-bdr-gray flex flex-col h-full text-secondary">
                   <div className="flex justify-between items-center mb-[15px] md:mb-5 mt-auto">
                     <span className="text-19 leading-[1.526315789473684] font-light text-secondary -tracking-[0.02em]">
                       {new Date(item.date).toLocaleDateString('en-GB', {

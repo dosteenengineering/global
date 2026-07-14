@@ -140,7 +140,7 @@ export default function Main({
   }, []);
 
   return (
-    <div className="min-h-screen bg-white pt-5 md:pt-100">
+    <div className="min-h-screen bg-white pt-5 xl:pt-100">
       <div ref={panelAnchorRef} className="container w-0 h-0 pointer-events-none" />
 
       <div className={isContainer ? "container" : ""}>

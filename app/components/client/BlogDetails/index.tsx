@@ -9,7 +9,7 @@ const Index = ({data,allBlogData}:{data:BlogItem,allBlogData:AllBlogData}) => {
   return ( 
     <>
         <InnerPageBanner 
-        titleMaxWidth="max-w-[30ch] 3xl:max-w-[1629px]" 
+        titleMaxWidth="max-w-full 2xl:max-w-[30ch] 3xl:max-w-[1629px]" 
         descriptionMaxWidth="max-w-[94%] 3xl:max-w-[1395px]" 
         title={data.title}
         image={data.thumbnail}

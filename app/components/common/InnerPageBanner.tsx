@@ -26,7 +26,7 @@ export default function InnerPageBanner({
   image,
   imageAlt = "Banner image",
   publishedDate,
-  bannerImgHeight = "h-[224px] md:h-[450px] 2xl:h-[550px] 3xl:h-[650px]",
+  bannerImgHeight = "h-[224px] md:h-[350px] xl:h-[450px] 2xl:h-[550px] 3xl:h-[650px]",
 }: InnerPageBannerProps) {
   const { ref, parallaxY } = useParallax(10);
   return (

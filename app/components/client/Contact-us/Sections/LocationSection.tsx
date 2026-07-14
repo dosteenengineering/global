@@ -20,7 +20,7 @@ export default function LocationsSection({ data }: { data: ContactData['secondSe
   }))
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftInset = useGetContainerSpacing(containerRef);
-  const { ref, parallaxY } = useParallax(12);
+  const { ref, parallaxY } = useParallax(12, 1.1); // pass your lg (smallest) scale;
 
   // Group locations by country (for mobile tabs)
   const grouped = locations.reduce<Record<string, typeof locations>>(
@@ -41,27 +41,13 @@ export default function LocationsSection({ data }: { data: ContactData['secondSe
       <ContainerAnchor ref={containerRef} />
       <div className="flex flex-col lg:flex-row lg:min-h-screen">
         {/* Left — hero image */}
-        <div
-          ref={ref}
-          className="relative   shrink-0 h-[199px] md:h-[300px] lg:h-auto w-full lg:w-[35.94%] overflow-hidden"
-        >
-          <Image
-            src={image}
-            alt="Locations"
-            fill
-            className="object-cover scale-[1.35] md:scale-[1.2] lg:scale-110"
-            priority
-            style={{
-              transform: ` translateY(${parallaxY}vh)`,
-            }}
-          />
+        <div ref={ref} className="relative shrink-0 h-[199px] min-h-max md:h-[450px] lg:h-auto w-full lg:w-[35.94%] overflow-hidden" >
+          <Image src={image} alt="Locations" fill className="object-cover h-full scale-[1.35] md:scale-[1.05] lg:scale-110" priority
+            style={{ transform: ` translateY(${parallaxY}vh) scale(1.1)`, }} />
         </div>
 
         {/* Right — blue panel */}
-        <div
-          className="relative flex-1 py-12.5 md:py-140 3xl:py-150 ps-[15px] lg:ps-90"
-          style={{ paddingRight: leftInset }}
-        >
+        <div className="relative flex-1 py-12.5 md:py-140 3xl:py-150 ps-[15px] lg:ps-90" style={{ paddingRight: leftInset }} >
           <PrimaryNoise2 />
 
           {/* ── Mobile: Tab Buttons ── */}
@@ -93,7 +79,7 @@ export default function LocationsSection({ data }: { data: ContactData['secondSe
           </div>
 
           {/* ── Desktop: Original Design (all cards with country heading) ── */}
-          <div className="relative hidden md:inline-grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-[auto_auto] gap-y-100 gap-x-120 3xl:gap-x-[131px] w-full">
+          <div className="relative hidden md:inline-grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-[auto_auto] xl:gap-y-100 gap-x-5 xl:gap-x-120 3xl:gap-x-[131px] w-full">
             {locations.map((loc, idx) => (
               <Reveal key={idx} variants={moveUpV2} delayRange={idx * 0.2}>
                 <LocationCard {...loc} showCountry={true} />

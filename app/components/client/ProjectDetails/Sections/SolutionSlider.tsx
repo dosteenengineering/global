@@ -34,7 +34,8 @@ export default function SolutionSlider({ images }: SolutionSliderProps) {
       >
         {images.map((src, i) => (
           <SwiperSlide key={i}>
-            <motion.div variants={moveUp(0.2*i)} initial="hidden" whileInView="show" viewport={{ once: true }} className="overflow-hidden w-full relative h-[169px] md:h-[480px] 3xl:h-[680px]">
+            <motion.div variants={moveUp(0.2*i)} initial="hidden" whileInView="show" viewport={{ once: true }} 
+            className="overflow-hidden w-full relative h-[169px] md:h-[350px] xl:h-[480px] 3xl:h-[680px]">
               <Image
                 src={src}
                 alt={`Solution image ${i + 1}`}

@@ -84,8 +84,8 @@ export default function SoftwareTools({ data }: { data: Capability['fifthSection
         <div className="flex flex-wrap gap-7.5 lg:gap-140 3xl:gap-[142px] items-start h-full">
           {/* Left — title + description */}
           <div className="2xl:shrink-0 w-full 2xl:w-[40.65%] relative h-full ">
-            <SectionTitle title={data.title} className="mb-[20px] sm:mb-5 2xl:mb-50 lg:max-w-[14ch] section-heading-90" />
-            <SectionDescription text={data.description} className="text-secondary !text-30 !leading-[1.333] font-light max-w-[40ch]" />
+            <SectionTitle title={data.title} className="mb-[20px] sm:mb-5 md:mb-40 2xl:mb-50 lg:max-w-[14ch] section-heading-90" />
+            <SectionDescription text={data.description} className="text-secondary !text-30 !leading-[1.333] font-light xl:max-w-[40ch]" />
           </div>
 
           {/* Right — tools table */}
