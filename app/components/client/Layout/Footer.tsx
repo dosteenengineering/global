@@ -673,7 +673,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 </div> */}
               </div>
             </div>
-            <div className="3xl:mt-40 mb-10  3xl:mb-0">
+            <div className="3xl:mt-40 mb-10  3xl:mb-[78.31px]">
               <div className="flex items-center justify-start gap-20">
                 {certifications.map((cert, index) => (
                   <motion.div
