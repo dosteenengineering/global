@@ -28,7 +28,7 @@ export default function Hero({data}:{data:Home['bannerSection']}) {
 
     if (el && ready) {
       event.preventDefault();
-      scrollTo(el as HTMLElement, { offset: -80, duration: 1.5 });
+      scrollTo(el as HTMLElement, { offset: -880, duration: 1.5 });
       window.history.pushState(null, "", hash!);
     }
   };
