@@ -89,7 +89,7 @@ export default function ContactForm({systemData}: {systemData: string[]}) {
   }, []);
 
   return (
-    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden">
+    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden scroll-mt-0">
       <div className="absolute bottom-[-35.3%] right-[-15%] 3xl:right-[-3.5%]">
         <Image
           src="/assets/images/contact-us/form-bg-svg.svg"

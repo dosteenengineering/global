@@ -127,7 +127,7 @@ const PartnerForm = () => {
   const onSubmit = async (values: PartnerFormValues) => {
     setIsSubmitting(true);
     setSubmitError(null);
-
+    console.log(`check`,values)
     try {
       const formData = new FormData();
 
