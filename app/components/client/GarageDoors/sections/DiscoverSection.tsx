@@ -94,8 +94,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
   // Mobile accordion — can open/close independently
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(0);
 
-  const activeDoor =
-    data.items.find((_, index) => index === activeId) ?? data.items[0];
+  const activeDoor = data.items.find((_, index) => index === activeId) ?? data.items[0];
 
   const toggleAccordion = (id: number) => {
     setOpenAccordionId((prev) => (prev === id ? null : id));

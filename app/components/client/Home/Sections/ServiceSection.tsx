@@ -102,7 +102,7 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
           <div className="w-px bg-[#76A7FF] shrink-0" />
 
           <div className="flex-1 pl-20 2xl:pl-140 3xl:pl-150 flex flex-col min-h-[400px]">
-            <div className="relative w-full h-[150px] xl:h-[200px] mb-[70px] 2xl:px-3 3xl:w-auto 3xl:h-auto">
+            <div className="relative w-full h-[150px] xl:h-[200px] mb-[70px] 2xl:px-3 3xl:w-fit 3xl:h-[200px]">
               {/* <Image
                 key={activeData.key}
                 src={activeData.image}

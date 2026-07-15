@@ -15,6 +15,7 @@ import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
+import { blogs } from "../../Blog/data";
 
 type BlogPost = {
   key: string;
@@ -33,6 +34,8 @@ type BlogsData = {
 const SLIDE_GAP = 80;
 
 export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
+console.log(`blogs`,blogs)
+  
   // ── Desktop swiper ──
   const swiperRef = useRef<SwiperType | null>(null);
   const slideRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +60,13 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
     swiperRef.current = s;
   }, []);
   const slidePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
-  const slideNext = useCallback(() => swiperRef.current?.slideNext(), []);
+  const slideNext = useCallback(() => {
+    console.log("active", swiperRef.current?.activeIndex);
+    console.log("real", swiperRef.current?.realIndex);
+    console.log("isEnd", swiperRef.current?.isEnd);
+    swiperRef.current?.slideNext();
+    console.log(swiperRef.current);
+  }, []);
 
   const mobileSlidePrev = useCallback(
     () => mobileSwiperRef.current?.slidePrev(),
@@ -98,7 +107,9 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
           />
 
           {/* Row 2 */}
-          <div className="flex flex-col gap-[15px] items-start px-90 3xl:px-[112px]">
+       
+      
+            <div className={`flex flex-col gap-[15px] items-start px-90 3xl:px-[112px] ${blogsData.posts.length > 2 ? '' : 'opacity-0'}`}>
             <motion.div
               variants={moveRight(0.2)}
               initial="hidden"
@@ -126,9 +137,10 @@ export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
                 ariaLabel="Next blog"
                 disableMode="dark"
               />
+              
             </motion.div>
           </div>
-
+      
           {/* Row 2 */}
           <motion.div
             variants={moveUp(0.5)}

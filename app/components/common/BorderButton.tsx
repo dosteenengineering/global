@@ -135,8 +135,9 @@ export default function BorderButton({
   // }
 
   if (href) {
+    const hasHash = href.includes("#");
     return (
-      <Link href={href} onClick={onClick} className={sharedClass} {...events}>
+      <Link href={href} onClick={onClick} scroll={!hasHash} className={sharedClass} {...events}>
         {content}
       </Link>
     );

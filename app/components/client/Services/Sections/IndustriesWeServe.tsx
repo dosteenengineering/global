@@ -16,20 +16,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
 
 
   // Paste each copied hotspot JSON array under the exact backend item.title.
-  // Example:
-  // "Residential Developments": [
-  //   {
-  //     id: "entrance-solutions",
-  //     title: "Entrance Solutions",
-  //     marker: { x: 35, y: 42 },
-  //     label: { x: 12, y: 38 },
-  //     side: "left",
-  //   },
-  // ],
-  // Industrial Facilities
-  // Residential Developments
-  // Commercial Buildings
-  // Government Facilities
+
   "Industrial": [
     {
       "id": "hotspot-1783075798773",
@@ -505,13 +492,30 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
 
   const [activeId, setActiveId] = useState(0);
   const detailRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    detailRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+  const isFirstRender = useRef(true);
+  // useEffect(() => {
+  //   if (isFirstRender.current) {
+  //     isFirstRender.current = false;
+  //     return;
+  //   }
+  //   detailRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
       
+  //   });
+  // }, [activeId]);
+
+  const handleIndustryClick = (index: number) => {
+    setActiveId(index);
+
+    requestAnimationFrame(() => {
+      detailRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     });
-  }, [activeId]);
+  };
+
 
   // Mobile accordion: track which item is open (null = all closed)
   const [openId, setOpenId] = useState<number | null>(0);
@@ -610,7 +614,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                 <motion.div key={item._id ?? index} variants={moveUp(0.1 * index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.1 * index, ease: "easeInOut" }}>
                   <button
                     type="button"
-                    onClick={() => setActiveId(index)}
+                    onClick={() => handleIndustryClick(index)}
                     className={`group relative flex items-center justify-between text-left w-full border-b
                        border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : "" }`}
                     style={

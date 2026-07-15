@@ -75,21 +75,21 @@ export default function ContactForm({systemData}: {systemData: string[]}) {
 
   // Watch all fields so InputField re-renders on value change
   const values = watch();
-  const { scrollTo } = useLenis();
+  // const { scrollTo } = useLenis();
 
-  useEffect(() => {
-    if (window.location.hash !== "#contact-form") return;
+  // useEffect(() => {
+  //   if (window.location.hash !== "#contact-form") return;
 
-    const timeout = setTimeout(() => {
-      const el = document.getElementById("contact-form");
-      if (el) scrollTo(el, { offset: -80, duration: 1.5 });
-    }, 300);
+  //   const timeout = setTimeout(() => {
+  //     const el = document.getElementById("contact-form");
+  //     if (el) scrollTo(el, { offset: 0, duration: 1.5 });
+  //   }, 300);
 
-    return () => clearTimeout(timeout);
-  }, []);
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   return (
-    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden scroll-mt-0">
+    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden">
       <div className="absolute bottom-[-35.3%] right-[-15%] 3xl:right-[-3.5%]">
         <Image
           src="/assets/images/contact-us/form-bg-svg.svg"

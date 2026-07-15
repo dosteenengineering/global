@@ -16,7 +16,7 @@ import { useHashScroll } from "@/app/hooks/useHashScroll";
 
 
 export default function LocationsSection({ data }: { data: ContactData['secondSection'] }) {
-  useHashScroll(-80); // match your header height
+  useHashScroll(0); // match your header height
   const { image } = data;
   const locations = data.items.map((item) => ({
     country: item.title,

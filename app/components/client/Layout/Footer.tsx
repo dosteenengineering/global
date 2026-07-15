@@ -744,15 +744,15 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
               <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                 Subscribe to our newsletter
               </p>
-              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] pr-0 min-w-max">
+              <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] pr-0 min-w-max cursor-pointer">
                 <input
                   type="email"
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="Enter Your Email"
-                  className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none"
+                  className="flex-1 h-full bg-transparent px-20 3xl:px-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%] placeholder:text-15 font-light font-poppins placeholder:font-light outline-none "
                 />
                 <button onClick={handleNewsletterSubmit} type="button" disabled={newsletterStatus === "loading"} className="relative flex items-center gap-3 h-[calc(100%+2px)]
-                 -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden"
+                 -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden cursor-pointer"
                 >
                   <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
                   <span className="relative grid group-hover:text-white transition-colors duration-300 ease-in-out">

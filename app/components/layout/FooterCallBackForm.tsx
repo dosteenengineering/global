@@ -98,7 +98,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
 
   const isMobile =
     mounted && typeof window !== "undefined" && window.innerWidth < 768;
-
+  const selectRef = useRef<any>(null);
   return (
     <div className="min-w-[250px] 2xl:min-w-[300px] 3xl:min-w-[477px]">
       {!hideTitle && (
@@ -193,7 +193,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
           initial="hidden"
           whileInView="show"
           viewport={{ amount: 0.1, once: true }}
-          className="relative"
+          className="relative cursor-pointer"
         >
           <Controller
             name="solutionType"
@@ -201,6 +201,8 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
             defaultValue={""}
             render={({ field }) => (
               <Select<OptionType>
+                ref={selectRef}
+                openMenuOnFocus
                 value={
                   solutionOptions.find((o) => o.value === field.value) ?? null
                 }
@@ -222,6 +224,9 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                 classNames={{
                   control: ({ isFocused }) =>
                     `border-b pb-4 pt-1 cursor-pointer transition-colors ${isFocused ? "border-[#1B2B6B]" : "border-[#C2C2C2]"}`,
+                  container: () => "cursor-pointer",
+                  valueContainer: () => "cursor-pointer",
+                  input: () => "cursor-pointer",
                   placeholder: () =>
                     "text-[15px] md:text-[16px] 3xl:text-19 font-poppins font-[300] -tracking-[2%] text-paragraph placeholder:text-paragraph",
                   singleValue: () =>
@@ -244,10 +249,10 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                 }}
               />
             )}
+        
           />
-
           {/* 👇 Custom arrow — sits in the already-relative wrapper */}
-          <span className="pointer-events-none absolute right-0 top-[15px]">
+          <span className="cursor-pointer absolute right-0 top-[15px]" onClick={() => selectRef.current?.focus()}>
             <svg
               width="18"
               height="10"
@@ -270,6 +275,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
               </defs>
             </svg>
           </span>
+
 
           <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
         </motion.div>

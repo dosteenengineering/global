@@ -9,7 +9,7 @@ import BorderButton from "@/app/components/common/BorderButton";
 import { AnimatePresence, motion } from "framer-motion";
 import { moveRight, moveUp } from "@/app/components/motionVariants";
 import { useRef } from "react";
-
+import { useLenis } from "@/app/components/LenisProvider";
 interface DosteenSystemsProps {
   title: string;
   systems: {
@@ -35,6 +35,8 @@ export default function DosteenSystems({
     systems[0].id,
   );
   const accordionRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const contentRef = useRef<HTMLDivElement>(null);
+   const { scrollTo } = useLenis();
 
   // const [openUpward, setOpenUpward] = useState<number | null>(null);
 
@@ -98,7 +100,7 @@ export default function DosteenSystems({
                 >
                   <span
                     className={`text-[18px] leading-[1.56] text-secondary tracking-[-0.02em] transition-all duration-300 ${
-                      isOpen ? "font-[500]" : "font-light"
+                      isOpen ? "font-medium" : "font-light"
                     }`}
                   >
                     {system.title}
@@ -212,7 +214,15 @@ export default function DosteenSystems({
               return (
                 <div
                   key={system.id}
-                  onClick={() => setActiveId(system.id)}
+                  onClick={() => {
+                    setActiveId(index);
+                    if (contentRef.current) {
+                      scrollTo(contentRef.current, {
+                        offset: -300,
+                        duration: 1.2,
+                      });
+                    }
+                  }}
                   className={`group hover:pl-2 md:pe-3 3xl:pe-0 hover:3xl:pl-20 relative flex items-center gap-20 cursor-pointer transition-all duration-300 border-t-2 first:border-t-2 hover:first:border-t-transparent  border-[#c2c2c2] last:border-b-2 group transition-all duration-300 
                     ${isActive ? "pl-2 xl:pl-6 3xl:pl-20 first:border-t-transparent" : ""}`}
                   style={{
@@ -258,7 +268,7 @@ export default function DosteenSystems({
 
           {/* Right col */}
           {/* <div className="flex-1 min-w-0 relative"> */}
-          <div className="flex-1 min-w-0 relative self-start sticky top-30">
+          <div className="flex-1 min-w-0 relative self-start sticky top-30" ref={contentRef}>
             <div key={activeSystem.id} className="flex flex-col h-full">
               {/* Title */}
               <motion.h3
