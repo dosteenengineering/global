@@ -235,7 +235,7 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
                             {activeStory.name}
                           </p>
                           <p className="text-19 leading-[1.52]">
-                            {activeStory.company} – {activeStory.designation}
+                            {activeStory.company}   {activeStory.designation}
                           </p>
                         </motion.div>
                       </AnimatePresence>

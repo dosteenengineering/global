@@ -372,30 +372,56 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
               >
                 <Link
                   href={`mailto:${contact.email}`}
-                  className="flex items-center gap-3"
+                  className="flex items-center gap-3 group"
                 >
                   <Image
                     src="/assets/icons/footer/social/mail.svg"
                     alt="Mail"
                     width={35}
                     height={28}
-                    className="shrink-0 pointer-events-none"
+                    className="shrink-0 pointer-events-none group-hover:brightness-0"
                   />
-                  <span>{contact.email}</span>
+                  <span className="group-hover:text-primary">{contact.email}</span>
+                </Link>
+                <Link
+                  href={`mailto:${contact.email2}`}
+                  className="flex items-center gap-3 group"
+                >
+                  <Image
+                    src="/assets/icons/footer/social/mail.svg"
+                    alt="Mail"
+                    width={35}
+                    height={28}
+                    className="shrink-0 pointer-events-none group-hover:brightness-0"
+                  />
+                  <span className="group-hover:text-primary">{contact.email2}</span>
                 </Link>
                 <div className="w-[1px] h-[28px] bg-black/35"></div>
                 <Link
                   href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-4"
+                  className="flex items-center gap-4 group"
                 >
                   <Image
                     src="/assets/icons/footer/social/phone.svg"
                     alt="Phone"
                     width={36}
                     height={35}
-                    className="shrink-0 pointer-events-none"
+                    className="shrink-0 pointer-events-none group-hover:brightness-0"
                   />
-                  <span>{contact.phone}</span>
+                  <span className="group-hover:text-primary">{contact.phone}</span>
+                </Link>
+                <Link
+                  href={`tel:${contact.phone2.replace(/\s/g, "")}`}
+                  className="flex items-center gap-4 group"
+                >
+                  <Image
+                    src="/assets/icons/footer/social/phone.svg"
+                    alt="Phone"
+                    width={36}
+                    height={35}
+                    className="shrink-0 pointer-events-none group-hover:brightness-0"
+                  />
+                  <span className="group-hover:text-primary">{contact.phone2}</span>
                 </Link>
               </motion.div>
             </div>
@@ -427,29 +453,55 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 >
                   <Link
                     href={`mailto:${contact.email}`}
-                    className="flex items-center gap-3 3xl:gap-4 border-b pb-3 3xl:pb-[14px] border-black/35"
+                    className="flex items-center gap-3 3xl:gap-4 pb-3 3xl:pb-[14px] group"
                   >
                     <Image
                       src="/assets/icons/footer/social/mail.svg"
                       alt="Mail"
                       width={35}
                       height={28}
-                      className="shrink-0 pointer-events-none"
+                      className="shrink-0 pointer-events-none group-hover:brightness-0"
                     />
-                    <span>{contact.email}</span>
+                    <span className="group-hover:text-primary">{contact.email}</span>
+                  </Link>
+                  <Link
+                    href={`mailto:${contact.email2}`}
+                    className="flex items-center gap-3 3xl:gap-4 border-b pb-3 3xl:pb-[14px] border-black/35 group"
+                  >
+                    <Image
+                      src="/assets/icons/footer/social/mail.svg"
+                      alt="Mail"
+                      width={35}
+                      height={28}
+                      className="shrink-0 pointer-events-none group-hover:brightness-0"
+                    />
+                    <span className="group-hover:text-primary">{contact.email2}</span>
                   </Link>
                   <Link
                     href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                    className="flex items-center gap-4 pt-4 3xl:pt-[18px]"
+                    className="flex items-center gap-4 pt-4 3xl:pt-[18px] group"
                   >
                     <Image
                       src="/assets/icons/footer/social/phone.svg"
                       alt="Phone"
                       width={36}
                       height={35}
-                      className="shrink-0 pointer-events-none"
+                      className="shrink-0 pointer-events-none group-hover:brightness-0"
                     />
-                    <span>{contact.phone}</span>
+                    <span className="group-hover:text-primary">{contact.phone}</span>
+                  </Link>
+                  <Link
+                    href={`tel:${contact.phone2.replace(/\s/g, "")}`}
+                    className="flex items-center gap-4 pt-4 3xl:pt-[18px] group"
+                  >
+                    <Image
+                      src="/assets/icons/footer/social/phone.svg"
+                      alt="Phone"
+                      width={36}
+                      height={35}
+                      className="shrink-0 pointer-events-none group-hover:brightness-0"
+                    />
+                    <span className="group-hover:text-primary">{contact.phone2}</span>
                   </Link>
                 </motion.div>
                 <motion.div

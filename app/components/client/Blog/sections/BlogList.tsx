@@ -61,8 +61,8 @@ const BlogList = ({ data }: { data: BlogItem[] }) => {
                 month: '2-digit',
                 year: 'numeric'
               }).replace(/\//g, '-')}</span>
-              <h2 className="text-30 leading-[1.333333333333333] font-light lg:max-w-[25ch] order-3 lg:order-2 max-md:line-clamp-3">{blog.title}</h2>
-              <button className="text-description !text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-4 xl:px-[18px] uppercase border border-bdr-gray rounded-full">
+              <h2 className="text-30 leading-[1.333333333333333] font-light lg:max-w-[30ch] order-3 lg:order-2 max-md:line-clamp-3">{blog.title}</h2>
+              <button className="text-description !text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-4 xl:px-[18px] uppercase border border-bdr-gray rounded-full lg:order-3">
                 {blog.category.name}
               </button>
             </div>

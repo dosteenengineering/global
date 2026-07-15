@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ContactData, locationsData } from "../data";
+import { ContactData } from "../data";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { useGetContainerSpacing } from "@/app/hooks/useGetContainerSpacing";
 import { useRef, useState } from "react";
@@ -20,7 +20,7 @@ export default function LocationsSection({ data }: { data: ContactData['secondSe
   }))
   const containerRef = useRef<HTMLDivElement | null>(null);
   const leftInset = useGetContainerSpacing(containerRef);
-  const { ref, parallaxY } = useParallax(12, 1.1); // pass your lg (smallest) scale;
+  const { ref, parallaxY } = useParallax(20); // pass your lg (smallest) scale;
 
   // Group locations by country (for mobile tabs)
   const grouped = locations.reduce<Record<string, typeof locations>>(
@@ -42,7 +42,7 @@ export default function LocationsSection({ data }: { data: ContactData['secondSe
       <div className="flex flex-col lg:flex-row lg:min-h-screen">
         {/* Left — hero image */}
         <div ref={ref} className="relative shrink-0 h-[199px] min-h-max md:h-[450px] lg:h-auto w-full lg:w-[35.94%] overflow-hidden" >
-          <Image src={image} alt="Locations" fill className="object-cover h-full scale-[1.35] md:scale-[1.05] lg:scale-110" priority
+          <Image src={image} alt="Locations" fill className="object-cover h-full scale-[1.35] md:scale-[1.05] lg:scale-110 xl:scale-120" priority
             style={{ transform: ` translateY(${parallaxY}vh) scale(1.1)`, }} />
         </div>
 

@@ -4,8 +4,10 @@ export const footerData = {
     alt: "Dosteen – Engineering Peace of Mind",
   },
   contact: {
+    email2: "info.mct@dosteen.com",
     email: "Info.dxb@dosteen.com",
-    phone: "+968 24 876 600",
+    phone2: "+968 24 876 600",
+    phone: "+971 4 2582321",
   },
   socials: [
     { name: "instagram", href: "https://www.instagram.com/dosteen.engineering/", icon: "/assets/icons/footer/social/instagram.svg" },
@@ -112,7 +114,7 @@ export const navItems = [
   },
   { label: "RESOURCE HUB", hasDropdown: false, href: "/resource" },
   { label: "CASE STUDIES", hasDropdown: false, href: "/case-studies" },
-  { label: "VENDOR REGISTRATION", hasDropdown: false, href: "/vendor-registration" },
+  { label: "PARTNER WITH US", hasDropdown: false, href: "/vendor-registration", newTab: true },
 ];
 
  export const menuItems = [
