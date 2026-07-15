@@ -258,18 +258,38 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
     };
   }, [searchQuery]);
 
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const openNow = (label: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenDropdown(label);
+  };
+
+  const closeSoon = (label: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      setOpenDropdown((current) => (current === label ? null : current));
+    }, 150);
+  };
+
+  // cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
   return (
     // <header className="absolute top-[30px] md:top-[23px] left-0 w-full z-[150]">
-    <header
-      className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
+    <header className={`fixed left-0 w-full z-[150] top-[30px] md:top-[23px]
       ${!introComplete ? "invisible" : ""}
       ${isMenuTransformDisabled
-          ? ""
-          : "transition-transform duration-300 ease-out " +
-          (isVisible
-            ? "translate-y-0"
-            : "-translate-y-[150%] pointer-events-none")
-        }`}
+        ? ""
+        : "transition-transform duration-300 ease-out " +
+        (isVisible
+          ? "translate-y-0"
+          : "-translate-y-[150%] pointer-events-none")
+      }`}
     >
       <div className="container relative z-[160] flex items-center justify-between gap-4 w-full">
         <div
@@ -308,7 +328,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
             {/* Nav items */}
             <div
               className={`hidden xl:flex items-center flex-1 overflow-visible transition-all duration-200 ease-in-out 
-    ${isMenuOpen
+              ${isMenuOpen
                   ? "max-w-0 gap-0 pr-0 opacity-0 pointer-events-none"
                   : "max-w-[760px] gap-40 pr-80 opacity-100 2xl:pr-100 3xl:pr-150"
                 }`}
@@ -402,35 +422,29 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                   ref={(el) => {
                     navItemRefs.current[i] = el;
                   }}
-                  className="relative group"
+                  className="relative group cursor-pointer"
                   style={{ opacity: 0 }}
-                  onMouseEnter={() =>
-                    item.hasDropdown && setOpenDropdown(item.label)
-                  }
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  // onMouseEnter={() =>
+                  //   item.hasDropdown && setOpenDropdown(item.label)
+                  // }
+                  // onMouseLeave={() => setOpenDropdown(null)}
+                  onMouseEnter={() => item.hasDropdown && openNow(item.label)}
+                  onMouseLeave={() => item.hasDropdown && closeSoon(item.label)}
                 >
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
-                  >
+                  <Link href={item.href} className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
+                    style={{ cursor: "pointer" }} >
                     <span className="text-15 leading-[1.733] uppercase">
                       {item.label}
                     </span>
                     {item.hasDropdown && (
-                      <Image
-                        src="/assets/icons/arrow-down-tip.svg"
-                        alt=""
-                        width={15}
-                        height={10}
-                        className={`w-auto h-[7px] pointer-events-none transition-transform duration-300 ease-out ${openDropdown === item.label ? "rotate-180" : ""
-                          }`}
-                      />
+                      <Image src="/assets/icons/arrow-down-tip.svg" alt="" width={15} height={10}
+                        className={`w-auto h-[7px] transition-transform duration-300 ease-out cursor-pointer ${openDropdown === item.label ? "rotate-180" : "" }`}/>
                     )}
                   </Link>
 
-                  {item.hasDropdown && (
-                    <div className="absolute top-full left-0 w-full h-[25px]" />
-                  )}
+                  {/* {item.hasDropdown && (
+                    <div className="absolute top-full left-0 w-full h-[25px] pointer-events-none" />
+                  )} */}
 
                   {/* Dropdown */}
                   {item.hasDropdown && item.subItems && (
@@ -448,9 +462,9 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                             duration: 0.38,
                             ease: [0.16, 1, 0.3, 1],
                           }}
-                          className="absolute top-[calc(100%+25px)] left-0 z-50 rounded-[16px] border border-white/15 bg-black/80 overflow-hidden"
+                          className="absolute top-full left-0 z-50   overflow-hidden  pt-[25px]"
                         >
-                          <ul className="py-[10px] min-w-[280px]">
+                          <ul className="py-[10px] min-w-[280px] bg-black/80 rounded-[16px] border border-white/15">
                             {item.subItems.map((sub, si) => (
                               <motion.li
                                 key={sub.label}
@@ -463,8 +477,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                                   delay: si * 0.065,
                                 }}
                               >
-                                <Link
-                                  href={sub.href}
+                                <Link href={sub.href}
                                   className="flex items-center px-[20px] py-[11px] text-white text-[14px] uppercase tracking-wide hover:bg-white/8 hover:translate-x-1 transition-all duration-300"
                                 >
                                   {sub.label}
@@ -626,7 +639,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
           <div className="rounded-full backdrop-blur-[2px]">
             <button
               ref={hamburgerRef}
-              className={`cursor-pointer flex items-center justify-center group ${isMenuOpen ? "w-[40px] h-[40px] xl:w-[70px] xl:h-[70px]" :"w-[40px] h-[40px] md:w-[70px] md:h-[70px]"} rounded-full
+              className={`cursor-pointer flex items-center justify-center group ${isMenuOpen ? "w-[40px] h-[40px] xl:w-[70px] xl:h-[70px]" : "w-[40px] h-[40px] md:w-[70px] md:h-[70px]"} rounded-full
                border border-white/30 glass-effect ${isMenuOpen && "bg-white/8"}
                 ${isSticky ? "bg-black/70" : "bg-white/8"}`}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -635,7 +648,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
               style={{ opacity: 0 }}
             >
               <span className={`
-                relative block ${isMenuOpen ? " w-6 h-5 xl:h-[21px] xl:w-[31px]" :" w-6 h-5 md:h-[21px] md:w-[31px]"} group-hover:scale-[1.08] transition-transform duration-300 ease-in-out
+                relative block ${isMenuOpen ? " w-6 h-5 xl:h-[21px] xl:w-[31px]" : " w-6 h-5 md:h-[21px] md:w-[31px]"} group-hover:scale-[1.08] transition-transform duration-300 ease-in-out
                 `}>
                 {/* Top line */}
                 <span

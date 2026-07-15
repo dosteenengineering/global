@@ -45,7 +45,7 @@ const BlogLatest = ({ data }: { data: BlogItem[] }) => {
           }).replace(/\//g, '-')}
         </motion.span>
         <motion.h2 variants={moveUp(0.4)} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="text-55 leading-[1.181818181818182] font-light text-heading lg:max-w-[25ch] order-3 lg:order-2">
+          className="text-55 leading-[1.181818181818182] font-light text-heading lg:max-w-[30ch] order-3 lg:order-2">
           {latestBlog.title}</motion.h2>
         <motion.button variants={moveUp(0.6)} initial="hidden" whileInView="show" viewport={{ once: true }}
           className="text-description !text-15 leading-[1.666666666666667] text-paragraph h-fit py-[3px] px-2 xl:px-[18px] uppercase border border-bdr-gray rounded-full order-2 lg:order-3">{latestBlog.category.name}</motion.button>
