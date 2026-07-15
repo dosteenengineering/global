@@ -30,7 +30,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
   // Residential Developments
   // Commercial Buildings
   // Government Facilities
-  "Industrial Facilities": [
+  "Industrial": [
     {
       "id": "hotspot-1783075798773",
       "title": "Docking Solution",
@@ -145,7 +145,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     }
   ],
 
-  "Residential Developments": [
+  "Residential": [
     {
       "id": "hotspot-1783078947137",
       "title": "Garbage & Linen Chutes",
@@ -259,7 +259,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     }
   ],
 
-  "Commercial Buildings": [
+  "Commercial": [
     {
       "id": "hotspot-1783079308586",
       "title": "Garbage & Linen Chutes",
@@ -370,7 +370,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "side": "right"
     }
   ],
-  "Government Facilities": [
+  "Government": [
     {
       "id": "hotspot-1783079773906",
       "title": "Blast Doors",
