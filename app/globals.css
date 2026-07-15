@@ -28,6 +28,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+html{
+    scroll-behavior: auto;
+}
+
 /* Lenis compatibility */
 .lenis.lenis-smooth {
     scroll-behavior: auto !important;

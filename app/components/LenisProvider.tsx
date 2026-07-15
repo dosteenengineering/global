@@ -72,7 +72,7 @@
 
 import Lenis from "lenis";
 import { usePathname } from "next/navigation";
-import { ReactNode, useEffect, useRef, useState, createContext, useContext } from "react";
+import { ReactNode, useEffect, useRef, useState, createContext, useContext, useCallback } from "react";
 
 const ROUTES_WITHOUT_LENIS = ["/vendor-registration", "/partner-registration"];
 
@@ -93,13 +93,8 @@ const LenisProvider = ({ children }: { children: ReactNode }) => {
   const lenisRef = useRef<Lenis | null>(null);
   const [ready, setReady] = useState(false);
 
+  // 1. Create Lenis ONCE for the whole app lifetime
   useEffect(() => {
-    setReady(false);
-
-    if (ROUTES_WITHOUT_LENIS.some((route) => pathname?.startsWith(route))) {
-      return;
-    }
-
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
     }
@@ -111,24 +106,46 @@ const LenisProvider = ({ children }: { children: ReactNode }) => {
     });
 
     lenisRef.current = lenis;
-    setReady(true); // flips AFTER lenis is actually usable
+    setReady(true);
 
     return () => {
       lenis.destroy();
       lenisRef.current = null;
       setReady(false);
     };
+  }, []); // 👈 empty deps — no more destroy/recreate per route
+
+  // 2. Separately, just start/stop based on route — no teardown
+  useEffect(() => {
+    if (!lenisRef.current) return;
+
+    const shouldDisable = ROUTES_WITHOUT_LENIS.some((route) =>
+      pathname?.startsWith(route)
+    );
+
+    if (shouldDisable) {
+      lenisRef.current.stop();
+    } else {
+      lenisRef.current.start();
+    }
   }, [pathname]);
 
-  const scrollTo: LenisContextType["scrollTo"] = (target, options = {}) => {
-    const { offset = -80, duration = 1.5 } = options;
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(target, { offset, duration });
-    } else {
-      const el = typeof target === "string" ? document.querySelector(target) : target;
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const scrollTo: LenisContextType["scrollTo"] = (target, options = {}) => {
+  //   const { offset = 0, duration = 1.5 } = options;
+  //   if (lenisRef.current) {
+  //     lenisRef.current.scrollTo(target, { offset, duration });
+  //   } else {
+  //     const el = typeof target === "string" ? document.querySelector(target) : target;
+  //     el?.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
+
+  const scrollTo = useCallback<LenisContextType["scrollTo"]>(
+    (target, options) => {
+      lenisRef.current?.scrollTo(target as any, options);
+    },
+    [],
+  );
 
   return (
     <LenisContext.Provider value={{ scrollTo, ready }}>

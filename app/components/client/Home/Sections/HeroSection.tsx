@@ -12,26 +12,26 @@ import { useLenis } from "@/app/components/LenisProvider";
 export default function Hero({data}:{data:Home['bannerSection']}) {
   const introComplete = useIntroComplete();
   // wherever this component/section lives
-  const { scrollTo, ready } = useLenis();
+  // const { scrollTo, ready } = useLenis();
 
-  const handleContactClick = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  ) => {
-    // someExistingHandler(event);
+  // const handleContactClick = (
+  //   event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  // ) => {
+  //   // someExistingHandler(event);
 
-    let hash: string | null = null;
-    try {
-      hash = new URL(data.buttonLink, window.location.origin).hash || null;
-    } catch { }
+  //   let hash: string | null = null;
+  //   try {
+  //     hash = new URL(data.buttonLink, window.location.origin).hash || null;
+  //   } catch { }
 
-    const el = hash ? document.querySelector(hash) : null;
+  //   const el = hash ? document.querySelector(hash) : null;
 
-    if (el && ready) {
-      event.preventDefault();
-      scrollTo(el as HTMLElement, { offset: -880, duration: 1.5 });
-      window.history.pushState(null, "", hash!);
-    }
-  };
+  //   if (el && ready) {
+  //     event.preventDefault();
+  //     scrollTo(el as HTMLElement, { offset: 0, duration: 1.5 });
+  //     window.history.pushState(null, "", hash!);
+  //   }
+  // };
 
   return (
     <section className="relative h-[85vh] lg:h-[100dvh] w-full overflow-hidden">
@@ -83,7 +83,7 @@ export default function Hero({data}:{data:Home['bannerSection']}) {
                 hoverBg="white"
                 className="!px-[24px] !py-[11.2px]"
                 href={data.buttonLink}
-                onClick={handleContactClick}
+                // onClick={handleContactClick}
               />
             </motion.div>
           )}

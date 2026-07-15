@@ -20,6 +20,7 @@ export const poppins = Poppins({
 //   variable: "--font-helvetica-neue",
 // });
 
+
 export const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400"],
@@ -49,12 +50,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
+
+  
         <link
           rel="preload"
           href="/assets/noise/primary-noise-vertical.png"
           as="image"
           type="image/png"
         />
+
       </head>
       <body
         // className={`${poppins.variable} ${helvetica_neue.variable} ${dmSans.variable} antialiased`}

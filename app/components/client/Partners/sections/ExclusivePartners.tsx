@@ -114,7 +114,7 @@ const Partners = ({data}:{data:ClientPageData['thirdSection']}) => {
                 viewport={{ once: true, margin: "-100px" }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
-                className={`relative cursor-pointer select-none border-l border-y border-[#c2c2c2] min-h-[200px] md:min-h-[284px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
+                className={`relative cursor-grab select-none border-l border-y border-[#c2c2c2] min-h-[200px] md:min-h-[284px] ${isLast ? "border-r" : ""} transition-colors duration-700 ease-out`} 
               >
                 <div className={`absolute inset-0 transition-opacity duration-700 ease-out will-change-[opacity] ${isActive ? "opacity-100" : "opacity-0" }`} >
                   <PrimaryNoise2 />

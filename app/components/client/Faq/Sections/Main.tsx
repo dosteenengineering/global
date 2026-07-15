@@ -63,15 +63,15 @@ export default function FaqSection({ data }: { data: FaqData }) {
   };
 
   return (
-    <section className="py-17.5 lg:pt-120   lg:pb-140 3xl:pb-200 relative ">
+    <section className="py-17.5 lg:pt-120 lg:pb-140 3xl:pb-200 relative ">
       <div
-        className={`absolute hidden lg:block ${filtered.length > 0 ? "top-[33.5%]" : "top-[17.8%]"} bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
+        className={`absolute hidden lg:block top-[33.5%] 3xl:top-[375px] ${filtered.length > 0 ? "" : "opacity-0"} transition-all duration-500 bottom-0 left-[-8.3%] w-full max-w-[550px] 3xl:max-w-[793px] max-h-[1203px] z-0 pointer-events-none`}
       >
         <Image
           src="/assets/icons/faq-question.svg"
           alt="faq-question"
           fill
-          className="object-contain object-top-left"
+          className="object-contain object-top-left "
         />
       </div>
 
@@ -85,24 +85,27 @@ export default function FaqSection({ data }: { data: FaqData }) {
           >
             <SectionTitle
               title={firstSection.title}
-              className={`section-heading-90 ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
+              // className={`section-heading-90 ${filtered.length > 0 ? "mb-30" : "mb-140 3xl:mb-150"} max-w-[20ch]`}
+              className={`section-heading-90 mb-30 max-w-[20ch]`}
             />
           </motion.div>
-          {filtered.length > 0 && (
+          {/* {filtered.length > 0 && ( */}
             <motion.div
               variants={moveUp(0.35)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.3 }}
-              className="mb-140 3xl:mb-150"
+              className={`mb-140 3xl:mb-150 `}
             >
+            <div className={`transition-all duration-300 `}>
               <FaqCta
                 subTitle={firstSection.subTitle}
                 btnText={firstSection.btnText}
                 btnLink={firstSection.btnLink}
               />
+              </div>
             </motion.div>
-          )}
+          {/* )} */}
         </div>
 
         {/* Toolbar */}
