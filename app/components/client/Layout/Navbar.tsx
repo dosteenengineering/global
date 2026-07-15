@@ -431,7 +431,9 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
                   onMouseEnter={() => item.hasDropdown && openNow(item.label)}
                   onMouseLeave={() => item.hasDropdown && closeSoon(item.label)}
                 >
-                  <Link href={item.href} className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
+                  <Link href={item.href} target={item.newTab ? "_blank" : undefined}
+                    rel={item.newTab ? "noopener noreferrer" : undefined} 
+                    className="flex items-center gap-[7px] text-white whitespace-nowrap cursor-pointer"
                     style={{ cursor: "pointer" }} >
                     <span className="text-15 leading-[1.733] uppercase">
                       {item.label}

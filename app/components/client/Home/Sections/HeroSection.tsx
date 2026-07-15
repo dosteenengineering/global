@@ -7,9 +7,31 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { useIntroComplete } from "@/app/context/IntroContext";
 import { Home } from "../data";
+import { useLenis } from "@/app/components/LenisProvider";
 
 export default function Hero({data}:{data:Home['bannerSection']}) {
   const introComplete = useIntroComplete();
+  // wherever this component/section lives
+  const { scrollTo, ready } = useLenis();
+
+  const handleContactClick = (
+    event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
+    // someExistingHandler(event);
+
+    let hash: string | null = null;
+    try {
+      hash = new URL(data.buttonLink, window.location.origin).hash || null;
+    } catch { }
+
+    const el = hash ? document.querySelector(hash) : null;
+
+    if (el && ready) {
+      event.preventDefault();
+      scrollTo(el as HTMLElement, { offset: -80, duration: 1.5 });
+      window.history.pushState(null, "", hash!);
+    }
+  };
 
   return (
     <section className="relative h-[85vh] lg:h-[100dvh] w-full overflow-hidden">
@@ -61,6 +83,7 @@ export default function Hero({data}:{data:Home['bannerSection']}) {
                 hoverBg="white"
                 className="!px-[24px] !py-[11.2px]"
                 href={data.buttonLink}
+                onClick={handleContactClick}
               />
             </motion.div>
           )}

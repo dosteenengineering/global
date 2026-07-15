@@ -14,7 +14,8 @@ type BorderButtonProps = {
   px?: string;
   className?: string;
   type?: "button" | "submit" | "reset";
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  // onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   disabled?: boolean;
@@ -119,23 +120,43 @@ export default function BorderButton({
     onPointerLeave: () => setHovered(false),
   };
 
-  if (type || onClick) {
+  // if (type || onClick) {
+  //   return (
+  //     <button
+  //       disabled={disabled}
+  //       type={type ?? "button"}
+  //       onClick={onClick}
+  //       className={sharedClass}
+  //       {...events}
+  //     >
+  //       {content}
+  //     </button>
+  //   );
+  // }
+
+  if (href) {
     return (
-      <button
-        disabled={disabled}
-        type={type ?? "button"}
-        onClick={onClick}
-        className={sharedClass}
-        {...events}
-      >
+      <Link href={href} onClick={onClick} className={sharedClass} {...events}>
         {content}
-      </button>
+      </Link>
     );
   }
 
   return (
-    <Link href={href ?? "#"} className={sharedClass} {...events}>
+    <button
+      disabled={disabled}
+      type={type ?? "button"}
+      onClick={onClick}
+      className={sharedClass}
+      {...events}
+    >
       {content}
-    </Link>
+    </button>
   );
 }
+//   return (
+//     <Link href={href ?? "#"} className={sharedClass} {...events}>
+//       {content}
+//     </Link>
+//   );
+// }
