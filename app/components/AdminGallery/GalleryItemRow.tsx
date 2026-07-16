@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ImageUploader } from "@/components/ui/image-uploader";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { SeoFormValues } from "@/app/types/seo";
 
 export interface GalleryFormProps {
-  metaTitle: string;
-  metaDescription: string;
+  seo:SeoFormValues
   firstSection: {
     image: string;
     imageAlt: string;

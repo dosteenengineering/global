@@ -1,14 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import seoSchema from "./Seo";
 
 const CsiSchema = new Schema(
   {
-    metaTitle: {
-      type: String,
-      default: "",
-    },
-    metaDescription: {
-      type: String,
-      default: "",
+    seo:{
+      type:seoSchema
     },
 
     firstSection: {

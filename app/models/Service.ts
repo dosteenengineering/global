@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const serviceSchema = new mongoose.Schema({
-    metaTitle: {
-        type: String,
-    },
-    metaDescription: {
-        type: String,
+    seo: {
+        type: seoSchema,
     },
     firstSection: {
         image: { type: String, required: true },
@@ -18,6 +16,9 @@ const serviceSchema = new mongoose.Schema({
         description: { type: String, required: true },
     },
     thirdSection: {
+        seo: {
+            type: seoSchema,
+        },
         title: { type: String, required: true },
         items: [
             {

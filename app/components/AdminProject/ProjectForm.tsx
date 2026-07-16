@@ -27,10 +27,13 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { statusData } from './statusData'
+import { SeoFormValues } from '@/app/types/seo'
+import SeoFields from '../common/SeoFields'
 
 
 
 interface ProjectFormProps {
+    seo: SeoFormValues;
     bannerSection: {
         image: string;
         imageAlt: string;
@@ -89,9 +92,6 @@ interface ProjectFormProps {
     thumbnail: string;
     thumbnailAlt: string;
 
-    metaTitle: string;
-    metaDescription: string;
-
     availableServices?: {
         _id: string;
         firstSection: {
@@ -100,7 +100,7 @@ interface ProjectFormProps {
     }[];
 
     featuredServices: string[];
-    featured:boolean;
+    featured: boolean;
 }
 
 const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
@@ -187,8 +187,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("scopeSection.items", data.data.scopeSection.items);
                 setValue("thumbnail", data.data.thumbnail);
                 setValue("thumbnailAlt", data.data.thumbnailAlt);
-                setValue("metaTitle", data.data.metaTitle);
-                setValue("metaDescription", data.data.metaDescription);
+                setValue("seo", data.data.seo);
                 setValue("images", data.data.images);
                 setValue("slug", data.data.slug);
                 setValue("featured", data.data.featured);
@@ -323,7 +322,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
 
                         {!reorderMode && <div className="mt-4 grid grid-cols-3 gap-4">
                             {imageUrls.map((url, index) => (
-                                <div key={index} className="relative h-40">
+                                <div key={index} className="relative h-full">
                                     <Image
                                         src={url}
                                         alt={`Uploaded image ${index + 1}`}
@@ -786,22 +785,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                     </div>
                 </AdminItemContainer>
 
-                <AdminItemContainer>
-                    <Label main>SEO</Label>
-                    <div className="flex flex-col gap-2 p-5">
-
-                        <div className="mt-2 grid grid-cols-1 gap-2  h-fit">
-                            <div>
-                                <Label>Title</Label>
-                                <Input type="text" {...register("metaTitle")} />
-                            </div>
-                            <div>
-                                <Label>Description</Label>
-                                <Input type="text" {...register("metaDescription")} />
-                            </div>
-                        </div>
-                    </div>
-                </AdminItemContainer>
+                <SeoFields<ProjectFormProps> control={control} register={register} errors={errors} />
 
 
                 <div className='flex justify-center w-full'>

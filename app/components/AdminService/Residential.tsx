@@ -29,10 +29,11 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import SeoFields from '../common/SeoFields';
+import { SeoFormValues } from '@/app/types/seo';
 
 interface IndividualServiceFormProps {
-    metaTitle: string;
-    metaDescription: string;
+    seo: SeoFormValues;
 
     firstSection: {
         title: string;
@@ -132,8 +133,7 @@ const IndividualService = () => {
                 const data = result.data;
 
                 reset({
-                    metaTitle: data.metaTitle || "",
-                    metaDescription: data.metaDescription || "",
+                    seo:data.seo,
 
                     firstSection: {
                         title: data.firstSection?.title || "",
@@ -631,19 +631,7 @@ const IndividualService = () => {
 
 
 
-                <AdminItemContainer>
-                    <Label main>SEO</Label>
-                    <div className="p-5 flex flex-col gap-2">
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='' {...register("metaTitle")} />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Description</Label>
-                            <Input type='text' placeholder='' {...register("metaDescription")} />
-                        </div>
-                    </div>
-                </AdminItemContainer>
+                <SeoFields<IndividualServiceFormProps> control={control} register={register} errors={errors} />
 
                 <div className='flex justify-center'>
                     <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>

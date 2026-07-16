@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const capabilitiesSchema = new mongoose.Schema(
   {
-    metaTitle: String,
-    metaDescription: String,
+    seo:{
+      type:seoSchema
+    },
 
     firstSection: {
       image: { type: String, required: true },

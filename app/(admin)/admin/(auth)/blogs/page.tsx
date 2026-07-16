@@ -20,11 +20,12 @@ import { useForm, Controller } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
 // import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { SeoFormValues } from "@/app/types/seo";
+import SeoFields from "@/app/components/common/SeoFields";
 
 
 interface BlogPageProps {
-    metaTitle: string;
-    metaDescription: string;
+    seo: SeoFormValues;
     bannerSection: {
         image: string;
         imageAlt: string;
@@ -171,8 +172,7 @@ export default function Blogs() {
             const response = await fetch("/api/admin/blog");
             if (response.ok) {
                 const data = await response.json();
-                setValue("metaTitle", data.data.metaTitle);
-                setValue("metaDescription", data.data.metaDescription);
+                setValue("seo", data.data.seo);
                 setValue("bannerSection", data.data.bannerSection);
             } else {
                 const data = await response.json();
@@ -246,19 +246,7 @@ export default function Blogs() {
                     </div>
                 </AdminItemContainer>
 
-                <AdminItemContainer>
-                    <Label main>SEO</Label>
-                    <div className="flex flex-col gap-2 p-5">
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='' {...register("metaTitle")} />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Description</Label>
-                            <Input type='text' placeholder='' {...register("metaDescription")} />
-                        </div>
-                    </div>
-                </AdminItemContainer>
+                <SeoFields<BlogPageProps> control={control} register={register} errors={errors} />
 
                 <div className='flex justify-center mt-5'>
                     <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>

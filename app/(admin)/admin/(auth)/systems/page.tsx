@@ -78,36 +78,6 @@ export default function Systems() {
   }
 
 
-  const handleFetchSector = async () => {
-    try {
-      const response = await fetch("/api/admin/system/sector");
-      if (response.ok) {
-        const data = await response.json();
-        setSectorList(data.data);
-      } else {
-        const data = await response.json();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log("Error fetching sector", error);
-    }
-  }
-
-
-  const handleFetchLocation = async () => {
-    try {
-      const response = await fetch("/api/admin/system/location");
-      if (response.ok) {
-        const data = await response.json();
-        setLocationList(data.data);
-      } else {
-        const data = await response.json();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log("Error fetching location", error);
-    }
-  }
 
 
   const handleDeleteSystem = async (id: string) => {
@@ -129,31 +99,29 @@ export default function Systems() {
   }
 
 
-  const fetchSystemDetails = async () => {
-    try {
-      const response = await fetch("/api/admin/system");
-      if (response.ok) {
-        const data = await response.json();
-        setValue("metaTitle", data.data.metaTitle);
-        setValue("metaDescription", data.data.metaDescription);
-        setValue("bannerSection", data.data.bannerSection);
-        setValue("firstSection", data.data.firstSection);
-        setValue("lastSection", data.data.lastSection);
-      } else {
-        const data = await response.json();
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log("Error fetching system details", error);
-    }
-  }
+  // const fetchSystemDetails = async () => {
+  //   try {
+  //     const response = await fetch("/api/admin/system");
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setValue("metaTitle", data.data.metaTitle);
+  //       setValue("metaDescription", data.data.metaDescription);
+  //       setValue("bannerSection", data.data.bannerSection);
+  //       setValue("firstSection", data.data.firstSection);
+  //       setValue("lastSection", data.data.lastSection);
+  //     } else {
+  //       const data = await response.json();
+  //       toast.error(data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error fetching system details", error);
+  //   }
+  // }
 
 
   useEffect(() => {
     handleFetchSystems();
-    handleFetchSector();
-    handleFetchLocation();
-    fetchSystemDetails();
+    // fetchSystemDetails();
   }, [])
 
   return (

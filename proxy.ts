@@ -10,6 +10,7 @@ export async function proxy(request: NextRequest) {
   response.headers.set("Access-Control-Allow-Origin", "https://docs-rho-wine.vercel.app");
   response.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  response.headers.set("x-pathname", request.nextUrl.pathname);
 
   // Define protected routes
   const isProtectedRoute = path.startsWith("/admin") && !path.includes("/admin/login");

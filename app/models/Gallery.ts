@@ -1,15 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import seoSchema from "./Seo";
 
 const GallerySchema = new Schema(
   {
-    metaTitle: {
-      type: String,
-      default: "",
-    },
-
-    metaDescription: {
-      type: String,
-      default: "",
+    seo: {
+      type: seoSchema
     },
 
     firstSection: {
@@ -34,24 +29,24 @@ const GallerySchema = new Schema(
       },
     },
 
-secondSection: {
-  items: [
-    {
-      _id: false,
-      title: { type: String, default: "" },
-      image: { type: String, default: "" },
-      imageAlt: { type: String, default: "" },
-      date: { type: String, default: "" },
-      images: [
+    secondSection: {
+      items: [
         {
           _id: false,
-          src: { type: String, default: "" },
-          alt: { type: String, default: "" },
+          title: { type: String, default: "" },
+          image: { type: String, default: "" },
+          imageAlt: { type: String, default: "" },
+          date: { type: String, default: "" },
+          images: [
+            {
+              _id: false,
+              src: { type: String, default: "" },
+              alt: { type: String, default: "" },
+            },
+          ],
         },
       ],
     },
-  ],
-},
   },
   {
     timestamps: true,

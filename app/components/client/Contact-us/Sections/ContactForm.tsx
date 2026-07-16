@@ -18,6 +18,7 @@ import {
 } from "@/lib/validations/contactScheme";
 import { sendContactEnquiryAction } from "@/lib/mail/actions/sendContactEnquiryAction";
 import { toast } from "sonner";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // const SYSTEM_OPTIONS = [
 //   "HVAC Systems",
@@ -33,11 +34,13 @@ import { toast } from "sonner";
 
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
-export default function ContactForm({systemData}: {systemData: string[]}) {
+export default function ContactForm({ systemData }: { systemData: string[] }) {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
-
+    const { scrollTo } = useLenis();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -73,9 +76,23 @@ export default function ContactForm({systemData}: {systemData: string[]}) {
     }
   };
 
+
+  useEffect(() => {
+    if (searchParams.get("scrollTo") !== "contact-form") return;
+
+    const timeout = setTimeout(() => {
+      const el = document.getElementById("contact-form");
+      if (el) scrollTo(el, { offset: 0, duration: 1.5 });
+      // remove the param without adding a history entry
+      router.replace("/contact-us", { scroll: false });
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   // Watch all fields so InputField re-renders on value change
   const values = watch();
-  // const { scrollTo } = useLenis();
+
 
   // useEffect(() => {
   //   if (window.location.hash !== "#contact-form") return;

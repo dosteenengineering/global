@@ -1,15 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import seoSchema from "./Seo";
 
 const ClientSchema = new Schema(
   {
-    metaTitle: {
-      type: String,
-      default: "",
-    },
-
-    metaDescription: {
-      type: String,
-      default: "",
+    seo: {
+      type: seoSchema
     },
 
     firstSection: {

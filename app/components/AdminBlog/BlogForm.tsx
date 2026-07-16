@@ -20,6 +20,8 @@ import AdminItemContainer from '../common/AdminItemContainer'
 import { toast } from 'sonner'
 import TinyEditor from "@/app/components/TinyMce/TinyEditor";
 import { Textarea } from '@/components/ui/textarea'
+import { SeoFormValues } from '@/app/types/seo'
+import SeoFields from '../common/SeoFields'
 
 
 
@@ -33,8 +35,7 @@ interface BlogFormProps {
     thumbnailAlt: string;
     date: string;
     slug: string;
-    metaTitle: string;
-    metaDescription: string;
+    seo: SeoFormValues;
 }
 
 const BlogForm = ({ editMode }: { editMode?: boolean }) => {
@@ -79,8 +80,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("slug", data.data.slug);
                 const isoDate = new Date(data.data.date).toISOString().split("T")[0];
                 setValue("date", isoDate);
-                setValue("metaTitle", data.data.metaTitle);
-                setValue("metaDescription", data.data.metaDescription);
+                setValue("seo", data.data.seo);
             } else {
                 const data = await response.json();
                 toast.error(data.message);
@@ -247,21 +247,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
                 </AdminItemContainer>
 
 
-                <div className="h-fit w-full p-2 border-2 border-gray-300 rounded-md mt-5">
-                    <div className="flex justify-between border-b-2 pb-2">
-                        <Label className="text-sm ">Meta Section</Label>
-                    </div>
-                    <div className="mt-2 grid grid-cols-1 gap-2  h-fit">
-                        <div>
-                            <Label>Meta title</Label>
-                            <Input type="text" {...register("metaTitle")} />
-                        </div>
-                        <div>
-                            <Label>Meta Description</Label>
-                            <Input type="text" {...register("metaDescription")} />
-                        </div>
-                    </div>
-                </div>
+                <SeoFields<BlogFormProps> control={control} register={register} errors={errors} />
 
 
                 <div className='flex justify-center'>
