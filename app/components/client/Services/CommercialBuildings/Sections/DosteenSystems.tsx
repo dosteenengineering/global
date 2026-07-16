@@ -33,8 +33,8 @@ function SystemCard({
   system: IDosteenSystemsProps["data"]["systems"][0];
 }) {
   return (
-    <Link href={`${system.slug}`} className="group block">
-      <div className="flex flex-col">
+    <Link href={`${system.slug}`} className="group block h-full">
+      <div className="flex flex-col h-full">
         <div className="relative h-[332px] md:h-[400px] xl:h-[455px] overflow-hidden order-2 md:order-1">
           {/* Image */}
           <Image src={system.image} alt={system.title} fill className="object-cover " />
@@ -47,11 +47,11 @@ function SystemCard({
           </div>
 
         {/* Title */}
-        <h3 className="mb-4 xl:mb-0 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 md:order-3">
+        <h3 className="mb-4 xl:mb-30 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 md:order-3">
           {system.title}
         </h3>
 
-        <div className="relative w-full h-[2px] mt-2 xl:mt-30 hidden lg:block order-4">
+        <div className="relative w-full h-[2px] pt-2 xl:pt-30 mt-auto hidden lg:block order-4">
           <div className="absolute inset-0 bg-[#C2C2C2] h-px" />
           <div className="absolute inset-0 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out h-[2px]" />
         </div>
@@ -141,7 +141,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
       <div className="container ">
         <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
           {data.systems.map((system, index) => (
-            <Reveal variants={moveUpV2} delayRange={index * 0.12}>
+            <Reveal variants={moveUpV2} delayRange={index * 0.12} className="h-full">
               <SystemCard key={system.id} system={system} />
             </Reveal>
           ))}
