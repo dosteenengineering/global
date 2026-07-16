@@ -41,12 +41,12 @@ const page = async () => {
 
     return (
         <>
-            {data?.data?.seo?.schema && (
+            {/* {data?.data?.seo?.schema && (
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: data.data.seo.schema }}
                 />
-            )}
+            )} */}
             <Index
                 data={data.data}
                 solutionsRaw={solutionsData.data}

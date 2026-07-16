@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "../globals.css";
 import LenisProvider from "../components/LenisProvider";
 import UserChrome from "../components/client/Layout/UserChrome";
+import HeadInjector from "@/app/components/common/HeadInjector";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -46,12 +47,20 @@ export default async function RootLayout({
       next: { revalidate: 60 },
     },
   );
+
   const solutionsData = await solutionsResponse.json();
+  const tagResponse = await fetch(`${process.env.BASE_URL}/api/admin/tags`);
+  const tagData = await tagResponse.json();
+
   return (
     <html lang="en">
       <head>
 
-  
+        {/* <HeadInjector html={tagData?.tag?.headerScript} /> */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: tagData?.tag?.headerScript }}
+        />
         <link
           rel="preload"
           href="/assets/noise/primary-noise-vertical.png"
