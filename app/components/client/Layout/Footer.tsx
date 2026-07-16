@@ -453,7 +453,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 >
                   <Link
                     href={`mailto:${contact.email}`}
-                    className="flex items-center gap-3 3xl:gap-4 pb-3 3xl:pb-0 group"
+                    className="flex items-center gap-3 3xl:gap-4  3xl:pb-0 group"
                   >
                     <Image
                       src="/assets/icons/footer/social/mail.svg"
@@ -492,7 +492,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                   </Link>
                   <Link
                     href={`tel:${contact.phone2.replace(/\s/g, "")}`}
-                    className="flex items-center gap-4 pt-4 3xl:pt-0 group"
+                    className="flex items-center gap-4  group"
                   >
                     <Image
                       src="/assets/icons/footer/social/phone.svg"

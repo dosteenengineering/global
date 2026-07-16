@@ -79,7 +79,7 @@ export default function ImageHotspots({
   const [dragTarget, setDragTarget] = useState<DragTarget | null>(null);
   const [isInView, setIsInView] = useState(false);
   const [expandedLabelId, setExpandedLabelId] = useState<string | null>(null);
-
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const editorEnabled = useMemo(() => {
     return process.env.NODE_ENV === "development" && (editMode || process.env.NEXT_PUBLIC_HOTSPOT_EDITOR === "true");
   }, [editMode]);
@@ -87,6 +87,10 @@ export default function ImageHotspots({
   useEffect(() => {
     setItems(hotspots);
   }, [hotspots]);
+
+  useEffect(() => {
+    setIsImageLoaded(false);
+  }, [image]);
 
   useEffect(() => {
     if (!editorEnabled) return;
@@ -186,7 +190,23 @@ export default function ImageHotspots({
         className={`relative h-full w-full overflow-visible ${editorEnabled ? "cursor-crosshair" : ""}`}
         onPointerDown={handleAddHotspot}
       >
-        <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} />
+        {/* <Image src={image} alt={alt} fill sizes={sizes} className={imageClassName} /> */}
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className={imageClassName}
+          onLoad={() => setIsImageLoaded(true)}
+        />
+
+        {/* Loading overlay */}
+        <div
+          className={`absolute inset-0 z-40 flex items-center justify-center transition-opacity duration-300 ${isImageLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+        >
+          <div className="h-8 w-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+        </div>
 
         <svg className="absolute inset-0 z-10 h-full w-full overflow-visible pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           {items.map((hotspot, index) => {
@@ -206,7 +226,8 @@ export default function ImageHotspots({
                 strokeLinejoin="round"
                 style={{
                   strokeDasharray: "1000",
-                  strokeDashoffset: isInView ? "0" : "1000",
+                  // strokeDashoffset: isInView ? "0" : "1000",
+                  strokeDashoffset: isInView && isImageLoaded ? "0" : "1000",
                   transition: `stroke-dashoffset ${ANIMATION_DURATION}s ease-out ${lineDelay}s`,
                 }}
               />
@@ -231,7 +252,8 @@ export default function ImageHotspots({
                 style={{
                   left: `${hotspot.marker.x}%`,
                   top: `${hotspot.marker.y}%`,
-                  opacity: isInView ? 1 : 0,
+                  // opacity: isInView ? 1 : 0,
+                  opacity: isInView && isImageLoaded ? 1 : 0,
                   transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
                 }}
                 onPointerDown={(event) => {
@@ -246,7 +268,8 @@ export default function ImageHotspots({
                 style={{
                   left: `${labelDot.x}%`,
                   top: `${labelDot.y}%`,
-                  opacity: isInView ? 1 : 0,
+                  // opacity: isInView ? 1 : 0,
+                  opacity: isInView && isImageLoaded ? 1 : 0,
                   transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
                 }}
                 aria-hidden="true"
@@ -263,7 +286,8 @@ export default function ImageHotspots({
                       : "w-5 h-5 hover:scale-110 p-[2px]"
                       } ${hotspot.side === "left" ? "origin-right" : "origin-left"}`}
                     style={{
-                      opacity: isInView ? 1 : 0,
+                      // opacity: isInView ? 1 : 0,
+                      opacity: isInView && isImageLoaded ? 1 : 0,
                       transition: `opacity 0.3s ease-out ${labelFadeDelay}s, width 0.3s ease-in-out, padding 0.3s ease-in-out`,
                     }}
                   >
@@ -300,7 +324,8 @@ export default function ImageHotspots({
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
-                        opacity: isInView ? 1 : 0,
+                        // opacity: isInView ? 1 : 0,
+                        opacity: isInView && isImageLoaded ? 1 : 0,
                         transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
                       }}
                     >
@@ -315,7 +340,8 @@ export default function ImageHotspots({
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
-                        opacity: isInView ? 1 : 0,
+                        // opacity: isInView ? 1 : 0,
+                        opacity: isInView && isImageLoaded ? 1 : 0,
                         transition: `opacity 0.3s ease-out ${labelFadeDelay}s`,
                       }}
                       onPointerDown={(event) => {

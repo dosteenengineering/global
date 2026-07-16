@@ -215,7 +215,7 @@ export default function DosteenSystems({
                 <div
                   key={system.id}
                   onClick={() => {
-                    setActiveId(index);
+                    setActiveId(system.id);
                     if (contentRef.current) {
                       scrollTo(contentRef.current, {
                         offset: -300,

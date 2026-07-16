@@ -13,8 +13,6 @@ import { moveUp } from "@/app/components/motionVariants";
 
 const industryHotspotsByTitle: Record<string, Hotspot[]> = {
   
-
-
   // Paste each copied hotspot JSON array under the exact backend item.title.
 
   "Industrial": [
@@ -476,8 +474,6 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
       "side": "right"
     }
   ]
-
-
 
 };
 
