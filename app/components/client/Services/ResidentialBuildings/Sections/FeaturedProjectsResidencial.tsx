@@ -164,14 +164,14 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
   return (
     <section className="w-full bg-white py-[70px] md:py-150 3xl:py-auto 3xl:pt-150 3xl:pb-200">
       <div className="container">
-        <SectionTitle text={"FEATURED PROJECTS"} className="section-heading-90 text-secondary mb-[20px] md:mb-5 lg:mb-50" />
+        <SectionTitle text={"FEATURED CASE STUDIES"} className="section-heading-90 text-secondary mb-[20px] md:mb-5 lg:mb-50" />
 
         {/* ── Mobile layout ── */}
         <div className="lg:hidden">
           {/* Top row: All Projects + Nav buttons */}
           <div className="flex items-center justify-between mb-5 pb-5 border-b border-bdr-gray">
             <BorderButton
-              text="All Projects"
+              text="VIEW ALL"
               borderColor="black"
               textColor="black"
               iconColor="primary"
