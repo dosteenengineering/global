@@ -120,7 +120,7 @@ const IndividualService = () => {
             if (response.ok) {
                 const data = result.data;
 
-                setValue("seo", result.data.seo);
+                setValue("seo", data.seo);
 
                 setValue("firstSection", {
                     title: data.firstSection?.title || "",
