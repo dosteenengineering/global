@@ -16,12 +16,14 @@ const serviceSchema = new mongoose.Schema({
         description: { type: String, required: true },
     },
     thirdSection: {
-        seo: {
-            type: seoSchema,
-        },
+
         title: { type: String, required: true },
         items: [
+
             {
+                seo: {
+                    type: seoSchema,
+                },
                 image: { type: String, required: true },
                 imageAlt: { type: String },
                 title: { type: String, required: true },
