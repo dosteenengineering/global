@@ -18,9 +18,11 @@ const THUMB_HEIGHT = 128;
 export default function Main({
   data,
   nextProject,
+  isRelatedAvailable
 }: {
   data: ProjectItemProps;
   nextProject: ProjectItemProps;
+  isRelatedAvailable:boolean
 }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLElement>(null);
@@ -144,7 +146,7 @@ export default function Main({
       <div ref={panelAnchorRef} className="container w-0 h-0 pointer-events-none" />
 
       <div className={isContainer ? "container" : ""}>
-        <div className="flex gap-80 3xl:gap-[109px] items-start">
+        <div className={`flex gap-80 3xl:gap-[109px] items-start"  ${!isRelatedAvailable && "mb-120"}`}>
           {/* ── Left aside ──────────────────────────────────────── */}
           <aside className="hidden lg:block shrink-0 w-[150px] 3xl:w-[176px] self-stretch">
             <div ref={anchorRef} className="relative h-full">
@@ -237,9 +239,9 @@ export default function Main({
         </div>
       </div>
 
-      <div className="container mt-140 3xl:mt-200 mb-120 hidden md:block">
+      {isRelatedAvailable && <div className="container mt-140 3xl:mt-200 mb-120 hidden md:block">
         <Divider />
-      </div>
+      </div>}
     </div>
   );
 }
