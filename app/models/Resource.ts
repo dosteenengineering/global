@@ -1,9 +1,11 @@
 import mongoose, { Schema } from "mongoose";
+import seoSchema from "./Seo";
 
 const ResourceSchema = new Schema(
   {
-    metaTitle: { type: String, default: "" },
-    metaDescription: { type: String, default: "" },
+    seo:{
+      type:seoSchema
+    },
 
     bannerSection: {
       image: { type: String, default: "" },

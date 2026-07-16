@@ -230,7 +230,7 @@ function SlideBackground({
 function ArrowLink({ href }: { href: string }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <Link href={href} target="_blank">
+    <Link href={href}>
       <div
         className="relative 3xl:w-[150px] 3xl:h-[150px] xl:w-[110px] xl:h-[110px] lg:w-[100px] lg:h-[100px] md:w-[70px] md:h-[70px] w-[80px] h-[80px] hover:cursor-pointer hover:translate-y-[-12px] hover:translate-x-[12px] transition-all duration-300 overflow-hidden"
         onMouseEnter={() => setHovered(true)}

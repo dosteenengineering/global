@@ -18,8 +18,11 @@ import { toast } from "sonner";
 const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 import "react-quill-new/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import SeoFields from "../common/SeoFields";
+import { SeoFormValues } from "@/app/types/seo";
 
 interface SystemFormProps {
+  seo: SeoFormValues;
   firstSection: {
     title: string;
     shortTitle: string;
@@ -100,9 +103,6 @@ interface SystemFormProps {
 
   thumbnail: string;
   thumbnailAlt: string;
-
-  metaTitle: string;
-  metaDescription: string;
 }
 
 const SystemForm = ({ editMode }: { editMode?: boolean }) => {
@@ -231,8 +231,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
         setValue("sixthSection.items", data.data.sixthSection.items);
         setValue("seventhSection", data.data.seventhSection);
         setValue("seventhSection.items", data.data.seventhSection.items);
-        setValue("metaTitle", data.data.metaTitle);
-        setValue("metaDescription", data.data.metaDescription);
+        setValue("seo", data.data.seo);
         setValue("slug", data.data.slug);
       } else {
         const data = await response.json();
@@ -1198,7 +1197,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
           </div>
         </AdminItemContainer>
 
-        <AdminItemContainer>
+        {/* <AdminItemContainer>
           <Label main>SEO</Label>
           <div className="flex flex-col gap-2 p-5">
             <div className="mt-2 grid grid-cols-1 gap-2  h-fit">
@@ -1212,7 +1211,9 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
               </div>
             </div>
           </div>
-        </AdminItemContainer>
+        </AdminItemContainer> */}
+
+        <SeoFields<SystemFormProps> control={control} register={register} errors={errors} />
 
         <div className="flex justify-center w-full">
           <Button type="submit" className="cursor-pointer text-white w-full">

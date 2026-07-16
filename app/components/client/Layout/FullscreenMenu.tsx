@@ -80,10 +80,17 @@ const navLinkVariants: Variants = {
   },
 };
 
+// Small reusable loading spinner used for search loading states
+const SearchSpinner = ({ className = "" }: { className?: string }) => (
+  <span
+    className={`inline-block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white ${className}`}
+    aria-hidden="true"
+  />
+);
 
 const ROUTE_MAP: Record<string, (item: SearchResultItem) => string> = {
   service: (r) => `/${r.item?.slug ?? "solutions"}`,
-  "service-item": (r) => `/services/${r.item?.slug}`,
+  "service-item": (r) => `/solutions/${r.item?.slug}`,
   system: (r) => `/${r.item?.slug}`,
   resource: (r) => `/${r.item?.slug}`,
   project: (r) => `/projects/${r.item?.slug}`,
@@ -227,26 +234,33 @@ const FullscreenMenu = ({
                     placeholder="Search..."
                     className="w-full bg-transparent text-[18px] font-light text-white outline-none placeholder:text-white/50"
                   />
-                  <button
-                    type="button"
-                    aria-label="Close search"
-                    onClick={()=>setSearchQuery("")}
-                    className="shrink-0 text-white/70 hover:text-white transition-colors"
-                  >
-                    <Image
-                      src="/assets/icons/close-icon.svg"
-                      alt=""
-                      width={16}
-                      height={16}
-                      className="h-4 w-4 brightness-0 invert"
-                    />
-                  </button>
+                  {isSearching ? (
+                    <SearchSpinner className="shrink-0" />
+                  ) : (
+                    <button
+                      type="button"
+                      aria-label="Close search"
+                      onClick={()=>setSearchQuery("")}
+                      className="shrink-0 text-white/70 hover:text-white transition-colors"
+                    >
+                      <Image
+                        src="/assets/icons/close-icon.svg"
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="h-4 w-4 brightness-0 invert"
+                      />
+                    </button>
+                  )}
                 </div>
 
                 <ul data-lenis-prevent className="max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 py-4 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
                   {trimmedSearchQuery ? (
                     isSearching ? (
-                      <li className="list-none text-[16px] font-light text-white/60">Searching…</li>
+                      <li className="list-none flex items-center gap-2 text-[16px] font-light text-white/60">
+                        <SearchSpinner />
+                        Searching…
+                      </li>
                     ) : filteredSearchItems.length > 0 ? (
                       filteredSearchItems.map((item, index) => (
                         <li key={`${item.label}-${item.href}-${index}`}>
@@ -378,7 +392,12 @@ const FullscreenMenu = ({
 
           {isSearchOpen && trimmedSearchQuery ? (
             <ul data-lenis-prevent className="relative z-1 hidden xl:block max-h-[75vh] list-disc space-y-3 overflow-y-auto pl-6 marker:text-white/50 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.3)_transparent] [&::-webkit-scrollbar]:w-[6px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 hover:[&::-webkit-scrollbar-thumb]:bg-white/50">
-              {filteredSearchItems.length > 0 ? (
+              {isSearching ? (
+                <li className="list-none flex items-center gap-2 text-[20px] font-light text-white/70">
+                  <SearchSpinner />
+                  Searching…
+                </li>
+              ) : filteredSearchItems.length > 0 ? (
                 filteredSearchItems.map((item, index) => (
                   <li key={`${item.label}-${item.href}-${index}`}>
                     <Link

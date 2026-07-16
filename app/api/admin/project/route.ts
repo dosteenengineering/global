@@ -69,8 +69,7 @@ export async function PATCH(request: NextRequest) {
             foundProject.slug = body.slug;
             foundProject.thumbnail = body.thumbnail;
             foundProject.thumbnailAlt = body.thumbnailAlt;
-            foundProject.metaTitle = body.metaTitle;
-            foundProject.metaDescription = body.metaDescription;
+            foundProject.seo = body.seo;
             await project.save();
             return NextResponse.json({ data: project, message: "Project updated successfully" }, { status: 200 });
         }

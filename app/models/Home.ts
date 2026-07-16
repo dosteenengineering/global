@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const homeSchema = new mongoose.Schema({
-    metaTitle: {
-        type: String,
-    },
-    metaDescription: {
-        type: String,
+    seo: {
+        type: seoSchema,
     },
     bannerSection: {
         desktopImage: { type: String, required: true },

@@ -26,11 +26,12 @@ import { DndContext, closestCorners } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import ProjectCard from "./ProjectCard";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { SeoFormValues } from "@/app/types/seo";
+import SeoFields from "@/app/components/common/SeoFields";
 
 
 interface ProjectPageProps {
-  metaTitle: string;
-  metaDescription: string;
+  seo: SeoFormValues;
   bannerSection: {
     image: string;
     imageAlt: string;
@@ -270,8 +271,7 @@ export default function Projects() {
       const response = await fetch("/api/admin/project");
       if (response.ok) {
         const data = await response.json();
-        setValue("metaTitle", data.data.metaTitle);
-        setValue("metaDescription", data.data.metaDescription);
+        setValue("seo", data.data.seo);
         setValue("bannerSection", data.data.bannerSection);
         setValue("lastSection", data.data.lastSection);
         setValue("lastSection.items", data.data.lastSection.items);
@@ -434,19 +434,8 @@ export default function Projects() {
           </div>
         </AdminItemContainer>
 
-        <AdminItemContainer>
-          <Label main>SEO</Label>
-          <div className="p-5 flex flex-col gap-2">
-            <div className='flex flex-col gap-2'>
-              <Label className='font-bold'>Title</Label>
-              <Input type='text' placeholder='' {...register("metaTitle")} />
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label className='font-bold'>Description</Label>
-              <Input type='text' placeholder='' {...register("metaDescription")} />
-            </div>
-          </div>
-        </AdminItemContainer>
+        <SeoFields<ProjectPageProps> control={control} register={register} errors={errors} />
+        
 
         <div className='flex justify-center mt-5'>
           <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>

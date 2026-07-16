@@ -1,13 +1,10 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const systemSchema = new mongoose.Schema(
   {
-    metaTitle: {
-      type: String,
-    },
-
-    metaDescription: {
-      type: String,
+    seo: {
+      type: seoSchema,
     },
 
     firstSection: {

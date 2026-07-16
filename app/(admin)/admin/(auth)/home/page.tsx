@@ -19,10 +19,11 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { image } from 'framer-motion/client';
+import { SeoFormValues } from '@/app/types/seo';
+import SeoFields from '@/app/components/common/SeoFields';
 
 export interface HomeFormProps {
-    metaTitle: string;
-    metaDescription: string;
+    seo: SeoFormValues;
 
     bannerSection: {
         image: string;
@@ -49,7 +50,7 @@ export interface HomeFormProps {
 
     thirdSection: {
         title: string;
-        image:string;
+        image: string;
         items: {
             title: string;
             image: string;
@@ -206,8 +207,7 @@ const HomePage = () => {
             const response = await fetch(`/api/admin/home`);
             if (response.ok) {
                 const data = await response.json();
-                setValue("metaTitle", data.data.metaTitle);
-                setValue("metaDescription", data.data.metaDescription);
+                setValue("seo", data.data.seo);
                 setValue("bannerSection", data.data.bannerSection);
                 setValue("secondSection", data.data.secondSection);
                 setValue("secondSection.items", data.data.secondSection.items);
@@ -1057,68 +1057,7 @@ const HomePage = () => {
                 </AdminItemContainer>
 
 
-                <AdminItemContainer>
-                    <Label main>SEO</Label>
-                    <div className='p-5 rounded-md flex flex-col gap-2'>
-
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Title</Label>
-                            <Input type='text' placeholder='' {...register("metaTitle")} />
-                        </div>
-                        <div className='flex flex-col gap-2'>
-                            <Label className='font-bold'>Description</Label>
-                            <Input type='text' placeholder='' {...register("metaDescription")} />
-                        </div>
-
-                        {/* <div className='flex flex-col gap-2 w-1/2'>
-                            <Label className='font-bold'>Og Type</Label>
-                            <Controller
-                                name={`ogType`}
-                                control={control}
-
-                                render={({ field }) => (
-                                    <Select
-                                        onValueChange={field.onChange}
-                                        value={field.value}
-                                        defaultValue="website"
-                                    >
-                                        <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select Style" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="website">
-                                                website
-                                            </SelectItem>
-                                            <SelectItem value="article">
-                                                article
-                                            </SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                )}
-                            />
-
-                        </div> */}
-
-
-                        {/* <div className='flex flex-col gap-2 w-1/2'>
-                            <Label className='font-bold'>Og Image</Label>
-                            <Controller
-                                name={`ogImage`}
-                                control={control}
-
-                                render={({ field }) => (
-                                    <ImageUploader
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        isLogo
-                                    />
-                                )}
-                            />
-                        </div> */}
-
-                    </div>
-
-                </AdminItemContainer>
+                <SeoFields<HomeFormProps> control={control} register={register} errors={errors} />
 
                 <div className='flex'>
                     <Button type='submit' className="cursor-pointer text-white text-[16px] w-full">Submit</Button>

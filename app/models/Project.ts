@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import seoSchema from "./Seo";
 
 const projectItemSchema = new mongoose.Schema(
     {
@@ -82,20 +83,17 @@ const projectItemSchema = new mongoose.Schema(
         thumbnail: { type: String },
         thumbnailAlt: { type: String },
 
-        metaTitle: { type: String },
-        metaDescription: { type: String },
+        seo:{
+            type:seoSchema
+        }
     },
     { _id: true }
 );
 
 const projectSchema = new mongoose.Schema(
     {
-        metaTitle: {
-            type: String,
-        },
-
-        metaDescription: {
-            type: String,
+        seo:{
+            type:seoSchema
         },
 
         bannerSection: {

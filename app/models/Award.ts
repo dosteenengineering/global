@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const awardSchema = new mongoose.Schema({
-    metaTitle: {
-        type: String,
-    },
-    metaDescription: {
-        type: String,
+    seo:{
+        type:seoSchema
     },
     firstSection:{
                 title:{type:String,required:true},
