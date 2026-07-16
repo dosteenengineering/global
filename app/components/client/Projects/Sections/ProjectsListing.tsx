@@ -64,9 +64,8 @@ function FilterDropdown({
           alt=""
           width={15}
           height={9}
-          className={`transition-transform duration-300 w-auto h-auto ${
-            open ? "rotate-180" : ""
-          }`}
+          className={`transition-transform duration-300 w-auto h-auto ${open ? "rotate-180" : ""
+            }`}
         />
       </button>
 
@@ -84,11 +83,10 @@ function FilterDropdown({
                   onChange(option);
                   setOpen(false);
                 }}
-                className={`block w-full whitespace-nowrap px-4 py-2 text-left text-description transition-colors duration-200 ${
-                  isActive
+                className={`block w-full whitespace-nowrap px-4 py-2 text-left text-description transition-colors duration-200 ${isActive
                     ? "bg-primary/5 text-primary font-semibold"
                     : "text-paragraph hover:bg-bdr-gray/30 hover:text-secondary"
-                }`}
+                  }`}
               >
                 {optionLabel}
               </button>
@@ -100,7 +98,7 @@ function FilterDropdown({
   );
 }
 
-export default function ProjectsListing({data}:{data:Project[]}) {
+export default function ProjectsListing({ data }: { data: Project[] }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -142,10 +140,10 @@ export default function ProjectsListing({data}:{data:Project[]}) {
         activeCategory === ALL_FILTER || project.firstSection.sector.name === activeCategory;
       const locationMatches =
         activeLocation === ALL_FILTER || project.firstSection.location.name === activeLocation;
-const statusMatches =
-  activeStatus === ALL_FILTER ||
-  Number(project.firstSection.status) ===
-    statusData.find((item) => item.name === activeStatus)?.value;
+      const statusMatches =
+        activeStatus === ALL_FILTER ||
+        Number(project.firstSection.status) ===
+        statusData.find((item) => item.name === activeStatus)?.value;
 
       return categoryMatches && locationMatches && statusMatches;
     });
@@ -233,22 +231,25 @@ const statusMatches =
             <span className="text-secondary md:text-paragraph text-[18px] md:text-55 leading-[1.56] md:leading-[1.1818] font-light tracking-[-0.02em]">
               Filter
             </span>
-            <Image src="/assets/icons/filterPlus.svg" alt="filter" width={50} height={50}
-              className="w-5 h-5 lg:w-[38px] lg:h-[38px] group-hover:rotate-45 group-active:rotate-45 transition-transform duration-300"
+            <Image
+              src="/assets/icons/filterPlus.svg"
+              alt="filter"
+              width={50}
+              height={50}
+              className={`w-5 h-5 lg:w-[38px] lg:h-[38px] transition-transform duration-300 ${isFilterOpen ? "rotate-45" : ""
+                }`}
             />
           </button>
         </div>
         <div
-          className={`transition-all duration-500 ease-in-out ${
-            isFilterOpen
+          className={`transition-all duration-500 ease-in-out ${isFilterOpen
               ? "max-h-[260px] opacity-100 mt-7.5 md:mt-50 3xl:mt-80 overflow-visible"
               : "max-h-0 opacity-0 mt-0 pointer-events-none"
-          }`}
+            }`}
         >
           <div
-            className={`flex flex-col gap-7.5 lg:flex-row flex-wrap lg:justify-between transition-transform duration-500 ease-in-out  ${
-              isFilterOpen ? "translate-y-0" : "-translate-y-3"
-            }`}
+            className={`flex flex-col gap-7.5 lg:flex-row flex-wrap lg:justify-between transition-transform duration-500 ease-in-out  ${isFilterOpen ? "translate-y-0" : "-translate-y-3"
+              }`}
           >
             <div className="flex flex-wrap items-center gap-x-5 gap-y-3 md:gap-x-5 3xl:gap-x-[26px] 3xl:gap-y-8 border-b border-bdr-gray pb-4 xl:pb-8">
               {categories.map((category) => {
@@ -259,11 +260,10 @@ const statusMatches =
                     key={category}
                     type="button"
                     onClick={() => updateFilter("category", category)}
-                    className={`text-19 text-paragraph transition-colors duration-200 tracking-[-0.02em] border-r border-bdr-gray pr-5 3xl:pr-[26px] last:border-0 cursor-pointer ${
-                      isActive
+                    className={`text-19 text-paragraph transition-colors duration-200 tracking-[-0.02em] border-r border-bdr-gray pr-5 3xl:pr-[26px] last:border-0 cursor-pointer ${isActive
                         ? "font-bold"
                         : "hover:text-secondary"
-                    }`}
+                      }`}
                   >
                     {category}
                   </button>

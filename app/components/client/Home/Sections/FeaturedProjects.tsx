@@ -253,12 +253,14 @@ export default function FeaturedProjectsSection({
               direction="left"
               disabled={false}
               ariaLabel="Previous project"
+              disableMode="dark"
             />
             <NavButton
               onClick={mobileSlideNext}
               direction="right"
               disabled={false}
               ariaLabel="Next Case Study"
+              disableMode="dark"
             />
           </motion.div>
         </div>

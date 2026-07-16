@@ -517,6 +517,7 @@ const FullscreenMenu = ({
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
+                  target="_blank"
                   className="group flex h-8 w-8 2xl:w-[42px] 2xl:h-[42px] items-center justify-center rounded-full border border-white/35 hover:bg-primary transition-colors duration-300"
                 >
                   <Image
