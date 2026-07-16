@@ -477,68 +477,6 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
 
 };
 
-// Module-level cache so images loaded once don't re-trigger the loader
-const loadedImagesCache = new Set<string>();
-
-function useImagePreload(src: string, minDisplayMs = 1200) {
-  const [isLoaded, setIsLoaded] = useState(() => loadedImagesCache.has(src));
-
-  useEffect(() => {
-    if (loadedImagesCache.has(src)) {
-      setIsLoaded(true);
-      return;
-    }
-
-    setIsLoaded(false);
-    const startTime = Date.now();
-    const img = new window.Image();
-    img.src = src;
-
-    const handleDone = () => {
-      const elapsed = Date.now() - startTime;
-      const remaining = Math.max(minDisplayMs - elapsed, 0);
-
-      setTimeout(() => {
-        loadedImagesCache.add(src);
-        setIsLoaded(true);
-      }, remaining);
-    };
-
-    if (img.complete) {
-      handleDone();
-    } else {
-      img.onload = handleDone;
-      img.onerror = handleDone;
-    }
-
-    return () => {
-      img.onload = null;
-      img.onerror = null;
-    };
-  }, [src, minDisplayMs]);
-
-  return isLoaded;
-}
-
-function ImageHotspotsWithLoader(props: React.ComponentProps<typeof ImageHotspots>) {
-  const isLoaded = useImagePreload(props.image);
-
-  return (
-    <div className="relative w-full h-full min-h-[250px] md:min-h-[300px] xl:min-h-[550px] 3xl:min-h-[650px]">
-      <div
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-      >
-        <div className="h-8 w-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
-      </div>
-
-      <div className={`transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
-        <ImageHotspots {...props} />
-      </div>
-    </div>
-  );
-}
-
 const normalizeHotspotKey = (value: string) =>
   value
     .toLowerCase()
@@ -548,7 +486,6 @@ const normalizeHotspotKey = (value: string) =>
 
 export default function IndustriesWeServe({ data }: { data: IndustriesPageData['thirdSection'] }) {
 
-  
   const [activeId, setActiveId] = useState(0);
   const detailRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
@@ -647,17 +584,8 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                   <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
                     <div className="flex flex-col z-10 text-white pt-5">
                       <p className="text-description text-white mb-30">{detail.description}</p>
-                      {/* <div className="relative w-full h-auto mb-30">
-                        <ImageHotspots
-                          image={detail.image}
-                          alt={detail.title}
-                          hotspots={itemHotspots}
-                          mobileMode={true}
-                          imageClassName="object-contain !relative"
-                        />
-                      </div> */}
                       <div className="relative w-full h-auto mb-30">
-                        <ImageHotspotsWithLoader
+                        <ImageHotspots
                           image={detail.image}
                           alt={detail.title}
                           hotspots={itemHotspots}
@@ -747,23 +675,11 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
           
 
             {/* Image */}
-            {/* <motion.div
-              variants={moveUp(0.3)}
-              className="relative w-full h-auto mb-50 px-4"
-            >
-              <ImageHotspots
-                image={active.image}
-                alt={active.imageAlt || active.title}
-                hotspots={activeHotspots}
-                editMode={process.env.NEXT_PUBLIC_HOTSPOT_EDITOR === "true"}
-                imageClassName="object-cover transition-all duration-500 !relative"
-              />
-            </motion.div> */}
             <motion.div
               variants={moveUp(0.3)}
               className="relative w-full h-auto mb-50 px-4"
             >
-              <ImageHotspotsWithLoader
+              <ImageHotspots
                 image={active.image}
                 alt={active.imageAlt || active.title}
                 hotspots={activeHotspots}
