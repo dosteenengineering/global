@@ -10,7 +10,8 @@ export const contactEnquirySchema = z.object({
   phone: z
     .string()
     .min(7, "Invalid phone number")
-    .max(20, "Invalid phone number"),
+    .max(20, "Invalid phone number")
+    .regex(/^\+?\d+$/, "Phone number must contain only digits"),
   projectLocation: z.string().optional(),
   systemOfInterest: z.string().optional(),
   projectBrief: z.string().optional(),
