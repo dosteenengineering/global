@@ -187,6 +187,7 @@ export default function GalleryLightbox({
               spaceBetween={8}
               watchSlidesProgress
               className="w-full !px-1"
+              centerInsufficientSlides={true}
             >
               {images.map((img, idx) => (
                 <SwiperSlide

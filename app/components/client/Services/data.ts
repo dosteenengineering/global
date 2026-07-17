@@ -23,6 +23,15 @@ export interface IndustriesPageData {
   };
 }
 
+export interface LowPolyItem {
+  title: string;
+  systemSlug: string;
+  marker: { x: string; y: string };
+  label: { x: string; y: string };
+  side: "left" | "right";
+}
+
+
 export interface IndustryItem {
   _id: string;
   image: string;
@@ -30,9 +39,14 @@ export interface IndustryItem {
   title: string;
   description: string;
   buttonLink: string;
+  slug:string;
 
   systemSection: {
     items: SystemItem[];
+  };
+
+    lowPolySection: {
+    items: LowPolyItem[];
   };
 }
 
@@ -42,6 +56,8 @@ export interface SystemItem {
   title: string;
   description?: string;
   buttonLink?: string;
+  marker: { x: string; y: string };
+  label: { x: string; y: string };
 }
 
 export const BannerData = {

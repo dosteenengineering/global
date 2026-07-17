@@ -83,17 +83,17 @@
   </style>
 
   <!-- stroke-dasharray + stroke-dashoffset as presentation attributes — hidden before CSS even loads -->
-  <path class="p1"  stroke-dasharray="460" stroke-dashoffset="460" d="M3.35742 3.35571H196.79V38.1879H3.35742V3.35571Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p2"  stroke-dasharray="492" stroke-dashoffset="492" d="M14.1035 38.188V196.644H186.044V38.188" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p3"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 69.8657H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p4"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 101.544H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p5"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 133.289H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p6"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 164.967H186.045" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p13" stroke-dasharray="300" stroke-dashoffset="300" d="M218.283 196.644H239.776L357.985 35.1677H433.209" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p12" stroke-dasharray="66"  stroke-dashoffset="66"  d="M411 13.2886L433.231 35.5033L411 57.8523" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p10" stroke-dasharray="66"  stroke-dashoffset="66"  d="M519.18 24.8322V4.02686H540.672V24.8322" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p9"  stroke-dasharray="132" stroke-dashoffset="132" d="M486.939 46.3088V24.8323H572.91V46.3088" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p8"  stroke-dasharray="242" stroke-dashoffset="242" d="M465.447 101.543V46.3086H594.402V101.543" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p11" stroke-dasharray="130" stroke-dashoffset="130" d="M529.926 69.8657V196.644" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="p7"  stroke-dasharray="510" stroke-dashoffset="510" d="M433.209 121.476L476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="p1"  stroke-dasharray="460" stroke-dashoffset="460" d="M3.35742 3.35571H196.79V38.1879H3.35742V3.35571Z" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p2"  stroke-dasharray="492" stroke-dashoffset="492" d="M14.1035 38.188V196.644H186.044V38.188" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p3"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 69.8657H186.045" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p4"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 101.544H186.045" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p5"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 133.289H186.045" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p6"  stroke-dasharray="172" stroke-dashoffset="172" d="M17.1269 164.967H186.045" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p13" stroke-dasharray="300" stroke-dashoffset="300" d="M218.283 196.644H239.776L357.985 35.1677H433.209" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p12" stroke-dasharray="66"  stroke-dashoffset="66"  d="M411 13.2886L433.231 35.5033L411 57.8523" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p10" stroke-dasharray="66"  stroke-dashoffset="66"  d="M519.18 24.8322V4.02686H540.672V24.8322" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p9"  stroke-dasharray="132" stroke-dashoffset="132" d="M486.939 46.3088V24.8323H572.91V46.3088" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p8"  stroke-dasharray="242" stroke-dashoffset="242" d="M465.447 101.543V46.3086H594.402V101.543" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p11" stroke-dasharray="130" stroke-dashoffset="130" d="M529.926 69.8657V196.644" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
+  <path class="p7"  stroke-dasharray="510" stroke-dashoffset="510" d="M433.209 121.476L476.194 196.644H583.657L626.642 121.476L529.925 67.7852L433.209 121.476Z" stroke="white" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>

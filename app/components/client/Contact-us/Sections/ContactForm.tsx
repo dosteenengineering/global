@@ -156,7 +156,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
             rules={{ required: "Required" }}
             render={({ field }) => (
               <InputField
-                label="First Name"
+                label="First Name *"
                 value={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
@@ -170,7 +170,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
             rules={{ required: "Required" }}
             render={({ field }) => (
               <InputField
-                label="Last Name"
+                label="Last Name *"
                 value={field.value}
                 onChange={field.onChange}
                 onBlur={field.onBlur}
@@ -218,7 +218,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
             rules={{ required: "Required" }}
             render={({ field }) => (
               <InputField
-                label="Email"
+                label="Email *"
                 type="email"
                 value={field.value}
                 onChange={field.onChange}
@@ -232,10 +232,14 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
             control={control}
             render={({ field }) => (
               <InputField
-                label="Phone"
+                label="Phone *"
                 type="tel"
                 value={field.value}
-                onChange={field.onChange}
+                onChange={(e) => {
+                  // strip everything except digits (and an optional leading +)
+                  const cleaned = e.target.value.replace(/[^\d+]/g, "");
+                  field.onChange(cleaned);
+                }}
                 onBlur={field.onBlur}
                 error={errors.phone?.message}
               />

@@ -85,6 +85,24 @@ const serviceSchema = new mongoose.Schema({
                         },
                     ],
                 },
+
+                lowPolySection:{
+                    items:[
+                        {
+                            title:String,
+                            systemSlug:String,
+                            marker:{
+                                x:String,
+                                y:String
+                            },
+                            label:{
+                                x:String,
+                                y:String
+                            },
+                            side:String
+                        }
+                    ]
+                }
             }
         ]
     }

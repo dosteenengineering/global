@@ -34,6 +34,14 @@ interface SystemFormProps {
     imageAlt: string;
     thumbnailImage: string;
     thumbnailImageAlt: string;
+    marker: {
+      x: string;
+      y: string;
+    };
+    label: {
+      x: string;
+      y: string;
+    };
   };
 
   secondSection: {
@@ -455,6 +463,45 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                 />
               </div>
             </div>
+
+            <div className="flex flex-col gap-2">
+              <Label className="font-bold">Marker & Label Position (%)</Label>
+              <div className="grid grid-cols-2 gap-4 border border-black/20 p-3 rounded-md">
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm">Marker X</Label>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 49.122807017543856"
+                    {...register("firstSection.marker.x")}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm">Marker Y</Label>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 39.41592261904761"
+                    {...register("firstSection.marker.y")}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm">Label X</Label>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 20.43859649122807"
+                    {...register("firstSection.label.x")}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label className="text-sm">Label Y</Label>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 12.960896164021163"
+                    {...register("firstSection.label.y")}
+                  />
+                </div>
+              </div>
+            </div>
+
           </div>
         </AdminItemContainer>
 

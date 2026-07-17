@@ -31,7 +31,7 @@ const BusinessInfoStep = ({ register, errors, watch }: StepFormProps) => {
       {showMoqAmount && (
         <FormInput
           name="minimumOrderQuantitySpecify"
-          label="Specify MOQ"
+          label="Specify MOQ *"
           register={register}
           errors={errors}
           required
