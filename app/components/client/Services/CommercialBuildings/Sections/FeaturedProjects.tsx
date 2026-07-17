@@ -56,7 +56,7 @@ export default function FeaturedProjects({data}:{data:Project[]}) {
 
         {/* Title */}
         <div className="flex items-center justify-between mb-50 border-b 2xl:border-b-0 border-bdr-blue pb-5 relative ">
-          <SectionTitle title={"FEATURED PROJECTS"} className="section-heading-90 text-white" />
+          <SectionTitle title={"FEATURED CASE STUDIES"} className="section-heading-90 text-white" />
 
           {showNav && (
             <motion.div

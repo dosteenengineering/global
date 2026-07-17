@@ -322,7 +322,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
       {/* <div className="hidden min-[1110px]:flex relative pt-140 3xl:pt-[143px]"> */}
       <div className="hidden min-[1110px]:flex relative pt-100 3xl:pt-[143px]">
         {/* ── LEFT COLUMN ── */}
-        <div className="flex flex-col flex-1 justify-between border-r border-[#C2C2C2]">
+        <div className="flex lg:flex-col flex-1 justify-between border-r border-[#C2C2C2]">
           <motion.div
             variants={moveUp(0.2)}
             initial="hidden"
@@ -368,7 +368,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ amount: 0.1, once: true }}
-                className="flex items-center gap-5 text-19 leading-[2.1] font-medium font-poppins -tracking-[2%]"
+                className="flex items-center flex-wrap gap-5 text-19 leading-[2.1] font-medium font-poppins -tracking-[2%]"
               >
                 <Link
                   href={`mailto:${contact.email}`}
@@ -427,7 +427,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
             </div>
 
             {/* 2xl+ — original single row */}
-            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-[62px] 2xl:pr-20 3xl:pr-[57px] gap-x-2">
+            <div className="hidden 2xl:flex items-start justify-between pb-40 3xl:pb-[62px] 2xl:pr-20 3xl:pr-[57px] gap-x-2 lg:gap-x-4">
               <motion.div
                 variants={moveUp(0.2)}
                 initial="hidden"
@@ -443,7 +443,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                   className="object-contain pointer-events-none"
                 />
               </motion.div>
-              <div className="flex gap-15 3xl:gap-[80px]">
+              <div className="flex flex-wrap gap-15 3xl:gap-[80px]">
                 <motion.div
                   variants={moveUp(0.3)}
                   initial="hidden"
@@ -789,7 +789,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
           MOBILE LAYOUT
       ════════════════════════════════════════════════════════ */}
       <div className="min-[1120px]:hidden relative pt-[50px] md:pt-120">
-        <div className="flex flex-col">
+        <div className="flex flex-wrap">
           <motion.div
             variants={moveUp(0.2)}
             initial="hidden"
@@ -816,7 +816,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
             <div className="border-b border-black/35 pb-[10px]">
               <Link
                 href={`mailto:${contact.email}`}
-                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary"
+                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary  max-lg:mb-3"
               >
                 <Image
                   src="/assets/icons/footer/social/mail.svg"
@@ -827,11 +827,24 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 />
                 <span>{contact.email}</span>
               </Link>
+              <Link
+                href={`mailto:${contact.email2}`}
+                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary"
+              >
+                <Image
+                  src="/assets/icons/footer/social/mail.svg"
+                  alt="Mail"
+                  width={24}
+                  height={20}
+                  className="shrink-0 w-[30px] h-[30px]"
+                />
+                <span>{contact.email2}</span>
+              </Link>
             </div>
             <div className="sm:border-b border-black/35 sm:pb-[10px] xl:pb-0">
               <Link
                 href={`tel:${contact.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary"
+                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary max-lg:mb-3"
               >
                 <Image
                   src="/assets/icons/footer/social/phone.svg"
@@ -841,6 +854,19 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                   className="shrink-0 w-[30px] h-[30px]"
                 />
                 <span>{contact.phone}</span>
+              </Link>
+              <Link
+                href={`tel:${contact.phone2.replace(/\s/g, "")}`}
+                className="flex items-center gap-[10px] md:gap-3 text-19 font-medium font-poppins -tracking-[2%] leading-[1.52] text-secondary"
+              >
+                <Image
+                  src="/assets/icons/footer/social/phone.svg"
+                  alt="Phone"
+                  width={24}
+                  height={24}
+                  className="shrink-0 w-[30px] h-[30px]"
+                />
+                <span>{contact.phone2}</span>
               </Link>
             </div>
           </motion.div>
@@ -913,8 +939,8 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                 <p className="text-[18px] lg:text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                   Subscribe to our newsletter
                 </p>
-                <div className="flex items-center relative w-full 2xl:max-w-[477px] h-auto rounded-full border border-[#454545] 
-                overflow-visible pr-0 sm:max-w-[70%] md:max-w-[50%]">
+                <div className="flex items-center relative w-full 3xl:max-w-[477px] h-auto rounded-full border border-[#454545] 
+                overflow-visible pr-0 sm:max-w-[70%] md:max-w-[100%] max-md:min-w-[60vw]">
                   <input
                     type="email"
                     placeholder="Enter Your Email"

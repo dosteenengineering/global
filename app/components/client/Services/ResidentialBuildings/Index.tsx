@@ -62,7 +62,11 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
       <DosteenSystems data={dosteenSystemsData} />
       <CtaSection {...thirdSectionData} descriptionWidth="max-w-[662px]" titleWidth="max-w-[23ch]" />
       <WhyTrustDosteen data={whyTrustData} />
-      <FeaturedProjectsResidencial data={featuredProjects}/>
+      {
+        featuredProjects.length > 0 && (
+          <FeaturedProjectsResidencial data={featuredProjects}/>
+        )
+      }
     </>
   );
 };

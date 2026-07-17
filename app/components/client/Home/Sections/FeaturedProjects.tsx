@@ -108,7 +108,7 @@ function InactiveSlot({
             </p>
           )}
           <p
-            className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33]${displayed.animating ? " slot-enter" : ""}`}
+            className={`text-30 font-poppins pr-5 font-[300] text-secondary -tracking-[2%] leading-[1.33] line-clamp-2 ${displayed.animating ? " slot-enter" : ""}`}
             style={
               displayed.animating
                 ? { ["--enter-from" as string]: enterFrom }
@@ -391,7 +391,7 @@ export default function FeaturedProjectsSection({
       {/* ═══════════════════════════════════════════════════════
           DESKTOP LAYOUT
       ════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[713px_auto] gap-x-140 3xl:gap-x-200 container">
+      <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-[713px_auto] gap-x-50 3xl:gap-x-200 container">
         {/* ───────── Row 1 Col 1 — ACTIVE SWIPER ───────── */}
         <motion.div
           variants={moveUp(0.2)}
@@ -447,7 +447,7 @@ export default function FeaturedProjectsSection({
                       />
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 px-50 pb-40 3xl:pb-[43px] z-10">
-                      <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px]">
+                      <p className="text-white font-poppins font-[300] text-30 leading-[1.33] -tracking-[2%] mb-20 2xl:mb-[22px] line-clamp-2">
                         {project.firstSection.title}
                       </p>
                       <div className="h-[1px] bg-white/30 mb-20 2xl:mb-[22px]" />

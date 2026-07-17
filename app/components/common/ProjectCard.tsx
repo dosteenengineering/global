@@ -113,9 +113,10 @@ export default function ProjectCard({
       viewport={{ once: true, amount: 0.3 }}
       className="h-full"
     >
-      <Link href={`/case-studies/${project.slug}`} className="h-full block">
-        <div className="flex flex-col group cursor-pointer h-full">
+      <div className="h-full block">
+        <div className="flex flex-col group h-full">
           {/* Image */}
+          <Link href={`/case-studies/${project.slug}`}>
           <div className="relative w-full  aspect-[11.2/12] lg:aspect-square h-[300px] lg:h-[400px] 3xl:h-[540px] overflow-hidden mb-30 3xl:mb-[32px] flex-shrink-0">
             <Image
               src={project.thumbnail}
@@ -134,18 +135,18 @@ export default function ProjectCard({
               />
             </div>
           </div>
-
+          </Link>
           {/* Bottom content */}
           <div className="flex flex-col flex-1 mt-auto">
             {/* Title */}
-            <h3
-              className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] line-clamp-2 ${isDark ? "text-secondary" : "text-white"}`}
-            >
+            <Link href={`/case-studies/${project.slug}`} >
+            <h3 className={`text-30 font-light tracking-[-0.02em] leading-[1.333] mb-[10px] md:mb-[15px] line-clamp-2 ${isDark ? "text-secondary" : "text-white"}`} >
               {project.firstSection.title}
             </h3>
+            </Link>
             {/* Location + Category */}
             <div
-              className={`mt-auto flex items-center justify-between mb-[10px] md:mb-[15px] pr-0 2xl:pr-8 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"}`}
+              className={`mt-auto flex w-full overflow-hidden gap-4 items-center justify-between mb-[10px] md:mb-[15px] 3xl:pr-80 ${isDark ? "text-paragraph" : "text-white font-light"}`}
             >
               <div className="flex items-center gap-[10px]">
                 <Image
@@ -163,9 +164,9 @@ export default function ProjectCard({
                   {project.firstSection.location.name}
                 </span>
               </div>
-              <span className="text-description">
-                {project.firstSection.sector.name}
-              </span>
+              <div className="max-w-[70%]">
+                <p className="text-description line-clamp-1 " title={project.firstSection.sector.name}>{project.firstSection.sector.name}</p>
+              </div>
             </div>
           </div>
           {/* Divider — pushed to bottom */}
@@ -175,7 +176,7 @@ export default function ProjectCard({
             />
           </div>
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 }

@@ -153,7 +153,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                             swiper.updateProgress();
                           }
                         }}
-                        className={`px-0 pb-[13px] mr-10 lg:mr-60 2xl:mr-80 2xl:mr-[144px] text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
+                        className={`px-0 pb-[13px] mr-10 lg:mr-60 2xl:mr-60 3xl:mr-[144px] text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
                       >
                         <span className="block font-semibold invisible h-0 overflow-hidden">
                           {tab.title}

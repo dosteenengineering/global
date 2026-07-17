@@ -12,7 +12,7 @@ const Main = () => {
   const containerInset = useGetContainerSpacing(containerRef);
 
   return (
-    <section className="relative h-[100svh] overflow-hidden">
+    <section className="relative xl:h-[100svh] overflow-hidden">
       <div className="absolute z-2 bottom-[-66%] left-[-21%] max-w-[948px] max-h-[949px] xl:w-[947px] xl:h-[948px] scale-125 rotate-[15deg]">
         <img
           src="./assets/images/become-a-partner/shape.svg"
@@ -56,11 +56,8 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <div
-          style={{ paddingRight: containerInset }}
-          data-lenis-prevent
-          className="z-10 h-full min-h-0 overflow-y-auto overscroll-contain bg-white pl-5 md:pl-70 xl:pl-80 3xl:pl-[72px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
+        <div style={{ paddingRight: containerInset }} data-lenis-prevent
+          className="z-10 h-full min-h-0 overflow-y-auto xl:overscroll-contain bg-white pl-5 md:pl-70 xl:pl-80 3xl:pl-[72px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <PartnerForm />
         </div>
       </div>

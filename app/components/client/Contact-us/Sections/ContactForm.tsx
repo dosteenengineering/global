@@ -8,7 +8,7 @@ import BorderButton from "@/app/components/common/BorderButton";
 import { TextAreaField } from "@/app/components/common/Textarea";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { moveUp } from "@/app/components/motionVariants";
 import { useLenis } from "@/app/components/LenisProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,7 +38,8 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
-  const { scrollTo } = useLenis();
+   const contentRef = useRef<HTMLDivElement>(null);
+    const { scrollTo } = useLenis();
   const router = useRouter();
   const searchParams = useSearchParams();
   const {
@@ -63,6 +64,18 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
     },
   });
 
+  useEffect(() => {
+    if (errors && contentRef.current) {
+      const offset = window.innerWidth < 768
+        ? -window.innerHeight * 0.1   // -10vh on mobile
+        : -80;                        // fixed px on desktop
+
+      scrollTo(contentRef.current, {
+        offset,
+        duration: 1.2,
+      });
+    }
+  }, [errors]);
   const onSubmit = async (data: ContactEnquiryFormValues) => {
     setFormStatus("idle");
     const result = await sendContactEnquiryAction(data);
@@ -72,10 +85,17 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
       reset();
     } else {
       setFormStatus("error");
+      
       toast.error("Something went wrong");
     }
   };
 
+  // if(formStatus === "error" && contentRef.current) {
+  //   scrollTo(contentRef.current, {
+  //     offset: -150,
+  //     duration: 1.2,
+  //   });
+  // }
 
   useEffect(() => {
     if (searchParams.get("scrollTo") !== "contact-form") return;
@@ -106,7 +126,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
   // }, []);
 
   return (
-    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden">
+    <section id="contact-form" className="container py-140 3xl:py-200 relative overflow-hidden" ref={contentRef}>
       <div className="absolute bottom-[-35.3%] right-[-15%] 3xl:right-[-3.5%]">
         <Image
           src="/assets/images/contact-us/form-bg-svg.svg"
