@@ -25,7 +25,6 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
   const tabs = industries.map((industry: any) => {
     const systems = industry.systemSection?.items ?? [];
 
-
     const rightItems = systems.map((system: any) => ({
       label: system.firstSection?.shortTitle || system.firstSection?.title || "",
       link: `/solutions/${industry.slug}/${system.slug}`,
