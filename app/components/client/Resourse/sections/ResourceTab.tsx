@@ -93,29 +93,81 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
     };
   }, [activeTab, data.tabs]);
 
+  // useLayoutEffect(() => {
+  //   const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
+  //   const activeButton = buttonRefs.current[activeIndex];
+  //   activeButton?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "nearest",
+  //     inline: "center",
+  //   });
+  // }, [activeTab, data.tabs]);
+
+  // useLayoutEffect(() => {
+  //   const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
+  //   const activeButton = buttonRefs.current[activeIndex];
+  //   const scroller = tabsScrollerRef.current;
+
+  //   if (!activeButton || !scroller) return;
+
+  //   scroller.scrollTo({
+  //     left:
+  //       activeButton.offsetLeft -
+  //       scroller.clientWidth / 2 +
+  //       activeButton.clientWidth / 2,
+  //     behavior: "smooth",
+  //   });
+  // }, [activeTab, data.tabs]);
+
+  // // Close dropdown on outside click
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     if (
+  //       dropdownRef.current &&
+  //       !dropdownRef.current.contains(e.target as Node)
+  //     ) {
+  //       setIsDropdownOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, []);
+
   useLayoutEffect(() => {
     const activeIndex = data.tabs.findIndex((tab) => tab.id === activeTab);
     const activeButton = buttonRefs.current[activeIndex];
-    activeButton?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
-  }, [activeTab, data.tabs]);
+    const scroller = tabsScrollerRef.current;
 
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (!activeButton || !scroller) return;
+
+    const buttonLeft = activeButton.offsetLeft;
+    const buttonRight = buttonLeft + activeButton.offsetWidth;
+
+    const visibleLeft = scroller.scrollLeft;
+    const visibleRight = visibleLeft + scroller.clientWidth;
+
+    const padding = 20;
+
+    // Already comfortably visible
+    if (
+      buttonLeft >= visibleLeft + padding &&
+      buttonRight <= visibleRight - padding
+    ) {
+      return;
+    }
+
+    if (buttonLeft < visibleLeft) {
+      scroller.scrollTo({
+        left: buttonLeft - padding,
+        behavior: "smooth",
+      });
+    } else if (buttonRight > visibleRight) {
+      scroller.scrollTo({
+        left: buttonRight - scroller.clientWidth + padding,
+        behavior: "smooth",
+      });
+    }
+  }, [activeTab]);
 
   const handleTabChange = (tab: LooseTab) => {
     setActiveTab(tab.id);

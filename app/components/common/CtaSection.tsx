@@ -24,9 +24,9 @@ const getActionHref = (link: string) => {
   return `tel:${trimmedLink.replace(/[^\d+]/g, "")}`;
 };
 
-export default function CtaSection({title, titleWidth, description, descriptionWidth, items}: {title: string, titleWidth?: string, description: string, descriptionWidth?: string, items: {buttonText: string, buttonLink: string}[]}) {
+export default function CtaSection({ title, titleWidth, description, descriptionWidth, items }: { title: string, titleWidth?: string, description: string, descriptionWidth?: string, items: { buttonText: string, buttonLink: string }[] }) {
 
-    
+
 
   return (
     <section className="relative w-full select-none overflow-hidden">
@@ -52,13 +52,13 @@ export default function CtaSection({title, titleWidth, description, descriptionW
         {/* <p className={`text-white text-30 leading-[1.333] font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`}>
           {description}
         </p> */}
-          <SectionDescription text={description} className={`max-w-[70ch] text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
+        <SectionDescription text={description} className={`max-w-[70ch] text-white !text-30 !leading-[1.333] !font-light tracking-[-0.02em] mb-[30px] md:mb-50 ${descriptionWidth}`} />
         {/* Buttons */}
         <div className="flex flex-wrap gap-5 md:gap-[10px]">
-          {items.map((btn,index) => (
+          {items.map((btn, index) => (
             <motion.div variants={moveUp(0.2 * index)} initial="hidden" whileInView="show" key={index}
-            viewport={{once:true, amount:0.4}}>
-            {/* <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.buttonLink} hoverBg="white" className="w-fit" /> */}
+              viewport={{ once: true, amount: 0.4 }}>
+              {/* <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={btn.buttonLink} hoverBg="white" className="w-fit" /> */}
               <BorderButton key={btn.buttonText} text={btn.buttonText} iconColor="white" px="px-[24px] md:px-30 3xl:px-[35px]" href={getActionHref(btn.buttonLink)} hoverBg="white" className="w-fit" />
             </motion.div>
           ))}

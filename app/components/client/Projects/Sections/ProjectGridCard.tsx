@@ -34,7 +34,7 @@ export default function GridCard({ project }: { project: Project }) {
       </h3>
 
       {/* Location + Category */}
-      <div className="flex items-center justify-between mb-[15px] pr-70 3xl:pr-[73px]">
+      <div className="flex items-center justify-between mb-[15px] 3xl:pr-[73px] gap-2">
         <div className="flex items-center gap-[10px] text-description text-paragraph">
           <Image
             src="/assets/icons/location-pin-gray.svg"

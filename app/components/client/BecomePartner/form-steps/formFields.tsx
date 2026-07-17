@@ -47,6 +47,30 @@ type BaseFieldProps = {
 //   );
 // };
 
+// export const FormInput = ({
+//   name,
+//   label,
+//   register,
+//   errors,
+//   required = false,
+//   type = "text",
+//   className = "",
+// }: BaseFieldProps & { type?: string }) => {
+//   const error = errors[name]?.message;
+
+//   return (
+//     <label className={`block ${className}`}>
+//       <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label} {required && <span className="text-primary">*</span>}</span>
+//       <input
+//         type={type}
+//         {...register(name, required ? { required: `${label} is required` } : undefined)}
+//         className="h-7 w-full border-0 border-b border-[#CFCFCF] bg-transparent px-0 text-16 text-secondary outline-none transition-colors focus:border-primary"
+//       />
+//       {error && <span className="mt-2 block text-12 text-red-500">{error}</span>}
+//     </label>
+//   );
+// };
+
 export const FormInput = ({
   name,
   label,
@@ -57,16 +81,58 @@ export const FormInput = ({
   className = "",
 }: BaseFieldProps & { type?: string }) => {
   const error = errors[name]?.message;
+  const currentYear = new Date().getFullYear();
+
+  const validationRules = {
+    ...(required && { required: `${label} is required` }),
+
+    ...(type === "email" && {
+      pattern: {
+        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: "Please enter a valid email address",
+      },
+    }),
+
+    ...(type === "year" && {
+      pattern: {
+        value: /^\d{4}$/,
+        message: "Please enter a valid 4-digit year",
+      },
+      validate: (value: string | boolean | string[] | FileList | null) => {
+        const year = Number(value);
+
+        if (year < 1800) {
+          return "Year cannot be before 1800";
+        }
+
+        if (year > currentYear) {
+          return `Year cannot be greater than ${currentYear}`;
+        }
+
+        return true;
+      },
+    }),
+  };
 
   return (
     <label className={`block ${className}`}>
-      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">
+        {label} {required && <span className="text-primary">*</span>}
+      </span>
+
       <input
-        type={type}
-        {...register(name, required ? { required: "Required" } : undefined)}
+        type={type === "year" ? "text" : type}
+        inputMode={type === "year" ? "numeric" : undefined}
+        maxLength={type === "year" ? 4 : undefined}
+        {...register(name, validationRules)}
         className="h-7 w-full border-0 border-b border-[#CFCFCF] bg-transparent px-0 text-16 text-secondary outline-none transition-colors focus:border-primary"
       />
-      {error && <span className="mt-2 block text-12 text-red-500">{error}</span>}
+
+      {error && (
+        <span className="mt-2 block text-12 text-red-500">
+          {String(error)}
+        </span>
+      )}
     </label>
   );
 };
@@ -121,11 +187,11 @@ export const PhoneInput = ({
 
   return (
     <label className="block">
-      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+      <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label} {required && <span className="text-primary">*</span>} </span>
       <Controller
         name={name}
         control={control}
-        rules={required ? { required: "Required" } : undefined}
+        rules={required ? { required: `${label} is required` } : undefined}
         render={({ field }) => (
           <PhoneInputControl value={field.value} name={field.name} onChange={field.onChange} onBlur={field.onBlur} />
         )}

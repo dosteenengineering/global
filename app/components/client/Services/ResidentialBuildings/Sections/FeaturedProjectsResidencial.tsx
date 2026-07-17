@@ -330,7 +330,7 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
           {/* Right: nav + inactive slots + all projects btn */}
           <div className="flex-1 min-w-0 flex flex-col justify-between">
             <div className="flex gap-40 3xl:gap-50 items-start flex-1" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              {[...inactiveProjects, ...inactiveProjects].map((project, i) => {
+              {inactiveProjects.map((project, i) => {
                 const projectIndex = projects.indexOf(project);
                 return (
                   <InactiveSlot

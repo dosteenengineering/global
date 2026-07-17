@@ -53,7 +53,7 @@ const page = async () => {
                 projectsData={projectsData.data}
                 blogsDataRaw={blogsData.data}
                 clientsData={clientsData.data}
-            />;
+            />
         </>
     )
 };

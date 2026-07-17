@@ -31,7 +31,7 @@ const DefaultServicePageIndex = ({ data, projectsData }: { data: CommercialBuild
       <DosteenSystems data={DosteenSystemsData} />
       <ProjectCta data={data.thirdSection} />
       {
-        featuredProjects && (
+        featuredProjects.length > 0 && (
           <FeaturedProjects data={featuredProjects} />
         )
       }

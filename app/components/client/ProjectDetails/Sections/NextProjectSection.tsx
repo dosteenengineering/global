@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { Project, ProjectItemProps } from "../data";
+import {ProjectItemProps } from "../data";
 import Image from "next/image";
 
 
 export default function NextProjectPanel({ project }: { project: ProjectItemProps }) {
+
+  console.log(`pro`,project)
   return (
-    <Link
-      href={`/case-studies/${project.slug}`}
-      className="group"
-    >
+    <Link href={`/case-studies/${project.slug}`} className="group" >
       <div className="relative w-[150px] 3xl:w-[176px] h-[110px] 3xl:h-[128px] overflow-hidden">
         <Image
           src={project.thumbnail}

@@ -7,11 +7,12 @@ import { ProjectItemProps, AllProjectData } from "./data";
 const Index = ({ data, allProjectData }: { data: ProjectItemProps, allProjectData: AllProjectData }) => {
 
   const isRelatedAvailable = allProjectData.projects.filter((project) => project._id !== data._id && project.firstSection.sector._id === data.firstSection.sector._id).length > 0
-
+  const currentIndex = allProjectData.projects.findIndex((project) => project._id === data._id);
+  const nextProject = allProjectData.projects[(currentIndex + 1) % allProjectData.projects.length];
   return (
     <>
       <InnerPageBanner title={data.firstSection.title} />
-      <Main data={data} nextProject={data} isRelatedAvailable={isRelatedAvailable}/>
+      <Main data={data} nextProject={nextProject} isRelatedAvailable={isRelatedAvailable}/>
       {
         isRelatedAvailable &&
         <RelatedProjects data={allProjectData} currentProject={data} />

@@ -441,7 +441,7 @@ const FullscreenMenu = ({
                     alt=""
                     width={22.47}
                     height={22.47}
-                    className="ml-50 h-5 w-5 xl:w-auto xl:h-auto opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
+                    className="ml-50 h-5 w-5 xl:w-[22.47px] xl:h-auto opacity-0 transition-all duration-300 group-hover:translate-x-2 group-hover:opacity-100"
                   />
                   <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00]" />
                   <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-[#76A7FF] to-[#76A7FF00] group-hover:from-white group-hover:w-full transition-all duration-300" />

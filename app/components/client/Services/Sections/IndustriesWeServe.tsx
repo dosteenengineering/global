@@ -8,11 +8,10 @@ import ImageHotspots, { Hotspot } from "@/app/components/common/ImageHotspots";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
-
-
+import { useLenis } from "@/app/components/LenisProvider";
 
 const industryHotspotsByTitle: Record<string, Hotspot[]> = {
-  
+
   // Paste each copied hotspot JSON array under the exact backend item.title.
 
   "Industrial": [
@@ -134,7 +133,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783078947137",
       "title": "Garbage & Linen Chutes",
-      "href":"solutions/residential-developments/efficient-garbage-linen-chutes-for-modern-buildings",
+      "href": "solutions/residential-developments/efficient-garbage-linen-chutes-for-modern-buildings",
       "marker": {
         "x": 49.122807017543856,
         "y": 39.41592261904761
@@ -176,7 +175,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079025580",
       "title": "Flood Barriers",
-      "href":"solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
+      "href": "solutions/residential-developments/advanced-flood-barriers-for-homes-in-uae-oman",
       "marker": {
         "x": 38.3,
         "y": 64.2
@@ -248,7 +247,7 @@ const industryHotspotsByTitle: Record<string, Hotspot[]> = {
     {
       "id": "hotspot-1783079308586",
       "title": "Garbage & Linen Chutes",
-      "href":"solutions/commercial-buildings/efficient-garbage-linen-chutes-for-modern-buildings",
+      "href": "solutions/commercial-buildings/efficient-garbage-linen-chutes-for-modern-buildings",
       "marker": {
         "x": 49.29824561403508,
         "y": 39.151372354497354
@@ -497,7 +496,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
   //   detailRef.current?.scrollIntoView({
   //     behavior: "smooth",
   //     block: "start",
-      
+
   //   });
   // }, [activeId]);
 
@@ -527,6 +526,9 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
   const toggleAccordion = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
+
+   const contentRef = useRef<HTMLDivElement>(null);
+    const { scrollTo } = useLenis();
   return (
     <section className="relative w-full select-none  overflow-hidden lg:overflow-visible">
       <PrimaryNoise2 />
@@ -555,8 +557,8 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
               return (
                 <div key={idx} className="relative first:border-t border-b border-bdr-blue py-5">
                   {/* Accordion header */}
-                  <button type="button" onClick={() => toggleAccordion(idx)} 
-                  className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
+                  <button type="button" onClick={() => toggleAccordion(idx)}
+                    className={` group relative flex items-center justify-between text-left w-full transition-all duration-300 cursor-pointer`} >
                     {/* Hover bg */}
                     {!isOpen && (
                       <span
@@ -610,44 +612,36 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
                 <motion.div key={item._id ?? index} variants={moveUp(0.1 * index)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.8, delay: 0.1 * index, ease: "easeInOut" }}>
                   <button
                     type="button"
-                    onClick={() => handleIndustryClick(index)}
-                    className={`group relative flex items-center justify-between text-left w-full border-b
-                       border-[#76A7FF] transition-all duration-300 cursor-pointer ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : "" }`}
-                    style={
-                      isActive
-                        ? {
-                          background:
-                            "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50.96%, rgba(255,255,255,0) 100%)",
-                        }
-                        : {}
-                    }
-                  >
+                    // onClick={() => handleIndustryClick(index)}
+                    onClick={() => {
+                      setActiveId(index);
+                      if (contentRef.current) {
+                        scrollTo(contentRef.current, {
+                          offset: -150,
+                          duration: 1.2,
+                        });
+                      }
+                    }}
+                    className={`group relative flex items-center justify-between text-left w-full border-b border-[#76A7FF] transition-all duration-300 cursor-pointer 
+                      ${isActive ? "px-1 2xl:px-[10px] 3xl:px-20" : ""}`}
+                    style={isActive ? { background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50.96%, rgba(255,255,255,0) 100%)", } : {}} >
                     {/* Hover bg */}
                     {!isActive && (
-                      <span
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                        style={{
-                          background:
-                            "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50.96%, rgba(255,255,255,0) 100%)",
-                        }}
-                      />
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        style={{ background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50.96%, rgba(255,255,255,0) 100%)", }} />
                     )}
 
-                    <span
-                      className={`relative z-10 text-base 2xl:text-19 leading-[2.5263] tracking-[-0.02em] transition-all duration-300 ${isActive
-                        ? "text-white font-medium"
-                        : "text-white font-light"
-                        }`}
-                    >
+                    <span className={`relative z-10 text-base 2xl:text-19 leading-[2.5263] tracking-[-0.02em] transition-all duration-300 
+                    ${isActive ? "text-white font-medium" : "text-white font-light"}`} >
                       {item.title}
                     </span>
 
                     {/* Arrow — only visible on active or hover */}
-                    <span
-                      className={`relative z-10 shrink-0 transition-all duration-300 ${isActive
+                    <span className={`relative z-10 shrink-0 transition-all duration-300 
+                    ${isActive
                         ? "opacity-100 translate-x-0"
                         : "opacity-0 -translate-x-50"
-                        }`}
+                      }`}
                     >
                       <Image src="/assets/icons/arrow-right.svg" alt="Arrow Right" width={50} height={40} className="object-contain w-[26px] h-[17px]" />
                     </span>
@@ -663,7 +657,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            ref={detailRef}
+            ref={contentRef}
             className="flex-1 hidden lg:flex flex-col z-10 text-white"
           >
             <motion.h2
@@ -672,7 +666,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
             >
               {active.title}
             </motion.h2>
-          
+
 
             {/* Image */}
             <motion.div
