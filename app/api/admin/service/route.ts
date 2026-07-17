@@ -203,7 +203,7 @@ export async function GET(request: NextRequest) {
     const slug = request.nextUrl.searchParams.get("slug");
 
     const service = await Service.findOne().populate(
-        "thirdSection.items.systemSection.items.system"
+        "thirdSection.items.systemSection.items"
     ).lean() as any;
 
     if (!service) {
