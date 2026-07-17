@@ -8,6 +8,7 @@ import ImageHotspots, { Hotspot } from "@/app/components/common/ImageHotspots";
 import PrimaryNoise2 from "@/app/components/common/noise/PrimaryNoise2";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { useLenis } from "@/app/components/LenisProvider";
 
 const toHotspot = (item: LowPolyItem, index: number, industrySlug: string): Hotspot => ({
   id: `hotspot-${index}-${item.systemSlug}`,
