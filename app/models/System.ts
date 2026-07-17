@@ -49,6 +49,14 @@ const systemSchema = new mongoose.Schema(
       thumbnailImageAlt: {
         type: String,
       },
+      marker:{
+        x:String,
+        y:String
+      },
+      label:{
+        x:String,
+        y:String
+      }
     },
 
     secondSection: {

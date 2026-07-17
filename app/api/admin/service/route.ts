@@ -202,9 +202,9 @@ export async function GET(request: NextRequest) {
     const id = request.nextUrl.searchParams.get("id");
     const slug = request.nextUrl.searchParams.get("slug");
 
-const service = await Service.findOne().populate(
-    "thirdSection.items.systemSection.items"
-).lean() as any;
+    const service = await Service.findOne().populate(
+        "thirdSection.items.systemSection.items.system"
+    ).lean() as any;
 
     if (!service) {
         return NextResponse.json({ message: "Service not found" }, { status: 404 });

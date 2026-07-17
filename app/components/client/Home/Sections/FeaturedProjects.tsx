@@ -26,6 +26,22 @@ import { moveUp } from "@/app/components/motionVariants";
 import { AllProjectData } from "../../ProjectDetails/data";
 const PLACEHOLDER = "/assets/images/placeholder.png";
 
+// helper — put this near the top of the file or in a shared utils file
+const truncateWords = (text: string | undefined, limit: number) => {
+  if (!text) return "";
+  const words = text.trim().split(/\s+/);
+  if (words.length <= limit) return text;
+  return words.slice(0, limit).join(" ") + "...";
+};
+
+// small inline component so both usages below stay DRY
+const ResponsiveTitle = ({ text }: { text?: string }) => (
+  <>
+    <span className="2xl:hidden">{text}</span>
+    <span className="hidden 2xl:inline">{truncateWords(text, 8)}</span>
+  </>
+);
+
 function getInactiveProjects(
   projects: AllProjectData["projects"],
   activeIndex: number,
@@ -88,7 +104,7 @@ function InactiveSlot({
               className="absolute inset-x-0 top-0 text-30 font-poppins pr-5 font-[300] -tracking-[2%] text-paragraph leading-[1.33] slot-exit"
               style={{ ["--exit-to" as string]: exitTo }}
             >
-              {displayed.prev?.firstSection.title}
+              <ResponsiveTitle text={displayed.prev?.firstSection.title} />
             </p>
           )}
           <p
@@ -99,7 +115,7 @@ function InactiveSlot({
                 : {}
             }
           >
-            {displayed.next?.firstSection.title}
+            <ResponsiveTitle text={displayed.prev?.firstSection.title} />
           </p>
         </div>
       </Link>
@@ -141,7 +157,7 @@ function InactiveSlot({
 }
 
 export default function FeaturedProjectsSection({
-  featuredProjectsData,sectionTitle
+  featuredProjectsData, sectionTitle
 }: {
   featuredProjectsData: AllProjectData["projects"];
   sectionTitle: string;
@@ -309,64 +325,61 @@ export default function FeaturedProjectsSection({
               return (
                 <SwiperSlide key={idx}>
                   <Link href={`/case-studies/${project.slug}`}>
-                  <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
-                    <Image
-                      src={project.thumbnail || PLACEHOLDER}
-                      alt={project.thumbnailAlt}
-                      fill
-                      className="object-cover"
-                      priority={idx === 0}
-                    />
-                    {/* Overlay + details only on the currently active slide */}
-                    <>
-                      {/* Gradient */}
-                      <div
-                        className={`absolute inset-0 transition-opacity duration-500 ${
-                          isActive ? "opacity-100" : "opacity-0"
-                        }`}
-                        style={{
-                          background:
-                            "linear-gradient(180deg, rgba(0,0,0,0) 35.9%, rgba(0,0,0,0.85) 86.75%)",
-                        }}
+                    <div className="relative w-full h-[383px] cursor-pointer group overflow-hidden">
+                      <Image
+                        src={project.thumbnail || PLACEHOLDER}
+                        alt={project.thumbnailAlt}
+                        fill
+                        className="object-cover"
+                        priority={idx === 0}
                       />
-                      {/* Arrow */}
-                      <div
-                        className={`absolute top-4 right-4 z-10 transition-all duration-500 ${
-                          isActive
-                            ? "opacity-100 translate-x-0 translate-y-0"
-                            : "opacity-0 translate-x-4 translate-y-4"
-                        }`}
-                      >
-                        <Image
-                          src="/assets/icons/arrow-right-top-big.svg"
-                          alt="arrow"
-                          width={71}
-                          height={48}
-                          className="w-[50px] h-[50px]"
+                      {/* Overlay + details only on the currently active slide */}
+                      <>
+                        {/* Gradient */}
+                        <div
+                          className={`absolute inset-0 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0"
+                            }`}
+                          style={{
+                            background:
+                              "linear-gradient(180deg, rgba(0,0,0,0) 35.9%, rgba(0,0,0,0.85) 86.75%)",
+                          }}
                         />
-                      </div>
-                      {/* Content */}
-                      <div
-                        className={`absolute bottom-0 left-0 right-0 px-6 pb-6 z-10 transition-opacity duration-500 ${
-                          isActive ? "opacity-100" : "opacity-0"
-                        }`}
-                      >
-                        <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
-                          {project.firstSection.title}
-                        </p>
-
-                        <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
-                        <div className="flex items-center gap-3 justify-between">
-                          <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
-                            Location: {project.firstSection.location.name}
-                          </span>
-                          <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
-                            Client: {project.firstSection.client}
-                          </span>
+                        {/* Arrow */}
+                        <div
+                          className={`absolute top-4 right-4 z-10 transition-all duration-500 ${isActive
+                              ? "opacity-100 translate-x-0 translate-y-0"
+                              : "opacity-0 translate-x-4 translate-y-4"
+                            }`}
+                        >
+                          <Image
+                            src="/assets/icons/arrow-right-top-big.svg"
+                            alt="arrow"
+                            width={71}
+                            height={48}
+                            className="w-[50px] h-[50px]"
+                          />
                         </div>
-                      </div>
-                    </>
-                  </div>
+                        {/* Content */}
+                        <div
+                          className={`absolute bottom-0 left-0 right-0 px-6 pb-6 z-10 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-0"
+                            }`}
+                        >
+                          <p className="text-white font-poppins font-[300] text-[21px] leading-[1.33] -tracking-[2%] mb-[10px] md:mb-4">
+                            {project.firstSection.title}
+                          </p>
+
+                          <div className="h-[1px] bg-white/30 mb-[10px] md:mb-4" />
+                          <div className="flex items-center gap-3 justify-between">
+                            <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
+                              Location: {project.firstSection.location.name}
+                            </span>
+                            <span className="text-white leading-[1.52] text-[14px] sm:text-19 font-poppins font-[300] -tracking-[2%]">
+                              Client: {project.firstSection.client}
+                            </span>
+                          </div>
+                        </div>
+                      </>
+                    </div>
                   </Link>
                 </SwiperSlide>
               );

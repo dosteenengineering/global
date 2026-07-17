@@ -73,7 +73,18 @@ interface IndividualServiceFormProps {
         buttonLink: string;
     };
 
+    lowPolySection: {
+        items: {
+            title: string;
+            systemSlug: string;
+            marker: { x: string; y: string };
+            label: { x: string; y: string };
+            side: "left" | "right";
+        }[];
+    };
+
     availableSystems?: {
+        slug: string | number | readonly string[] | undefined;
         _id: string;
         firstSection: {
             title: string;
@@ -91,6 +102,15 @@ const IndividualService = () => {
 
     const { register, handleSubmit, setValue, control, formState: { errors }, getValues, watch } = useForm<IndividualServiceFormProps>();
 
+
+    const {
+        fields: lowPolyItems,
+        append: lowPolyAppend,
+        remove: lowPolyRemove,
+    } = useFieldArray({
+        control,
+        name: "lowPolySection.items",
+    });
 
     const handleAddIndividualService = async (data: IndividualServiceFormProps) => {
 
@@ -152,6 +172,8 @@ const IndividualService = () => {
                     buttonText: data.thirdSection?.buttonText || "",
                     buttonLink: data.thirdSection?.buttonLink || "",
                 });
+
+                setValue("lowPolySection.items", data.lowPolySection.items)
 
             } else {
                 toast.error(result.message);
@@ -360,6 +382,110 @@ const IndividualService = () => {
                                 })} />
                             </div>
 
+                        </div>
+                    </div>
+                </AdminItemContainer>
+
+
+                <AdminItemContainer>
+                    <Label main>Low Poly Section</Label>
+                    <div className='p-5 rounded-md flex flex-col gap-2'>
+                        <div>
+                            <Label className='font-bold'>Items</Label>
+                            <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
+
+                                {lowPolyItems.map((field, index) => (
+                                    <div key={field.id} className='grid grid-cols-2 gap-4 relative border-b border-black/20 pb-5 last:border-b-0'>
+                                        <div className='absolute top-2 right-2'>
+                                            <RiDeleteBinLine onClick={() => lowPolyRemove(index)} className='cursor-pointer text-red-600' />
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>System</Label>
+                                            <Controller
+                                                control={control}
+                                                name={`lowPolySection.items.${index}.systemSlug`}
+                                                // rules={{ required: "System is required" }}
+                                                render={({ field }) => (
+                                                    <select className='border rounded-md p-2' {...field}>
+                                                        <option value="">Select a system</option>
+                                                        {availableSystems.map((system) => (
+                                                            <option key={system._id} value={system.slug}>
+                                                                {system.firstSection?.title}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                )}
+                                            />
+                                            {/* {errors.lowPolySection?.items?.[index]?.systemSlug && (
+                                                <p className='text-red-500'>
+                                                    {errors.lowPolySection.items[index]?.systemSlug?.message}
+                                                </p>
+                                            )} */}
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Title</Label>
+                                            <Input
+                                                type='text'
+                                                placeholder='Title'
+                                                {...register(`lowPolySection.items.${index}.title`, {
+                                                    required: "Title is required",
+                                                })}
+                                            />
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Side</Label>
+                                            <select
+                                                className='border rounded-md p-2'
+                                                {...register(`lowPolySection.items.${index}.side`)}
+                                            >
+                                                <option value="left">Left</option>
+                                                <option value="right">Right</option>
+                                            </select>
+                                        </div>
+
+                                        <div /> {/* spacer to keep the grid aligned */}
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Marker X</Label>
+                                            <Input type='text' {...register(`lowPolySection.items.${index}.marker.x`)} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Marker Y</Label>
+                                            <Input type='text' {...register(`lowPolySection.items.${index}.marker.y`)} />
+                                        </div>
+
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Label X</Label>
+                                            <Input type='text' {...register(`lowPolySection.items.${index}.label.x`)} />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            <Label className='font-bold'>Label Y</Label>
+                                            <Input type='text' {...register(`lowPolySection.items.${index}.label.y`)} />
+                                        </div>
+                                    </div>
+                                ))}
+
+                            </div>
+                            <div className='flex justify-end mt-2'>
+                                <Button
+                                    type='button'
+                                    addItem
+                                    onClick={() =>
+                                        lowPolyAppend({
+                                            title: "",
+                                            systemSlug: "",
+                                            marker: { x: "", y: "" },
+                                            label: { x: "", y: "" },
+                                            side: "left",
+                                        })
+                                    }
+                                >
+                                    Add Item
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </AdminItemContainer>
