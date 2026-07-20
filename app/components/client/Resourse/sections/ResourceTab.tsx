@@ -218,7 +218,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                   const prevIndex = Math.max(activeTabIndex - 1, 0);
                   setActiveTab(data.tabs[prevIndex].id);
                 }}
-                className={` z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtFirstTab
+                className={` z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden 
+                  ${isAtFirstTab
                   ? "cursor-not-allowed opacity-35"
                   : "hover:border-primary hover:text-primary"
                   }`}
@@ -236,7 +237,8 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                   );
                   setActiveTab(data.tabs[nextIndex].id);
                 }}
-                className={`z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden ${isAtLastTab
+                className={`z-10 flex h-9 w-9 items-center justify-center rounded-full border border-bdr-gray bg-white text-secondary shadow-sm transition-all 3xl:hidden 
+                  ${isAtLastTab
                   ? "cursor-not-allowed opacity-35"
                   : "hover:border-primary hover:text-primary"
                   }`}
@@ -394,11 +396,11 @@ const ResourseTab = ({ data }: ResourseTabProps) => {
                         alt=""
                         width={32}
                         height={32}
-                        className="h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain"
+                        className={`h-7 w-7 xl:w-auto xl:h-auto shrink-0 object-contain ${isActive ? "brightness-0" : "brightness-100"}`}
                       />
                       <span
-                        className={`text-19 leading-[1.526315789473684] text-secondary font-poppins transition-all tracking-[-0.02em] duration-300 ${isActive ? "font-medium" : "font-light"
-                          }`}
+                        className={`text-19 leading-[1.526315789473684] font-poppins transition-all tracking-[-0.02em] duration-300 font-light
+                           ${isActive ? "text-secondary" : "text-secondary" }`}
                       >
                         {tab.label}
                       </span>
