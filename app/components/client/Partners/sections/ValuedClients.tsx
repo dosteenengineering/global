@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { valuedClientsData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { motion } from "framer-motion";

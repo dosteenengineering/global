@@ -11,7 +11,6 @@ import { X } from "lucide-react";
 import NavButton from "@/app/components/common/NavigationButton";
 
 export default function Main({ data }: { data: Award[] }) {
-  console.log(data)
   const categories = Array.from(
     new Map(
       data.map((award) => [

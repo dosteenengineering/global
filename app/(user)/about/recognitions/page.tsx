@@ -10,7 +10,6 @@ export async function generateMetadata() {
     next: { revalidate: 60 },
   });
   const { data } = await response.json();
-  console.log(data.seo)
   if (data.seo) {
     return buildMetadata(data.seo, pathname);
   }

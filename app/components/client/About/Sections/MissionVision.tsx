@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { AboutPageData, MissionVisionData } from "../data";
+import { AboutPageData } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
