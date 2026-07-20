@@ -21,9 +21,51 @@ const NewsLetter = ({ data }: Props) => {
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [newsletterMessage, setNewsletterMessage] = useState("");
 
+  // const handleNewsletterSubmit = async () => {
+  //   const trimmed = newsletterEmail.trim();
+  //   if (!trimmed) return; 
+
+  //   setNewsletterStatus("loading");
+  //   setNewsletterMessage("");
+
+  //   try {
+  //     const res = await fetch("/api/admin/newsletter", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email: trimmed }),
+  //     });
+  //     const data = await res.json();
+
+  //     if (data.success) {
+  //       setNewsletterStatus("success");
+  //       setNewsletterMessage(data.message);
+  //       setNewsletterEmail("");
+  //     } else {
+  //       setNewsletterStatus("error");
+  //       setNewsletterMessage(data.message);
+  //     }
+  //   } catch {
+  //     setNewsletterStatus("error");
+  //     setNewsletterMessage("Something went wrong. Please try again.");
+  //   }
+  // };
+
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleNewsletterSubmit = async () => {
     const trimmed = newsletterEmail.trim();
-    if (!trimmed) return;
+
+    if (!trimmed) {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Please enter your email address.");
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(trimmed)) {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Please enter a valid email address.");
+      return;
+    }
 
     setNewsletterStatus("loading");
     setNewsletterMessage("");
@@ -34,15 +76,22 @@ const NewsLetter = ({ data }: Props) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmed }),
       });
-      const data = await res.json();
 
-      if (data.success) {
+      // Handle non-2xx responses (e.g. 400/500) before parsing
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Invalid server response");
+      }
+
+      if (res.ok && data.success) {
         setNewsletterStatus("success");
-        setNewsletterMessage(data.message);
+        setNewsletterMessage(data.message ?? "Subscribed successfully!");
         setNewsletterEmail("");
       } else {
         setNewsletterStatus("error");
-        setNewsletterMessage(data.message);
+        setNewsletterMessage(data.message ?? "Subscription failed. Please try again.");
       }
     } catch {
       setNewsletterStatus("error");
