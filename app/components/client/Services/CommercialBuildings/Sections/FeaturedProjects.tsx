@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import NavButton from "@/app/components/common/NavigationButton";
 import { Project } from "../../../Projects/data";
+import { Autoplay } from "swiper/modules";
 
 
 export default function FeaturedProjects({data}:{data:Project[]}) {
@@ -93,6 +94,7 @@ export default function FeaturedProjects({data}:{data:Project[]}) {
         </div>
 
         <Swiper
+          modules={[Autoplay]}
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
             updateState(swiper);
@@ -100,7 +102,11 @@ export default function FeaturedProjects({data}:{data:Project[]}) {
           onSlideChange={(swiper) => updateState(swiper)}
           onBreakpoint={(swiper) => updateState(swiper)}
           spaceBetween={30}
-          slidesPerView={1}
+          autoplay={{
+            delay: 3000, // 3 seconds
+            disableOnInteraction: false, // Continue autoplay after user interaction
+            pauseOnMouseEnter: true, // Pause on hover (optional)
+          }}
           breakpoints={{
             768: { slidesPerView: 2 },
             1400: { slidesPerView: 3 },
@@ -110,7 +116,7 @@ export default function FeaturedProjects({data}:{data:Project[]}) {
           {projects.map((project, index) => (
             <SwiperSlide key={index} className="!h-auto flex flex-col ">
               {/* @ts-ignore */}
-              <ProjectCard project={project} delay={0.2 + index * 0.3} />
+              <ProjectCard project={project} delay={0.12} />
             </SwiperSlide>
           ))}
         </Swiper>

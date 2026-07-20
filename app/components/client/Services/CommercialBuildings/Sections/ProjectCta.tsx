@@ -31,7 +31,7 @@ const ProjectCta = ({data}:{data:CtaProps}) => {
             px="px-8 lg:px-[35px]"
             hoverBg="black"
             className="z-10 min-w-max"
-            href={`/${data.buttonLink}`}
+            href={`${data.buttonLink}`}
           />
         </div>
       </div>
