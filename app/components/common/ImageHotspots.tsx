@@ -9,7 +9,7 @@ const LINE_DELAY = 0.25;
 export interface Hotspot {
   id: string;
   title: string;
-  href?: string;
+  href?: string | null;
   marker: {
     x: number;
     y: number;
@@ -320,7 +320,9 @@ export default function ImageHotspots({
                       className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
                  border-white bg-transparent hover:bg-white text-white hover:text-[#294596] transition-all duration-300 px-[8px]
                   2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] xl:text-[12px] 3xl:text-15 font-light
-                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
+                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm 
+                  ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2
+                   ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-pointer"}`}
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
@@ -334,9 +336,10 @@ export default function ImageHotspots({
                   ) : (
                     <button
                       type="button"
-                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border
+                      className={`absolute z-20 flex min-h-[24px] min-w-[96px] items-center justify-center rounded-full border pointer-events-none cursor-alias
                  border-white bg-transparent hover:bg-white text-white hover:text-[#294596] transition-all duration-300 px-[8px] 2xl:px-4 py-[5px] 2xl:py-[10px] text-center text-[10px] xl:text-[12px] 3xl:text-15 font-light
-                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-default"}`}
+                  leading-none tracking-[-0.02em] text-[#25293a] shadow-[0_8px_18px_rgba(29,39,100,0.08)] backdrop-blur-sm
+                   ${hotspot.side === "left" ? "-translate-x-full" : ""} -translate-y-1/2 ${editorEnabled ? "cursor-grab active:cursor-grabbing" : "cursor-alias"}`}
                       style={{
                         left: `${hotspot.label.x}%`,
                         top: `${hotspot.label.y}%`,
