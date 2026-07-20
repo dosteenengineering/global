@@ -24,9 +24,15 @@ export default function FaqSection({ data }: { data: FaqData }) {
   const page = Number(searchParams.get("page") || 1);
   const [inputValue, setInputValue] = useState(search);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastPushedRef = useRef(search);
 
   useEffect(() => {
-    setInputValue(search);
+    // Only sync from the URL if this change didn't originate from our own debounce push
+    // (e.g. it came from browser back/forward, or an external link)
+    if (search !== lastPushedRef.current) {
+      setInputValue(search);
+      lastPushedRef.current = search;
+    }
   }, [search]);
 
   useEffect(() => {
@@ -58,6 +64,7 @@ export default function FaqSection({ data }: { data: FaqData }) {
       const params = new URLSearchParams();
       if (value.trim()) params.set("q", value);
       params.set("page", "1");
+      lastPushedRef.current = value; // NEW: record what we're about to push, before it lands
       router.push(`?${params.toString()}`, { scroll: false });
     }, DEBOUNCE_MS);
   };
@@ -90,21 +97,21 @@ export default function FaqSection({ data }: { data: FaqData }) {
             />
           </motion.div>
           {/* {filtered.length > 0 && ( */}
-            <motion.div
-              variants={moveUp(0.35)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className={`mb-140 3xl:mb-150 `}
-            >
+          <motion.div
+            variants={moveUp(0.35)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className={`mb-140 3xl:mb-150 `}
+          >
             <div className={`transition-all duration-300 `}>
               <FaqCta
                 subTitle={firstSection.subTitle}
                 btnText={firstSection.btnText}
                 btnLink={firstSection.btnLink}
               />
-              </div>
-            </motion.div>
+            </div>
+          </motion.div>
           {/* )} */}
         </div>
 

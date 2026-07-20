@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { AboutPageData, ValuesData } from "../data";
+import { AboutPageData } from "../data";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";

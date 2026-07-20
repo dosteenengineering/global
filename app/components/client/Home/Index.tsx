@@ -18,7 +18,6 @@ import { ClientPageData } from "../Partners/data";
 
 
 function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
-  console.log(apiData,"solutionsData")
 
   const industries = apiData?.thirdSection?.items ?? [];
 
