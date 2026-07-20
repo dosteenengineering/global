@@ -206,8 +206,8 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
             onSlideChange={(s) => setMobileActiveIndex(s.realIndex)}
             slidesPerView={1}
             spaceBetween={0}
-            speed={600}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            speed={800}
+            autoplay={{ delay: 1000, disableOnInteraction: false }}
             className="w-full h-[383px] lg:h-[480px] mb-5"
           >
             {projects.map((project,index) => (

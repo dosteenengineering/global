@@ -349,7 +349,7 @@ export default function SolutionsSection({
         <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-auto">
           <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px] text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
             <span
-              className="max-w-[48ch]"
+              className="max-w-[53ch] 3xl:pr-80"
               dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }}
             />
             <BorderButton
