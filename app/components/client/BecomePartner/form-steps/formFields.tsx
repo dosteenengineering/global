@@ -13,6 +13,9 @@ type BaseFieldProps = {
   required?: boolean;
   className?: string;
   multiple?: boolean;
+  maxSizeMB?: number;
+  maxFiles?: number;
+  accept?:string;
 };
 
 
@@ -411,9 +414,31 @@ export const FileInput = ({
   errors,
   className = "",
   multiple,
-  required = false
+  required = false,
+  maxSizeMB = 5,
+  maxFiles,
+  accept
 }: BaseFieldProps & { helper: string }) => {
   const error = errors[name]?.message;
+
+  const validateFiles = (value: unknown) => {
+    if (!(value instanceof FileList)) {
+      return required ? "Required" : true;
+    }
+    if (required && value.length === 0) {
+      return "Required";
+    }
+    if (maxFiles && value.length > maxFiles) {
+      return `You can upload up to ${maxFiles} files`;
+    }
+    const maxBytes = maxSizeMB * 1024 * 1024;
+    for (const file of Array.from(value)) {
+      if (file.size > maxBytes) {
+        return `File exceeds ${maxSizeMB}MB`;
+      }
+    }
+    return true;
+  };
 
   return (
     <label className={`block ${className}`}>
@@ -422,16 +447,13 @@ export const FileInput = ({
         <Paperclip size={24} strokeWidth={1.5} className="shrink-0 text-paragraph" />
       </div>
       <div className=" flex h-8 items-center border-b border-[#CFCFCF]">
-        <input type="file" multiple={multiple} {...register(
-          name,
-          required
-            ? {
-              validate: (value) =>
-                (value instanceof FileList && value.length > 0) ||
-                "Required",
-            }
-            : undefined,
-        )} className="min-w-0 flex-1 text-12 text-paragraph file:hidden" />
+        <input
+          type="file"
+          multiple={multiple}
+          accept={accept}
+          {...register(name, { validate: validateFiles })}
+          className="min-w-0 flex-1 text-12 text-paragraph file:hidden"
+        />
       </div>
       <span className="mt-1 block text-11 leading-[1.45] text-paragraph">{helper}</span>
       {error && <span className="mt-2 block text-12 text-red-500">{error}</span>}

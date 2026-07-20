@@ -1,8 +1,8 @@
 import Main from "./Main"
-const index = () => {
+const index = ({data}:{data:any}) => {
   return ( 
     <>
-      <Main/>
+      <Main data={data}/>
     </>
    );
 }

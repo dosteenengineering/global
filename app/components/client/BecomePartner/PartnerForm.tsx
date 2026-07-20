@@ -88,7 +88,7 @@ const stepFields: Record<string, (keyof PartnerFormValues)[]> = {
   ],
 };
 
-const PartnerForm = () => {
+const PartnerForm = ({data}:any) => {
   const [activeStep, setActiveStep] = useState(0);
   const currentStep = steps[activeStep];
   const isFirstStep = activeStep === 0;
@@ -174,7 +174,7 @@ const PartnerForm = () => {
 
   return (
     <>
-      <ThankYouModal isOpen={isSubmitted} />
+      <ThankYouModal isOpen={isSubmitted} data={data}/>
       <div className="h-full min-h-0">
         <form
           onSubmit={handleSubmit(onSubmit)}

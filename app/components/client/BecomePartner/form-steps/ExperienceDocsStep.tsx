@@ -7,15 +7,15 @@ const ExperienceDocsStep = ({ register, errors, watch }: StepFormProps) => {
 
   return (
     <>
-      <FormInput name="relevantExperience" label="Years of Relevant Experience *" register={register} errors={errors} required/>
-      <SelectInput name="keyCertifications" watch={watch} label="Key Certifications *" options={keyCertificates} register={register} errors={errors} required/>
-      <FormInput name="pastProjects" label="Major Past Projects / Client *" className="md:col-span-2" register={register} errors={errors} required/>
-      <FileInput name="brochure" label="Product/Service Brochure or Catalog *" helper="Max 5MB, PDF preferred" register={register} errors={errors} required/>
-      <FileInput name="technicalSpecSheet" label="Technical Specifications Sheet *" helper="Detailed technical specs - Max 5MB" register={register} errors={errors} required/>
-      <FileInput name="uploadedDocuments" multiple={true} label="Upload Documents *" helper="Trade License, VAT Certificate, ISO Certificates, Bank Details, Insurance Certificate (max 5 files, PDF/JPG)" className="md:col-span-2" register={register} errors={errors} required/>
-      <SelectInput name="paymentTermsPreference" watch={watch} label="Payment Terms Preference *"
-        options={paymentPreference} className="md:col-span-2" register={register} errors={errors} required/>
-      <TermsCheckbox register={register} errors={errors}/>
+      <FormInput name="relevantExperience" label="Years of Relevant Experience" register={register} errors={errors} required />
+      <SelectInput name="keyCertifications" watch={watch} label="Key Certifications" options={keyCertificates} register={register} errors={errors} required />
+      <FormInput name="pastProjects" label="Major Past Projects / Client" className="md:col-span-2" register={register} errors={errors} required />
+      <FileInput name="brochure" maxSizeMB={5} accept=".pdf" label="Product/Service Brochure or Catalog" helper="Max 5MB, PDF preferred" register={register} errors={errors} required />
+      <FileInput name="technicalSpecSheet" maxSizeMB={5} label="Technical Specifications Sheet" helper="Detailed technical specs - Max 5MB" register={register} errors={errors} required />
+      <FileInput name="uploadedDocuments" maxSizeMB={5} maxFiles={5} accept=".pdf,.jpg,.jpeg" multiple={true} label="Upload Documents" helper="Trade License, VAT Certificate, ISO Certificates, Bank Details, Insurance Certificate (max 5 files, PDF/JPG)" className="md:col-span-2" register={register} errors={errors} required />
+      <SelectInput name="paymentTermsPreference" watch={watch} label="Payment Terms Preference"
+        options={paymentPreference} className="md:col-span-2" register={register} errors={errors} required />
+      <TermsCheckbox register={register} errors={errors} />
     </>
   );
 };

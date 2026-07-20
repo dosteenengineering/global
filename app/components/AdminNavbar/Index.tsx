@@ -116,11 +116,11 @@ const AdminNavbar = () => {
         })),
       ],
     },
-    // {
-    //   name: "Become a Partner",
-    //   href: "/admin/become-a-partner",
-    //   icon: GroupIcon,
-    // },
+    {
+      name: "Become a Partner",
+      href: "/admin/become-a-partner",
+      icon: GroupIcon,
+    },
     {
       name: "Contact",
       href: "###",

@@ -4,7 +4,7 @@ import "swiper/css";
 import Image from "next/image";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
-import { aboutServicesData, IndustriesPageData } from "../data";
+import { IndustriesPageData } from "../data";
 
 export default function AboutDetails({data}:{data:IndustriesPageData['secondSection']}) {
   return (
