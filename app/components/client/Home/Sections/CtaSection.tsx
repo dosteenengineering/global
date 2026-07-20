@@ -85,7 +85,8 @@ useEffect(() => {
                   viewport={{ amount: 0.1, once: true }}
                 >
                   <Link
-                    href={getActionHref(action.link)}
+                    // href={getActionHref(action.link)}
+                    href={action.link}
                     className={`group flex items-center gap-[10px] sm:gap-30 sm:px-6 lg:pe-[45px] lg:ps-[49px]
                        ${i === 0 ? "sm:pl-0" : ""} ${i === data.items.length - 1 ? "sm:pr-0" : ""}`}
                   >

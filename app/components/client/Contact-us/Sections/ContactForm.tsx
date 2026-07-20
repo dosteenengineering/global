@@ -64,8 +64,31 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
     },
   });
 
+  // useEffect(() => {
+  //   if (errors && contentRef.current) {
+  //     const offset = window.innerWidth < 768
+  //       ? -window.innerHeight * 0.1   // -10vh on mobile
+  //       : -80;                        // fixed px on desktop
+
+  //     scrollTo(contentRef.current, {
+  //       offset,
+  //       duration: 1.2,
+  //     });
+  //   }
+  // }, [errors]);
+
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    if (errors && contentRef.current) {
+    // Skip the very first run (initial mount)
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const hasErrors = errors && Object.keys(errors).length > 0;
+
+    if (hasErrors && contentRef.current) {
       const offset = window.innerWidth < 768
         ? -window.innerHeight * 0.1   // -10vh on mobile
         : -80;                        // fixed px on desktop
@@ -76,6 +99,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
       });
     }
   }, [errors]);
+
   const onSubmit = async (data: ContactEnquiryFormValues) => {
     setFormStatus("idle");
     const result = await sendContactEnquiryAction(data);
@@ -97,18 +121,18 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
   //   });
   // }
 
-  useEffect(() => {
-    if (searchParams.get("scrollTo") !== "contact-form") return;
+  // useEffect(() => {
+  //   if (searchParams.get("scrollTo") !== "contact-form") return;
 
-    const timeout = setTimeout(() => {
-      const el = document.getElementById("contact-form");
-      if (el) scrollTo(el, { offset: 0, duration: 1.5 });
-      // remove the param without adding a history entry
-      router.replace("/contact-us", { scroll: false });
-    }, 300);
+  //   const timeout = setTimeout(() => {
+  //     const el = document.getElementById("contact-form");
+  //     if (el) scrollTo(el, { offset: 0, duration: 1.5 });
+  //     // remove the param without adding a history entry
+  //     router.replace("/contact-us", { scroll: false });
+  //   }, 300);
 
-    return () => clearTimeout(timeout);
-  }, []);
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   // Watch all fields so InputField re-renders on value change
   const values = watch();
