@@ -1,7 +1,7 @@
 "use client"
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
-import { AboutPageData, servingMapData } from "../data";
+import { AboutPageData } from "../data";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
