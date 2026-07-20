@@ -46,6 +46,34 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
   };
   // --- end accordion direction logic ---
 
+  // --- desktop swiper: scroll active tab into view ---
+  const scrollActiveTabIntoView = (title: string | null) => {
+    const swiper = swiperRef.current;
+    if (!swiper || !title) return;
+
+    const index = data.items.findIndex((t) => t.title === title);
+    if (index === -1) return;
+
+    const slide = swiper.slides[index] as HTMLElement;
+    if (!slide) return;
+
+    const target = Math.min(
+      0,
+      -(slide.offsetLeft - (swiper.width / 2 - slide.offsetWidth / 2)),
+    );
+
+    // Animate smoothly to the target position instead of jumping instantly
+    // (setTransition exists at runtime on Swiper core but isn't in the bundled types)
+    (swiper as unknown as { setTransition: (duration: number) => void }).setTransition(600);
+    swiper.setTranslate(target);
+    swiper.updateProgress();
+
+    // Reset transition duration afterwards so manual dragging stays instant/1:1
+    window.setTimeout(() => {
+      (swiper as unknown as { setTransition: (duration: number) => void }).setTransition(0);
+    }, 600);
+  };
+  // --- end desktop swiper scroll logic ---
 
   const updateIndicator = () => {
     const swiper = swiperRef.current;
@@ -75,12 +103,75 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
 
   useEffect(() => {
     activeTabRef.current = activeTab;
+    // Auto-scroll the swiper so the active tab is always brought into view,
+    // regardless of what triggered the activeTab change (click, mount, etc.)
+    scrollActiveTabIntoView(activeTab);
     setTimeout(() => updateIndicator(), 0);
   }, [activeTab]);
 
+  // --- autoplay: cycle through tabs like a slider ---
+  const AUTOPLAY_DELAY = 6000; // ms between auto-advances (slower, smoother pace)
+  const RESUME_DELAY = 6000; // ms of inactivity before autoplay resumes after manual interaction
+  const autoplayIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const stopAutoplay = () => {
+    if (autoplayIntervalRef.current) {
+      clearInterval(autoplayIntervalRef.current);
+      autoplayIntervalRef.current = null;
+    }
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayIntervalRef.current = setInterval(() => {
+      // Autoplay only drives the desktop tab slider (lg breakpoint, 1024px+).
+      // On mobile the accordion is user-driven only, so skip advancing there.
+      if (typeof window !== "undefined" && window.innerWidth < 1024) return;
+
+      const currentIndex = data.items.findIndex(
+        (t) => t.title === activeTabRef.current,
+      );
+      const nextIndex = (currentIndex + 1) % data.items.length;
+      setActiveTab(data.items[nextIndex].title);
+    }, AUTOPLAY_DELAY);
+  };
+
+  // Pause autoplay on manual interaction, then resume after a period of inactivity
+  const pauseAutoplayTemporarily = () => {
+    stopAutoplay();
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = setTimeout(() => {
+      startAutoplay();
+    }, RESUME_DELAY);
+  };
+
+  // Pause immediately while hovered, resume immediately on mouse leave
+  const handleTabsMouseEnter = () => {
+    stopAutoplay();
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
+    }
+  };
+
+  const handleTabsMouseLeave = () => {
+    startAutoplay();
+  };
+
+  useEffect(() => {
+    startAutoplay();
+    return () => {
+      stopAutoplay();
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // --- end autoplay ---
+
   const activeData = data.items.find((tab) => tab.title === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
+
   return (
     <section className="relative w-full lg:min-h-screen overflow-hidden">
       <SecondaryNoise />
@@ -104,7 +195,12 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
             className="hidden lg:block"
           >
             <div className="mt-18 3xl:mt-[68px]">
-              <div ref={tabsContainerRef} className="relative overflow-hidden">
+              <div
+                ref={tabsContainerRef}
+                className="relative overflow-hidden"
+                onMouseEnter={handleTabsMouseEnter}
+                onMouseLeave={handleTabsMouseLeave}
+              >
                 <Swiper
                   modules={[FreeMode]}
                   freeMode={{ enabled: true, sticky: false }}
@@ -112,12 +208,14 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                   spaceBetween={0}
                   onTouchStart={() => {
                     isDraggingRef.current = true;
+                    pauseAutoplayTemporarily();
                   }}
                   onTouchEnd={() => {
                     isDraggingRef.current = false;
                   }}
                   onSwiper={(s) => {
                     swiperRef.current = s;
+                    scrollActiveTabIntoView(activeTabRef.current);
                     setTimeout(() => updateIndicator(), 0);
                   }}
                   onSetTranslate={() => updateIndicator()}
@@ -128,30 +226,7 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                       <button
                         onClick={() => {
                           setActiveTab(tab.title);
-                          const swiper = swiperRef.current;
-                          if (!swiper) return;
-
-                          const slide = swiper.slides[index] as HTMLElement;
-                          const translate = swiper.translate ?? 0;
-
-                          const slideLeft = slide.offsetLeft + translate;
-                          const slideRight = slideLeft + slide.offsetWidth;
-
-                          const isVisible =
-                            slideLeft >= 0 && slideRight <= swiper.width;
-
-                          if (!isVisible) {
-                            swiper.setTranslate(
-                              Math.min(
-                                0,
-                                -(
-                                  slide.offsetLeft -
-                                  (swiper.width / 2 - slide.offsetWidth / 2)
-                                ),
-                              ),
-                            );
-                            swiper.updateProgress();
-                          }
+                          pauseAutoplayTemporarily();
                         }}
                         className={`px-0 pb-[13px] mr-10 lg:mr-60 2xl:mr-60 3xl:mr-[144px] text-19 2xl:leading-[2.631578947368421] font-poppins -tracking-[2%] group transition-colors duration-300 relative cursor-pointer ${activeTab === tab.title ? "text-secondary" : "text-paragraph"} hover:!text-secondary`}
                       >
@@ -195,23 +270,8 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                 </div>
                 {/* <motion.div initial="hidden" whileInView="show" variants={moveUpVariant(0.2)} viewport={{ once: true }} className="w-px bg-bdr-gray" /> */}
                 <div className="ml-15 2xl:ml-100 3xl:ml-[150px] pt-50">
-                  <div dangerouslySetInnerHTML={{__html:activeData.description}} 
-                  className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system">
-                    {/* {activeData.rightItems.map((item, index) => (
-                      <motion.ul
-                        key={`${activeTab}-${index}`}
-                        initial="hidden"
-                        whileInView="show"
-                        variants={moveUp(index * 0.15)}
-                        viewport={{ once: true }}
-                        className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
-                      >
-                        <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2">
-                          <span className="w-[5px] h-[5px] bg-primary block"></span>
-                          <span>{item}</span>
-                        </li>
-                      </motion.ul>
-                    ))} */}
+                  <div dangerouslySetInnerHTML={{ __html: activeData.description }}
+                    className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system">
                   </div>
                 </div>
               </div>
@@ -222,14 +282,13 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
             {data.items.map((tab, index: number) => {
               const isOpen = activeTab === tab.title;
               return (
-                <motion.div initial="hidden" whileInView="show" variants={moveUp(index * 0.14)} viewport={{ once: true }} key={index} 
+                <motion.div initial="hidden" whileInView="show" variants={moveUp(index * 0.14)} viewport={{ once: true }} key={index}
                   ref={(el) => {
                     accordionItemRefs.current[index] = el;
                   }}
-                className="border-b first:border-t border-bdr-gray" >
+                  className="border-b first:border-t border-bdr-gray" >
                   {/* Accordion trigger */}
                   <button
-                    // onClick={() => setActiveTab(isOpen ? null : tab.title)}
                     onClick={() => handleAccordionToggle(tab.title, index)}
                     className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-5 md:py-[10px]"
                   >
@@ -286,24 +345,8 @@ export default function Customization({ data }: { data: IndividualSystemData['fi
                       </h3>
 
                       {/* Right items */}
-
-                      <div dangerouslySetInnerHTML={{__html:tab.description}} 
-                      className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system-mobile">
-                        {/* {tab.rightItems.map((item, index) => (
-                          <motion.ul
-                            key={`${activeTab}-${index}`}
-                            initial="hidden"
-                            whileInView="show"
-                            variants={moveUp(index * 0.15)}
-                            viewport={{ once: true }}
-                            className="group cursor-pointer flex items-center w-fit transition-colors duration-300"
-                          >
-                            <li className="transition-all duration-300 text-paragraph group-hover:text-secondary flex items-center gap-x-2 mb-[5px]">
-                              <span className="w-[5px] h-[5px] bg-primary block"></span>
-                              <span>{item}</span>
-                            </li>
-                          </motion.ul>
-                        ))} */}
+                      <div dangerouslySetInnerHTML={{ __html: tab.description }}
+                        className="w-full text-19 font-light leading-[1.789473684210526] font-poppins -tracking-[2%] customization-section-system-mobile">
                       </div>
                     </div>
                   </div>
