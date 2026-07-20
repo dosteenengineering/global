@@ -1,31 +1,33 @@
 import mongoose from "mongoose";
+import seoSchema from "./Seo";
 
 const partnerSchema = new mongoose.Schema({
-    metaTitle:{type:String},
-    metaDescription:{type:String},
-    formSection:{
-        title:{
-            type:String
+    seo: {
+        type: seoSchema
+    },
+    formSection: {
+        title: {
+            type: String
         },
-        description:{
-            type:String
+        description: {
+            type: String
         },
-        subTitle:{
-            type:String
+        subTitle: {
+            type: String
         }
     },
-    thankyouSection:{
-        title:{
-            type:String
+    thankyouSection: {
+        title: {
+            type: String
         },
-        description:{
-            type:String
+        description: {
+            type: String
         },
-        buttonText:{
-            type:String
+        buttonText: {
+            type: String
         },
-        buttonLink:{
-            type:String
+        buttonLink: {
+            type: String
         }
     }
 })

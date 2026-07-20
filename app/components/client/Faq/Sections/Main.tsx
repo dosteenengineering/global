@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+// import { useSearchParams, useRouter } from "next/navigation";
 import Accordion from "@/app/components/common/Accordian";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import Image from "next/image";
@@ -17,22 +17,16 @@ const DEBOUNCE_MS = 200;
 
 export default function FaqSection({ data }: { data: FaqData }) {
   const { firstSection, secondSection } = data;
-  const searchParams = useSearchParams();
-  const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const router = useRouter();
 
-  const search = searchParams.get("q") || "";
-  const page = Number(searchParams.get("page") || 1);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const [inputValue, setInputValue] = useState(search);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const lastPushedRef = useRef(search);
 
   useEffect(() => {
-    // Only sync from the URL if this change didn't originate from our own debounce push
-    // (e.g. it came from browser back/forward, or an external link)
-    if (search !== lastPushedRef.current) {
-      setInputValue(search);
-      lastPushedRef.current = search;
-    }
+    setInputValue(search);
   }, [search]);
 
   useEffect(() => {
@@ -61,11 +55,8 @@ export default function FaqSection({ data }: { data: FaqData }) {
     setInputValue(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
-      const params = new URLSearchParams();
-      if (value.trim()) params.set("q", value);
-      params.set("page", "1");
-      lastPushedRef.current = value; // NEW: record what we're about to push, before it lands
-      router.push(`?${params.toString()}`, { scroll: false });
+      setSearch(value);
+      setPage(1);
     }, DEBOUNCE_MS);
   };
 
