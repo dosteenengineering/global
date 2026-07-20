@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import { useLenis } from "@/app/components/LenisProvider"; // adjust path
 
 export function useHashScroll(offset = 0) {
-  const { scrollTo, ready } = useLenis();
+  const { scrollTo } = useLenis();
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log('[hashScroll] ready:', ready, 'pathname:', pathname, 'stashed:', (window as any).__initialHash, 'live hash:', window.location.hash);
-    if (!ready) return;
+    console.log('[hashScroll] ready:', true, 'pathname:', pathname, 'stashed:', (window as any).__initialHash, 'live hash:', window.location.hash);
+    if (!true) return;
 
     // read from the stashed value first, fallback to actual hash
     const hash = (window as any).__initialHash || window.location.hash;
@@ -27,5 +27,5 @@ export function useHashScroll(offset = 0) {
     });
 
     return () => cancelAnimationFrame(raf);
-  }, [ready, pathname]);
+  }, [pathname]);
 }
