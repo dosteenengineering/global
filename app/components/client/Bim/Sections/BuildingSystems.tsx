@@ -69,11 +69,11 @@ function Cell({ item, isTopRow, isFirstSlide, fixedHeight, onRef, delay = 0 }: C
           </div>
         </div>
       </div>
-
+      <Link href={item.slug ? `/solutions/systems/${item.slug}` : "#"}>
       <h3 className="text-30 leading-[1.333] text-secondary font-light mb-2.5 md:mb-5">
         {item.title}
       </h3>
-
+      </Link>
       <p className="text-paragraph text-description lg:mb-30">
         {item.description}
       </p>

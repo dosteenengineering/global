@@ -300,10 +300,10 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
             }`}
         >
           <div
-            className={`flex items-center justify-between w-full transition-all duration-500 ease-out 
+            className={`flex items-center justify-between w-full transition-[border-radius] duration-500 ease-out 
               ${isMenuOpen
                 ? "rounded-none border border-transparent overflow-visible bg-transparent"
-                : "rounded-[50px] border border-white/30 glass-effect"
+                : "rounded-[50px] border border-white/30 glass-effect "
               }
               ${isSticky ? "bg-black/50" : "bg-transparent"}
               `}
