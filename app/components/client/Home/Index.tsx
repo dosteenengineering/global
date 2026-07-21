@@ -86,7 +86,7 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
 
 
   const blogsData = {
-    title:"BLOGS",
+    title:data.eleventhSection.title,
     posts: blogsDataRaw.blogs.map((blog, index: number) => ({
       key: `blog-${index + 1}`,
       title: blog.title ?? "",
