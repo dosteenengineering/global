@@ -16,8 +16,8 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
   }, []);
 
   const dosteenSystemsData = {
-    title: data.systemSection.title,
-    systems: data.systemSection.items.map((item, index) => ({
+    title: data?.systemSection.title,
+    systems: data?.systemSection.items.map((item, index) => ({
       id: index + 1,
       title: item.firstSection.title,
       image: item.firstSection.thumbnailImage || item.firstSection.image,
@@ -27,19 +27,19 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
   };
 
   const thirdSectionData = {
-    title: data.thirdSection.title,
-    description: data.thirdSection.description,
+    title: data?.thirdSection.title,
+    description: data?.thirdSection.description,
     items: [
       {
-        buttonText: data.thirdSection.buttonText,
-        buttonLink: data.thirdSection.buttonLink,
+        buttonText: data?.thirdSection.buttonText,
+        buttonLink: data?.thirdSection.buttonLink,
       },
     ],
   };
 
   const whyTrustData = {
-    title: data.fourthSection.title,
-    stats: data.fourthSection.items.map((item, index) => ({
+    title: data?.fourthSection.title,
+    stats: data?.fourthSection.items.map((item, index) => ({
       id: index + 1,
       value: item.number,
       title: item.value,
@@ -51,7 +51,7 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
   const featuredProjects = (projectsData ?? []).filter(
     (project) =>
       project.featuredServices?.some(
-        (s) => (typeof s === "object" ? s._id : s).toString() === data._id?.toString()
+        (s) => (typeof s === "object" ? s._id : s).toString() === data?._id?.toString()
       )
   );
 

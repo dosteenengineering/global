@@ -15,7 +15,7 @@ export async function generateMetadata({
     next: { revalidate: 60 },
   });
   const { data } = await response.json();
-  if (data.seo) {
+  if (data?.seo) {
     return buildMetadata(data.seo, pathname);
   }
 }
@@ -41,7 +41,7 @@ export default async function ServicePage({
 
   const projectsData = await projectsResponse.json();
 
-  if (id === "residential-developments") {
+  if (id === "residential") {
     return (
       <>
         {data?.data?.seo?.schema && (
