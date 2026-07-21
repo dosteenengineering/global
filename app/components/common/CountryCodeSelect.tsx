@@ -62,7 +62,7 @@ export default function CountryCodeSelect({
             : "text-foreground-light border-foreground-light"
           }`}
       >
-        <div className={`flex items-center gap-[10px] absolute -top-[27px] border-b pr-[15px] 
+        <div className={`flex items-center gap-[10px] absolute -top-[25px] md:-top-[27px] border-b pr-[15px] 
             ${variant === "light" ? "border-white" : "border-foreground-light"}`}
         >
           <span className={`fi fi-${selected.iso.toLowerCase()} mb-[5px] inline-block shrink-0`}

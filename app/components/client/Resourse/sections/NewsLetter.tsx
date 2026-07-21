@@ -122,7 +122,7 @@ const NewsLetter = ({ data }: Props) => {
           <button onClick={handleNewsletterSubmit} className="relative cursor-pointer flex items-center gap-3 h-[calc(100%+2px)] -my-[1px] -mr-[1px] px-20 3xl:px-[27px] rounded-[50px] border border-primary text-secondary text-15 leading-[1.73333] uppercase group overflow-hidden">
             <span className="absolute inset-0 bg-secondary -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out rounded-[50px]" />
             <span className="relative  group-hover:text-white transition-colors duration-300 ease-in-out">
-              {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
+              {newsletterStatus === "loading" ? "Subscribing..." : `${data.buttonText}`}
             </span>
             <Image
               src="/assets/icons/button-arrow-top-right.svg"

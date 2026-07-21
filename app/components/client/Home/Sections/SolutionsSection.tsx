@@ -110,19 +110,19 @@ export default function SolutionsSection({
   const activeData = solutionsData.tabs.find((tab) => tab.key === activeTab);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
-<section className="relative w-full h-full lg:min-h-screen text-white overflow-hidden">
-  <AnimatePresence>
-    <motion.div
-      key={activeData?.image}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="absolute inset-0 bg-cover bg-center"
-      style={{ backgroundImage: `url(${activeData?.image})` }}
-    />
-  </AnimatePresence>
-  <div className="absolute inset-0 bg-black/70" />
+    <section className="relative w-full h-full lg:min-h-screen text-white overflow-hidden">
+      <AnimatePresence>
+        <motion.div
+          key={activeData?.image}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${activeData?.image})` }}
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-black/70" />
 
       <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden min-h-screen flex flex-col">
         <div className="container h-full">
@@ -155,11 +155,10 @@ export default function SolutionsSection({
                         {tab.label}
                       </span> */}
                       <span
-                        className={`transition-all duration-300 ${
-                          activeTab === tab.key
+                        className={`transition-all duration-300 ${activeTab === tab.key
                             ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
                             : "[-webkit-text-stroke:0px_currentColor]"
-                        }`}
+                          }`}
                       >
                         {tab.label}
                       </span>
@@ -179,17 +178,25 @@ export default function SolutionsSection({
             <div className="mt-[76px]" />
             {activeData && (
               <div className="flex w-full">
-                <div className="pr-12 2xl:pr-15 mt-120 3xl:mt-[170px] pb-200 3xl:pb-[204px]">
-                  <motion.h3
-                    key={activeTab}
-                    initial="hidden"
-                    whileInView="show"
-                    variants={moveUpVariant(1.5)}
-                    viewport={{ once: true }}
-                    className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light"
-                  >
-                    {activeData.leftTitle}
-                  </motion.h3>
+                <div className="pr-12 2xl:pr-15 mt-120 3xl:mt-[170px] pb-200 3xl:pb-[204px] w-[30%]">
+                  {(() => {
+                    const words = activeData.leftTitle.split(" ");
+                    const mid = Math.ceil(words.length / 2);
+                    const lines = [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
+
+                    return lines.map((line, index) => (
+                      <motion.h3
+                        key={`${activeTab}-${index}`}
+                        initial="hidden"
+                        whileInView="show"
+                        variants={moveUpVariant(1.5)}
+                        viewport={{ once: true }}
+                        className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light"
+                      >
+                        {line}
+                      </motion.h3>
+                    ));
+                  })()}
                 </div>
                 <motion.div
                   initial="hidden"
@@ -247,7 +254,7 @@ export default function SolutionsSection({
                 >
                   {/* Accordion trigger */}
                   <button
-                    onClick={() => setActiveTab(isOpen ? null : tab.key)}
+                    onClick={() => setActiveTab(tab.key)}
                     className="w-full flex justify-between items-start text-30 leading-[1.33] font-poppins -tracking-[2%] text-left py-[10px]"
                   >
                     <motion.div
@@ -320,9 +327,8 @@ export default function SolutionsSection({
                             >
                               <Link href={item.link}>
                                 <span
-                                  className={`transition-all duration-300   ${
-                                    hoveredIndex === index ? "font-[700]" : ""
-                                  }`}
+                                  className={`transition-all duration-300   ${hoveredIndex === index ? "font-[700]" : ""
+                                    }`}
                                 >
                                   {item.label}
                                 </span>
