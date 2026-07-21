@@ -20,7 +20,7 @@ export default function Navbar({ solutionsRaw }: { solutionsRaw: any }) {
       const apiSubItems =
         solutionsRaw?.thirdSection?.items?.map((s: any) => ({
           label: s.homeTitle?.trim(),
-          href: s.buttonLink || `/solutions/${s.slug}`,
+          href: `/solutions/${s.slug}` || `#`,
         })) ?? [];
 
       return {

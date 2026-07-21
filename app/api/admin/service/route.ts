@@ -214,9 +214,12 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ data: service, message: "Service fetched successfully" }, { status: 200 });
     }
 
+
     const item = service.thirdSection.items.find((item: any) =>
         id ? item._id.toString() === id : item.slug === slug
     );
+
+    console.log(item)
 
     if (!item) {
         return NextResponse.json({ message: "Service not found" }, { status: 404 });
