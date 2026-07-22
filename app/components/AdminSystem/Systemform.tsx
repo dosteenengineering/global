@@ -1000,11 +1000,10 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
           </div>
         </AdminItemContainer>
 
-        <AdminItemContainer>
+        {/* <AdminItemContainer>
           <Label main>Sixth Section</Label>
 
           <div className="p-5 rounded-md flex flex-col gap-4">
-            {/* Main Heading */}
             <div>
               <Label>Title</Label>
               <Input
@@ -1020,7 +1019,6 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
               )}
             </div>
 
-            {/* Testimonials */}
             <div>
               <Label className="font-bold">Testimonials</Label>
 
@@ -1030,7 +1028,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                     key={field.id}
                     className="relative border-b border-black/10 pb-5 last:border-b-0"
                   >
-                    {/* Delete */}
+                    
                     <div className="absolute top-1 right-2">
                       <RiDeleteBinLine
                         onClick={() => sixthSectionRemove(index)}
@@ -1039,7 +1037,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      {/* Left */}
+                      
                       <div className="flex flex-col gap-4">
                         <div>
                           <Label className="font-bold">Client Name</Label>
@@ -1086,7 +1084,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                         </div>
                       </div>
 
-                      {/* Right */}
+                      
                       <div className="flex flex-col gap-4">
                         <div>
                           <Label className="font-bold">Testimonial</Label>
@@ -1115,7 +1113,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
                   </div>
                 ))}
 
-                {/* Add Button */}
+                
                 <div className="flex justify-end">
                   <Button
                     type="button"
@@ -1134,7 +1132,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
               </div>
             </div>
           </div>
-        </AdminItemContainer>
+        </AdminItemContainer> */}
 
         <AdminItemContainer>
           <Label main>Seventh Section</Label>

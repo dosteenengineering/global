@@ -121,16 +121,17 @@ const AdminNavbar = () => {
       href: "/admin/become-a-partner",
       icon: GroupIcon,
     },
-    {
-      name: "Contact",
-      href: "###",
-      icon: PhoneIcon,
-      hasChild: true,
-      children: [
-        { name: "Main Page", href: "/admin/contact" },
-        { name: "Enquiries", href: "/admin/contact/enquiries" },
-      ],
-    },
+    // {
+    //   name: "Contact",
+    //   href: "###",
+    //   icon: PhoneIcon,
+    //   hasChild: true,
+    //   children: [
+    //     { name: "Main Page", href: "/admin/contact" },
+    //     // { name: "Enquiries", href: "/admin/contact/enquiries" },
+    //   ],
+    // },
+    { name: "Contact", href: "/admin/contact", icon: PhoneIcon },
     { name: "Faq", href: "/admin/faq", icon: LeafIcon },
     {
       name: "Forms",
