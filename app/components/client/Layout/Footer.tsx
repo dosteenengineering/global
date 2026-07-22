@@ -301,37 +301,37 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
     }
   };
 
-  const residentialCol = {
-    title: "Residential Developments",
-    links: (
-      industries.find((i: any) => i.slug === "residential-developments")
-        ?.systemSection?.items ?? []
-    ).map((s: any) => ({
-      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
-      href: `/solutions/residential-developments/${s.slug}`,
-    })),
-  };
+  // const residentialCol = {
+  //   title: "Residential Developments",
+  //   links: (
+  //     industries.find((i: any) => i.slug === "residential-developments")
+  //       ?.systemSection?.items ?? []
+  //   ).map((s: any) => ({
+  //     label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+  //     href: `/solutions/residential-developments/${s.slug}`,
+  //   })),
+  // };
 
-  const commercialCol = {
-    title: "Commercial Buildings",
-    links: (
-      industries.find((i: any) => i.slug === "commercial-buildings")
-        ?.systemSection?.items ?? []
-    ).map((s: any) => ({
-      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
-      href: `/solutions/commercial-buildings/${s.slug}`,
-    })),
-  };
-  const industrialCol = {
-    title: "Industrial Facilities",
-    links: (
-      industries.find((i: any) => i.slug === "industrial-facilities")
-        ?.systemSection?.items ?? []
-    ).map((s: any) => ({
-      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
-      href: `/solutions/industrial-facilities/${s.slug}`,
-    })),
-  };
+  // const commercialCol = {
+  //   title: "Commercial Buildings",
+  //   links: (
+  //     industries.find((i: any) => i.slug === "commercial-buildings")
+  //       ?.systemSection?.items ?? []
+  //   ).map((s: any) => ({
+  //     label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+  //     href: `/solutions/commercial-buildings/${s.slug}`,
+  //   })),
+  // };
+  // const industrialCol = {
+  //   title: "Industrial Facilities",
+  //   links: (
+  //     industries.find((i: any) => i.slug === "industrial-facilities")
+  //       ?.systemSection?.items ?? []
+  //   ).map((s: any) => ({
+  //     label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+  //     href: `/solutions/industrial-facilities/${s.slug}`,
+  //   })),
+  // };
 
   // const governmentCol = {
   //   title: "Government Facilities",
@@ -344,11 +344,24 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   //   })),
   // };
 
+  const EXCLUDED_SLUGS = ["government"];
+
+const industryCols = industries
+  .filter((i: any) => !EXCLUDED_SLUGS.includes(i.slug))
+  .map((industry: any) => ({
+    title: industry.homeTitle, // adjust to whatever field holds the display label — see note below
+    links: (industry.systemSection?.items ?? []).map((s: any) => ({
+      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+      href: `/solutions/${industry.slug}/${s.slug}`,
+    })),
+  }));
+
   const navColumns = [
     footerData.navColumns[0],
-    residentialCol,
-    commercialCol,
-    industrialCol,
+    ...industryCols,
+    // residentialCol,
+    // commercialCol,
+    // industrialCol,
     // governmentCol,
   ];
 
