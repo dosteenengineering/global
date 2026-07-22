@@ -190,7 +190,6 @@ const systemSchema = new mongoose.Schema(
     sixthSection: {
       title: {
         type: String,
-        required: true,
       },
 
       items: [

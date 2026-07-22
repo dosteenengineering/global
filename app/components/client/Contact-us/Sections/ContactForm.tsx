@@ -34,7 +34,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
-export default function ContactForm({ systemData }: { systemData: string[] }) {
+export default function ContactForm({ systemData, title }: { systemData: string[], title:string }) {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
@@ -161,7 +161,7 @@ export default function ContactForm({ systemData }: { systemData: string[] }) {
         />
       </div>
       <SectionTitle
-        title="Tell Us About Your Project"
+        title={title}
         className="max-w-[20ch] section-heading-90 mb-10 lg:mb-80"
       />
 

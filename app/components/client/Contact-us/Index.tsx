@@ -10,7 +10,7 @@ const Index = ({ data, systemData }: { data: ContactData, systemData: Individual
     <>
       <ContactBanner {...data.firstSection} titleMaxWidth="max-w-[22ch]" descriptionMaxWidth="max-w-[62ch]" />
       <LocationSection data={data.secondSection}/>
-      <ContactForm systemData={systemData.map((item)=>item.firstSection.title)} />
+      <ContactForm systemData={systemData.map((item)=>item.firstSection.title)} title={data.thirdSection.title}/>
     </>
   );
 };

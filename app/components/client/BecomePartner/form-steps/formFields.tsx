@@ -443,7 +443,7 @@ export const FileInput = ({
   return (
     <label className={`block ${className}`}>
       <div className="flex justify-between">
-        <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label}</span>
+        <span className="block text-19 leading-[1.684210526315789] font-light text-paragraph tracking-[-0.02em]">{label} {required && `*`}</span>
         <Paperclip size={24} strokeWidth={1.5} className="shrink-0 text-paragraph" />
       </div>
       <div className=" flex h-8 items-center border-b border-[#CFCFCF]">
