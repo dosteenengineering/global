@@ -32,6 +32,7 @@ export const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Dosteen",
   description: "Engineering peace of mind",
+  metadataBase: new URL(process.env.BASE_URL || "http://localhost:3000"),
 };
 
 export const dynamic = "force-dynamic";

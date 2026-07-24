@@ -16,6 +16,9 @@ export function buildMetadata(seo: SeoInput, url: string): Metadata {
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
+    alternates:{
+      canonical:url
+    },
     openGraph: {
       title: seo.ogTitle || seo.metaTitle,
       description: seo.ogDescription || seo.metaDescription,
