@@ -50,7 +50,7 @@ export default function ContactBanner({
         {/* <h1 className={`text-secondary mb-0 md:mb-20 hero-heading !leading-none translate-y-[-15px] ${titleMaxWidth}`} >
           {title}
         </h1> */}
-        <SectionTitle text={title} className={`text-secondary mb-[20px] md:mb-20 2xl:mb-[22px] hero-heading ${titleMaxWidth}`} />
+        <SectionTitle text={title} className={`text-secondary mb-[20px] md:mb-20 2xl:mb-[22px] hero-heading ${titleMaxWidth}`} as="h1"  />
 
         {description && (
           // <p

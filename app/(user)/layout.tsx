@@ -55,7 +55,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-
         {/* <HeadInjector html={tagData?.tag?.headerScript} /> */}
         <script
           type="application/ld+json"
