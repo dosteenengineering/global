@@ -22,7 +22,10 @@ export function buildMetadata(seo: SeoInput, url: string): Metadata {
     openGraph: {
       title: seo.ogTitle || seo.metaTitle,
       description: seo.ogDescription || seo.metaDescription,
-      images: seo.ogImage ? [seo.ogImage] : [],
+      images: {
+        url:seo.ogImage,
+        alt:seo.ogTitle
+      },
       url,
       type: "website",
     },
