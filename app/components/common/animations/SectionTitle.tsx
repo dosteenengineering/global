@@ -175,7 +175,7 @@ export default function SectionTitle({
   text,
   title,
   className = "",
-  as: Tag = "h1",
+  as: Tag = "h2",
   delay = 0.23,
   stagger = 0.12,
 }: SectionTitleProps) {
