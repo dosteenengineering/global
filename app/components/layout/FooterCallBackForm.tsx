@@ -14,6 +14,7 @@ import {
 } from "@/lib/validations/footerCallbackSchema";
 import { sendFooterCallbackAction } from "@/lib/mail/actions/sendFooterCallbackAction";
 import { toast } from "sonner";
+import ReCAPTCHA from "react-google-recaptcha";
 
 type OptionType = { label: string; value: string };
 
@@ -67,6 +68,8 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaError, setCaptchaError] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -84,6 +87,12 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
   });
 
   const onSubmit = async (data: FooterCallbackFormValues) => {
+    const captchaValue = recaptchaRef?.current?.getValue();
+    if (!captchaValue) {
+      setCaptchaError("Please verify yourself to continue");
+      return;
+    }
+    setCaptchaError("");
     setFormStatus("idle");
     const result = await sendFooterCallbackAction(data);
     if (result.success) {
@@ -239,17 +248,16 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
                   menuList: () =>
                     `py-1 overflow-y-scroll ${isMobile ? "h-[285px] pt-3" : "max-h-[180px]"}`,
                   option: ({ isFocused, isSelected }) =>
-                    `px-4 py-2 text-[13px] font-poppins font-[300] cursor-pointer transition-colors ${
-                      isSelected
-                        ? "bg-[#1B2B6B] text-white"
-                        : isFocused
-                          ? "bg-[#E2E2DE] text-secondary"
-                          : "text-secondary"
+                    `px-4 py-2 text-[13px] font-poppins font-[300] cursor-pointer transition-colors ${isSelected
+                      ? "bg-[#1B2B6B] text-white"
+                      : isFocused
+                        ? "bg-[#E2E2DE] text-secondary"
+                        : "text-secondary"
                     }`,
                 }}
               />
             )}
-        
+
           />
           {/* 👇 Custom arrow — sits in the already-relative wrapper */}
           <span className="cursor-pointer absolute right-0 top-[15px]" onClick={() => selectRef.current?.focus()}>
@@ -279,6 +287,24 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
 
           <p className="text-red-500 text-[12px] mt-1 min-h-[18px]" />
         </motion.div>
+
+        {/* reCAPTCHA */}
+        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+          <motion.div
+            variants={moveUp(0.95)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              ref={recaptchaRef}
+            />
+            {captchaError && (
+              <p className="mt-1 text-sm text-red-600">{captchaError}</p>
+            )}
+          </motion.div>
+        )}
 
         {/* Submit */}
         <motion.div
