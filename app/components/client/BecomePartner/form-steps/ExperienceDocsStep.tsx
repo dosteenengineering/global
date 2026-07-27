@@ -1,9 +1,11 @@
+import { Ref } from "react";
 import { keyCertificates, paymentPreference } from "./data";
 import { FileInput, FormInput } from "./formFields";
 import { SelectInput } from "./SelectInput";
 import type { StepFormProps } from "./types";
+import ReCAPTCHA from "react-google-recaptcha";
 
-const ExperienceDocsStep = ({ register, errors, watch }: StepFormProps) => {
+const ExperienceDocsStep = ({ register, errors, watch,recaptchaRef,captchaError }: StepFormProps & {recaptchaRef:Ref<ReCAPTCHA>,captchaError:string}) => {
 
   return (
     <>
@@ -16,6 +18,19 @@ const ExperienceDocsStep = ({ register, errors, watch }: StepFormProps) => {
       <SelectInput name="paymentTermsPreference" watch={watch} label="Payment Terms Preference"
         options={paymentPreference} className="md:col-span-2" register={register} errors={errors} required />
       <TermsCheckbox register={register} errors={errors} />
+      {/* reCAPTCHA */}
+      {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+        <div
+        >
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            ref={recaptchaRef}
+          />
+          {captchaError && (
+            <p className="mt-1 text-sm text-red-600">{captchaError}</p>
+          )}
+        </div>
+      )}
     </>
   );
 };

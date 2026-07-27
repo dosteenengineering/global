@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, Check } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import BorderButton from "@/app/components/common/BorderButton";
 import BusinessInfoStep from "./form-steps/BusinessInfoStep";
@@ -11,6 +11,7 @@ import PersonalInfoStep from "./form-steps/PersonalInfoStep";
 import type { PartnerFormValues, Step } from "./form-steps/types";
 import ThankYouModal from "./ThankyouModal";
 import { submitPartnerAction } from "@/lib/saveVendor";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const steps: Step[] = [
   {
@@ -88,7 +89,9 @@ const stepFields: Record<string, (keyof PartnerFormValues)[]> = {
   ],
 };
 
-const PartnerForm = ({data}:any) => {
+const PartnerForm = ({ data }: any) => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaError, setCaptchaError] = useState("");
   const [activeStep, setActiveStep] = useState(0);
   const currentStep = steps[activeStep];
   const isFirstStep = activeStep === 0;
@@ -125,9 +128,15 @@ const PartnerForm = ({data}:any) => {
   };
 
   const onSubmit = async (values: PartnerFormValues) => {
+    const captchaValue = recaptchaRef?.current?.getValue();
+    if (!captchaValue) {
+      setCaptchaError("Please verify yourself to continue");
+      return;
+    }
+    setCaptchaError("");
     setIsSubmitting(true);
     setSubmitError(null);
-    console.log(`check`,values)
+    console.log(`check`, values)
     try {
       const formData = new FormData();
 
@@ -166,7 +175,7 @@ const PartnerForm = ({data}:any) => {
       case "business":
         return <BusinessInfoStep {...stepProps} />;
       case "docs":
-        return <ExperienceDocsStep {...stepProps} />;
+        return <ExperienceDocsStep {...stepProps} recaptchaRef={recaptchaRef} captchaError={captchaError} />;
       default:
         return <PersonalInfoStep {...stepProps} />;
     }
@@ -174,7 +183,7 @@ const PartnerForm = ({data}:any) => {
 
   return (
     <>
-      <ThankYouModal isOpen={isSubmitted} data={data}/>
+      <ThankYouModal isOpen={isSubmitted} data={data} />
       <div className="h-full min-h-0">
         <form
           onSubmit={handleSubmit(onSubmit)}

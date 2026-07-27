@@ -12,6 +12,7 @@ import FooterNoise from "../../common/noise/FooterNoise";
 import BorderButton from "../../common/BorderButton";
 import { moveUp } from "../../motionVariants";
 import { motion } from "framer-motion";
+import ReCAPTCHA from "react-google-recaptcha";
 
 type FooterProps = {
   solutionsRaw: any;
@@ -221,6 +222,8 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [newsletterMessage, setNewsletterMessage] = useState("");
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaError, setCaptchaError] = useState("");
 
   // const handleNewsletterSubmit = async () => {
   //   const trimmed = newsletterEmail.trim();
@@ -255,6 +258,12 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleNewsletterSubmit = async () => {
+    const captchaValue = recaptchaRef?.current?.getValue();
+    if (!captchaValue) {
+      setCaptchaError("Please verify yourself to continue");
+      return;
+    }
+    setCaptchaError("");
     const trimmed = newsletterEmail.trim();
 
     if (!trimmed) {
@@ -346,15 +355,15 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
 
   const EXCLUDED_SLUGS = ["government"];
 
-const industryCols = industries
-  .filter((i: any) => !EXCLUDED_SLUGS.includes(i.slug))
-  .map((industry: any) => ({
-    title: industry.homeTitle, // adjust to whatever field holds the display label — see note below
-    links: (industry.systemSection?.items ?? []).map((s: any) => ({
-      label: s.firstSection?.shortTitle || s.firstSection?.title || "",
-      href: `/solutions/${industry.slug}/${s.slug}`,
-    })),
-  }));
+  const industryCols = industries
+    .filter((i: any) => !EXCLUDED_SLUGS.includes(i.slug))
+    .map((industry: any) => ({
+      title: industry.homeTitle, // adjust to whatever field holds the display label — see note below
+      links: (industry.systemSection?.items ?? []).map((s: any) => ({
+        label: s.firstSection?.shortTitle || s.firstSection?.title || "",
+        href: `/solutions/${industry.slug}/${s.slug}`,
+      })),
+    }));
 
   const navColumns = [
     footerData.navColumns[0],
@@ -677,37 +686,37 @@ const industryCols = industries
                 {navColumns
                   .filter((col) => col.title !== "Quick Links")
                   .map((col, i) => (
-                  <motion.div
-                    variants={moveUp(i * 0.2)}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ amount: 0.1, once: true }}
-                    key={`xl-${col.title}`}
-                    className="hidden 3xl:block"
-                  >
-                    <h3 className="text-19 font-medium text-secondary mb-5 leading-[1.52]">
-                      {col.title}
-                    </h3>
-                    <ul>
-                      {col.links.map((link: any, j: number) => (
-                        <motion.li
-                          variants={moveUp(j * 0.11)}
-                          initial="hidden"
-                          whileInView="show"
-                          viewport={{ amount: 0.1, once: true }}
-                          key={link.label}
-                        >
-                          <Link
-                            href={link.href}
-                            className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
+                    <motion.div
+                      variants={moveUp(i * 0.2)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ amount: 0.1, once: true }}
+                      key={`xl-${col.title}`}
+                      className="hidden 3xl:block"
+                    >
+                      <h3 className="text-19 font-medium text-secondary mb-5 leading-[1.52]">
+                        {col.title}
+                      </h3>
+                      <ul>
+                        {col.links.map((link: any, j: number) => (
+                          <motion.li
+                            variants={moveUp(j * 0.11)}
+                            initial="hidden"
+                            whileInView="show"
+                            viewport={{ amount: 0.1, once: true }}
+                            key={link.label}
                           >
-                            {link.label}
-                          </Link>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
+                            <Link
+                              href={link.href}
+                              className="text-15 text-paragraph font-[300] leading-[2.13] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
+                            >
+                              {link.label}
+                            </Link>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
                 {/* <div className="hidden 3xl:block absolute bottom-50 3xl:bottom-70 pb-[10px] left-0">
                   <div className="flex items-center justify-center xl:justify-start gap-20">
                     {certifications.map((cert, index) => (
@@ -803,9 +812,28 @@ const industryCols = industries
             className="pt-8 pb-8 3xl:pt-40 3xl:pb-[42px] border-t border-[#D0CFC9] pl-40 3xl:pl-90"
           >
             <div className="">
+
               <p className="text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                 Subscribe to our newsletter
               </p>
+              {/* reCAPTCHA */}
+              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                <motion.div
+                  variants={moveUp(0.95)}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="mb-30"
+                >
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    ref={recaptchaRef}
+                  />
+                  {captchaError && (
+                    <p className="mt-1 text-sm text-red-600">{captchaError}</p>
+                  )}
+                </motion.div>
+              )}
               <div className="flex items-center w-full max-w-[477px] h-[50px] md:h-[60px] rounded-full border border-[#454545] pr-0 min-w-max cursor-pointer">
                 <input
                   type="email"
@@ -963,21 +991,21 @@ const industryCols = industries
               {navColumns
                 .filter((col) => col.title !== "Quick Links")
                 .map((col, i) => (
-                <motion.div
-                  variants={moveUp(i * 0.15)}
-                  initial="hidden"
-                  whileInView="show"
-                  viewport={{ amount: 0.1, once: true }}
-                  key={col.title}
-                >
-                  <AccordionItem
-                    title={col.title}
-                    links={col.links}
-                    isOpen={openIndex === i}
-                    onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-                  />
-                </motion.div>
-              ))}
+                  <motion.div
+                    variants={moveUp(i * 0.15)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ amount: 0.1, once: true }}
+                    key={col.title}
+                  >
+                    <AccordionItem
+                      title={col.title}
+                      links={col.links}
+                      isOpen={openIndex === i}
+                      onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+                    />
+                  </motion.div>
+                ))}
             </div>
           </div>
 
@@ -1008,6 +1036,24 @@ const industryCols = industries
                 <p className="text-[18px] lg:text-19 tracking-[-2%] leading-[1.52] font-medium mb-30 font-poppins text-secondary">
                   Subscribe to our newsletter
                 </p>
+                {/* reCAPTCHA */}
+                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                  <motion.div
+                    variants={moveUp(0.95)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="mb-30"
+                  >
+                    <ReCAPTCHA
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                      ref={recaptchaRef}
+                    />
+                    {captchaError && (
+                      <p className="mt-1 text-sm text-red-600">{captchaError}</p>
+                    )}
+                  </motion.div>
+                )}
                 <div className="flex items-center relative w-full 3xl:max-w-[477px] h-auto rounded-full border border-[#454545] 
                 overflow-visible pr-0 sm:max-w-[70%] md:max-w-[100%] max-md:min-w-[60vw]">
                   <input
