@@ -19,6 +19,7 @@ import {
 import { sendContactEnquiryAction } from "@/lib/mail/actions/sendContactEnquiryAction";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // const SYSTEM_OPTIONS = [
 //   "HVAC Systems",
@@ -34,12 +35,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 // ─── Main Form ────────────────────────────────────────────────────────────────
 
-export default function ContactForm({ systemData, title }: { systemData: string[], title:string }) {
+export default function ContactForm({ systemData, title }: { systemData: string[], title: string }) {
   const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
     "idle",
   );
-   const contentRef = useRef<HTMLDivElement>(null);
-    const { scrollTo } = useLenis();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [captchaError, setCaptchaError] = useState("");
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { scrollTo } = useLenis();
   const router = useRouter();
   const searchParams = useSearchParams();
   const {
@@ -109,7 +112,7 @@ export default function ContactForm({ systemData, title }: { systemData: string[
       reset();
     } else {
       setFormStatus("error");
-      
+
       toast.error("Something went wrong");
     }
   };
@@ -330,6 +333,25 @@ export default function ContactForm({ systemData, title }: { systemData: string[
             )}
           />
         </motion.div>
+
+        {/* reCAPTCHA */}
+        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+          <motion.div
+            variants={moveUp(0.5)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="mb-10 lg:mb-30"
+          >
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              ref={recaptchaRef}
+            />
+            {captchaError && (
+              <p className="mt-1 text-sm text-red-600">{captchaError}</p>
+            )}
+          </motion.div>
+        )}
 
         <motion.div
           variants={moveUp(0.5)}
