@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import Index from "../components/client/Home/Index";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const headersList = await headers();
-    const pathname = headersList.get("x-pathname") ?? headersList.get("x-invoke-path") ?? "/";
+    // const headersList = await headers();
+    // const pathname = headersList.get("x-pathname") ?? headersList.get("x-invoke-path") ?? "/";
+    const pathname = "/";
     const response = await fetch(`${process.env.BASE_URL}/api/admin/home`, {
         next: { revalidate: 60 },
     });
@@ -14,31 +15,23 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const page = async () => {
-    const response = await fetch(`${process.env.BASE_URL}/api/admin/home`, {
-        next: { revalidate: 60 },
-    });
-    const data = await response.json();
+    
 
-    const solutionsResponse = await fetch(`${process.env.BASE_URL}/api/admin/service`, {
-        next: { revalidate: 60 },
-    });
-    const solutionsData = await solutionsResponse.json();
+    const [response, solutionsResponse, projectsResponse, blogResponse, clientsResponse] = await Promise.all([
+        fetch(`${process.env.BASE_URL}/api/admin/home`, { next: { revalidate: 60 } }),
+        fetch(`${process.env.BASE_URL}/api/admin/service`, { next: { revalidate: 60 } }),
+        fetch(`${process.env.BASE_URL}/api/admin/project`, { next: { revalidate: 60 } }),
+        fetch(`${process.env.BASE_URL}/api/admin/blog`, { next: { revalidate: 60 } }),
+        fetch(`${process.env.BASE_URL}/api/admin/clients`, { next: { revalidate: 60 } }),
+    ]);
 
-    const projectsResponse = await fetch(`${process.env.BASE_URL}/api/admin/project`, {
-        next: { revalidate: 60 },
-    });
-    const projectsData = await projectsResponse.json();
-
-    const blogResponse = await fetch(`${process.env.BASE_URL}/api/admin/blog`, {
-        next: { revalidate: 60 },
-    });
-    const blogsData = await blogResponse.json();
-
-    const clientsResponse = await fetch(`${process.env.BASE_URL}/api/admin/clients`, {
-        next: { revalidate: 60 },
-    });
-    const clientsData = await clientsResponse.json();
-
+    const [data, solutionsData, projectsData, blogsData, clientsData] = await Promise.all([
+        response.json(),
+        solutionsResponse.json(),
+        projectsResponse.json(),
+        blogResponse.json(),
+        clientsResponse.json(),
+    ]);
     return (
         <>
             {/* {data?.data?.seo?.schema && (
