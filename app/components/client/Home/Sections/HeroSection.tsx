@@ -61,7 +61,7 @@ export default function Hero({data}:{data:Home['bannerSection']}) {
           {/* Title */}
           {introComplete && (
             <TitleReveal
-              text={data.title}
+              texts={data.items.map((item)=>item.title)}
               className="text-[#FFFBFB] max-w-[380px] md:max-w-[520px] banner-heading lg:max-w-[800px] xl:max-w-[800px] 3xl:max-w-none font-bold uppercase font-helvetica"
             />
           )}

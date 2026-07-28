@@ -12,6 +12,9 @@ const homeSchema = new mongoose.Schema({
         title: { type: String, required: true },
         buttonText: { type: String, required: true },
         buttonLink: { type: String, required: true },
+        items:[{
+            title:{type:String}
+        }]
     },
     secondSection: {
         title: { type: String, required: true },

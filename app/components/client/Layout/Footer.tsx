@@ -180,7 +180,7 @@ const CallbackPopup = ({
           <SecondaryNoise />
           <div className="relative z-10 px-6 pt-6 pb-40">
             <div className="flex items-center justify-between mb-6">
-              <motion.h3
+              <motion.p
                 variants={moveUp(0.2)}
                 initial="hidden"
                 whileInView="show"
@@ -188,7 +188,7 @@ const CallbackPopup = ({
                 className="text-[22px] lg:text-30 font-medium font-poppins text-secondary leading-[1.2]"
               >
                 Get a Call Back
-              </motion.h3>
+              </motion.p>
               <motion.button
                 variants={moveUp(0.3)}
                 initial="hidden"
@@ -659,9 +659,9 @@ const handleNewsletterSubmit = async () => {
                     key={col.title}
                     className=" 3xl:hidden"
                   >
-                    <h3 className="text-19 font-medium text-secondary mb-3 3xl:mb-5 leading-[1.52] max-w-[210px] xl:max-w-none 2xl:max-w-none">
+                    <p className="text-19 font-medium text-secondary mb-3 3xl:mb-5 leading-[1.52] max-w-[210px] xl:max-w-none 2xl:max-w-none">
                       {col.title}
-                    </h3>
+                    </p>
                     <ul>
                       {col.links.map(
                         (link: { href: string; label: string }, j: number) => (
@@ -697,9 +697,9 @@ const handleNewsletterSubmit = async () => {
                       key={`xl-${col.title}`}
                       className="hidden 3xl:block"
                     >
-                      <h3 className="text-19 font-medium text-secondary mb-5 leading-[1.52]">
+                      <p className="text-19 font-medium text-secondary mb-5 leading-[1.52]">
                         {col.title}
-                      </h3>
+                      </p>
                       <ul>
                         {col.links.map((link: any, j: number) => (
                           <motion.li
