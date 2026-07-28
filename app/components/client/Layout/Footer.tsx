@@ -260,8 +260,6 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
 const handleNewsletterSubmit = async () => {
   const trimmed = newsletterEmail.trim();
 
-  alert("clikkee")
-
   if (!trimmed) {
     setNewsletterStatus("error");
     setNewsletterMessage("Please enter your email address.");
@@ -1052,6 +1050,7 @@ const handleNewsletterSubmit = async () => {
                     className="mb-30"
                   >
                     <ReCAPTCHA
+                    size="invisible"
                       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                       ref={recaptchaRef}
                     />
