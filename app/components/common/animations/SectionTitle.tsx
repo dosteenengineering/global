@@ -189,72 +189,78 @@ export default function SectionTitle({
     let cancelled = false;
     let ctx: gsap.Context | undefined;
 
-const run = () => {
-  if (cancelled || !el.isConnected) return;
+    const run = () => {
+      if (cancelled || !el.isConnected) return;
 
-  const elRect = el.getBoundingClientRect();
-  const computed = window.getComputedStyle(el);
+      const elRect = el.getBoundingClientRect();
+      const computed = window.getComputedStyle(el);
 
-  // Split on \n first — each segment is a forced line group
-  const segments = content.split("\n").map((s) => s.trim()).filter(Boolean);
+      // Split on \n first — each segment is a forced line group
+      const segments = content.split("\n").map((s) => s.trim()).filter(Boolean);
 
-  const measureSegment = (text: string): string[] => {
-    const clone = el.cloneNode(false) as HTMLElement;
-    Object.assign(clone.style, {
-      position: "absolute",
-      top: "0", left: "0",
-      visibility: "hidden",
-      pointerEvents: "none",
-      zIndex: "-1",
-      margin: "0",
-      boxSizing: computed.boxSizing,
-      width: computed.boxSizing === "border-box" ? `${elRect.width}px` : computed.width,
-      font: computed.font,
-      letterSpacing: computed.letterSpacing,
-      wordSpacing: computed.wordSpacing,
-      textTransform: computed.textTransform,
-      lineHeight: computed.lineHeight,
-      whiteSpace: "normal",
-    });
+      const measureSegment = (text: string): string[] => {
+        const clone = el.cloneNode(false) as HTMLElement;
+        Object.assign(clone.style, {
+          position: "absolute",
+          top: "0", left: "0",
+          visibility: "hidden",
+          pointerEvents: "none",
+          zIndex: "-1",
+          margin: "0",
+          boxSizing: computed.boxSizing,
+          width: computed.boxSizing === "border-box" ? `${elRect.width}px` : computed.width,
+          font: computed.font,
+          letterSpacing: computed.letterSpacing,
+          wordSpacing: computed.wordSpacing,
+          textTransform: computed.textTransform,
+          lineHeight: computed.lineHeight,
+          whiteSpace: "normal",
+        });
 
-    const words = text.split(" ").filter(Boolean);
-    clone.innerHTML = words
-      .map((w, i) => `<span data-i="${i}">${w}</span>${i < words.length - 1 ? " " : ""}`)
-      .join("");
+        const words = text.split(" ").filter(Boolean);
+        clone.innerHTML = words
+          .map((w, i) => `<span data-i="${i}">${w}</span>${i < words.length - 1 ? " " : ""}`)
+          .join("");
 
-    el.parentElement?.appendChild(clone);
+        el.parentElement?.appendChild(clone);
 
-    const spans = Array.from(clone.querySelectorAll<HTMLElement>("[data-i]"));
-    const lineMap = new Map<number, string[]>();
-    spans.forEach((s) => {
-      const top = Math.round(s.getBoundingClientRect().top);
-      if (!lineMap.has(top)) lineMap.set(top, []);
-      lineMap.get(top)!.push(s.textContent ?? "");
-    });
+        const spans = Array.from(clone.querySelectorAll<HTMLElement>("[data-i]"));
+        const lineMap = new Map<number, string[]>();
+        spans.forEach((s) => {
+          const top = Math.round(s.getBoundingClientRect().top);
+          if (!lineMap.has(top)) lineMap.set(top, []);
+          lineMap.get(top)!.push(s.textContent ?? "");
+        });
 
-    clone.remove();
-    return Array.from(lineMap.values()).map((w) => w.join(" "));
-  };
+        clone.remove();
+        return Array.from(lineMap.values()).map((w) => w.join(" "));
+      };
 
-  // Each \n segment measured independently, results concatenated
-  const lines = segments.flatMap((seg) => measureSegment(seg));
+      // Each \n segment measured independently, results concatenated
+      const lines = segments.flatMap((seg) => measureSegment(seg));
 
       // clone.remove();
 
       // Step 3: Rebuild with mask > inner per line
       el.innerHTML = "";
       const fragment = document.createDocumentFragment();
-      lines.forEach((line) => {
+      lines.forEach((line, index) => {
         const mask = document.createElement("span");
         mask.style.cssText = `
-          display:block;
-          ${lines.length > 1 ? "padding-bottom:0.00277em; padding-top:1px; margin-bottom:-1.7px;" : ""}
-        `;
+    display:block;
+    ${lines.length > 1 ? "padding-bottom:0.00277em; padding-top:1px; margin-bottom:-1.7px;" : ""}
+  `;
         const inner = document.createElement("span");
         inner.style.cssText = "display:block;";
         inner.textContent = line;
         mask.appendChild(inner);
         fragment.appendChild(mask);
+
+        // Add a space between lines so .textContent concatenation
+        // (used by SEO crawlers) doesn't glue words together at line breaks
+        if (index < lines.length - 1) {
+          fragment.appendChild(document.createTextNode(" "));
+        }
       });
       el.appendChild(fragment);
 

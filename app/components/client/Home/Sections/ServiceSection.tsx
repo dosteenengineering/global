@@ -91,9 +91,9 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
                     </AnimatePresence>
                   </span>
 
-                  <span className={`text-30 font-poppins leading-[1.33] font-[300] -tracking-[2%] transition-all duration-300 mb-14 2xl:mb-[72px] min-w-[260px] 2xl:min-w-[275px] 3xl:min-w-[285px] ${isActive ? "font-[600] text-white" : "text-white/60"} transition-all duration-300`} >
+                  <h3 className={`text-30 font-poppins leading-[1.33] font-[300] -tracking-[2%] transition-all duration-300 mb-14 2xl:mb-[72px] min-w-[260px] 2xl:min-w-[275px] 3xl:min-w-[285px] ${isActive ? "font-[600] text-white" : "text-white/60"} transition-all duration-300`} >
                     {tab.label}
-                  </span>
+                  </h3>
                 </motion.button>
               );
             })}
@@ -122,14 +122,14 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
               text={activeData.description}
               className="text-55 text-white leading-[1.18] font-light font-poppins -tracking-[2%] max-w-[855px]"
             /> */}
-            {/* <p className="text-40 text-white leading-[1.18] font-light font-poppins -tracking-[2%] max-w-[855px]">
+            <p className="!text-40 text-white !leading-[1.2] font-light font-poppins -tracking-[2%] max-w-[855px]">
               {activeData.description}
-            </p> */}
-            <SectionDescription
+            </p>
+            {/* <SectionDescription
               key={activeTab}
               text={activeData.description}
               className="!text-40 text-white !leading-[1.2] font-light font-poppins -tracking-[2%] max-w-[855px]"
-            />
+            /> */}
             <motion.div
               initial="hidden"
               whileInView="show"
@@ -169,11 +169,11 @@ export default function ServicesSection({servicesData}:{servicesData:ServicesDat
                     onClick={() => handleActivate(tab.key)}
                     className="w-full text-left pb-[10px]"
                   >
-                    <span
+                    <h3
                       className={`text-30 transition-all duration-300 pb-[10px]  ${isActive ? "font-semibold text-white border-b-1 border-white" : "text-white font-light"}`}
                     >
                       {tab.label}
-                    </span>
+                    </h3>
                   </motion.button>
                 </SwiperSlide>
               );

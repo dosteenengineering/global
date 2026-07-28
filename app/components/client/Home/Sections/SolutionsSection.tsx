@@ -156,8 +156,8 @@ export default function SolutionsSection({
                       </span> */}
                       <span
                         className={`transition-all duration-300 ${activeTab === tab.key
-                            ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
-                            : "[-webkit-text-stroke:0px_currentColor]"
+                          ? "[--stroke:1px] [-webkit-text-stroke:var(--stroke)_currentColor]"
+                          : "[-webkit-text-stroke:0px_currentColor]"
                           }`}
                       >
                         {tab.label}
@@ -180,22 +180,33 @@ export default function SolutionsSection({
               <div className="flex w-full">
                 <div className="pr-12 2xl:pr-15 mt-120 3xl:mt-[170px] pb-200 3xl:pb-[204px] w-[30%]">
                   {(() => {
-                    const words = activeData.leftTitle.split(" ");
+                    const words = activeData.leftTitle.trim().split(" ");
                     const mid = Math.ceil(words.length / 2);
                     const lines = [words.slice(0, mid).join(" "), words.slice(mid).join(" ")];
 
-                    return lines.map((line, index) => (
+                    return (
                       <motion.h3
-                        key={`${activeTab}-${index}`}
+                        key={activeTab}
                         initial="hidden"
                         whileInView="show"
                         variants={moveUpVariant(1.5)}
                         viewport={{ once: true }}
                         className="text-[36px] 2xl:text-55 leading-[1.18] font-poppins -tracking-[2%] max-w-[370px] 2xl:max-w-[509px] font-light"
                       >
-                        {line}
+                        {lines.map((line, index) => (
+                          <motion.span
+                            key={`${activeTab}-${index}`}
+                            initial="hidden"
+                            whileInView="show"
+                            variants={moveUpVariant(1.5 + index * 0.1)}
+                            viewport={{ once: true }}
+                            className="block"
+                          >
+                            {line}
+                          </motion.span>
+                        ))}
                       </motion.h3>
-                    ));
+                    );
                   })()}
                 </div>
                 <motion.div

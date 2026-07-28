@@ -112,7 +112,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
   return (
     <div className="min-w-[250px] 2xl:min-w-[300px] 3xl:min-w-[477px]">
       {!hideTitle && (
-        <motion.h2
+        <motion.p
           variants={moveUp(0.2)}
           initial="hidden"
           whileInView="show"
@@ -120,7 +120,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
           className="text-[22px] lg:text-30 font-[500] text-secondary font-poppins leading-[0.96] mb-8 md:mb-10"
         >
           Get a Call Back
-        </motion.h2>
+        </motion.p>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -298,7 +298,7 @@ html{
 }
 
 .banner-heading {
-    @apply text-[36px] md:text-[50px] lg:text-[78px] 3xl:text-95 font-helvetica uppercase;
+    @apply text-[36px] md:text-[40px] lg:text-[68px] 3xl:text-[75px] font-helvetica uppercase;
 }
 
 .text-description {

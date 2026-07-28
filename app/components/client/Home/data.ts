@@ -9,6 +9,9 @@ export interface Home {
     title: string;
     buttonText: string;
     buttonLink: string;
+    items:{
+title:string;
+    }[]
   };
 
   secondSection: {

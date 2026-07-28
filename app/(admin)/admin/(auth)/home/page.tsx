@@ -33,7 +33,11 @@ export interface HomeFormProps {
         buttonLink: string;
         mobileImage: string;
         desktopImage: string;
+        items: {
+            title: string;
+        }[]
     };
+
 
     secondSection: {
         title: string;
@@ -145,6 +149,10 @@ const HomePage = () => {
 
     const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<HomeFormProps>();
 
+    const { fields: bannerSectionItems, append: bannerSectionAppend, remove: bannerSectionRemove } = useFieldArray({
+        control,
+        name: "bannerSection.items"
+    });
 
     const { fields: secondSectionItems, append: secondSectionAppend, remove: secondSectionRemove } = useFieldArray({
         control,
@@ -209,6 +217,7 @@ const HomePage = () => {
                 const data = await response.json();
                 setValue("seo", data.data.seo);
                 setValue("bannerSection", data.data.bannerSection);
+                setValue("bannerSection.items", data.data.bannerSection.items);
                 setValue("secondSection", data.data.secondSection);
                 setValue("secondSection.items", data.data.secondSection.items);
                 setValue("thirdSection", data.data.thirdSection);
@@ -329,6 +338,41 @@ const HomePage = () => {
                                 {errors.bannerSection?.buttonLink && <p className='text-red-500'>{errors.bannerSection?.buttonLink.message}</p>}
                             </div>
 
+                        </div>
+
+                        <div>
+                            <Label className='font-bold'>Items</Label>
+                            <div className='border border-black/20 p-2 rounded-md grid grid-cols-1 gap-5'>
+
+
+                                {bannerSectionItems.map((field, index) => (
+                                    <div key={field.id} className='grid grid-cols-1 gap-2 relative border-b border-black/20 pb-5 last:border-b-0'>
+                                        <div className='absolute top-2 right-2'>
+                                            <RiDeleteBinLine onClick={() => bannerSectionRemove(index)} className='cursor-pointer text-red-600' />
+                                        </div>
+
+                                        <div className='grid grid-cols-2 gap-2'>
+
+                                            <div className='flex flex-col gap-2'>
+                                                <div className='flex flex-col gap-2'>
+                                                    <Label className='font-bold'>Title</Label>
+                                                    <Input type='text' placeholder='Title' {...register(`bannerSection.items.${index}.title`, {
+                                                        required: "Title is required"
+                                                    })} />
+                                                    {errors.bannerSection?.items?.[index]?.title && <p className='text-red-500'>{errors.bannerSection?.items?.[index]?.title.message}</p>}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                ))}
+
+
+
+                            </div>
+                            <div className='flex justify-end mt-2'>
+                                <Button type='button' addItem onClick={() => bannerSectionAppend({ title: "" })}>Add Item</Button>
+                            </div>
                         </div>
 
                     </div>

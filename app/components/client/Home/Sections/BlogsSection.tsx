@@ -229,9 +229,9 @@ console.log(`blogs`,blogs)
           ref={containerRef}
           className="container flex items-center justify-between mb-[30px] md:mb-12"
         >
-          <h2 className="text-secondary section-heading-90 w-full">
+          <span className="text-secondary section-heading-90 w-full" aria-hidden="true">
             {blogsData.title}
-          </h2>
+          </span>
           {/* Nav buttons — left aligned */}
           <div className="flex items-center gap-[10px]">
             <NavButton

@@ -205,7 +205,7 @@ export default function ResidentialHero({ firstSection, secondSection }: { first
         {/* Title + Description — inside container, pinned to bottom */}
         <div className="flex flex-col md:flex-row justify-end md:justify-between w-full container h-full items-start md:items-end pb-[90px] md:pb-120 z-10">
           <div className="z-10 mb-5 md:mb-0">
-            {banner.title.split(" ").map((line, i) => (
+            {banner.title.split("</br>").map((line, i) => (
               <h1 key={i} ref={i === 0 ? titleLine0Ref : titleLine1Ref} className="text-white max-sm:!text-[36px] max-xl:!text-[50px]  section-heading-90 will-change-transform" >
                 {line}
               </h1>
