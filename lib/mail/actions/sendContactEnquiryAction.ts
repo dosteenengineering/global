@@ -11,10 +11,40 @@ import ContactEnquiry from "@/app/models/ContactEnquiry";
 // import { getToEmail } from "../../services/getToMail.service";
 import connectDB from "../../mongodb";
 
-export async function sendContactEnquiryAction(data: ContactEnquiryFormValues) {
+async function verifyCaptcha(token: string): Promise<boolean> {
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: process.env.RECAPTCHA_SECRET_KEY_CHECKBOX || "",
+        response: token,
+      }),
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch (error) {
+    console.error("reCAPTCHA verification error:", error);
+    return false;
+  }
+}
+
+export async function sendContactEnquiryAction(
+  data: ContactEnquiryFormValues,
+  captchaValue: string,
+) {
   try {
     if (!data.email || !data.firstName || !data.phone) {
       return { success: false, message: "Missing required fields" };
+    }
+
+    if (!captchaValue) {
+      return { success: false, message: "Captcha verification is required." };
+    }
+
+    const isHuman = await verifyCaptcha(captchaValue);
+    if (!isHuman) {
+      return { success: false, message: "Captcha verification failed. Please try again." };
     }
 
     await connectDB();
