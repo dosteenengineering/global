@@ -104,15 +104,22 @@ export default function ContactForm({ systemData, title }: { systemData: string[
   }, [errors]);
 
   const onSubmit = async (data: ContactEnquiryFormValues) => {
+    const captchaValue = recaptchaRef.current?.getValue();
+    if (!captchaValue) {
+      setCaptchaError("Please verify yourself to continue");
+      return;
+    }
+    setCaptchaError("");
+
     setFormStatus("idle");
-    const result = await sendContactEnquiryAction(data);
+    const result = await sendContactEnquiryAction(data, captchaValue);
     if (result.success) {
       setFormStatus("success");
       toast.success("Enquiry submitted successfully");
       reset();
+      recaptchaRef.current?.reset();
     } else {
       setFormStatus("error");
-
       toast.error("Something went wrong");
     }
   };
@@ -335,7 +342,7 @@ export default function ContactForm({ systemData, title }: { systemData: string[
         </motion.div>
 
         {/* reCAPTCHA */}
-        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_CHECKBOX && (
           <motion.div
             variants={moveUp(0.5)}
             initial="hidden"
@@ -344,7 +351,7 @@ export default function ContactForm({ systemData, title }: { systemData: string[
             className="mb-10 lg:mb-30"
           >
             <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_CHECKBOX || ""}
               ref={recaptchaRef}
             />
             {captchaError && (

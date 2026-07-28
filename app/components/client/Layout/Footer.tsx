@@ -257,58 +257,63 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
 
   const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const handleNewsletterSubmit = async () => {
-    const captchaValue = recaptchaRef?.current?.getValue();
-    if (!captchaValue) {
-      setCaptchaError("Please verify yourself to continue");
-      return;
-    }
-    setCaptchaError("");
-    const trimmed = newsletterEmail.trim();
+const handleNewsletterSubmit = async () => {
+  const trimmed = newsletterEmail.trim();
 
-    if (!trimmed) {
-      setNewsletterStatus("error");
-      setNewsletterMessage("Please enter your email address.");
-      return;
-    }
+  alert("clikkee")
 
-    if (!EMAIL_REGEX.test(trimmed)) {
-      setNewsletterStatus("error");
-      setNewsletterMessage("Please enter a valid email address.");
-      return;
-    }
+  if (!trimmed) {
+    setNewsletterStatus("error");
+    setNewsletterMessage("Please enter your email address.");
+    return;
+  }
 
-    setNewsletterStatus("loading");
-    setNewsletterMessage("");
+  if (!EMAIL_REGEX.test(trimmed)) {
+    setNewsletterStatus("error");
+    setNewsletterMessage("Please enter a valid email address.");
+    return;
+  }
 
+  const captchaValue = await recaptchaRef?.current?.executeAsync();
+
+  console.log(captchaValue)
+  recaptchaRef?.current?.reset();
+  if (!captchaValue) {
+    setCaptchaError("Please verify yourself to continue");
+    return;
+  }
+  setCaptchaError("");
+
+  setNewsletterStatus("loading");
+  setNewsletterMessage("");
+
+  try {
+    const res = await fetch("/api/admin/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: trimmed, captchaValue }),
+    });
+
+    let data;
     try {
-      const res = await fetch("/api/admin/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: trimmed }),
-      });
-
-      // Handle non-2xx responses (e.g. 400/500) before parsing
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error("Invalid server response");
-      }
-
-      if (res.ok && data.success) {
-        setNewsletterStatus("success");
-        setNewsletterMessage(data.message ?? "Subscribed successfully!");
-        setNewsletterEmail("");
-      } else {
-        setNewsletterStatus("error");
-        setNewsletterMessage(data.message ?? "Subscription failed. Please try again.");
-      }
+      data = await res.json();
     } catch {
-      setNewsletterStatus("error");
-      setNewsletterMessage("Something went wrong. Please try again.");
+      throw new Error("Invalid server response");
     }
-  };
+
+    if (res.ok && data.success) {
+      setNewsletterStatus("success");
+      setNewsletterMessage(data.message ?? "Subscribed successfully!");
+      setNewsletterEmail("");
+    } else {
+      setNewsletterStatus("error");
+      setNewsletterMessage(data.message ?? "Subscription failed. Please try again.");
+    }
+  } catch {
+    setNewsletterStatus("error");
+    setNewsletterMessage("Something went wrong. Please try again.");
+  }
+};
 
   // const residentialCol = {
   //   title: "Residential Developments",
@@ -826,6 +831,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
                   className="mb-30"
                 >
                   <ReCAPTCHA
+                  size="invisible"
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                     ref={recaptchaRef}
                   />

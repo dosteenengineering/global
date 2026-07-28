@@ -87,14 +87,15 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
   });
 
   const onSubmit = async (data: FooterCallbackFormValues) => {
-    const captchaValue = recaptchaRef?.current?.getValue();
+    const captchaValue = await recaptchaRef.current?.executeAsync();
+    recaptchaRef.current?.reset();
     if (!captchaValue) {
       setCaptchaError("Please verify yourself to continue");
       return;
     }
     setCaptchaError("");
     setFormStatus("idle");
-    const result = await sendFooterCallbackAction(data);
+    const result = await sendFooterCallbackAction(data, captchaValue);
     if (result.success) {
       setFormStatus("success");
       toast.success("Enquiry sent successfully!");
@@ -189,7 +190,12 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
           <input
             type="tel"
             placeholder="Contact Number*"
-            {...register("contactNumber")}
+            inputMode="numeric"
+            {...register("contactNumber", {
+              onChange: (e) => {
+                e.target.value = e.target.value.replace(/[^0-9+\s-]/g, "");
+              },
+            })}
             className={inputClass}
           />
           <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
@@ -297,6 +303,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
             viewport={{ once: true }}
           >
             <ReCAPTCHA
+              size="invisible"
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               ref={recaptchaRef}
             />

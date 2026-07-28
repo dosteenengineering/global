@@ -4,6 +4,23 @@ import Newsletter from "@/app/models/Newsletter";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+async function verifyCaptcha(token: string): Promise<boolean> {
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: process.env.RECAPTCHA_SECRET_KEY || "",
+        response: token,
+      }),
+    });
+    const data = await res.json();
+    return data.success === true;
+  } catch (error) {
+    console.error("reCAPTCHA verification error:", error);
+    return false;
+  }
+}
 
 export async function GET() {
   try {
@@ -19,14 +36,28 @@ export async function GET() {
   }
 }
 
-
 export async function POST(req: NextRequest) {
   try {
-    const { email } = await req.json();
+    const { email, captchaValue } = await req.json();
 
     if (!email || !EMAIL_REGEX.test(email)) {
       return NextResponse.json(
         { success: false, message: "Please enter a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    if (!captchaValue) {
+      return NextResponse.json(
+        { success: false, message: "Captcha verification is required." },
+        { status: 400 }
+      );
+    }
+
+    const isHuman = await verifyCaptcha(captchaValue);
+    if (!isHuman) {
+      return NextResponse.json(
+        { success: false, message: "Captcha verification failed. Please try again." },
         { status: 400 }
       );
     }
