@@ -28,7 +28,7 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-html{
+html {
     scroll-behavior: auto;
 }
 
@@ -202,11 +202,11 @@ html{
 
 @media (min-width: 768px) and (max-width: 1023px) {
     :root {
-        --text-30:22px;
+        --text-30: 22px;
         --text-90: 52px;
         --space-50: 20px;
         --space-40: 15px;
-        --space-80:30px;
+        --space-80: 30px;
         /* Tablet-specific */
     }
 }
@@ -733,28 +733,98 @@ input:-webkit-autofill:active {
 .blog-content-wrapper h2 {
     @apply text-55 leading-[1.181818181818182] font-light text-secondary mb-30 tracking-[-0.02em];
 }
-.blog-content-wrapper h6{
+
+.blog-content-wrapper h6 {
     @apply text-30 leading-[1.333333333333333] font-light mb-40;
 }
+
 .blog-content-wrapper p {
     @apply text-description text-paragraph;
 }
 
-.blog-content-wrapper h3{
+.blog-content-wrapper h3 {
     @apply text-30 leading-[1.333333333333333] font-light text-secondary mb-2;
 }
 
-.blog-content-wrapper ul{
+.blog-content-wrapper ul {
     @apply text-description text-paragraph list-disc pl-[1em] py-30 ml-[10px];
 }
-.blog-content-wrapper ol{
-    @apply text-description text-paragraph pl-[1em] mb-5  ml-[10px];
+
+.blog-content-wrapper ol {
+    @apply text-description text-paragraph pl-[1em] mb-5 ml-[10px];
 }
 
-.blog-content-wrapper ul li::marker{
+.blog-content-wrapper ul li::marker {
     @apply text-[13px];
 }
 
-.blog-content-wrapper ol li h4{
+.blog-content-wrapper ol li h4 {
     @apply text-25 leading-[1.333333333333333] font-light text-secondary mb-[0.2em];
+}
+
+/* 404 style */
+
+@keyframes focus-lock {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(41, 69, 150, 0));
+    }
+
+    50% {
+        transform: scale(1.035);
+        filter: drop-shadow(0 0 22px rgba(41, 69, 150, 0.35));
+    }
+}
+
+@keyframes dash-drift {
+    to {
+        stroke-dashoffset: -16;
+    }
+}
+
+@keyframes lens-drift {
+
+    0%,
+    100% {
+        mask-position: 32% 28%;
+        -webkit-mask-position: 32% 28%;
+    }
+
+    25% {
+        mask-position: 45% 38%;
+        -webkit-mask-position: 45% 38%;
+    }
+
+    50% {
+        mask-position: 68% 58%;
+        -webkit-mask-position: 68% 58%;
+    }
+
+    75% {
+        mask-position: 50% 43%;
+        -webkit-mask-position: 50% 43%;
+    }
+}
+
+@keyframes grid-breathe {
+
+    0%,
+    100% {
+        background-size: 40px 40px;
+    }
+
+    50% {
+        background-size: 42px 42px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .focus-lock,
+    .dash-drift,
+    .grid-magnify {
+        animation: none !important;
+    }
 }
