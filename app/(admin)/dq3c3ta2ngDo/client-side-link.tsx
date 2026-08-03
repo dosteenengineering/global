@@ -44,7 +44,7 @@ function ClientSideLink({
       });
       const data = await res.json();
       if (data.success) {
-        window.location.href = "/admin/login";
+        window.location.href = "/dq3c3ta2ngDo/login";
       }
     } catch (error) {
       console.log(error);
