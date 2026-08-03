@@ -37,7 +37,7 @@ type ServicesData = {
 
 export default function ServicesSection({servicesData}:{servicesData:ServicesData}) {
 
-  console.log(servicesData)
+  // console.log(servicesData)
   const [activeTab, setActiveTab] = useState<string>(servicesData.tabs[1] ? servicesData.tabs[1].key : servicesData.tabs[0].key );
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });

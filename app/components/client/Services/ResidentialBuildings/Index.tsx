@@ -22,7 +22,7 @@ const ResidentialPage = ({ data, projectsData }: { data: ResidentialDevelopmentD
       title: item.firstSection.title,
       image: item.firstSection.thumbnailImage || item.firstSection.image,
       description: item.firstSection.firstDescription,
-      slug: `/solutions/residential-developments/${item.slug}`,
+      slug: `/solutions/${item.slug}`,
     })),
   };
 

@@ -34,7 +34,7 @@ type BlogsData = {
 const SLIDE_GAP = 80;
 
 export default function BlogsSection({blogsData}:{blogsData:BlogsData}) {
-console.log(`blogs`,blogs)
+// console.log(`blogs`,blogs)
   
   // ── Desktop swiper ──
   const swiperRef = useRef<SwiperType | null>(null);
@@ -61,11 +61,11 @@ console.log(`blogs`,blogs)
   }, []);
   const slidePrev = useCallback(() => swiperRef.current?.slidePrev(), []);
   const slideNext = useCallback(() => {
-    console.log("active", swiperRef.current?.activeIndex);
-    console.log("real", swiperRef.current?.realIndex);
-    console.log("isEnd", swiperRef.current?.isEnd);
+    // console.log("active", swiperRef.current?.activeIndex);
+    // console.log("real", swiperRef.current?.realIndex);
+    // console.log("isEnd", swiperRef.current?.isEnd);
     swiperRef.current?.slideNext();
-    console.log(swiperRef.current);
+    // console.log(swiperRef.current);
   }, []);
 
   const mobileSlidePrev = useCallback(

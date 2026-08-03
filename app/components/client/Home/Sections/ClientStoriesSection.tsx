@@ -49,13 +49,13 @@ export default function ClientStoriesSection({clientStoriesDataFromApi}:{clientS
 
   const handleSwiper = useCallback((s: SwiperType) => {
     // console.log("swiper mounted", s.el);
-    console.log("slide changed", s.el);
-    console.log("realIndex", s.realIndex);
+    // console.log("slide changed", s.el);
+    // console.log("realIndex", s.realIndex);
     swiperRef.current = s;
   }, []);
 
   const handleSlideChange = useCallback((s: SwiperType) => {
-    console.log("slide changed", s.realIndex);
+    // console.log("slide changed", s.realIndex);
     setActiveIndex(s.realIndex);
     setProgressKey((k) => k + 1);
   }, []);
