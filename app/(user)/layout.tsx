@@ -48,6 +48,13 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}>
+        <noscript dangerouslySetInnerHTML={{ __html: tagData?.tag?.bodyScript }}></noscript>
+        {tagData?.tag?.schema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: tagData?.tag?.schema }}
+          />
+        )}
         <LenisProvider>
           <UserChrome solutionsRaw={solutionsData.data}>{children}</UserChrome>
         </LenisProvider>

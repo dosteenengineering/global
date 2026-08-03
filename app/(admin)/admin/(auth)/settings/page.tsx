@@ -12,6 +12,7 @@ import AdminItemContainer from '@/app/components/common/AdminItemContainer'
 interface FormValues {
     headerScript: string;
     bodyScript: string;
+    schema:string;
 }
 
 interface FormValues2 {
@@ -179,6 +180,12 @@ const Settings = () => {
                             <Label className=''>Body Script</Label>
                             <Textarea {...register('bodyScript')}></Textarea>
                         </div>
+
+                        <div className="space-y-4">
+                            <Label className=''>Schema</Label>
+                            <Textarea {...register('schema')}></Textarea>
+                        </div>
+
                         <div className="flex justify-center">
                             <Button type="submit" className='w-full cursor-pointer text-white text-[16px]'>Submit</Button>
                         </div>

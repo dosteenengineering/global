@@ -12,15 +12,16 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
         }
         const body = await request.json();
-        const { headerScript, bodyScript } = body;
+        const { headerScript, bodyScript, schema } = body;
         const tag = await Tag.findOne({});
         if(tag){
             tag.headerScript = headerScript;
             tag.bodyScript = bodyScript;
+            tag.schema = schema
             await tag.save();
             return NextResponse.json({ message: "Tag updated successfully" }, { status: 200 });
         }else{
-            const tag = new Tag({ headerScript, bodyScript });
+            const tag = new Tag({ headerScript, bodyScript, schema });
             await tag.save();
             return NextResponse.json({ message: "Tag created successfully" }, { status: 200 });
         }
