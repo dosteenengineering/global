@@ -57,7 +57,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
             if (response.ok) {
                 const data = await response.json();
                 toast.success(data.message);
-                router.push("/admin/blogs");
+                router.push("/dq3c3ta2ngDo/blogs");
             }
         } catch (error) {
             console.log("Error in adding blog", error);

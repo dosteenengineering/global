@@ -325,7 +325,7 @@ export default function Blogs() {
                 <div className="h-screen w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
                     <div className="flex justify-between border-b-2 border-black/20 pb-2">
                         <Label className="text-sm font-bold">Blogs</Label>
-                        <Button onClick={() => router.push("/admin/blogs/add")} className="text-white">Add Blog</Button>
+                        <Button onClick={() => router.push("/dq3c3ta2ngDo/blogs/add")} className="text-white">Add Blog</Button>
                     </div>
                     <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
                         {blogList.map((item) => (
@@ -334,7 +334,7 @@ export default function Blogs() {
                                     {item.title}
                                 </div>
                                 <div className="flex gap-5">
-                                    <MdEdit onClick={() => router.push(`/admin/blogs/edit/${item._id}`)} />
+                                    <MdEdit onClick={() => router.push(`/dq3c3ta2ngDo/blogs/edit/${item._id}`)} />
 
                                     <Dialog>
                                         <DialogTrigger><MdDelete /></DialogTrigger>

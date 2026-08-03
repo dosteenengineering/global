@@ -151,7 +151,7 @@ export default function Systems() {
 />
             </div>
             <div className="flex gap-2">
-              <Button onClick={() => router.push("/admin/systems/add")} className="text-white cursor-pointer">Add System</Button>
+              <Button onClick={() => router.push("/dq3c3ta2ngDo/systems/add")} className="text-white cursor-pointer">Add System</Button>
             </div>
           </div>
           <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
@@ -164,7 +164,7 @@ export default function Systems() {
                   <span className="text-xs text-gray-500">{item.slug}</span>
                 </div>
                 <div className="flex gap-5">
-                  <MdEdit onClick={() => router.push(`/admin/systems/edit/${item._id}`)} />
+                  <MdEdit onClick={() => router.push(`/dq3c3ta2ngDo/systems/edit/${item._id}`)} />
 
                   <Dialog>
                     <DialogTrigger><MdDelete /></DialogTrigger>
