@@ -208,7 +208,7 @@ const SystemForm = ({ editMode }: { editMode?: boolean }) => {
       const json = await response.json();
       if (response.ok) {
         toast.success(json.message);
-        router.push("/admin/systems");
+        router.push("/dq3c3ta2ngDo/systems");
       } else {
         toast.error(json.message || "Something went wrong"); // surface the actual error
       }

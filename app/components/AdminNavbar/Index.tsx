@@ -1,6 +1,6 @@
 "use client";
 
-import ClientSideLink from "@/app/(admin)/admin/client-side-link";
+import ClientSideLink from "@/app/(admin)/dq3c3ta2ngDo/client-side-link";
 import React, { useState } from "react";
 import { HomeIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 import {
@@ -72,53 +72,53 @@ const AdminNavbar = () => {
   };
 
   const navItems = [
-    { name: "Home", href: "/admin/home", icon: HomeIcon },
-    { name: "About", href: "/admin/about", icon: InfoIcon },
+    { name: "Home", href: "/dq3c3ta2ngDo/home", icon: HomeIcon },
+    { name: "About", href: "/dq3c3ta2ngDo/about", icon: InfoIcon },
     {
       name: "Services",
       href: "#",
       icon: EnvelopeIcon,
       hasChild: true,
       children: [
-        { name: "Main Page", href: "/admin/services" },
+        { name: "Main Page", href: "/dq3c3ta2ngDo/services" },
         ...serviceData.map((service: { _id: string; title: string }) => ({
           name: service.title.split(" ").slice(0, 2).join(" ") + "...",
-          href: `/admin/services/${service._id}`,
+          href: `/dq3c3ta2ngDo/services/${service._id}`,
         })),
       ],
     },
-    { name: "Systems", href: "/admin/systems", icon: Workflow },
-    { name: "Projects", href: "/admin/projects", icon: Workflow },
+    { name: "Systems", href: "/dq3c3ta2ngDo/systems", icon: Workflow },
+    { name: "Projects", href: "/dq3c3ta2ngDo/projects", icon: Workflow },
     {
       name: "Bim Capabilities",
-      href: "/admin/bim-capabilities",
+      href: "/dq3c3ta2ngDo/bim-capabilities",
       icon: Share2Icon,
     },
     {
       name: "Csi Specifications",
-      href: "/admin/csi-specifications",
+      href: "/dq3c3ta2ngDo/csi-specifications",
       icon: Share2Icon,
     },
-    { name: "Clients", href: "/admin/clients", icon: RiShakeHandsLine },
-    { name: "Blogs", href: "/admin/blogs", icon: Share2Icon },
-    { name: "Gallery", href: "/admin/gallery", icon: GalleryThumbnails },
-    { name: "Awards", href: "/admin/awards", icon: AwardIcon },
+    { name: "Clients", href: "/dq3c3ta2ngDo/clients", icon: RiShakeHandsLine },
+    { name: "Blogs", href: "/dq3c3ta2ngDo/blogs", icon: Share2Icon },
+    { name: "Gallery", href: "/dq3c3ta2ngDo/gallery", icon: GalleryThumbnails },
+    { name: "Awards", href: "/dq3c3ta2ngDo/awards", icon: AwardIcon },
     {
       name: "Resources",
       href: "#####",
       icon: MdAppRegistration,
       hasChild: true,
       children: [
-        { name: "Main Page", href: "/admin/resources" },
+        { name: "Main Page", href: "/dq3c3ta2ngDo/resources" },
         ...secondSectionData.map((service: { _id: string; title: string }) => ({
           name: service.title.split(" ").slice(0, 2).join(" ") + "...",
-          href: `/admin/resources/${service._id}`,
+          href: `/dq3c3ta2ngDo/resources/${service._id}`,
         })),
       ],
     },
     {
       name: "Become a Partner",
-      href: "/admin/become-a-partner",
+      href: "/dq3c3ta2ngDo/become-a-partner",
       icon: GroupIcon,
     },
     // {
@@ -131,27 +131,27 @@ const AdminNavbar = () => {
     //     // { name: "Enquiries", href: "/admin/contact/enquiries" },
     //   ],
     // },
-    { name: "Contact", href: "/admin/contact", icon: PhoneIcon },
-    { name: "Faq", href: "/admin/faq", icon: LeafIcon },
+    { name: "Contact", href: "/dq3c3ta2ngDo/contact", icon: PhoneIcon },
+    { name: "Faq", href: "/dq3c3ta2ngDo/faq", icon: LeafIcon },
     {
       name: "Forms",
       href: "#######",
       icon: Form,
       hasChild: true,
       children: [
-        { name: "Footer Enquiries", href: "/admin/forms/footer-enquiries" },
-        { name: "Contact Enquiries", href: "/admin/forms/contact-enquiries" },
+        { name: "Footer Enquiries", href: "/dq3c3ta2ngDo/forms/footer-enquiries" },
+        { name: "Contact Enquiries", href: "/dq3c3ta2ngDo/forms/contact-enquiries" },
         {
           name: "Vendor Registrations",
-          href: "/admin/forms/vendor-registrations",
+          href: "/dq3c3ta2ngDo/forms/vendor-registrations",
         },
         {
           name: "Newsletter",
-          href: "/admin/forms/news-letter",
+          href: "/dq3c3ta2ngDo/forms/news-letter",
         },
       ],
     },
-    { name: "Settings", href: "/admin/settings", icon: Settings },
+    { name: "Settings", href: "/dq3c3ta2ngDo/settings", icon: Settings },
   ];
 
   return navItems.map((item) => {

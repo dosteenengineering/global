@@ -588,7 +588,7 @@ export default function Projects() {
               >
                 {reorderMode ? "Done" : "Reorder"}
               </Button>
-              <Button onClick={() => router.push("/admin/projects/add")} className="text-white cursor-pointer">Add Project</Button>
+              <Button onClick={() => router.push("/dq3c3ta2ngDo/projects/add")} className="text-white cursor-pointer">Add Project</Button>
             </div>
           </div>
           <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
@@ -614,7 +614,7 @@ export default function Projects() {
                   {item.firstSection.title}
                 </div>
                 <div className="flex gap-5">
-                  <MdEdit onClick={() => router.push(`/admin/projects/edit/${item._id}`)} />
+                  <MdEdit onClick={() => router.push(`/dq3c3ta2ngDo/projects/edit/${item._id}`)} />
 
                   <Dialog>
                     <DialogTrigger><MdDelete /></DialogTrigger>
