@@ -40,6 +40,7 @@ export async function POST(request: Request) {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60, // 1 day
+      path:"/"
     });
 
     return NextResponse.json({ success: true, data: "" }, { status: 200 });

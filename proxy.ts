@@ -13,13 +13,13 @@ export async function proxy(request: NextRequest) {
   response.headers.set("x-pathname", request.nextUrl.pathname);
 
   // Define protected routes
-  const isProtectedRoute = path.startsWith("/admin") && !path.includes("/admin/login");
+  const isProtectedRoute = path.startsWith("/dq3c3ta2ngDo") && !path.includes("/dq3c3ta2ngDo/login");
 
   if (isProtectedRoute) {
     const token = request.cookies.get("adminToken")?.value || "";
 
     if (!token) {
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return NextResponse.redirect(new URL("/dq3c3ta2ngDo/login", request.url));
     }
 
     try {
@@ -28,7 +28,7 @@ export async function proxy(request: NextRequest) {
       return NextResponse.next();
     } catch (error) {
       console.log(error);
-      return NextResponse.redirect(new URL("/admin/login", request.url));
+      return NextResponse.redirect(new URL("/dq3c3ta2ngDo/login", request.url));
     }
   }
 
@@ -36,5 +36,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*", "/admin/:path*","/((?!_next/static|_next/image|favicon.ico).*)",],
+  matcher: ["/api/:path*", "/dq3c3ta2ngDo/:path*","/((?!_next/static|_next/image|favicon.ico).*)",],
 };
