@@ -14,7 +14,7 @@ const DefaultServicePageIndex = ({ data, projectsData }: { data: CommercialBuild
       id: index + 1,
       title: item.firstSection.title,
       image: item.firstSection.thumbnailImage || item.firstSection.image,
-      slug: `/solutions/${data.slug}/${item.slug}`,
+      slug: `/solutions/${item.slug}`,
     })),
   };
 

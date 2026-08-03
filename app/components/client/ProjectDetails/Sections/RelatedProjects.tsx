@@ -14,7 +14,7 @@ import NavButton from "@/app/components/common/NavigationButton";
 
 
 export default function RelatedProjects({ data, currentProject, }:{data:AllProjectData, currentProject: ProjectItemProps}) {
-  console.log(data)
+  // console.log(data)
   const title = "Related Case Studies";
   // const projects = data.projects;
   const projects = data.projects.filter((project) => project._id !== currentProject._id && project.firstSection.sector._id === currentProject.firstSection.sector._id);

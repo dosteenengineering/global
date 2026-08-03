@@ -5,7 +5,6 @@ import ContactForm from "./Sections/ContactForm";
 import LocationSection from "./Sections/LocationSection";
 
 const Index = ({ data, systemData }: { data: ContactData, systemData: IndividualSystemData[] }) => {
-  console.log('systemData', systemData)
   return (
     <>
       <ContactBanner {...data.firstSection} titleMaxWidth="max-w-[22ch]" descriptionMaxWidth="max-w-[62ch]" />

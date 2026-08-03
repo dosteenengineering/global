@@ -136,7 +136,7 @@ const PartnerForm = ({ data }: any) => {
     setCaptchaError("");
     setIsSubmitting(true);
     setSubmitError(null);
-    console.log(`check`, values)
+    // console.log(`check`, values)
     try {
       const formData = new FormData();
 

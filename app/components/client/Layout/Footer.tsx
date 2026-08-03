@@ -274,7 +274,7 @@ const handleNewsletterSubmit = async () => {
 
   const captchaValue = await recaptchaRef?.current?.executeAsync();
 
-  console.log(captchaValue)
+  // console.log(captchaValue)
   recaptchaRef?.current?.reset();
   if (!captchaValue) {
     setCaptchaError("Please verify yourself to continue");
@@ -364,7 +364,7 @@ const handleNewsletterSubmit = async () => {
       title: industry.homeTitle, // adjust to whatever field holds the display label — see note below
       links: (industry.systemSection?.items ?? []).map((s: any) => ({
         label: s.firstSection?.shortTitle || s.firstSection?.title || "",
-        href: `/solutions/${industry.slug}/${s.slug}`,
+        href: `/solutions/${s.slug}`,
       })),
     }));
 

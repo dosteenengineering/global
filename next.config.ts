@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    images: {
+  images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       {
@@ -11,11 +11,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental:{
-    serverActions:{
-      bodySizeLimit:'20mb'
-    }
-  }
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "20mb",
+    },
+  },
+  async redirects() {
+    return [
+      {
+        source: "/solutions/:id/:service",
+        destination: "/solutions/:service",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

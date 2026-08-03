@@ -69,7 +69,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
             const response = await fetch(`/api/admin/blog?id=${id}`);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
+                // console.log(data);
                 setValue("title", data.data.title);
                 setValue("coverImage", data.data.coverImage);
                 setValue("coverImageAlt", data.data.coverImageAlt);
