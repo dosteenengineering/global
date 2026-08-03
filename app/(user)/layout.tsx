@@ -3,6 +3,7 @@ import { Poppins, DM_Sans } from "next/font/google";
 import "../globals.css";
 import LenisProvider from "../components/LenisProvider";
 import UserChrome from "../components/client/Layout/UserChrome";
+import parse from 'html-react-parser'
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -42,13 +43,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        {parse(tagData?.tag?.headerScript || "")}
+        {/* <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: tagData?.tag?.headerScript }}
-        />
+        /> */}
       </head>
       <body className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}>
-        <noscript dangerouslySetInnerHTML={{ __html: tagData?.tag?.bodyScript }}></noscript>
+        {tagData?.tag && <>{parse(tagData?.tag?.bodyScript || "")}</>}
         {tagData?.tag?.schema && (
           <script
             type="application/ld+json"
