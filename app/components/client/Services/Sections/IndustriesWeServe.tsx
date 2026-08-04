@@ -10,10 +10,10 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { useLenis } from "@/app/components/LenisProvider";
 
-const toHotspot = (item: LowPolyItem, index: number, industrySlug: string): Hotspot => ({
-  id: `hotspot-${index}-${item.systemSlug}`,
+const toHotspot = (item: LowPolyItem, index: number): Hotspot => ({
+  id: `hotspot-${index}-${item.system}`,
   title: item.title,
-  href: item.systemSlug ? `solutions/${industrySlug}/${item.systemSlug}` : null,
+  href: item?.system ? `solutions/${item.system.slug}` : null,
   marker: { x: Number(item.marker.x), y: Number(item.marker.y) },
   label: { x: Number(item.label.x), y: Number(item.label.y) },
   side: item.side,
@@ -29,8 +29,9 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
   // Mobile accordion: track which item is open (null = all closed)
   const [openId, setOpenId] = useState<number | null>(0);
   const active = data.items.find((i, idx) => idx === activeId)!;
+  console.log("active",active)
   const activeHotspots = active.lowPolySection.items.map((item, index) =>
-    toHotspot(item, index, active.slug)
+    toHotspot(item, index)
   );
 
   // Helper function to get hotspots for mobile items
@@ -93,7 +94,7 @@ export default function IndustriesWeServe({ data }: { data: IndustriesPageData['
               const isOpen = idx === openId;
               const detail = data.items.find((i, index) => index === idx)!;
               const itemHotspots = item.lowPolySection.items.map((hotspotItem, index) =>
-                toHotspot(hotspotItem, index, item.slug)
+                toHotspot(hotspotItem, index)
               );
 
               return (

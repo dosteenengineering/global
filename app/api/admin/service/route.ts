@@ -204,7 +204,7 @@ export async function GET(request: NextRequest) {
 
     const service = await Service.findOne().populate(
         "thirdSection.items.systemSection.items"
-    ).lean() as any;
+    ).populate("thirdSection.items.lowPolySection.items.system","slug").lean() as any;
 
     if (!service) {
         return NextResponse.json({ message: "Service not found" }, { status: 404 });

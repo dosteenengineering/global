@@ -86,20 +86,25 @@ const serviceSchema = new mongoose.Schema({
                     ],
                 },
 
-                lowPolySection:{
-                    items:[
+                lowPolySection: {
+                    items: [
                         {
-                            title:String,
-                            systemSlug:String,
-                            marker:{
-                                x:String,
-                                y:String
+                            title: String,
+                            system: {
+                                type: mongoose.Schema.Types.ObjectId,
+                                ref: "System",
+                                default: null,
+                                set: (v: any) => (v === "" ? null : v),
                             },
-                            label:{
-                                x:String,
-                                y:String
+                            marker: {
+                                x: String,
+                                y: String
                             },
-                            side:String
+                            label: {
+                                x: String,
+                                y: String
+                            },
+                            side: String
                         }
                     ]
                 }
