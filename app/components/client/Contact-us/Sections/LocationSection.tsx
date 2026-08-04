@@ -159,6 +159,7 @@ function LocationCard({
       {/* Location button */}
       <Link
         href={locationUrl}
+        target="_blank"
         className="group overflow-hidden w-fit max-w-[138px] h-7.5 md:h-[42px] px-2.5 lg:pl-[26px] lg:pr-[16px] flex items-center gap-[10px] border border-white rounded-full text-white text-15 uppercase relative"
       >
         <span
