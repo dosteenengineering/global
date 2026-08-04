@@ -21,13 +21,14 @@ export async function GET(request: NextRequest) {
     System.findOne({ slug }).lean() as Promise<any>,
   ]);
 
-  const solutionItem = serviceDoc?.thirdSection?.items?.find(
+  const solutionIndex = serviceDoc?.thirdSection?.items?.findIndex(
     (item: any) => item.slug === slug
   );
 
-  if (solutionItem) {
+  if (solutionIndex !== undefined && solutionIndex !== -1) {
+    const solutionItem = serviceDoc.thirdSection.items[solutionIndex];
     return NextResponse.json(
-      { type: "solution", data: solutionItem },
+      { type: "solution", data: solutionItem, solutionIndex },
       { status: 200 }
     );
   }

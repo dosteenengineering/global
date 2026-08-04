@@ -40,7 +40,7 @@ export default async function SolutionOrServicePage({
     });
     const projectsData = await projectsResponse.json();
 
-    return resolved.data.slug === "residential" ? (
+    return resolved.solutionIndex === 0 ? (
       <>{SchemaScript}<ResidentialPage data={resolved.data} projectsData={projectsData.data.projects} /></>
     ) : (
       <>{SchemaScript}<DefaultServicePageIndex data={resolved.data} projectsData={projectsData.data.projects} /></>
