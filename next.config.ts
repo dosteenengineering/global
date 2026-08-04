@@ -23,6 +23,156 @@ const nextConfig: NextConfig = {
         destination: "/solutions/:service",
         permanent: true,
       },
+      {
+        source: "/commercial",
+        destination: "/solutions/commercial",
+        permanent: true,
+      },
+      {
+        source: "/residential",
+        destination: "/solutions/residential",
+        permanent: true,
+      },
+      {
+        source: "/projects-engineered",
+        destination: "/case-studies",
+        permanent: true,
+      },
+      {
+        source: "/reach-us",
+        destination: "/contact-us",
+        permanent: true,
+      },
+      {
+        source: "/copy-of-industrial",
+        destination: "/solutions/industrial",
+        permanent: true,
+      },
+      {
+        source: "/copy-of-commerical-test",
+        destination: "/solutions/commercial",
+        permanent: true,
+      },
+      {
+        source: "/copy-of-force-entry",
+        destination: "/solutions/vault-doors",
+        permanent: true,
+      },
+      {
+        source: "/residential/shutters",
+        destination: "/solutions/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/book-online",
+        destination: "/contact-us",
+        permanent: true,
+      },
+      {
+        source: "/copy-of-made-in-oman",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/residential/architectural-shades",
+        destination: "/solutions/architectural-shades",
+        permanent: true,
+      },
+      {
+        source: "/residential/garage-doors",
+        destination: "/solutions/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/residential/garbage-linen-chutes",
+        destination: "/solutions/garbage-linen-chutes",
+        permanent: true,
+      },
+      {
+        source: "/residential/retractable-pool-covers",
+        destination: "/solutions/retractable-pool-covers",
+        permanent: true,
+      },
+      {
+        source: "/residential/flood-barriers-for-homes",
+        destination: "/solutions/flood-barriers",
+        permanent: true,
+      },
+      {
+        source: "/solutions/government-facilities",
+        destination: "/solutions/government",
+        permanent: true,
+      },
+      {
+        source: "/solutions/elegant-shutters-for-stylish-secure-living",
+        destination: "/solutions/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/solutions/premium-residential-garage-doors-in-uae-oman",
+        destination: "/solutions/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/solutions/retractable-pool-covers-for-year-round-protection",
+        destination: "/solutions/retractable-pool-covers",
+        permanent: true,
+      },
+      {
+        source: "/solutions/insect-screens-fly-meshsolutions-for-healthy-living",
+        destination: "/solutions/fly-mesh-insect-screens",
+        permanent: true,
+      },
+      {
+        source: "/solutions/garbage-linen-chutes-systems",
+        destination: "/solutions/garbage-linen-chutes",
+        permanent: true,
+      },
+      {
+        source: "/solutions/space-saving-multi-parking-systems-for-homes-building",
+        destination: "/solutions/multi-parking-systems",
+        permanent: true,
+      },
+      {
+        source: "/solutions/advanced-flood-barriers-for-homes-in-uae-oman",
+        destination: "/solutions/flood-barriers",
+        permanent: true,
+      },
+      {
+        source: "/solutions/bespoke-steel-gates-for-youre-homes-in-uae-oman",
+        destination: "/solutions/bespoke-steel-gates",
+        permanent: true,
+      },
+      {
+        source: "/solutions/security-shutters-for-government-high-security-facilities",
+        destination: "/solutions/security-shutters",
+        permanent: true,
+      },
+      {
+        source: "/solutions/blast-doors-glass-windows-for-government-grade-protection",
+        destination: "/solutions/blast-doors-windows",
+        permanent: true,
+      },
+      {
+        source: "/residential/multi-parking-solutions",
+        destination: "/solutions/multi-parking-systems",
+        permanent: true,
+      },
+      {
+        source: "/residential/bespoke-steel-gates",
+        destination: "/solutions/bespoke-steel-gates",
+        permanent: true,
+      },
+      {
+        source: "/residential/fly-mesh-insect-screens",
+        destination: "/solutions/fly-mesh-insect-screens",
+        permanent: true,
+      },
+      {
+        source: "/residential/copy-of-innovative-architectural-shad",
+        destination: "/solutions/architectural-shades",
+        permanent: true,
+      },
     ];
   },
 };

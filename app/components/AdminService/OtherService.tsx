@@ -14,21 +14,6 @@ import { toast } from 'sonner';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic'
-import { closestCorners, DndContext, DragEndEvent } from "@dnd-kit/core";
-import {
-    arrayMove,
-    SortableContext,
-    verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import ProductCard from './ProductCard';
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
 import { SeoFormValues } from '@/app/types/seo';
 import SeoFields from '../common/SeoFields';
 
@@ -76,7 +61,7 @@ interface IndividualServiceFormProps {
     lowPolySection: {
         items: {
             title: string;
-            systemSlug: string;
+            system: string;
             marker: { x: string; y: string };
             label: { x: string; y: string };
             side: "left" | "right";
@@ -173,7 +158,13 @@ const IndividualService = () => {
                     buttonLink: data.thirdSection?.buttonLink || "",
                 });
 
-                setValue("lowPolySection.items", data.lowPolySection.items)
+                setValue("lowPolySection.items", data.lowPolySection.items.map((item: any) => ({
+                    title: item.title || "",
+                    system: typeof item.system === "string" ? item.system : item.system?._id || "",
+                    marker: item.marker || { x: "", y: "" },
+                    label: item.label || { x: "", y: "" },
+                    side: item.side || "left",
+                })))
 
             } else {
                 toast.error(result.message);
@@ -404,24 +395,21 @@ const IndividualService = () => {
                                             <Label className='font-bold'>System</Label>
                                             <Controller
                                                 control={control}
-                                                name={`lowPolySection.items.${index}.systemSlug`}
-                                                // rules={{ required: "System is required" }}
+                                                name={`lowPolySection.items.${index}.system`}
                                                 render={({ field }) => (
                                                     <select className='border rounded-md p-2' {...field}>
                                                         <option value="">Select a system</option>
                                                         {availableSystems.map((system) => (
-                                                            <option key={system._id} value={system.slug}>
-                                                                {system.firstSection?.title}
+                                                            <>
+                                                            <option key={system._id} value={system._id}>
+                                                                {system.firstSection?.title}{" "}
+                                                            ({system.slug})
                                                             </option>
+                                                            </>
                                                         ))}
                                                     </select>
                                                 )}
                                             />
-                                            {/* {errors.lowPolySection?.items?.[index]?.systemSlug && (
-                                                <p className='text-red-500'>
-                                                    {errors.lowPolySection.items[index]?.systemSlug?.message}
-                                                </p>
-                                            )} */}
                                         </div>
 
                                         <div className='flex flex-col gap-2'>
@@ -476,7 +464,7 @@ const IndividualService = () => {
                                     onClick={() =>
                                         lowPolyAppend({
                                             title: "",
-                                            systemSlug: "",
+                                            system: "",
                                             marker: { x: "", y: "" },
                                             label: { x: "", y: "" },
                                             side: "left",

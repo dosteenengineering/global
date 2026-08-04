@@ -78,7 +78,7 @@ interface IndividualServiceFormProps {
     lowPolySection: {
         items: {
             title: string;
-            systemSlug: string;
+            system: string;
             marker: { x: string; y: string };
             label: { x: string; y: string };
             side: "left" | "right";
@@ -190,7 +190,13 @@ const IndividualService = () => {
                         items: data.fourthSection?.items || [],
                     },
                     lowPolySection: {
-                        items: data.lowPolySection?.items || [],
+                        items: (data.lowPolySection?.items || []).map((item: any) => ({
+                            title: item.title || "",
+                            system: typeof item.system === "string" ? item.system : item.system?._id || "",
+                            marker: item.marker || { x: "", y: "" },
+                            label: item.label || { x: "", y: "" },
+                            side: item.side || "left",
+                        })),
                     },
                 });
             } else {
@@ -224,7 +230,7 @@ const IndividualService = () => {
         const orderedSystems = currentItems
             .map((id: string) => availableSystems.find((sys) => sys._id === id))
             .filter(
-                (sys): sys is { _id: string; firstSection: { title: string };slug:string } => Boolean(sys)
+                (sys): sys is { _id: string; firstSection: { title: string }; slug: string } => Boolean(sys)
             );
 
         setSystemSheetItems(
@@ -669,24 +675,21 @@ const IndividualService = () => {
                                             <Label className='font-bold'>System</Label>
                                             <Controller
                                                 control={control}
-                                                name={`lowPolySection.items.${index}.systemSlug`}
-                                                // rules={{ required: "System is required" }}
+                                                name={`lowPolySection.items.${index}.system`}
                                                 render={({ field }) => (
                                                     <select className='border rounded-md p-2' {...field}>
                                                         <option value="">Select a system</option>
                                                         {availableSystems.map((system) => (
-                                                            <option key={system._id} value={system.slug}>
-                                                                {system.firstSection?.title}
+                                                            <>
+                                                            <option key={system._id} value={system._id}>
+                                                                {system.firstSection?.title}{" "}
+                                                            ({system.slug})
                                                             </option>
+                                                            </>
                                                         ))}
                                                     </select>
                                                 )}
                                             />
-                                            {/* {errors.lowPolySection?.items?.[index]?.systemSlug && (
-                                                <p className='text-red-500'>
-                                                    {errors.lowPolySection.items[index]?.systemSlug?.message}
-                                                </p>
-                                            )} */}
                                         </div>
 
                                         <div className='flex flex-col gap-2'>
@@ -741,7 +744,7 @@ const IndividualService = () => {
                                     onClick={() =>
                                         lowPolyAppend({
                                             title: "",
-                                            systemSlug: "",
+                                            system: "",
                                             marker: { x: "", y: "" },
                                             label: { x: "", y: "" },
                                             side: "left",

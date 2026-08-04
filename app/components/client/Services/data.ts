@@ -25,7 +25,9 @@ export interface IndustriesPageData {
 
 export interface LowPolyItem {
   title: string;
-  systemSlug: string;
+  system: {
+    slug:string
+  };
   marker: { x: string; y: string };
   label: { x: string; y: string };
   side: "left" | "right";
