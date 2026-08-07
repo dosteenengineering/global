@@ -88,7 +88,7 @@ const AdminNavbar = () => {
       ],
     },
     { name: "Systems", href: "/dq3c3ta2ngDo/systems", icon: Workflow },
-    { name: "Projects", href: "/dq3c3ta2ngDo/projects", icon: Workflow },
+    { name: "Case Studies", href: "/dq3c3ta2ngDo/projects", icon: Workflow },
     {
       name: "Bim Capabilities",
       href: "/dq3c3ta2ngDo/bim-capabilities",
