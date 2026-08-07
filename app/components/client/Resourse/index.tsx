@@ -1,4 +1,3 @@
-
 import InnerPageBanner2 from "../../common/InnerPageBanner2";
 import { DynamicResourceHubData, Resource } from "./data";
 import GuidesArticles from "./sections/GuidsArticles";
@@ -6,36 +5,39 @@ import NewsLetter from "./sections/NewsLetter";
 import ResourseTab from "./sections/ResourceTab";
 import SpecTools from "./sections/SpecTools";
 import CtaSection from "../../common/CtaSection";
-import {typeToId,typeToLabel,inferFileType,inferBimType} from "@/lib/resourceEssentials"
+import {
+  typeToId,
+  typeToLabel,
+  inferFileType,
+  inferBimType,
+} from "@/lib/resourceEssentials";
 
-const Index = ({data}:{data:Resource}) => {
-
+const Index = ({ data }: { data: Resource }) => {
   const industryGuidesData = {
-  title: data.thirdSection.title,
+    title: data.thirdSection.title,
 
-  items: data.thirdSection.items.map((item, index) => ({
-    id: index + 1,
-    featured: true,
-    audience: item.title,
-    type: item.pillText,
-    title: item.subTitle,
-    image: item.image,
-    link: "#", // replace with actual link field if available
-  })),
-};
+    items: data.thirdSection.items.map((item, index) => ({
+      id: index + 1,
+      featured: true,
+      audience: item.title,
+      type: item.pillText,
+      title: item.subTitle,
+      image: item.image,
+      link: "#", // replace with actual link field if available
+    })),
+  };
 
   const specificationToolsData = {
-  title: data.fourthSection.title,
+    title: data.fourthSection.title,
 
-  items: data.fourthSection.items.map((item, index) => ({
-    id: index + 1,
-    title: item.title,
-    desc: item.description,
-    buttonText: item.buttonText,
-    link: item.buttonLink,
-  })),
-};
-
+    items: data.fourthSection.items.map((item, index) => ({
+      id: index + 1,
+      title: item.title,
+      desc: item.description,
+      buttonText: item.buttonText,
+      link: item.buttonLink,
+    })),
+  };
 
   const resourcesKnowledgeHubData = {
     sectionTitle: data.secondSection.title,
@@ -47,9 +49,13 @@ const Index = ({data}:{data:Resource}) => {
         icon: item.image,
         title: item.title,
         ...(item.description && { description: item.description }),
-        ...(item.buttonText && item.buttonLink && {
-          button: { text: item.buttonText.toUpperCase(), link: item.buttonLink },
-        }),
+        ...(item.buttonText &&
+          item.buttonLink && {
+            button: {
+              text: item.buttonText.toUpperCase(),
+              link: item.buttonLink,
+            },
+          }),
       };
 
       switch (item.type) {
@@ -66,7 +72,7 @@ const Index = ({data}:{data:Resource}) => {
                 tags: sub.tags || [],
                 download: sub.file || "#",
               })),
-            ])
+            ]),
           );
           return { ...base, filters, items };
         }
@@ -82,7 +88,7 @@ const Index = ({data}:{data:Resource}) => {
                 title: sub.title,
                 download: sub.file || "#",
               })),
-            ])
+            ]),
           );
           return { ...base, filters, items };
         }
@@ -142,17 +148,20 @@ const Index = ({data}:{data:Resource}) => {
     }),
   };
 
-
-  return ( 
+  return (
     <>
       <InnerPageBanner2 {...data.bannerSection} />
       <ResourseTab data={resourcesKnowledgeHubData as DynamicResourceHubData} />
       <GuidesArticles data={industryGuidesData} />
       <SpecTools data={specificationToolsData} />
       <NewsLetter data={data.fifthSection} />
-      <CtaSection {...data.lastSection} descriptionWidth="max-w-[70ch]" titleWidth="max-w-[20ch]"/>
+      <CtaSection
+        {...data.lastSection}
+        descriptionWidth="max-w-[70ch]"
+        titleWidth="max-w-[20ch]"
+      />
     </>
-   );
-}
- 
+  );
+};
+
 export default Index;

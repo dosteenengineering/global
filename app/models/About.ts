@@ -64,23 +64,23 @@ const aboutSchema = new mongoose.Schema({
         ]
     },
     seventhSection: {
-        title: { type: String, required: true },
-        image: { type: String, required: true },
-        imageAlt: { type: String, required: true },
+        title: { type: String },
+        image: { type: String },
+        imageAlt: { type: String },
         items: [
             {
-                number: { type: String, required: true },
-                value: { type: String, required: true },
+                number: { type: String },
+                value: { type: String },
             }
         ]
     },
     eighthSection: {
-        title: { type: String, required: true },
+        title: { type: String },
         items: [
             {
-                title: { type: String, required: true },
-                xValue: { type: String, required: true },
-                yValue: { type: String, required: true },
+                title: { type: String },
+                xValue: { type: String },
+                yValue: { type: String },
             }
         ]
     },

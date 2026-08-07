@@ -124,15 +124,15 @@ const AboutPage = () => {
         name: "sixthSection.items"
     });
 
-    const { fields: seventhSectionItems, append: seventhSectionAppend, remove: seventhSectionRemove } = useFieldArray({
-        control,
-        name: "seventhSection.items"
-    });
+    // const { fields: seventhSectionItems, append: seventhSectionAppend, remove: seventhSectionRemove } = useFieldArray({
+    //     control,
+    //     name: "seventhSection.items"
+    // });
 
-    const { fields: eighthSectionItems, append: eighthSectionAppend, remove: eighthSectionRemove } = useFieldArray({
-        control,
-        name: "eighthSection.items"
-    });
+    // const { fields: eighthSectionItems, append: eighthSectionAppend, remove: eighthSectionRemove } = useFieldArray({
+    //     control,
+    //     name: "eighthSection.items"
+    // });
 
     const { fields: ninethSectionItems, append: ninethSectionAppend, remove: ninethSectionRemove } = useFieldArray({
         control,
@@ -173,9 +173,9 @@ const AboutPage = () => {
                 setValue("sixthSection", data.data.sixthSection);
                 setValue("sixthSection.items", data.data.sixthSection.items);
                 setValue("seventhSection", data.data.seventhSection);
-                setValue("seventhSection.items", data.data.seventhSection.items);
-                setValue("eighthSection", data.data.eighthSection);
-                setValue("eighthSection.items", data.data.eighthSection.items);
+                // setValue("seventhSection.items", data.data.seventhSection.items);
+                // setValue("eighthSection", data.data.eighthSection);
+                // setValue("eighthSection.items", data.data.eighthSection.items);
                 setValue("ninethSection", data.data.ninethSection);
                 setValue("ninethSection.items", data.data.ninethSection.items);
             } else {
@@ -656,7 +656,7 @@ const AboutPage = () => {
 
                         </div>
 
-                        <div>
+                        {/* <div>
                             <Label className='font-bold'>Items</Label>
                             <div className='border border-black/20 p-2 rounded-md flex flex-col gap-5'>
 
@@ -699,14 +699,14 @@ const AboutPage = () => {
                             <div className='flex justify-end mt-2'>
                                 <Button type='button' addItem onClick={() => seventhSectionAppend({ number: "", value: "" })}>Add Item</Button>
                             </div>
-                        </div>
+                        </div> */}
 
 
                     </div>
                 </AdminItemContainer>
 
 
-                <AdminItemContainer>
+                {/* <AdminItemContainer>
                     <Label main>Eighth Section</Label>
                     <div className='p-5 rounded-md flex flex-col gap-2'>
                         <div className='flex flex-col gap-2'>
@@ -777,7 +777,7 @@ const AboutPage = () => {
 
 
                     </div>
-                </AdminItemContainer>
+                </AdminItemContainer> */}
 
 
                 <AdminItemContainer>
