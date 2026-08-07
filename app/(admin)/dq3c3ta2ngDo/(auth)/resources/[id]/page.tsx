@@ -1157,15 +1157,13 @@ const SecondSectionItemPage = () => {
                                                 <Label className="font-bold">Description</Label>
                                                 <Textarea
                                                     placeholder="e.g. Valid through [date] - Issued by [body]"
-                                                    {...register(`certifications.items.${index}.description`, {
-                                                        required: "Description is required",
-                                                    })}
+                                                    {...register(`certifications.items.${index}.description`)}
                                                 />
-                                                {errors?.certifications?.items?.[index]?.description && (
+                                                {/* {errors?.certifications?.items?.[index]?.description && (
                                                     <p className="text-red-500">
                                                         {errors.certifications.items[index]?.description?.message}
                                                     </p>
-                                                )}
+                                                )} */}
                                             </div>
 
                                             <div className="flex flex-col gap-2">

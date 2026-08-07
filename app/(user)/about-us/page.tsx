@@ -1,5 +1,6 @@
 import Index from "@/app/components/client/About/Index";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
+import { getGroupedCountryMapData } from "@/lib/services/getCountryMap";
 import { Metadata } from "next";
 import { headers } from "next/headers";
 
@@ -21,6 +22,8 @@ const page = async () => {
     next: { revalidate: 60 },
   });
   const data = await response.json();
+
+  const countries = await getGroupedCountryMapData();
   return (
     <>
       {data?.data?.seo?.schema && (
@@ -29,7 +32,7 @@ const page = async () => {
           dangerouslySetInnerHTML={{ __html: data.data.seo.schema }}
         />
       )}
-      <Index data={data.data} />
+      <Index data={data.data} countries={countries} />
     </>
   );
 };

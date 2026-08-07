@@ -73,7 +73,16 @@ const AdminNavbar = () => {
 
   const navItems = [
     { name: "Home", href: "/dq3c3ta2ngDo/home", icon: HomeIcon },
-    { name: "About", href: "/dq3c3ta2ngDo/about", icon: InfoIcon },
+    {
+  name: "About",
+  href: "#",
+  icon: InfoIcon,
+  hasChild: true,
+  children: [
+    { name: "Main Page", href: "/dq3c3ta2ngDo/about" },
+    { name: "Partner Map", href: "/dq3c3ta2ngDo/about/partner-map" },
+  ],
+},
     {
       name: "Services",
       href: "#",

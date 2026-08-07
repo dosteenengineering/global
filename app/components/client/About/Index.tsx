@@ -7,8 +7,9 @@ import OurValues from "./Sections/OurValues";
 import CtaSection from "../../common/CtaSection";
 import { AboutPageData } from "./data";
 import ServingMap from "./Sections/ServingMap";
+import { CategoryWithCountries } from "@/lib/services/getCountryMap";
 
-const Index = ({data}:{data:AboutPageData}) => {
+const Index = ({data, countries}:{data:AboutPageData, countries: CategoryWithCountries[]}) => {
   return (
     <>
       <InnerPageBanner
@@ -21,7 +22,7 @@ const Index = ({data}:{data:AboutPageData}) => {
       <WhyChooseDosteen data={data.fourthSection}/>
       <MissionVision data={data.fifthSection}/>
       <OurValues data={data.sixthSection}/>
-      <ServingMap seventhSection={data.seventhSection} eighthSection={data.eighthSection}/>
+<ServingMap seventhSection={data.seventhSection} countries={countries} />
       <CtaSection {...data.ninethSection} descriptionWidth="max-w-[968px]" />
     </>
   );
