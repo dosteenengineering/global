@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Metadata } from "next";
 import Index from "../components/client/Home/Index";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
@@ -15,40 +16,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const page = async () => {
-    
+    const headersList = await headers();
+    const isMobile = /iPhone|Android|Mobile/i.test(headersList.get("user-agent") || "");
 
-    const [response, solutionsResponse, projectsResponse, blogResponse, clientsResponse] = await Promise.all([
-        fetch(`${process.env.BASE_URL}/api/admin/home`, { next: { revalidate: 60 } }),
-        fetch(`${process.env.BASE_URL}/api/admin/service`, { next: { revalidate: 60 } }),
-        fetch(`${process.env.BASE_URL}/api/admin/project`, { next: { revalidate: 60 } }),
-        fetch(`${process.env.BASE_URL}/api/admin/blog`, { next: { revalidate: 60 } }),
-        fetch(`${process.env.BASE_URL}/api/admin/clients`, { next: { revalidate: 60 } }),
-    ]);
+    const homeResponse = await fetch(`${process.env.BASE_URL}/api/admin/home`, { next: { revalidate: 60 } });
+    const data = await homeResponse.json();
 
-    const [data, solutionsData, projectsData, blogsData, clientsData] = await Promise.all([
-        response.json(),
-        solutionsResponse.json(),
-        projectsResponse.json(),
-        blogResponse.json(),
-        clientsResponse.json(),
-    ]);
+    // Don't await these yet — pass the promises down
+    const solutionsPromise = fetch(`${process.env.BASE_URL}/api/admin/service`, { next: { revalidate: 60 } }).then(r => r.json()).then(r => r.data);
+    const projectsPromise = fetch(`${process.env.BASE_URL}/api/admin/project`, { next: { revalidate: 60 } }).then(r => r.json()).then(r => r.data);
+    const blogPromise = fetch(`${process.env.BASE_URL}/api/admin/blog`, { next: { revalidate: 60 } }).then(r => r.json()).then(r => r.data);
+    const clientsPromise = fetch(`${process.env.BASE_URL}/api/admin/clients`, { next: { revalidate: 60 } }).then(r => r.json()).then(r => r.data);
+
     return (
         <>
             {data?.data?.seo?.schema && (
-                <script
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: data.data.seo.schema }}
-                />
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: data.data.seo.schema }} />
             )}
             <Index
                 data={data.data}
-                solutionsRaw={solutionsData.data}
-                projectsData={projectsData.data}
-                blogsDataRaw={blogsData.data}
-                clientsData={clientsData.data}
+                solutionsPromise={solutionsPromise}
+                projectsPromise={projectsPromise}
+                blogsPromise={blogPromise}
+                clientsPromise={clientsPromise}
+                isMobile={isMobile}
             />
         </>
-    )
+    );
 };
 
 export default page;

@@ -272,18 +272,19 @@ function ArrowLink({ href }: { href: string }) {
 /* ─── Main section ─────────────────────────────────────────────────── */
 export default function BimSection({data}:{data:Home['eighthSection']}) {
   const [current, setCurrent] = useState(0);
-  const [progress, setProgress] = useState(0); // 0–1
+  const progressBarRef = useRef<HTMLDivElement>(null); // NEW
 
   const startRef = useRef<number>(performance.now());
   const rafRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
+  const progressRef = useRef(0); // NEW — replaces progress state
 
   const total = data.items.length;
   const next = (current + 1) % total;
 
   const goTo = useCallback((idx: number) => {
     setCurrent(idx);
-    setProgress(0);
+    progressRef.current = 0;
     startRef.current = performance.now();
   }, []);
 
@@ -293,17 +294,23 @@ export default function BimSection({data}:{data:Home['eighthSection']}) {
       if (!pausedRef.current) {
         const elapsed = now - startRef.current;
         const p = Math.min(elapsed / SLIDE_DURATION, 1);
-        setProgress(p);
+        progressRef.current = p;
+
+        // Direct DOM update — no re-render
+        if (progressBarRef.current) {
+          progressBarRef.current.style.transform = `scaleX(${p})`;
+        }
+
         if (p >= 1) {
           setCurrent((c) => {
             const n = (c + 1) % total;
             startRef.current = performance.now();
-            setProgress(0);
+            progressRef.current = 0;
             return n;
           });
         }
       } else {
-        startRef.current = performance.now() - progress * SLIDE_DURATION;
+        startRef.current = performance.now() - progressRef.current * SLIDE_DURATION;
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -364,8 +371,9 @@ export default function BimSection({data}:{data:Home['eighthSection']}) {
             onClick={() => goTo(next)}
           >
             <div
+              ref={progressBarRef}
               className="absolute inset-0 top-1/2 -translate-y-1/2 bg-primary h-[4px] origin-left will-change-transform"
-              style={{ transform: `scaleX(${progress})` }}
+              style={{ transform: "scaleX(0)" }}
             />
           </div>
           {/* next slide title shown as label */}

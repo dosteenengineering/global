@@ -9,34 +9,14 @@ import { useIntroComplete } from "@/app/context/IntroContext";
 import { Home } from "../data";
 import { useLenis } from "@/app/components/LenisProvider";
 
-export default function Hero({data}:{data:Home['bannerSection']}) {
+export default function Hero({data, isMobile}:{data:Home['bannerSection'], isMobile:boolean}) {
   const introComplete = useIntroComplete();
-  // wherever this component/section lives
-  // const { scrollTo, ready } = useLenis();
 
-  // const handleContactClick = (
-  //   event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
-  // ) => {
-  //   // someExistingHandler(event);
-
-  //   let hash: string | null = null;
-  //   try {
-  //     hash = new URL(data.buttonLink, window.location.origin).hash || null;
-  //   } catch { }
-
-  //   const el = hash ? document.querySelector(hash) : null;
-
-  //   if (el && ready) {
-  //     event.preventDefault();
-  //     scrollTo(el as HTMLElement, { offset: 0, duration: 1.5 });
-  //     window.history.pushState(null, "", hash!);
-  //   }
-  // };
 
   return (
     <section className="relative h-[85vh] lg:h-[100dvh] w-full overflow-hidden">
       {/* Background Image */}
-      <Image
+      {/* <Image
         src={data.desktopImage}
         alt={data.imageAlt}
         fill
@@ -50,7 +30,21 @@ export default function Hero({data}:{data:Home['bannerSection']}) {
         fill
         priority
         className="object-cover object-top md:hidden"
+      /> */}
+
+      <Image
+        src={isMobile ? data.mobileImage : data.desktopImage}
+        alt={data.imageAlt}
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        quality={75}
+        className={isMobile ? "object-cover object-top" : "object-cover"}
       />
+   
+
+    
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60" />

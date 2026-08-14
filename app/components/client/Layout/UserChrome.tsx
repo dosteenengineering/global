@@ -54,7 +54,7 @@ const UserChrome = ({ children, solutionsRaw }: UserChromeProps) => {
   const hideChrome = ROUTES_WITHOUT_CHROME.includes(pathname);
 
   const [introState, setIntroState] = useState<"pending" | "running" | "done">(
-    "pending",
+    "running",
   );
 
   useEffect(() => {
@@ -77,14 +77,10 @@ const UserChrome = ({ children, solutionsRaw }: UserChromeProps) => {
       {introState === "running" && (
         <IntroAnimation onComplete={handleIntroComplete} />
       )}
-      {introState !== "pending" && (
-        <>
-          <Toaster />
-          <Navbar solutionsRaw={solutionsRaw} />
-          {children}
-          <Footer solutionsRaw={solutionsRaw} />
-        </>
-      )}
+      <Toaster />
+      <Navbar solutionsRaw={solutionsRaw} />
+      {children}
+      <Footer solutionsRaw={solutionsRaw} />
     </IntroContext.Provider>
   );
 };
