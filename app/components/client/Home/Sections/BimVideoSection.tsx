@@ -204,13 +204,22 @@ function SlideBackground({
           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
         >
           {slide.type === "video" ? (
+            // <video
+            //   ref={videoRef}
+            //   src={slide.video}
+            //   muted
+            //   loop
+            //   playsInline
+            //   preload="auto"
+            //   className="absolute inset-0 w-full h-full object-cover"
+            // />
             <video
               ref={videoRef}
               src={slide.video}
               muted
               loop
               playsInline
-              preload="auto"
+              preload={active ? "auto" : "metadata"}
               className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
@@ -328,8 +337,14 @@ export default function BimSection({data}:{data:Home['eighthSection']}) {
   return (
     <section className="relative lg:h-auto lg:min-h-screen w-full overflow-hidden bg-black">
       {/* backgrounds — render all, only active is visible */}
-      {data.items.map((s, i) => (
+      {/* {data.items.map((s, i) => (
         <SlideBackground key={i} slide={s} active={i === current} />
+      ))} */}
+
+      {data.items.map((s, i) => (
+        (i === current || i === next) && (
+          <SlideBackground key={i} slide={s} active={i === current} />
+        )
       ))}
 
       {/* overlay */}

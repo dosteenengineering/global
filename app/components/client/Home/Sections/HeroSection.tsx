@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import { useIntroComplete } from "@/app/context/IntroContext";
 import { Home } from "../data";
-import { useLenis } from "@/app/components/LenisProvider";
+// import { useLenis } from "@/app/components/LenisProvider";
 
 export default function Hero({data, isMobile}:{data:Home['bannerSection'], isMobile:boolean}) {
   const introComplete = useIntroComplete();
