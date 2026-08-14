@@ -1,8 +1,8 @@
+import { Suspense } from "react";
 import HeroSection from "./Sections/HeroSection";
 import AboutSlider from "./Sections/AboutSlider";
 import SolutionsSection from "./Sections/SolutionsSection";
 import ServiceSection from "./Sections/ServiceSection";
-// import IndustriesSection from "./Sections/IndustriesSection";
 import BimVideoSection from "./Sections/BimVideoSection";
 import FeaturedProjects from "./Sections/FeaturedProjects";
 import ClientStoriesSection from "./Sections/ClientStoriesSection";
@@ -16,14 +16,11 @@ import { AllProjectData } from "../ProjectDetails/data";
 import { AllBlogData } from "../Blog/data";
 import { ClientPageData } from "../Partners/data";
 
-
 function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
-
   const industries = apiData?.thirdSection?.items ?? [];
 
   const tabs = industries.map((industry: any) => {
     const systems = industry.systemSection?.items ?? [];
-
     const rightItems = systems.map((system: any) => ({
       label: system.firstSection?.shortTitle || system.firstSection?.title || "",
       link: `/solutions/${system.slug}`,
@@ -32,13 +29,11 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
     return {
       key: industry.slug,
       label: industry.title,
-      leftTitle:
-        industry.homeTitle,
+      leftTitle: industry.homeTitle,
       image: industry.firstSection?.homeImage ?? "",
       rightItems,
     };
   });
-
 
   return {
     mainTitle: data?.thirdSection?.title,
@@ -50,10 +45,64 @@ function transformToSolutionsData(apiData: IndustriesPageData, data: Home) {
   };
 }
 
-const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: { data: Home, solutionsRaw: IndustriesPageData, projectsData: AllProjectData, blogsDataRaw: AllBlogData, clientsData:ClientPageData }) => {
-   console.log(`show data`,data.ninethSection)
-  const solutionsData = transformToSolutionsData(solutionsRaw, data);
+// --- Async wrapper components, one per lazy-loaded section ---
 
+async function SolutionsSectionWrapper({ solutionsPromise, data }: { solutionsPromise: Promise<IndustriesPageData>; data: Home }) {
+  const solutionsRaw = await solutionsPromise;
+  const solutionsData = transformToSolutionsData(solutionsRaw, data);
+  return <SolutionsSection solutionsData={solutionsData} />;
+}
+
+async function FeaturedProjectsWrapper({ projectsPromise, sectionTitle }: { projectsPromise: Promise<AllProjectData>; sectionTitle: string }) {
+  const projectsData = await projectsPromise;
+  const featuredProjects = projectsData?.projects?.filter((item) => item.featured);
+  return <FeaturedProjects featuredProjectsData={featuredProjects} sectionTitle={sectionTitle} />;
+}
+
+async function BlogsSectionWrapper({ blogsPromise, title }: { blogsPromise: Promise<AllBlogData>; title: string }) {
+  const blogsDataRaw = await blogsPromise;
+  const blogsData = {
+    title,
+    posts: blogsDataRaw.blogs.map((blog, index: number) => ({
+      key: `blog-${index + 1}`,
+      title: blog.title ?? "",
+      category: blog.category?.name ?? blog.category ?? "",
+      date: blog.date
+        ? new Date(blog.date).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        }).replace(/\//g, "-")
+        : "",
+      image: blog.thumbnail ?? "",
+      href: `/blog/${blog.slug}`,
+    })),
+  };
+  return <BlogsSection blogsData={blogsData} />;
+}
+
+async function TrustedClientsWrapper({ clientsPromise, data }: { clientsPromise: Promise<ClientPageData>; data: Home['twelthSection'] }) {
+  const clientsData = await clientsPromise;
+  return <TrustedClients data={data} clientsData={clientsData} />;
+}
+
+// --- Main component ---
+
+const Index = ({
+  data,
+  solutionsPromise,
+  projectsPromise,
+  blogsPromise,
+  clientsPromise,
+  isMobile,
+}: {
+  data: Home;
+  solutionsPromise: Promise<IndustriesPageData>;
+  projectsPromise: Promise<AllProjectData>;
+  blogsPromise: Promise<AllBlogData>;
+  clientsPromise: Promise<ClientPageData>;
+  isMobile: boolean;
+}) => {
   const clientStoriesData = {
     title: data.tenthSection.title.toUpperCase(),
     stories: data.tenthSection.items.map((item: any, index: number) => {
@@ -78,46 +127,36 @@ const Index = ({ data, solutionsRaw, projectsData, blogsDataRaw, clientsData }: 
       description: item.description ?? "",
       buttonText: item.buttonText ?? "",
       buttonLink: item.buttonLink ?? "",
-      svgPaths: [], // static — keep hardcoded in ServiceSection per tab key
+      svgPaths: [],
     })),
-  }
-
-  const featuredProjects = projectsData?.projects?.filter((item) => (item.featured))
-
-
-  const blogsData = {
-    title:data.eleventhSection.title,
-    posts: blogsDataRaw.blogs.map((blog, index: number) => ({
-      key: `blog-${index + 1}`,
-      title: blog.title ?? "",
-      category: blog.category?.name ?? blog.category ?? "",
-      date: blog.date
-        ? new Date(blog.date).toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        }).replace(/\//g, "-")
-        : "",
-      image: blog.thumbnail ?? "",
-      href: `/blog/${blog.slug}`,
-    })),
-  }
-
-  // console.log(clientsData)
+  };
 
   return (
     <>
-      <HeroSection data={data.bannerSection} />
+      <HeroSection data={data.bannerSection} isMobile={isMobile} />
       <AboutSlider data={data.secondSection} />
-      <SolutionsSection solutionsData={solutionsData} />
+
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <SolutionsSectionWrapper solutionsPromise={solutionsPromise} data={data} />
+      </Suspense>
+
       <ServiceSection servicesData={servicesData} />
-      {/* <IndustriesSection data={data.sixthSection} /> */}
-      <FeaturedProjects featuredProjectsData={featuredProjects} sectionTitle={data.ninethSection.title} />
+
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <FeaturedProjectsWrapper projectsPromise={projectsPromise} sectionTitle={data.ninethSection.title} />
+      </Suspense>
+
       <WhyDosteen data={data.seventhSection} />
       <BimVideoSection data={data.eighthSection} />
       <ClientStoriesSection clientStoriesDataFromApi={clientStoriesData} />
-      <BlogsSection blogsData={blogsData}/>
-      <TrustedClients data={data.twelthSection} clientsData={clientsData}/>
+
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <BlogsSectionWrapper blogsPromise={blogsPromise} title={data.eleventhSection.title} />
+      </Suspense>
+
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <TrustedClientsWrapper clientsPromise={clientsPromise} data={data.twelthSection} />
+      </Suspense>
       <CtaSection data={data.lastSection} />
     </>
   );

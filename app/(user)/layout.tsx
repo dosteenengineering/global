@@ -4,7 +4,7 @@ import "../globals.css";
 import LenisProvider from "../components/LenisProvider";
 import UserChrome from "../components/client/Layout/UserChrome";
 import parse from 'html-react-parser'
-
+export const dynamic = "force-dynamic"
 export const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],

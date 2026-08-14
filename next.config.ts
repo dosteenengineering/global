@@ -173,6 +173,16 @@ const nextConfig: NextConfig = {
         destination: "/solutions/architectural-shades",
         permanent: true,
       },
+      {
+        source: "/about",
+        destination: "/about-us",
+        permanent: true,
+      },
+      {
+        source: "/solutions/fire-protection-system",
+        destination: "/solutions/fire-protection-systems",
+        permanent: true,
+      },
     ];
   },
 };
