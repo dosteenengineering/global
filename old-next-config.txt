@@ -18,7 +18,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // --- General page redirects ---
+      {
+        source: "/solutions/:id/:service",
+        destination: "/solutions/:service",
+        permanent: true,
+      },
       {
         source: "/commercial",
         destination: "/solutions/commercial",
@@ -40,16 +44,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/book-online",
-        destination: "/contact-us",
-        permanent: true,
-      },
-      {
-        source: "/about-us",
-        destination: "/about",
-        permanent: true,
-      },
-      {
         source: "/copy-of-industrial",
         destination: "/solutions/industrial",
         permanent: true,
@@ -65,20 +59,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/copy-of-made-in-oman",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/copy-of-residential",
-        destination: "/solutions/architectural-shades",
-        permanent: true,
-      },
-
-      // --- /residential/* legacy paths ---
-      {
         source: "/residential/shutters",
         destination: "/solutions/garage-doors",
+        permanent: true,
+      },
+      {
+        source: "/book-online",
+        destination: "/contact-us",
+        permanent: true,
+      },
+      {
+        source: "/copy-of-made-in-oman",
+        destination: "/",
         permanent: true,
       },
       {
@@ -107,65 +99,8 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/residential/multi-parking-solutions",
-        destination: "/solutions/multi-parking-systems",
-        permanent: true,
-      },
-      {
-        source: "/residential/bespoke-steel-gates",
-        destination: "/solutions/bespoke-steel-gates",
-        permanent: true,
-      },
-      {
-        source: "/residential/fly-mesh-insect-screens",
-        destination: "/solutions/fly-mesh-insect-screens",
-        permanent: true,
-      },
-      {
-        source: "/residential/copy-of-innovative-architectural-shad",
-        destination: "/solutions/architectural-shades",
-        permanent: true,
-      },
-
-      // --- /solutions/* single-segment legacy/slug redirects ---
-      {
         source: "/solutions/government-facilities",
-        destination: "/solutions/government-building-systems",
-        permanent: true,
-      },
-      {
-        source: "/solutions/government",
-        destination: "/solutions/government-building-systems",
-        permanent: true,
-      },
-      {
-        source: "/solutions/industrial-facilities",
-        destination: "/solutions/industrial-building-systems",
-        permanent: true,
-      },
-      {
-        source: "/solutions/commercial-buildings",
-        destination: "/solutions/commercial-building-systems",
-        permanent: true,
-      },
-      {
-        source: "/solutions/residential-developments",
-        destination: "/solutions/residential-building-systems",
-        permanent: true,
-      },
-      {
-        source: "/solutions/mantrap-security-doors",
-        destination: "/solutions/mantrap-access-control",
-        permanent: true,
-      },
-      {
-        source: "/solutions/vault-door-solutions",
-        destination: "/solutions/vault-doors",
-        permanent: true,
-      },
-      {
-        source: "/solutions/fire-protection-system",
-        destination: "/solutions/fire-protection-systems",
+        destination: "/solutions/government",
         permanent: true,
       },
       {
@@ -218,50 +153,34 @@ const nextConfig: NextConfig = {
         destination: "/solutions/blast-doors-windows",
         permanent: true,
       },
-
-      // --- /solutions/<category>/<slug> specific overrides (must precede the wildcard below) ---
       {
-        source: "/solutions/commercial/advanced-flood-barriers-for-homes-in-uae-oman",
-        destination: "/solutions/flood-barriers",
+        source: "/residential/multi-parking-solutions",
+        destination: "/solutions/multi-parking-systems",
         permanent: true,
       },
       {
-        source: "/solutions/government/vault-door-solutions",
-        destination: "/solutions/vault-doors",
-        permanent: true,
-      },
-      {
-        source: "/solutions/government/security-shutters-for-government-high-security-facilities",
-        destination: "/solutions/security-shutters",
-        permanent: true,
-      },
-      {
-        source: "/solutions/government/mantrap-security-doors",
-        destination: "/solutions/mantrap-access-control",
-        permanent: true,
-      },
-      {
-        source: "/solutions/residential/premium-residential-garage-doors-in-uae-oman",
-        destination: "/solutions/garage-doors",
-        permanent: true,
-      },
-      {
-        source: "/solutions/commercial/bespoke-steel-gates-for-youre-homes-in-uae-oman",
+        source: "/residential/bespoke-steel-gates",
         destination: "/solutions/bespoke-steel-gates",
         permanent: true,
       },
-
-      // --- /blog/* legacy paths ---
       {
-        source: "/blog/solutions/government/blast-doors-glass-windows-for-government-grade-protection",
-        destination: "/solutions/blast-doors-windows",
+        source: "/residential/fly-mesh-insect-screens",
+        destination: "/solutions/fly-mesh-insect-screens",
         permanent: true,
       },
-
-      // --- Wildcard fallback: MUST stay last so specific rules above take priority ---
       {
-        source: "/solutions/:id/:service",
-        destination: "/solutions/:service",
+        source: "/residential/copy-of-innovative-architectural-shad",
+        destination: "/solutions/architectural-shades",
+        permanent: true,
+      },
+      {
+        source: "/about",
+        destination: "/about-us",
+        permanent: true,
+      },
+      {
+        source: "/solutions/fire-protection-system",
+        destination: "/solutions/fire-protection-systems",
         permanent: true,
       },
     ];

@@ -9,9 +9,17 @@ export async function generateMetadata() {
         next: { revalidate: 60 },
     });
     const { data } = await response.json();
-    if (data.seo) {
-        return buildMetadata(data.seo, pathname);
-    }
+    // if (data.seo) {
+    //     return buildMetadata(data.seo, pathname);
+    // }
+    const baseMetadata = data?.seo ? buildMetadata(data.seo, pathname) : {};
+    return {
+        ...baseMetadata,
+        robots: {
+            index: false,
+            follow: true,
+        },
+    };
 }
 
 const Page = async() => {
