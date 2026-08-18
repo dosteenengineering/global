@@ -74,6 +74,11 @@ const nextConfig: NextConfig = {
         destination: "/solutions/architectural-shades",
         permanent: true,
       },
+      {
+        source: "/innovative-architectural-shading-systems-in-oman",
+        destination: "/solutions/architectural-shades",
+        permanent: true,
+      },
 
       // --- /residential/* legacy paths ---
       {
