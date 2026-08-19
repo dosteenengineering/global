@@ -8,7 +8,7 @@ interface IntroAnimationProps {
 }
 
 const noiseBg = {
-  backgroundImage: "url(/assets/noise/primary-noise-vertical.png)",
+  backgroundImage: "url(/assets/noise/primary-noise-vertical-optimized.webp)",
   backgroundRepeat: "repeat-x",
   backgroundSize: "150px 100%",
   mixBlendMode: "screen" as const,
