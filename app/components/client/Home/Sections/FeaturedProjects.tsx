@@ -330,6 +330,7 @@ export default function FeaturedProjectsSection({
                         src={project.thumbnail || PLACEHOLDER}
                         alt={project.thumbnailAlt}
                         fill
+                        sizes="(min-width: 768px) 713px, 100vw"
                         className="object-cover"
                         priority={idx === 0}
                       />
@@ -431,8 +432,9 @@ export default function FeaturedProjectsSection({
                       src={project.thumbnail || PLACEHOLDER}
                       alt={project.thumbnailAlt}
                       fill
+                      sizes="(min-width: 768px) 713px, 100vw"
                       className="object-cover"
-                      priority
+                      priority={index === 0}
                     />
                     <div
                       className="absolute inset-0"

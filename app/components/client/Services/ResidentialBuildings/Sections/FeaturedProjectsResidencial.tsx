@@ -217,9 +217,10 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                   <Image
                     src={project.thumbnail}
                     alt={project.thumbnailAlt}
-                    fill
-                    className="object-cover"
-                    priority
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                      sizes="100vw"
                   />
                   <div
                     className="absolute inset-0"
@@ -303,7 +304,8 @@ export default function FeaturedProjectsResidencial({ data }: {data:Project[]}) 
                       onMouseLeave={handleMouseLeave}
                     >
                       <Link href={`/case-studies/${project.slug}`}>
-                        <Image src={project.thumbnail} alt={project.thumbnailAlt} fill className="object-cover pointer-events-none" priority />
+                        <Image src={project.thumbnail} alt={project.thumbnailAlt} fill className="object-cover pointer-events-none" priority={index === 0}
+                          sizes="(min-width: 768px) 713px, 100vw" />
                       {/* </Link> */}
                       <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 38.14%, rgba(0,0,0,0.85) 89.52%)" }} />
                       <div className="absolute bottom-0 left-0 right-0 px-40 pb-40 z-10">
