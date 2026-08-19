@@ -12,7 +12,17 @@ import FooterNoise from "../../common/noise/FooterNoise";
 import BorderButton from "../../common/BorderButton";
 import { moveUp } from "../../motionVariants";
 import { motion } from "framer-motion";
-import ReCAPTCHA from "react-google-recaptcha";
+// import ReCAPTCHA from "react-google-recaptcha";
+
+import dynamic from "next/dynamic";
+
+import type ReCAPTCHA from "react-google-recaptcha";
+import type { ComponentType } from "react";
+import type { ReCAPTCHAProps } from "react-google-recaptcha";
+
+const ReCAPTCHAComponent = dynamic(() => import("react-google-recaptcha"), {
+  ssr: false,
+}) as ComponentType<ReCAPTCHAProps & { ref?: React.Ref<ReCAPTCHA> }>;
 
 type FooterProps = {
   solutionsRaw: any;
@@ -212,6 +222,7 @@ const CallbackPopup = ({
 };
 
 const Footer = ({ solutionsRaw }: FooterProps) => {
+  
   const { contact, socials, certifications, bottomLinks } = footerData;
   const containerRef = useRef<HTMLDivElement>(null);
   const leftPadding = useGetContainerSpacing(containerRef);
@@ -224,6 +235,7 @@ const Footer = ({ solutionsRaw }: FooterProps) => {
   const [newsletterMessage, setNewsletterMessage] = useState("");
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [captchaError, setCaptchaError] = useState("");
+  const [recaptchaNeeded, setRecaptchaNeeded] = useState(false);
 
   // const handleNewsletterSubmit = async () => {
   //   const trimmed = newsletterEmail.trim();
@@ -820,7 +832,7 @@ const handleNewsletterSubmit = async () => {
                 Subscribe to our newsletter
               </p>
               {/* reCAPTCHA */}
-              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+              {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && recaptchaNeeded && (
                 <motion.div
                   variants={moveUp(0.95)}
                   initial="hidden"
@@ -828,9 +840,9 @@ const handleNewsletterSubmit = async () => {
                   viewport={{ once: true }}
                   className="mb-30"
                 >
-                  <ReCAPTCHA
+                  <ReCAPTCHAComponent
                   size="invisible"
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY  || ""}
                     ref={recaptchaRef}
                   />
                   {captchaError && (
@@ -842,6 +854,7 @@ const handleNewsletterSubmit = async () => {
                 <input
                   type="email"
                   // onChange={(e) => setNewsletterEmail(e.target.value)}
+                  onFocus={() => setRecaptchaNeeded(true)}
                   onChange={(e) => {
                     setNewsletterEmail(e.target.value);
                     if (newsletterStatus === "error") {
@@ -1041,7 +1054,7 @@ const handleNewsletterSubmit = async () => {
                   Subscribe to our newsletter
                 </p>
                 {/* reCAPTCHA */}
-                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+                {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && recaptchaNeeded && (
                   <motion.div
                     variants={moveUp(0.95)}
                     initial="hidden"
@@ -1049,7 +1062,7 @@ const handleNewsletterSubmit = async () => {
                     viewport={{ once: true }}
                     className="mb-30"
                   >
-                    <ReCAPTCHA
+                    <ReCAPTCHAComponent
                     size="invisible"
                       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                       ref={recaptchaRef}
@@ -1063,6 +1076,7 @@ const handleNewsletterSubmit = async () => {
                 overflow-visible pr-0 sm:max-w-[70%] md:max-w-[100%] max-md:min-w-[60vw]">
                   <input
                     type="email"
+                    onFocus={() => setRecaptchaNeeded(true)}
                     placeholder="Enter Your Email"
                     onChange={(e) => setNewsletterEmail(e.target.value)}
                     className="flex-1 min-w-0 h-full bg-transparent pl-4 pr-0 3xl:pl-[25px] text-15 leading-[2.133] text-secondary placeholder:text-paragraph placeholder:tracking-[-2%]
