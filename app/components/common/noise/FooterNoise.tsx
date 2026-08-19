@@ -8,7 +8,7 @@ export default function FooterNoise({ className = "" }: FooterNoiseProps) {
       <div
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{
-          backgroundImage: `url("/assets/noise/privacy-noise.png")`,
+          backgroundImage: `url("/assets/noise/privacy-noise-optimized.webp")`,
           backgroundRepeat: "repeat",
           backgroundSize: "200px",
         }}

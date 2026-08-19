@@ -8,7 +8,7 @@ export default function SecondaryNoise({ className = "" }: SecondaryNoiseProps) 
       <div
         className={`absolute inset-0 pointer-events-none ${className}`}
         style={{
-          backgroundImage: `url("/assets/noise/secondary-noise.png")`,
+          backgroundImage: `url("/assets/noise/secondary-noise-optimized.webp")`,
           backgroundRepeat: "repeat",
           backgroundSize: "200px",
         }}

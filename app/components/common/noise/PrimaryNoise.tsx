@@ -17,7 +17,7 @@ function Bg() {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: "url(/assets/noise/primary-noise.png)",
+          backgroundImage: "url(/assets/noise/primary-noise-optimized.webp)",
           backgroundRepeat: "repeat",
           backgroundSize: "250px",
           mixBlendMode: "screen",
