@@ -81,6 +81,7 @@ const ResourceSubmissionsPage = () => {
 
     const handleApprove = async (id: string, approved: boolean) => {
         try {
+            if(!approved) return;
             const res = await fetch(`/api/admin/download-lead?id=${id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
