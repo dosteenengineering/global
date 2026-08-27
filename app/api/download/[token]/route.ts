@@ -27,11 +27,11 @@ function htmlResponse(title: string, message: string, status: number) {
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { token: string } },
+  { params }: { params: Promise<{ token: string }> },
 ) {
   try {
     await connectDB();
-    const { token } = params;
+    const { token } = await params;
 
     if (!token) {
       return htmlResponse(
