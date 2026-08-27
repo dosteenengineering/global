@@ -33,6 +33,7 @@ const DownloadGate = ({ fileUrl, fileName, onClose }: DownloadGateProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const {
     register,
@@ -76,17 +77,8 @@ const DownloadGate = ({ fileUrl, fileName, onClose }: DownloadGateProps) => {
         return;
       }
 
-      // Trigger download
-      const link = document.createElement("a");
-      link.href = fileUrl;
-      link.download = fileName;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-
-      onClose();
+      // Don't auto-download — the request needs admin approval first.
+      setSubmitted(true);
     } catch {
       setServerError("Something went wrong. Please try again.");
     } finally {
@@ -125,103 +117,133 @@ const DownloadGate = ({ fileUrl, fileName, onClose }: DownloadGateProps) => {
           >
             <X size={20} strokeWidth={1.5} className="group-hover:scale-125 transition-transform duration-300" />
           </button>
-          {/* Heading */}
-          <motion.div variants={moveUp(0.1)} initial="hidden" animate="show">
-            <h2 className="font-poppins text-[22px] md:text-[28px] font-light leading-[1.3] tracking-[-0.02em] text-secondary mb-2">
-              Download File
-            </h2>
-            <p className="font-poppins text-[14px] md:text-[15px] font-light leading-[1.6] text-paragraph mb-[50px]">
-              Please fill in your details to download.
-            </p>
-          </motion.div>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            {/* Name */}
-            <motion.div
-              variants={moveUp(0.18)}
-              initial="hidden"
-              animate="show"
-              className="pb-2 3xl:pb-5"
-            >
-              <input
-                type="text"
-                placeholder="Name*"
-                {...register("name", { required: "Name is required" })}
-                className={inputClass}
-              />
-              <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
-                {errors.name?.message ?? ""}
+
+          {submitted ? (
+            // ─── Pending confirmation state ──────────────────────────────
+            <motion.div variants={moveUp(0.1)} initial="hidden" animate="show">
+              <h2 className="font-poppins text-[22px] md:text-[28px] font-light leading-[1.3] tracking-[-0.02em] text-secondary mb-2">
+                Request Submitted
+              </h2>
+              <p className="font-poppins text-[14px] md:text-[15px] font-light leading-[1.6] text-paragraph mb-[50px]">
+                Thanks for your interest. Your request to download{" "}
+                <span className="font-normal text-secondary">{fileName}</span>{" "}
+                is pending approval. We&apos;ll send the file to your email once
+                it&apos;s approved.
               </p>
+              <div className="pt-2 w-fit">
+                <BorderButton
+                  type="button"
+                  onClick={onClose}
+                  text="Close"
+                  borderColor="black"
+                  iconColor="primary"
+                  px="px-30 3xl:px-[35px]"
+                  textColor="black"
+                  hoverBg="black"
+                />
+              </div>
             </motion.div>
-            {/* Email */}
-            <motion.div
-              variants={moveUp(0.26)}
-              initial="hidden"
-              animate="show"
-              className="pb-2 3xl:pb-5"
-            >
-              <input
-                type="email"
-                placeholder="Email ID*"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Enter a valid email address",
-                  },
-                })}
-                className={inputClass}
-              />
-              <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
-                {errors.email?.message ?? ""}
-              </p>
-            </motion.div>
-            {/* Contact Number */}
-            <motion.div
-              variants={moveUp(0.34)}
-              initial="hidden"
-              animate="show"
-              className="pb-5"
-            >
-              <input
-                type="tel"
-                placeholder="Contact Number*"
-                {...register("contactNumber", {
-                  required: "Contact number is required",
-                  pattern: {
-                    value: /^[+\d\s\-()]{7,20}$/,
-                    message: "Enter a valid contact number",
-                  },
-                })}
-                className={inputClass}
-              />
-              <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
-                {errors.contactNumber?.message ?? ""}
-              </p>
-            </motion.div>
-            {/* Server error */}
-            {serverError && (
-              <p className="text-red-500 text-[12px] mb-4 -mt-2">
-                {serverError}
-              </p>
-            )}
-            {/* Submit */}
-            <motion.div
-              variants={moveUp(0.42)}
-              initial="hidden"
-              animate="show"
-              className="pt-2 w-fit"
-            >
-              <BorderButton
-                type="submit"
-                text={submitting ? "Submitting…" : "Download"}
-                borderColor="black"
-                iconColor="primary"
-                px="px-30 3xl:px-[35px]"
-                textColor="black"
-                hoverBg="black"
-              />
-            </motion.div>
-          </form>
+          ) : (
+            // ─── Form state ───────────────────────────────────────────────
+            <>
+              <motion.div variants={moveUp(0.1)} initial="hidden" animate="show">
+                <h2 className="font-poppins text-[22px] md:text-[28px] font-light leading-[1.3] tracking-[-0.02em] text-secondary mb-2">
+                  Download File
+                </h2>
+                <p className="font-poppins text-[14px] md:text-[15px] font-light leading-[1.6] text-paragraph mb-[50px]">
+                  Please fill in your details to download.
+                </p>
+              </motion.div>
+              <form onSubmit={handleSubmit(onSubmit)} noValidate>
+                {/* Name */}
+                <motion.div
+                  variants={moveUp(0.18)}
+                  initial="hidden"
+                  animate="show"
+                  className="pb-2 3xl:pb-5"
+                >
+                  <input
+                    type="text"
+                    placeholder="Name*"
+                    {...register("name", { required: "Name is required" })}
+                    className={inputClass}
+                  />
+                  <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
+                    {errors.name?.message ?? ""}
+                  </p>
+                </motion.div>
+                {/* Email */}
+                <motion.div
+                  variants={moveUp(0.26)}
+                  initial="hidden"
+                  animate="show"
+                  className="pb-2 3xl:pb-5"
+                >
+                  <input
+                    type="email"
+                    placeholder="Email ID*"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Enter a valid email address",
+                      },
+                    })}
+                    className={inputClass}
+                  />
+                  <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
+                    {errors.email?.message ?? ""}
+                  </p>
+                </motion.div>
+                {/* Contact Number */}
+                <motion.div
+                  variants={moveUp(0.34)}
+                  initial="hidden"
+                  animate="show"
+                  className="pb-5"
+                >
+                  <input
+                    type="tel"
+                    placeholder="Contact Number*"
+                    {...register("contactNumber", {
+                      required: "Contact number is required",
+                      pattern: {
+                        value: /^[+\d\s\-()]{7,20}$/,
+                        message: "Enter a valid contact number",
+                      },
+                    })}
+                    className={inputClass}
+                  />
+                  <p className="text-red-500 text-[12px] mt-1 min-h-[18px]">
+                    {errors.contactNumber?.message ?? ""}
+                  </p>
+                </motion.div>
+                {/* Server error */}
+                {serverError && (
+                  <p className="text-red-500 text-[12px] mb-4 -mt-2">
+                    {serverError}
+                  </p>
+                )}
+                {/* Submit */}
+                <motion.div
+                  variants={moveUp(0.42)}
+                  initial="hidden"
+                  animate="show"
+                  className="pt-2 w-fit"
+                >
+                  <BorderButton
+                    type="submit"
+                    text={submitting ? "Submitting…" : "Download"}
+                    borderColor="black"
+                    iconColor="primary"
+                    px="px-30 3xl:px-[35px]"
+                    textColor="black"
+                    hoverBg="black"
+                  />
+                </motion.div>
+              </form>
+            </>
+          )}
         </div>
       </motion.div>
     </motion.div>

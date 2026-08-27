@@ -158,6 +158,10 @@ const AdminNavbar = () => {
           name: "Newsletter",
           href: "/dq3c3ta2ngDo/forms/news-letter",
         },
+        {
+          name: "Resource Submissions",
+          href: "/dq3c3ta2ngDo/forms/resource",
+        },
       ],
     },
     { name: "Settings", href: "/dq3c3ta2ngDo/settings", icon: Settings },
