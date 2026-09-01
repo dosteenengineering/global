@@ -1,6 +1,7 @@
 import Index from "@/app/components/client/ProjectDetails/Index";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
 import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
@@ -25,12 +26,18 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const data = await response.json();
 
+console.log("data",data)
+
   const allProjectResponse = await fetch(
     `${process.env.BASE_URL}/api/admin/project`,
     { next: { revalidate: 60 } },
   );
 
   const allProjectData = await allProjectResponse.json();
+
+  if (!data.data){
+    redirect("/404");
+  }
 
   return (
     <>

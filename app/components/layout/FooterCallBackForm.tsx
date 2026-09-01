@@ -100,6 +100,7 @@ const FooterCallBackForm = ({ hideTitle }: { hideTitle?: boolean }) => {
       setFormStatus("success");
       toast.success("Enquiry sent successfully!");
       reset();
+      window.location.replace("/thank-you");
     } else {
       setFormStatus("error");
       toast.error("Failed to send enquiry. Please try again.");

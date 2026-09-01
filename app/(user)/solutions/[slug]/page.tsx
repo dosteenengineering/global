@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
 import ResidentialPage from "@/app/components/client/Services/ResidentialBuildings/Index";
@@ -27,12 +27,18 @@ export default async function SolutionOrServicePage({
 }) {
   const { slug } = await params;
   const resolved = await resolveSlug(slug);
-  if (!resolved) return notFound();
+  // if (!resolved) return notFound();
+
+  if (!resolved?.data) {
+    redirect("/404");
+  }
 
   const schema = resolved.data?.seo?.schema;
   const SchemaScript = schema ? (
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
   ) : null;
+
+
 
   if (resolved.type === "solution") {
     const projectsResponse = await fetch(`${process.env.BASE_URL}/api/admin/project`, {
