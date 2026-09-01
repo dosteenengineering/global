@@ -1,6 +1,7 @@
 import Index from "@/app/components/client/BlogDetails";
 import { buildMetadata } from "@/lib/seo/buildMetadata";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
@@ -31,6 +32,10 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 
   const allBlogData = await allBlogResponse.json();
+
+  if(!data.data){
+    redirect("/404");
+  }
 
   return (
     <>

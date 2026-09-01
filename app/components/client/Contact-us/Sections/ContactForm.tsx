@@ -118,6 +118,7 @@ export default function ContactForm({ systemData, title }: { systemData: string[
       toast.success("Enquiry submitted successfully");
       reset();
       recaptchaRef.current?.reset();
+      window.location.replace("/thank-you");
     } else {
       setFormStatus("error");
       toast.error("Something went wrong");
