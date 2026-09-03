@@ -33,6 +33,7 @@ const page = async () => {
             {data?.data?.seo?.schema && (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: data.data.seo.schema }} />
             )}
+            <meta name="google-site-verification" content="hZyAIQtKPqfRlekVS-u08KUWqOVWoHfxoc1D3HogB2E" />
             <Index
                 data={data.data}
                 solutionsPromise={solutionsPromise}
