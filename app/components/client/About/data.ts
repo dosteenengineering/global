@@ -90,8 +90,8 @@ export interface AboutPageData {
       imageAlt: string;
       title: string;
       description: string;
-      xValue:string;
-      yValue:string;
+      xValue: string;
+      yValue: string;
     }[];
   };
 
@@ -99,18 +99,18 @@ export interface AboutPageData {
     title: string;
     description: string;
     items: {
-      buttonText:string;
-      buttonLink:string;
+      buttonText: string;
+      buttonLink: string;
     }[];
   };
 }
 
 export const AboutData = {
-  title: "Dosteen: A UAE & Oman Building Systems Engineering Company",
+  title: "Dosteen: A UAE & Oman Engineering Solutions Engineering Company",
 
   description: `
     <p>
-      Dosteen is a multi-discipline building systems engineering company headquartered in Dubai, UAE, with operations across Oman and the broader MENA region.
+      Dosteen is a multi-discipline engineering solutions engineering company headquartered in Dubai, UAE, with operations across Oman and the broader MENA region.
     </p>
     <p><br /></p>
     <p>
@@ -184,68 +184,58 @@ export const WhoWeServeData = {
 
 export const WhyChooseData = {
   title: "WHY LEADING DEVELOPERS & CONTRACTORS CHOOSE DOSTEEN",
-  description:
-    "In a market filled with suppliers, Dosteen stands apart through engineering precision, accountability, and a 25-year track record of zero-failure systems.",
+  description: "In a market filled with suppliers, Dosteen stands apart through engineering precision, accountability, and a 25-year track record of zero-failure systems.",
 
   items: [
     {
       id: 1,
       icon: "/assets/images/about/why-choose/1.svg",
       title: "End-to-End Engineering Capability",
-      description:
-        "We're not just a supplier — we're your engineering partner. From initial specification and BIM coordination to installation, testing, and post-handover support, Dosteen manages the entire lifecycle.",
+      description: "We're not just a supplier — we're your engineering partner. From initial specification and BIM coordination to installation, testing, and post-handover support, Dosteen manages the entire lifecycle.",
     },
     {
       id: 2,
       icon: "/assets/images/about/why-choose/2.svg",
       title: "ISO 9001:2015 Certified Operations",
-      description:
-        "Our quality management system ensures every project follows documented procedures, inspection protocols, and defect prevention measures — not ad-hoc processes.",
+      description: "Our quality management system ensures every project follows documented procedures, inspection protocols, and defect prevention measures — not ad-hoc processes.",
     },
     {
       id: 3,
       icon: "/assets/images/about/why-choose/4.svg",
       title: "UAE & Oman Compliance Expertise",
-      description:
-        "We hold approvals from Dubai Municipality, DCD, Abu Dhabi Civil Defence, and Oman authorities. Every system we install meets local building codes and fire safety regulations.",
+      description: "We hold approvals from Dubai Municipality, DCD, Abu Dhabi Civil Defence, and Oman authorities. Every system we install meets local building codes and fire safety regulations.",
     },
     {
       id: 4,
       icon: "/assets/images/about/why-choose/3.svg",
       title: "BIM-Integrated Engineering",
-      description:
-        "Our engineering team works in Revit and AutoCAD to coordinate with your MEP and structural teams — identifying clashes before they become on-site issues.",
+      description: "Our engineering team works in Revit and AutoCAD to coordinate with your MEP and structural teams — identifying clashes before they become on-site issues.",
     },
     {
       id: 5,
       icon: "/assets/images/about/why-choose/5.svg",
       title: "Global Technology, Regional Support",
-      description:
-        "We partner with world-leading brands while maintaining local warehousing, engineering teams, and 24/7 support across UAE and Oman.",
+      description: "We partner with world-leading brands while maintaining local warehousing, engineering teams, and 24/7 support across UAE and Oman.",
     },
     {
       id: 6,
       icon: "/assets/images/about/why-choose/6.svg",
       title: "25-Year Track Record",
-      description:
-        "We've been engineering building systems in the UAE since 1999 — surviving market cycles, evolving regulations, and technology shifts through consistent quality.",
+      description: "We've been engineering engineering solutions in the UAE since 1999 — surviving market cycles, evolving regulations, and technology shifts through consistent quality.",
     },
   ],
 };
-
 
 export const MissionVisionData = {
   mission: {
     icon: "/assets/images/about/vision-mision/1.svg",
     title: "MISSION",
-    description:
-      "To engineer safe, reliable, and intelligent building systems that protect people, assets, and environments — delivered with precision, on time, and backed by 25 years of regional expertise.",
+    description: "To engineer safe, reliable, and intelligent engineering solutions that protect people, assets, and environments — delivered with precision, on time, and backed by 25 years of regional expertise.",
   },
   vision: {
     icon: "/assets/images/about/vision-mision/2.svg",
     title: "VISION",
-    description:
-      "To be the most trusted building systems partner across the MENA region — recognised for engineering excellence, innovation, and an unwavering commitment to quality.",
+    description: "To be the most trusted engineering solutions partner across the MENA region — recognised for engineering excellence, innovation, and an unwavering commitment to quality.",
   },
 };
 
@@ -256,41 +246,34 @@ export const ValuesData = {
     {
       id: 1,
       title: "Quality",
-      description:
-        "We use only certified materials and global-standard components. Every installation is inspected, tested, and warranted.",
+      description: "We use only certified materials and global-standard components. Every installation is inspected, tested, and warranted.",
     },
     {
       id: 2,
       title: "Excellence",
-      description:
-        "Our team of certified engineers designs solutions using BIM, load calculations, and compliance verification — not guesswork.",
+      description: "Our team of certified engineers designs solutions using BIM, load calculations, and compliance verification — not guesswork.",
     },
     {
       id: 3,
       title: "Safety First",
-      description:
-        "All our systems comply with local UAE/Oman building codes, fire safety regulations, and international standards.",
+      description: "All our systems comply with local UAE/Oman building codes, fire safety regulations, and international standards.",
     },
     {
       id: 4,
       title: "Client Partnership",
-      description:
-        "We don't just install and leave. We support our clients from specification through commissioning and post-handover maintenance.",
+      description: "We don't just install and leave. We support our clients from specification through commissioning and post-handover maintenance.",
     },
     {
       id: 5,
       title: "Innovation",
-      description:
-        "We continuously evaluate global technology trends and bring the best-in-class products to the MENA market.",
+      description: "We continuously evaluate global technology trends and bring the best-in-class products to the MENA market.",
     },
   ],
 };
 
-
 export const CtaData = {
   title: "GET YOUR FREE ENGINEERING QUOTE WITHIN 48 HOURS.",
-  description:
-    "Our engineering team is ready to review your project specifications, provide a compliant solution recommendation, and deliver a detailed quote — typically within 48 hours.",
+  description: "Our engineering team is ready to review your project specifications, provide a compliant solution recommendation, and deliver a detailed quote — typically within 48 hours.",
   buttons: [
     {
       text: "REQUEST A QUOTE",
@@ -301,7 +284,7 @@ export const CtaData = {
       href: "/contact-us#contact-form",
     },
   ],
-items: [
+  items: [
     {
       buttonText: "REQUEST A QUOTE",
       buttonLink: "/contact-us#contact-form",

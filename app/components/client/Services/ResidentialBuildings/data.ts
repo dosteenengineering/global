@@ -155,26 +155,17 @@ export interface TrustItem {
   value: string;
 }
 
-
 export const residentialData = {
   banner: {
     image: "/assets/images/services/1.jpg",
     title: "RESIDENTIAL DEVELOPMENTS",
-    description:
-      "Residential developments in the UAE and Oman demand building systems.",
+    description: "Residential developments in the UAE and Oman demand engineering solutions.",
   },
   second: {
     heading: "ENGINEERED FOR SAFE, STYLISH LIVING",
-    description:
-      "Combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking \n systems for high-rise towers",
-    leftImages: [
-      "/assets/images/services/residential/1.jpg",
-      "/assets/images/services/residential/2.jpg",
-    ],
-    rightImages: [
-      "/assets/images/services/residential/3.jpg",
-      "/assets/images/services/residential/4.jpg",
-    ],
+    description: "Combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking \n systems for high-rise towers",
+    leftImages: ["/assets/images/services/residential/1.jpg", "/assets/images/services/residential/2.jpg"],
+    rightImages: ["/assets/images/services/residential/3.jpg", "/assets/images/services/residential/4.jpg"],
   },
 };
 
@@ -185,56 +176,49 @@ export const dosteenSystemsData = {
       id: 1,
       title: "Sectional garage doors (residential grade)",
       image: "/assets/images/services/residential/systems/1.jpg",
-      description:
-        "Sectional garage doors (residential grade) are designed to offer a perfect balance of durability, functionality, and modern aesthetics for everyday home use.",
+      description: "Sectional garage doors (residential grade) are designed to offer a perfect balance of durability, functionality, and modern aesthetics for everyday home use.",
       slug: "/solutions/residential-developments/sectional-garage-doors",
     },
     {
       id: 2,
       title: "Architectural shading - pergolas, ouvres, awnings",
       image: "/assets/images/services/1.jpg",
-      description:
-        "Elegant shading solutions including pergolas, ouvres, and awnings that blend seamlessly with modern architectural design.",
+      description: "Elegant shading solutions including pergolas, ouvres, and awnings that blend seamlessly with modern architectural design.",
       slug: "/solutions/residential-developments/architectural-shading",
     },
     {
       id: 3,
       title: "Automated gate systems and barriers",
       image: "/assets/images/about/banner.jpg",
-      description:
-        "High-performance automated gate systems and barriers engineered for security, reliability, and smooth operation in any environment.",
+      description: "High-performance automated gate systems and barriers engineered for security, reliability, and smooth operation in any environment.",
       slug: "/solutions/residential-developments/automated-gate-systems",
     },
     {
       id: 4,
       title: "Multi-level parking systems",
       image: "/assets/images/services/2.jpg",
-      description:
-        "Intelligent multi-level parking systems that maximize space efficiency in residential and commercial developments.",
+      description: "Intelligent multi-level parking systems that maximize space efficiency in residential and commercial developments.",
       slug: "/solutions/residential-developments/multi-level-parking",
     },
     {
       id: 5,
       title: "Fire-rated doors and fire curtains",
       image: "/assets/images/home/hero/herobg.jpg",
-      description:
-        "Certified fire-rated doors and fire curtains providing critical passive fire protection for buildings of all types.",
+      description: "Certified fire-rated doors and fire curtains providing critical passive fire protection for buildings of all types.",
       slug: "/solutions/residential-developments/fire-rated-doors",
     },
     {
       id: 6,
       title: "Garbage chute systems",
       image: "/assets/images/home/blogs/b1.jpg",
-      description:
-        "Hygienic and efficient garbage chute systems built for high-rise residential and commercial properties.",
+      description: "Hygienic and efficient garbage chute systems built for high-rise residential and commercial properties.",
       slug: "/solutions/residential-developments/garbage-chute-systems",
     },
     {
       id: 7,
       title: "Flood barriers for basement car parks",
       image: "/assets/images/home/blogs/b2.jpg",
-      description:
-        "Robust flood barrier systems specifically engineered to protect basement car parks and below-grade structures from water ingress.",
+      description: "Robust flood barrier systems specifically engineered to protect basement car parks and below-grade structures from water ingress.",
       slug: "/solutions/residential-developments/flood-barriers",
     },
   ],
@@ -242,8 +226,7 @@ export const dosteenSystemsData = {
 
 export const CtaData = {
   title: "Need something built to spec?",
-  description:
-    "We also offer custom solutions tailored to your exact requirements.",
+  description: "We also offer custom solutions tailored to your exact requirements.",
   buttons: [
     {
       text: "Discuss your project",
@@ -293,7 +276,6 @@ export const whyTrustData = {
     },
   ],
 };
-
 
 export interface Project {
   id: number;

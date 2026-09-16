@@ -90,7 +90,7 @@ export const banner = {
   title: "Premium Residential Garage Doors Across UAE, Oman & MENA",
   description: "Designed to Impress, Safety You Can Count On",
   image: "/assets/images/garage-doors/banner.jpg",
-  imageAlt: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
+  imageAlt: "CSI MasterFormat Specifications for Engineering Solutions — UAE & Oman",
 };
 
 export const garageDoorData = {
