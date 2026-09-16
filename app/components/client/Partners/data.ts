@@ -64,7 +64,7 @@ export const banner = {
 };
 
 export const aboutPartners = {
-  title: "Since 1998, Dosteen has been the preferred building systems partner for UAE and Oman's most demanding projects.",
+  title: "Since 1998, Dosteen has been the preferred engineering solutions partner for UAE and Oman's most demanding projects.",
   description: "From Dubai Expo 2020 to Al Mouj Muscat, our engineering teams deliver entrance systems, fire protection, and multi-parking solutions alongside the region's top-tier contractors and developers. These partnerships reflect our commitment to quality, compliance, and on-time delivery.",
 };
 

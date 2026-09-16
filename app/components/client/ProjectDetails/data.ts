@@ -29,104 +29,98 @@ export interface Project {
   };
 }
 
-
 export interface ProjectItemProps {
-    _id?: string;
+  _id?: string;
 
-    firstSection: {
-        title: string;
-        sector: {name:string; _id:string};
-        location: {name:string};
-        status: string;
-        client: string;
-        consultant: string;
-        contractor: string;
-        coverImage: string;
-        coverImageAlt: string;
-    };
+  firstSection: {
+    title: string;
+    sector: { name: string; _id: string };
+    location: { name: string };
+    status: string;
+    client: string;
+    consultant: string;
+    contractor: string;
+    coverImage: string;
+    coverImageAlt: string;
+  };
 
-    secondSection: {
-        title: string;
-        description: string;
-    };
+  secondSection: {
+    title: string;
+    description: string;
+  };
 
-    thirdSection: {
-        title: string;
-        description: string;
-        items: {
-            image: string;
-            imageAlt?: string;
-        }[];
-    };
+  thirdSection: {
+    title: string;
+    description: string;
+    items: {
+      image: string;
+      imageAlt?: string;
+    }[];
+  };
 
-    fourthSection: {
-        title: string;
-        items: {
-            title: string;
-            description: string;
-        }[];
-    };
+  fourthSection: {
+    title: string;
+    items: {
+      title: string;
+      description: string;
+    }[];
+  };
 
-    fifthSection: {
-        title: string;
-        description: string;
-    };
+  fifthSection: {
+    title: string;
+    description: string;
+  };
 
-    scopeSection: {
-        items: {
-            title: string;
-        }[];
-    };
+  scopeSection: {
+    items: {
+      title: string;
+    }[];
+  };
 
-    featuredServices:{
-      _id:string;
-    }[]
+  featuredServices: {
+    _id: string;
+  }[];
 
-    featured:boolean;
+  featured: boolean;
 
-    images: string[];
+  images: string[];
 
-    slug: string;
+  slug: string;
 
-    thumbnail: string;
-    thumbnailAlt: string;
+  thumbnail: string;
+  thumbnailAlt: string;
 
-    metaTitle?: string;
-    metaDescription?: string;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
-
 export interface AllProjectData {
-    _id: string;
-    bannerSection: {
-        image: string;
-        imageAlt?: string;
-        title: string;
-    };
-    lastSection: {
-        title: string;
-        description: string;
-        items: {
-            _id: string;
-            buttonText: string;
-            buttonLink: string;
-        }[];
-    };
-    projects: ProjectItemProps[];
-    metaTitle?: string;
-    metaDescription?: string;
-    updatedAt?: string;
+  _id: string;
+  bannerSection: {
+    image: string;
+    imageAlt?: string;
+    title: string;
+  };
+  lastSection: {
+    title: string;
+    description: string;
+    items: {
+      _id: string;
+      buttonText: string;
+      buttonLink: string;
+    }[];
+  };
+  projects: ProjectItemProps[];
+  metaTitle?: string;
+  metaDescription?: string;
+  updatedAt?: string;
 }
 
 export const projects: Project[] = [
   {
     title: "EXPO 2020, DUBAI",
     location: "Dubai, UAE",
-    images: [
-      "/assets/images/project-details/1.jpg",
-      "/assets/images/projects/2.jpg",
-      "/assets/images/projects/1.jpg",
-    ],
+    images: ["/assets/images/project-details/1.jpg", "/assets/images/projects/2.jpg", "/assets/images/projects/1.jpg"],
     specifications: [
       { label: "Sector", value: "Commercial" },
       { label: "Activity", value: "Dubai" },
@@ -138,18 +132,13 @@ export const projects: Project[] = [
     challenge: {
       heading: "The Challenge",
       description:
-        "<p>Expo 2020 Dubai presented a Civil Defence compliance and large-scale programme challenge that required more than a standard building systems installation. The project required full Dubai Civil Defence approval across all fire-rated systems installed across multiple pavilions before any individual pavilion could receive its occupancy permit — with each pavilion operating to its own programme timeline and sign-off sequence.</p> <p><br></p> <p>The systems scope included fire curtains, roller shutters, and dock levellers across a large-format, multi-building site — each system category subject to different Civil Defence inspection requirements and sign-off procedures. Any delay in a single system's Civil Defence approval had the potential to hold an entire pavilion's occupancy — a direct commercial and programme risk for the main contractor and the event authority.</p>",
+        "<p>Expo 2020 Dubai presented a Civil Defence compliance and large-scale programme challenge that required more than a standard engineering solutions installation. The project required full Dubai Civil Defence approval across all fire-rated systems installed across multiple pavilions before any individual pavilion could receive its occupancy permit — with each pavilion operating to its own programme timeline and sign-off sequence.</p> <p><br></p> <p>The systems scope included fire curtains, roller shutters, and dock levellers across a large-format, multi-building site — each system category subject to different Civil Defence inspection requirements and sign-off procedures. Any delay in a single system's Civil Defence approval had the potential to hold an entire pavilion's occupancy — a direct commercial and programme risk for the main contractor and the event authority.</p>",
     },
     dosteenSolution: {
       heading: "The Dosteen Solution",
       description:
         "Dosteen's engineering team began with a full review of Za'abeel Tower's specification, programme, and Dubai Civil Defence compliance requirements. Fire curtains were selected from Dosteen's global partner range — chosen for their Dubai Civil Defence approval status, their low-profile 110mm housing compatible with the tower's ceiling void specification, and their proven deployment record across UAE commercial high-rise projects. Alternative products with larger housings were reviewed and rejected as they could not be accommodated without structural ceiling modifications.",
-      images: [
-        "/assets/images/project-details/solutions/1.jpg",
-        "/assets/images/project-details/solutions/2.jpg",
-        "/assets/images/project-details/1.jpg",
-        "/assets/images/projects/2.jpg",
-      ],
+      images: ["/assets/images/project-details/solutions/1.jpg", "/assets/images/project-details/solutions/2.jpg", "/assets/images/project-details/1.jpg", "/assets/images/projects/2.jpg"],
     },
     systemsAndProducts: [
       {
@@ -162,8 +151,7 @@ export const projects: Project[] = [
       },
       {
         key: "Application on Project",
-        value:
-          "Installed across all fire compartment boundaries on floors 1–12 to provide compartmentalisation in the event of fire",
+        value: "Installed across all fire compartment boundaries on floors 1–12 to provide compartmentalisation in the event of fire",
       },
       {
         key: "Quantity / Scale",
@@ -175,8 +163,7 @@ export const projects: Project[] = [
       },
       {
         key: "Why Selected",
-        value:
-          "Selected for their Dubai Civil Defence approval status and compact housing profile, which was required by the project's ceiling void specification. Alternative products with larger housings could not be accommodated without structural modifications.",
+        value: "Selected for their Dubai Civil Defence approval status and compact housing profile, which was required by the project's ceiling void specification. Alternative products with larger housings could not be accommodated without structural modifications.",
       },
     ],
     outcome: {
@@ -217,18 +204,17 @@ export const featuredProjectsData = {
   ],
 };
 
-
 export const ctaData = {
-    title: "Let's Talk About Your Project.",
-    description: "Dummy Content: Our engineering team is ready to review your project requirements, identify the most relevant case study references from our portfolio, and deliver a detailed engineering proposal — within 48 hours.",
-    buttons: [
-        {
-            text: "REQUEST A QUOTE",
-            href: "#",
-        },
-        {
-            text: "SPEAK TO OUR TEAM",
-            href: "#",
-        },
-    ],
-}
+  title: "Let's Talk About Your Project.",
+  description: "Dummy Content: Our engineering team is ready to review your project requirements, identify the most relevant case study references from our portfolio, and deliver a detailed engineering proposal — within 48 hours.",
+  buttons: [
+    {
+      text: "REQUEST A QUOTE",
+      href: "#",
+    },
+    {
+      text: "SPEAK TO OUR TEAM",
+      href: "#",
+    },
+  ],
+};

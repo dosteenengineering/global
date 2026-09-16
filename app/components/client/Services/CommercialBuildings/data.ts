@@ -117,23 +117,21 @@ export interface CommercialBuildingData {
 
   thirdSection: {
     description: string;
-    buttonText:string;
-    buttonLink:string;
+    buttonText: string;
+    buttonLink: string;
   };
 }
 
 export const BannerData = {
   title: "Commercial Buildings",
-  description:
-    "From residential towers to airport terminals — Dosteen delivers ISO-certified building systems engineering across every sector in the UAE and Oman.",
+  description: "From residential towers to airport terminals — Dosteen delivers ISO-certified engineering solutions engineering across every sector in the UAE and Oman.",
   image: "/assets/images/services/banner.jpg",
   imageAlt: "Commercial Buildings",
 };
 
-
 export const DosteenSystemsData = {
   description:
-    "Residential developments in the UAE and Oman demand building systems that combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking systems for high-rise towers — Dosteen engineers solutions that comply with Dubai Municipality and civil defence requirements while meeting the finish quality expected in premium residential projects.",
+    "Residential developments in the UAE and Oman demand engineering solutions that combine security, aesthetics, and long-term reliability. From automated garage doors and sectional overhead doors for private villas to fire-rated doors, flood barriers, and multi-parking systems for high-rise towers — Dosteen engineers solutions that comply with Dubai Municipality and civil defence requirements while meeting the finish quality expected in premium residential projects.",
   title: "DOSTEEN SYSTEMS",
   systems: [
     {
@@ -188,10 +186,10 @@ export const DosteenSystemsData = {
 };
 
 export const ProjectCtaData = {
-    description: "<p>Need something built to spec? We also offer <span class='font-semibold'>custom solutions tailored</span> to your exact requirements.</p>",
-    buttonText: "Discuss your project",
-    buttonLink: "#",
-}
+  description: "<p>Need something built to spec? We also offer <span class='font-semibold'>custom solutions tailored</span> to your exact requirements.</p>",
+  buttonText: "Discuss your project",
+  buttonLink: "#",
+};
 
 export const featuredProjectsData = {
   title: "FEATURED PROJECTS",

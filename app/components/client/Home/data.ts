@@ -9,9 +9,9 @@ export interface Home {
     title: string;
     buttonText: string;
     buttonLink: string;
-    items:{
-title:string;
-    }[]
+    items: {
+      title: string;
+    }[];
   };
 
   secondSection: {
@@ -29,7 +29,7 @@ title:string;
 
   thirdSection: {
     title: string;
-    image:string;
+    image: string;
   };
 
   fourthSection: {
@@ -75,8 +75,8 @@ title:string;
       description?: string;
       link: string;
       video?: string;
-      image:string;
-      type:string;
+      image: string;
+      type: string;
     }[];
   };
 
@@ -113,7 +113,6 @@ title:string;
   };
 }
 
-
 //second Section
 export interface SlideData {
   id: number;
@@ -125,36 +124,31 @@ export interface SlideData {
 export const slidesData: SlideData[] = [
   {
     id: 1,
-    description:
-      "Dosteen's story began over 25+ years ago, driven by a vision to create a safer and more secure environment through exceptional engineering. Since then, we've grown from a regional provider to a trusted partner for businesses and homeowners across \n Oman and the UAE.",
+    description: "Dosteen's story began over 25+ years ago, driven by a vision to create a safer and more secure environment through exceptional engineering. Since then, we've grown from a regional provider to a trusted partner for businesses and homeowners across \n Oman and the UAE.",
     stat: "20,000+",
     statLabel: "Projects Delivered",
   },
   {
     id: 2,
-    description:
-      "With a team of highly skilled engineers and technicians, we have consistently delivered cutting-edge security solutions tailored to the unique needs of every client. Our footprint spans across major cities and industries throughout the Middle East.",
+    description: "With a team of highly skilled engineers and technicians, we have consistently delivered cutting-edge security solutions tailored to the unique needs of every client. Our footprint spans across major cities and industries throughout the Middle East.",
     stat: "500+",
     statLabel: "Enterprise Clients",
   },
   {
     id: 3,
-    description:
-      "We continuously invest in the latest technologies to ensure our clients receive world-class protection. From smart surveillance to integrated access control systems, our solutions are built for tomorrow's challenges today.",
+    description: "We continuously invest in the latest technologies to ensure our clients receive world-class protection. From smart surveillance to integrated access control systems, our solutions are built for tomorrow's challenges today.",
     stat: "15+",
     statLabel: "Years of Innovation",
   },
   {
     id: 4,
-    description:
-      "Our team brings together decades of hands-on experience in security engineering, project management, and client support. Every project is handled with precision, professionalism, and a commitment to exceeding expectations.",
+    description: "Our team brings together decades of hands-on experience in security engineering, project management, and client support. Every project is handled with precision, professionalism, and a commitment to exceeding expectations.",
     stat: "1,200+",
     statLabel: "Certified Experts",
   },
   {
     id: 5,
-    description:
-      "We believe in building long-term relationships with our clients. Our after-sales support, regular maintenance programs, and dedicated account teams ensure that your security investment continues to perform at its best for years to come.",
+    description: "We believe in building long-term relationships with our clients. Our after-sales support, regular maintenance programs, and dedicated account teams ensure that your security investment continues to perform at its best for years to come.",
     stat: "98+",
     statLabel: "Client Retention Rate",
   },
@@ -165,7 +159,7 @@ export type SolutionTab = {
   key: string;
   label: string;
   leftTitle: string;
-  rightItems: {label: string, link: string}[];
+  rightItems: { label: string; link: string }[];
 };
 
 export const solutionsData: {
@@ -187,19 +181,42 @@ export const solutionsData: {
       key: "residential",
       label: "Residential Systems",
       leftTitle: "Integrated Systems Designed for Modern Homes",
-      rightItems: [{label:"Garage Doors", link:"/solutions/residential/garage-doors"}, {label:"Multi-Parking Solutions", link:"/solutions/residential/multi-parking-solutions"}, {label:"Architectural Shades", link:"/solutions/residential/architectural-shades"}, {label:"Bespoke Steel Gates", link:"/solutions/residential/bespoke-steel-gates"}, {label:"Shutters", link:"/solutions/residential/shutters"}, {label:"Fly Mesh & Insect Screens", link:"/solutions/residential/fly-mesh-insect-screens"}, {label:"Flood Barriers", link:"/solutions/residential/flood-barriers"}, {label:"Retractable Pool Covers", link:"/solutions/residential/retractable-pool-covers"}, {label:"Garage & Linen Chutes", link:"/solutions/residential/garage-linen-chutes"}],
+      rightItems: [
+        { label: "Garage Doors", link: "/solutions/residential/garage-doors" },
+        { label: "Multi-Parking Solutions", link: "/solutions/residential/multi-parking-solutions" },
+        { label: "Architectural Shades", link: "/solutions/residential/architectural-shades" },
+        { label: "Bespoke Steel Gates", link: "/solutions/residential/bespoke-steel-gates" },
+        { label: "Shutters", link: "/solutions/residential/shutters" },
+        { label: "Fly Mesh & Insect Screens", link: "/solutions/residential/fly-mesh-insect-screens" },
+        { label: "Flood Barriers", link: "/solutions/residential/flood-barriers" },
+        { label: "Retractable Pool Covers", link: "/solutions/residential/retractable-pool-covers" },
+        { label: "Garage & Linen Chutes", link: "/solutions/residential/garage-linen-chutes" },
+      ],
     },
     {
       key: "commercial",
       label: "Commercial & Industrial Systems",
       leftTitle: "High Systems for Commercial Spaces",
-      rightItems: [{label:"Industrial Doors", link:"/solutions/commercial/industrial-doors"}, {label:"Loading Bay Systems", link:"/solutions/commercial/loading-bay-systems"}, {label:"Security Shutters", link:"/solutions/commercial/security-shutters"}, {label:"Dock Levelers", link:"/solutions/commercial/dock-levelers"}, {label:"Fire Rated Doors", link:"/solutions/commercial/fire-rated-doors"}, {label:"Warehouse Automation", link:"/solutions/commercial/warehouse-automation"}],
+      rightItems: [
+        { label: "Industrial Doors", link: "/solutions/commercial/industrial-doors" },
+        { label: "Loading Bay Systems", link: "/solutions/commercial/loading-bay-systems" },
+        { label: "Security Shutters", link: "/solutions/commercial/security-shutters" },
+        { label: "Dock Levelers", link: "/solutions/commercial/dock-levelers" },
+        { label: "Fire Rated Doors", link: "/solutions/commercial/fire-rated-doors" },
+        { label: "Warehouse Automation", link: "/solutions/commercial/warehouse-automation" },
+      ],
     },
     {
       key: "defense",
       label: "Defense & Government",
       leftTitle: "Advanced Security Systems for Critical Infrastructure",
-      rightItems: [{label:"Blast Resistant Doors", link:"/solutions/defense/blast-resistant-doors"}, {label:"Perimeter Security Gates", link:"/solutions/defense/perimeter-security-gates"}, {label:"Ballistic Barriers", link:"/solutions/defense/ballistic-barriers"}, {label:"High Security Bollards", link:"/solutions/defense/high-security-bollards"}, {label:"Military Hangar Doors", link:"/solutions/defense/military-hangar-doors"}],
+      rightItems: [
+        { label: "Blast Resistant Doors", link: "/solutions/defense/blast-resistant-doors" },
+        { label: "Perimeter Security Gates", link: "/solutions/defense/perimeter-security-gates" },
+        { label: "Ballistic Barriers", link: "/solutions/defense/ballistic-barriers" },
+        { label: "High Security Bollards", link: "/solutions/defense/high-security-bollards" },
+        { label: "Military Hangar Doors", link: "/solutions/defense/military-hangar-doors" },
+      ],
     },
   ],
 };
@@ -421,20 +438,17 @@ export const whyDosteenData = {
     {
       icon: "/assets/images/home/why-dosteen/experience.svg",
       title: "Experience",
-      description:
-        "Proven project experience across diverse industries and environments",
+      description: "Proven project experience across diverse industries and environments",
     },
     {
       icon: "/assets/images/home/why-dosteen/expertise.svg",
       title: "Expertise",
-      description:
-        "Deep technical knowledge and specialized skills for every challenge",
+      description: "Deep technical knowledge and specialized skills for every challenge",
     },
     {
       icon: "/assets/images/home/why-dosteen/experience.svg",
       title: "Innovation",
-      description:
-        "Pioneering new approaches to meet tomorrow's engineering challenges",
+      description: "Pioneering new approaches to meet tomorrow's engineering challenges",
     },
   ],
 };
@@ -445,15 +459,13 @@ export type WhyDosteenSlide = (typeof whyDosteenData.slides)[number];
 export const bimData = [
   {
     heading: "ADVANCED BIM CAPABILITIES",
-    description:
-      "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
+    description: "Advanced BIM capabilities enabling accurate planning, seamless coordination, and efficient project execution.",
     background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
     link: "/bim-capabilities",
   },
   {
     heading: "CSI SPECIFICATION DOCUMENTATION",
-    description:
-      "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
+    description: "Comprehensive CSI spec documentation ensuring every project phase is clearly defined and contractually sound.",
     background: { type: "video" as const, src: "/assets/videos/bim-bg-vdo.mp4" },
     link: "/csi-specifications",
   },
@@ -537,24 +549,21 @@ export const clientStoriesData: ClientStoriesData = {
   stories: [
     {
       key: "story-1",
-      quote:
-        "Dosteen delivered exceptional quality and professionalism throughout the project.",
+      quote: "Dosteen delivered exceptional quality and professionalism throughout the project.",
       name: "Éric Perreault",
       company: "Company Name",
       designation: "Designation",
     },
     {
       key: "story-2",
-      quote:
-        "Working with the team was an absolute pleasure. They exceeded every expectation we had set.",
+      quote: "Working with the team was an absolute pleasure. They exceeded every expectation we had set.",
       name: "Sarah Mitchell",
       company: "Company Name",
       designation: "Designation",
     },
     {
       key: "story-3",
-      quote:
-        "From concept to completion, the attention to detail and dedication to excellence was unmatched.",
+      quote: "From concept to completion, the attention to detail and dedication to excellence was unmatched.",
       name: "James Thornton",
       company: "Company Name",
       designation: "Designation",
@@ -621,17 +630,12 @@ export interface TrustedClientsData {
 }
 
 export const trustedClientsData: TrustedClientsData = {
-  logos: [
-    "/assets/images/home/clients/1.svg",
-    "/assets/images/home/clients/2.svg",
-    "/assets/images/home/clients/3.svg",
-    "/assets/images/home/clients/4.svg",
-  ],
+  logos: ["/assets/images/home/clients/1.svg", "/assets/images/home/clients/2.svg", "/assets/images/home/clients/3.svg", "/assets/images/home/clients/4.svg"],
 };
 
 //twelfth Section
 export const ctaData = {
-  heading: "PLAN YOUR BUILDING SYSTEMS WITH DOSTEEN",
+  heading: "PLAN YOUR Engineering Solutions WITH DOSTEEN",
   actions: [
     {
       key: "quote",

@@ -256,6 +256,26 @@ const nextConfig: NextConfig = {
         destination: "/solutions/bespoke-steel-gates",
         permanent: true,
       },
+      {
+        source: "/solutions/residential-building-systems",
+        destination: "/solutions/residential-engineering-solutions",
+        permanent: true,
+      },
+      {
+        source: "/solutions/commercial-building-systems",
+        destination: "/solutions/commercial-engineering-solutions",
+        permanent: true,
+      },
+      {
+        source: "/solutions/industrial-building-systems",
+        destination: "/solutions/industrial-engineering-solutions",
+        permanent: true,
+      },
+      {
+        source: "/solutions/government-building-systems",
+        destination: "/solutions/government-engineering-solutions",
+        permanent: true,
+      },
 
       // --- /blog/* legacy paths ---
       {

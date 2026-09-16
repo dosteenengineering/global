@@ -13,8 +13,8 @@ export type Csi = {
     title: string;
     items: {
       title: string;
-      image:string;
-      imageAlt:string;
+      image: string;
+      imageAlt: string;
     }[];
   };
 
@@ -43,7 +43,7 @@ export type Csi = {
       title: string;
       subItems: {
         title: string;
-        subTitle:string;
+        subTitle: string;
       }[];
     }[];
   };
@@ -64,7 +64,7 @@ export type Csi = {
     title: string;
     description: string;
     items: {
-      _id:string;
+      _id: string;
       image: string;
       imageAlt: string;
       title: string;
@@ -90,7 +90,7 @@ export type Csi = {
   tenthSection: {
     title: string;
     items: {
-      _id:string;
+      _id: string;
       question: string;
       answer: string;
     }[];
@@ -111,12 +111,11 @@ export type Csi = {
   __v: number;
 };
 
-
 export const banner = {
-  title: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
+  title: "CSI MasterFormat Specifications for Engineering Solutions — UAE & Oman",
   description: "Dosteen provides CSI MasterFormat-ready specs for all supplied systems — with correct sections, three-part format, and UAE/Oman compliance built in.",
   image: "/assets/images/csi-specifications/banner.jpg",
-  imageAlt: "CSI MasterFormat Specifications for Building Systems — UAE & Oman",
+  imageAlt: "CSI MasterFormat Specifications for Engineering Solutions — UAE & Oman",
 };
 
 export const featuresList = {
@@ -408,7 +407,7 @@ export const ctaData = {
       href: "#",
     },
   ],
-    items: [
+  items: [
     {
       buttonText: "REQUEST A BIM PROPOSAL",
       buttonLink: "#",
