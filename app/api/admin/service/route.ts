@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import Service from "@/app/models/Service";
 import { verifyAdmin } from "@/lib/verifyAdmin";
@@ -239,6 +240,7 @@ export async function PATCH(request: NextRequest) {
     // No id = update the top-level service document
     if (!id) {
         const service = await Service.findOneAndUpdate({}, body, { upsert: true, new: true });
+        revalidateTag("slug-resolve", "max");
         return NextResponse.json({ data: service, message: "Service updated successfully" }, { status: 200 });
     }
 
@@ -258,6 +260,8 @@ export async function PATCH(request: NextRequest) {
     };
 
     await service.save();
+
+    revalidateTag("slug-resolve", "max");
 
     return NextResponse.json({
         data: service.thirdSection.items[itemIndex],

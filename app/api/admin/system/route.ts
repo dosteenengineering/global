@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import System from "@/app/models/System";
 import { verifyAdmin } from "@/lib/verifyAdmin";
@@ -90,6 +91,8 @@ export async function POST(request: NextRequest) {
 
     const system = await System.create(body);
 
+    revalidateTag("slug-resolve", "max");
+
     return NextResponse.json(
       {
         data: system,
@@ -152,6 +155,8 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
+    revalidateTag("slug-resolve", "max");
+
     return NextResponse.json(
       {
         data: updatedSystem,
@@ -198,6 +203,8 @@ export async function DELETE(request: NextRequest) {
         { status: 404 },
       );
     }
+
+    revalidateTag("slug-resolve", "max");
 
     return NextResponse.json(
       {
