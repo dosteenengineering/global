@@ -276,6 +276,11 @@ const nextConfig: NextConfig = {
         destination: "/solutions/government-engineering-solutions",
         permanent: true,
       },
+      {
+        source: "/solutions/window-garage-shutters",
+        destination: "/solutions/roller-shutters",
+        permanent: true,
+      },
 
       // --- /blog/* legacy paths ---
       {
