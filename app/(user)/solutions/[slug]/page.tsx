@@ -7,7 +7,7 @@ import ServiceIndex from "@/app/components/client/GarageDoors";
 
 async function resolveSlug(slug: string) {
   const url = `${process.env.BASE_URL}/api/admin/slug-resolve?slug=${slug}`;
-  const res = await fetch(url, { next: { revalidate: 60 } });
+  const res = await fetch(url, { next: { tags: ["slug-resolve"] } });
   if (!res.ok) return null;
   return res.json();
 }
