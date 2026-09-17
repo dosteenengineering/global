@@ -32,6 +32,7 @@ export default async function SolutionOrServicePage({
   if (!resolved?.data) {
     redirect("/404");
   }
+  
 
   const schema = resolved.data?.seo?.schema;
   const SchemaScript = schema ? (
