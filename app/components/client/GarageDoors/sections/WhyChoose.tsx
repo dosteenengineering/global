@@ -91,8 +91,8 @@ const WhyChoose = ({ data }: {data:IndividualSystemData['fourthSection']}) => {
           {/* <p className="text-24 lg:text-30 leading-[1.333333333333333] font-light tracking-[-0.02em] mb-50">
             {data.sectionDesc}
           </p> */}
-          <SectionDescription text={data.description} className="!text-24 lg:!text-30 !leading-[1.333333333333333] font-light 
-          tracking-[-0.02em] !mb-100" />
+          <SectionDescription as="div" dangerouslySetInnerHTML={{ __html: data.description ?? "" }} className="!text-24 lg:!text-30 !leading-[1.333333333333333] font-light
+          tracking-[-0.02em] !mb-100 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6" />
         </div>
 
         {/* ── Mobile: Swiper ── */}
