@@ -126,7 +126,7 @@ export const projects: Project[] = [
       { label: "Activity", value: "Dubai" },
       { label: "Status", value: "Completed" },
       { label: "Client", value: "Client Name" },
-      { label: "Architect / Location", value: "Architect Name" },
+      { label: "Architect / Consultant", value: "Architect Name" },
       { label: "Main Contractor", value: "Contractor Name" },
     ],
     challenge: {
