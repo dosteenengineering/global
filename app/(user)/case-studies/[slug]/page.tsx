@@ -3,13 +3,21 @@ import { buildMetadata } from "@/lib/seo/buildMetadata";
 import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const slug = (await params).slug;
   const headersList = await headers();
-  const pathname = headersList.get("x-pathname") ?? headersList.get("x-invoke-path") ?? "/";
-  const response = await fetch(`${process.env.BASE_URL}/api/admin/project?slug=${slug}`, {
-    next: { revalidate: 60 },
-  });
+  const pathname =
+    headersList.get("x-pathname") ?? headersList.get("x-invoke-path") ?? "/";
+  const response = await fetch(
+    `${process.env.BASE_URL}/api/admin/project?slug=${slug}`,
+    {
+      next: { revalidate: 60 },
+    },
+  );
   const { data } = await response.json();
   if (data.seo) {
     return buildMetadata(data.seo, pathname);
@@ -17,7 +25,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
-
   const slug = (await params).slug;
   const response = await fetch(
     `${process.env.BASE_URL}/api/admin/project?slug=${slug}`,
@@ -26,7 +33,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const data = await response.json();
 
-console.log("data",data)
+  // console.log("data",data)
 
   const allProjectResponse = await fetch(
     `${process.env.BASE_URL}/api/admin/project`,
@@ -35,7 +42,7 @@ console.log("data",data)
 
   const allProjectData = await allProjectResponse.json();
 
-  if (!data.data){
+  if (!data.data) {
     redirect("/404");
   }
 
@@ -49,7 +56,7 @@ console.log("data",data)
       )}
       <Index data={data.data} allProjectData={allProjectData.data} />
     </>
-  )
+  );
 };
 
 export default page;

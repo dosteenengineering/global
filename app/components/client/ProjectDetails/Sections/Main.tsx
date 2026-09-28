@@ -41,7 +41,7 @@ export default function Main({
     { label: "Location", value: data.firstSection.location.name },
     { label: "Status", value: statusData.find((item)=>item.value.toString() == data.firstSection.status)?.name || "" },
     { label: "Client", value: data.firstSection.client },
-    { label: "Architect / Location", value:data.firstSection.consultant },
+    { label: "Architect / Consultant", value:data.firstSection.consultant },
     { label: "Main Contractor", value: data.firstSection.contractor },
   ]
   // Measure hero height
