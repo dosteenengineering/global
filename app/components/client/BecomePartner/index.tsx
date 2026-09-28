@@ -1,10 +1,10 @@
-import Main from "./Main"
-const index = ({data}:{data:any}) => {
-  return ( 
+import Main from "./Main";
+const index = ({ data }: { data: any }) => {
+  return (
     <>
-      <Main data={data}/>
+      <Main data={data} />
     </>
-   );
-}
- 
+  );
+};
+
 export default index;

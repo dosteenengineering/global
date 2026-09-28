@@ -1,5 +1,6 @@
 import { Paperclip } from "lucide-react";
 import CountryCodeSelect from "@/app/components/common/CountryCodeSelect";
+import countryCodes from "country-codes-list";
 import { Controller } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
@@ -19,36 +20,20 @@ type BaseFieldProps = {
 };
 
 
-// const defaultDialCode = "+971";
+const defaultDialCode = "+971";
 
-// const getLocalPhoneNumber = (value: unknown, selectedCode: string) => {
-//   if (typeof value !== "string") return "";
+// Longest first so "+1 242" matches before "+1"
+const countryDialCodes = Array.from(
+  new Set(countryCodes.customArray({ code: "+{countryCallingCode}" }).map((c) => c.code)),
+).sort((a, b) => b.length - a.length);
 
-//   const trimmedValue = value.trim();
-//   if (trimmedValue.startsWith(selectedCode)) {
-//     return trimmedValue.slice(selectedCode.length).trimStart();
-//   }
-
-//   const matchedCode = [...countryDialCodes]
-//     .sort((a, b) => b.length - a.length)
-//     .find((code) => trimmedValue.startsWith(code));
-
-//   if (matchedCode) {
-//     return trimmedValue.slice(matchedCode.length).trimStart();
-//   }
-
-//   return trimmedValue;
-// };
-
-// const getDialCodeFromValue = (value: unknown) => {
-//   if (typeof value !== "string") return defaultDialCode;
-
-//   return (
-//     [...countryDialCodes]
-//       .sort((a, b) => b.length - a.length)
-//       .find((code) => value.trim().startsWith(code)) ?? defaultDialCode
-//   );
-// };
+// Stored value is "<dial code> <number>", e.g. "+971 501234567"
+const parsePhoneValue = (value: unknown) => {
+  if (typeof value !== "string" || !value) return { code: defaultDialCode, local: "" };
+  const code = countryDialCodes.find((c) => value.startsWith(`${c} `));
+  if (!code) return { code: defaultDialCode, local: value };
+  return { code, local: value.slice(code.length + 1) };
+};
 
 // export const FormInput = ({
 //   name,
@@ -215,7 +200,15 @@ const PhoneInputControl = ({
   onChange: (value: string) => void;
   onBlur: () => void;
 }) => {
-  const [selectedCode, setSelectedCode] = useState("+971");
+  const parsed = parsePhoneValue(value);
+  const [selectedCode, setSelectedCode] = useState(parsed.code);
+  const local =
+    typeof value === "string" && value.startsWith(`${selectedCode} `)
+      ? value.slice(selectedCode.length + 1)
+      : parsed.local;
+
+  const emit = (code: string, number: string) =>
+    onChange(number.trim() ? `${code} ${number}` : "");
 
   const phoneRowRef = useRef<HTMLDivElement | null>(null);
   const [phoneRowWidth, setPhoneRowWidth] = useState(0);
@@ -239,7 +232,10 @@ const PhoneInputControl = ({
     >
       <CountryCodeSelect
         value={selectedCode}
-        onChange={setSelectedCode}
+        onChange={(code) => {
+          setSelectedCode(code);
+          emit(code, local);
+        }}
         dropdownWidth={phoneRowWidth}
       />
 
@@ -247,8 +243,8 @@ const PhoneInputControl = ({
         <input
           type="tel"
           name={name}
-          value={typeof value === "string" ? value : ""}
-          onChange={(e) => onChange(e.target.value)}
+          value={local}
+          onChange={(e) => emit(selectedCode, e.target.value)}
           onBlur={onBlur}
           autoComplete="tel"
           className="w-full pl-[100px] border-none pb-[5px] outline-none bg-transparent text-16 text-secondary"
