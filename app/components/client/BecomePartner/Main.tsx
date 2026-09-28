@@ -40,13 +40,13 @@ const Main = ({data}:any) => {
                 {data?.formSection?.title}
               </h1>
               <p className="text-description text-white max-w-[40ch]">
-                {data?.formSection.subTitle}
+                {data?.formSection?.subTitle}
               </p>
             </div>
             <div className="p-30 relative overflow-hidden">
               <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.02)_100%)]"></div>
               <p className="text-description text-white relative z-2">
-                {data?.formSection.description}
+                {data?.formSection?.description}
               </p>
             </div>
           </div>

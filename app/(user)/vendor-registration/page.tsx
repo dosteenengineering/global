@@ -34,7 +34,6 @@ const Page = async () => {
     },
   );
   const data = await response.json();
-  console.log("sad", data)
   
   return <Index data={data?.data} />;
 };

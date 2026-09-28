@@ -23,7 +23,7 @@ const PartnerSchema = new Schema(
     // Business Type & Product Categories
     businessType: {
       type: String,
-      enum: ["Manufacturer", "Distributor", "Subcontractor", "Importer"], // adjust to match your actual RadioGroup options
+      enum: ["Manufacturer", "Distributor", "Subcontractor", "Importer", "Other"], // adjust to match your actual RadioGroup options
       default: "Manufacturer",
     },
     productServices: { type: String, default: "", trim:true },
@@ -47,6 +47,7 @@ const PartnerSchema = new Schema(
   { timestamps: true },
 );
 
-const Partner = models.Partner || model("Partner", PartnerSchema);
+// Explicit collection keeps existing submissions stored in "partners"
+const Partner = models.Vendor || model("Vendor", PartnerSchema, "partners");
 
 export default Partner;
