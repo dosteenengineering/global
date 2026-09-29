@@ -102,7 +102,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
 
   return (
     // <section className="relative py-12.5 md:py-100 lg:py-150">
-    <section className="relative py-12.5 md:py-100 lg:py-150">
+    <section className="relative py-12.5 md:py-100 lg:py-150" id="discover-sec-nav">
       <PrimaryNoise />
       <div className="container relative z-10">
         <SectionTitle
