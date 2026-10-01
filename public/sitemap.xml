@@ -145,7 +145,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.dosteen.com/case-studies/ad-port-construction-of-al-ain-business-park-warehouses-phase-1</loc>
+    <loc>
+      https://www.dosteen.com/case-studies/ad-port-construction-of-al-ain-business-park-warehouses-phase-1</loc>
     <priority>0.7</priority>
   </url>
   <url>
@@ -173,7 +174,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.dosteen.com/case-studies/2013-dubai-international-airport-expansion-phase-lll-gsem-building-and-uld-building</loc>
+    <loc>
+      https://www.dosteen.com/case-studies/2013-dubai-international-airport-expansion-phase-lll-gsem-building-and-uld-building</loc>
     <priority>0.7</priority>
   </url>
   <url>
@@ -235,5 +237,9 @@
   <url>
     <loc>https://www.dosteen.com/blog/heat-resistant-door-engineering-gcc</loc>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.dosteen.com/blog/basement-flood-barriers-villas-dubai-abu-dhabi-muscat</loc>
+    <priority>0.7</priority>
   </url>
 </urlset>
