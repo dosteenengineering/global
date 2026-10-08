@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import PrimaryNoise from "@/app/components/common/noise/PrimaryNoise";
@@ -99,10 +99,25 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
   const toggleAccordion = (id: number) => {
     setOpenAccordionId((prev) => (prev === id ? null : id));
   };
+  useEffect(() => {
+    const match = window.location.hash.match(/^#discover-sec-nav-(\d+)$/);
+    if (!match) return;
 
+    const index = Number(match[1]) - 1; // 1-based in URL → 0-based
+    if (index < 0 || index >= data.items.length) return;
+
+    setActiveId(index);       // desktop sidebar + content
+    setOpenAccordionId(index); // mobile accordion
+
+    const t = setTimeout(() => {
+      const el = document.getElementById("discover-sec-nav");
+      if (el) scrollTo(el, { offset: -100, duration: 1.2 });
+    }, 300);
+    return () => clearTimeout(t);
+  }, [data.items.length]);
   return (
     // <section className="relative py-12.5 md:py-100 lg:py-150">
-    <section className="relative py-12.5 md:py-100 lg:py-150">
+    <section className="relative py-12.5 md:py-100 lg:py-150" >
       <PrimaryNoise />
       <div className="container relative z-10">
         <SectionTitle
@@ -187,7 +202,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
           </div>
 
           {/* ── Desktop: Original sidebar + content ── */}
-          <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[484px_minmax(0,1fr)]">
+          <div className="hidden xl:grid grid-cols-1 items-start xl:grid-cols-[400px_minmax(0,1fr)] 3xl:grid-cols-[484px_minmax(0,1fr)]" id="discover-sec-nav">
             <aside className="xl:sticky xl:top-5 xl:self-start xl:border-r xl:border-bdr-blue xl:pt-40">
               <div className="pb-0 xl:pr-70">
                 <nav className="flex flex-wrap gap-3 overflow-x-auto pb-6 xl:block xl:overflow-visible xl:pb-0">
