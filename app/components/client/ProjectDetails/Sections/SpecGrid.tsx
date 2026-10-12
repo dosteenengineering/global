@@ -17,7 +17,7 @@ export default function SpecGrid({
         {specs.map(({ label, value }) => (
           <div key={label} className="text-paragraph tracking-[-0.02em] border-b border-bdr-gray last:border-b-0 [&:nth-last-child(2)]:border-b-0 pb-30">
             <p className="text-15 leading-[1.666] font-light">{label}</p>
-            <p className="text-[15px] lg:text-19 leading-[1.8668] md:leading-[1.5263] font-bold pb-[15px] md:pb-0">{value}</p>
+            <p className="text-[15px] lg:text-19 leading-[1.8668] md:leading-[1.5263] font-bold pb-[15px] md:pb-0 w-[80%]">{value}</p>
           </div>
         ))}
       </div>

@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, message: "Invalid credentials" }, { status: 401 });
     }
 
-    // Check password
+    //Check password
     const isMatch = await bcrypt.compare(password, admin.password);
 
     if (!isMatch) {
