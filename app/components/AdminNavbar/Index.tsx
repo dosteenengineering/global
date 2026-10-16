@@ -171,12 +171,12 @@ const AdminNavbar = () => {
     const Icon = item.icon;
     return (
       <ClientSideLink
-        key={item.href}
+        key={item.name}
         href={item.href}
         name={item.name}
         icon={<Icon className="h-5 w-5" />}
-        isOpen={openLink === item.href}
-        setOpenLink={setOpenLink}
+        isOpen={openLink === item.name}
+        setOpenLink={(open) => setOpenLink(open ? item.name : null)}
         hasChild={item.hasChild}
       >
         {item.children}
