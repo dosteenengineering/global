@@ -13,6 +13,7 @@ import Customization from "./sections/Customization";
 // import ClientStoriesSection from "../Home/Sections/ClientStoriesSection";
 import Faq from "../../common/Faq";
 const Index = ({ data }: { data: IndividualSystemData }) => {
+    // console.log("data:",data);
   const clientStoriesData = {
     title: data?.sixthSection?.title?.toUpperCase(),
     stories: data?.sixthSection?.items?.map((item: any, index: number) => {

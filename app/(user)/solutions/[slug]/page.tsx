@@ -28,11 +28,12 @@ export default async function SolutionOrServicePage({
   const { slug } = await params;
   const resolved = await resolveSlug(slug);
   // if (!resolved) return notFound();
-
+// console.log("resolved:", resolved);
   if (!resolved?.data) {
     redirect("/404");
   }
   
+
 
   const schema = resolved.data?.seo?.schema;
   const SchemaScript = schema ? (
