@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdOpenInNew } from "react-icons/md";
 import {
   Dialog,
   DialogContent,
@@ -164,6 +164,9 @@ export default function Systems() {
                   <span className="text-xs text-gray-500">{item.slug}</span>
                 </div>
                 <div className="flex gap-5">
+                  <a href={`/solutions/${item.slug}`} target="_blank" rel="noopener noreferrer" title="View page">
+                    <MdOpenInNew />
+                  </a>
                   <MdEdit onClick={() => router.push(`/dq3c3ta2ngDo/systems/edit/${item._id}`)} />
 
                   <Dialog>
