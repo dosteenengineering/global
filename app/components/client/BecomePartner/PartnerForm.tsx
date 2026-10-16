@@ -129,7 +129,8 @@ const PartnerForm = ({ data }: any) => {
 
   const onSubmit = async (values: PartnerFormValues) => {
     const captchaValue = recaptchaRef?.current?.getValue();
-    if (!captchaValue) {
+    // Captcha is only rendered when a site key is configured
+    if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && !captchaValue) {
       setCaptchaError("Please verify yourself to continue");
       return;
     }

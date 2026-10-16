@@ -1,7 +1,7 @@
 // app/api/admin/partner/bulk-delete/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
-import Partner from "@/app/models/Partner";
+import Partner from "@/app/models/Vendor";
 import { verifyAdmin } from "@/lib/verifyAdmin";
 
 export async function DELETE(request: NextRequest) {

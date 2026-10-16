@@ -37,23 +37,23 @@ const Main = ({data}:any) => {
             />
             <div className="mt-50 mb-30 3xl:mt-140 3xl:mb-50">
               <h1 className="text-55 leading-[1.181818181818182] text-white font-light mb-20 -tracking-[0.02em]">
-                {data.formSection.title}
+                {data?.formSection?.title}
               </h1>
               <p className="text-description text-white max-w-[40ch]">
-                {data.formSection.subTitle}
+                {data?.formSection?.subTitle}
               </p>
             </div>
             <div className="p-30 relative overflow-hidden">
               <div className="absolute inset-0 z-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.02)_100%)]"></div>
               <p className="text-description text-white relative z-2">
-                {data.formSection.description}
+                {data?.formSection?.description}
               </p>
             </div>
           </div>
         </div>
         <div style={{ paddingRight: containerInset }} data-lenis-prevent
           className="z-10 h-full min-h-0 overflow-y-auto xl:overscroll-contain bg-white pl-5 md:pl-70 xl:pl-80 3xl:pl-[72px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <PartnerForm data={data.thankyouSection}/>
+          <PartnerForm data={data?.thankyouSection}/>
         </div>
       </div>
     </section>

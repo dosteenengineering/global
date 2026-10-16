@@ -4,15 +4,12 @@ const BecomeAPartnerSchema = new Schema(
   {
     title: {
       type: String,
-      required: true,
     },
     subTitle: {
       type: String,
-      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true }

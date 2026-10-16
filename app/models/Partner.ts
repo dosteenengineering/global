@@ -32,4 +32,4 @@ const partnerSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.models.Partner || mongoose.model("Partner", partnerSchema);
+export default mongoose.models.PartnerPage || mongoose.model("PartnerPage", partnerSchema);

@@ -48,7 +48,9 @@ const BlogContent = ({ data }: BlogContentProps) => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )[0];
   const listBlogs = latestBlog
-    ? filteredBlogs.filter((blog) => blog.title !== latestBlog.title)
+    ? filteredBlogs.filter((blog) => blog.title !== latestBlog.title).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
     : [];
 
   const handleCategoryChange = (category: string) => {
