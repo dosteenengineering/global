@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, DM_Sans } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
+import { DivideIcon } from "@heroicons/react/24/outline";
 export const poppins = Poppins({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
@@ -27,11 +28,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head />
-      <body className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}>
+    <div lang="en">
+      {/* <head/> */}
+      <div className={`${poppins.variable} ${dmSans.variable} antialiased bg-white`}>
         {children}
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }
