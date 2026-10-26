@@ -5,8 +5,26 @@ import { useDropzone } from "react-dropzone";
 import { File, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
-import { uploadToDropbox } from "@/lib/connectDropbox";
 import { toast } from "sonner";
+
+async function uploadFile(file: File, fileType: string): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("fileType", fileType);
+
+  const response = await fetch("/api/admin/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.error || "Upload failed");
+  }
+
+  return data.url as string;
+}
 
 interface FileUploaderProps {
   value?: string;
@@ -80,23 +98,7 @@ export function FileUploader({
         setIsUploading(true);
         setError(null);
 
-        // const formData = new FormData();
-        // formData.append("file", file);
-        // formData.append("fileType", "file");
-
-        // const response = await fetch("/api/admin/upload", {
-        //   method: "POST",
-        //   body: formData,
-        // });
-
-        // if (response.status !== 200) {
-        //   alert("Upload failed");
-        //   return;
-        // }
-
-        // const data = await response.json();
-        const filePath = `/uploads/file/${Date.now()}${file.name}`;
-        const uploadResult = await uploadToDropbox(file, filePath);
+        const uploadResult = await uploadFile(file, "file");
         setFileName(file.name);
         console.log(file.size)
         onChange(uploadResult, file.name, formatBytes(file.size));
