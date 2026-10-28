@@ -46,7 +46,7 @@ type UserChromeProps = {
   solutionsRaw: any;
 };
 
-const ROUTES_WITHOUT_CHROME = ["/vendor-registration", "/partner-registration"];
+const ROUTES_WITHOUT_CHROME = ["/vendor-registration", "/partner-registration","/thank-you"];
 let introPlayedThisLoad = false;
 
 const UserChrome = ({ children, solutionsRaw }: UserChromeProps) => {

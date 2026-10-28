@@ -23,7 +23,7 @@ export async function proxy(request: NextRequest) {
     }
 
     try {
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET || "your-secret-key");
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       await jose.jwtVerify(token, secret);
       return NextResponse.next();
     } catch (error) {

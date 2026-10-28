@@ -5,8 +5,26 @@ import { useDropzone } from "react-dropzone";
 import { Upload, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
-import { uploadToDropbox } from "@/lib/connectDropbox";
 import { toast } from "sonner";
+
+async function uploadFile(file: File, fileType: string): Promise<string> {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("fileType", fileType);
+
+  const response = await fetch("/api/admin/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data?.error || "Upload failed");
+  }
+
+  return data.url as string;
+}
 
 interface VideoUploaderProps {
   value?: string;
@@ -48,8 +66,7 @@ const onDrop = useCallback(
         video.src = URL.createObjectURL(file);
       });
 
-      const filePath = `/uploads/video/${Date.now()}${file.name}`;
-      const uploadResult = await uploadToDropbox(file, filePath);
+      const uploadResult = await uploadFile(file, "video");
       setLocalVideoUrl(uploadResult);
       onChange(uploadResult, duration, file);  // pass duration
       setIsUploadComplete(true);

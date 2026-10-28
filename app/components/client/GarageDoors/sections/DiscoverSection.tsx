@@ -39,7 +39,7 @@ interface DiscoverSectionProps {
 
 function DoorContent({ door }: { door: IndividualSystemData['secondSection']['items'][0] }) {
   const [imageSrc, setImageSrc] = useState(door.image);
-
+  console.log("DoorContent data:", door);
   return (
     <article className="pr-0 xl:pr-4">
       <h3 className="hidden xl:block text-40 lg:text-55 text-white leading-[1.181818181818182] font-light tracking-[-0.02em] mb-40 lg:mb-50">
@@ -48,7 +48,7 @@ function DoorContent({ door }: { door: IndividualSystemData['secondSection']['it
       {/* <div className="relative w-full aspect-[8/6] xl:aspect-[2.08/1] mb-5 xl:mb-40 overflow-hidden bg-white/10"> */}
       <div className="relative w-full h-[300px] max-h-[482px] 2xl:h-[482px] mb-5 xl:mb-40 2xl:mb-50 overflow-hidden bg-white/10 max-w-[1002px]">
         <Image
-          src={imageSrc}
+          src={imageSrc||"/assets/images/placeholder.png"}
           alt={door.title}
           fill
           sizes="(min-width: 1280px) 920px, 100vw"
@@ -90,7 +90,7 @@ const DiscoverSection = ({ data }: { data: IndividualSystemData['secondSection']
   const [activeId, setActiveId] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const { scrollTo } = useLenis();
-
+//  console.log("DiscoverSection data:", data);
   // Mobile accordion — can open/close independently
   const [openAccordionId, setOpenAccordionId] = useState<number | null>(0);
 

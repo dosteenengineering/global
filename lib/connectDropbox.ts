@@ -1,9 +1,13 @@
+import "server-only";
 import { Dropbox } from "dropbox";
 // import fetch, { RequestInfo, RequestInit, Response } from "node-fetch";
 
-const APP_KEY = process.env.NEXT_PUBLIC_DROPBOX_APP_KEY;
-const APP_SECRET = process.env.NEXT_PUBLIC_DROPBOX_APP_SECRET;
-const REFRESH_TOKEN = process.env.NEXT_PUBLIC_DROPBOX_REFRESH_TOKEN;
+// Read env vars dynamically so Next.js does not inline the NEXT_PUBLIC_ values into any bundle at build time.
+const readEnv = (name: string) => process.env[name];
+
+const APP_KEY = readEnv("NEXT_PUBLIC_DROPBOX_APP_KEY");
+const APP_SECRET = readEnv("NEXT_PUBLIC_DROPBOX_APP_SECRET");
+const REFRESH_TOKEN = readEnv("NEXT_PUBLIC_DROPBOX_REFRESH_TOKEN");
 
 if (!APP_KEY || !APP_SECRET || !REFRESH_TOKEN) {
   throw new Error("DROPBOX_APP_KEY or DROPBOX_APP_SECRET is not set in environment variables");
@@ -52,7 +56,6 @@ async function getAccessToken(): Promise<string> {
       expiresAt: Date.now() + (data.expires_in || 3600) * 1000,
     };
 
-    console.log("New token info:", tokenInfo);
     return tokenInfo.accessToken;
   } catch (error) {
     console.error("Error getting access token:", error);
@@ -65,15 +68,11 @@ let currentAccessToken: string | null = null;
 
 export async function getDropboxInstance(): Promise<Dropbox> {
   const accessToken = await getAccessToken();
-  console.log("Access Token:", accessToken);
 
   if (!dropboxInstance || currentAccessToken !== accessToken) {
     dropboxInstance = new Dropbox({
       accessToken,
-      fetch: (url: RequestInfo, init?: RequestInit) => {
-        console.log("Dropbox API Request:", url, init); // Log each Dropbox API request
-        return fetch(url, init) as Promise<Response>;
-      },
+      fetch: (url: RequestInfo, init?: RequestInit) => fetch(url, init) as Promise<Response>,
     });
     currentAccessToken = accessToken;
   }
