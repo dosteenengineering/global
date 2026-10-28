@@ -71,8 +71,8 @@ export const footerData = {
     { src: "/assets/icons/footer/iso/f4.svg", alt: "Intertek 318" },
   ],
   bottomLinks: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms & Conditions", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms-conditions" },
     { label: "Sitemap", href: "#" },
   ],
 };

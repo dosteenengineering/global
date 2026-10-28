@@ -92,10 +92,10 @@ const Index = () => {
                           </ul>
                         );
                       }
-                      if (item.text.includes("\\n")) {
+                      if (item.text.includes("\n")) {
                         return (
                           <address key={itemIndex} className="not-italic leading-7">
-                            {item.text.split("\\n").map((line, lineIndex) => (
+                            {item.text.split("\n").map((line, lineIndex) => (
                               <React.Fragment key={lineIndex}>
                                 {lineIndex > 0 && <br />}
                                 {renderText(line)}
