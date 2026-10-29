@@ -52,6 +52,11 @@ interface ProjectFormProps {
         coverImageAlt: string;
     };
 
+    overviewSection: {
+        title: string;
+        description: string;
+    };
+
     secondSection: {
         title: string;
         description: string;
@@ -178,6 +183,7 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
                     sector: data.data.firstSection.sector?._id || "",
                     location: data.data.firstSection.location?._id || "",
                 });
+                setValue("overviewSection", data.data.overviewSection);
                 setValue("secondSection", data.data.secondSection);
                 setValue("thirdSection", data.data.thirdSection);
                 setValue("thirdSection.items", data.data.thirdSection.items);
@@ -493,6 +499,20 @@ const ProjectForm = ({ editMode }: { editMode?: boolean }) => {
 
                     </div>
 
+                </AdminItemContainer>
+
+                <AdminItemContainer>
+                    <Label className='' main>Overview Section</Label>
+                    <div className='p-5 rounded-md flex flex-col gap-5'>
+                        <div>
+                            <Label className=''>Title</Label>
+                            <Input type='text' placeholder='Title' {...register("overviewSection.title")} />
+                        </div>
+                        <div>
+                            <Label className=''>Description</Label>
+                            <Textarea placeholder='Description' {...register("overviewSection.description")} />
+                        </div>
+                    </div>
                 </AdminItemContainer>
 
                 <AdminItemContainer>
