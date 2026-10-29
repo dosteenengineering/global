@@ -197,8 +197,21 @@ export default function Main({
               <SpecGrid specs={specifications} />
             </div>
             <div className="container px-[16px] sm:px-0">
+              {/* Overview */}
+              {data.overviewSection?.title && (
+                <>
+                  <div className="mb-7.5 md:mb-80">
+                    <TextandDescription
+                      title={data.overviewSection.title}
+                      description={data.overviewSection.description ?? ""}
+                    />
+                  </div>
+                  <Divider />
+                </>
+              )}
+
               {/* Challenge — ref for deco alignment */}
-              <div ref={challengeRef} className="mb-7.5 md:mb-80">
+              <div ref={challengeRef} className="my-7.5 md:my-80">
                 <TextandDescription
                   title={data.secondSection.title}
                   description={data.secondSection.description}

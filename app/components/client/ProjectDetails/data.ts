@@ -43,6 +43,10 @@ export interface ProjectItemProps {
     coverImage: string;
     coverImageAlt: string;
   };
+  overviewSection?: {
+    title: string;
+    description: string;
+  };
 
   secondSection: {
     title: string;
