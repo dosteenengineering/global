@@ -21,6 +21,11 @@ const projectItemSchema = new mongoose.Schema(
             coverImageAlt: { type: String },
         },
 
+        overviewSection: {
+            title: { type: String },
+            description: { type: String },
+        },
+
         secondSection: {
             title: { type: String, required: true },
             description: { type: String, required: true },

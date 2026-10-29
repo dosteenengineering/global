@@ -56,6 +56,7 @@ export async function PATCH(request: NextRequest) {
                 return NextResponse.json({ message: "Project not found" }, { status: 404 });
             }
             foundProject.firstSection = body.firstSection;
+            foundProject.overviewSection = body.overviewSection;
             foundProject.secondSection = body.secondSection;
             foundProject.thirdSection = body.thirdSection;
             foundProject.fourthSection = body.fourthSection;
