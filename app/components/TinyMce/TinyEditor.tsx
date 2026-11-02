@@ -1,16 +1,47 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Editor as TinyMCEEditor } from 'tinymce';
 
-export default function TinyEditor({ setNewsContent, newsContent }: { newsContent?: string | boolean, setNewsContent: Dispatch<SetStateAction<string>> }) {
+const DEFAULT_CONTENT = "<p>This is the initial content of the editor.</p>";
+
+export default function TinyEditor({ setNewsContent, newsContent }: { newsContent?: string | boolean, setNewsContent: (content: string) => void }) {
     const editorRef = useRef<TinyMCEEditor | null>(null);
     const [isUploadingImage, setIsUploadingImage] = useState(false);
 
+    // `initialValue` must stay stable. The tinymce-react wrapper calls editor.setContent() whenever
+    // `initialValue` changes, which resets the caret to the start. Binding it to the live form value
+    // made every "change" (e.g. pressing Enter) re-render -> setContent -> cursor jumps to the top.
+    const [initialValue] = useState(() =>
+        typeof newsContent === "string" && newsContent ? newsContent : DEFAULT_CONTENT
+    );
+
+    // Last content emitted by the editor itself, so we can tell our own updates apart from external ones.
+    const lastEmittedRef = useRef<string | null>(null);
+    // Latest prop value, readable from the editor's onInit callback.
+    const latestValueRef = useRef(newsContent);
+
     const handleEditorChange = (content: string) => {
-        console.log("called")
-        setNewsContent(content); // Update state as the editor content changes
-        console.log(content); // Log the current content
+        lastEmittedRef.current = content;
+        setNewsContent(content);
     };
+
+    // Push only *external* value changes (e.g. blog data loaded in edit mode) into the editor.
+    const syncExternalValue = (editor: TinyMCEEditor, value: unknown) => {
+        if (typeof value !== "string") return;
+        if (value === lastEmittedRef.current) return;
+        if (value === editor.getContent()) return;
+        editor.setContent(value);
+        editor.undoManager.clear();
+        editor.undoManager.add();
+        lastEmittedRef.current = value;
+    };
+
+    useEffect(() => {
+        latestValueRef.current = newsContent;
+        if (editorRef.current?.initialized) {
+            syncExternalValue(editorRef.current, newsContent);
+        }
+    }, [newsContent]);
 
     const uploadImageToDropbox = async (file: File) => {
         const formData = new FormData();
@@ -36,9 +67,11 @@ export default function TinyEditor({ setNewsContent, newsContent }: { newsConten
             <Editor
                 apiKey={process.env.NEXT_PUBLIC_TINY_MCE_KEY}
                 onInit={(_evt, editor) => {
-                    editorRef.current = editor
+                    editorRef.current = editor;
+                    // Value may have arrived (async fetch) before the editor finished initialising
+                    syncExternalValue(editor, latestValueRef.current);
                 }}
-                initialValue={newsContent && typeof newsContent == "string" ? newsContent : "<p>This is the initial content of the editor.</p>"}
+                initialValue={initialValue}
                 init={{
                     height: 500,
                     menubar: false,
@@ -57,7 +90,19 @@ export default function TinyEditor({ setNewsContent, newsContent }: { newsConten
                         'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                         'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
-                        'code', 'image',
+                        'code', 'image', 'quickbars',
+                    ],
+
+                    // Interlinking: select text -> floating toolbar -> link button -> dialog with URL + target
+                    quickbars_selection_toolbar: 'link | bold italic | blocks',
+                    quickbars_insert_toolbar: false,
+                    quickbars_image_toolbar: false,
+                    link_context_toolbar: true, // edit / open / remove when the cursor is inside a link
+                    link_title: false,
+                    link_default_target: '',
+                    link_target_list: [
+                        { title: 'Same tab', value: '' },
+                        { title: 'New tab (_blank)', value: '_blank' },
                     ],
                     file_picker_callback: (cb) => {
                         const input = document.createElement("input");
@@ -113,11 +158,11 @@ export default function TinyEditor({ setNewsContent, newsContent }: { newsConten
                     toolbar: 'undo redo | blocks | ' +
                         'bold italic forecolor | alignleft aligncenter ' +
                         'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help | code | image',
+                        'link | removeformat | help | code | image',
 
                     setup: (editor) => {
                         editor.on("change", () => {
-                            handleEditorChange(editorRef.current?.getContent() || "");
+                            handleEditorChange(editor.getContent());
                         });
                         // Ensure jQuery is loaded before the plugin (add jQuery via a global script or import)
                         if (typeof window !== 'undefined' && !window.jQuery) {

@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit, MdList, MdLocationOn, MdOpenInNew, MdVisibility, MdVisibilityOff, MdWeb, MdWorkspaces } from "react-icons/md";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useRouter } from "next/navigation";
+import AdminTabs, { useAdminTab } from "@/app/components/common/AdminTabs";
 import AdminItemContainer from '@/app/components/common/AdminItemContainer';
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { ImageUploader } from '@/components/ui/image-uploader'
@@ -53,16 +54,36 @@ interface ProjectPageProps {
 
 
 
+const TAB_KEYS = ["list", "page", "sector", "location"] as const;
+
 export default function Projects() {
+  return (
+    <Suspense fallback={null}>
+      <ProjectsContent />
+    </Suspense>
+  );
+}
+
+function ProjectsContent() {
 
   const [sector, setSector] = useState<string>("");
   const [location, setLocation] = useState<string>("");
-  const [projectList, setProjectList] = useState<{ _id: string, firstSection: { title: string, description: string } }[]>([]);
+  const [projectList, setProjectList] = useState<{ _id: string, slug?: string, firstSection: { title: string, description: string, sector?: { _id: string, name: string } | null, location?: { _id: string, name: string } | null }, isHidden?: boolean }[]>([]);
   const [locationList, setLocationList] = useState<{ _id: string, name: string }[]>([]);
   const [sectorList, setSectorList] = useState<{ _id: string, name: string }[]>([]);
   const [reorderMode, setReorderMode] = useState(false);
 
+  const [search, setSearch] = useState<string>("");
+  const [isLoadingProjects, setIsLoadingProjects] = useState<boolean>(true);
+
   const router = useRouter();
+  const [activeTab, setActiveTab] = useAdminTab(TAB_KEYS);
+
+  const filteredProjects = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    if (!term) return projectList;
+    return projectList.filter((item) => item.firstSection?.title?.toLowerCase().includes(term));
+  }, [projectList, search]);
 
   const { register, handleSubmit, setValue, control, formState: { errors } } = useForm<ProjectPageProps>();
 
@@ -83,6 +104,26 @@ export default function Projects() {
       }
     } catch (error) {
       console.log("Error fetching projects", error);
+    } finally {
+      setIsLoadingProjects(false);
+    }
+  }
+
+  const handleToggleVisibility = async (id: string, isHidden: boolean) => {
+    try {
+      const response = await fetch(`/api/admin/project/visibility?id=${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isHidden }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setProjectList((prev) => prev.map((item) => item._id === id ? { ...item, isHidden } : item));
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.log("Error updating case study visibility", error);
     }
   }
 
@@ -326,6 +367,18 @@ export default function Projects() {
   return (
     <div className="flex flex-col gap-5">
 
+      <AdminTabs
+        activeTab={activeTab}
+        onChange={setActiveTab}
+        tabs={[
+          { key: "list", label: "Case Studies", icon: MdList, count: projectList.length },
+          { key: "page", label: "Page", icon: MdWeb },
+          { key: "sector", label: "Sector", icon: MdWorkspaces, count: sectorList.length },
+          { key: "location", label: "Location", icon: MdLocationOn, count: locationList.length },
+        ]}
+      />
+
+      {activeTab === "page" && (
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
         <AdminItemContainer>
           <Label className='' main>Banner Section</Label>
@@ -442,12 +495,10 @@ export default function Projects() {
         </div>
 
       </form>
+      )}
 
-
-      <div className="h-screen grid grid-cols-2 gap-5">
-
-        <div className="flex flex-col gap-2 h-screen">
-          <div className="h-1/2 w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
+      {activeTab === "sector" && (
+          <div className="h-[80vh] w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
             <div className="flex justify-between border-b-2 border-black/20 pb-2">
               <Label className="text-sm font-bold">Sector</Label>
               <Dialog>
@@ -464,7 +515,7 @@ export default function Projects() {
 
               </Dialog>
             </div>
-            <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[80%]">
+            <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
               {sectorList.map((item) => (
                 <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                   <div className="text-[16px]">
@@ -508,9 +559,10 @@ export default function Projects() {
 
             </div>
           </div>
+      )}
 
-
-          <div className="h-1/2 w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
+      {activeTab === "location" && (
+          <div className="h-[80vh] w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
             <div className="flex justify-between border-b-2 border-black/20 pb-2">
               <Label className="text-sm font-bold">Location</Label>
               <Dialog>
@@ -529,7 +581,7 @@ export default function Projects() {
             </div>
             <div className="h-full">
 
-              <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[80%]">
+              <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
                 {locationList.map((item) => (
                   <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
                     <div className="text-[16px]">
@@ -575,26 +627,42 @@ export default function Projects() {
 
             </div>
           </div>
+      )}
 
-        </div>
-
-        <div className="h-screen w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white">
-          <div className="flex justify-between border-b-2 border-black/20 pb-2">
-            <Label className="text-sm font-bold">Projects</Label>
-            <div className="flex gap-2">
+      {activeTab === "list" && (
+        <div className="h-[80vh] w-full p-5 shadow-md border-black/20 rounded-md overflow-y-hidden bg-white flex flex-col">
+          <div className="flex justify-between items-center gap-4 border-b-2 border-black/20 pb-2">
+            <Label className="text-sm font-bold">Case Studies</Label>
+            <div className="flex items-center gap-2">
+              {!reorderMode && (
+                <Input
+                  type="search"
+                  placeholder="Search case studies..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-72"
+                />
+              )}
               <Button
                 className={`text-white ${reorderMode ? "bg-yellow-700" : "bg-green-700"}`}
-                onClick={() => (reorderMode ? confirmProjectOrder() : setReorderMode(true))}
+                onClick={() => {
+                  if (reorderMode) {
+                    confirmProjectOrder();
+                  } else {
+                    setSearch("");
+                    setReorderMode(true);
+                  }
+                }}
               >
                 {reorderMode ? "Done" : "Reorder"}
               </Button>
               <Button onClick={() => router.push("/dq3c3ta2ngDo/projects/add")} className="text-white cursor-pointer">Add Project</Button>
             </div>
           </div>
-          <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
+          <div className="mt-2 flex flex-col gap-2 overflow-y-auto flex-1">
 
             {reorderMode && (
-              <div className="mt-2 flex flex-col gap-2 overflow-y-scroll h-[90%]">
+              <div className="flex flex-col gap-2">
                 <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
                   <SortableContext
                     items={projectList.map((p) => p._id)}
@@ -608,13 +676,67 @@ export default function Projects() {
               </div>
             )}
 
-            {!reorderMode && projectList.map((item) => (
-              <div className="flex justify-between border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300" key={item._id}>
-                <div className="text-[16px]">
-                  {item.firstSection.title}
+            {isLoadingProjects && Array.from({ length: 6 }).map((_, i) => (
+              <div key={`skeleton-${i}`} className="flex flex-col gap-2 border border-black/10 p-2 rounded-md animate-pulse">
+                <div className="h-4 w-1/2 rounded bg-black/10" />
+                <div className="flex gap-1.5">
+                  <div className="h-3 w-20 rounded-full bg-black/10" />
+                  <div className="h-3 w-16 rounded-full bg-black/10" />
                 </div>
-                <div className="flex gap-5">
-                  <MdEdit onClick={() => router.push(`/dq3c3ta2ngDo/projects/edit/${item._id}`)} />
+              </div>
+            ))}
+
+            {!isLoadingProjects && !reorderMode && filteredProjects.length === 0 && (
+              <p className="text-center text-black/50 py-10">
+                {search.trim() ? "No case studies match your search." : "No case studies found."}
+              </p>
+            )}
+
+            {!reorderMode && filteredProjects.map((item) => (
+              <div className={`flex justify-between gap-4 border border-black/20 p-2 items-center rounded-md shadow-md hover:shadow-lg transition-all duration-300 ${item.isHidden ? "bg-black/[0.03]" : ""}`} key={item._id}>
+                <div className={`flex flex-col gap-1 min-w-0 ${item.isHidden ? "opacity-50" : ""}`}>
+                  <div className="text-[16px] truncate">
+                    {item.firstSection.title}
+                  </div>
+                  {(item.firstSection.sector?.name || item.firstSection.location?.name || item.isHidden) && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {item.firstSection.sector?.name && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70">
+                          <MdWorkspaces className="text-[13px]" />
+                          {item.firstSection.sector.name}
+                        </span>
+                      )}
+                      {item.firstSection.location?.name && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-black/5 border border-black/10 text-xs font-medium text-black/70">
+                          <MdLocationOn className="text-[13px]" />
+                          {item.firstSection.location.name}
+                        </span>
+                      )}
+                      {item.isHidden && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-xs font-medium text-red-700">
+                          <MdVisibilityOff className="text-[13px]" />
+                          Hidden
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="flex gap-5 shrink-0 items-center">
+                  <button
+                    type="button"
+                    onClick={() => handleToggleVisibility(item._id, !item.isHidden)}
+                    title={item.isHidden ? "Hidden — click to show on website" : "Visible — click to hide from website"}
+                    aria-label={item.isHidden ? "Show case study on website" : "Hide case study from website"}
+                    className={`cursor-pointer ${item.isHidden ? "text-red-600" : ""}`}
+                  >
+                    {item.isHidden ? <MdVisibilityOff /> : <MdVisibility />}
+                  </button>
+                  {item.slug && (
+                    <a href={`/case-studies/${item.slug}`} target="_blank" rel="noopener noreferrer" title="View on website" aria-label="View on website">
+                      <MdOpenInNew />
+                    </a>
+                  )}
+                  <MdEdit className="cursor-pointer" onClick={() => router.push(`/dq3c3ta2ngDo/projects/edit/${item._id}`)} />
 
                   <Dialog>
                     <DialogTrigger><MdDelete /></DialogTrigger>
@@ -633,11 +755,9 @@ export default function Projects() {
                 </div>
               </div>
             ))}
-
-
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

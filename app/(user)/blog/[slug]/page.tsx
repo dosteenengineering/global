@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     next: { revalidate: 60 },
   });
   const { data } = await response.json();
-  if (data.seo) {
+  if (data?.seo) {
     return buildMetadata(data.seo, pathname);
   }
 }
