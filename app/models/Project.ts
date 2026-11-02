@@ -90,7 +90,10 @@ const projectItemSchema = new mongoose.Schema(
 
         seo:{
             type:seoSchema
-        }
+        },
+
+        // Hidden case studies are excluded from the public site; missing on older records = visible
+        isHidden: { type: Boolean, default: false },
     },
     { _id: true }
 );

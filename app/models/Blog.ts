@@ -22,7 +22,9 @@ const blogSchema = new mongoose.Schema({
         slug: { type: String, required: true },
         seo:{
             type:seoSchema
-        }
+        },
+        // Hidden blogs are excluded from the public site; missing on older records = visible
+        isHidden: { type: Boolean, default: false },
     }],
 })
 

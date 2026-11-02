@@ -10,17 +10,19 @@ export async function GET(request: NextRequest) {
         await connectDB();
         const id = request.nextUrl.searchParams.get("id");
         const slug = request.nextUrl.searchParams.get("slug");
+        // Only a logged-in admin can see hidden blogs; the public site never receives them
+        const isAdmin = await verifyAdmin(request);
         if (id) {
             const blog = await Blog.findOne({}).populate("blogs.category", "name _id");
             const foundBlog = blog.blogs.find((blog: { _id: string }) => blog._id.toString() === id);
-            if (!foundBlog) {
+            if (!foundBlog || (foundBlog.isHidden && !isAdmin)) {
                 return NextResponse.json({ message: "Blog not found" }, { status: 404 });
             }
             return NextResponse.json({ data: foundBlog, message: "Blog fetched successfully" }, { status: 200 });
         } else if (slug) {
             const blog = await Blog.findOne({}).populate("blogs.category", "name _id");
             const foundBlog = blog.blogs.find((blog: { slug: string }) => blog.slug === slug);
-            if (!foundBlog) {
+            if (!foundBlog || (foundBlog.isHidden && !isAdmin)) {
                 return NextResponse.json({ message: "Blog not found" }, { status: 404 });
             }
             return NextResponse.json({ data: foundBlog, message: "Blog fetched successfully" }, { status: 200 });
@@ -29,7 +31,12 @@ export async function GET(request: NextRequest) {
             if (!blog) {
                 return NextResponse.json({ message: "Blog not found" }, { status: 404 });
             }
-            return NextResponse.json({ data: blog, message: "Blog fetched successfully" }, { status: 200 });
+            if (isAdmin) {
+                return NextResponse.json({ data: blog, message: "Blog fetched successfully" }, { status: 200 });
+            }
+            const publicData = blog.toObject();
+            publicData.blogs = publicData.blogs.filter((item: { isHidden?: boolean }) => !item.isHidden);
+            return NextResponse.json({ data: publicData, message: "Blog fetched successfully" }, { status: 200 });
         }
 
     } catch (error) {

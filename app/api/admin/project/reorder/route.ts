@@ -35,6 +35,13 @@ export async function POST(req: NextRequest) {
             )
             .filter(Boolean);
 
+        // Safety net against data loss: keep any case study missing from the submitted order, appended at the end
+        const orderedSet = new Set(orderedIds);
+        const missing = doc.projects.filter(
+            (p: { _id: Types.ObjectId }) => !orderedSet.has(p._id.toString())
+        );
+        reordered.push(...missing);
+
 
         doc.projects = reordered;
         await doc.save({ session });
