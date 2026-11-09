@@ -1,5 +1,6 @@
 // lib/seo/buildMetadata.ts
 import type { Metadata } from "next";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 interface SeoInput {
   metaTitle: string;
@@ -23,7 +24,7 @@ export function buildMetadata(seo: SeoInput, url: string): Metadata {
       title: seo.ogTitle || seo.metaTitle,
       description: seo.ogDescription || seo.metaDescription,
       images: {
-        url:seo.ogImage,
+        url:toMediaUrl(seo.ogImage),
         alt:seo.ogTitle
       },
       url,
@@ -33,7 +34,7 @@ export function buildMetadata(seo: SeoInput, url: string): Metadata {
       card: "summary_large_image",
       title: seo.twitterTitle || seo.metaTitle,
       description: seo.twitterDescription || seo.metaDescription,
-      images: seo.twitterImage ? [seo.twitterImage] : [],
+      images: seo.twitterImage ? [toMediaUrl(seo.twitterImage)] : [],
     },
   };
 }

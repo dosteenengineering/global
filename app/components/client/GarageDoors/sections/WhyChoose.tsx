@@ -12,6 +12,7 @@ import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
 import { SectionDescription } from "@/app/components/common/animations/SectionDescription";
 import { IndividualSystemData } from "../data";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 // interface WhyChooseProps {
 //   data: {
@@ -37,7 +38,7 @@ function Card({ item,isActive }: { item: IndividualSystemData["fourthSection"]["
           {/* <img src={item.logo} alt={item.logoAlt} width="64px" height="64px"
             className="w-16 h-16 group-hover:invert-1 group-hover:brightness-1000 transition-all duration-300 ease-in-out"
           /> */}
-          <img src={item.logo} alt={item.logoAlt} width="64px" height="64px"
+          <img src={toMediaUrl(item.logo)} alt={item.logoAlt} width="64px" height="64px"
             className="w-16 h-16 group-hover:scale-105 transition-all duration-300 ease-in-out"
           />
         </div>
