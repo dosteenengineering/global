@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
 import "swiper/css";
 import { AllBlogData } from "../../Blog/data";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 interface GuidesArticlesProps {
   data: {
@@ -169,7 +170,7 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
                     {item.title}
                   </h3>
                   <img
-                    src={item.thumbnail}
+                    src={toMediaUrl(item.thumbnail)}
                     alt={item.thumbnailAlt}
                     className="w-full object-cover h-[194px] sm:h-[300px] md:h-[300px] mt-auto"
                   />
@@ -202,7 +203,7 @@ const GuidesArticles = ({ data }: { data: AllBlogData }) => {
                 {item.title}
               </h3>
               <img
-                src={item.thumbnail}
+                src={toMediaUrl(item.thumbnail)}
                 alt={item.thumbnailAlt}
                 className={`w-full object-cover h-[200px] md:h-[300px] lg:h-[350px] ${imageHeightClasses[index] ?? imageHeightClasses[0]}`}
               />

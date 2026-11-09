@@ -7,6 +7,7 @@ import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { moveUp, moveUpVariant } from "@/app/components/motionVariants";
 import BorderButton from "@/app/components/common/BorderButton";
 import Link from "next/link";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 type SolutionRightItem = {
   label: string;
@@ -119,7 +120,7 @@ export default function SolutionsSection({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${activeData?.image})` }}
+          style={{ backgroundImage: `url(${toMediaUrl(activeData?.image)})` }}
         />
       </AnimatePresence>
       <div className="absolute inset-0 bg-black/70" />

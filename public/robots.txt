@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
  
 Sitemap: https://www.dosteen.com/sitemap.xml
+Sitemap: https://www.dosteen.com/image-sitemap.xml

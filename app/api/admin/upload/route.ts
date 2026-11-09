@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToDropbox } from "@/lib/connectDropbox";
 import { verifyAdmin } from "@/lib/verifyAdmin";
+import { buildUploadPath } from "@/lib/uploadPath";
 
 export async function POST(request: NextRequest) {
   const isAdmin = await verifyAdmin(request);
@@ -20,7 +21,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const filePath = `/uploads/${fileType}/${Date.now()}${file.name.replace(/\s+/g, "-").replace(/[()]/g, "").replace(/[^a-z0-9.-]/g, "")}`;
+    const filePath = buildUploadPath(fileType, file.name);
     const uploadResult = await uploadToDropbox(file, filePath);
 
     return NextResponse.json(
