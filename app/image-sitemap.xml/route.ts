@@ -2,6 +2,7 @@ import connectDB from "@/lib/mongodb";
 import Project from "@/app/models/Project";
 import Blog from "@/app/models/Blog";
 import Service from "@/app/models/Service";
+import System from "@/app/models/System";
 import { MEDIA_IMAGE_EXTENSIONS, toMediaUrl } from "@/lib/mediaUrl";
 
 // Image sitemap for case studies, blogs and solutions, referenced from public/robots.txt.
@@ -82,6 +83,16 @@ interface ServiceDoc {
   };
 }
 
+interface SystemDoc {
+  slug?: string;
+  thumbnail?: string;
+  images?: string[];
+  firstSection?: { image?: string; thumbnailImage?: string };
+  secondSection?: { items?: ImageItem[] };
+  fourthSection?: { items?: (ImageItem & { logo?: string })[] };
+  fifthSection?: { items?: ImageItem[] };
+}
+
 async function getProjectEntries(): Promise<SitemapEntry[]> {
   const doc = await Project.findOne({}).lean<ProjectDoc>();
   return (doc?.projects ?? [])
@@ -122,11 +133,30 @@ async function getSolutionEntries(): Promise<SitemapEntry[]> {
     }));
 }
 
+// Individual systems (e.g. /solutions/flood-barriers) live in their own collection.
+async function getSystemEntries(): Promise<SitemapEntry[]> {
+  const docs = await System.find({}).lean<SystemDoc[]>();
+  return docs
+    .filter((doc) => doc.slug)
+    .map((doc) => ({
+      loc: `${SITE_URL}/solutions/${doc.slug}`,
+      images: collectImages([
+        doc.firstSection?.image,
+        doc.firstSection?.thumbnailImage,
+        doc.thumbnail,
+        ...(doc.images ?? []),
+        ...(doc.secondSection?.items ?? []).map((item) => item.image),
+        ...(doc.fourthSection?.items ?? []).flatMap((item) => [item.image, item.logo]),
+        ...(doc.fifthSection?.items ?? []).map((item) => item.image),
+      ]),
+    }));
+}
+
 export async function GET() {
   try {
     await connectDB();
 
-    const entries = (await Promise.all([getProjectEntries(), getBlogEntries(), getSolutionEntries()]))
+    const entries = (await Promise.all([getProjectEntries(), getBlogEntries(), getSolutionEntries(), getSystemEntries()]))
       .flat()
       .filter((entry) => entry.images.length > 0);
 

@@ -1,6 +1,32 @@
 import type { NextConfig } from "next";
 
+// Public host of the Vercel Blob store that holds site images. Derived from the store id inside
+// BLOB_READ_WRITE_TOKEN ("vercel_blob_rw_<storeId>_<secret>"); BLOB_PUBLIC_BASE_URL overrides it.
+const blobBaseUrl = (() => {
+  if (process.env.BLOB_PUBLIC_BASE_URL) return process.env.BLOB_PUBLIC_BASE_URL.replace(/\/$/, "");
+  const storeId = process.env.BLOB_READ_WRITE_TOKEN?.split("_")[3];
+  return storeId ? `https://${storeId.toLowerCase()}.public.blob.vercel-storage.com` : null;
+})();
+
 const nextConfig: NextConfig = {
+  // Images in Blob are served under our own domain: www.dosteen.com/images/<alt-text>.webp
+  async rewrites() {
+    if (!blobBaseUrl) return [];
+    return [{ source: "/images/:file", destination: `${blobBaseUrl}/images/:file` }];
+  },
+  async headers() {
+    return [
+      {
+        source: "/images/:file",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, s-maxage=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // Uploaded SVGs are served from our origin; stop them running scripts if opened directly.
+          { key: "Content-Security-Policy", value: "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; sandbox" },
+        ],
+      },
+    ];
+  },
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     dangerouslyAllowSVG: true,
