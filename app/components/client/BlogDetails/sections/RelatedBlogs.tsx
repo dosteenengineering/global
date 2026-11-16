@@ -36,7 +36,7 @@ const imageHeightClasses = [
 const GuidesArticles = ({ data }: { data: AllBlogData }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const links = "#"
+  const links = "/blog";
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
