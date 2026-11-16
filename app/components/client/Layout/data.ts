@@ -73,7 +73,7 @@ export const footerData = {
   bottomLinks: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms & Conditions", href: "/terms-conditions" },
-    { label: "Sitemap", href: "#" },
+    // { label: "Sitemap", href: "#" },
   ],
 };
 
