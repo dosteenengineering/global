@@ -28,8 +28,11 @@ export default function TitleRevealFill({
   exitDur = 500,
   loop = true,
 }: TitleRevealFillProps) {
-  const measureRef = useRef<HTMLHeadingElement>(null);
-  const [lineGroups, setLineGroups] = useState<string[] | null>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+  // Measured line wrapping, tagged with the text it belongs to. Tagging (instead of resetting state
+  // when the text changes) avoids a race where the measurement ran before the measuring <h1> was
+  // mounted, leaving the title permanently hidden and the rotation stopped.
+  const [measured, setMeasured] = useState<{ text: string; groups: string[] } | null>(null);
   const [index, setIndex] = useState(0);
   const [exiting, setExiting] = useState(false);
 
@@ -37,12 +40,9 @@ export default function TitleRevealFill({
   const items = useMemo(() => (texts && texts.length ? texts : [text]), [texts, text]);
   const activeText = items[index] ?? items[0];
   const words = activeText.toUpperCase().split(/\s+/).filter(Boolean);
+  const lineGroups = measured?.text === activeText ? measured.groups : null;
 
-  // Re-measure line wrapping whenever the active text changes
-  useEffect(() => {
-    setLineGroups(null); // force remeasure pass for the new text
-  }, [index, items]);
-
+  // Measuring <h1> is always mounted, so the ref exists whenever this runs
   useEffect(() => {
     const measure = () => {
       if (!measureRef.current) return;
@@ -66,7 +66,13 @@ export default function TitleRevealFill({
         }
       });
       if (curGroup.length) groups.push(curGroup);
-      setLineGroups(groups.map((g) => g.join(" ")));
+      const lines = groups.map((g) => g.join(" "));
+      // Keep the same object when nothing changed so the rotation timers are not reset
+      setMeasured((prev) =>
+        prev && prev.text === activeText && prev.groups.join("\n") === lines.join("\n")
+          ? prev
+          : { text: activeText, groups: lines },
+      );
     };
 
     const raf = requestAnimationFrame(measure);
@@ -167,12 +173,19 @@ export default function TitleRevealFill({
         ${css}
       `}</style>
 
-      {!lineGroups && (
-        <h1
+      <div style={{ position: "relative" }}>
+        {/* Hidden copy used only to measure line wrapping; holds the layout space until measured.
+            A <div> (not <h1>) so the page keeps a single h1 for SEO. */}
+        <div
           ref={measureRef}
           className={className}
           aria-hidden="true"
-          style={{ opacity: 0, userSelect: "none", pointerEvents: "none" }}
+          style={{
+            opacity: 0,
+            userSelect: "none",
+            pointerEvents: "none",
+            ...(lineGroups ? { position: "absolute", top: 0, left: 0, right: 0, visibility: "hidden" } : {}),
+          }}
         >
           {words.map((w, i) => (
             <span key={i} data-word={w} style={{ display: "inline" }}>
@@ -180,26 +193,26 @@ export default function TitleRevealFill({
               {i < words.length - 1 ? " " : ""}
             </span>
           ))}
-        </h1>
-      )}
+        </div>
 
-      {lineGroups && (
-        <h1
-          key={`title-${index}`}
-          className={`${className} trf-exit-wrap ${exiting ? "is-exiting" : ""}`}
-        >
-          {lineGroups.map((line, i) => (
-            <span key={i} className="trf-mask">
-              <span className={`trf-inner-${i}`}>
-                <span className="trf-stroke">
-                  {line}
-                  <span className={`trf-fill-base trf-fill-${i}`}>{line}</span>
+        {lineGroups && (
+          <h1
+            key={`title-${index}`}
+            className={`${className} trf-exit-wrap ${exiting ? "is-exiting" : ""}`}
+          >
+            {lineGroups.map((line, i) => (
+              <span key={i} className="trf-mask">
+                <span className={`trf-inner-${i}`}>
+                  <span className="trf-stroke">
+                    {line}
+                    <span className={`trf-fill-base trf-fill-${i}`}>{line}</span>
+                  </span>
                 </span>
               </span>
-            </span>
-          ))}
-        </h1>
-      )}
+            ))}
+          </h1>
+        )}
+      </div>
     </>
   );
 }

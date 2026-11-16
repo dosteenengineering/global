@@ -166,6 +166,7 @@ import Link from "next/link";
 import SectionTitle from "@/app/components/common/animations/SectionTitle";
 import { motion, AnimatePresence } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 const SLIDE_DURATION = 6000; // ms
 
@@ -224,7 +225,7 @@ function SlideBackground({
             />
           ) : (
             <img
-              src={slide.image}
+              src={toMediaUrl(slide.image)}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />

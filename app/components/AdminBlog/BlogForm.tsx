@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import { useParams } from 'next/navigation'
 import { ImageUploader } from '@/components/ui/image-uploader'
 import { RiAiGenerateText } from 'react-icons/ri'
+import { MdArrowBack, MdOpenInNew } from 'react-icons/md'
 import AdminItemContainer from '../common/AdminItemContainer'
 import { toast } from 'sonner'
 import TinyEditor from "@/app/components/TinyMce/TinyEditor";
@@ -44,6 +45,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
     const { id } = useParams();
 
     const [categoryList, setCategoryList] = useState<{ _id: string; name: string }[]>([]);
+    const [savedSlug, setSavedSlug] = useState<string>("");
 
     const { register, handleSubmit, setValue, watch, control, formState: { errors } } = useForm<BlogFormProps>();
 
@@ -54,10 +56,20 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
                 method: editMode ? "PATCH" : "POST",
                 body: JSON.stringify(data),
             });
+            const result = await response.json();
             if (response.ok) {
-                const data = await response.json();
-                toast.success(data.message);
-                router.push("/dq3c3ta2ngDo/blogs");
+                toast.success(result.message);
+                setSavedSlug(data.slug);
+                if (!editMode) {
+                    // Move to the edit page of the newly created blog so further saves update it instead of creating duplicates
+                    const blogs: { _id: string; slug: string }[] = result.data?.blogs ?? [];
+                    const created = blogs.find((b) => b.slug === data.slug) ?? blogs[blogs.length - 1];
+                    if (created?._id) {
+                        router.replace(`/dq3c3ta2ngDo/blogs/edit/${created._id}`);
+                    }
+                }
+            } else {
+                toast.error(result.message || "Failed to save blog");
             }
         } catch (error) {
             console.log("Error in adding blog", error);
@@ -78,6 +90,7 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
                 setValue("thumbnailAlt", data.data.thumbnailAlt);
                 setValue("content", data.data.content);
                 setValue("slug", data.data.slug);
+                setSavedSlug(data.data.slug);
                 const isoDate = new Date(data.data.date).toISOString().split("T")[0];
                 setValue("date", isoDate);
                 setValue("seo", data.data.seo);
@@ -133,6 +146,36 @@ const BlogForm = ({ editMode }: { editMode?: boolean }) => {
 
     return (
         <div className='flex flex-col gap-5'>
+            <div className="sticky -top-8 z-20 -mx-8 -mt-8 px-8 pt-8 pb-3 bg-gray-100/95 backdrop-blur-sm flex items-center justify-between gap-3">
+                <button
+                    type="button"
+                    onClick={() => router.push("/dq3c3ta2ngDo/blogs")}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-black/10 shadow-sm text-[15px] font-medium text-black/80 hover:text-black hover:shadow-md transition-all cursor-pointer"
+                >
+                    <MdArrowBack className="text-[18px]" />
+                    Go Back
+                </button>
+                {savedSlug ? (
+                    <a
+                        href={`/blog/${savedSlug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black text-white shadow-md text-[15px] font-medium hover:bg-black/85 transition-all"
+                    >
+                        Visit Blog
+                        <MdOpenInNew className="text-[18px]" />
+                    </a>
+                ) : (
+                    <span
+                        title="Save the blog first to visit it"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-black/20 text-white text-[15px] font-medium cursor-not-allowed"
+                    >
+                        Visit Blog
+                        <MdOpenInNew className="text-[18px]" />
+                    </span>
+                )}
+            </div>
+
             <form className='flex flex-col gap-5 rounded-md' onSubmit={handleSubmit(handleAddBlog)}>
 
                 <AdminItemContainer>

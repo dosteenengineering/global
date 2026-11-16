@@ -11,17 +11,19 @@ export async function GET(request: NextRequest) {
         await connectDB();
         const id = request.nextUrl.searchParams.get("id");
         const slug = request.nextUrl.searchParams.get("slug");
+        // Only a logged-in admin can see hidden case studies; the public site never receives them
+        const isAdmin = await verifyAdmin(request);
         if (id) {
             const project = await Project.findOne({}).populate("projects.firstSection.sector", "name _id").populate("projects.firstSection.location", "name _id");
             const foundProject = project.projects.find((project: { _id: string }) => project._id.toString() === id);
-            if (!foundProject) {
+            if (!foundProject || (foundProject.isHidden && !isAdmin)) {
                 return NextResponse.json({ message: "Project not found" }, { status: 404 });
             }
             return NextResponse.json({ data: foundProject, message: "Project fetched successfully" }, { status: 200 });
         } else if (slug) {
             const project = await Project.findOne({}).populate("projects.firstSection.sector", "name _id").populate("projects.firstSection.location", "name _id");
             const foundProject = project.projects.find((project: { slug: string }) => project.slug === slug);
-            if (!foundProject) {
+            if (!foundProject || (foundProject.isHidden && !isAdmin)) {
                 return NextResponse.json({ message: "Project not found" }, { status: 404 });
             }
             return NextResponse.json({ data: foundProject, message: "Project fetched successfully" }, { status: 200 });
@@ -30,7 +32,12 @@ export async function GET(request: NextRequest) {
             if (!project) {
                 return NextResponse.json({ message: "Project not found" }, { status: 404 });
             }
-            return NextResponse.json({ data: project, message: "Project fetched successfully" }, { status: 200 });
+            if (isAdmin) {
+                return NextResponse.json({ data: project, message: "Project fetched successfully" }, { status: 200 });
+            }
+            const publicData = project.toObject();
+            publicData.projects = publicData.projects.filter((item: { isHidden?: boolean }) => !item.isHidden);
+            return NextResponse.json({ data: publicData, message: "Project fetched successfully" }, { status: 200 });
         }
 
     } catch (error) {

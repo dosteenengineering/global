@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import NavButton from "@/app/components/common/NavigationButton";
 import { motion } from "framer-motion";
 import { moveUp } from "@/app/components/motionVariants";
+import { toMediaUrl } from "@/lib/mediaUrl";
 
 export default function ProjectImageSlider({ project }: { project: ProjectItemProps }) {
 
@@ -32,7 +33,7 @@ export default function ProjectImageSlider({ project }: { project: ProjectItemPr
         {project.images.map((src, i) => (
           <SwiperSlide key={i}>
             <img
-              src={src}
+              src={toMediaUrl(src)}
               alt={i === 0 ? project.firstSection.title : `${project.firstSection.title} image ${i + 1}`}
               className="w-full h-full object-cover"
               draggable={false}

@@ -19,7 +19,7 @@ export async function generateMetadata({
     },
   );
   const { data } = await response.json();
-  if (data.seo) {
+  if (data?.seo) {
     return buildMetadata(data.seo, pathname);
   }
 }

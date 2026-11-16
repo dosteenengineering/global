@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToDropbox } from "@/lib/connectDropbox";
 import { verifyAdmin } from "@/lib/verifyAdmin";
+import { buildUploadPath } from "@/lib/uploadPath";
 
 export async function POST(request: NextRequest) {
     const isAdmin = await verifyAdmin(request);
@@ -22,8 +23,8 @@ export async function POST(request: NextRequest) {
       }
   
       const uploadResults = await Promise.all(
-        files.map(async (file) => {
-          const filePath = `/uploads/${fileType}/${Date.now()}-${file.name}`;
+        files.map(async (file, index) => {
+          const filePath = buildUploadPath(fileType, file.name, index);
           return await uploadToDropbox(file, filePath); // assuming it returns URL
         })
       );

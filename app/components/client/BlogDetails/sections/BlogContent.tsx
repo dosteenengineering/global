@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {BlogItem } from "../../Blog/data";
 import { usePathname } from "next/navigation";
+import { rewriteMediaUrlsInHtml } from "@/lib/mediaUrl";
 
 const STICKY_TOP = 120;
 const DESKTOP_BREAKPOINT = 1024;
@@ -166,7 +167,7 @@ const BlogContent = ({ data }: {data:BlogItem}) => {
               </div>
             </div>
           </div>
-          <div className="blog-content-wrapper" dangerouslySetInnerHTML={{ __html: data.content }}>
+          <div className="blog-content-wrapper" dangerouslySetInnerHTML={{ __html: rewriteMediaUrlsInHtml(data.content) }}>
             {/* <div className="border-b border-bdr-gray pb-60">
               <motion.p variants={moveUp(0.2)} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="text-30 leading-[1.333333333333333] font-light mb-40">
                 In today’s fast-paced industrial and commercial environments, facility safety is no longer limited to alarms, cameras, or access control systems. Physical infrastructure — particularly industrial door solutions — plays a crucial role in protecting people, assets, and operations.

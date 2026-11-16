@@ -219,6 +219,7 @@ export async function POST(req: NextRequest) {
     // --- PROJECTS (individual project subdocuments, each with its own slug) ---
     const projectDocs = await Project.aggregate([
       { $unwind: "$projects" },
+      { $match: { "projects.isHidden": { $ne: true } } },
       {
         $lookup: {
           from: "locations",
@@ -274,6 +275,7 @@ export async function POST(req: NextRequest) {
     // --- BLOGS (individual blog subdocuments, each with its own slug) ---
     const blogDocs = await Blog.aggregate([
       { $unwind: "$blogs" },
+      { $match: { "blogs.isHidden": { $ne: true } } },
       {
         $lookup: {
           from: "categories",
