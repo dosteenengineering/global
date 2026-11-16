@@ -795,6 +795,7 @@ const handleNewsletterSubmit = async () => {
                   <Link
                     key={link.label}
                     href={link.href}
+                    target="_blank"
                     className="text-15 font-light font-poppins text-paragraph leading-[1.66] hover:underline underline-offset-4 hover:text-primary transition-all duration-300"
                   >
                     {link.label}
