@@ -451,7 +451,7 @@ const ServingMap = ({ seventhSection, countries }: ServingMapProps) => {
                   className="!text-55 leading-[1.181818181818182] font-light text-black tracking-[-0.02em]"
                 />
               </div>
-              <div className="grid grid-cols-2 max-lg:max-w-[50%]">
+              <div className="grid grid-cols-2 gap-x-4 md:gap-x-9">
                 {activeCategory?.countries.map((country, index) => (
                   <motion.div
                     variants={moveUp(0.2 + index * 0.1)}
