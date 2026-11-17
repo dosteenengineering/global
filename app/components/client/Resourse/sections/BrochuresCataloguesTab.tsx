@@ -66,7 +66,7 @@ const ResourceDownloadCard = ({ item, delay, onDownload }: { item: BrochuresCata
           </div>
 
          <button onClick={() => onDownload(item.download, item.title)}
-            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary"
+            className="group inline-flex items-center gap-2.5 md:gap-3 xl:gap-20 text-[12px] md:text-[15px] leading-none font-poppins font-light uppercase text-primary cursor-pointer"
           >
             <span className="uppercase font-normal leading-[1.67]">Download</span>
             <img src="/assets/icons/download.svg" width={"22px"} height={"20px"} alt="Download" className="object-contain w-[22px] h-[20px] transition-transform duration-300 group-hover:translate-y-1" />
