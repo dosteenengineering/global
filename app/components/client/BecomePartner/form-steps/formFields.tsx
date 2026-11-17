@@ -242,9 +242,10 @@ const PhoneInputControl = ({
       <div className="overflow-x-hidden flex-1">
         <input
           type="tel"
+          inputMode="numeric"
           name={name}
           value={local}
-          onChange={(e) => emit(selectedCode, e.target.value)}
+          onChange={(e) => emit(selectedCode, e.target.value.replace(/\D/g, ""))}
           onBlur={onBlur}
           autoComplete="tel"
           className="w-full pl-[100px] border-none pb-[5px] outline-none bg-transparent text-16 text-secondary"
