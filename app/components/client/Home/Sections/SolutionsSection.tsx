@@ -125,7 +125,7 @@ export default function SolutionsSection({
       </AnimatePresence>
       <div className="absolute inset-0 bg-black/70" />
 
-      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150 overflow-hidden min-h-screen flex flex-col">
+      <div className="relative z-10 w-full pt-12 md:pt-140 3xl:pt-150  overflow-hidden lg:min-h-screen flex flex-col">
         <div className="container h-full">
           <SectionTitle
             text={solutionsData.mainTitle}
@@ -251,7 +251,7 @@ export default function SolutionsSection({
             whileInView="show"
             variants={moveUp(0.2)}
             viewport={{ once: true }}
-            className="lg:hidden mb-12 mt-[30px] md:mt-12"
+            className="lg:hidden mb-12 md:mb-140 mt-[30px] md:mt-12"
           >
             {solutionsData.tabs.map((tab: SolutionTab, index: number) => {
               const isOpen = activeTab === tab.key;
@@ -365,7 +365,7 @@ export default function SolutionsSection({
           </motion.div>
         </div>
         <div className="bg-primary/50 backdrop-blur-[20px] w-full h-fit mt-auto">
-          <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px] text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
+          <div className="container flex flex-col lg:flex-row gap-[10px] md:gap-40 not-last:lg:gap-0 lg:items-center py-[30px] md:py-50 3xl:py-[56px]  text-30 leading-[1.555] font-light md:font-normal md:leading-[1.33] font-poppins -tracking-[2%]">
             <span
               className="max-w-[53ch] 3xl:pr-80"
               dangerouslySetInnerHTML={{ __html: solutionsData.secondTitle }}
