@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { whoBenefitsSection, BenefitItem, Capability } from "../data";
 import SecondaryNoise from "@/app/components/common/noise/SecondaryNoise";
@@ -38,13 +38,35 @@ function AccordionItem({
   onSelect: () => void;
   delay: number;
 }) {
+
+  // ADDED: ref + scroll logic lives here, because isActive only exists in this component
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (!isActive || !window.matchMedia("(max-width: 1023px)").matches) return;
+
+    const t = setTimeout(() => {
+      const el = itemRef.current;
+      if (!el) return;
+      const headerOffset = 90; // set to your fixed header height
+      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }, 550); // after the 500ms collapse/expand transition
+    return () => clearTimeout(t);
+  }, [isActive]);
   return (
     <motion.div
+      ref={itemRef}
       variants={moveUp(delay)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
-      className={`flex cursor-pointer gap-0 group ${isActive ? "py-5 lg:py-7 xl:py-50" : "py-5 lg:py-7 xl:py-40"}`}
+      className={`scroll-mt-[90px] flex cursor-pointer gap-0 group ${isActive ? "py-5 lg:py-7 xl:py-50" : "py-5 lg:py-7 xl:py-40"}`}
       onClick={onSelect}
     >
       <div
@@ -104,7 +126,7 @@ export default function Benefits({
     items[1]?._id ?? items[0]?._id ?? ""
   );
   // const [titleParts] = useState<string[]>(title.split('\n')); 
-
+  
   return (
     <section className="relative w-full py-12.5  md:py-100 3xl:py-150">
       {showSecondaryNoise && <SecondaryNoise />}
