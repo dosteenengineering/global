@@ -193,14 +193,14 @@ const PartnerForm = ({ data }: any) => {
         >
           <Stepper activeStep={activeStep} />
           <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            <h2 className=" mb-50 shrink-0 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
+            <h2 className="mb-50 md:mb-60 lg:mb-50 shrink-0 text-[36px] leading-[1.181818181818182] text-secondary font-light md:text-55 tracking-[-0.02em]">
               {currentStep.title}
             </h2>
             <div className="pb-50">
-              <div className="grid grid-cols-1 gap-x-60 gap-y-40 3xl:gap-y-60 md:grid-cols-2 ">
+              <div className="grid grid-cols-1 gap-x-60 gap-y-40 md:gap-y-60 lg:gap-y-40 3xl:gap-y-60 md:grid-cols-2 ">
                 {renderStep()}
               </div>
-              <div className="mt-50 3xl:mt-80 flex items-center gap-4">
+              <div className="mt-50 md:mt-70 lg:mt-50 3xl:mt-80 flex items-center gap-4">
                 {!isFirstStep && (
                   <BorderButton
                     type="button"
@@ -236,7 +236,7 @@ const PartnerForm = ({ data }: any) => {
 
 const Stepper = ({ activeStep }: { activeStep: number }) => {
   return (
-    <div className="relative flex w-full shrink-0 justify-between pb-30 3xl:pb-60">
+    <div className="relative flex w-full shrink-0 justify-between pb-[40px] lg:pb-30 3xl:pb-60">
       <span className="absolute left-[58px] right-[73px] top-[14px] h-px bg-bdr-gray xl:top-[20px]">
         <span
           className="block h-full bg-primary transition-[width]"
