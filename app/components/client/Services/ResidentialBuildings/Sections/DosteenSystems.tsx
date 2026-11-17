@@ -48,26 +48,16 @@ export default function DosteenSystems({
 
   const toggleAccordion = (id: number) => {
     const isClosing = openAccordionId === id;
-
     setOpenAccordionId(isClosing ? null : id);
 
-    if (!isClosing) {
-      setTimeout(() => {
-        const accordion = accordionRefs.current[id];
+    if (isClosing) return;
 
-        if (!accordion) return;
-
-        const rect = accordion.getBoundingClientRect();
-
-        // If the opened accordion extends below the viewport
-        if (rect.bottom > window.innerHeight) {
-          accordion.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
-      }, 350); // same as Framer Motion duration
-    }
+    // wait for the previous item to collapse (Framer duration is 0.35s)
+    setTimeout(() => {
+      const accordion = accordionRefs.current[id];
+      if (!accordion) return;
+      scrollTo(accordion, { offset: -90, duration: 0.8 }); // 90 = your fixed header height
+    }, 400);
   };
 
   return (
