@@ -49,7 +49,7 @@ function SystemCard({
           </div>
 
         {/* Title */}
-        <h3 className="mb-4 xl:mb-30 mt-0 lg:mt-[30px] text-30 font-medium lg:font-light text-secondary lg:group-hover:font-medium transition-all duration-300 order-1 md:order-3">
+        <h3 className="mb-4 xl:mb-30 mt-0 lg:mt-[30px] text-30 font-medium md:font-light text-secondary md:group-hover:font-medium transition-all duration-300 order-1 md:order-3 md:max-lg:line-clamp-1 md:max-lg:break-all">
           {system.title}
         </h3>
 
@@ -146,7 +146,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
 
       {/* Cards Grid */}
       <div className="container ">
-        <div className="  w-full hidden md:grid grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
+        <div className=" w-full hidden md:grid md:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-x-30 gap-y-80">
           {data.systems.map((system, index) => (
             <Reveal variants={moveUpV2} delayRange={index * 0.12} className="h-full">
               <SystemCard key={system.id} system={system} />
