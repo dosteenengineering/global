@@ -27,6 +27,8 @@ interface IDosteenSystemsProps {
   };
 }
 
+
+
 function SystemCard({
   system,
 }: {
@@ -65,8 +67,13 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(1);
 
+  const [isEnd, setIsEnd] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+
   function updateState(swiper: SwiperType) {
     setActiveIndex(swiper.activeIndex);
+    setIsEnd(swiper.isEnd);
+    setIsBeginning(swiper.isBeginning);
     setSlidesPerView(
       typeof swiper.params.slidesPerView === "number"
         ? swiper.params.slidesPerView
@@ -176,7 +183,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                   if (s && !s.destroyed) s.slidePrev();
                 }}
                 direction="left"
-                disabled={false}
+                disabled={isBeginning}
                 ariaLabel="Previous"
                 borderColor="border-[#161616]"
                 disableMode="dark"
@@ -187,7 +194,7 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
                   if (s && !s.destroyed) s.slideNext();
                 }}
                 direction="right"
-                disabled={false}
+                disabled={isEnd}
                 ariaLabel="Next"
                 borderColor="border-[#161616]"
                 disableMode="dark"
@@ -197,7 +204,9 @@ export default function DosteenSystems({ data }: IDosteenSystemsProps) {
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
+              updateState(swiper);
             }}
+            onSlideChange={updateState}
             slidesPerView={1}
             spaceBetween={20}
             className="w-full"
