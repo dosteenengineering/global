@@ -19,6 +19,7 @@ export const footerData = {
     {
       title: "Quick Links",
       links: [
+        { label: "Sitemap", href: "/sitemap" },
         { label: "About Us", href: "/about" },
         { label: "Csi Specifications", href: "/csi-specifications" },
         { label: "Case Studies", href: "/case-studies" },
@@ -73,7 +74,7 @@ export const footerData = {
   bottomLinks: [
     { label: "Privacy Policy", href: "/privacy-policy" },
     { label: "Terms & Conditions", href: "/terms-conditions" },
-    // { label: "Sitemap", href: "#" },
+    { label: "Sitemap", href: "/sitemap" },
   ],
 };
 
