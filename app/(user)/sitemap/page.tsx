@@ -156,7 +156,7 @@ export default function SitemapPage() {
             >
               <div className="flex items-start gap-4 border-b border-[#edf0f2] pb-5">
                 <span className="pt-1 text-xs font-medium tracking-[0.12em] text-[#9aa4ae]">
-                  {section.number}
+                  {section.number} 
                 </span>
                 <div>
                   <h2
