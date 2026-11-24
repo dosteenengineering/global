@@ -10,12 +10,24 @@ const blobBaseUrl = (() => {
 
 const nextConfig: NextConfig = {
   // Images in Blob are served under our own domain: www.dosteen.com/images/<alt-text>.webp
+  // (videos and PDFs likewise: /videos/<title>.mp4, /documents/<title>.pdf)
   async rewrites() {
     if (!blobBaseUrl) return [];
-    return [{ source: "/images/:file", destination: `${blobBaseUrl}/images/:file` }];
+    return [
+      { source: "/images/:file", destination: `${blobBaseUrl}/images/:file` },
+      { source: "/videos/:file", destination: `${blobBaseUrl}/videos/:file` },
+      { source: "/documents/:file", destination: `${blobBaseUrl}/documents/:file` },
+    ];
   },
   async headers() {
     return [
+      {
+        source: "/:folder(videos|documents)/:file",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, s-maxage=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+        ],
+      },
       {
         source: "/images/:file",
         headers: [
