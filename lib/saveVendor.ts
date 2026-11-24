@@ -1,7 +1,7 @@
 "use server";
 
 import Vendor from "@/app/models/Vendor";
-import { uploadToDropbox } from "@/lib/connectDropbox";
+import { uploadPrivateFile } from "@/lib/blobUpload";
 import connectDB from "./mongodb";
 
 export async function submitPartnerAction(formData: FormData) {
@@ -45,13 +45,9 @@ export async function submitPartnerAction(formData: FormData) {
       formData.getAll("uploadedDocuments") as File[],
     );
 
+    // Applicants' company documents are private: stored at unguessable addresses, never on our domain.
     const uploadFiles = async (files: File[], folder: string) => {
-      return Promise.all(
-        files.map(async (file) => {
-          const path = `/uploads/${folder}/${Date.now()}-${file.name}`;
-          return await uploadToDropbox(file, path);
-        }),
-      );
+      return Promise.all(files.map((file) => uploadPrivateFile(file, folder)));
     };
 
     const [brochureUrls, technicalSpecSheetUrls, uploadedDocumentsUrls] =

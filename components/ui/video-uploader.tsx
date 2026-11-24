@@ -6,22 +6,24 @@ import { Upload, X, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import { toast } from "sonner";
+import { upload } from "@vercel/blob/client";
 
-async function uploadFile(file: File, fileType: string): Promise<string> {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("fileType", fileType);
-
-  const response = await fetch("/api/admin/upload", {
-    method: "POST",
-    body: formData,
-  });
-
+// Videos go from the browser straight to Blob: a request to our server is capped at 4.5 MB.
+// The server picks the file name and issues a one-time token for it (app/api/admin/upload-video).
+async function uploadVideo(file: File): Promise<string> {
+  const response = await fetch(`/api/admin/upload-video?name=${encodeURIComponent(file.name)}`);
   const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data?.error || "Upload failed");
   }
+
+  await upload(data.pathname, file, {
+    access: "public",
+    handleUploadUrl: "/api/admin/upload-video",
+    contentType: data.contentType,
+    multipart: file.size > 20 * 1024 * 1024, // large files go up in parts, each retried on failure
+  });
 
   return data.url as string;
 }
@@ -66,7 +68,7 @@ const onDrop = useCallback(
         video.src = URL.createObjectURL(file);
       });
 
-      const uploadResult = await uploadFile(file, "video");
+      const uploadResult = await uploadVideo(file);
       setLocalVideoUrl(uploadResult);
       onChange(uploadResult, duration, file);  // pass duration
       setIsUploadComplete(true);
