@@ -10,19 +10,18 @@ const blobBaseUrl = (() => {
 
 const nextConfig: NextConfig = {
   // Images in Blob are served under our own domain: www.dosteen.com/images/<alt-text>.webp
-  // (videos and PDFs likewise: /videos/<title>.mp4, /documents/<title>.pdf)
+  // (PDFs likewise: /documents/<title>.pdf; videos are redirected instead, see redirects())
   async rewrites() {
     if (!blobBaseUrl) return [];
     return [
       { source: "/images/:file", destination: `${blobBaseUrl}/images/:file` },
-      { source: "/videos/:file", destination: `${blobBaseUrl}/videos/:file` },
       { source: "/documents/:file", destination: `${blobBaseUrl}/documents/:file` },
     ];
   },
   async headers() {
     return [
       {
-        source: "/:folder(videos|documents)/:file",
+        source: "/documents/:file",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, s-maxage=31536000, immutable" },
           { key: "X-Content-Type-Options", value: "nosniff" },
@@ -57,6 +56,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // --- Videos: www.dosteen.com/videos/<title>.mp4 -> Blob ---
+      // Redirected, not proxied: browsers load video in byte ranges, and the CDN would cache the
+      // first range response and serve that slice to every later request, breaking playback.
+      ...(blobBaseUrl ? [{ source: "/videos/:file", destination: `${blobBaseUrl}/videos/:file`, permanent: false }] : []),
+
       // --- General page redirects ---
       {
         source: "/commercial",
