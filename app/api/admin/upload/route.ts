@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { uploadToDropbox } from "@/lib/connectDropbox";
+import { uploadSiteFile, UploadRejectedError } from "@/lib/blobUpload";
 import { verifyAdmin } from "@/lib/verifyAdmin";
-import { buildUploadPath } from "@/lib/uploadPath";
 
 export async function POST(request: NextRequest) {
   const isAdmin = await verifyAdmin(request);
@@ -10,27 +9,20 @@ export async function POST(request: NextRequest) {
   }
   try {
     const formData = await request.formData();
-    const file = formData.get("file") as File;
-    let fileType = formData.get("fileType") as string;
+    const file = formData.get("file");
 
-    if (!fileType) {
-      fileType = "misc";
-    }
-
-    if (!file) {
+    if (!(file instanceof File)) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const filePath = buildUploadPath(fileType, file.name);
-    const uploadResult = await uploadToDropbox(file, filePath);
+    // The Blob folder (images, videos, documents) follows the file's extension.
+    const url = await uploadSiteFile(file);
 
-    return NextResponse.json(
-      {
-        url: uploadResult,
-      },
-      { status: 200 }
-    );
+    return NextResponse.json({ url }, { status: 200 });
   } catch (error) {
+    if (error instanceof UploadRejectedError) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
     console.error("Error uploading file:", error);
     return NextResponse.json({ error: "Failed to upload file" }, { status: 500 });
   }

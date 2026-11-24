@@ -43,7 +43,7 @@ export default function TinyEditor({ setNewsContent, newsContent }: { newsConten
         }
     }, [newsContent]);
 
-    const uploadImageToDropbox = async (file: File) => {
+    const uploadImage = async (file: File) => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("fileType", "image");
@@ -126,7 +126,7 @@ export default function TinyEditor({ setNewsContent, newsContent }: { newsConten
                                     });
                                 }
 
-                                const uploadedUrl = await uploadImageToDropbox(file);
+                                const uploadedUrl = await uploadImage(file);
 
                                 cb(uploadedUrl, { title: file.name });
 
